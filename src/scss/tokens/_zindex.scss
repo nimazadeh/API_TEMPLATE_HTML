@@ -1,0 +1,15 @@
+// =============================================================
+// APIForge X — Design Tokens: Z-Index
+// One ordered ladder for every floating layer.
+// =============================================================
+
+:root {
+  --z-header: 90;
+  --z-sidebar: 100;
+  --z-dropdown: 200;
+  --z-backdrop: 300;
+  --z-modal: 310;
+  --z-palette: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+}

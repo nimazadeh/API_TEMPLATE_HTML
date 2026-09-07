@@ -1,0 +1,502 @@
+[
+  {
+    "id": "req_vLT4AO4ixl",
+    "method": "POST",
+    "path": "/v1/embeddings",
+    "status": 200,
+    "latencyMs": 776,
+    "keyPrefix": "sk_live_ZZMcfb",
+    "timestamp": "2026-09-07T19:05:24.526Z",
+    "userAgent": "node-fetch/3.3.2"
+  },
+  {
+    "id": "req_JwZbN160pJ",
+    "method": "GET",
+    "path": "/v1/models",
+    "status": 404,
+    "latencyMs": 922,
+    "keyPrefix": "sk_live_pbMUeU",
+    "timestamp": "2026-09-07T18:28:24.526Z",
+    "userAgent": "axios/1.7.4"
+  },
+  {
+    "id": "req_RkBheOzpBw",
+    "method": "POST",
+    "path": "/v1/webhooks",
+    "status": 200,
+    "latencyMs": 455,
+    "keyPrefix": "sk_live_I7Edbk",
+    "timestamp": "2026-09-07T17:56:24.526Z",
+    "userAgent": "postman-runtime/7.39.0"
+  },
+  {
+    "id": "req_jinKN0XXkC",
+    "method": "DELETE",
+    "path": "/v1/api-keys/73242",
+    "status": 200,
+    "latencyMs": 232,
+    "keyPrefix": "sk_test_FA4D2v",
+    "timestamp": "2026-09-07T17:09:24.526Z",
+    "userAgent": "guzzlehttp/7.8.1"
+  },
+  {
+    "id": "req_1S9PR4SOqx",
+    "method": "POST",
+    "path": "/v1/completions",
+    "status": 200,
+    "latencyMs": 449,
+    "keyPrefix": "sk_test_SChAHc",
+    "timestamp": "2026-09-07T16:28:24.526Z",
+    "userAgent": "curl/8.5.0"
+  },
+  {
+    "id": "req_FU6xDOxxkv",
+    "method": "POST",
+    "path": "/v1/webhooks",
+    "status": 404,
+    "latencyMs": 384,
+    "keyPrefix": "sk_live_Yhz7MV",
+    "timestamp": "2026-09-07T15:49:24.526Z",
+    "userAgent": "rest-client/2.1.0"
+  },
+  {
+    "id": "req_EpKbqNGjUo",
+    "method": "POST",
+    "path": "/v1/embeddings",
+    "status": 200,
+    "latencyMs": 104,
+    "keyPrefix": "sk_live_WZcUFV",
+    "timestamp": "2026-09-07T15:23:24.526Z",
+    "userAgent": "rest-client/2.1.0"
+  },
+  {
+    "id": "req_AQJ6c6Fv0G",
+    "method": "GET",
+    "path": "/v1/models",
+    "status": 200,
+    "latencyMs": 568,
+    "keyPrefix": "sk_live_eRZk4t",
+    "timestamp": "2026-09-07T14:37:24.526Z",
+    "userAgent": "postman-runtime/7.39.0"
+  },
+  {
+    "id": "req_YwdbFisaKk",
+    "method": "PUT",
+    "path": "/v1/api-keys/68753",
+    "status": 503,
+    "latencyMs": 2194,
+    "keyPrefix": "sk_live_Yj9kPy",
+    "timestamp": "2026-09-07T14:00:24.526Z",
+    "userAgent": "guzzlehttp/7.8.1"
+  },
+  {
+    "id": "req_uRNLb3eNsI",
+    "method": "POST",
+    "path": "/v1/completions",
+    "status": 404,
+    "latencyMs": 753,
+    "keyPrefix": "sk_live_3yoHyI",
+    "timestamp": "2026-09-07T13:17:24.526Z",
+    "userAgent": "rest-client/2.1.0"
+  },
+  {
+    "id": "req_kc7Tj52prW",
+    "method": "POST",
+    "path": "/v1/audiences",
+    "status": 200,
+    "latencyMs": 1193,
+    "keyPrefix": "sk_test_WBCwNX",
+    "timestamp": "2026-09-07T12:34:24.526Z",
+    "userAgent": "rest-client/2.1.0"
+  },
+  {
+    "id": "req_m7zae8RweZ",
+    "method": "DELETE",
+    "path": "/v1/api-keys/84870",
+    "status": 200,
+    "latencyMs": 1114,
+    "keyPrefix": "sk_test_sWGCjx",
+    "timestamp": "2026-09-07T12:13:24.526Z",
+    "userAgent": "axios/1.7.4"
+  },
+  {
+    "id": "req_pA13EZoBGv",
+    "method": "POST",
+    "path": "/v1/emails",
+    "status": 200,
+    "latencyMs": 1188,
+    "keyPrefix": "sk_test_z0wxRx",
+    "timestamp": "2026-09-07T11:28:24.526Z",
+    "userAgent": "rest-client/2.1.0"
+  },
+  {
+    "id": "req_AyK9jVpwDh",
+    "method": "POST",
+    "path": "/v1/completions",
+    "status": 201,
+    "latencyMs": 724,
+    "keyPrefix": "sk_live_nRsgKV",
+    "timestamp": "2026-09-07T10:50:24.526Z",
+    "userAgent": "axios/1.7.4"
+  },
+  {
+    "id": "req_i2GyoEggHc",
+    "method": "POST",
+    "path": "/v1/webhooks",
+    "status": 200,
+    "latencyMs": 1107,
+    "keyPrefix": "sk_live_HNebKT",
+    "timestamp": "2026-09-07T10:01:24.526Z",
+    "userAgent": "curl/8.5.0"
+  },
+  {
+    "id": "req_qAyYWXhPsi",
+    "method": "GET",
+    "path": "/v1/models",
+    "status": 200,
+    "latencyMs": 988,
+    "keyPrefix": "sk_test_mSxl4P",
+    "timestamp": "2026-09-07T09:32:24.526Z",
+    "userAgent": "python-requests/2.32.3"
+  },
+  {
+    "id": "req_10aDOUkp1I",
+    "method": "POST",
+    "path": "/v1/embeddings",
+    "status": 200,
+    "latencyMs": 375,
+    "keyPrefix": "sk_test_8IxxXp",
+    "timestamp": "2026-09-07T08:49:24.526Z",
+    "userAgent": "postman-runtime/7.39.0"
+  },
+  {
+    "id": "req_yYhyXKy7UK",
+    "method": "GET",
+    "path": "/v1/audiences/75475",
+    "status": 200,
+    "latencyMs": 938,
+    "keyPrefix": "sk_live_y7ancY",
+    "timestamp": "2026-09-07T08:01:24.526Z",
+    "userAgent": "postman-runtime/7.39.0"
+  },
+  {
+    "id": "req_gRYTkiN1ZR",
+    "method": "POST",
+    "path": "/v1/embeddings",
+    "status": 200,
+    "latencyMs": 235,
+    "keyPrefix": "sk_live_rComse",
+    "timestamp": "2026-09-07T07:22:24.526Z",
+    "userAgent": "rest-client/2.1.0"
+  },
+  {
+    "id": "req_3dQacQK7A5",
+    "method": "GET",
+    "path": "/v1/audiences/23975",
+    "status": 200,
+    "latencyMs": 210,
+    "keyPrefix": "sk_live_9Fs8nr",
+    "timestamp": "2026-09-07T06:58:24.526Z",
+    "userAgent": "rest-client/2.1.0"
+  },
+  {
+    "id": "req_RDiJgLrw6j",
+    "method": "POST",
+    "path": "/v1/embeddings",
+    "status": 200,
+    "latencyMs": 986,
+    "keyPrefix": "sk_test_bQ7d8T",
+    "timestamp": "2026-09-07T06:38:24.526Z",
+    "userAgent": "axios/1.7.4"
+  },
+  {
+    "id": "req_33ZiCsMhas",
+    "method": "GET",
+    "path": "/v1/models",
+    "status": 500,
+    "latencyMs": 4098,
+    "keyPrefix": "sk_live_d0aKEy",
+    "timestamp": "2026-09-07T06:12:24.526Z",
+    "userAgent": "guzzlehttp/7.8.1"
+  },
+  {
+    "id": "req_Jsa9kNoLtO",
+    "method": "GET",
+    "path": "/v1/emails/50881",
+    "status": 200,
+    "latencyMs": 784,
+    "keyPrefix": "sk_live_wds0b4",
+    "timestamp": "2026-09-07T05:38:24.526Z",
+    "userAgent": "python-requests/2.32.3"
+  },
+  {
+    "id": "req_IzUt3gNbhj",
+    "method": "POST",
+    "path": "/v1/completions",
+    "status": 502,
+    "latencyMs": 933,
+    "keyPrefix": "sk_test_Ex2qXF",
+    "timestamp": "2026-09-07T05:07:24.526Z",
+    "userAgent": "axios/1.7.4"
+  },
+  {
+    "id": "req_2h56aP5M5U",
+    "method": "POST",
+    "path": "/v1/emails",
+    "status": 200,
+    "latencyMs": 1346,
+    "keyPrefix": "sk_test_1lupqN",
+    "timestamp": "2026-09-07T04:13:24.526Z",
+    "userAgent": "python-requests/2.32.3"
+  },
+  {
+    "id": "req_CGhUKeLlYy",
+    "method": "POST",
+    "path": "/v1/completions",
+    "status": 200,
+    "latencyMs": 1348,
+    "keyPrefix": "sk_live_7tExIO",
+    "timestamp": "2026-09-07T03:22:24.526Z",
+    "userAgent": "rest-client/2.1.0"
+  },
+  {
+    "id": "req_M5dVUJX4Mn",
+    "method": "GET",
+    "path": "/v1/emails/8066",
+    "status": 200,
+    "latencyMs": 1155,
+    "keyPrefix": "sk_live_n7ygvi",
+    "timestamp": "2026-09-07T02:34:24.526Z",
+    "userAgent": "axios/1.7.4"
+  },
+  {
+    "id": "req_rFJBobUOwy",
+    "method": "POST",
+    "path": "/v1/webhooks",
+    "status": 200,
+    "latencyMs": 837,
+    "keyPrefix": "sk_live_n1bX9g",
+    "timestamp": "2026-09-07T02:07:24.526Z",
+    "userAgent": "guzzlehttp/7.8.1"
+  },
+  {
+    "id": "req_9qedOYEet3",
+    "method": "GET",
+    "path": "/v1/audiences/69811",
+    "status": 200,
+    "latencyMs": 743,
+    "keyPrefix": "sk_live_G5QSMA",
+    "timestamp": "2026-09-07T01:25:24.526Z",
+    "userAgent": "node-fetch/3.3.2"
+  },
+  {
+    "id": "req_3Htc2YE6Nr",
+    "method": "GET",
+    "path": "/v1/models",
+    "status": 200,
+    "latencyMs": 116,
+    "keyPrefix": "sk_test_4aqQnb",
+    "timestamp": "2026-09-07T00:34:24.526Z",
+    "userAgent": "node-fetch/3.3.2"
+  },
+  {
+    "id": "req_NpXRhQARtU",
+    "method": "POST",
+    "path": "/v1/emails",
+    "status": 200,
+    "latencyMs": 669,
+    "keyPrefix": "sk_live_1mirDw",
+    "timestamp": "2026-09-07T00:08:24.526Z",
+    "userAgent": "rest-client/2.1.0"
+  },
+  {
+    "id": "req_UrPLYQcUvJ",
+    "method": "POST",
+    "path": "/v1/webhooks",
+    "status": 401,
+    "latencyMs": 503,
+    "keyPrefix": "sk_test_8Q3RTV",
+    "timestamp": "2026-09-06T23:32:24.526Z",
+    "userAgent": "axios/1.7.4"
+  },
+  {
+    "id": "req_NouUQpC3FL",
+    "method": "GET",
+    "path": "/v1/audiences/74400",
+    "status": 200,
+    "latencyMs": 777,
+    "keyPrefix": "sk_test_yKmoG5",
+    "timestamp": "2026-09-06T23:05:24.526Z",
+    "userAgent": "curl/8.5.0"
+  },
+  {
+    "id": "req_ZRoXyZEcS1",
+    "method": "PUT",
+    "path": "/v1/api-keys/3515",
+    "status": 200,
+    "latencyMs": 594,
+    "keyPrefix": "sk_test_sibabg",
+    "timestamp": "2026-09-06T22:32:24.526Z",
+    "userAgent": "guzzlehttp/7.8.1"
+  },
+  {
+    "id": "req_TL2o3yAHQs",
+    "method": "POST",
+    "path": "/v1/audiences",
+    "status": 200,
+    "latencyMs": 863,
+    "keyPrefix": "sk_test_qKvPY7",
+    "timestamp": "2026-09-06T22:12:24.526Z",
+    "userAgent": "guzzlehttp/7.8.1"
+  },
+  {
+    "id": "req_kTiAKEHHnL",
+    "method": "POST",
+    "path": "/v1/embeddings",
+    "status": 429,
+    "latencyMs": 1938,
+    "keyPrefix": "sk_test_FWQ9i9",
+    "timestamp": "2026-09-06T21:38:24.526Z",
+    "userAgent": "python-requests/2.32.3"
+  },
+  {
+    "id": "req_bnNOLbrRTb",
+    "method": "POST",
+    "path": "/v1/audiences",
+    "status": 200,
+    "latencyMs": 503,
+    "keyPrefix": "sk_test_WxrGiy",
+    "timestamp": "2026-09-06T21:00:24.526Z",
+    "userAgent": "node-fetch/3.3.2"
+  },
+  {
+    "id": "req_xRMWj4nQFo",
+    "method": "POST",
+    "path": "/v1/embeddings",
+    "status": 502,
+    "latencyMs": 1286,
+    "keyPrefix": "sk_test_HHH7t6",
+    "timestamp": "2026-09-06T20:38:24.526Z",
+    "userAgent": "axios/1.7.4"
+  },
+  {
+    "id": "req_uky3HQtqht",
+    "method": "POST",
+    "path": "/v1/webhooks",
+    "status": 200,
+    "latencyMs": 422,
+    "keyPrefix": "sk_test_sYeK3B",
+    "timestamp": "2026-09-06T19:53:24.526Z",
+    "userAgent": "node-fetch/3.3.2"
+  },
+  {
+    "id": "req_AOIJjplTvr",
+    "method": "POST",
+    "path": "/v1/completions",
+    "status": 201,
+    "latencyMs": 1379,
+    "keyPrefix": "sk_live_zeIxVs",
+    "timestamp": "2026-09-06T18:58:24.526Z",
+    "userAgent": "guzzlehttp/7.8.1"
+  },
+  {
+    "id": "req_NLSIQjibWO",
+    "method": "POST",
+    "path": "/v1/completions",
+    "status": 200,
+    "latencyMs": 260,
+    "keyPrefix": "sk_test_Bn33x0",
+    "timestamp": "2026-09-06T18:08:24.526Z",
+    "userAgent": "python-requests/2.32.3"
+  },
+  {
+    "id": "req_VNUWZCJ9ME",
+    "method": "POST",
+    "path": "/v1/embeddings",
+    "status": 200,
+    "latencyMs": 207,
+    "keyPrefix": "sk_test_iZ3Oz1",
+    "timestamp": "2026-09-06T17:17:24.526Z",
+    "userAgent": "python-requests/2.32.3"
+  },
+  {
+    "id": "req_8Bc9EpizWi",
+    "method": "GET",
+    "path": "/v1/audiences/88077",
+    "status": 502,
+    "latencyMs": 3435,
+    "keyPrefix": "sk_test_8TAkJE",
+    "timestamp": "2026-09-06T16:35:24.526Z",
+    "userAgent": "postman-runtime/7.39.0"
+  },
+  {
+    "id": "req_krQtA0l2lt",
+    "method": "GET",
+    "path": "/v1/emails/5218",
+    "status": 200,
+    "latencyMs": 1198,
+    "keyPrefix": "sk_live_S6HRcE",
+    "timestamp": "2026-09-06T16:06:24.526Z",
+    "userAgent": "guzzlehttp/7.8.1"
+  },
+  {
+    "id": "req_BhVgRd2E6c",
+    "method": "POST",
+    "path": "/v1/embeddings",
+    "status": 200,
+    "latencyMs": 876,
+    "keyPrefix": "sk_test_CLbxpX",
+    "timestamp": "2026-09-06T15:42:24.526Z",
+    "userAgent": "rest-client/2.1.0"
+  },
+  {
+    "id": "req_TvE7t7sGDb",
+    "method": "GET",
+    "path": "/v1/audiences/84825",
+    "status": 500,
+    "latencyMs": 2563,
+    "keyPrefix": "sk_live_gzCsUZ",
+    "timestamp": "2026-09-06T14:55:24.526Z",
+    "userAgent": "curl/8.5.0"
+  },
+  {
+    "id": "req_bpSwu3YRUF",
+    "method": "DELETE",
+    "path": "/v1/api-keys/27068",
+    "status": 200,
+    "latencyMs": 865,
+    "keyPrefix": "sk_test_o8o2Yt",
+    "timestamp": "2026-09-06T14:13:24.526Z",
+    "userAgent": "axios/1.7.4"
+  },
+  {
+    "id": "req_WLMbUERIgo",
+    "method": "GET",
+    "path": "/v1/emails/92916",
+    "status": 200,
+    "latencyMs": 399,
+    "keyPrefix": "sk_live_O8ySVn",
+    "timestamp": "2026-09-06T13:18:24.526Z",
+    "userAgent": "postman-runtime/7.39.0"
+  },
+  {
+    "id": "req_XHvkQ0hMPd",
+    "method": "POST",
+    "path": "/v1/emails",
+    "status": 200,
+    "latencyMs": 252,
+    "keyPrefix": "sk_test_x3iL9A",
+    "timestamp": "2026-09-06T12:27:24.526Z",
+    "userAgent": "rest-client/2.1.0"
+  },
+  {
+    "id": "req_xLRErsddsT",
+    "method": "PUT",
+    "path": "/v1/api-keys/55765",
+    "status": 200,
+    "latencyMs": 84,
+    "keyPrefix": "sk_test_ZmeaGb",
+    "timestamp": "2026-09-06T11:46:24.526Z",
+    "userAgent": "node-fetch/3.3.2"
+  }
+]

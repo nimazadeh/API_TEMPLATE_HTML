@@ -1,0 +1,152 @@
+[
+  {
+    "date": "2026-08-09",
+    "requests": 129154,
+    "errors": 298
+  },
+  {
+    "date": "2026-08-10",
+    "requests": 119732,
+    "errors": 232
+  },
+  {
+    "date": "2026-08-11",
+    "requests": 115749,
+    "errors": 568
+  },
+  {
+    "date": "2026-08-12",
+    "requests": 128624,
+    "errors": 390
+  },
+  {
+    "date": "2026-08-13",
+    "requests": 140523,
+    "errors": 298
+  },
+  {
+    "date": "2026-08-14",
+    "requests": 145233,
+    "errors": 195
+  },
+  {
+    "date": "2026-08-15",
+    "requests": 148421,
+    "errors": 601
+  },
+  {
+    "date": "2026-08-16",
+    "requests": 165872,
+    "errors": 623
+  },
+  {
+    "date": "2026-08-17",
+    "requests": 172153,
+    "errors": 466
+  },
+  {
+    "date": "2026-08-18",
+    "requests": 170883,
+    "errors": 379
+  },
+  {
+    "date": "2026-08-19",
+    "requests": 181112,
+    "errors": 129
+  },
+  {
+    "date": "2026-08-20",
+    "requests": 173280,
+    "errors": 413
+  },
+  {
+    "date": "2026-08-21",
+    "requests": 185791,
+    "errors": 492
+  },
+  {
+    "date": "2026-08-22",
+    "requests": 193092,
+    "errors": 340
+  },
+  {
+    "date": "2026-08-23",
+    "requests": 187228,
+    "errors": 566
+  },
+  {
+    "date": "2026-08-24",
+    "requests": 174869,
+    "errors": 143
+  },
+  {
+    "date": "2026-08-25",
+    "requests": 176310,
+    "errors": 500
+  },
+  {
+    "date": "2026-08-26",
+    "requests": 184561,
+    "errors": 517
+  },
+  {
+    "date": "2026-08-27",
+    "requests": 189680,
+    "errors": 394
+  },
+  {
+    "date": "2026-08-28",
+    "requests": 206564,
+    "errors": 488
+  },
+  {
+    "date": "2026-08-29",
+    "requests": 197639,
+    "errors": 465
+  },
+  {
+    "date": "2026-08-30",
+    "requests": 205687,
+    "errors": 434
+  },
+  {
+    "date": "2026-08-31",
+    "requests": 218211,
+    "errors": 136
+  },
+  {
+    "date": "2026-09-01",
+    "requests": 211995,
+    "errors": 416
+  },
+  {
+    "date": "2026-09-02",
+    "requests": 211932,
+    "errors": 212
+  },
+  {
+    "date": "2026-09-03",
+    "requests": 216981,
+    "errors": 342
+  },
+  {
+    "date": "2026-09-04",
+    "requests": 218694,
+    "errors": 180
+  },
+  {
+    "date": "2026-09-05",
+    "requests": 230649,
+    "errors": 231
+  },
+  {
+    "date": "2026-09-06",
+    "requests": 231034,
+    "errors": 368
+  },
+  {
+    "date": "2026-09-07",
+    "requests": 217732,
+    "errors": 500
+  }
+]

@@ -1,0 +1,89 @@
+// =============================================================
+// APIForge X — Components: Dropdown menu
+// Floating surface (stacked shadow), used for user menu, env
+// switcher, row actions. Anchored with logical positioning.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  position: absolute;
+  z-index: var(--z-dropdown);
+  inset-inline-end: 0;
+  top: calc(100% + 6px);
+  min-width: 200px;
+  padding: 6px;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-floating);
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(-4px) scale(0.98);
+  visibility: hidden;
+  pointer-events: none;
+  @include motion(150ms);
+  transition-property: opacity, transform, visibility;
+  transition-timing-function: $ease-out;
+
+  .dropdown.is-open & {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: 7px 10px;
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: start;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--bg-surface-2);
+    color: var(--text-primary);
+  }
+  svg {
+    width: 16px;
+    height: 16px;
+    flex: none;
+  }
+  &.is-danger {
+    color: var(--error);
+    &:hover {
+      background: var(--error-bg);
+      color: var(--error);
+    }
+  }
+}
+
+.dropdown-divider {
+  height: 1px;
+  margin: 6px 4px;
+  background: var(--border-subtle);
+  border: 0;
+}
+
+.dropdown-label {
+  padding: 6px 10px 2px;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}

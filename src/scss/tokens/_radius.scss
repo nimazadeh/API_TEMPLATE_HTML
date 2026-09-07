@@ -1,0 +1,12 @@
+// =============================================================
+// APIForge X — Design Tokens: Radius
+// 3 radii only: 6px interactive, 12px container, 9999px pill.
+// Source of truth: docs/product/DESIGN_DIRECTION.md (D-006)
+// =============================================================
+
+:root {
+  --radius-sm: 6px; // buttons, inputs, badges, selects
+  --radius-md: 12px; // cards, panels, code wells, dropdowns, modals
+  --radius-pill: 9999px; // status badges, tags, small pills
+  --radius-data: 4px; // table row hover, progress fill
+}

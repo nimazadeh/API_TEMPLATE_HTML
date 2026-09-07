@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Style Guide — APIForge X</title>
+    <script>
+      // No-flash theme: resolve theme before first paint.
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body data-env="live">
+    <div class="app-shell">
+      <!-- ============ Sidebar ============ -->
+      <aside class="app-sidebar">
+        <div class="sidebar-brand">
+          <span class="brand-mark"><i data-lucide="zap"></i></span>
+          <span class="brand-name">APIForge X</span>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Primary">
+          <div class="nav-group">
+            <div class="nav-group__label">Foundation</div>
+            <a class="nav-item is-active" href="./style-guide.html">
+              <i data-lucide="palette"></i><span>Style Guide</span>
+            </a>
+            <a class="nav-item" href="./rtl.html">
+              <i data-lucide="languages"></i><span>RTL Test</span>
+            </a>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group__label">Overview</div>
+            <a class="nav-item" href="#" data-tooltip="Phase 2" data-tooltip-pos="right">
+              <i data-lucide="layout-dashboard"></i><span>Overview</span>
+            </a>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group__label">APIs</div>
+            <a class="nav-item" href="#" data-tooltip="Phase 2" data-tooltip-pos="right">
+              <i data-lucide="code-2"></i><span>APIs / Endpoints</span>
+            </a>
+            <a class="nav-item" href="#" data-tooltip="Phase 2" data-tooltip-pos="right">
+              <i data-lucide="key"></i><span>API Keys</span>
+            </a>
+            <a class="nav-item" href="#" data-tooltip="Phase 2" data-tooltip-pos="right">
+              <i data-lucide="package"></i><span>SDKs</span>
+            </a>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group__label">Monitoring</div>
+            <a class="nav-item" href="#" data-tooltip="Phase 2" data-tooltip-pos="right">
+              <i data-lucide="scroll-text"></i><span>Logs</span>
+              <span class="nav-item__badge">New</span>
+            </a>
+            <a class="nav-item" href="#" data-tooltip="Phase 2" data-tooltip-pos="right">
+              <i data-lucide="webhook"></i><span>Webhooks</span>
+            </a>
+            <a class="nav-item" href="#" data-tooltip="Phase 2" data-tooltip-pos="right">
+              <i data-lucide="alert-triangle"></i><span>Errors</span>
+            </a>
+            <a class="nav-item" href="#" data-tooltip="Phase 2" data-tooltip-pos="right">
+              <i data-lucide="gauge"></i><span>Rate Limits</span>
+            </a>
+            <a class="nav-item" href="#" data-tooltip="Phase 2" data-tooltip-pos="right">
+              <i data-lucide="bar-chart-3"></i><span>Usage</span>
+            </a>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group__label">Management</div>
+            <a class="nav-item" href="#" data-tooltip="Phase 2" data-tooltip-pos="right">
+              <i data-lucide="users"></i><span>Team</span>
+            </a>
+            <a class="nav-item" href="#" data-tooltip="Phase 2" data-tooltip-pos="right">
+              <i data-lucide="credit-card"></i><span>Billing</span>
+            </a>
+            <a class="nav-item" href="#" data-tooltip="Phase 2" data-tooltip-pos="right">
+              <i data-lucide="settings"></i><span>Settings</span>
+            </a>
+          </div>
+        </nav>
+
+        <div class="sidebar-foot">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="Environment">
+            <button type="button" class="env-option" data-env="test"><span class="dot"></span>Test</button>
+            <button type="button" class="env-option" data-env="live"><span class="dot"></span>Live</button>
+          </div>
+          <button type="button" class="btn btn-ghost" data-theme-toggle aria-pressed="false" aria-label="Toggle theme">
+            <i data-lucide="sun-moon"></i><span>Theme</span>
+          </button>
+          <div class="sidebar-user">
+            <span class="avatar">AP</span>
+            <span class="sidebar-user__meta">
+              <span class="name">Arash P.</span>
+              <span class="email">arash@apiforge.dev</span>
+            </span>
+            <i data-lucide="chevron-down"></i>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ============ Header ============ -->
+      <header class="app-header">
+        <button type="button" class="btn btn-icon header-burger" aria-label="Open menu" data-drawer-open="#sidebar-drawer">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="header-title">
+          <span class="crumb">APIForge X</span>
+          <span class="crumb-sep">/</span>
+          <span class="title">Style Guide</span>
+        </div>
+        <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="Search (⌘K)">
+          <i data-lucide="search"></i>
+          <span class="text-tertiary">Search…</span>
+          <span class="kbd-hint">⌘K</span>
+        </button>
+        <div class="header-actions">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="Environment">
+            <button type="button" class="env-option" data-env="test"><span class="dot"></span>Test</button>
+            <button type="button" class="env-option" data-env="live"><span class="dot"></span>Live</button>
+          </div>
+          <button type="button" class="btn btn-icon" data-theme-toggle aria-label="Toggle theme" data-tooltip="Toggle theme">
+            <i data-lucide="sun-moon"></i>
+          </button>
+          <button type="button" class="btn btn-icon" aria-label="Help" data-tooltip="Help">
+            <i data-lucide="help-circle"></i>
+          </button>
+          <div class="dropdown" data-dropdown>
+            <button type="button" class="btn btn-icon" aria-label="Notifications" data-dropdown-toggle>
+              <i data-lucide="bell"></i>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-label">Notifications</div>
+              <button type="button" class="dropdown-item"><i data-lucide="circle-check"></i> Deployment succeeded</button>
+              <button type="button" class="dropdown-item"><i data-lucide="alert-triangle"></i> 2 webhooks failing</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ============ Main ============ -->
+      <main class="app-main">
+        <!-- Test mode banner -->
+        <div class="env-banner" data-env-banner hidden>
+          <i data-lucide="alert-triangle"></i>
+          You are viewing <strong>test data</strong>. All keys use the <code>sk_test_</code> prefix.
+        </div>
+        <div class="app-main__inner">
+          <div class="d-flex align-items-end justify-content-between mb-4 gap-3 flex-wrap">
+            <div>
+              <h1 class="mb-1">Style Guide</h1>
+              <p class="text-secondary mb-0">APIForge X design system — Phase 1 foundation. Dark-first, hairline borders, 4px grid, Lucide only.</p>
+            </div>
+            <button type="button" class="btn btn-secondary" data-command-palette>
+              <i data-lucide="command"></i> Open palette <span class="kbd-hint">⌘K</span>
+            </button>
+          </div>
+
+          <!-- Colors -->
+          <section class="card mb-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Color tokens</h3>
+                <div class="card-subtitle">Monochrome + one indigo accent + status. Color = meaning.</div>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-6 col-md-3">
+                <div class="swatch" style="background: var(--bg-canvas);"></div>
+                <div class="swatch-label"><code>--bg-canvas</code> #0a0a0a</div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="swatch" style="background: var(--bg-surface-1);"></div>
+                <div class="swatch-label"><code>--bg-surface-1</code> #141415</div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="swatch" style="background: var(--bg-surface-2);"></div>
+                <div class="swatch-label"><code>--bg-surface-2</code> #1a1a1c</div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="swatch" style="background: var(--bg-surface-3);"></div>
+                <div class="swatch-label"><code>--bg-surface-3</code> #202023</div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="swatch" style="background: var(--accent);"></div>
+                <div class="swatch-label"><code>--accent</code> #6366f1</div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="swatch" style="background: var(--success);"></div>
+                <div class="swatch-label"><code>--success</code> #22c55e</div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="swatch" style="background: var(--warning);"></div>
+                <div class="swatch-label"><code>--warning</code> #f59e0b</div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="swatch" style="background: var(--error);"></div>
+                <div class="swatch-label"><code>--error</code> #ef4444</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Typography -->
+          <section class="card mb-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Typography</h3>
+                <div class="card-subtitle">3 lanes: Inter (UI), JetBrains Mono (code), Vazirmatn (Persian). Tabular numbers for metrics.</div>
+              </div>
+            </div>
+            <div class="row g-4 align-items-start">
+              <div class="col-md-6">
+                <div class="display mb-2">48px Display</div>
+                <h1 class="mb-2">32px Heading one</h1>
+                <h2 class="mb-2">24px Heading two</h2>
+                <h3 class="mb-2">20px Heading three</h3>
+                <h4 class="mb-3">16px Heading four</h4>
+                <div class="eyebrow mb-2">Eyebrow label · 11px uppercase</div>
+                <p class="body-lg text-body">16px lead — a calm, focused sentence for intros.</p>
+                <p class="text-body">14px body — the default UI size. High density, low clutter.</p>
+                <p class="body-sm">13px secondary — descriptions and secondary text.</p>
+                <p class="caption">12px caption — meta, timestamps, fine print.</p>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <div class="eyebrow mb-1">Monospace</div>
+                  <code class="ltr-isolate">req_8Fk2mQx1Zw</code>
+                  <code class="ltr-isolate">sk_live_4fJk9Lm2Xp</code>
+                  <code class="ltr-isolate">POST /v1/emails</code>
+                </div>
+                <div class="mb-3">
+                  <div class="eyebrow mb-1">Tabular numbers</div>
+                  <div class="tabular-nums" style="font-size: 20px;">1,245,088 &nbsp; 99.97% &nbsp; 0.0042</div>
+                </div>
+                <div>
+                  <div class="eyebrow mb-1">Persian (Vazirmatn)</div>
+                  <p dir="rtl" lang="fa" class="text-body mb-1">نمای کلی درخواست‌ها و کلیدهای API</p>
+                  <p dir="rtl" lang="fa" class="text-secondary mb-0">کد همیشه چپ‌به‌راست می‌ماند: <code dir="ltr" class="ltr-isolate">sk_live_4fJk9Lm2Xp</code></p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Buttons -->
+          <section class="card mb-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Buttons</h3>
+                <div class="card-subtitle">32px default · 28px sm · 36px lg · icon 32px.</div>
+              </div>
+            </div>
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+              <button type="button" class="btn btn-primary">Primary</button>
+              <button type="button" class="btn btn-primary"><i data-lucide="plus"></i> New API key</button>
+              <button type="button" class="btn btn-secondary">Secondary</button>
+              <button type="button" class="btn btn-ghost">Ghost</button>
+              <button type="button" class="btn btn-danger">Revoke</button>
+              <button type="button" class="btn btn-danger-ghost">Danger ghost</button>
+              <button type="button" class="btn btn-link">Link button</button>
+              <button type="button" class="btn btn-primary" disabled>Disabled</button>
+              <button type="button" class="btn btn-primary"><span class="spinner"></span> Loading</button>
+            </div>
+            <hr class="hairline my-3" />
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+              <button type="button" class="btn btn-primary btn-sm">Small</button>
+              <button type="button" class="btn btn-secondary btn-sm">Small</button>
+              <button type="button" class="btn btn-primary btn-lg">Large</button>
+              <button type="button" class="btn btn-icon" aria-label="Settings"><i data-lucide="settings"></i></button>
+              <button type="button" class="btn btn-icon" aria-label="Copy"><i data-lucide="copy"></i></button>
+            </div>
+          </section>
+
+          <!-- Forms -->
+          <section class="card mb-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Forms</h3>
+                <div class="card-subtitle">32px inputs, hairline borders, accent focus ring.</div>
+              </div>
+            </div>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label" for="sg-name">Key name</label>
+                  <input class="form-control" id="sg-name" type="text" placeholder="Production backend" />
+                  <div class="form-text">Give this key a memorable name.</div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="sg-env">Environment</label>
+                  <select class="form-select" id="sg-env">
+                    <option>Test</option>
+                    <option selected>Live</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="sg-scopes">Scopes</label>
+                  <label class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" checked />
+                    <span class="form-check-label">emails:write — send emails</span>
+                  </label>
+                  <label class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" />
+                    <span class="form-check-label">audiences:read — read audiences</span>
+                  </label>
+                  <label class="form-check">
+                    <input class="form-check-input" type="radio" name="sg-radio" />
+                    <span class="form-check-label">Expires in 90 days</span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label" for="sg-key">API key</label>
+                  <div class="input-group">
+                    <input class="form-control form-control--mono" id="sg-key" type="password" value="sk_live_4fJk9Lm2XpQz7RvW" readonly />
+                    <span class="input-group-text">
+                      <button type="button" class="btn btn-icon btn-icon--sm" data-reveal aria-label="Reveal key"><i data-lucide="eye"></i></button>
+                      <button type="button" class="btn btn-icon btn-icon--sm" data-copy="sk_live_4fJk9Lm2XpQz7RvW" aria-label="Copy key"><i data-lucide="copy"></i></button>
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="sg-search">Search</label>
+                  <div class="search-field">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input class="form-control" id="sg-search" type="text" placeholder="Search requests…" />
+                    <span class="kbd-hint">⌘K</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="sg-note">Notes</label>
+                  <textarea class="form-control" id="sg-note" placeholder="Optional notes…"></textarea>
+                </div>
+                <div class="form-group mb-0">
+                  <label class="form-label" for="sg-err">With error</label>
+                  <input class="form-control is-invalid" id="sg-err" type="text" value="bad_value" />
+                  <div class="form-error">This value is not valid.</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Tables -->
+          <section class="mb-4">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <div>
+                <h3 class="mb-0">Tables</h3>
+                <div class="text-secondary">The most important component. 40px rows, hover only, badges + latency color.</div>
+              </div>
+              <span class="badge badge-accent">mock data</span>
+            </div>
+            <div class="table-card">
+              <div class="table-responsive">
+                <table class="table table--compact">
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Method</th>
+                      <th>Endpoint</th>
+                      <th>Status</th>
+                      <th class="cell-num">Latency</th>
+                      <th>Request ID</th>
+                      <th>Key</th>
+                    </tr>
+                  </thead>
+                  <tbody id="logs-demo"></tbody>
+                </table>
+              </div>
+              <div class="table-footer">
+                <span>Showing <strong>8</strong> of <strong>50</strong> requests</span>
+                <nav class="pagination" aria-label="Pagination">
+                  <button type="button" class="page-link" disabled>Prev</button>
+                  <button type="button" class="page-link is-active">1</button>
+                  <button type="button" class="page-link">2</button>
+                  <button type="button" class="page-link">3</button>
+                  <button type="button" class="page-link">Next</button>
+                </nav>
+              </div>
+            </div>
+          </section>
+
+          <!-- Cards & KPI -->
+          <section class="mb-4">
+            <h3 class="mb-2">Cards & KPI</h3>
+            <div class="row g-3 mb-3">
+              <div class="col-6 col-xl-3">
+                <div class="card card--dense kpi">
+                  <span class="kpi-label">Requests · 24h</span>
+                  <span class="kpi-value">1.2M</span>
+                  <span class="kpi-delta up"><i data-lucide="trending-up"></i> 12.4% vs last week</span>
+                </div>
+              </div>
+              <div class="col-6 col-xl-3">
+                <div class="card card--dense kpi">
+                  <span class="kpi-label">Error rate</span>
+                  <span class="kpi-value">0.41%</span>
+                  <span class="kpi-delta down"><i data-lucide="trending-down"></i> 0.08% worse</span>
+                </div>
+              </div>
+              <div class="col-6 col-xl-3">
+                <div class="card card--dense kpi">
+                  <span class="kpi-label">P95 latency</span>
+                  <span class="kpi-value">184ms</span>
+                  <span class="kpi-delta up"><i data-lucide="trending-up"></i> 22ms faster</span>
+                </div>
+              </div>
+              <div class="col-6 col-xl-3">
+                <div class="card card--dense kpi">
+                  <span class="kpi-label">Active keys</span>
+                  <span class="kpi-value">5</span>
+                  <span class="kpi-delta flat">No change</span>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="card card--interactive">
+                  <h4 class="mb-1">Interactive card</h4>
+                  <p class="text-secondary mb-0">Hover to see the surface lift and border change.</p>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="card card--dense">
+                  <div class="card-header">
+                    <h4 class="card-title">Usage this month</h4>
+                    <button type="button" class="btn btn-sm btn-ghost">View report</button>
+                  </div>
+                  <div class="usage-row mb-3">
+                    <div class="usage-row__head">
+                      <span class="usage-row__label">Requests</span>
+                      <span class="usage-row__value">8.4M / 10M</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width: 84%"></div></div>
+                  </div>
+                  <div class="usage-row">
+                    <div class="usage-row__head">
+                      <span class="usage-row__label">Rate limit</span>
+                      <span class="usage-row__value">80 / 100 req/s</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar progress-bar--warning" style="width: 80%"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Code blocks -->
+          <section class="mb-4">
+            <h3 class="mb-2">Code blocks</h3>
+            <div class="row g-3">
+              <div class="col-lg-6">
+                <div class="code-block" data-code-block>
+                  <div class="code-block__header">
+                    <div class="code-tabs" role="tablist" aria-label="Language">
+                      <button type="button" class="code-tabs__tab is-active" data-tab="curl">cURL</button>
+                      <button type="button" class="code-tabs__tab" data-tab="node">Node</button>
+                      <button type="button" class="code-tabs__tab" data-tab="python">Python</button>
+                    </div>
+                    <div class="code-block__actions">
+                      <button type="button" class="btn btn-icon" data-code-copy aria-label="Copy code"><i data-lucide="copy"></i></button>
+                    </div>
+                  </div>
+                  <pre class="code-block__body" data-code-pane data-pane="curl">curl https://api.apiforge.dev/v1/emails \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "to": "user@example.com" }'</pre>
+                  <pre class="code-block__body" data-code-pane data-pane="node" hidden>import { ApiForge } from '@apiforge/sdk';
+
+const client = new ApiForge('YOUR_API_KEY');
+await client.emails.send({
+  to: 'user@example.com',
+});</pre>
+                  <pre class="code-block__body" data-code-pane data-pane="python" hidden>import apiforge
+
+client = apiforge.Client("YOUR_API_KEY")
+client.emails.send(to="user@example.com")</pre>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card card--dense h-100">
+                  <div class="card-header">
+                    <h4 class="card-title">Inline code & injection</h4>
+                  </div>
+                  <p class="text-secondary">Your key is <code class="ltr-isolate">sk_live_4fJk9Lm2Xp</code> and lives in <code class="ltr-isolate">Authorization</code>.</p>
+                  <p class="text-secondary">Syntax lanes: <code class="ltr-isolate"><span class="tok-kw">const</span> <span class="tok-fn">send</span> = <span class="tok-str">"ok"</span>; <span class="tok-com">// 4 colors max</span></code></p>
+                  <p class="text-secondary mb-0">Switch environment in the header — the code blocks re-inject <code class="ltr-isolate">sk_test_…</code> vs <code class="ltr-isolate">sk_live_…</code>.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Badges -->
+          <section class="card mb-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Badges</h3>
+                <div class="card-subtitle">Method + status + scope + neutral.</div>
+              </div>
+            </div>
+            <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+              <span class="badge badge-method badge-method--GET">GET</span>
+              <span class="badge badge-method badge-method--POST">POST</span>
+              <span class="badge badge-method badge-method--PUT">PUT</span>
+              <span class="badge badge-method badge-method--DELETE">DELETE</span>
+              <span class="badge badge-method badge-method--PATCH">PATCH</span>
+            </div>
+            <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+              <span class="badge badge-status badge-status--success"><span class="dot"></span>200</span>
+              <span class="badge badge-status badge-status--warning"><span class="dot"></span>404</span>
+              <span class="badge badge-status badge-status--429"><span class="dot"></span>429</span>
+              <span class="badge badge-status badge-status--error"><span class="dot"></span>500</span>
+              <span class="badge badge-status badge-status--neutral"><span class="dot"></span>—</span>
+            </div>
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+              <span class="badge badge-accent">emails:write</span>
+              <span class="badge badge-accent">audiences:read</span>
+              <span class="badge badge-neutral">neutral</span>
+            </div>
+          </section>
+
+          <!-- Skeletons -->
+          <section class="card mb-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Skeletons</h3>
+                <div class="card-subtitle">Shimmer that mirrors the final layout — never a spinner.</div>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-6 col-md-3"><div class="skeleton-kpi"></div></div>
+              <div class="col-6 col-md-3"><div class="skeleton-kpi"></div></div>
+              <div class="col-6 col-md-3"><div class="skeleton-kpi"></div></div>
+              <div class="col-6 col-md-3"><div class="skeleton-kpi"></div></div>
+              <div class="col-12 col-md-8">
+                <div class="skeleton-row"></div>
+                <div class="skeleton-row"></div>
+                <div class="skeleton-row"></div>
+                <div class="skeleton-row"></div>
+              </div>
+              <div class="col-12 col-md-4"><div class="skeleton-chart"></div></div>
+            </div>
+          </section>
+
+          <!-- Empty state -->
+          <section class="card mb-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Empty state</h3>
+                <div class="card-subtitle">Designed, teaching, actionable.</div>
+              </div>
+            </div>
+            <div class="empty-state">
+              <span class="empty-icon"><i data-lucide="scroll-text"></i></span>
+              <h4 class="empty-title">No requests yet</h4>
+              <p class="empty-desc">Send your first request and it will show up here in real time.</p>
+              <div class="code-block empty-code">
+                <div class="code-block__header">
+                  <span class="code-block__lang"><i data-lucide="terminal"></i> cURL</span>
+                  <div class="code-block__actions">
+                    <button type="button" class="btn btn-icon" data-code-copy aria-label="Copy code"><i data-lucide="copy"></i></button>
+                  </div>
+                </div>
+                <pre class="code-block__body" data-code-pane data-pane="curl">curl https://api.apiforge.dev/v1/emails \
+  -H "Authorization: Bearer YOUR_API_KEY"</pre>
+              </div>
+              <button type="button" class="btn btn-primary"><i data-lucide="plus"></i> Create API key</button>
+            </div>
+          </section>
+
+          <!-- Timeline / Progress / Modal / Toast / Dropdown -->
+          <section class="mb-4">
+            <div class="row g-3">
+              <div class="col-lg-6">
+                <div class="card card--dense h-100">
+                  <div class="card-header">
+                    <h4 class="card-title">Webhook retry timeline</h4>
+                  </div>
+                  <ol class="timeline">
+                    <li class="timeline__item">
+                      <span class="timeline__rail"><span class="timeline__node is-error"><i data-lucide="x"></i></span></span>
+                      <div class="timeline__content">
+                        <div class="timeline__title">Attempt 1 — failed</div>
+                        <div class="timeline__meta">500 Internal Server Error · 2m ago</div>
+                      </div>
+                    </li>
+                    <li class="timeline__item">
+                      <span class="timeline__rail"><span class="timeline__node is-pending"><i data-lucide="clock"></i></span></span>
+                      <div class="timeline__content">
+                        <div class="timeline__title">Retrying in 2 minutes</div>
+                        <div class="timeline__meta">Exponential backoff · attempt 2 of 5</div>
+                      </div>
+                    </li>
+                    <li class="timeline__item">
+                      <span class="timeline__rail"><span class="timeline__node is-success"><i data-lucide="check"></i></span></span>
+                      <div class="timeline__content">
+                        <div class="timeline__title">Attempt 2 — delivered</div>
+                        <div class="timeline__meta">200 OK · 84ms</div>
+                      </div>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card card--dense h-100">
+                  <div class="card-header">
+                    <h4 class="card-title">Overlays & feedback</h4>
+                  </div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <button type="button" class="btn btn-secondary" data-modal-open="#sg-modal">Open modal</button>
+                    <button type="button" class="btn btn-secondary" data-drawer-open="#sg-drawer">Open drawer</button>
+                    <button type="button" class="btn btn-secondary" id="sg-toast">Show toast</button>
+                    <div class="dropdown" data-dropdown>
+                      <button type="button" class="btn btn-secondary" data-dropdown-toggle>Dropdown <i data-lucide="chevron-down"></i></button>
+                      <div class="dropdown-menu">
+                        <button type="button" class="dropdown-item"><i data-lucide="copy"></i> Duplicate</button>
+                        <button type="button" class="dropdown-item"><i data-lucide="rotate-ccw"></i> Rotate key</button>
+                        <hr class="dropdown-divider" />
+                        <button type="button" class="dropdown-item is-danger"><i data-lucide="trash-2"></i> Revoke</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Mobile sidebar drawer -->
+    <div class="sidebar-drawer" data-drawer id="sidebar-drawer" hidden>
+      <div class="sidebar-brand">
+        <span class="brand-mark"><i data-lucide="zap"></i></span>
+        <span class="brand-name">APIForge X</span>
+        <button type="button" class="btn btn-icon ms-auto" data-close aria-label="Close menu"><i data-lucide="x"></i></button>
+      </div>
+      <nav class="sidebar-nav" aria-label="Primary">
+        <div class="nav-group">
+          <div class="nav-group__label">Foundation</div>
+          <a class="nav-item is-active" href="./style-guide.html"><i data-lucide="palette"></i><span>Style Guide</span></a>
+          <a class="nav-item" href="./rtl.html"><i data-lucide="languages"></i><span>RTL Test</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label">Overview</div>
+          <a class="nav-item" href="#"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label">APIs</div>
+          <a class="nav-item" href="#"><i data-lucide="code-2"></i><span>APIs / Endpoints</span></a>
+          <a class="nav-item" href="#"><i data-lucide="key"></i><span>API Keys</span></a>
+          <a class="nav-item" href="#"><i data-lucide="package"></i><span>SDKs</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label">Monitoring</div>
+          <a class="nav-item" href="#"><i data-lucide="scroll-text"></i><span>Logs</span></a>
+          <a class="nav-item" href="#"><i data-lucide="webhook"></i><span>Webhooks</span></a>
+          <a class="nav-item" href="#"><i data-lucide="alert-triangle"></i><span>Errors</span></a>
+          <a class="nav-item" href="#"><i data-lucide="gauge"></i><span>Rate Limits</span></a>
+          <a class="nav-item" href="#"><i data-lucide="bar-chart-3"></i><span>Usage</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label">Management</div>
+          <a class="nav-item" href="#"><i data-lucide="users"></i><span>Team</span></a>
+          <a class="nav-item" href="#"><i data-lucide="credit-card"></i><span>Billing</span></a>
+          <a class="nav-item" href="#"><i data-lucide="settings"></i><span>Settings</span></a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile bottom tab bar -->
+    <nav class="bottom-tabbar" aria-label="Primary mobile">
+      <a class="bottom-tabbar__item" href="#"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+      <a class="bottom-tabbar__item is-active" href="./style-guide.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
+      <a class="bottom-tabbar__item" href="#"><i data-lucide="key"></i><span>Keys</span></a>
+      <a class="bottom-tabbar__item" href="#"><i data-lucide="bar-chart-3"></i><span>Usage</span></a>
+      <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="More">
+        <i data-lucide="more-horizontal"></i><span>More</span>
+      </button>
+    </nav>
+
+    <!-- Modal demo -->
+    <div class="modal" data-modal id="sg-modal" hidden>
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h4 class="modal-title">Create API key</h4>
+          <button type="button" class="btn btn-icon" data-close aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="sg-modal-name">Name</label>
+            <input class="form-control" id="sg-modal-name" type="text" placeholder="Production backend" autofocus />
+          </div>
+          <div class="form-group mb-0">
+            <label class="form-label" for="sg-modal-exp">Expiration</label>
+            <select class="form-select" id="sg-modal-exp">
+              <option>Never</option>
+              <option>30 days</option>
+              <option>90 days</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" data-close>Cancel</button>
+          <button type="button" class="btn btn-primary">Create key</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drawer demo -->
+    <div class="drawer" data-drawer id="sg-drawer" hidden>
+      <div class="drawer-header">
+        <h4 class="m-0">Request details</h4>
+        <button type="button" class="btn btn-icon" data-close aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="drawer-body">
+        <p class="text-secondary">Phase 2 wires this drawer to a full request inspector — headers, body JSON, timeline and a "Copy as cURL" action.</p>
+      </div>
+    </div>
+
+    <script type="module" src="/src/js/pages/style-guide.js"></script>
+  </body>
+</html>

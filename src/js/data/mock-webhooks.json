@@ -1,0 +1,39 @@
+[
+  {
+    "id": "wh_8f3k2ma1",
+    "url": "https://example.com/hooks/email-events",
+    "description": "Email delivery events",
+    "events": [
+      "email.sent",
+      "email.bounced",
+      "email.delivered"
+    ],
+    "status": "enabled",
+    "successRate": 99.2,
+    "lastDelivery": "2026-09-07T19:24:24.526Z"
+  },
+  {
+    "id": "wh_2x9q7b04",
+    "url": "https://example.com/hooks/audience-sync",
+    "description": "Audience sync events",
+    "events": [
+      "audience.created",
+      "audience.updated"
+    ],
+    "status": "enabled",
+    "successRate": 97.8,
+    "lastDelivery": "2026-09-07T19:16:24.526Z"
+  },
+  {
+    "id": "wh_c7d1p9z3",
+    "url": "https://example.com/hooks/usage-alerts",
+    "description": "Usage threshold alerts",
+    "events": [
+      "usage.warning",
+      "usage.limit_reached"
+    ],
+    "status": "disabled",
+    "successRate": 0,
+    "lastDelivery": null
+  }
+]

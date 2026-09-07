@@ -19,7 +19,7 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 
 ---
 
-## Phase 1: Foundation & Design System (Next)
+## Phase 1: Foundation & Design System — COMPLETE ✅
 
 **Duration:** 3-5 days
 **Goal:** Build the skeleton that makes all pages possible — tokens, layout, core components, RTL system, mock data
@@ -27,9 +27,9 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 ### Tasks:
 
 #### 1.1 Project Setup
-- [ ] Initialize Vite project (vite.config.js) with SCSS, multi-page input (rollupOptions.input for each HTML)
-- [ ] Install Bootstrap 5.3.x, sass, chart.js, lucide
-- [ ] Setup folder structure:
+- [x] Initialize Vite project (vite.config.js) with SCSS, multi-page input (rollupOptions.input for each HTML)
+- [x] Install Bootstrap 5.3.x, sass, chart.js, lucide
+- [x] Setup folder structure:
 ```
 /src
   /assets
@@ -52,52 +52,52 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
     index.html (landing)
     pricing.html
 ```
-- [ ] Setup SCSS architecture: tokens as CSS variables, dark-first, light override via data-theme
-- [ ] Setup ESLint + Prettier (optional but recommended)
+- [x] Setup SCSS architecture: tokens as CSS variables, dark-first, light override via data-theme
+- [ ] Setup ESLint + Prettier (optional — deferred to Phase 4 polish)
 
 #### 1.2 Design Tokens
-- [ ] Colors: dark and light CSS variables (canvas, surfaces, border, text, accent, status) as per DESIGN_DIRECTION.md
-- [ ] Typography: Inter + Vazirmatn + JetBrains Mono, type scale, tracking, tabular numbers utility, Vazirmatn line-height 1.7
-- [ ] Spacing: 4px base, tokens
-- [ ] Radius: 6px, 12px, 9999px
-- [ ] Shadows: stacked for floating only
-- [ ] Z-index: sidebar, header, dropdown, modal, command palette
+- [x] Colors: dark and light CSS variables (canvas, surfaces, border, text, accent, status) as per DESIGN_DIRECTION.md
+- [x] Typography: Inter + Vazirmatn + JetBrains Mono, type scale, tracking, tabular numbers utility, Vazirmatn line-height 1.7
+- [x] Spacing: 4px base, tokens
+- [x] Radius: 6px, 12px, 9999px
+- [x] Shadows: stacked for floating only
+- [x] Z-index: sidebar, header, dropdown, modal, command palette
 
 #### 1.3 Base Layout
-- [ ] App shell: sidebar 256px + header 56px + main fluid, with logical properties (inline-start)
-- [ ] Sidebar: groups, items with Lucide icons, active state, collapsible, bottom user menu + env switcher + theme toggle
-- [ ] Header: breadcrumb/title, search with Cmd+K hint, env switcher pill, help, user
-- [ ] Responsive: sidebar collapses to 64px icon rail on tablet, drawer + bottom tab bar on mobile
-- [ ] Theme toggle: dark/light with localStorage + prefers-color-scheme + no flash script
-- [ ] Env switcher: Test/Live pill + banner when test
-- [ ] RTL: Test sidebar on right when dir="rtl", logical properties
+- [x] App shell: sidebar 256px + header 56px + main fluid, with logical properties (inline-start)
+- [x] Sidebar: groups, items with Lucide icons, active state, collapsible, bottom user menu + env switcher + theme toggle
+- [x] Header: breadcrumb/title, search with Cmd+K hint, env switcher pill, help, user
+- [x] Responsive: sidebar collapses to 64px icon rail on tablet, drawer + bottom tab bar on mobile
+- [x] Theme toggle: dark/light with localStorage + prefers-color-scheme + no flash script
+- [x] Env switcher: Test/Live pill + banner when test
+- [x] RTL: Test sidebar on right when dir="rtl", logical properties
 
 #### 1.4 Core Components (HTML + SCSS + JS)
-- [ ] Buttons: primary, secondary, ghost, destructive, sizes, loading, icon
-- [ ] Forms: input, textarea, select, checkbox, radio, label, help, error, search with Cmd+K
-- [ ] Tables: header uppercase, row 40px, hover, method badges, status badges with dot, latency color, skeleton, empty
-- [ ] Cards: default, interactive, code card
-- [ ] Badges: method (GET blue etc.), status (200 green etc.), scopes, neutral
-- [ ] Code blocks: dark well, header with language + copy + tabs, body mono 13px, LTR isolated, copy feedback, injection placeholder
-- [ ] Inline code: LTR isolated
-- [ ] Empty states: icon + title + description + code snippet + action
-- [ ] Skeletons: table rows, KPI cards, chart shimmer
-- [ ] Command palette: overlay, input autofocus, groups, fuzzy search (vanilla JS), keyboard nav, footer legend
-- [ ] Copy utility: copy button with "Copied!" state
-- [ ] Tooltip: minimal, delay first
-- [ ] Modal/Drawer: for key reveal-once, log detail, webhook detail
-- [ ] Progress: rate limit progress bar, usage progress
-- [ ] Timeline: webhook retry timeline visual
+- [x] Buttons: primary, secondary, ghost, destructive, sizes, loading, icon
+- [x] Forms: input, textarea, select, checkbox, radio, label, help, error, search with Cmd+K
+- [x] Tables: header uppercase, row 40px, hover, method badges, status badges with dot, latency color, skeleton, empty
+- [x] Cards: default, interactive, code card
+- [x] Badges: method (GET blue etc.), status (200 green etc.), scopes, neutral
+- [x] Code blocks: dark well, header with language + copy + tabs, body mono 13px, LTR isolated, copy feedback, injection placeholder
+- [x] Inline code: LTR isolated
+- [x] Empty states: icon + title + description + code snippet + action
+- [x] Skeletons: table rows, KPI cards, chart shimmer
+- [x] Command palette: overlay, input autofocus, groups, fuzzy search (vanilla JS), keyboard nav, footer legend
+- [x] Copy utility: copy button with "Copied!" state
+- [x] Tooltip: minimal, delay first
+- [x] Modal/Drawer: for key reveal-once, log detail, webhook detail
+- [x] Progress: rate limit progress bar, usage progress
+- [x] Timeline: webhook retry timeline visual
 
 #### 1.5 Mock Data & Utilities
-- [ ] Mock JSON: logs (50 entries with method, endpoint, status, latency, request ID, key prefix), keys (5), webhooks (3 endpoints with deliveries), usage (30 days), endpoints (10)
-- [ ] Utilities: format relative time, format latency with color, format status with badge, tabular numbers, copy, LTR isolate, Persian numbers toggle
+- [x] Mock JSON: logs (50 entries with method, endpoint, status, latency, request ID, key prefix), keys (5), webhooks (3 endpoints with deliveries), usage (30 days), endpoints (10)
+- [x] Utilities: format relative time, format latency with color, format status with badge, tabular numbers, copy, LTR isolate, Persian numbers toggle
 
 #### 1.6 RTL System
-- [ ] Vazirmatn font loading (woff2, 300,400,500,700)
-- [ ] Logical properties throughout (margin-inline, etc.)
-- [ ] LTR isolation utility class: .ltr-isolate { direction: ltr; unicode-bidi: isolate; text-align: left; }
-- [ ] Test page with mixed Persian + English code
+- [x] Vazirmatn font loading (woff2, 300,400,500,700)
+- [x] Logical properties throughout (margin-inline, etc.)
+- [x] LTR isolation utility class: .ltr-isolate { direction: ltr; unicode-bidi: isolate; text-align: left; }
+- [x] Test page with mixed Persian + English code
 
 **Exit Criteria:**
 - Vite dev server runs, dark/light toggle works, sidebar responsive, no flash

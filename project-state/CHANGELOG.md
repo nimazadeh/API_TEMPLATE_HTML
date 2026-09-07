@@ -42,6 +42,38 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## [Phase 1] — 2026-09-07 — FOUNDATION & DESIGN SYSTEM COMPLETE ✅
+
+### Added
+- **Project setup:** `package.json` (Vite 7.3.6, Bootstrap 5.3.8, Sass, Lucide, Chart.js, Fontsource fonts), `vite.config.js` (multi-page inputs, `@` alias, relative base, 0.0.0.0 host + `allowedHosts` for the preview proxy), `.gitignore`
+- **Design tokens** (`src/scss/tokens/`): colors (dark-first + light override, monochrome + indigo `#6366f1` + status), typography (Inter Variable / JetBrains Mono / Vazirmatn + type scale + tracking + line-heights), spacing (4px scale), radius (6/12/pill/4), z-index ladder, mixins (breakpoints, focus ring, motion, visually-hidden)
+- **Vendor layer** (`src/scss/vendor/_bootstrap.scss`): curated Bootstrap subset (functions/variables/maps/mixins/utilities/root/reboot/type/images/containers/grid/helpers + utilities API) with variable overrides (dark body, hairline borders, 6/12/pill radius, no shadows, 24px gutters, `$enable-dark-mode: false`)
+- **Base layer** (`src/scss/base/`): reset/polish, typography utilities (`.display`, `.eyebrow`, `.mono`, `.tabular-nums`, `.ltr-isolate`, `.num-fa`/`.num-en`), custom utilities (`.hairline`, `.floating`, `.sr-only`), Bootstrap `--bs-*` variable bridge
+- **Core components** (`src/scss/components/` + JS): buttons (5 types, 3 sizes, icon, loading), forms (input/select/textarea/check/radio/search+⌘K/key reveal), badges (method + status + scope), tables (40px rows, hover, latency color, pagination), cards (default/interactive/KPI), code blocks (always-dark wells, 40px header, language tabs, copy, key injection), skeletons, empty states, tooltip, modal, drawer, progress, timeline, toast, dropdown, command palette (⌘K, fuzzy search, groups, keyboard nav)
+- **Layouts** (`src/scss/layouts/` + `main.scss`): app shell (sidebar 256px + header 56px + fluid main, logical grid areas), sidebar (grouped nav, active state, foot cluster, 64px icon rail on tablet), header (breadcrumb, search field, env switcher, theme toggle, help, user), mobile nav (bottom tab bar + sidebar drawer)
+- **JS architecture** (`src/js/`): `main.js` boot(), per-page entries, components (theme, env-switcher, command-palette, code-block, copy, dropdown, tooltip, modal, toast, reveal, table), formatting utils (relative time, latency class, status/method badges, Persian digits), deterministic mock-data generator
+- **Mock data** (`src/js/data/` + `scripts/generate-mock-data.mjs`): 50 logs, 5 keys, 3 webhooks, 30-day usage, 10 endpoints — seeded & regenerable
+- **Foundation pages:** `/` (temporary hub), `/style-guide.html` (full component showcase), `/rtl.html` (Persian RTL demo with LTR-isolated code + Persian labels)
+- **README.md** — quick start, structure, theming, RTL notes
+
+### Decisions
+- Bootstrap imported as a curated `@import`-based subset (Bootstrap 5.3.8 partials share one scope; variable overrides must precede the import stack)
+- Sass deprecation warnings (Bootstrap's legacy `color-functions`/`import`) silenced by ID via `silenceDeprecations` in Vite
+- Lucide icons registered in a tree-shaken `icons.js` map instead of the full 1800-icon object (main JS bundle 370 KB → 26 KB)
+- Single JS-managed global modal/drawer backdrop (fixed-position children inside transformed containers break against the viewport)
+- RTL demo ships as a separate `rtl.html` with `dir="rtl" lang="fa"` (D-018: `?lang=fa` toggle deferred)
+- Sidebar fixed 256px; resizable deferred (D-016)
+
+### Validated
+- `npm run build` clean (no warnings); CSS 170 KB → 37.2 KB gzip; main JS 26 KB → 9.3 KB gzip
+- Dark/light toggle, env switcher, ⌘K palette, copy-with-feedback, code tabs + key injection all wired
+- Mock logs render in the table; RTL page mirrors the shell with code LTR
+
+### Next
+- Phase 2: Core App Pages — Overview, Logs, Keys, Usage (observability first)
+
+---
+
 ## Template for Future Phases
 
 ```

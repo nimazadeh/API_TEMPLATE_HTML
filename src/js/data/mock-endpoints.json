@@ -1,0 +1,72 @@
+[
+  {
+    "method": "POST",
+    "path": "/v1/emails",
+    "group": "Emails",
+    "description": "Send an email",
+    "id": "ep_yVMglF"
+  },
+  {
+    "method": "GET",
+    "path": "/v1/emails/{id}",
+    "group": "Emails",
+    "description": "Retrieve an email",
+    "id": "ep_ARMFye"
+  },
+  {
+    "method": "POST",
+    "path": "/v1/completions",
+    "group": "AI",
+    "description": "Create a completion",
+    "id": "ep_eMKF1N"
+  },
+  {
+    "method": "POST",
+    "path": "/v1/embeddings",
+    "group": "AI",
+    "description": "Create embeddings",
+    "id": "ep_SitOVD"
+  },
+  {
+    "method": "GET",
+    "path": "/v1/models",
+    "group": "AI",
+    "description": "List available models",
+    "id": "ep_idB5b2"
+  },
+  {
+    "method": "POST",
+    "path": "/v1/audiences",
+    "group": "Audiences",
+    "description": "Create an audience",
+    "id": "ep_asbZDI"
+  },
+  {
+    "method": "GET",
+    "path": "/v1/audiences/{id}",
+    "group": "Audiences",
+    "description": "Retrieve an audience",
+    "id": "ep_CwnatD"
+  },
+  {
+    "method": "POST",
+    "path": "/v1/webhooks",
+    "group": "Webhooks",
+    "description": "Create a webhook endpoint",
+    "id": "ep_1IsxOn"
+  },
+  {
+    "method": "PUT",
+    "path": "/v1/api-keys/{id}",
+    "group": "Platform",
+    "description": "Update an API key",
+    "id": "ep_sb68vP"
+  },
+  {
+    "method": "DELETE",
+    "path": "/v1/api-keys/{id}",
+    "group": "Platform",
+    "description": "Revoke an API key",
+    "id": "ep_YPhtRY"
+  }
+]

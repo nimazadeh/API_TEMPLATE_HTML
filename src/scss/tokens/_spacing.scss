@@ -1,0 +1,26 @@
+// =============================================================
+// APIForge X — Design Tokens: Spacing
+// 4px base grid. Scale: 4, 8, 12, 16, 24, 32, 48, 96.
+// Source of truth: docs/product/DESIGN_DIRECTION.md (D-006)
+// =============================================================
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 96px;
+}
+
+// Compile-time helpers for the 4px scale (used by partials).
+$space-1: var(--space-1);
+$space-2: var(--space-2);
+$space-3: var(--space-3);
+$space-4: var(--space-4);
+$space-5: var(--space-5);
+$space-6: var(--space-6);
+$space-7: var(--space-7);
+$space-8: var(--space-8);

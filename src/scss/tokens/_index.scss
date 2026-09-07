@@ -1,0 +1,12 @@
+// =============================================================
+// APIForge X — Design Tokens entry point
+// Forwards every token module + shared mixins so other partials can
+// `@use "@/scss/tokens/_index" as *;`
+// =============================================================
+
+@forward './_colors';
+@forward './_typography';
+@forward './_spacing';
+@forward './_radius';
+@forward './_zindex';
+@forward './_mixins';

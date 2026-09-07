@@ -1,0 +1,32 @@
+// =============================================================
+// APIForge X — Components: Tooltip
+// Minimal, delay before showing. Used only as last resort (inline
+// help first — Vercel principle).
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.tooltip {
+  position: absolute;
+  z-index: var(--z-tooltip);
+  max-width: 240px;
+  padding: 6px 10px;
+  font-size: var(--fs-caption);
+  line-height: 1.4;
+  color: var(--text-primary);
+  background: var(--bg-surface-3);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-overlay);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(2px);
+  @include motion(150ms);
+  transition-property: opacity, transform;
+  transition-timing-function: $ease-out;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "key_DElNoSR8",
+    "name": "Production backend",
+    "prefix": "sk_live_kGT2HqnH",
+    "scopes": [
+      "audiences:read",
+      "audiences:write",
+      "emails:read",
+      "emails:write"
+    ],
+    "createdAt": "2026-06-01T19:47:24.526Z",
+    "lastUsedAt": "2026-09-07T14:47:24.526Z",
+    "status": "active"
+  },
+  {
+    "id": "key_YNAdp9GX",
+    "name": "CLI tool",
+    "prefix": "sk_live_0Kl7TkTY",
+    "scopes": [
+      "emails:read",
+      "emails:write"
+    ],
+    "createdAt": "2026-04-24T19:47:24.526Z",
+    "lastUsedAt": "2026-09-06T19:47:24.526Z",
+    "status": "active"
+  },
+  {
+    "id": "key_wB0jrqmT",
+    "name": "Staging server",
+    "prefix": "sk_live_59TBLYfg",
+    "scopes": [
+      "audiences:read",
+      "audiences:write",
+      "emails:read",
+      "emails:write"
+    ],
+    "createdAt": "2026-01-14T19:47:24.526Z",
+    "lastUsedAt": "2026-09-07T12:47:24.526Z",
+    "status": "revoked"
+  },
+  {
+    "id": "key_UClbFi5n",
+    "name": "CI pipeline",
+    "prefix": "sk_live_Y1RmzwSu",
+    "scopes": [
+      "emails:read",
+      "emails:write"
+    ],
+    "createdAt": "2026-04-12T19:47:24.526Z",
+    "lastUsedAt": "2026-09-06T13:47:24.526Z",
+    "status": "active"
+  },
+  {
+    "id": "key_9NTCj99C",
+    "name": "Local dev",
+    "prefix": "sk_test_K8u1oPZY",
+    "scopes": [
+      "audiences:read",
+      "emails:read",
+      "emails:write"
+    ],
+    "createdAt": "2025-12-15T19:47:24.526Z",
+    "lastUsedAt": "2026-09-05T17:47:24.526Z",
+    "status": "active"
+  }
+]

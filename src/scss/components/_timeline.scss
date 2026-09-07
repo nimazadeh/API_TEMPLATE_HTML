@@ -1,0 +1,91 @@
+// =============================================================
+// APIForge X — Components: Timeline
+// Webhook retry timeline: attempt → outcome → retry chain.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.timeline__item {
+  position: relative;
+  display: flex;
+  gap: var(--space-3);
+  padding-bottom: var(--space-5);
+
+  &:last-child {
+    padding-bottom: 0;
+    .timeline__rail::after {
+      display: none;
+    }
+  }
+}
+
+.timeline__rail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: none;
+
+  .timeline__node {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    background: var(--bg-surface-2);
+    color: var(--text-secondary);
+    z-index: 1;
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+    &.is-success {
+      color: var(--success);
+      border-color: var(--success-border);
+      background: var(--success-bg);
+    }
+    &.is-error {
+      color: var(--error);
+      border-color: var(--error-border);
+      background: var(--error-bg);
+    }
+    &.is-pending {
+      color: var(--warning);
+      border-color: var(--warning-border);
+      background: var(--warning-bg);
+    }
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: 22px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+}
+
+.timeline__content {
+  padding-top: 2px;
+  .timeline__title {
+    font-size: var(--fs-body);
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  .timeline__meta {
+    font-size: var(--fs-caption);
+    color: var(--text-tertiary);
+    margin-top: 2px;
+  }
+}

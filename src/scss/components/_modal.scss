@@ -1,0 +1,120 @@
+// =============================================================
+// APIForge X — Components: Modal & Drawer
+// Key reveal-once, log detail, webhook detail. Stacked shadow,
+// 12px radius, backdrop. Transform/opacity motion only.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-backdrop);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  @include motion(200ms);
+  transition-property: opacity;
+  &.is-open {
+    opacity: 1;
+  }
+}
+
+.modal {
+  position: fixed;
+  z-index: var(--z-modal);
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5vh 16px 16px;
+  overflow-y: auto;
+  pointer-events: none;
+}
+
+.modal-dialog {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 480px;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-floating);
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+  @include motion(200ms);
+  transition-property: opacity, transform;
+  transition-timing-function: $ease-out;
+
+  .is-open & {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 20px 20px 0;
+  .modal-title {
+    margin: 0;
+    font-size: var(--fs-h4);
+    font-weight: 500;
+  }
+}
+.modal-body {
+  padding: 16px 20px;
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  line-height: var(--lh-body);
+}
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: 0 20px 20px;
+}
+
+// Drawer — slides from the inline-end side (mirrors in RTL)
+.drawer {
+  position: fixed;
+  z-index: var(--z-modal);
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: min(560px, 100vw);
+  background: var(--bg-surface-1);
+  border-inline-start: 1px solid var(--border);
+  box-shadow: var(--shadow-floating);
+  transform: translateX(100%);
+  @include motion(250ms);
+  transition-property: transform;
+  transition-timing-function: $ease-out;
+
+  // RTL-aware slide-in
+  [dir='rtl'] & {
+    transform: translateX(-100%);
+  }
+  &.is-open,
+  [dir='rtl'] &.is-open {
+    transform: none;
+  }
+
+  display: flex;
+  flex-direction: column;
+}
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.drawer-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}

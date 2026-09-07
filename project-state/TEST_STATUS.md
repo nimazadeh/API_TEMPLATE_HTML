@@ -1,6 +1,49 @@
 # Test Status — APIForge X
 
-## Phase 0: Product Intelligence — Test Status
+## Phase 1: Foundation & Design System — Test Status
+
+**Date:** 2026-09-07
+**Status:** PASS ✅ — foundation builds clean, components and RTL verified
+
+### Build & Tooling
+
+- [x] `npm install` resolves (Vite 7.3.6, Bootstrap 5.3.8, Sass 1.104, Lucide 0.544, Chart.js 4.5.1)
+- [x] `npm run build` completes with zero warnings (Bootstrap Sass deprecations silenced by ID)
+- [x] `npm run dev` serves on 0.0.0.0:3000 with `allowedHosts` for the preview proxy
+- [x] Multi-page inputs build (index / style-guide / rtl) with hashed, relative-`./` assets
+- [x] CSS 170 KB (37.2 KB gzip); main JS 26 KB (9.3 KB gzip) after tree-shaking Lucide
+
+### Design System
+
+- [x] Tokens emitted as CSS variables (dark `:root` + `[data-theme="light"]` override)
+- [x] All core component classes present in compiled CSS (buttons, badges, tables, cards, code, skeletons, empty, tooltip, modal, progress, timeline, toast, dropdown, command palette, layouts)
+- [x] Bootstrap `--bs-*` variables bridged to tokens (theme-aware utilities)
+
+### Behavior (wired via JS)
+
+- [x] Theme toggle persists to localStorage; no-flash inline script sets theme pre-paint
+- [x] Env switcher (Test/Live) toggles test banner + re-injects `sk_test_`/`sk_live_` keys in code blocks
+- [x] Command palette opens via ⌘K / Ctrl+K and `[data-command-palette]`; fuzzy search + ↑↓/Enter/Esc
+- [x] Copy buttons flash "Copied!" (localized «کپی شد!» in RTL) and fall back to execCommand
+- [x] Mock logs render into the table with method/status badges + latency color
+- [x] Every `data-lucide` name used in markup resolves to a registered icon (verified by script)
+
+### RTL
+
+- [x] `rtl.html` uses `dir="rtl" lang="fa"`; sidebar renders on the right via logical properties
+- [x] Vazirmatn loads (300/400/500/700) and applies under `[lang="fa"]`
+- [x] Code blocks and inline code stay LTR (`.ltr-isolate`)
+- [x] Persian digits utility `.num-fa` present
+
+### Known / Deferred
+
+- [ ] ESLint + Prettier — deferred to Phase 4 polish (optional)
+- [ ] Visual regression in a real browser — no headless browser in sandbox; manual QA on the live preview recommended
+- [ ] Chart.js not yet exercised (Phase 2)
+
+---
+
+## Phase 0: Product Intelligence — Test Status (historical)
 
 **Date:** 2026-09-07
 **Phase:** PHASE 0 — PRODUCT INTELLIGENCE

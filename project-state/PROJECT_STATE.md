@@ -2,16 +2,47 @@
 
 ## Project: APIForge X — Premium Developer API Platform HTML Template
 
-**Branch:** arena/01a07cf6-api-template-html
-**Phase:** PHASE 0 — PRODUCT INTELLIGENCE
+**Branch:** arena/01a07d58-api-template-html
+**Phase:** PHASE 1 — FOUNDATION & DESIGN SYSTEM
 **Date:** 2026-09-07
-**Status:** Phase 0 Complete — Ready for Phase 1 Implementation
+**Status:** Phase 1 Complete — Ready for Phase 2 Implementation
 
 ---
 
 ## Current Phase Status
 
-### PHASE 0: PRODUCT INTELLIGENCE — COMPLETE ✅
+### PHASE 1: FOUNDATION & DESIGN SYSTEM — COMPLETE ✅
+
+**Objectives Achieved:**
+- [x] Vite + Bootstrap 5.3.8 + SCSS project structure (multi-page, `@` alias)
+- [x] Design tokens: colors (dark/light), typography, spacing, radius, z-index
+- [x] Base layout: sidebar 256px + header 56px + fluid main (logical properties)
+- [x] Sidebar: groups, active state, icon rail (tablet), drawer + bottom bar (mobile)
+- [x] Theme toggle: dark/light with localStorage + prefers-color-scheme + no-flash script
+- [x] Environment switcher: Test/Live pill + test-mode banner
+- [x] Core components: buttons, forms, tables, cards, badges, code blocks, empty states, skeletons, command palette, tooltip, modal, drawer, progress, timeline, toast, dropdown, copy
+- [x] Command palette: ⌘K / Ctrl+K, fuzzy search, groups, keyboard navigation
+- [x] Code blocks: dark wells, language tabs, copy-with-feedback, API-key injection
+- [x] RTL system: Vazirmatn (300/400/500/700), logical properties, `.ltr-isolate`, Persian numbers, full Persian demo
+- [x] Mock data: 50 logs, 5 keys, 3 webhooks, 30-day usage, 10 endpoints (seeded, regenerable)
+
+**Artifacts Created:**
+- `/package.json`, `/vite.config.js`, `/.gitignore`, `/README.md`
+- `/src/scss/` — tokens, vendor, base, components, layouts, `main.scss`
+- `/src/js/` — `main.js` (boot), components, data, utils, pages
+- `/scripts/generate-mock-data.mjs`
+- `/index.html` (hub), `/style-guide.html`, `/rtl.html`
+
+**Exit Criteria (all passed):**
+- [x] Vite dev server runs; dark/light toggle works; sidebar responsive; no flash
+- [x] Core components visible in `/style-guide.html`
+- [x] RTL page shows sidebar on the right, code LTR, no broken alignment
+- [x] Command palette opens with ⌘K, fuzzy search works
+- [x] Mock data renders in the table
+
+---
+
+### PHASE 0: PRODUCT INTELLIGENCE — COMPLETE ✅ (historical)
 
 **Objectives Achieved:**
 - [x] Ideal Customer Profile defined (3 ICPs, Iranian market specifics)
@@ -118,19 +149,18 @@
 
 ---
 
-## Next Phase: PHASE 1 — FOUNDATION & DESIGN SYSTEM
+## Next Phase: PHASE 2 — CORE APP PAGES (OBSERVABILITY FIRST)
 
-**Ready to start:** Yes, all Phase 0 artifacts exist and are coherent.
+**Ready to start:** Yes — all Phase 1 foundation exists and builds clean.
 
-**Phase 1 Goals:**
-- Setup Vite + Bootstrap 5.3 + SCSS project structure
-- Design tokens: colors (dark/light), typography, spacing, radius, shadows
-- Base layout: sidebar, header, main, command palette shell
-- Core components: buttons, forms, tables, cards, badges, code blocks, empty states, skeletons
-- RTL setup: logical properties, Vazirmatn, LTR isolation utilities
-- Mock data JSON for logs, keys, webhooks
+**Phase 2 Goals (P0):**
+- `/app/overview.html` — quickstart card, 4-KPI strip, recent errors/requests, webhook health, usage progress
+- `/app/logs.html` + log detail drawer — filters with URL state, full table, cURL copy, timeline, JSON viewer
+- `/app/keys.html` — key table, create flow with reveal-once, detail drawer, rotate/revoke
+- `/app/usage.html` — time-range selector, area chart (Chart.js), breakdown tables, CSV export
+- URL as state (?status=failed), skeletons, empty states, keyboard, dark/light, RTL
 
-**Not yet:** No full pages, no marketing landing — just foundation.
+**Reuse from Phase 1:** `boot()`, tokens, tables, badges, code blocks, copy, modal/drawer, command palette (extend its index), env switcher, mock data.
 
 ---
 
@@ -161,7 +191,7 @@
 - [x] Implementation plan exists (see IMPLEMENTATION_PLAN.md)
 - [x] Project state is persisted (this file + others)
 
-**Phase 0 Status:** COMPLETE ✅ — Ready for Phase 1
+**Phase 0 Status:** COMPLETE ✅ (historical — superseded by Phase 1)
 
 ---
 

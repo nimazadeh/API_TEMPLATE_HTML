@@ -1,0 +1,45 @@
+// =============================================================
+// APIForge X — Base: Bootstrap CSS-variable bridge
+//
+// Bootstrap's own utilities (.text-primary, .bg-body, .border, …)
+// resolve against its --bs-* custom properties, which are emitted
+// with compile-time values. We re-map the important ones to our
+// theme tokens so Bootstrap utilities stay theme-aware (dark/light)
+// while our own components use the --bg-* / --accent tokens directly.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+:root {
+  --bs-primary: var(--accent);
+  --bs-primary-rgb: 99, 102, 241;
+  --bs-body-bg: var(--bg-canvas);
+  --bs-body-bg-rgb: 10, 10, 10;
+  --bs-body-color: var(--text-primary);
+  --bs-body-color-rgb: 250, 250, 250;
+  --bs-emphasis-color: var(--text-primary);
+  --bs-secondary-color: var(--text-secondary);
+  --bs-tertiary-color: var(--text-tertiary);
+  --bs-border-color: var(--border);
+  --bs-border-color-translucent: var(--border);
+  --bs-link-color: var(--accent);
+  --bs-link-color-rgb: 99, 102, 241;
+  --bs-link-hover-color: var(--accent-hover);
+  --bs-heading-color: var(--text-primary);
+  --bs-body-font-family: var(--font-sans);
+  --bs-body-font-size: 0.875rem;
+  --bs-body-line-height: var(--lh-body);
+}
+
+[data-theme='light'] {
+  --bs-body-bg: #fcfcfc;
+  --bs-body-bg-rgb: 252, 252, 252;
+  --bs-body-color: #18181b;
+  --bs-body-color-rgb: 24, 24, 27;
+  --bs-emphasis-color: #18181b;
+  --bs-secondary-color: #71717a;
+  --bs-tertiary-color: #a1a1aa;
+  --bs-border-color: rgba(0, 0, 0, 0.08);
+  --bs-border-color-translucent: rgba(0, 0, 0, 0.08);
+  --bs-heading-color: #18181b;
+}

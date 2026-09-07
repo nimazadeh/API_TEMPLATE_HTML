@@ -1,0 +1,78 @@
+// =============================================================
+// APIForge X — Layouts: Mobile bottom tab bar + drawer
+// 4 primary items + More, 56px, active accent. Sidebar as drawer.
+// Source: docs/product/DESIGN_DIRECTION.md
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.bottom-tabbar {
+  display: none;
+  @include mq-max('md') {
+    display: flex;
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: var(--z-header);
+    height: 56px;
+    background: var(--bg-surface-0);
+    border-top: 1px solid var(--border);
+    // Safe area
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+.bottom-tabbar__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 500;
+  font-family: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+  &.is-active {
+    color: var(--accent);
+  }
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+// Mobile sidebar drawer
+.sidebar-drawer {
+  position: fixed;
+  z-index: var(--z-modal); // above the shared backdrop
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: min(280px, 85vw);
+  background: var(--bg-surface-0);
+  border-inline-end: 1px solid var(--border);
+  transform: translateX(-100%);
+  @include motion(250ms);
+  transition-property: transform;
+  transition-timing-function: $ease-out;
+
+  [dir='rtl'] & {
+    transform: translateX(100%);
+  }
+  &.is-open,
+  [dir='rtl'] &.is-open {
+    transform: none;
+  }
+
+  display: flex;
+  flex-direction: column;
+}

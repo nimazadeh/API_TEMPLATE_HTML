@@ -1,0 +1,111 @@
+// =============================================================
+// APIForge X — Design Tokens: Color
+// Dark-first (default), light via [data-theme="light"] override.
+// Monochrome + single indigo accent + status colors only.
+// Source of truth: docs/product/DESIGN_DIRECTION.md
+// =============================================================
+
+:root {
+  color-scheme: dark;
+
+  // Canvas & surfaces
+  --bg-canvas: #0a0a0a;
+  --bg-surface-0: #0a0a0a;
+  --bg-surface-1: #141415;
+  --bg-surface-2: #1a1a1c;
+  --bg-surface-3: #202023;
+
+  // Hairline borders
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --border-active: rgba(255, 255, 255, 0.16);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+
+  // Text
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
+  --text-disabled: #52525b;
+
+  // Accent (interactive only)
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-active: #4f46e5;
+  --accent-subtle-bg: rgba(99, 102, 241, 0.12);
+  --accent-subtle-border: rgba(99, 102, 241, 0.24);
+
+  // Status
+  --success: #22c55e;
+  --success-bg: rgba(34, 197, 94, 0.12);
+  --success-border: rgba(34, 197, 94, 0.24);
+  --error: #ef4444;
+  --error-bg: rgba(239, 68, 68, 0.12);
+  --error-border: rgba(239, 68, 68, 0.24);
+  --warning: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.12);
+  --warning-border: rgba(245, 158, 11, 0.24);
+  --info: #3b82f6;
+  --info-bg: rgba(59, 130, 246, 0.12);
+  --info-border: rgba(59, 130, 246, 0.24);
+  --neutral: #a1a1aa;
+  --neutral-bg: rgba(161, 161, 170, 0.12);
+  --neutral-border: rgba(161, 161, 170, 0.24);
+
+  // Code wells — ALWAYS dark, even in light theme (Vercel/Stripe discipline)
+  --code-bg: #0f0f10;
+  --code-header-bg: #141415;
+  --code-text: #e4e4e7;
+  --syn-keyword: #c4b5fd; // 4 syntax colors max: keyword, string, number, comment
+  --syn-string: #86efac;
+  --syn-number: #93c5fd;
+  --syn-comment: #71717a;
+
+  // Floating shadows (stacked) — dark
+  --shadow-floating: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 4px 16px rgba(0, 0, 0, 0.4),
+    0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-overlay: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+// `data-theme="dark"` is explicit; :root above is the fallback default.
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+// Light theme override — surfaces flip, code stays dark.
+[data-theme='light'] {
+  color-scheme: light;
+
+  --bg-canvas: #fcfcfc;
+  --bg-surface-0: #fcfcfc;
+  --bg-surface-1: #ffffff;
+  --bg-surface-2: #f4f4f5;
+  --bg-surface-3: #e4e4e7;
+
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.12);
+  --border-active: rgba(0, 0, 0, 0.16);
+  --border-subtle: rgba(0, 0, 0, 0.04);
+
+  --text-primary: #18181b;
+  --text-secondary: #71717a;
+  --text-tertiary: #a1a1aa;
+  --text-disabled: #d4d4d8;
+
+  // Accent identical; status bg/border tuned for light surfaces.
+  --accent-subtle-bg: rgba(99, 102, 241, 0.1);
+  --accent-subtle-border: rgba(99, 102, 241, 0.3);
+  --success-bg: rgba(34, 197, 94, 0.1);
+  --success-border: rgba(34, 197, 94, 0.3);
+  --error-bg: rgba(239, 68, 68, 0.08);
+  --error-border: rgba(239, 68, 68, 0.28);
+  --warning-bg: rgba(245, 158, 11, 0.12);
+  --warning-border: rgba(245, 158, 11, 0.3);
+  --info-bg: rgba(59, 130, 246, 0.1);
+  --info-border: rgba(59, 130, 246, 0.3);
+  --neutral-bg: rgba(0, 0, 0, 0.06);
+  --neutral-border: rgba(0, 0, 0, 0.16);
+
+  --shadow-floating: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-overlay: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.18);
+}

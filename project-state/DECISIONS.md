@@ -213,13 +213,48 @@ Additions: Vanilla JS fuzzy search for command palette, not heavy lib.
 
 ---
 
-## Future Decisions (To Be Made in Phase 1+)
+## Phase 1 Decisions
 
-- D-016: Sidebar resizable? Decision pending Phase 1 — start fixed 256px, add resizable later if easy.
-- D-017: Chart.js vs ApexCharts for usage? Decision: Chart.js for now, but allow Apex if needed for more complex.
-- D-018: Separate /fa/ folder for Persian or ?lang=fa toggle? Decision pending — start with ?lang=fa JS toggle for demo, but provide both options in docs.
-- D-019: Auth pages minimal or with OAuth? Decision: Minimal like Vercel, with optional OAuth buttons.
-- D-020: Documentation in-app vs external? Decision: In-app minimal reference + link to external, but same design system.
+### D-016: Sidebar Resizable — Deferred
+
+**Date:** 2026-09-07
+**Decision:** Fixed 256px (collapsible to 64px icon rail on tablet, drawer + bottom bar on mobile). Resizable drag-handle deferred — no need before buyers ask.
+**Rationale:** Phase 1 is foundation; a drag handle adds complexity without changing the visual system.
+
+### D-017: Bootstrap Import Strategy — Curated @import Subset
+
+**Date:** 2026-09-07
+**Context:** Bootstrap 5.3.8 partials share one Sass scope via legacy `@import`; the `@use … with` mechanism only partially applies.
+**Decision:** Import a curated subset (`functions`, `variables`, `variables-dark`, `maps`, `mixins`, `utilities`, `root`, `reboot`, `type`, `images`, `containers`, `grid`, `helpers`, `utilities/api`) with variable overrides declared before the import stack. Components (buttons/forms/tables/cards/badges/code/modals/tooltips/progress) are built by us.
+**Rationale:** Keeps the bundle lean and guarantees the APIForge look instead of stock Bootstrap.
+**Consequences:** Bootstrap's `color-functions`/`import` Sass deprecations must be silenced via `silenceDeprecations` in Vite.
+
+### D-018: RTL Demo — Separate `rtl.html`
+
+**Date:** 2026-09-07
+**Decision:** Ship a dedicated `rtl.html` with `<html dir="rtl" lang="fa">` (full Persian demo) rather than a `?lang=fa` toggle. A runtime `dir` toggle stays possible later.
+**Rationale:** Simplest, most reliable demo for buyers; logical properties handle mirroring automatically.
+
+### D-019: Lucide Registry — Tree-Shaken Import Map
+
+**Date:** 2026-09-07
+**Decision:** Maintain `src/js/components/icons.js` importing only the icons the template uses; `createIcons({ icons })` maps `data-lucide` kebab names to PascalCase exports. Do not import the full `icons` object.
+**Rationale:** Full `icons` object ballooned the main JS bundle to ~370 KB; the curated registry is ~26 KB (9.3 KB gzip).
+**Consequences:** Each new icon must be added to the registry (documented in README).
+
+### D-020: Modal/Drawer Backdrop — Single Global Element
+
+**Date:** 2026-09-07
+**Decision:** One JS-managed `.backdrop` appended to `<body>`, shared by all modals/drawers, instead of a backdrop inside each dialog.
+**Rationale:** `position: fixed` children inside `transform`-animated containers resolve against the container, not the viewport — a per-dialog backdrop would break the full-screen dim.
+**Consequences:** `openDialog`/`closeDialog` track an open-count; Escape/backdrop-click close all open dialogs.
+
+## Future Decisions (To Be Made in Phase 2+)
+
+- D-021: Chart.js vs ApexCharts for usage? Decision: Chart.js for now, but allow Apex if needed for more complex.
+- D-022: Auth pages minimal or with OAuth? Decision: Minimal like Vercel, with optional OAuth buttons.
+- D-023: Documentation in-app vs external? Decision: In-app minimal reference + link to external, but same design system.
+- D-024: Log detail as drawer vs separate page? Decision pending Phase 2 — start with drawer (keeps context), add deep-linkable page if needed.
 
 ---
 

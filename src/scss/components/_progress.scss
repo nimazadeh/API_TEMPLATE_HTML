@@ -1,0 +1,46 @@
+// =============================================================
+// APIForge X — Components: Progress
+// Rate limit bars, usage vs limit. Hairline track, accent/status fill.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.progress {
+  height: 6px;
+  background: var(--bg-surface-2);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  width: 100%;
+}
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+  @include motion(300ms);
+  transition-property: width;
+
+  &.progress-bar--success { background: var(--success); }
+  &.progress-bar--warning { background: var(--warning); }
+  &.progress-bar--danger { background: var(--error); }
+}
+
+// Labeled usage row (label + value + bar)
+.usage-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  .usage-row__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+    font-size: var(--fs-body-sm);
+    .usage-row__label {
+      color: var(--text-secondary);
+    }
+    .usage-row__value {
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+    }
+  }
+}
