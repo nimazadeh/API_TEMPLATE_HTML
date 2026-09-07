@@ -1,5 +1,65 @@
 # Test Status — APIForge X
 
+## Phase 3A — Verification Gate (post-implementation pass)
+
+**Date:** 2026-09-07
+**Status:** PASS ✅ — 5 real issues found and fixed; runtime/static/code-quality QA clean. Browser click-through/visual/responsive still NOT executed (no browser in sandbox).
+
+### 1. Runtime QA — PASS
+
+- [x] `vite build` green (9 page inputs; per-page chunks `dashboard`/`apis`/`api-keys`/`logs`/`usage` emitted)
+- [x] Dev server serves all 5 product pages + `index.html` + `style-guide.html` + `rtl.html` + `rtl-test.html` (HTTP 200)
+- [x] All 5 page modules + shared modules (`icons.js`, `charts.js`, `log-detail.js`, `table.js`) transform without errors (200, no `Transform failed`/`SyntaxError`)
+- [x] No missing assets: dev-server asset refs resolve; `dist/*.html` asset refs all resolve against `dist/assets/`; all 5 built JS chunks present
+- [x] No broken components: `getElementById` targets in every page module resolve to real DOM ids in its HTML (dashboard 4/4, apis 8/8, api-keys 21/21, logs 14/14, usage 14/14); no duplicate ids
+
+### 2. Interaction QA — wiring verified statically (NOT click-executed)
+
+- [x] Dashboard: theme menu (`[data-mode]` → `setThemeMode`), env switcher (`[data-env-switcher] .env-option`), range selector (`[data-range]` → re-render + `destroyChart`), charts (`makeChart` on `#chart-requests`/`#chart-latency`)
+- [x] API Explorer: endpoint selection (`[data-endpoint]` delegation → `selectEndpoint`), SDK tabs (`initCodeBlock`), code copy (`[data-code-copy]`), tester (`#tester-send` → simulated 200/400)
+- [x] API Keys: reveal modal (`[data-key-action="reveal"]`), copy (full secret via `dataset.copy`), rotate/revoke confirmations (`openConfirm`), create flow (`#create` deep link + `#key-create-submit`)
+- [x] Logs: filters (search/status/env/range + `.seg__item[data-method]`), row click + keyboard Enter/Space → `openLogDrawer`, "Copy as cURL" (`[data-copy-curl]`), CSV export
+- [x] Usage: chart range switch (`[data-range]` → `setRange`), CSV export (`#usage-export`)
+- [~] Actual click-through NOT executed — no headless browser (chromium/firefox/playwright/puppeteer) in the sandbox; verification is by code-path + build + HTTP only.
+
+### 3. Responsive QA — NOT visually executed
+
+- [~] Breakpoints compiled and present in `dist/assets/main-*.css` (`.split` → 1fr ≤ 991.98px; `.attribution` → 1fr ≤ 767.98px; `.usage-plan__numbers` → 1fr ≤ 575.98px; sidebar rail/drawer/bottom-nav rules present)
+- [~] 360/390/430/768/1024/1440 visual inspection requires a real browser/preview — recorded honestly as NOT executed.
+
+### 4. RTL/LTR QA — static PASS
+
+- [x] Persian UI: `rtl.html` (Persian demo) + `rtl-test.html` (direction/theme switching) serve 200
+- [x] Code blocks always LTR: `_code.scss` sets `direction: ltr` on `.code-block`/panes; `.chart__canvas`/`.chart__body` LTR
+- [x] English technical terms isolated: `.ltr-isolate` (direction:ltr + unicode-bidi:isolate) applied on endpoints/keys/paths in JS-rendered rows (`table.js`, `apis.js`, `usage.js`) and on the reveal-key/tester-URL inputs (`dir="ltr"`)
+- [x] Tables mirror via logical properties (`.table` `text-align:start`, `.cell-num` `text-align:end`)
+- [x] Directional icons registered for mirroring: `ArrowRight`/`ArrowLeft`, `ChevronRight`/`ChevronLeft`
+
+### 5. Code Quality Review — PASS (after fixes)
+
+- [x] No broken imports (all relative imports resolve, 24 JS files scanned)
+- [x] No unused imports (scan clean after removing `escapeHtml` from logs.js and `absoluteTime` from dashboard.js)
+- [x] Icon registry complete: 67 registered, 53 used, 0 missing (added `RefreshCw`)
+- [x] No duplicated CSS beyond the documented `.kpi`/`.stat` alias (intentional Phase 2 backward-compat; identical values, benign)
+- [x] No stale class/attr references (`filterbar`/`chart-card`/`segmented`/`usage-grid`/`data-copy-from` all removed)
+- [x] Accessibility static checks: icon-only buttons have `aria-label`; modals/offcanvas have `aria-labelledby`; checkboxes implicitly labeled; segments carry `aria-pressed`; log rows `tabindex="0"` + keyboard activation
+
+### Fixed in this pass (5 real issues)
+
+1. `refresh-cw` icon missing from the Lucide registry → Logs "Refresh" button icon would not render; added `RefreshCw`
+2. Dead "Done" button in the reveal-once modal (no dismiss) → added `data-bs-dismiss="modal"`
+3. Dead "Export" button on Usage (no handler) → wired CSV export (`#usage-export`)
+4. Unused `escapeHtml` import in `logs.js` → removed
+5. Unused `absoluteTime` import in `dashboard.js` → removed
+
+### Remaining limitations
+
+- [ ] Browser interaction / visual / responsive QA — requires a real browser/preview; run manually on the live preview
+- [ ] Chart.js runtime rendering + theme re-render (`afx:theme`) — verified by build + module transform only, not observed in a browser
+- [ ] Full WCAG 2.x audit — deferred; static label/role checks only
+
+---
+
 ## Phase 3A: Core Product Experience — Test Status
 
 **Date:** 2026-09-07

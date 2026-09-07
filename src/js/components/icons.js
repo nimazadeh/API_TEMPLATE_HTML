@@ -72,6 +72,7 @@ import {
   PieChart,
   Timer,
   LogOut,
+  RefreshCw,
 } from 'lucide';
 
 import { createIcons } from 'lucide';
@@ -143,6 +144,7 @@ export const icons = {
   PieChart,
   Timer,
   LogOut,
+  RefreshCw,
 };
 
 export function initIcons() {

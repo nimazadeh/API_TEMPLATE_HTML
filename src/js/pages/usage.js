@@ -171,6 +171,21 @@ function renderAttribution() {
     .join('');
 }
 
+// --- Export ----------------------------------------------------------------------
+function exportCsv() {
+  const header = ['date', 'requests', 'errors', 'latency_ms'];
+  const lines = usage.map((d) => [d.date, d.requests, d.errors, d.latencyMs].join(','));
+  const blob = new Blob([[header.join(','), ...lines].join('\n')], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'apiforge-usage.csv';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
 // --- Wiring ---------------------------------------------------------------------
 renderPlan();
 renderRequestsChart();
@@ -181,3 +196,4 @@ renderAttribution();
 document.querySelectorAll('[data-range]').forEach((btn) => {
   btn.addEventListener('click', () => setRange(btn.dataset.range));
 });
+document.getElementById('usage-export').addEventListener('click', exportCsv);

@@ -6,7 +6,7 @@
 import { boot } from '../main.js';
 import { makeChart, destroyChart, axis, tooltips, initCharts } from '../components/charts.js';
 import { createIcons, icons } from '../components/icons.js';
-import { formatNumber, compactNumber, relativeTime, absoluteTime, escapeHtml } from '../utils/format.js';
+import { formatNumber, compactNumber, relativeTime, escapeHtml } from '../utils/format.js';
 import metrics from '../data/mock-metrics.json';
 import usage from '../data/mock-usage.json';
 import activity from '../data/mock-activity.json';

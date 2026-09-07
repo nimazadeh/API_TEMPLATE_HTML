@@ -9,7 +9,6 @@ import { boot } from '../main.js';
 import { createIcons, icons } from '../components/icons.js';
 import { renderLogsFull } from '../components/table.js';
 import { openLogDrawer } from '../components/log-detail.js';
-import { escapeHtml } from '../utils/format.js';
 import logs from '../data/mock-logs.json';
 
 boot();

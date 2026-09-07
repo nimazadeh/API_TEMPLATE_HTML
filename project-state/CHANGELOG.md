@@ -6,6 +6,31 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## [Phase 3A — Verification] — 2026-09-07 — POST-IMPLEMENTATION VERIFICATION PASS ✅
+
+### Fixed
+- `src/js/components/icons.js` — added `RefreshCw` (Logs "Refresh" button icon was unregistered and would not render)
+- `api-keys.html` — reveal-once modal "Done" button now dismisses the modal (`data-bs-dismiss="modal"`)
+- `usage.html` + `src/js/pages/usage.js` — "Export" button wired to a daily-usage CSV export (was a dead button)
+- `src/js/pages/logs.js` — removed unused `escapeHtml` import
+- `src/js/pages/dashboard.js` — removed unused `absoluteTime` import
+
+### Verified (executed)
+- `vite build` green — 9 page inputs; per-page chunks for all 5 product pages; `dist/*.html` asset refs all resolve
+- Runtime HTTP QA — all pages + modules serve 200 with no transform errors; dev-server asset refs resolve
+- Static wiring QA — every `getElementById` target in the 5 page modules resolves to a real DOM id; no duplicate ids
+- Icon registry audit — 67 registered / 53 used / 0 missing
+- Import audit — all 24 JS files' relative imports resolve; no unused imports remain
+- RTL/LTR static checks — code blocks LTR, `.ltr-isolate` on technical terms, logical table alignment, directional icons registered; `rtl.html`/`rtl-test.html` serve 200
+- Accessibility static checks — labelled icon buttons, labelled dialogs/offcanvas, labelled checkboxes, `aria-pressed` segments, keyboard-activated rows
+
+### Remaining limitations (recorded honestly)
+- Interaction / visual / responsive QA NOT executed — no headless browser in the sandbox; run manually on the live preview
+- Chart.js runtime rendering + theme re-render not observed in a browser (build + module transform only)
+- Full WCAG audit deferred
+
+---
+
 ## [Phase 3A] — 2026-09-07 — CORE PRODUCT EXPERIENCE IMPLEMENTATION COMPLETE ✅
 
 ### Added
