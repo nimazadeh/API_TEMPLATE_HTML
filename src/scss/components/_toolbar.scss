@@ -1,0 +1,111 @@
+// =============================================================
+// APIForge X — Components: Page toolbar & filter bar
+// Shared page-header scaffold (title + actions) and the filter row
+// used by Logs / Usage. Not page-specific — reusable by any app page.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+// Page header: title + description on one side, actions on the other.
+.toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-5);
+
+  .toolbar__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+}
+
+// Filter row: controls + active filter chips.
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+
+  .filter-bar__grow {
+    flex: 1;
+    min-width: 180px;
+    max-width: 320px;
+  }
+
+  // Selects keep a fixed width inside the row (form-select is 100% by default).
+  .filter-bar__select {
+    width: 156px;
+    flex: none;
+  }
+}
+
+// Active filter chip with a remove action.
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  height: 28px;
+  padding-inline: 10px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-subtle-bg);
+  border: 1px solid var(--accent-subtle-border);
+  color: var(--text-primary);
+  font-size: var(--fs-body-sm);
+
+  code {
+    color: var(--accent);
+  }
+  .filter-chip__remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    margin-inline-end: -4px;
+    border-radius: 50%;
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+    &:hover {
+      background: var(--accent-subtle-border);
+      color: var(--text-primary);
+    }
+  }
+}
+
+// Stat strip above a table (Requests in range · Error rate · P95).
+.stat-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+
+  .stat-strip__item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    .stat-strip__label {
+      font-size: var(--fs-eyebrow);
+      letter-spacing: var(--track-eyebrow);
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+    .stat-strip__value {
+      font-size: var(--fs-h4);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      color: var(--text-primary);
+    }
+  }
+}

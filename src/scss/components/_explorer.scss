@@ -1,0 +1,171 @@
+// =============================================================
+// APIForge X — Components: API Explorer
+// Catalog cards, endpoint documentation, and the interactive tester.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+// --- Catalog card ---
+.api-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+
+  .api-card__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    .api-card__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      flex: none;
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    .api-card__name {
+      font-size: var(--fs-body);
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+  }
+  .api-card__desc {
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    line-height: var(--lh-body);
+  }
+  .api-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: auto;
+  }
+}
+
+// --- Endpoint documentation ---
+.endpoint-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+
+  .endpoint-path {
+    font-family: var(--font-code);
+    font-size: var(--fs-mono);
+    color: var(--text-primary);
+  }
+}
+
+.params-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body-sm);
+
+  thead th {
+    padding: 8px 12px;
+    font-size: var(--fs-caption);
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    text-align: start;
+    color: var(--text-tertiary);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+    color: var(--text-secondary);
+  }
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  .param-name {
+    font-family: var(--font-code);
+    font-size: var(--fs-mono-sm);
+    color: var(--text-primary);
+  }
+  .param-required {
+    font-size: var(--fs-caption);
+    color: var(--warning);
+  }
+  .param-desc {
+    max-width: 320px;
+  }
+}
+
+// --- Tester panel ---
+.tester {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-4));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+
+  @include mq-max('lg') {
+    position: static;
+  }
+}
+
+.tester__url {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  .tester__method {
+    display: inline-flex;
+    align-items: center;
+    padding-inline: 12px;
+    border: 1px solid var(--border);
+    border-inline-end: 0;
+    border-start-start-radius: var(--radius-sm);
+    border-end-start-radius: var(--radius-sm);
+    background: var(--surface-2);
+    color: var(--text-primary);
+    font-family: var(--font-code);
+    font-size: var(--fs-mono-sm);
+    font-weight: 500;
+  }
+  .form-control {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+}
+
+.tester__param {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  .tester__param-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    code {
+      color: var(--text-primary);
+    }
+  }
+}
+
+.response-viewer {
+  .response-viewer__status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+    .response-viewer__latency {
+      margin-inline-start: auto;
+      font-size: var(--fs-caption);
+      color: var(--text-tertiary);
+    }
+  }
+}

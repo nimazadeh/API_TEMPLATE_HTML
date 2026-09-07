@@ -301,16 +301,35 @@ Additions: Vanilla JS fuzzy search for command palette, not heavy lib.
 **Decision:** Log/request/key detail views open as an offcanvas drawer (keeps list context); a deep-linkable page can be added later if needed.
 **Consequences:** Phase 3 detail UIs reuse `.offcanvas`; drawer content is the request inspector (headers, body JSON, timeline, "Copy as cURL").
 
-## Future Decisions (To Be Made in Phase 3+)
+### D-028: Chart.js Is the Product Charting Layer (resolves the Phase 3 "Chart.js vs ApexCharts" item)
 
-- Chart.js vs ApexCharts for usage? Decision: Chart.js for now, but allow Apex if needed for more complex.
+**Date:** 2026-09-07
+**Decision:** Chart.js (4.x) powers all product charts via a thin `components/charts.js` adapter — tree-shaken registration (Line/Bar/Doughnut + Category/Linear + Filler/Tooltip/Legend), CSS-variable theming, and `afx:theme` re-render.
+**Consequences:** No second charting library; charts stay LTR inside an LTR container; pages call `makeChart(canvas, factory(readTokens))` and `initCharts()` once.
+
+### D-029: Mock Keys Are Masked with a Reveal-Once Secret Derived from `prefix`
+
+**Date:** 2026-09-07
+**Decision:** `mock-keys.json` stores only the key `prefix` (e.g. `sk_live_…`); the full secret is a deterministic in-session suffix derived from the key id and only shown through the reveal-once modal.
+**Consequences:** No full secrets hardcoded in data/HTML; copy buttons copy the full secret; rotation regenerates the prefix + clears the derived secret.
+
+### D-030: The Logs Filter Row Reuses `.filter-bar` + `.seg` (not a bespoke widget)
+
+**Date:** 2026-09-07
+**Decision:** Logs filters use the shared `.filter-bar` scaffold (`filter-bar__grow` for search, `filter-bar__select` for selects) and the shared `.seg`/`.seg__item` segmented control for methods.
+**Consequences:** The page-specific `.filterbar`/`.filterbar__segments` markup was removed; filter state lives in the page module (`state` object) and re-renders the shared `renderLogsFull`.
+
+### D-031: Usage Page Uses Page-Scoped SCSS (`pages/_usage.scss`) for Layout Only
+
+**Date:** 2026-09-07
+**Decision:** Usage-specific layout (`.usage-plan`, `.attribution`, `.top-list`) lives in `src/scss/pages/_usage.scss`; primitives (`.progress`, `.usage-row`, `.stat-strip`, `.chart`, `.card--dense`, `.seg`) are reused from shared partials.
+**Consequences:** No per-page duplication of progress/stat/chart styles; the only new partial is page-scoped and tokens-only.
+
+## Future Decisions (To Be Made in Phase 3B+)
+
 - Auth pages minimal or with OAuth? Decision: Minimal like Vercel, with optional OAuth buttons.
 - Documentation in-app vs external? Decision: In-app minimal reference + link to external, but same design system.
-
-- D-021: Chart.js vs ApexCharts for usage? Decision: Chart.js for now, but allow Apex if needed for more complex.
-- D-022: Auth pages minimal or with OAuth? Decision: Minimal like Vercel, with optional OAuth buttons.
-- D-023: Documentation in-app vs external? Decision: In-app minimal reference + link to external, but same design system.
-- D-024: Log detail as drawer vs separate page? Decision pending Phase 2 — start with drawer (keeps context), add deep-linkable page if needed.
+- Webhook detail: drawer vs separate page? Decision pending Phase 3B — start with the drawer pattern (D-027), add deep-linkable page if needed.
 
 ---
 

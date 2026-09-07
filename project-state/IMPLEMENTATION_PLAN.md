@@ -167,6 +167,11 @@ foundation, complete primitive set, and the two visual verification pages.
 
 ## Phase 3: Core App Pages — Observability First (P0)
 
+> **Phase 3A status: COMPLETE ✅** (2026-09-07) — see the Phase 3A record below.
+> Phase 3A shipped Dashboard, APIs (explorer), API Keys, Logs, Usage as one coherent
+> product slice; the full Phase 3 scope (webhooks/docs/metrics/team/billing/settings)
+> moves to Phases 3B/3C.
+
 **Duration:** 5-7 days
 **Goal:** Build most important pages: Overview, Logs, Keys, Usage — the daily-use pages
 
@@ -206,6 +211,18 @@ foundation, complete primitive set, and the two visual verification pages.
 
 **Exit Criteria:**
 - 4 pages fully functional with mock data, filters URL state, dark/light, RTL, responsive, keyboard, skeletons, empty
+
+### Phase 3A record — CORE PRODUCT EXPERIENCE (COMPLETE ✅, 2026-09-07)
+
+- [x] **Data:** `scripts/generate-mock-data.mjs` rewritten (seed `20260907`) → 5 APIs, 15 endpoints, 6 keys, 80 logs, 30-day usage, 2 environments, plan, attribution, 8 activity events, metrics; regenerated `src/js/data/mock-*.json`
+- [x] **Shared:** `charts.js`, `log-detail.js`, rewritten `table.js`/`theme.js`, extended `icons.js`/`format.js`/`code-block.js`; new partials `_segmented`/`_toolbar`/`_split`/`_inspector`/`_explorer`/`pages/_usage`
+- [x] **dashboard.html** — toolbar header, 4 KPI cards (skeleton→content), request + latency Chart.js (24h/7d/30d), activity timeline, quick actions
+- [x] **apis.html** — catalog, endpoint filter table, 60/40 docs+tester split, `GET /users`-style endpoint reference (method badge/URL/params/response JSON), cURL/Node/Python SDK tabs, copy, env-key injection, simulated Send (200/400)
+- [x] **api-keys.html** — env-filtered list, masked keys, reveal-once modal, copy/rotate/revoke with confirm, create flow with scopes, deep link `#create`
+- [x] **logs.html** — method/status/env/time/search filters, dense table, row-click → inspector drawer (request/response/timing/context + "Copy as cURL"), CSV export
+- [x] **usage.html** — plan consumption (used/limit/resets), requests-over-time (7d/30d), consumption-by-API doughnut, top endpoints, endpoint+environment attribution
+- [x] **Wiring:** `vite.config.js` pageInputs (9 inputs), command palette (`commands.js`), sidebar nav (later phases disabled + tooltip), `index.html` hub links
+- [x] **QA:** `vite build` green; dev-server HTTP 200 for all pages/modules; static QA clean; interaction/responsive/visual NOT executed (no browser in sandbox)
 
 ---
 

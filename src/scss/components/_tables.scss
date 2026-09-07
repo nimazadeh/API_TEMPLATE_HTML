@@ -70,6 +70,13 @@
     tr.is-clickable {
       cursor: pointer;
     }
+    // Selected row (API explorer endpoint list)
+    tr.is-selected td {
+      background: var(--accent-subtle-bg);
+    }
+    tr.is-selected:hover td {
+      background: var(--accent-subtle-bg);
+    }
   }
 
   // Right-aligned numeric cells with tabular numbers

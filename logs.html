@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Logs — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body data-env="live">
+    <div class="app-shell">
+      <!-- ============ Sidebar ============ -->
+      <aside class="app-sidebar">
+        <div class="sidebar-brand">
+          <span class="brand-mark"><i data-lucide="zap"></i></span>
+          <span class="brand-name">APIForge X</span>
+        </div>
+        <nav class="sidebar-nav" aria-label="Primary">
+          <div class="nav-group">
+            <div class="nav-group__label">Overview</div>
+            <a class="nav-item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Developer</div>
+            <a class="nav-item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+            <a class="nav-item" href="./apis.html#endpoints"><i data-lucide="braces"></i><span>Endpoints</span></a>
+            <a class="nav-item" href="./api-keys.html"><i data-lucide="key"></i><span>API Keys</span></a>
+            <a class="nav-item is-active" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
+            <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3B"><i data-lucide="webhook"></i><span>Webhooks</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Analytics</div>
+            <a class="nav-item" href="./usage.html"><i data-lucide="bar-chart-3"></i><span>Usage</span></a>
+            <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3B"><i data-lucide="activity"></i><span>Metrics</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Workspace</div>
+            <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3C"><i data-lucide="users"></i><span>Team</span></a>
+            <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3C"><i data-lucide="credit-card"></i><span>Billing</span></a>
+            <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3C"><i data-lucide="settings"></i><span>Settings</span></a>
+          </div>
+        </nav>
+        <div class="sidebar-foot">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="Environment">
+            <button type="button" class="env-option" data-env="test"><span class="dot"></span>Test</button>
+            <button type="button" class="env-option" data-env="live"><span class="dot"></span>Live</button>
+          </div>
+          <div class="sidebar-user dropdown dropup">
+            <button type="button" class="sidebar-user__toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="avatar">AP</span>
+              <span class="sidebar-user__meta">
+                <span class="name">Arash P.</span>
+                <span class="email">arash@apiforge.dev</span>
+              </span>
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-header">arash@apiforge.dev</div>
+              <button type="button" class="dropdown-item"><i data-lucide="users"></i> Profile</button>
+              <button type="button" class="dropdown-item"><i data-lucide="settings"></i> Settings</button>
+              <hr class="dropdown-divider" />
+              <button type="button" class="dropdown-item is-danger"><i data-lucide="log-out"></i> Sign out</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ============ Header ============ -->
+      <header class="app-header">
+        <button type="button" class="btn btn-icon header-burger" aria-label="Open menu" data-bs-toggle="offcanvas" data-bs-target="#sidebar-drawer" aria-controls="sidebar-drawer">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="header-title">
+          <span class="crumb">APIForge X</span>
+          <span class="crumb-sep">/</span>
+          <span class="title">Logs</span>
+        </div>
+        <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="Search (⌘K)">
+          <i data-lucide="search"></i>
+          <span class="text-tertiary">Search…</span>
+          <span class="kbd-hint">⌘K</span>
+        </button>
+        <div class="header-actions">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="Environment">
+            <button type="button" class="env-option" data-env="test"><span class="dot"></span>Test</button>
+            <button type="button" class="env-option" data-env="live"><span class="dot"></span>Live</button>
+          </div>
+          <div class="dropdown" data-theme-menu>
+            <button type="button" class="btn btn-icon" aria-label="Theme" data-bs-toggle="dropdown" aria-expanded="false">
+              <i data-lucide="sun-moon"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <button type="button" class="dropdown-item" data-mode="dark" role="menuitemradio"><i data-lucide="sun-moon"></i> Dark <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-mode="light" role="menuitemradio"><i data-lucide="sun-moon"></i> Light <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-mode="system" role="menuitemradio"><i data-lucide="sun-moon"></i> System <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-icon" aria-label="Help" data-bs-toggle="tooltip" data-bs-title="Help">
+            <i data-lucide="help-circle"></i>
+          </button>
+          <div class="dropdown">
+            <button type="button" class="btn btn-icon" aria-label="Notifications" data-bs-toggle="dropdown" aria-expanded="false">
+              <i data-lucide="bell"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <div class="dropdown-header">Notifications</div>
+              <button type="button" class="dropdown-item"><i data-lucide="alert-triangle"></i> 2 webhooks failing</button>
+              <button type="button" class="dropdown-item"><i data-lucide="circle-check"></i> Deployment succeeded</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ============ Main ============ -->
+      <main class="app-main">
+        <div class="env-banner" data-env-banner hidden>
+          <i data-lucide="alert-triangle"></i>
+          You are viewing <strong>test data</strong>.
+        </div>
+        <div class="app-main__inner">
+          <header class="toolbar">
+            <div>
+              <h1 class="mb-1">Logs</h1>
+              <p class="text-secondary mb-0">Inspect every request — method, status, latency and payload.</p>
+            </div>
+            <div class="toolbar__actions">
+              <button type="button" class="btn btn-ghost" id="logs-refresh" aria-label="Refresh"><i data-lucide="refresh-cw"></i> Refresh</button>
+              <button type="button" class="btn btn-secondary" id="logs-export" aria-label="Export"><i data-lucide="download"></i> Export</button>
+            </div>
+          </header>
+
+          <div class="filter-bar logs-filter">
+            <div class="filter-bar__grow">
+              <input class="form-control" id="logs-search" type="search" placeholder="Search endpoint…" aria-label="Search logs" />
+            </div>
+            <div class="seg" role="group" aria-label="Filter by method">
+              <button type="button" class="seg__item is-active" data-method="all" aria-pressed="true">All</button>
+              <button type="button" class="seg__item" data-method="GET" aria-pressed="false">GET</button>
+              <button type="button" class="seg__item" data-method="POST" aria-pressed="false">POST</button>
+              <button type="button" class="seg__item" data-method="PUT" aria-pressed="false">PUT</button>
+              <button type="button" class="seg__item" data-method="DELETE" aria-pressed="false">DELETE</button>
+            </div>
+            <select class="form-select filter-bar__select" id="logs-status" aria-label="Filter by status">
+              <option value="all" selected>All statuses</option>
+              <option value="2xx">2xx success</option>
+              <option value="4xx">4xx client errors</option>
+              <option value="5xx">5xx server errors</option>
+            </select>
+            <select class="form-select filter-bar__select" id="logs-env" aria-label="Filter by environment">
+              <option value="all" selected>All environments</option>
+              <option value="live">Live</option>
+              <option value="test">Test</option>
+            </select>
+            <select class="form-select filter-bar__select" id="logs-range" aria-label="Time range">
+              <option value="all" selected>All time</option>
+              <option value="1h">Last hour</option>
+              <option value="24h">Last 24 hours</option>
+              <option value="7d">Last 7 days</option>
+            </select>
+            <button type="button" class="btn btn-ghost" id="logs-clear">Clear filters</button>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Status</th>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Latency</th>
+                    <th>Timestamp</th>
+                    <th>Request ID</th>
+                    <th>Key</th>
+                  </tr>
+                </thead>
+                <tbody id="logs-list"></tbody>
+              </table>
+            </div>
+            <div class="table-footer"><span id="logs-count">—</span></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Log detail drawer -->
+    <aside class="offcanvas offcanvas-end inspector" id="log-drawer" tabindex="-1" aria-labelledby="log-drawer-title">
+      <div class="offcanvas-header">
+        <span class="offcanvas-title inspector-title" id="log-drawer-title">Request details</span>
+        <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="offcanvas-body"></div>
+    </aside>
+
+    <!-- Mobile sidebar drawer -->
+    <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="Primary">
+      <div class="sidebar-brand">
+        <span class="brand-mark"><i data-lucide="zap"></i></span>
+        <span class="brand-name">APIForge X</span>
+        <button type="button" class="btn btn-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="Close menu"><i data-lucide="x"></i></button>
+      </div>
+      <nav class="sidebar-nav" aria-label="Primary">
+        <div class="nav-group">
+          <div class="nav-group__label">Overview</div>
+          <a class="nav-item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label">Developer</div>
+          <a class="nav-item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+          <a class="nav-item" href="./apis.html#endpoints"><i data-lucide="braces"></i><span>Endpoints</span></a>
+          <a class="nav-item" href="./api-keys.html"><i data-lucide="key"></i><span>API Keys</span></a>
+          <a class="nav-item is-active" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
+          <a class="nav-item is-disabled" href="#"><i data-lucide="webhook"></i><span>Webhooks</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label">Analytics</div>
+          <a class="nav-item" href="./usage.html"><i data-lucide="bar-chart-3"></i><span>Usage</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label">Workspace</div>
+          <a class="nav-item is-disabled" href="#"><i data-lucide="users"></i><span>Team</span></a>
+          <a class="nav-item is-disabled" href="#"><i data-lucide="credit-card"></i><span>Billing</span></a>
+          <a class="nav-item is-disabled" href="#"><i data-lucide="settings"></i><span>Settings</span></a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile bottom tab bar -->
+    <nav class="bottom-tabbar" aria-label="Primary mobile">
+      <a class="bottom-tabbar__item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+      <a class="bottom-tabbar__item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+      <a class="bottom-tabbar__item is-active" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
+      <a class="bottom-tabbar__item" href="./api-keys.html"><i data-lucide="key"></i><span>Keys</span></a>
+      <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="More">
+        <i data-lucide="more-horizontal"></i><span>More</span>
+      </button>
+    </nav>
+
+    <script type="module" src="/src/js/pages/logs.js"></script>
+  </body>
+</html>

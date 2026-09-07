@@ -29,6 +29,11 @@
     min-height: 180px;
     direction: ltr; // canvas charts always LTR
   }
+  .chart__canvas {
+    position: relative;
+    height: var(--chart-height, 260px);
+    direction: ltr;
+  }
   .chart__meta {
     display: flex;
     align-items: center;

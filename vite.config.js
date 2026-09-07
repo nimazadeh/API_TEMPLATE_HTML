@@ -3,12 +3,17 @@ import { fileURLToPath, URL } from 'node:url';
 import path from 'node:path';
 
 // Multi-page inputs — every top-level HTML page the template ships.
-// Phase 1 ships the foundation pages; Phase 2+ adds the app pages here.
+// Phase 1 ships the foundation pages; Phase 3A adds the app pages.
 const pageInputs = {
   main: path.resolve(__dirname, 'index.html'),
   'style-guide': path.resolve(__dirname, 'style-guide.html'),
   rtl: path.resolve(__dirname, 'rtl.html'),
   'rtl-test': path.resolve(__dirname, 'rtl-test.html'),
+  dashboard: path.resolve(__dirname, 'dashboard.html'),
+  apis: path.resolve(__dirname, 'apis.html'),
+  'api-keys': path.resolve(__dirname, 'api-keys.html'),
+  logs: path.resolve(__dirname, 'logs.html'),
+  usage: path.resolve(__dirname, 'usage.html'),
 };
 
 export default defineConfig({

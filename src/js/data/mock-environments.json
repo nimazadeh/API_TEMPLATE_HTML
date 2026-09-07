@@ -1,0 +1,20 @@
+[
+  {
+    "id": "live",
+    "name": "Live",
+    "baseUrl": "https://api.apiforge.dev",
+    "description": "Production traffic and real data.",
+    "created": "2025-10-22T21:31:54.330Z",
+    "keysCount": 4,
+    "requestsShare": 94.8
+  },
+  {
+    "id": "test",
+    "name": "Test",
+    "baseUrl": "https://api.test.apiforge.dev",
+    "description": "Isolated sandbox for staging and local development.",
+    "created": "2026-02-09T21:31:54.330Z",
+    "keysCount": 2,
+    "requestsShare": 5.2
+  }
+]

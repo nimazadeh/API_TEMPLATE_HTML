@@ -1,0 +1,120 @@
+// =============================================================
+// APIForge X — Components: Request inspector (log detail drawer)
+// Reusable debugging surface: method/status header, timing bars,
+// request/response sections, key/value header tables.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.inspector-head {
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-4);
+}
+
+.inspector-section {
+  padding-top: var(--space-4);
+  & + & {
+    border-top: 1px solid var(--border-subtle);
+  }
+}
+
+.inspector-label {
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 0 0 var(--space-3);
+}
+
+.inspector-sub {
+  font-size: var(--fs-caption);
+  color: var(--text-tertiary);
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+// Key/value header tables
+.kv {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-mono-sm);
+
+  th,
+  td {
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+    text-align: start;
+  }
+  th {
+    width: 40%;
+    font-weight: 400;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+  }
+  td {
+    color: var(--text-secondary);
+    word-break: break-all;
+  }
+  tr:last-child th,
+  tr:last-child td {
+    border-bottom: 0;
+  }
+}
+
+// Timing bars (Queue / Processing / Response)
+.timing-bars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.timing-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+
+  .timing-row__name {
+    width: 96px;
+    flex: none;
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+  }
+  .timing-row__track {
+    flex: 1;
+    height: 6px;
+    background: var(--surface-2);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+  }
+  .timing-row__fill {
+    height: 100%;
+    background: var(--text-tertiary);
+    border-radius: var(--radius-pill);
+    &.is-accent {
+      background: var(--accent);
+    }
+    &.is-muted {
+      background: var(--border-active);
+    }
+  }
+  .timing-row__value {
+    width: 64px;
+    flex: none;
+    text-align: end;
+    font-size: var(--fs-caption);
+    color: var(--text-tertiary);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+// Drawer width for the inspector
+.offcanvas.inspector {
+  --bs-offcanvas-width: min(640px, 100vw);
+}
+
+// Flush code blocks inside drawers (no outer rounding)
+.code-block--flush {
+  border-radius: var(--radius-sm);
+}

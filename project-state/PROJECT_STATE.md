@@ -3,9 +3,9 @@
 ## Project: APIForge X — Premium Developer API Platform HTML Template
 
 **Branch:** arena/01a07d58-api-template-html
-**Phase:** PHASE 2 — FOUNDATION & DESIGN SYSTEM (PRODUCTION HARDENING)
+**Phase:** PHASE 3A — CORE PRODUCT EXPERIENCE IMPLEMENTATION
 **Date:** 2026-09-07
-**Status:** Phase 2 Complete — Phase 3 (Core App Pages) NOT yet authorized
+**Status:** Phase 3A Complete — five core pages shipped; Phases 3B (Webhooks/Docs/Metrics) and 3C (Team/Billing/Settings) remain
 
 ---
 
@@ -67,6 +67,34 @@
 - [x] `vite build` green (PASS 2, re-run after refactor)
 - [x] Dev server serves all four pages + module transforms (PASS 3)
 - [x] Static QA clean (PASS 1): no stale overlay attrs, no duplicate IDs, labels present, all Lucide icons resolve
+- [~] Interaction / responsive / visual QA not executed (no browser in sandbox) — recorded honestly, see TEST_STATUS.md
+
+---
+
+### PHASE 3A: CORE PRODUCT EXPERIENCE — COMPLETE ✅
+
+**Objectives Achieved:**
+- [x] `dashboard.html` — header (title, environment selector, date range, primary action), 4 KPI cards (Requests Today, Success Rate, Average Latency, Monthly Usage) with skeleton→content load, Chart.js request-volume + latency charts (24h/7d/30d), activity timeline (key created, webhook failed, endpoint updated…), quick actions (Create API key, Test endpoint, Debug a request)
+- [x] `apis.html` — API catalog (name, description, version, status, endpoint count), endpoint table (method/path/summary/API) with filter, 60% docs / 40% tester split (`.split`), endpoint example (method badge, URL, parameters, headers), JSON response + cURL/Node/Python SDK tabs (always LTR), copy buttons, env-key injection, simulated send request (200 / 400 states)
+- [x] `api-keys.html` — key list (name, permission, environment, created, last used, actions) filtered by environment; masked keys with reveal-once modal, copy/rotate/revoke with confirmation modal, create-key flow with scoped permissions + reveal-once, empty/loading states
+- [x] `logs.html` — toolbar filters (method segments, status, environment, time range, search), dense table (status/method/endpoint/latency/timestamp/request-id/key), row-click detail drawer (request/response/headers/payload/timing/context, "Copy as cURL"), CSV export
+- [x] `usage.html` — plan consumption (used/limit/resets-in + progress), requests-over-time chart (7d/30d), consumption-by-API doughnut, top endpoints, endpoint + environment attribution
+- [x] Data layer rebuilt: deterministic generator (seed `20260907`) → 5 APIs, 15 endpoints, 6 keys, 80 logs, 30-day usage, 2 environments, plan, attribution (byEndpoint + byEnvironment), 8 activity events, metrics (24h/7d/30d KPIs + 24h hourly)
+- [x] Shared components extended: icons registry, `format.js` (compactNumber/formatDate/percent), `theme.js` (dark/light/system + menu), `charts.js` (CSS-variable Chart.js theming + `afx:theme` re-render), `log-detail.js` (deterministic request inspector), `table.js` (`logRowFull`/`keyRow`), `code-block.js` (`initCodeBlock`)
+- [x] New SCSS partials: `_segmented`, `_toolbar`, `_split`, `_inspector`, `_explorer`, `pages/_usage`
+- [x] All 5 pages wired into `vite.config.js` pageInputs, command palette, sidebar nav (later phases remain disabled with tooltip), and the `index.html` hub
+
+**Artifacts Created/Updated:**
+- New pages: `dashboard.html`, `apis.html`, `api-keys.html`, `logs.html`, `usage.html` + `src/js/pages/{dashboard,apis,api-keys,logs,usage}.js`
+- New components: `charts.js`, `log-detail.js`; rewritten `table.js`, `theme.js`; extended `icons.js`, `format.js`, `code-block.js`
+- New partials: `_segmented`, `_toolbar`, `_split`, `_inspector`, `_explorer`, `pages/_usage`; edited `_chart`, `_dropdown`, `_sidebar`, `_tables`, `_toolbar`
+- Data: `scripts/generate-mock-data.mjs` rewritten + regenerated `src/js/data/mock-*.json`
+- `vite.config.js` pageInputs += 5 pages; `index.html` hub links the product pages
+
+**Exit Criteria:**
+- [x] `vite build` green (all 9 page inputs)
+- [x] Dev server serves all pages + module transforms over HTTP (200)
+- [x] Static QA: no stale class refs (`filterbar`/`chart-card`/`segmented` removed), script refs resolve, Lucide icons resolve
 - [~] Interaction / responsive / visual QA not executed (no browser in sandbox) — recorded honestly, see TEST_STATUS.md
 
 ---
@@ -178,18 +206,17 @@
 
 ---
 
-## Next Phase: PHASE 3 — CORE APP PAGES (OBSERVABILITY FIRST)
+## Next Phase: PHASE 3B — WEBHOOKS · DOCUMENTATION · METRICS
 
 **Ready to start:** NOT YET AUTHORIZED — wait for separate authorization.
 
-**Phase 3 Goals (P0):**
-- `/app/overview.html` — quickstart card, 4-KPI strip, recent errors/requests, webhook health, usage progress
-- `/app/logs.html` + log detail drawer — filters with URL state, full table, cURL copy, timeline, JSON viewer
-- `/app/keys.html` — key table, create flow with reveal-once, detail drawer, rotate/revoke
-- `/app/usage.html` — time-range selector, area chart (Chart.js), breakdown tables, CSV export
-- URL as state (?status=failed), skeletons, empty states, keyboard, dark/light, RTL
+**Phase 3B Scope (draft):**
+- `webhooks.html` — event catalog, per-webhook delivery log + failure inspector, secret reveal, retry/resend
+- `docs.html` — SDK/quickstart documentation with LTR code + version selector (phase 3A `initCodeBlock`/`sdkBlock` primitives reuse)
+- `metrics.html` — latency/error-rate/percentile charts + alerting thresholds
+- Later (3C): Team, Billing, Settings; Phase 5: marketing landing
 
-**Reuse from Phases 1–2:** `boot()`, semantic tokens, five-lane typography, tables, badges, code blocks, copy, Bootstrap modal/offcanvas, command palette (extend its index), env switcher, mock data.
+**Reuse from Phase 3A:** `boot()`, `charts.js` (makeChart/initCharts), `log-detail.js` inspector pattern, `table.js` renderers, `_segmented`/`_toolbar`/`_split`/`_inspector`/`_explorer`, command palette index (`commands.js`), env switcher, deterministic mock data.
 
 ---
 

@@ -41,6 +41,11 @@
 @use 'components/stat';
 @use 'components/chart';
 @use 'components/loading';
+@use 'components/segmented';
+@use 'components/toolbar';
+@use 'components/split';
+@use 'components/inspector';
+@use 'components/explorer';
 
 // Layouts
 @use 'layouts/app-shell';
@@ -50,3 +55,4 @@
 
 // Pages
 @use 'pages/rtl-test';
+@use 'pages/usage';

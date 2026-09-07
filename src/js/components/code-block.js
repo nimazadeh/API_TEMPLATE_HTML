@@ -34,28 +34,36 @@ function activateTab(block, tab) {
   });
 }
 
+/** Initialize a single code block: key injection, tabs, and copy. */
+export function initCodeBlock(block) {
+  if (!block || block.dataset.initialized) return;
+  block.dataset.initialized = 'true';
+
+  // Cache the raw template once; env switching re-injects the key.
+  block.querySelectorAll('[data-code-pane]').forEach((pane) => {
+    if (pane.dataset.raw == null) pane.dataset.raw = pane.textContent;
+    pane.textContent = injectKey(pane.dataset.raw);
+  });
+
+  const tabs = block.querySelectorAll('.code-tabs__tab');
+  tabs.forEach((tab) => tab.addEventListener('click', () => activateTab(block, tab)));
+  const firstTab = block.querySelector('.code-tabs__tab.is-active') || tabs[0];
+  if (firstTab) activateTab(block, firstTab);
+
+  // Copy button copies the visible pane (uses [data-code-copy] so the
+  // generic [data-copy] handler doesn't double-bind).
+  const copyBtn = block.querySelector('[data-code-copy]');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const pane = visiblePane(block);
+      if (pane) flashCopied(copyBtn, await copyText(pane.textContent.trim()));
+    });
+  }
+}
+
 export function initCodeBlocks() {
   document.querySelectorAll('[data-code-block]').forEach((block) => {
-    // Cache the raw template once; env switching re-injects the key.
-    block.querySelectorAll('[data-code-pane]').forEach((pane) => {
-      if (pane.dataset.raw == null) pane.dataset.raw = pane.textContent;
-      pane.textContent = injectKey(pane.dataset.raw);
-    });
-
-    const tabs = block.querySelectorAll('.code-tabs__tab');
-    tabs.forEach((tab) => tab.addEventListener('click', () => activateTab(block, tab)));
-    const firstTab = block.querySelector('.code-tabs__tab.is-active') || tabs[0];
-    if (firstTab) activateTab(block, firstTab);
-
-    // Copy button copies the visible pane (uses [data-code-copy] so the
-    // generic [data-copy] handler doesn't double-bind).
-    const copyBtn = block.querySelector('[data-code-copy]');
-    if (copyBtn) {
-      copyBtn.addEventListener('click', async () => {
-        const pane = visiblePane(block);
-        if (pane) flashCopied(copyBtn, await copyText(pane.textContent.trim()));
-      });
-    }
+    initCodeBlock(block);
   });
 
   document.addEventListener('afx:env', () => {

@@ -1,67 +1,94 @@
 [
   {
-    "id": "key_DElNoSR8",
+    "id": "key_7TkTYBzu",
     "name": "Production backend",
-    "prefix": "sk_live_kGT2HqnH",
+    "prefix": "sk_live_wB0jrqmT",
     "scopes": [
-      "audiences:read",
-      "audiences:write",
       "emails:read",
-      "emails:write"
+      "emails:write",
+      "audiences:read",
+      "audiences:write"
     ],
-    "createdAt": "2026-06-01T19:47:24.526Z",
-    "lastUsedAt": "2026-09-07T14:47:24.526Z",
+    "env": "live",
+    "permission": "full",
+    "createdAt": "2025-11-14T21:31:54.329Z",
+    "lastUsedAt": "2026-09-04T21:31:54.329Z",
+    "lastUsedIp": "168.112.153.208",
     "status": "active"
   },
   {
-    "id": "key_YNAdp9GX",
+    "id": "key_fg9TfUCl",
     "name": "CLI tool",
-    "prefix": "sk_live_0Kl7TkTY",
+    "prefix": "sk_live_bFi5nY1R",
     "scopes": [
       "emails:read",
       "emails:write"
     ],
-    "createdAt": "2026-04-24T19:47:24.526Z",
-    "lastUsedAt": "2026-09-06T19:47:24.526Z",
+    "env": "live",
+    "permission": "restricted",
+    "createdAt": "2026-07-01T21:31:54.329Z",
+    "lastUsedAt": "2026-09-06T15:31:54.329Z",
+    "lastUsedIp": "92.182.83.87",
     "status": "active"
   },
   {
-    "id": "key_wB0jrqmT",
+    "id": "key_Cy9NTCj9",
     "name": "Staging server",
-    "prefix": "sk_live_59TBLYfg",
+    "prefix": "sk_live_9CK8u1oP",
     "scopes": [
       "audiences:read",
-      "audiences:write",
-      "emails:read",
-      "emails:write"
+      "audiences:write"
     ],
-    "createdAt": "2026-01-14T19:47:24.526Z",
-    "lastUsedAt": "2026-09-07T12:47:24.526Z",
+    "env": "live",
+    "permission": "restricted",
+    "createdAt": "2025-12-16T21:31:54.329Z",
+    "lastUsedAt": "2026-09-05T10:31:54.329Z",
+    "lastUsedIp": "133.212.176.142",
     "status": "revoked"
   },
   {
-    "id": "key_UClbFi5n",
+    "id": "key_pcvint10",
     "name": "CI pipeline",
-    "prefix": "sk_live_Y1RmzwSu",
+    "prefix": "sk_live_GYvKiH58",
     "scopes": [
       "emails:read",
       "emails:write"
     ],
-    "createdAt": "2026-04-12T19:47:24.526Z",
-    "lastUsedAt": "2026-09-06T13:47:24.526Z",
+    "env": "live",
+    "permission": "restricted",
+    "createdAt": "2025-11-01T21:31:54.329Z",
+    "lastUsedAt": "2026-09-05T23:31:54.329Z",
+    "lastUsedIp": "153.101.127.193",
     "status": "active"
   },
   {
-    "id": "key_9NTCj99C",
+    "id": "key_blIZSPAp",
     "name": "Local dev",
-    "prefix": "sk_test_K8u1oPZY",
+    "prefix": "sk_test_1dcDTRVL",
     "scopes": [
-      "audiences:read",
       "emails:read",
-      "emails:write"
+      "emails:write",
+      "audiences:read"
     ],
-    "createdAt": "2025-12-15T19:47:24.526Z",
-    "lastUsedAt": "2026-09-05T17:47:24.526Z",
+    "env": "test",
+    "permission": "full",
+    "createdAt": "2026-03-21T21:31:54.329Z",
+    "lastUsedAt": "2026-09-04T23:31:54.329Z",
+    "lastUsedIp": "162.40.169.176",
+    "status": "active"
+  },
+  {
+    "id": "key_LZbpJBlK",
+    "name": "Analytics job",
+    "prefix": "sk_test_AEhYnBDb",
+    "scopes": [
+      "usage:read"
+    ],
+    "env": "test",
+    "permission": "restricted",
+    "createdAt": "2026-01-15T21:31:54.329Z",
+    "lastUsedAt": "2026-09-06T23:31:54.329Z",
+    "lastUsedIp": "29.138.116.89",
     "status": "active"
   }
 ]

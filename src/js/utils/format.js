@@ -77,3 +77,23 @@ export function faDigits(str) {
 export function formatNumber(n) {
   return Number(n).toLocaleString('en-US');
 }
+
+/** Compact number: 1.2M, 842K, 9.4K. */
+export function compactNumber(n) {
+  const v = Number(n);
+  if (v >= 1e6) return `${(v / 1e6).toFixed(v >= 1e7 ? 1 : 2)}M`;
+  if (v >= 1e3) return `${(v / 1e3).toFixed(v >= 1e4 ? 0 : 1)}K`;
+  return String(v);
+}
+
+/** Date → "Sep 7, 2026" (short). */
+export function formatDate(iso) {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '—';
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+/** Percent with fixed decimals and % sign. */
+export function percent(n, digits = 1) {
+  return `${Number(n).toFixed(digits)}%`;
+}

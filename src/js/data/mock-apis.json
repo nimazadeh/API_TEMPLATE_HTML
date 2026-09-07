@@ -1,0 +1,47 @@
+[
+  {
+    "id": "api_emails",
+    "name": "Emails API",
+    "status": "stable",
+    "description": "Send transactional email and track delivery status.",
+    "basePath": "/v1/emails",
+    "version": "v1",
+    "endpointsCount": 3
+  },
+  {
+    "id": "api_ai",
+    "name": "AI Inference",
+    "status": "stable",
+    "description": "Run completions and embeddings on hosted models.",
+    "basePath": "/v1",
+    "version": "v1",
+    "endpointsCount": 3
+  },
+  {
+    "id": "api_audiences",
+    "name": "Audiences",
+    "status": "beta",
+    "description": "Build and query audience segments.",
+    "basePath": "/v1/audiences",
+    "version": "v1",
+    "endpointsCount": 3
+  },
+  {
+    "id": "api_webhooks",
+    "name": "Webhooks",
+    "status": "stable",
+    "description": "Receive real-time events for your workspace.",
+    "basePath": "/v1/webhooks",
+    "version": "v1",
+    "endpointsCount": 3
+  },
+  {
+    "id": "api_platform",
+    "name": "Platform",
+    "status": "stable",
+    "description": "Manage keys and read usage across environments.",
+    "basePath": "/v1",
+    "version": "v1",
+    "endpointsCount": 3
+  }
+]

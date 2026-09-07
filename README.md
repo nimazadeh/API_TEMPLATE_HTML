@@ -6,8 +6,9 @@ A dark-first, keyboard-first, **RTL first-class** HTML template for API platform
 depth-over-breadth developer tool surface in the spirit of Stripe, Resend,
 Vercel and Linear.
 
-> **Status:** Phase 2 — Foundation & Design System (production hardening) complete.
-> Phase 3 (core app pages) not yet started. See `/project-state/PROJECT_STATE.md`.
+> **Status:** Phase 3A — Core Product Experience complete. Five product pages ship
+> as a working vertical slice (Dashboard, APIs, API Keys, Logs, Usage). See
+> `/project-state/PROJECT_STATE.md`.
 
 ## Stack
 
@@ -31,7 +32,17 @@ npm run build     # outputs dist/
 npm run preview   # serve the production build
 ```
 
-Foundation pages in this phase:
+Product pages (Phase 3A):
+
+| Page | Purpose |
+|------|---------|
+| `/dashboard.html` | Overview — KPI cards, request/latency charts, activity feed, quick actions |
+| `/apis.html` | API explorer — catalog, endpoint reference docs + interactive tester |
+| `/api-keys.html` | API keys — masked list, reveal-once, create/rotate/revoke |
+| `/logs.html` | Request log inspector — filters, dense table, detail drawer + cURL |
+| `/usage.html` | Usage — plan consumption, charts, attribution, top endpoints |
+
+Foundation pages:
 
 | Page | Purpose |
 |------|---------|
@@ -51,9 +62,10 @@ src/
     base/       # fonts, reset, typography (5 lanes), utilities, Bootstrap var bridge
     components/ # buttons, forms, badges, tables, cards, code, skeletons, empty,
                 # tooltip, modal/offcanvas, progress, timeline, toast, dropdown,
-                # tabs, alert, breadcrumb, avatar, stat, chart, loading, palette
+                # tabs, alert, breadcrumb, avatar, stat, chart, loading, palette,
+                # segmented, toolbar, split, inspector, explorer
     layouts/    # app shell, sidebar, header, mobile nav
-    pages/      # per-page styles (rtl-test)
+    pages/      # per-page styles (rtl-test, usage)
     main.scss
   js/
     core/       # bootstrap.js — Bootstrap ESM data-API imports
@@ -85,10 +97,13 @@ scripts/generate-mock-data.mjs
 
 ## Notes for the next phases
 
-- App pages (`/app/*.html`) and the marketing pages are Phase 3–6; add each new
-  HTML entry to the `pageInputs` map in `vite.config.js`.
+- Remaining app pages (Webhooks, Documentation, Metrics, Team, Billing,
+  Settings) and the marketing pages are Phase 3B–6; add each new HTML entry to
+  the `pageInputs` map in `vite.config.js`.
 - Add new Lucide icons to `src/js/components/icons.js` (keeps the bundle
   tree-shaken).
+- Charts are registered tree-shaken in `src/js/components/charts.js`
+  (`makeChart`/`initCharts`); re-theme on `afx:theme` is automatic.
 - Bootstrap JS is bound through `src/js/core/bootstrap.js`; add a component to
   its import list only if a page needs that data-API.
 - Mock data is deterministic and regenerable via `node scripts/generate-mock-data.mjs`.

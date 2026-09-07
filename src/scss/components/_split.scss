@@ -1,0 +1,18 @@
+// =============================================================
+// APIForge X — Components: Split layout (API Explorer)
+// 60% documentation / 40% tester on desktop, stacked on mobile.
+// Logical properties → mirrors in RTL.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: var(--space-5);
+  align-items: start;
+
+  @include mq-max('lg') {
+    grid-template-columns: 1fr;
+  }
+}

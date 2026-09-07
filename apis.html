@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <title>APIs — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body data-env="live">
+    <div class="app-shell">
+      <!-- ============ Sidebar ============ -->
+      <aside class="app-sidebar">
+        <div class="sidebar-brand">
+          <span class="brand-mark"><i data-lucide="zap"></i></span>
+          <span class="brand-name">APIForge X</span>
+        </div>
+        <nav class="sidebar-nav" aria-label="Primary">
+          <div class="nav-group">
+            <div class="nav-group__label">Overview</div>
+            <a class="nav-item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Developer</div>
+            <a class="nav-item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+            <a class="nav-item" href="./apis.html#endpoints"><i data-lucide="braces"></i><span>Endpoints</span></a>
+            <a class="nav-item" href="./api-keys.html"><i data-lucide="key"></i><span>API Keys</span></a>
+            <a class="nav-item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
+            <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3B"><i data-lucide="webhook"></i><span>Webhooks</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Analytics</div>
+            <a class="nav-item" href="./usage.html"><i data-lucide="bar-chart-3"></i><span>Usage</span></a>
+            <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3B"><i data-lucide="activity"></i><span>Metrics</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Workspace</div>
+            <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3C"><i data-lucide="users"></i><span>Team</span></a>
+            <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3C"><i data-lucide="credit-card"></i><span>Billing</span></a>
+            <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3C"><i data-lucide="settings"></i><span>Settings</span></a>
+          </div>
+        </nav>
+        <div class="sidebar-foot">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="Environment">
+            <button type="button" class="env-option" data-env="test"><span class="dot"></span>Test</button>
+            <button type="button" class="env-option" data-env="live"><span class="dot"></span>Live</button>
+          </div>
+          <div class="sidebar-user dropdown dropup">
+            <button type="button" class="sidebar-user__toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="avatar">AP</span>
+              <span class="sidebar-user__meta">
+                <span class="name">Arash P.</span>
+                <span class="email">arash@apiforge.dev</span>
+              </span>
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-header">arash@apiforge.dev</div>
+              <button type="button" class="dropdown-item"><i data-lucide="users"></i> Profile</button>
+              <button type="button" class="dropdown-item"><i data-lucide="settings"></i> Settings</button>
+              <hr class="dropdown-divider" />
+              <button type="button" class="dropdown-item is-danger"><i data-lucide="log-out"></i> Sign out</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ============ Header ============ -->
+      <header class="app-header">
+        <button type="button" class="btn btn-icon header-burger" aria-label="Open menu" data-bs-toggle="offcanvas" data-bs-target="#sidebar-drawer" aria-controls="sidebar-drawer">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="header-title">
+          <span class="crumb">APIForge X</span>
+          <span class="crumb-sep">/</span>
+          <span class="title">APIs</span>
+        </div>
+        <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="Search (⌘K)">
+          <i data-lucide="search"></i>
+          <span class="text-tertiary">Search…</span>
+          <span class="kbd-hint">⌘K</span>
+        </button>
+        <div class="header-actions">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="Environment">
+            <button type="button" class="env-option" data-env="test"><span class="dot"></span>Test</button>
+            <button type="button" class="env-option" data-env="live"><span class="dot"></span>Live</button>
+          </div>
+          <div class="dropdown" data-theme-menu>
+            <button type="button" class="btn btn-icon" aria-label="Theme" data-bs-toggle="dropdown" aria-expanded="false">
+              <i data-lucide="sun-moon"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <button type="button" class="dropdown-item" data-mode="dark" role="menuitemradio"><i data-lucide="sun-moon"></i> Dark <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-mode="light" role="menuitemradio"><i data-lucide="sun-moon"></i> Light <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-mode="system" role="menuitemradio"><i data-lucide="sun-moon"></i> System <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-icon" aria-label="Help" data-bs-toggle="tooltip" data-bs-title="Help">
+            <i data-lucide="help-circle"></i>
+          </button>
+          <div class="dropdown">
+            <button type="button" class="btn btn-icon" aria-label="Notifications" data-bs-toggle="dropdown" aria-expanded="false">
+              <i data-lucide="bell"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <div class="dropdown-header">Notifications</div>
+              <button type="button" class="dropdown-item"><i data-lucide="alert-triangle"></i> 2 webhooks failing</button>
+              <button type="button" class="dropdown-item"><i data-lucide="circle-check"></i> Deployment succeeded</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ============ Main ============ -->
+      <main class="app-main">
+        <div class="env-banner" data-env-banner hidden>
+          <i data-lucide="alert-triangle"></i>
+          You are viewing <strong>test data</strong>. All keys use the <code class="ltr-isolate">sk_test_</code> prefix.
+        </div>
+        <div class="app-main__inner">
+          <header class="toolbar">
+            <div>
+              <h1 class="mb-1">APIs</h1>
+              <p class="text-secondary mb-0">Browse the catalog, read the reference, and test requests live.</p>
+            </div>
+            <div class="toolbar__actions">
+              <span class="badge badge-accent">v1 · 15 endpoints</span>
+            </div>
+          </header>
+
+          <!-- Catalog -->
+          <section id="apis" class="mb-5">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h2 class="h3 mb-0">API catalog</h2>
+            </div>
+            <div class="row g-3" id="api-catalog"></div>
+          </section>
+
+          <!-- Endpoints -->
+          <section id="endpoints" class="mb-5">
+            <div class="d-flex align-items-center justify-content-between mb-3 gap-3 flex-wrap">
+              <h2 class="h3 mb-0">Endpoints</h2>
+              <div class="search-field" style="width: 240px">
+                <i data-lucide="search" class="search-icon"></i>
+                <input class="form-control" id="endpoint-search" type="text" placeholder="Filter endpoints…" aria-label="Filter endpoints" />
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Method</th>
+                      <th>Endpoint</th>
+                      <th>Description</th>
+                      <th>API</th>
+                    </tr>
+                  </thead>
+                  <tbody id="endpoint-list"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- Detail + tester -->
+          <section>
+            <h2 class="h3 mb-3">Reference &amp; tester</h2>
+            <div class="split">
+              <div id="api-doc"></div>
+              <div class="tester card card--dense" id="tester"></div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Mobile sidebar drawer -->
+    <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="Primary">
+      <div class="sidebar-brand">
+        <span class="brand-mark"><i data-lucide="zap"></i></span>
+        <span class="brand-name">APIForge X</span>
+        <button type="button" class="btn btn-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="Close menu"><i data-lucide="x"></i></button>
+      </div>
+      <nav class="sidebar-nav" aria-label="Primary">
+        <div class="nav-group">
+          <div class="nav-group__label">Overview</div>
+          <a class="nav-item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label">Developer</div>
+          <a class="nav-item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+          <a class="nav-item" href="./apis.html#endpoints"><i data-lucide="braces"></i><span>Endpoints</span></a>
+          <a class="nav-item" href="./api-keys.html"><i data-lucide="key"></i><span>API Keys</span></a>
+          <a class="nav-item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
+          <a class="nav-item is-disabled" href="#"><i data-lucide="webhook"></i><span>Webhooks</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label">Analytics</div>
+          <a class="nav-item" href="./usage.html"><i data-lucide="bar-chart-3"></i><span>Usage</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label">Workspace</div>
+          <a class="nav-item is-disabled" href="#"><i data-lucide="users"></i><span>Team</span></a>
+          <a class="nav-item is-disabled" href="#"><i data-lucide="credit-card"></i><span>Billing</span></a>
+          <a class="nav-item is-disabled" href="#"><i data-lucide="settings"></i><span>Settings</span></a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile bottom tab bar -->
+    <nav class="bottom-tabbar" aria-label="Primary mobile">
+      <a class="bottom-tabbar__item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+      <a class="bottom-tabbar__item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+      <a class="bottom-tabbar__item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
+      <a class="bottom-tabbar__item" href="./api-keys.html"><i data-lucide="key"></i><span>Keys</span></a>
+      <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="More">
+        <i data-lucide="more-horizontal"></i><span>More</span>
+      </button>
+    </nav>
+
+    <script type="module" src="/src/js/pages/apis.js"></script>
+  </body>
+</html>

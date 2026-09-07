@@ -6,6 +6,34 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## [Phase 3A] — 2026-09-07 — CORE PRODUCT EXPERIENCE IMPLEMENTATION COMPLETE ✅
+
+### Added
+- Five product pages: `dashboard.html`, `apis.html`, `api-keys.html`, `logs.html`, `usage.html` + page modules in `src/js/pages/`
+- `src/js/components/charts.js` — tree-shaken Chart.js registration (Line/Bar/Doughnut + Category/Linear + Filler/Tooltip/Legend), CSS-variable theming, `makeChart`/`refreshCharts`/`initCharts`, `axis`/`tooltips` shared options
+- `src/js/components/log-detail.js` — deterministic request inspector (`buildLogDetail`, `cURLFor`, `openLogDrawer` → Bootstrap offcanvas)
+- SCSS partials: `_segmented`, `_toolbar`, `_split`, `_inspector`, `_explorer`, `pages/_usage` (registered in `main.scss`)
+- Icon registry extended (GitBranch, LogOut, Globe, ExternalLink, Play, Braces, FileJson, FolderOpen, Server, Box, Lock, ShieldCheck, Ban, SlidersHorizontal, Filter, Calendar, Database, Download, PieChart, Timer, ArrowUpRight, Check)
+- `format.js` helpers: `compactNumber`, `formatDate`, `percent`
+
+### Changed
+- `scripts/generate-mock-data.mjs` rewritten (seed `20260907`) — 5 APIs, 15 endpoints, 6 keys (env/permission/prefix/scopes/status), 80 enriched logs, 30-day usage, 2 environments, plan, attribution (byEndpoint + byEnvironment), 8 activity events, metrics (24h/7d/30d KPIs + 24h hourly)
+- `table.js` rewritten — `logRow`/`logRowFull`/`keyRow` + `renderLogs`/`renderLogsFull`/`renderKeys` with copy binding
+- `theme.js` rewritten — dark/light/system with 3-option `[data-theme-menu]` (retains `data-theme-toggle`)
+- `code-block.js` — `initCodeBlock(block)` exported for dynamically rendered docs/tester code
+- `_tables.scss` — `.is-selected` row state (API explorer endpoint list)
+- `_toolbar.scss` — `.filter-bar__select` fixed width
+- `vite.config.js` pageInputs += dashboard/apis/api-keys/logs/usage
+- `index.html` hub now links the five product pages (label → Phase 3A)
+
+### QA
+- `vite build` green — 9 HTML pages; per-page JS chunks (`dashboard`, `apis`, `api-keys`, `logs`, `usage`)
+- Dev server serves all pages + module transforms (200); no transform errors
+- Static QA clean (class refs reconciled to `.filter-bar`/`.seg`/`.card--dense`+`.chart`)
+- Interaction / responsive / visual QA NOT executed (no browser in sandbox) — recorded honestly in TEST_STATUS.md
+
+---
+
 ## [Phase 2] — 2026-09-07 — FOUNDATION & DESIGN SYSTEM (PRODUCTION HARDENING) COMPLETE ✅
 
 ### Added

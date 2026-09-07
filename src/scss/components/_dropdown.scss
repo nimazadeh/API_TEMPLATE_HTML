@@ -57,6 +57,14 @@
   }
 }
 
+// Theme menu items (Dark / Light / System) — trailing check for the active mode
+.dropdown-item .theme-check {
+  margin-inline-start: auto;
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+}
+
 .dropdown-header {
   padding: 6px 10px 2px;
   font-size: var(--fs-eyebrow);

@@ -81,6 +81,15 @@
     color: var(--text-primary);
     font-weight: 500;
   }
+  // Not-yet-built sections (later phases)
+  &.is-disabled {
+    color: var(--text-disabled);
+    cursor: default;
+    &:hover {
+      background: transparent;
+      color: var(--text-disabled);
+    }
+  }
   .nav-item__badge {
     margin-inline-start: auto;
     display: inline-flex;
@@ -110,11 +119,30 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 8px;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  &:hover {
-    background: var(--surface-2);
+
+  // Account menu — the toggle is a full-width button inside the dropdown.
+  .sidebar-user__toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 1;
+    min-width: 0;
+    padding: 8px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: inherit;
+    text-align: start;
+    cursor: pointer;
+    &:hover {
+      background: var(--surface-2);
+    }
+  }
+  > svg {
+    flex: none;
+    margin-inline-end: 8px;
   }
   .avatar {
     width: 28px;
@@ -131,6 +159,7 @@
   }
   .sidebar-user__meta {
     min-width: 0;
+    flex: 1;
     .name {
       font-size: var(--fs-body-sm);
       font-weight: 500;

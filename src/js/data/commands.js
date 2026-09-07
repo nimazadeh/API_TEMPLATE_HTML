@@ -1,13 +1,48 @@
 // =============================================================
 // APIForge X — Command palette index (static)
-// Groups: Navigation, Actions. Extended per-phase (endpoints, recent
-// in Phase 3+). `run` receives the event for context.
+// Groups: Navigate, Quick actions. `run` receives the event for
+// context. Extended per-phase as pages land.
 // =============================================================
 
 export const commandGroups = [
   {
-    label: 'Navigation',
+    label: 'Navigate',
     items: [
+      {
+        id: 'nav-overview',
+        title: 'Overview',
+        desc: 'Platform health dashboard',
+        icon: 'layout-dashboard',
+        href: './dashboard.html',
+      },
+      {
+        id: 'nav-apis',
+        title: 'APIs',
+        desc: 'Browse and test the API catalog',
+        icon: 'code-2',
+        href: './apis.html',
+      },
+      {
+        id: 'nav-keys',
+        title: 'API Keys',
+        desc: 'Manage and rotate keys',
+        icon: 'key',
+        href: './api-keys.html',
+      },
+      {
+        id: 'nav-logs',
+        title: 'Logs',
+        desc: 'Request log inspector',
+        icon: 'scroll-text',
+        href: './logs.html',
+      },
+      {
+        id: 'nav-usage',
+        title: 'Usage',
+        desc: 'Usage and attribution analytics',
+        icon: 'bar-chart-3',
+        href: './usage.html',
+      },
       {
         id: 'nav-style-guide',
         title: 'Style Guide',
@@ -20,34 +55,34 @@ export const commandGroups = [
         title: 'RTL Test — فارسی',
         desc: 'Persian / right-to-left demo',
         icon: 'languages',
-        href: './rtl.html',
-      },
-      {
-        id: 'nav-overview',
-        title: 'Overview',
-        desc: 'App dashboard (Phase 3)',
-        icon: 'layout-dashboard',
-        disabled: true,
-      },
-      {
-        id: 'nav-logs',
-        title: 'Logs',
-        desc: 'Request log inspector (Phase 3)',
-        icon: 'scroll-text',
-        disabled: true,
-      },
-      {
-        id: 'nav-keys',
-        title: 'API Keys',
-        desc: 'Key management (Phase 3)',
-        icon: 'key',
-        disabled: true,
+        href: './rtl-test.html',
       },
     ],
   },
   {
-    label: 'Actions',
+    label: 'Quick actions',
     items: [
+      {
+        id: 'act-create-key',
+        title: 'Create API key',
+        desc: 'Generate a new key',
+        icon: 'key',
+        href: './api-keys.html#create',
+      },
+      {
+        id: 'act-test-endpoint',
+        title: 'Test an endpoint',
+        desc: 'Open the API explorer tester',
+        icon: 'play',
+        href: './apis.html#endpoints',
+      },
+      {
+        id: 'act-view-logs',
+        title: 'View logs',
+        desc: 'Open the request log inspector',
+        icon: 'scroll-text',
+        href: './logs.html',
+      },
       {
         id: 'act-theme',
         title: 'Toggle theme',
@@ -74,17 +109,6 @@ export const commandGroups = [
         icon: 'circle-check',
         run: () => {
           document.querySelectorAll('[data-env-switcher] .env-option[data-env="live"]').forEach((b) => b.click());
-        },
-      },
-      {
-        id: 'act-copy',
-        title: 'Copy sample API key',
-        desc: 'Copy sk_live_… to clipboard',
-        icon: 'copy',
-        run: () => {
-          import('../components/copy.js').then(({ copyText, flashCopied }) => {
-            copyText('sk_live_4fJk9Lm2XpQz7RvW');
-          });
         },
       },
     ],

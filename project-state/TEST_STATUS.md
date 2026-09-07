@@ -1,5 +1,36 @@
 # Test Status — APIForge X
 
+## Phase 3A: Core Product Experience — Test Status
+
+**Date:** 2026-09-07
+**Status:** PASS ✅ (with honestly-recorded limitations) — build green, static + runtime QA clean; browser interaction/visual/responsive NOT executed (no browser in sandbox)
+
+### QA Loop
+
+- [x] **PASS 1 — Static:** no stale class refs (`filterbar`/`filter-bar` reconciled to `.filter-bar`, `chart-card`/`segmented`/`usage-grid` removed in favor of `.card--dense`+`.chart`+`.seg`), no duplicate IDs, every `<input|select>` has a label/aria-label, all `data-lucide` names resolve to registered icons, all five pages reference an existing `src/js/pages/*.js`, `renderKeys`/`logRowFull` column counts match their `<thead>` (6 and 7 columns respectively)
+- [x] **PASS 2 — Production build:** `vite build` green — 9 HTML pages (index, style-guide, rtl, rtl-test, dashboard, apis, api-keys, logs, usage), per-page JS chunks emitted (`dashboard`, `apis`, `api-keys`, `logs`, `usage`), CSS 278 kB (52.9 kB gzip)
+- [x] **PASS 3 — Runtime:** dev server on 0.0.0.0:3000 serves all pages (200) + module transforms for `pages/{dashboard,apis,api-keys,logs,usage}.js`, `components/{table,charts,log-detail}.js`, `main.js` (200, no transform/compile errors)
+- [~] **PASS 4 — Interaction:** NOT executed end-to-end — no headless browser in the sandbox. Wired by code path only: catalog/endpoint row selection → doc+tester re-render; tester Send (200/400 simulated); reveal-once modal (copy + confirm checkbox gate); rotate/revoke via confirmation modal; log row → `openLogDrawer` offcanvas; filter state re-render; CSV export; 7d/30d chart range switch; theme/env events. Do not claim a click-through pass.
+- [~] **PASS 5 — Responsive:** NOT visually executed at 360/390/430/768/992/1200/1440. `.split` (3fr/2fr → 1fr below lg), `.attribution` (3fr/2fr → 1fr below md), `.usage-plan__numbers` (3-col → 1-col below sm), and the Phase 2 sidebar/tablet/mobile shell are in place; visual verification requires a real browser/preview.
+- [~] **PASS 6 — Accessibility:** static checks pass (semantic tables with `aria-label`s, rows `tabindex="0"` + Enter/Space keyboard activation for log rows, modal/offcanvas dialog semantics, icon-only buttons labeled, `aria-pressed` on segments, focus rings from tokens). Full WCAG audit deferred.
+- [~] **PASS 7 — Visual:** NOT performed — no browser/preview tool available. Tokens-only styling confirmed via compiled CSS (`.api-card`, `.tester`, `.inspector`, `.usage-plan`, `.attribution`, `.top-list`, `.filter-bar`).
+- [x] **PASS 8 — Refactor + rerun:** `vite build` re-run after markup reconciliation (filter bar, usage cards), still green.
+
+### Phase 3A specifics verified
+
+- [x] All five pages carry the full app shell (sidebar groups, header, env switcher, theme menu, mobile drawer + bottom bar)
+- [x] Log drawer is a Bootstrap offcanvas (`.offcanvas.offcanvas-end.inspector#log-drawer` with `.inspector-title` + `.offcanvas-body`) matching `openLogDrawer`'s expectations
+- [x] Reveal-modal copy button uses `data-copy-target` (matching `bindCopyButton`), not the retired `data-copy-from`
+- [x] `initCodeBlock` unified copy/tab/key-injection for dynamically rendered docs/tester code blocks (`data-code-block` on JSON + SDK blocks)
+
+### Known / Deferred
+
+- [ ] ESLint + Prettier — deferred (optional)
+- [ ] Browser interaction / responsive / visual QA — requires a real browser/preview; run manually on the live preview
+- [ ] Chart.js runtime rendering — verified by build + module transform only; visual theme re-render (`afx:theme`) not observed in a browser
+
+---
+
 ## Phase 2: Foundation & Design System — Production Hardening — Test Status
 
 **Date:** 2026-09-07
