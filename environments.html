@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
-    <title>APIs — APIForge X</title>
+    <title>Environments — APIForge X</title>
     <script>
       (function () {
         var stored = null;
@@ -29,7 +29,7 @@
           </div>
           <div class="nav-group">
             <div class="nav-group__label">Developer</div>
-            <a class="nav-item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+            <a class="nav-item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
             <a class="nav-item" href="./endpoints.html"><i data-lucide="braces"></i><span>Endpoints</span></a>
             <a class="nav-item" href="./api-keys.html"><i data-lucide="key"></i><span>API Keys</span></a>
             <a class="nav-item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
@@ -44,7 +44,7 @@
           </div>
           <div class="nav-group">
             <div class="nav-group__label">Workspace</div>
-            <a class="nav-item" href="./environments.html"><i data-lucide="server"></i><span>Environments</span></a>
+            <a class="nav-item is-active" href="./environments.html"><i data-lucide="server"></i><span>Environments</span></a>
             <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3C"><i data-lucide="users"></i><span>Team</span></a>
             <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3C"><i data-lucide="credit-card"></i><span>Billing</span></a>
             <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3C"><i data-lucide="settings"></i><span>Settings</span></a>
@@ -83,7 +83,7 @@
         <div class="header-title">
           <span class="crumb">APIForge X</span>
           <span class="crumb-sep">/</span>
-          <span class="title">APIs</span>
+          <span class="title">Environments</span>
         </div>
         <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="Search (⌘K)">
           <i data-lucide="search"></i>
@@ -125,63 +125,101 @@
       <main class="app-main">
         <div class="env-banner" data-env-banner hidden>
           <i data-lucide="alert-triangle"></i>
-          You are viewing <strong>test data</strong>. All keys use the <code class="ltr-isolate">sk_test_</code> prefix.
+          You are viewing <strong>test data</strong>.
         </div>
         <div class="app-main__inner">
           <header class="toolbar">
             <div>
-              <h1 class="mb-1">APIs</h1>
-              <p class="text-secondary mb-0">Browse the catalog, read the reference, and test requests live.</p>
+              <h1 class="mb-1">Environments</h1>
+              <p class="text-secondary mb-0">Variables and keys, separated by environment.</p>
             </div>
             <div class="toolbar__actions">
-              <span class="badge badge-accent">v1 · 15 endpoints</span>
+              <button type="button" class="btn btn-primary" id="variable-create" aria-label="New variable"><i data-lucide="plus"></i> New variable</button>
             </div>
           </header>
 
-          <!-- Catalog -->
-          <section id="apis" class="mb-5">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-              <h2 class="h3 mb-0">API catalog</h2>
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+            <div class="seg" role="group" aria-label="Environment" id="env-switcher">
+              <button type="button" class="seg__item is-active" data-env-page="live" aria-pressed="true">Production</button>
+              <button type="button" class="seg__item" data-env-page="staging" aria-pressed="false">Staging</button>
+              <button type="button" class="seg__item" data-env-page="test" aria-pressed="false">Development</button>
             </div>
-            <div class="row g-3" id="api-catalog"></div>
-          </section>
+          </div>
 
-          <!-- Endpoints -->
-          <section id="endpoints" class="mb-5">
-            <div class="d-flex align-items-center justify-content-between mb-3 gap-3 flex-wrap">
-              <h2 class="h3 mb-0">Endpoints</h2>
-              <div class="search-field" style="width: 240px">
-                <i data-lucide="search" class="search-icon"></i>
-                <input class="form-control" id="endpoint-search" type="text" placeholder="Filter endpoints…" aria-label="Filter endpoints" />
-              </div>
-            </div>
-            <div class="table-card">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Method</th>
-                      <th>Endpoint</th>
-                      <th>Description</th>
-                      <th>API</th>
-                    </tr>
-                  </thead>
-                  <tbody id="endpoint-list"></tbody>
-                </table>
-              </div>
-            </div>
-          </section>
+          <div id="env-notice" class="mb-4"></div>
 
-          <!-- Detail + tester -->
-          <section>
-            <h2 class="h3 mb-3">Reference &amp; tester</h2>
-            <div class="split">
-              <div id="api-doc"></div>
-              <div class="tester card card--dense" id="tester"></div>
+          <div class="card mb-4" id="env-summary"></div>
+
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h4 class="eyebrow mb-0">Variables</h4>
+          </div>
+          <div class="table-card mb-4">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                    <th>Updated</th>
+                  </tr>
+                </thead>
+                <tbody id="var-list"></tbody>
+              </table>
             </div>
-          </section>
+            <div class="table-footer"><span id="var-count">—</span></div>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h4 class="eyebrow mb-0">API keys</h4>
+          </div>
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Key</th>
+                    <th>Scopes</th>
+                    <th>Last used</th>
+                  </tr>
+                </thead>
+                <tbody id="env-keys"></tbody>
+              </table>
+            </div>
+            <div class="table-footer"><span id="key-count">—</span></div>
+          </div>
         </div>
       </main>
+    </div>
+
+    <!-- New variable modal -->
+    <div class="modal fade" id="variable-modal" tabindex="-1" aria-labelledby="variable-modal-title" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="variable-modal-title">New variable</h5>
+            <button type="button" class="btn btn-icon" data-bs-dismiss="modal" aria-label="Close"><i data-lucide="x"></i></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="form-label" for="var-name">Name</label>
+              <input class="form-control form-control--mono ltr-isolate" id="var-name" type="text" placeholder="API_KEY" spellcheck="false" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="var-value">Value</label>
+              <input class="form-control form-control--mono ltr-isolate" id="var-value" type="text" placeholder="sk_live_…" spellcheck="false" />
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="var-secret" checked />
+              <label class="form-check-label" for="var-secret">Mask this value (secret)</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-ghost" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="var-save">Add variable</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Mobile sidebar drawer -->
@@ -198,7 +236,7 @@
         </div>
         <div class="nav-group">
           <div class="nav-group__label">Developer</div>
-          <a class="nav-item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+          <a class="nav-item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
           <a class="nav-item" href="./endpoints.html"><i data-lucide="braces"></i><span>Endpoints</span></a>
           <a class="nav-item" href="./api-keys.html"><i data-lucide="key"></i><span>API Keys</span></a>
           <a class="nav-item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
@@ -212,7 +250,7 @@
         </div>
         <div class="nav-group">
           <div class="nav-group__label">Workspace</div>
-          <a class="nav-item" href="./environments.html"><i data-lucide="server"></i><span>Environments</span></a>
+          <a class="nav-item is-active" href="./environments.html"><i data-lucide="server"></i><span>Environments</span></a>
           <a class="nav-item is-disabled" href="#"><i data-lucide="users"></i><span>Team</span></a>
           <a class="nav-item is-disabled" href="#"><i data-lucide="credit-card"></i><span>Billing</span></a>
           <a class="nav-item is-disabled" href="#"><i data-lucide="settings"></i><span>Settings</span></a>
@@ -223,7 +261,7 @@
     <!-- Mobile bottom tab bar -->
     <nav class="bottom-tabbar" aria-label="Primary mobile">
       <a class="bottom-tabbar__item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
-      <a class="bottom-tabbar__item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+      <a class="bottom-tabbar__item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
       <a class="bottom-tabbar__item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
       <a class="bottom-tabbar__item" href="./api-keys.html"><i data-lucide="key"></i><span>Keys</span></a>
       <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="More">
@@ -231,6 +269,6 @@
       </button>
     </nav>
 
-    <script type="module" src="/src/js/pages/apis.js"></script>
+    <script type="module" src="/src/js/pages/environments.js"></script>
   </body>
 </html>

@@ -1,0 +1,36 @@
+// =============================================================
+// APIForge X — Pages: Errors
+// Stack-trace frame presentation inside the error detail drawer.
+// Reuses .code-block (code well) and .kv (key/value tables).
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.stack {
+  .code-block__body code {
+    display: block;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+}
+
+.stack-frame__line {
+  display: block;
+
+  // The faulting frame — subtle red tint, stays legible in both themes.
+  &.is-fault {
+    background: var(--error-bg);
+    border-radius: 4px;
+    margin-inline: -8px;
+    padding-inline: 8px;
+  }
+}
+
+.stack-frame__code {
+  display: block;
+  margin-top: 2px;
+  padding-inline-start: 12px;
+  border-inline-start: 2px solid var(--error);
+  color: var(--code-text);
+  opacity: 0.85;
+}

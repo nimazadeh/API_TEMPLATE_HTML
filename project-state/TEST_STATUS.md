@@ -1,5 +1,58 @@
 # Test Status — APIForge X
 
+## Phase 3B — Verification Gate (post-implementation pass)
+
+**Date:** 2026-09-07
+**Status:** PASS ✅ — 0 blocking issues; two real issues found and fixed (endpoint service filter select wasn't populated; dead `.kpi-foot` class replaced with `.stat-foot`). Browser click-through/visual/responsive still NOT executed (no browser in sandbox).
+
+### 1. Runtime QA — PASS
+
+- [x] `vite build` green — 14 page inputs (index, style-guide, rtl, rtl-test, dashboard, apis, api-keys, logs, usage, webhooks, endpoints, errors, rate-limits, environments); per-page chunks emitted
+- [x] Dev server serves all 14 pages over HTTP (200)
+- [x] All 5 new page modules + `webhook-detail.js`/`error-detail.js` transform without errors (200, no `Transform failed`/`SyntaxError`)
+- [x] All 7 new JSON data files parse (`mock-webhooks`, `mock-webhook-deliveries`, `mock-errors`, `mock-rate-limits`, `mock-variables`, `mock-environments`, `mock-keys`)
+
+### 2. Interaction QA — wiring verified statically (NOT click-executed)
+
+- [x] Webhooks: endpoints + deliveries tables render; row click + keyboard Enter/Space → `openDeliveryDrawer`; retry (mutates delivery → re-render + re-render open drawer), replay (prepends `pending` delivery), copy payload, Bootstrap tabs inside the drawer (delegated data-API)
+- [x] Endpoints: filters (search/method seg/service/status), row click → drawer (description/auth/params/request+response schema), Create/Edit modal (validation + toast), copy buttons (`data-copy-target`)
+- [x] Errors: overview KPIs computed from data; filters (severity/status/env); row click → `openErrorDrawer`; mark-resolved toggle + assign dropdown callbacks
+- [x] Rate Limits: banner (breached/near), 3 current-limit cards, mixed bar+line history chart + monthly doughnut via `makeChart`, rules table with per-rule progress
+- [x] Environments: page-scoped Production/Staging/Development switcher, production banner, summary, variables reveal/copy/delete (delete has Undo toast action) + add-variable modal, per-environment keys
+- [~] Actual click-through NOT executed — no headless browser in the sandbox; verification is by code-path + build + HTTP only.
+
+### 3. Responsive QA — NOT visually executed
+
+- [~] New partials carry breakpoints (`.limit-grid` → 1fr ≤ 767.98px); tables are `.table-responsive`; drawers are `min(640px,100vw)`; mobile bottom bar + drawer present on every new page
+- [~] 360/390/430/768/1024/1440 visual inspection requires a real browser/preview — recorded honestly as NOT executed.
+
+### 4. RTL/LTR QA — static PASS
+
+- [x] Endpoint paths, webhook URLs, event names, stack frames, JSON payloads and base URLs rendered with `.ltr-isolate` / `dir="ltr"`; code wells force `direction: ltr` via `.code-block`
+- [x] `.stack-frame__code` uses `border-inline-start`; `.rule-usage`/`.limit-card` use logical spacing — mirror safely in RTL
+
+### 5. Code Quality Review — PASS
+
+- [x] No broken imports (7 new JS files scanned); no unused imports
+- [x] Icon registry: 70 registered / 58 literal `data-lucide` usages / 0 missing (`Bug`, `FileText`, `Pencil` added; `eye-off`/`file-json`/`pie-chart` etc. referenced dynamically)
+- [x] No duplicated CSS — new partials add only genuinely-new classes (`.stack-frame*`, `.limit-*`, `.rule-usage`); everything else reuses shared partials
+- [x] No stale class/attr references; no `Phase 3B` tooltips left in nav (Metrics retagged Phase 3C)
+- [x] Accessibility static checks: icon-only buttons carry `aria-label`; drawers/modals `aria-labelledby`; segments `aria-pressed`; clickable rows `tabindex="0"` + Enter/Space; progress bars `role="img"` + `aria-label`
+- [x] Link audit — no broken `./*.html` links
+
+### Fixed in this pass (2 real issues)
+
+1. `endpoints.html` filter select `#endpoint-service` was populated only in the modal (`#ep-service`); the service filter had no options — now both selects are populated from `mock-apis.json`
+2. `.kpi-foot` was never defined in the design system (a latent Phase 3A bug — dashboard KPI foot text rendered unstyled); `dashboard.js` (2 occurrences) and the new `errors.js` (4 occurrences) migrated to the canonical `.stat-foot` class
+
+### Remaining limitations
+
+- [ ] Browser interaction / visual / responsive QA — requires a real browser/preview; run manually on the live preview
+- [ ] Chart.js runtime rendering + theme re-render (`afx:theme`) — verified by build + module transform only, not observed in a browser
+- [ ] Full WCAG 2.x audit — deferred; static label/role checks only
+
+---
+
 ## Phase 3A — Verification Gate (post-implementation pass)
 
 **Date:** 2026-09-07

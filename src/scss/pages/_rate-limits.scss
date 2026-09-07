@@ -1,0 +1,86 @@
+// =============================================================
+// APIForge X — Pages: Rate Limits
+// Current-limit cards (requests/min, requests/day, monthly quota)
+// and the per-rule usage bars. Reuses .card, .progress and .stat-strip.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.limit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+
+  @include mq-max('md') {
+    grid-template-columns: 1fr;
+  }
+}
+
+.limit-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+
+  .limit-card__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .limit-card__label {
+    font-size: var(--fs-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .limit-card__value {
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    letter-spacing: var(--track-h3);
+    font-variant-numeric: tabular-nums;
+    color: var(--text-primary);
+
+    .limit-card__limit {
+      font-size: var(--fs-body-sm);
+      font-weight: 400;
+      color: var(--text-tertiary);
+    }
+  }
+
+  .limit-card__reset {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--fs-caption);
+    color: var(--text-tertiary);
+
+    svg {
+      width: 13px;
+      height: 13px;
+    }
+  }
+}
+
+// Compact in-cell usage bar for the rules table.
+.rule-usage {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 140px;
+
+  .progress {
+    flex: 1;
+  }
+  .rule-usage__value {
+    flex: none;
+    min-width: 64px;
+    text-align: end;
+    font-variant-numeric: tabular-nums;
+    font-size: var(--fs-caption);
+    color: var(--text-secondary);
+  }
+}

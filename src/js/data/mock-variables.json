@@ -1,0 +1,146 @@
+[
+  {
+    "id": "var_wP7j9pRt",
+    "environment": "live",
+    "name": "DATABASE_URL",
+    "value": "postgres://apiforge:8xK2mQp4@db.apiforge.dev:5432/prod",
+    "secret": true,
+    "updatedAt": "2026-09-05T22:26:10.018Z",
+    "addedBy": "Arash P."
+  },
+  {
+    "id": "var_6R6yuVWa",
+    "environment": "live",
+    "name": "REDIS_URL",
+    "value": "rediss://default:r7Xp2mK9@redis.apiforge.dev:6379",
+    "secret": true,
+    "updatedAt": "2026-08-17T22:26:10.018Z",
+    "addedBy": "system"
+  },
+  {
+    "id": "var_BvhyiXfx",
+    "environment": "live",
+    "name": "WEBHOOK_SIGNING_SECRET",
+    "value": "whsec_live_8f3k2ma1q7x9B4dL2nP",
+    "secret": true,
+    "updatedAt": "2026-07-17T22:26:10.018Z",
+    "addedBy": "Arash P."
+  },
+  {
+    "id": "var_pJPgx0wh",
+    "environment": "live",
+    "name": "OPENAI_API_KEY",
+    "value": "sk-proj-9xK2mQp4r7Xv1L8nB3dF6",
+    "secret": true,
+    "updatedAt": "2026-09-02T22:26:10.018Z",
+    "addedBy": "system"
+  },
+  {
+    "id": "var_brQFTix5",
+    "environment": "live",
+    "name": "LOG_LEVEL",
+    "value": "info",
+    "secret": false,
+    "updatedAt": "2026-09-02T22:26:10.018Z",
+    "addedBy": "Arash P."
+  },
+  {
+    "id": "var_6yRWUayU",
+    "environment": "live",
+    "name": "FEATURE_FLAGS",
+    "value": "{\"billing_v2\":true,\"async_email\":false}",
+    "secret": false,
+    "updatedAt": "2026-08-31T22:26:10.018Z",
+    "addedBy": "system"
+  },
+  {
+    "id": "var_0goliNuI",
+    "environment": "staging",
+    "name": "DATABASE_URL",
+    "value": "postgres://apiforge:9bQx7Kp2@db.staging.apiforge.dev:5432/staging",
+    "secret": true,
+    "updatedAt": "2026-07-18T22:26:10.018Z",
+    "addedBy": "Sara R."
+  },
+  {
+    "id": "var_rDKQwX37",
+    "environment": "staging",
+    "name": "REDIS_URL",
+    "value": "redis://redis.staging.apiforge.dev:6379",
+    "secret": true,
+    "updatedAt": "2026-08-25T22:26:10.018Z",
+    "addedBy": "system"
+  },
+  {
+    "id": "var_t10VHB7Q",
+    "environment": "staging",
+    "name": "WEBHOOK_SIGNING_SECRET",
+    "value": "whsec_stag_2mQp4r7Xv1L8nB3d",
+    "secret": true,
+    "updatedAt": "2026-08-23T22:26:10.018Z",
+    "addedBy": "Arash P."
+  },
+  {
+    "id": "var_nNPvde6P",
+    "environment": "staging",
+    "name": "LOG_LEVEL",
+    "value": "debug",
+    "secret": false,
+    "updatedAt": "2026-08-22T22:26:10.018Z",
+    "addedBy": "Sara R."
+  },
+  {
+    "id": "var_6jVyPHgt",
+    "environment": "test",
+    "name": "DATABASE_URL",
+    "value": "postgres://localhost:5432/apiforge_dev",
+    "secret": true,
+    "updatedAt": "2026-08-16T22:26:10.018Z",
+    "addedBy": "Arash P."
+  },
+  {
+    "id": "var_Ov8jQo27",
+    "environment": "test",
+    "name": "REDIS_URL",
+    "value": "redis://localhost:6379",
+    "secret": true,
+    "updatedAt": "2026-07-19T22:26:10.018Z",
+    "addedBy": "system"
+  },
+  {
+    "id": "var_Aa0YpLtt",
+    "environment": "test",
+    "name": "WEBHOOK_SIGNING_SECRET",
+    "value": "whsec_test_7Xv1L8nB3dF6mQp4",
+    "secret": true,
+    "updatedAt": "2026-09-04T22:26:10.018Z",
+    "addedBy": "system"
+  },
+  {
+    "id": "var_OAVR1hY2",
+    "environment": "test",
+    "name": "OPENAI_API_KEY",
+    "value": "sk-proj-4r7Xv1L8nB3dF6mQp",
+    "secret": true,
+    "updatedAt": "2026-08-05T22:26:10.018Z",
+    "addedBy": "system"
+  },
+  {
+    "id": "var_vcneOmhx",
+    "environment": "test",
+    "name": "LOG_LEVEL",
+    "value": "debug",
+    "secret": false,
+    "updatedAt": "2026-08-04T22:26:10.018Z",
+    "addedBy": "system"
+  },
+  {
+    "id": "var_7lF7RmCl",
+    "environment": "test",
+    "name": "PORT",
+    "value": "4000",
+    "secret": false,
+    "updatedAt": "2026-08-24T22:26:10.018Z",
+    "addedBy": "Arash P."
+  }
+]

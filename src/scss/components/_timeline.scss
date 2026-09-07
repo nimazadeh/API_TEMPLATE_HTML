@@ -65,6 +65,16 @@
       border-color: var(--warning-border);
       background: var(--warning-bg);
     }
+    &.is-info {
+      color: var(--info);
+      border-color: var(--info-border);
+      background: var(--info-bg);
+    }
+    &.is-neutral {
+      color: var(--text-secondary);
+      border-color: var(--border);
+      background: var(--surface-2);
+    }
   }
   &::after {
     content: '';

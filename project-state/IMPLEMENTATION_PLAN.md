@@ -169,8 +169,10 @@ foundation, complete primitive set, and the two visual verification pages.
 
 > **Phase 3A status: COMPLETE ✅** (2026-09-07) — see the Phase 3A record below.
 > Phase 3A shipped Dashboard, APIs (explorer), API Keys, Logs, Usage as one coherent
-> product slice; the full Phase 3 scope (webhooks/docs/metrics/team/billing/settings)
-> moves to Phases 3B/3C.
+> product slice.
+> **Phase 3B status: COMPLETE ✅** (2026-09-07) — see the Phase 3B record below.
+> Phase 3B shipped Webhooks, Endpoints, Errors, Rate Limits and Environments.
+> Remaining scope (docs/metrics/team/billing/settings) moves to Phase 3C+.
 
 **Duration:** 5-7 days
 **Goal:** Build most important pages: Overview, Logs, Keys, Usage — the daily-use pages
@@ -224,9 +226,25 @@ foundation, complete primitive set, and the two visual verification pages.
 - [x] **Wiring:** `vite.config.js` pageInputs (9 inputs), command palette (`commands.js`), sidebar nav (later phases disabled + tooltip), `index.html` hub links
 - [x] **QA:** `vite build` green; dev-server HTTP 200 for all pages/modules; static QA clean; interaction/responsive/visual NOT executed (no browser in sandbox)
 
+### Phase 3B record — ADVANCED DEVELOPER WORKFLOWS (COMPLETE ✅, 2026-09-07)
+
+- [x] **Data:** generator extended with a separate `randB` PRNG (keeps Phase 3A byte-identical) → webhooks (6), webhook deliveries (26 with attempt timelines + payload/headers/response/signature), errors (12 with stack traces), rate limits (3 current + 14-day history + 6 rules), variables (16); environments → Production/Staging/Development; keys → +2 staging
+- [x] **Shared:** `webhook-detail.js`, `error-detail.js`, `highlightJson()` in `code-block.js`, `icons.js` +`Bug`/`FileText`/`Pencil`, `_timeline.scss` +`is-info`/`is-neutral`; partials `pages/_errors`, `pages/_rate-limits`
+- [x] **webhooks.html** — endpoint list (event/endpoint/status/attempts/last-delivery/environment) + recent deliveries; delivery drawer (timeline created→sent→delivered/failed/retrying, Payload/Headers/Response/Signature tabs, syntax-highlighted JSON, retry/replay/copy-payload); health strip
+- [x] **endpoints.html** — method/path/service/version/status table with search+method+service+status filters; detail drawer (description/auth/params/request+response schema); Create/Edit modal
+- [x] **errors.html** — KPIs (total/endpoints/rate/resolved), severity/message/endpoint/occurrences/last-seen list with filters; drawer (stack trace with faulting frame, request info, user context, environment) + mark-resolved/assign
+- [x] **rate-limits.html** — current-limit cards (per minute/day/monthly), 14-day bar+limit-line chart + monthly remaining doughnut, rules table (API/limit/window/usage/status), warning/breached banner
+- [x] **environments.html** — Production/Staging/Development switcher, production banner, summary, variables (masked value/reveal/copy/delete/add), API keys per environment
+- [x] **Wiring:** `vite.config.js` pageInputs (14 inputs), sidebar + mobile nav enabled across all app pages, `commands.js`, `index.html` hub
+- [x] **QA:** `vite build` green; dev-server HTTP 200 for all 14 pages/modules; static wiring/icon/link/import audits clean; interaction/responsive/visual NOT executed (no browser in sandbox)
+
 ---
 
 ## Phase 4: Differentiators — Webhooks, APIs, Errors (P1)
+
+> **Note (2026-09-07):** Webhooks, Endpoints, Errors and Rate Limits were pulled forward
+> into Phase 3B and are COMPLETE ✅. What remains of the original Phase 4 list is
+> in-app documentation (`docs.html`) and the marketing-to-app continuity pages.
 
 **Duration:** 5-7 days
 **Goal:** Build differentiators that make template feel specialized

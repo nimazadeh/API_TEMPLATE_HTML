@@ -23,6 +23,13 @@ export const commandGroups = [
         href: './apis.html',
       },
       {
+        id: 'nav-endpoints',
+        title: 'Endpoints',
+        desc: 'Reference docs and schemas',
+        icon: 'braces',
+        href: './endpoints.html',
+      },
+      {
         id: 'nav-keys',
         title: 'API Keys',
         desc: 'Manage and rotate keys',
@@ -37,11 +44,39 @@ export const commandGroups = [
         href: './logs.html',
       },
       {
+        id: 'nav-webhooks',
+        title: 'Webhooks',
+        desc: 'Delivery debugger and payload inspector',
+        icon: 'webhook',
+        href: './webhooks.html',
+      },
+      {
         id: 'nav-usage',
         title: 'Usage',
         desc: 'Usage and attribution analytics',
         icon: 'bar-chart-3',
         href: './usage.html',
+      },
+      {
+        id: 'nav-errors',
+        title: 'Errors',
+        desc: 'Issue monitoring and stack traces',
+        icon: 'bug',
+        href: './errors.html',
+      },
+      {
+        id: 'nav-rate-limits',
+        title: 'Rate Limits',
+        desc: 'Current limits and per-API rules',
+        icon: 'gauge',
+        href: './rate-limits.html',
+      },
+      {
+        id: 'nav-environments',
+        title: 'Environments',
+        desc: 'Variables and keys per environment',
+        icon: 'server',
+        href: './environments.html',
       },
       {
         id: 'nav-style-guide',

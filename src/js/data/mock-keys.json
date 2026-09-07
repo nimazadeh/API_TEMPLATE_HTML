@@ -11,8 +11,8 @@
     ],
     "env": "live",
     "permission": "full",
-    "createdAt": "2025-11-14T21:31:54.329Z",
-    "lastUsedAt": "2026-09-04T21:31:54.329Z",
+    "createdAt": "2025-11-14T22:26:10.010Z",
+    "lastUsedAt": "2026-09-04T22:26:10.011Z",
     "lastUsedIp": "168.112.153.208",
     "status": "active"
   },
@@ -26,8 +26,8 @@
     ],
     "env": "live",
     "permission": "restricted",
-    "createdAt": "2026-07-01T21:31:54.329Z",
-    "lastUsedAt": "2026-09-06T15:31:54.329Z",
+    "createdAt": "2026-07-01T22:26:10.011Z",
+    "lastUsedAt": "2026-09-06T16:26:10.011Z",
     "lastUsedIp": "92.182.83.87",
     "status": "active"
   },
@@ -41,8 +41,8 @@
     ],
     "env": "live",
     "permission": "restricted",
-    "createdAt": "2025-12-16T21:31:54.329Z",
-    "lastUsedAt": "2026-09-05T10:31:54.329Z",
+    "createdAt": "2025-12-16T22:26:10.011Z",
+    "lastUsedAt": "2026-09-05T11:26:10.011Z",
     "lastUsedIp": "133.212.176.142",
     "status": "revoked"
   },
@@ -56,8 +56,8 @@
     ],
     "env": "live",
     "permission": "restricted",
-    "createdAt": "2025-11-01T21:31:54.329Z",
-    "lastUsedAt": "2026-09-05T23:31:54.329Z",
+    "createdAt": "2025-11-01T22:26:10.011Z",
+    "lastUsedAt": "2026-09-06T00:26:10.011Z",
     "lastUsedIp": "153.101.127.193",
     "status": "active"
   },
@@ -72,8 +72,8 @@
     ],
     "env": "test",
     "permission": "full",
-    "createdAt": "2026-03-21T21:31:54.329Z",
-    "lastUsedAt": "2026-09-04T23:31:54.329Z",
+    "createdAt": "2026-03-21T22:26:10.011Z",
+    "lastUsedAt": "2026-09-05T00:26:10.011Z",
     "lastUsedIp": "162.40.169.176",
     "status": "active"
   },
@@ -86,9 +86,39 @@
     ],
     "env": "test",
     "permission": "restricted",
-    "createdAt": "2026-01-15T21:31:54.329Z",
-    "lastUsedAt": "2026-09-06T23:31:54.329Z",
+    "createdAt": "2026-01-15T22:26:10.011Z",
+    "lastUsedAt": "2026-09-07T00:26:10.011Z",
     "lastUsedIp": "29.138.116.89",
+    "status": "active"
+  },
+  {
+    "id": "key_4i0EmAsY",
+    "name": "Staging server",
+    "prefix": "sk_test_NeCY9S9Y",
+    "scopes": [
+      "emails:read",
+      "emails:write",
+      "audiences:read"
+    ],
+    "env": "staging",
+    "permission": "restricted",
+    "createdAt": "2026-04-26T22:26:10.011Z",
+    "lastUsedAt": "2026-09-06T01:26:10.011Z",
+    "lastUsedIp": "65.57.97.134",
+    "status": "active"
+  },
+  {
+    "id": "key_8MYiZKW3",
+    "name": "Preview deploy",
+    "prefix": "sk_test_udlVEwhM",
+    "scopes": [
+      "audiences:read"
+    ],
+    "env": "staging",
+    "permission": "restricted",
+    "createdAt": "2026-04-14T22:26:10.011Z",
+    "lastUsedAt": "2026-09-04T16:26:10.011Z",
+    "lastUsedIp": "204.79.61.246",
     "status": "active"
   }
 ]

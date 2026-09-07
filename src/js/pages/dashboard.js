@@ -40,7 +40,7 @@ function kpiInner(label, value, deltaHtml, dir, foot) {
     <span class="kpi-label">${label}</span>
     <span class="kpi-value">${value}</span>
     <span class="kpi-delta ${dir}">${deltaHtml}</span>
-    <span class="kpi-foot">${foot}</span>`;
+    <span class="stat-foot">${foot}</span>`;
 }
 
 function renderKpis(range) {
@@ -63,7 +63,7 @@ function renderKpis(range) {
     <div class="progress mt-1" role="img" aria-label="${Math.round(usagePct * 100)}% of plan used">
       <div class="progress-bar" style="width:${(usagePct * 100).toFixed(1)}%"></div>
     </div>
-    <span class="kpi-foot">${plan.periodLabel}</span>`;
+    <span class="stat-foot">${plan.periodLabel}</span>`;
 
   cards.forEach((c) => c.classList.remove('skeleton-kpi'));
   createIcons({ icons });

@@ -6,6 +6,42 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## [Phase 3B] — 2026-09-07 — ADVANCED DEVELOPER WORKFLOWS COMPLETE ✅
+
+### Added
+- Five advanced pages: `webhooks.html`, `endpoints.html`, `errors.html`, `rate-limits.html`, `environments.html` + page modules in `src/js/pages/`
+- `src/js/components/webhook-detail.js` — delivery drawer: attempt timeline (created → sent → delivered/failed/retrying) + Payload/Headers/Response/Signature inspector with syntax-highlighted JSON + retry/replay/copy-payload
+- `src/js/components/error-detail.js` — issue drawer: message/type, simulated stack trace (faulting frame highlighted), request info, user context, environment, mark-resolved + assign
+- `highlightJson()` in `src/js/components/code-block.js` — 4-color JSON syntax highlighter (keys/strings/numbers/keywords), escaped, reused by the webhook and endpoint drawers
+- Icons: `Bug`, `FileText`, `Pencil` added to the Lucide registry (now 70 registered)
+- `src/scss/pages/_errors.scss`, `src/scss/pages/_rate-limits.scss` (registered in `main.scss`); `.timeline__node` gained `is-info`/`is-neutral` states
+- Deterministic mock data (seed `20260907`, separate `randB` PRNG keeps Phase 3A byte-identical apart from `Date.now()` timestamps): `mock-webhooks.json` (6), `mock-webhook-deliveries.json` (26 with attempt timelines + payload/headers/response/signature), `mock-errors.json` (12 with stack traces), `mock-rate-limits.json` (3 current + 14-day history + 6 rules), `mock-variables.json` (16); `mock-environments.json` → Production/Staging/Development (3), `mock-keys.json` → +2 staging keys
+- Navigation: sidebar + mobile drawer enabled for Webhooks/Endpoints/Errors/Rate Limits/Environments across all app pages; Metrics retagged to Phase 3C; `commands.js` + `index.html` hub updated
+
+### Changed
+- `vite.config.js` — `pageInputs` 9 → 14 pages
+- `index.html` hub — eyebrow retagged Phase 3B and 5 new product cards added
+
+### Fixed
+- `src/js/pages/endpoints.js` — the service filter select (`#endpoint-service`) had no options (only the modal's select was populated); now both are filled from `mock-apis.json`
+- `src/js/pages/dashboard.js` + `src/js/pages/errors.js` — replaced the dead `.kpi-foot` class (never styled in the design system) with the canonical `.stat-foot`
+
+### Verified (executed)
+- `vite build` green — 14 page inputs; per-page chunks emitted; `dist/*.html` asset refs resolve
+- Runtime HTTP QA — all 14 pages + new page/component modules serve 200 with no transform errors
+- Static wiring QA — every `getElementById` target in the 5 new page modules resolves; `data-copy-target` ids resolve; drawers exist on their pages
+- Icon registry audit — 70 registered / 58 literal `data-lucide` usages / 0 missing
+- Link audit — no broken `./*.html` links
+- Import audit — no unused imports in the 7 new JS files
+- Nav audit — no leftover `Phase 3B` tooltips; Metrics retagged Phase 3C
+
+### Remaining limitations (recorded honestly)
+- Interaction / visual / responsive QA NOT executed — no headless browser in the sandbox; run manually on the live preview
+- Chart.js runtime rendering + theme re-render not observed in a browser (build + module transform only)
+- Full WCAG audit deferred
+
+---
+
 ## [Phase 3A — Verification] — 2026-09-07 — POST-IMPLEMENTATION VERIFICATION PASS ✅
 
 ### Fixed

@@ -1,39 +1,105 @@
 [
   {
-    "id": "wh_8f3k2ma1",
-    "url": "https://example.com/hooks/email-events",
+    "id": "wh_LzSGKV8u",
+    "url": "https://hooks.acme.dev/hooks/email-events",
+    "slug": "email-events",
     "description": "Email delivery events",
     "events": [
       "email.sent",
-      "email.bounced",
-      "email.delivered"
+      "email.delivered",
+      "email.bounced"
     ],
+    "environment": "live",
     "status": "enabled",
-    "successRate": 99.2,
-    "lastDelivery": "2026-09-07T19:24:24.526Z"
+    "signingSecret": "whsec_OgZtTkxlNrLDehqYNosT07ue",
+    "createdAt": "2026-08-05T22:26:10.013Z",
+    "successRate": 100,
+    "lastDeliveryAt": "2026-09-07T20:22:10.014Z",
+    "failures24h": 0
   },
   {
-    "id": "wh_2x9q7b04",
-    "url": "https://example.com/hooks/audience-sync",
+    "id": "wh_uhDKvc1N",
+    "url": "https://integrations.shopflow.io/hooks/audience-sync",
+    "slug": "audience-sync",
     "description": "Audience sync events",
     "events": [
       "audience.created",
-      "audience.updated"
+      "audience.updated",
+      "audience.deleted"
     ],
+    "environment": "live",
     "status": "enabled",
-    "successRate": 97.8,
-    "lastDelivery": "2026-09-07T19:16:24.526Z"
+    "signingSecret": "whsec_mD7BCROlwJfyl7pm7kOeds4P",
+    "createdAt": "2025-12-28T22:26:10.013Z",
+    "successRate": 80,
+    "lastDeliveryAt": "2026-09-07T20:08:10.016Z",
+    "failures24h": 1
   },
   {
-    "id": "wh_c7d1p9z3",
-    "url": "https://example.com/hooks/usage-alerts",
+    "id": "wh_Bm5ssT3X",
+    "url": "https://api.mercuryhq.com/hooks/usage-alerts",
+    "slug": "usage-alerts",
     "description": "Usage threshold alerts",
     "events": [
       "usage.warning",
       "usage.limit_reached"
     ],
+    "environment": "live",
     "status": "disabled",
+    "signingSecret": "whsec_NpjevZ44mEZKtJwKBU7DmcL2",
+    "createdAt": "2026-06-18T22:26:10.013Z",
     "successRate": 0,
-    "lastDelivery": null
+    "lastDeliveryAt": "2026-09-07T20:38:10.016Z",
+    "failures24h": 3
+  },
+  {
+    "id": "wh_Io2otLWi",
+    "url": "https://events.pulse.run/hooks/completion-stream",
+    "slug": "completion-stream",
+    "description": "Model completion stream",
+    "events": [
+      "completion.created",
+      "completion.failed"
+    ],
+    "environment": "live",
+    "status": "enabled",
+    "signingSecret": "whsec_jCwE1VXTiGkTLjLRZtL9440g",
+    "createdAt": "2026-07-21T22:26:10.013Z",
+    "successRate": 60,
+    "lastDeliveryAt": "2026-09-07T20:39:10.016Z",
+    "failures24h": 2
+  },
+  {
+    "id": "wh_nuTqfdwa",
+    "url": "https://backend.yourco.dev/hooks/staging-email",
+    "slug": "staging-email",
+    "description": "Staging email events",
+    "events": [
+      "email.sent",
+      "email.bounced"
+    ],
+    "environment": "staging",
+    "status": "enabled",
+    "signingSecret": "whsec_j6Xli31JsdPdwsc5Eh1w76EB",
+    "createdAt": "2026-05-26T22:26:10.013Z",
+    "successRate": 100,
+    "lastDeliveryAt": "2026-09-07T15:55:10.016Z",
+    "failures24h": 0
+  },
+  {
+    "id": "wh_9XWfdl9g",
+    "url": "https://sink.local.test/hooks/dev-sink",
+    "slug": "dev-sink",
+    "description": "Local development sink",
+    "events": [
+      "email.delivered"
+    ],
+    "environment": "test",
+    "status": "enabled",
+    "signingSecret": "whsec_QxoaBE4E6asagM6vZNfjsWy5",
+    "createdAt": "2026-02-28T22:26:10.013Z",
+    "successRate": 100,
+    "lastDeliveryAt": "2026-09-07T16:31:10.016Z",
+    "failures24h": 0
   }
 ]

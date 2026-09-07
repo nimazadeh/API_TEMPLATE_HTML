@@ -3,9 +3,9 @@
 ## Project: APIForge X — Premium Developer API Platform HTML Template
 
 **Branch:** arena/01a07d58-api-template-html
-**Phase:** PHASE 3A — CORE PRODUCT EXPERIENCE IMPLEMENTATION
+**Phase:** PHASE 3B — ADVANCED DEVELOPER WORKFLOWS
 **Date:** 2026-09-07
-**Status:** Phase 3A Complete — five core pages shipped; Phases 3B (Webhooks/Docs/Metrics) and 3C (Team/Billing/Settings) remain
+**Status:** Phase 3B Complete — Webhooks, Endpoints, Errors, Rate Limits and Environments shipped; Phase 3C (Team/Billing/Settings) plus docs/metrics/marketing remain
 
 ---
 
@@ -95,6 +95,34 @@
 - [x] `vite build` green (all 9 page inputs)
 - [x] Dev server serves all pages + module transforms over HTTP (200)
 - [x] Static QA: no stale class refs (`filterbar`/`chart-card`/`segmented` removed), script refs resolve, Lucide icons resolve
+- [~] Interaction / responsive / visual QA not executed (no browser in sandbox) — recorded honestly, see TEST_STATUS.md
+
+---
+
+### PHASE 3B: ADVANCED DEVELOPER WORKFLOWS — COMPLETE ✅
+
+**Objectives Achieved:**
+- [x] `webhooks.html` — Webhooks Debugger (Stripe/Linear/Vercel-inspired): webhook endpoint list (event, endpoint, status, attempts, last delivery, environment) + recent-deliveries table + delivery detail drawer with attempt timeline (created → sent → delivered/failed/retrying, each with timestamp/status/latency) and a Payload Inspector (Payload / Headers / Response / Signature tabs, syntax-highlighted JSON, copy, LTR-isolated); actions retry / replay / copy payload; empty + loading states
+- [x] `endpoints.html` — Endpoint Management: table (method, path, service, version, status) with search/method/service/status filters; detail drawer (description, authentication, parameters table, request schema, response schema); Create/Edit modal (method, path, service, auth type, description) with validation + toast
+- [x] `errors.html` — Error Monitoring (Sentry/Vercel-inspired): overview cards (total errors, affected endpoints, error rate, resolved %), severity/message/endpoint/occurrences/last-seen list with severity/status/environment filters, detail drawer (message, simulated stack trace with faulting frame, request info, user context, environment, timestamp) with mark-resolved + assign actions
+- [x] `rate-limits.html` — Rate Limits: current-limit cards (requests/minute, requests/day, monthly quota) with progress + reset info, usage visualization (14-day requests/day bar chart with limit line + monthly remaining doughnut), rules table (API, limit, window, current usage, status) with warning/breached states and a warning banner
+- [x] `environments.html` — Environment Management: Production/Staging/Development switcher, production warning banner ("You're working in Production"), per-environment summary, variables table (name, masked value, updated) with reveal/copy/delete + add-variable modal, API keys separated by environment
+- [x] Data layer extended deterministically (seed `20260907`): webhooks (6), webhook deliveries (26, with attempt timelines + payloads/headers/response/signature), errors (12 with stack traces), rate limits (3 current + 14-day history + 6 rules), variables (16), plus a third environment (`staging`) and 2 staging keys — new entities use a **separate PRNG instance** so Phase 3A datasets stay byte-identical except `Date.now()` timestamps
+- [x] Reused components end-to-end: `.table`/`.table-card`, `.toolbar`/`.filter-bar`/`.seg`/`.stat-strip`, `.offcanvas`/`.modal`, `.code-block` + new `highlightJson()`, `.timeline` (+ `is-info`/`is-neutral` node states), `.kv`, `.params-table`, `.kpi`, `.progress`/`.usage-row`, `.empty-state`, `charts.js`, `copy.js`, `afxToast`
+- [x] New components: `webhook-detail.js` (delivery drawer), `error-detail.js` (issue drawer); new partials: `pages/_errors`, `pages/_rate-limits` (only genuinely-new styles)
+- [x] All 5 pages wired into `vite.config.js` pageInputs (now 14), sidebar + mobile drawer nav (enabled Webhooks/Endpoints/Errors/Rate Limits/Environments; Metrics retagged Phase 3C), command palette (`commands.js`), and `index.html` hub
+
+**Artifacts Created/Updated:**
+- New pages: `webhooks.html`, `endpoints.html`, `errors.html`, `rate-limits.html`, `environments.html` + `src/js/pages/{webhooks,endpoints,errors,rate-limits,environments}.js`
+- New components: `src/js/components/webhook-detail.js`, `error-detail.js`; extended `code-block.js` (`highlightJson`), `icons.js` (+`Bug`, `FileText`, `Pencil`), `_timeline.scss` (+`is-info`/`is-neutral`)
+- New partials: `src/scss/pages/_errors.scss`, `_rate-limits.scss` (registered in `main.scss`)
+- Data: `scripts/generate-mock-data.mjs` extended + regenerated (`mock-webhooks`, `mock-webhook-deliveries`, `mock-errors`, `mock-rate-limits`, `mock-variables`; `mock-environments` → 3 envs; `mock-keys` → +2 staging)
+- Nav updated across all 5 Phase 3A pages + `commands.js` + `index.html` hub
+
+**Exit Criteria:**
+- [x] `vite build` green (14 page inputs)
+- [x] Dev server serves all 14 pages + new modules transform over HTTP (200)
+- [x] Static QA: `getElementById` targets resolve, `data-copy-target` ids resolve, drawers exist on their pages, no broken links, no missing icons, no unused imports, no `Phase 3B` tooltips left in nav
 - [~] Interaction / responsive / visual QA not executed (no browser in sandbox) — recorded honestly, see TEST_STATUS.md
 
 ---
@@ -206,17 +234,17 @@
 
 ---
 
-## Next Phase: PHASE 3B — WEBHOOKS · DOCUMENTATION · METRICS
+## Next Phase: PHASE 3C — WORKSPACE MANAGEMENT (Team · Billing · Settings)
 
 **Ready to start:** NOT YET AUTHORIZED — wait for separate authorization.
 
-**Phase 3B Scope (draft):**
-- `webhooks.html` — event catalog, per-webhook delivery log + failure inspector, secret reveal, retry/resend
-- `docs.html` — SDK/quickstart documentation with LTR code + version selector (phase 3A `initCodeBlock`/`sdkBlock` primitives reuse)
-- `metrics.html` — latency/error-rate/percentile charts + alerting thresholds
-- Later (3C): Team, Billing, Settings; Phase 5: marketing landing
+**Phase 3C Scope (draft):**
+- `team.html` — members table (avatar, name, email, role, last active), invite flow, roles/permissions, audit log
+- `billing.html` — current plan card, usage projection, invoices table, payment method, upgrade/downgrade
+- `settings.html` — profile, workspace, security (2FA/sessions), notifications, danger zone
+- Remaining out-of-scope items (not scheduled): in-app `docs.html`, `metrics.html` (nav item currently disabled), marketing landing/pricing/changelog/status
 
-**Reuse from Phase 3A:** `boot()`, `charts.js` (makeChart/initCharts), `log-detail.js` inspector pattern, `table.js` renderers, `_segmented`/`_toolbar`/`_split`/`_inspector`/`_explorer`, command palette index (`commands.js`), env switcher, deterministic mock data.
+**Reuse from Phase 3A/3B:** `boot()`, `charts.js`, `log-detail.js`/`webhook-detail.js`/`error-detail.js` drawer pattern, `table.js` renderers, `.filter-bar`/`.seg`/`.toolbar`/`.offcanvas`/`.modal`/`.kpi`/`.empty-state`, command palette index, env switcher, deterministic mock data.
 
 ---
 

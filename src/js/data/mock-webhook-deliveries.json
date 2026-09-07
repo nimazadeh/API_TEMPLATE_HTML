@@ -1,0 +1,1978 @@
+[
+  {
+    "id": "wd_saufcMCpSr",
+    "webhookId": "wh_Io2otLWi",
+    "endpoint": "https://events.pulse.run/hooks/completion-stream",
+    "event": "completion.failed",
+    "environment": "live",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 694,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T20:39:10.016Z",
+    "payload": {
+      "id": "cmpl_SlHDeMB6",
+      "model": "forge-1",
+      "status": "failed",
+      "error": "context_length_exceeded"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "completion.failed"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_saufcMCpSr"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_Io2otLWi"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=fd17af392ae90e8441e1d6c034ec3f7c463c04dd55dacc59d310e953858e8a36",
+    "timeline": [
+      {
+        "at": "2026-09-07T20:39:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T20:39:10.039Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T20:39:10.733Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 694
+      }
+    ]
+  },
+  {
+    "id": "wd_8sVNdrC5e4",
+    "webhookId": "wh_Bm5ssT3X",
+    "endpoint": "https://api.mercuryhq.com/hooks/usage-alerts",
+    "event": "usage.warning",
+    "environment": "live",
+    "status": "failed",
+    "attempts": 2,
+    "latencyMs": 1991,
+    "responseCode": 500,
+    "createdAt": "2026-09-07T20:38:10.016Z",
+    "payload": {
+      "metric": "requests",
+      "threshold": 80,
+      "current": 86,
+      "window": "day"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "usage.warning"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_8sVNdrC5e4"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_Bm5ssT3X"
+      ]
+    ],
+    "response": {
+      "status": 500,
+      "body": {
+        "error": {
+          "code": "internal_error",
+          "message": "Something went wrong on the receiver side."
+        }
+      }
+    },
+    "signature": "t=1788819970,sha256=96ae9bc7786a5785eafa8f41203216b47573034d4fb7c53900c0f3c5605caf55",
+    "timeline": [
+      {
+        "at": "2026-09-07T20:38:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T20:38:10.090Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T20:38:11.086Z",
+        "state": "failed",
+        "code": 500,
+        "latencyMs": 996
+      },
+      {
+        "at": "2026-09-07T20:40:27.086Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T20:40:28.082Z",
+        "state": "failed",
+        "code": 502,
+        "latencyMs": 996
+      },
+      {
+        "at": "2026-09-07T20:41:55.082Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      }
+    ]
+  },
+  {
+    "id": "wd_Ro5pjRiT2i",
+    "webhookId": "wh_LzSGKV8u",
+    "endpoint": "https://hooks.acme.dev/hooks/email-events",
+    "event": "email.sent",
+    "environment": "live",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 637,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T20:22:10.014Z",
+    "payload": {
+      "id": "eml_fqUHK1hJB8",
+      "to": "user@example.com",
+      "subject": "Welcome to Acme",
+      "from": "team@yourco.dev"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "email.sent"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_Ro5pjRiT2i"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_LzSGKV8u"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=169e65f3b50a68217c137ae08352ea9c642704dd82608f604a1b30b6fed04a73",
+    "timeline": [
+      {
+        "at": "2026-09-07T20:22:10.014Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T20:22:10.062Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T20:22:10.699Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 637
+      }
+    ]
+  },
+  {
+    "id": "wd_VoxgozBFyv",
+    "webhookId": "wh_uhDKvc1N",
+    "endpoint": "https://integrations.shopflow.io/hooks/audience-sync",
+    "event": "audience.updated",
+    "environment": "live",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 489,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T20:08:10.016Z",
+    "payload": {
+      "id": "aud_p8n2wgUr",
+      "name": "Trial users",
+      "size": 14625,
+      "changed": [
+        "filters"
+      ]
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "audience.updated"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_VoxgozBFyv"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_uhDKvc1N"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=bc481bd2b354c1fbdd1580a9ea8699186f76d5dc944c8353bc1ea4bc46b13fbf",
+    "timeline": [
+      {
+        "at": "2026-09-07T20:08:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T20:08:10.070Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T20:08:10.559Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 489
+      }
+    ]
+  },
+  {
+    "id": "wd_ElT2GOV2JJ",
+    "webhookId": "wh_uhDKvc1N",
+    "endpoint": "https://integrations.shopflow.io/hooks/audience-sync",
+    "event": "audience.created",
+    "environment": "live",
+    "status": "delivered",
+    "attempts": 2,
+    "latencyMs": 404,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T19:40:10.015Z",
+    "payload": {
+      "id": "aud_v8YplKl6",
+      "name": "Churned accounts",
+      "size": 33308
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "audience.created"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_ElT2GOV2JJ"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_uhDKvc1N"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=5bd5f847635db82d294ba75f53d1e5f0d130150802f40d5f050bd00c88657091",
+    "timeline": [
+      {
+        "at": "2026-09-07T19:40:10.015Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T19:40:10.059Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T19:40:10.261Z",
+        "state": "failed",
+        "code": 500,
+        "latencyMs": 202
+      },
+      {
+        "at": "2026-09-07T19:42:56.261Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T19:42:56.463Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 202
+      }
+    ]
+  },
+  {
+    "id": "wd_lVZZqn8Z1N",
+    "webhookId": "wh_Io2otLWi",
+    "endpoint": "https://events.pulse.run/hooks/completion-stream",
+    "event": "completion.created",
+    "environment": "live",
+    "status": "failed",
+    "attempts": 3,
+    "latencyMs": 3454,
+    "responseCode": 503,
+    "createdAt": "2026-09-07T19:11:10.016Z",
+    "payload": {
+      "id": "cmpl_FjzsArdG",
+      "model": "forge-1-turbo",
+      "status": "succeeded",
+      "tokens": 2048
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "completion.created"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_lVZZqn8Z1N"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_Io2otLWi"
+      ]
+    ],
+    "response": {
+      "status": 503,
+      "body": {
+        "error": {
+          "code": "service_unavailable",
+          "message": "Receiver temporarily overloaded."
+        }
+      }
+    },
+    "signature": "t=1788819970,sha256=8b543a60d9689ce5f66ec362b2b0a1ac3f1f3254d066017f2fc609ccdadb0142",
+    "timeline": [
+      {
+        "at": "2026-09-07T19:11:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T19:11:10.039Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T19:11:11.190Z",
+        "state": "failed",
+        "code": 502,
+        "latencyMs": 1151
+      },
+      {
+        "at": "2026-09-07T19:12:46.190Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T19:12:47.341Z",
+        "state": "failed",
+        "code": 500,
+        "latencyMs": 1151
+      },
+      {
+        "at": "2026-09-07T19:14:17.341Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T19:14:18.492Z",
+        "state": "failed",
+        "code": 502,
+        "latencyMs": 1151
+      },
+      {
+        "at": "2026-09-07T19:15:20.492Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      }
+    ]
+  },
+  {
+    "id": "wd_5icpmc3xEH",
+    "webhookId": "wh_LzSGKV8u",
+    "endpoint": "https://hooks.acme.dev/hooks/email-events",
+    "event": "email.delivered",
+    "environment": "live",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 364,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T18:33:10.014Z",
+    "payload": {
+      "id": "eml_6MjLlCwFXM",
+      "status": "delivered",
+      "recipient": "user@example.com",
+      "deliveredAt": "2026-09-07T21:47:10.014Z"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "email.delivered"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_5icpmc3xEH"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_LzSGKV8u"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=12a558a1c2ebc01cb095498630621d39de3ec8c4e14dfddae0e63460114ccaa7",
+    "timeline": [
+      {
+        "at": "2026-09-07T18:33:10.014Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T18:33:10.092Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T18:33:10.456Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 364
+      }
+    ]
+  },
+  {
+    "id": "wd_CAHDRrEmvC",
+    "webhookId": "wh_Io2otLWi",
+    "endpoint": "https://events.pulse.run/hooks/completion-stream",
+    "event": "completion.created",
+    "environment": "live",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 572,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T18:18:10.016Z",
+    "payload": {
+      "id": "cmpl_ZJ8rDpyN",
+      "model": "forge-1-turbo",
+      "status": "succeeded",
+      "tokens": 1537
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "completion.created"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_CAHDRrEmvC"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_Io2otLWi"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=b048ecb97aab67c0b1b2ee9af2963e81eb6802a354489c92e8038ef4c28b2122",
+    "timeline": [
+      {
+        "at": "2026-09-07T18:18:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T18:18:10.052Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T18:18:10.624Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 572
+      }
+    ]
+  },
+  {
+    "id": "wd_n5ZahlI70X",
+    "webhookId": "wh_uhDKvc1N",
+    "endpoint": "https://integrations.shopflow.io/hooks/audience-sync",
+    "event": "audience.deleted",
+    "environment": "live",
+    "status": "failed",
+    "attempts": 4,
+    "latencyMs": 1278,
+    "responseCode": 503,
+    "createdAt": "2026-09-07T18:09:10.015Z",
+    "payload": {
+      "id": "aud_N2RhEt4F",
+      "name": "Legacy segment",
+      "deletedAt": "2026-09-07T21:25:10.015Z"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "audience.deleted"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_n5ZahlI70X"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_uhDKvc1N"
+      ]
+    ],
+    "response": {
+      "status": 503,
+      "body": {
+        "error": {
+          "code": "service_unavailable",
+          "message": "Receiver temporarily overloaded."
+        }
+      }
+    },
+    "signature": "t=1788819970,sha256=d2824e5ad21ce0ad66db80523546f3e83e304cf1126636e8d5fbdbdb082c2b81",
+    "timeline": [
+      {
+        "at": "2026-09-07T18:09:10.015Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T18:09:10.042Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T18:09:10.362Z",
+        "state": "failed",
+        "code": 502,
+        "latencyMs": 320
+      },
+      {
+        "at": "2026-09-07T18:09:59.362Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T18:09:59.682Z",
+        "state": "failed",
+        "code": 500,
+        "latencyMs": 320
+      },
+      {
+        "at": "2026-09-07T18:12:12.682Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T18:12:13.002Z",
+        "state": "failed",
+        "code": 502,
+        "latencyMs": 320
+      },
+      {
+        "at": "2026-09-07T18:13:16.002Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T18:13:16.322Z",
+        "state": "failed",
+        "code": 502,
+        "latencyMs": 320
+      },
+      {
+        "at": "2026-09-07T18:14:32.322Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      }
+    ]
+  },
+  {
+    "id": "wd_JPNTdkm7sS",
+    "webhookId": "wh_Io2otLWi",
+    "endpoint": "https://events.pulse.run/hooks/completion-stream",
+    "event": "completion.created",
+    "environment": "live",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 752,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T17:16:10.016Z",
+    "payload": {
+      "id": "cmpl_xmw1Oz6A",
+      "model": "forge-1",
+      "status": "succeeded",
+      "tokens": 1328
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "completion.created"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_JPNTdkm7sS"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_Io2otLWi"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=9fe09938fd5ebbfea30374cb5156e49ba82e64ab0b7d36741e8cbc969529a714",
+    "timeline": [
+      {
+        "at": "2026-09-07T17:16:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T17:16:10.075Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T17:16:10.827Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 752
+      }
+    ]
+  },
+  {
+    "id": "wd_boyeWsgsI1",
+    "webhookId": "wh_9XWfdl9g",
+    "endpoint": "https://sink.local.test/hooks/dev-sink",
+    "event": "email.delivered",
+    "environment": "test",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 189,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T16:31:10.016Z",
+    "payload": {
+      "id": "eml_7p8li0HGE8",
+      "status": "delivered",
+      "recipient": "ops@acme.dev",
+      "deliveredAt": "2026-09-07T22:21:10.016Z"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "email.delivered"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_boyeWsgsI1"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_9XWfdl9g"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=61f6d2b07e01d5b7d4561ac572d69d5deced6a22dc89c48ed3ea73660bc7652b",
+    "timeline": [
+      {
+        "at": "2026-09-07T16:31:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T16:31:10.065Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T16:31:10.254Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 189
+      }
+    ]
+  },
+  {
+    "id": "wd_fXGekDc8dt",
+    "webhookId": "wh_uhDKvc1N",
+    "endpoint": "https://integrations.shopflow.io/hooks/audience-sync",
+    "event": "audience.deleted",
+    "environment": "live",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 255,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T16:11:10.016Z",
+    "payload": {
+      "id": "aud_Lujb4asz",
+      "name": "Legacy segment",
+      "deletedAt": "2026-09-07T20:42:10.016Z"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "audience.deleted"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_fXGekDc8dt"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_uhDKvc1N"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=4abdc3bc17b4360b2b16c1b9636ec67f4d85ab69ffccc6c4679d36708ea43bf5",
+    "timeline": [
+      {
+        "at": "2026-09-07T16:11:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T16:11:10.093Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T16:11:10.348Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 255
+      }
+    ]
+  },
+  {
+    "id": "wd_yyheiosxfF",
+    "webhookId": "wh_nuTqfdwa",
+    "endpoint": "https://backend.yourco.dev/hooks/staging-email",
+    "event": "email.bounced",
+    "environment": "staging",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 617,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T15:55:10.016Z",
+    "payload": {
+      "id": "eml_ItXYnBGoRY",
+      "status": "bounced",
+      "recipient": "old@yourco.io",
+      "reason": "blocked",
+      "code": 550
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "email.bounced"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_yyheiosxfF"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_nuTqfdwa"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=a3a30434bbfa9abfed158dd880a97e53dc02688c62da1f1cec5885bd1242684d",
+    "timeline": [
+      {
+        "at": "2026-09-07T15:55:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T15:55:10.038Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T15:55:10.655Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 617
+      }
+    ]
+  },
+  {
+    "id": "wd_BLCDn5Ydeq",
+    "webhookId": "wh_Bm5ssT3X",
+    "endpoint": "https://api.mercuryhq.com/hooks/usage-alerts",
+    "event": "usage.warning",
+    "environment": "live",
+    "status": "failed",
+    "attempts": 3,
+    "latencyMs": 1926,
+    "responseCode": 500,
+    "createdAt": "2026-09-07T15:37:10.016Z",
+    "payload": {
+      "metric": "requests",
+      "threshold": 80,
+      "current": 95,
+      "window": "day"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "usage.warning"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_BLCDn5Ydeq"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_Bm5ssT3X"
+      ]
+    ],
+    "response": {
+      "status": 500,
+      "body": {
+        "error": {
+          "code": "internal_error",
+          "message": "Something went wrong on the receiver side."
+        }
+      }
+    },
+    "signature": "t=1788819970,sha256=d9f199c8f8bb7c3a045dccc41bab1277584a756a4b87692b84f67134f06d7d75",
+    "timeline": [
+      {
+        "at": "2026-09-07T15:37:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T15:37:10.059Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T15:37:10.701Z",
+        "state": "failed",
+        "code": 503,
+        "latencyMs": 642
+      },
+      {
+        "at": "2026-09-07T15:39:30.701Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T15:39:31.343Z",
+        "state": "failed",
+        "code": 502,
+        "latencyMs": 642
+      },
+      {
+        "at": "2026-09-07T15:41:31.343Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T15:41:31.985Z",
+        "state": "failed",
+        "code": 502,
+        "latencyMs": 642
+      },
+      {
+        "at": "2026-09-07T15:43:05.985Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      }
+    ]
+  },
+  {
+    "id": "wd_1ktkr4Comi",
+    "webhookId": "wh_nuTqfdwa",
+    "endpoint": "https://backend.yourco.dev/hooks/staging-email",
+    "event": "email.bounced",
+    "environment": "staging",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 396,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T13:37:10.016Z",
+    "payload": {
+      "id": "eml_d5t8EdZEJZ",
+      "status": "bounced",
+      "recipient": "noreply@acme.dev",
+      "reason": "blocked",
+      "code": 550
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "email.bounced"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_1ktkr4Comi"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_nuTqfdwa"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=2058b5f69c78c65a05924e7121f7bbe350b5f76d31d1f36e153096e813f94c66",
+    "timeline": [
+      {
+        "at": "2026-09-07T13:37:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T13:37:10.104Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T13:37:10.500Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 396
+      }
+    ]
+  },
+  {
+    "id": "wd_D4Nqoid1un",
+    "webhookId": "wh_LzSGKV8u",
+    "endpoint": "https://hooks.acme.dev/hooks/email-events",
+    "event": "email.sent",
+    "environment": "live",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 485,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T10:52:10.014Z",
+    "payload": {
+      "id": "eml_qz7wruQ2iI",
+      "to": "user@example.com",
+      "subject": "Welcome to Acme",
+      "from": "team@yourco.dev"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "email.sent"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_D4Nqoid1un"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_LzSGKV8u"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=9f073af30d2d7a0432eec2c294ba631bc80b7be8227e120119745284307ca9bb",
+    "timeline": [
+      {
+        "at": "2026-09-07T10:52:10.014Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T10:52:10.080Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T10:52:10.565Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 485
+      }
+    ]
+  },
+  {
+    "id": "wd_kjmzTd7GQB",
+    "webhookId": "wh_Io2otLWi",
+    "endpoint": "https://events.pulse.run/hooks/completion-stream",
+    "event": "completion.failed",
+    "environment": "live",
+    "status": "retrying",
+    "attempts": 1,
+    "latencyMs": 4766,
+    "responseCode": null,
+    "createdAt": "2026-09-07T10:51:10.016Z",
+    "payload": {
+      "id": "cmpl_IdGjG5a6",
+      "model": "forge-1",
+      "status": "failed",
+      "error": "context_length_exceeded"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "completion.failed"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_kjmzTd7GQB"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_Io2otLWi"
+      ]
+    ],
+    "response": null,
+    "signature": "t=1788819970,sha256=a6ea44f48e556198cbcd25331c1629a048731138a01b68c60fb7a6306219d6b3",
+    "timeline": [
+      {
+        "at": "2026-09-07T10:51:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T10:51:10.060Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T10:51:14.826Z",
+        "state": "failed",
+        "code": 502,
+        "latencyMs": 4766
+      },
+      {
+        "at": "2026-09-07T10:52:23.826Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T10:54:13.826Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      }
+    ]
+  },
+  {
+    "id": "wd_eTxfMWskeh",
+    "webhookId": "wh_LzSGKV8u",
+    "endpoint": "https://hooks.acme.dev/hooks/email-events",
+    "event": "email.delivered",
+    "environment": "live",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 871,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T10:06:10.014Z",
+    "payload": {
+      "id": "eml_0sMtFKt0of",
+      "status": "delivered",
+      "recipient": "ops@acme.dev",
+      "deliveredAt": "2026-09-07T21:26:10.014Z"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "email.delivered"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_eTxfMWskeh"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_LzSGKV8u"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=207dcb31e07cf5c12c22f6d0a8f52f67a64c608e9f515e857c62edae73bcef6e",
+    "timeline": [
+      {
+        "at": "2026-09-07T10:06:10.014Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T10:06:10.048Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T10:06:10.919Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 871
+      }
+    ]
+  },
+  {
+    "id": "wd_6Smlv7Gohc",
+    "webhookId": "wh_uhDKvc1N",
+    "endpoint": "https://integrations.shopflow.io/hooks/audience-sync",
+    "event": "audience.deleted",
+    "environment": "live",
+    "status": "delivered",
+    "attempts": 2,
+    "latencyMs": 815,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T08:45:10.015Z",
+    "payload": {
+      "id": "aud_T4hqNvNU",
+      "name": "Legacy segment",
+      "deletedAt": "2026-09-07T22:16:10.015Z"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "audience.deleted"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_6Smlv7Gohc"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_uhDKvc1N"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=d764d8d545e84c3e71b0deae663b623b3419fb8bf66d44511ff47d070c7a269e",
+    "timeline": [
+      {
+        "at": "2026-09-07T08:45:10.015Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T08:45:10.098Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T08:45:10.506Z",
+        "state": "failed",
+        "code": 503,
+        "latencyMs": 408
+      },
+      {
+        "at": "2026-09-07T08:46:25.506Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T08:46:25.914Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 408
+      }
+    ]
+  },
+  {
+    "id": "wd_KqeGBwgFoC",
+    "webhookId": "wh_9XWfdl9g",
+    "endpoint": "https://sink.local.test/hooks/dev-sink",
+    "event": "email.delivered",
+    "environment": "test",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 531,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T07:03:10.016Z",
+    "payload": {
+      "id": "eml_1m6boX1wks",
+      "status": "delivered",
+      "recipient": "user@example.com",
+      "deliveredAt": "2026-09-07T21:55:10.016Z"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "email.delivered"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_KqeGBwgFoC"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_9XWfdl9g"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=62c6321fe85a2a47bb2f16550d1a9f22742d75ba9d753356c27320766abf15b0",
+    "timeline": [
+      {
+        "at": "2026-09-07T07:03:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T07:03:10.094Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T07:03:10.625Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 531
+      }
+    ]
+  },
+  {
+    "id": "wd_IQOw6OvyHa",
+    "webhookId": "wh_nuTqfdwa",
+    "endpoint": "https://backend.yourco.dev/hooks/staging-email",
+    "event": "email.sent",
+    "environment": "staging",
+    "status": "delivered",
+    "attempts": 2,
+    "latencyMs": 666,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T06:19:10.016Z",
+    "payload": {
+      "id": "eml_svrRxSFx1H",
+      "to": "jane@yourco.io",
+      "subject": "Your receipt",
+      "from": "team@yourco.dev"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "email.sent"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_IQOw6OvyHa"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_nuTqfdwa"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=111078e4c9a644a9703dc467d07c800563bc4e0712a950179163688af9c5ce36",
+    "timeline": [
+      {
+        "at": "2026-09-07T06:19:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T06:19:10.062Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T06:19:10.395Z",
+        "state": "failed",
+        "code": 502,
+        "latencyMs": 333
+      },
+      {
+        "at": "2026-09-07T06:20:39.395Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T06:20:39.728Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 333
+      }
+    ]
+  },
+  {
+    "id": "wd_pUTwXd7zUZ",
+    "webhookId": "wh_nuTqfdwa",
+    "endpoint": "https://backend.yourco.dev/hooks/staging-email",
+    "event": "email.sent",
+    "environment": "staging",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 218,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T04:29:10.016Z",
+    "payload": {
+      "id": "eml_kuoXPsQgPV",
+      "to": "jane@yourco.io",
+      "subject": "Password reset",
+      "from": "team@yourco.dev"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "email.sent"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_pUTwXd7zUZ"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_nuTqfdwa"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=d09525a5eeb292d983210962a5f7f067349613acca636c40ebdc4ac5e7e37a18",
+    "timeline": [
+      {
+        "at": "2026-09-07T04:29:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T04:29:10.046Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T04:29:10.264Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 218
+      }
+    ]
+  },
+  {
+    "id": "wd_e164IgDaWR",
+    "webhookId": "wh_nuTqfdwa",
+    "endpoint": "https://backend.yourco.dev/hooks/staging-email",
+    "event": "email.bounced",
+    "environment": "staging",
+    "status": "delivered",
+    "attempts": 2,
+    "latencyMs": 426,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T04:11:10.016Z",
+    "payload": {
+      "id": "eml_4O4vNBmVtS",
+      "status": "bounced",
+      "recipient": "old@yourco.io",
+      "reason": "mailbox_full",
+      "code": 550
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "email.bounced"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_e164IgDaWR"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_nuTqfdwa"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=d3d0f9ca045362e8762bb54c9d979cf77572ac9b61495aed137cfd3d23cf7665",
+    "timeline": [
+      {
+        "at": "2026-09-07T04:11:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T04:11:10.099Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T04:11:10.312Z",
+        "state": "failed",
+        "code": 502,
+        "latencyMs": 213
+      },
+      {
+        "at": "2026-09-07T04:13:09.312Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T04:13:09.525Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 213
+      }
+    ]
+  },
+  {
+    "id": "wd_UicvVGE91r",
+    "webhookId": "wh_9XWfdl9g",
+    "endpoint": "https://sink.local.test/hooks/dev-sink",
+    "event": "email.delivered",
+    "environment": "test",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 847,
+    "responseCode": 200,
+    "createdAt": "2026-09-07T01:18:10.016Z",
+    "payload": {
+      "id": "eml_oiBk3zBy5E",
+      "status": "delivered",
+      "recipient": "user@example.com",
+      "deliveredAt": "2026-09-07T21:42:10.016Z"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "email.delivered"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_UicvVGE91r"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_9XWfdl9g"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=08d0ef5c6629d5a5c8b18e1e4eb64b64050d9543a3a5d92320a19c0612aa6fae",
+    "timeline": [
+      {
+        "at": "2026-09-07T01:18:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T01:18:10.047Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T01:18:10.894Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 847
+      }
+    ]
+  },
+  {
+    "id": "wd_5BoKGlKBKa",
+    "webhookId": "wh_Bm5ssT3X",
+    "endpoint": "https://api.mercuryhq.com/hooks/usage-alerts",
+    "event": "usage.limit_reached",
+    "environment": "live",
+    "status": "failed",
+    "attempts": 4,
+    "latencyMs": 5315,
+    "responseCode": 500,
+    "createdAt": "2026-09-07T00:45:10.016Z",
+    "payload": {
+      "metric": "requests",
+      "limit": 500000,
+      "window": "day",
+      "reachedAt": "2026-09-07T21:45:10.016Z"
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "usage.limit_reached"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_5BoKGlKBKa"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_Bm5ssT3X"
+      ]
+    ],
+    "response": {
+      "status": 500,
+      "body": {
+        "error": {
+          "code": "internal_error",
+          "message": "Something went wrong on the receiver side."
+        }
+      }
+    },
+    "signature": "t=1788819970,sha256=e0caa2f931135e12ebb195edec5542796abf5dca594fc47f856253ae16c0dd98",
+    "timeline": [
+      {
+        "at": "2026-09-07T00:45:10.016Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T00:45:10.097Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T00:45:11.426Z",
+        "state": "failed",
+        "code": 503,
+        "latencyMs": 1329
+      },
+      {
+        "at": "2026-09-07T00:46:41.426Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T00:46:42.755Z",
+        "state": "failed",
+        "code": 503,
+        "latencyMs": 1329
+      },
+      {
+        "at": "2026-09-07T00:48:23.755Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T00:48:25.084Z",
+        "state": "failed",
+        "code": 500,
+        "latencyMs": 1329
+      },
+      {
+        "at": "2026-09-07T00:51:20.084Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-07T00:51:21.413Z",
+        "state": "failed",
+        "code": 503,
+        "latencyMs": 1329
+      },
+      {
+        "at": "2026-09-07T00:52:54.413Z",
+        "state": "retrying",
+        "code": null,
+        "latencyMs": null
+      }
+    ]
+  },
+  {
+    "id": "wd_kRtml96m29",
+    "webhookId": "wh_LzSGKV8u",
+    "endpoint": "https://hooks.acme.dev/hooks/email-events",
+    "event": "email.bounced",
+    "environment": "live",
+    "status": "delivered",
+    "attempts": 1,
+    "latencyMs": 404,
+    "responseCode": 200,
+    "createdAt": "2026-09-06T23:01:10.014Z",
+    "payload": {
+      "id": "eml_TGSXpqbSFj",
+      "status": "bounced",
+      "recipient": "old@yourco.io",
+      "reason": "mailbox_full",
+      "code": 550
+    },
+    "headers": [
+      [
+        "Content-Type",
+        "application/json"
+      ],
+      [
+        "User-Agent",
+        "APIForge-Webhooks/1.0"
+      ],
+      [
+        "X-APIForge-Event",
+        "email.bounced"
+      ],
+      [
+        "X-APIForge-Delivery",
+        "wd_kRtml96m29"
+      ],
+      [
+        "X-APIForge-Webhook",
+        "wh_LzSGKV8u"
+      ]
+    ],
+    "response": {
+      "status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "signature": "t=1788819970,sha256=8333d836fac022959153c604efff77c8c056dc2c6eac0e5b0fe011c61457cfd5",
+    "timeline": [
+      {
+        "at": "2026-09-06T23:01:10.014Z",
+        "state": "created",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-06T23:01:10.090Z",
+        "state": "sent",
+        "code": null,
+        "latencyMs": null
+      },
+      {
+        "at": "2026-09-06T23:01:10.494Z",
+        "state": "delivered",
+        "code": 200,
+        "latencyMs": 404
+      }
+    ]
+  }
+]

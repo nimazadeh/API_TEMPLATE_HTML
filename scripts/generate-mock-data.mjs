@@ -48,6 +48,40 @@ function weighted(entries) {
 }
 
 // =====================================================================
+// Phase 3B helpers — a SEPARATE seeded PRNG so the Phase 3A datasets
+// (keys, logs, usage, metrics, …) stay byte-identical while new
+// entities (webhooks, deliveries, errors, rate limits, variables)
+// remain fully deterministic. Same seed + offset = reproducible.
+// =====================================================================
+const randB = mulberry32(20260907 ^ 0x3b3b1a);
+const pickB = (arr) => arr[Math.floor(randB() * arr.length)];
+const betweenB = (min, max) => min + Math.floor(randB() * (max - min + 1));
+const base62B = (len) => {
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let out = '';
+  for (let i = 0; i < len; i++) out += chars[Math.floor(randB() * chars.length)];
+  return out;
+};
+const hexB = (len) => {
+  const chars = '0123456789abcdef';
+  let out = '';
+  for (let i = 0; i < len; i++) out += chars[Math.floor(randB() * chars.length)];
+  return out;
+};
+const isoDaysAgoB = (d) => new Date(Date.now() - d * 864e5).toISOString();
+const isoHoursAgoB = (h) => new Date(Date.now() - h * 3600e3).toISOString();
+const isoMinutesAgoB = (m) => new Date(Date.now() - m * 60e3).toISOString();
+function weightedB(entries) {
+  const total = entries.reduce((s, [, w]) => s + w, 0);
+  let r = randB() * total;
+  for (const [value, w] of entries) {
+    r -= w;
+    if (r <= 0) return value;
+  }
+  return entries[entries.length - 1][0];
+}
+
+// =====================================================================
 // Endpoints — hand-authored for quality, ids assigned deterministically.
 // =====================================================================
 const endpointDefs = [
@@ -227,7 +261,7 @@ const keyDefs = [
   { name: 'Local dev', env: 'test', permission: 'full', scopes: ['emails:read', 'emails:write', 'audiences:read'] },
   { name: 'Analytics job', env: 'test', permission: 'restricted', scopes: ['usage:read'] },
 ];
-const keys = keyDefs.map((k, i) => ({
+const liveTestKeys = keyDefs.map((k, i) => ({
   id: `key_${base62(8)}`,
   name: k.name,
   prefix: `${k.env === 'live' ? 'sk_live' : 'sk_test'}_${base62(8)}`,
@@ -239,6 +273,24 @@ const keys = keyDefs.map((k, i) => ({
   lastUsedIp: `${between(20, 220)}.${between(0, 255)}.${between(0, 255)}.${between(1, 254)}`,
   status: i === 2 ? 'revoked' : 'active',
 }));
+
+// Staging keys (Phase 3B) — third environment, non-production prefixes.
+const stagingKeys = [
+  { name: 'Staging server', permission: 'restricted', scopes: ['emails:read', 'emails:write', 'audiences:read'] },
+  { name: 'Preview deploy', permission: 'restricted', scopes: ['audiences:read'] },
+].map((k) => ({
+  id: `key_${base62B(8)}`,
+  name: k.name,
+  prefix: `sk_test_${base62B(8)}`,
+  scopes: k.scopes,
+  env: 'staging',
+  permission: k.permission,
+  createdAt: isoDaysAgoB(betweenB(10, 180)),
+  lastUsedAt: isoHoursAgoB(betweenB(1, 96)),
+  lastUsedIp: `${betweenB(20, 220)}.${betweenB(0, 255)}.${betweenB(0, 255)}.${betweenB(1, 254)}`,
+  status: 'active',
+}));
+const keys = [...liveTestKeys, ...stagingKeys];
 
 // =====================================================================
 // Logs (80) — env derived from key prefix.
@@ -296,7 +348,7 @@ for (let i = 29; i >= 0; i--) {
 const environments = [
   {
     id: 'live',
-    name: 'Live',
+    name: 'Production',
     baseUrl: 'https://api.apiforge.dev',
     description: 'Production traffic and real data.',
     created: isoDaysAgo(320),
@@ -304,10 +356,19 @@ const environments = [
     requestsShare: 94.8,
   },
   {
+    id: 'staging',
+    name: 'Staging',
+    baseUrl: 'https://api.staging.apiforge.dev',
+    description: 'Pre-release validation before Production.',
+    created: isoDaysAgo(180),
+    keysCount: keys.filter((k) => k.env === 'staging').length,
+    requestsShare: 0,
+  },
+  {
     id: 'test',
-    name: 'Test',
+    name: 'Development',
     baseUrl: 'https://api.test.apiforge.dev',
-    description: 'Isolated sandbox for staging and local development.',
+    description: 'Isolated sandbox for local development.',
     created: isoDaysAgo(210),
     keysCount: keys.filter((k) => k.env === 'test').length,
     requestsShare: 5.2,
@@ -385,6 +446,253 @@ const metrics = {
 };
 
 // =====================================================================
+// Webhooks (Phase 3B) — registered endpoints per environment.
+// =====================================================================
+const webhookHosts = [
+  'hooks.acme.dev', 'integrations.shopflow.io', 'api.mercuryhq.com',
+  'events.pulse.run', 'backend.yourco.dev', 'sink.local.test',
+];
+const webhookDefs = [
+  { slug: 'email-events', description: 'Email delivery events', events: ['email.sent', 'email.delivered', 'email.bounced'], environment: 'live', status: 'enabled' },
+  { slug: 'audience-sync', description: 'Audience sync events', events: ['audience.created', 'audience.updated', 'audience.deleted'], environment: 'live', status: 'enabled' },
+  { slug: 'usage-alerts', description: 'Usage threshold alerts', events: ['usage.warning', 'usage.limit_reached'], environment: 'live', status: 'disabled' },
+  { slug: 'completion-stream', description: 'Model completion stream', events: ['completion.created', 'completion.failed'], environment: 'live', status: 'enabled' },
+  { slug: 'staging-email', description: 'Staging email events', events: ['email.sent', 'email.bounced'], environment: 'staging', status: 'enabled' },
+  { slug: 'dev-sink', description: 'Local development sink', events: ['email.delivered'], environment: 'test', status: 'enabled' },
+];
+const webhooks = webhookDefs.map((w, i) => ({
+  id: `wh_${base62B(8)}`,
+  url: `https://${webhookHosts[i % webhookHosts.length]}/hooks/${w.slug}`,
+  ...w,
+  signingSecret: `whsec_${base62B(24)}`,
+  createdAt: isoDaysAgoB(betweenB(20, 300)),
+}));
+
+// =====================================================================
+// Webhook deliveries (Phase 3B) — the debugger's source of truth.
+// Each delivery carries a full attempt timeline + payload/headers/
+// response/signature so the detail drawer is 100% data-driven.
+// =====================================================================
+const eventPayloads = {
+  'email.sent': () => ({ id: `eml_${base62B(10)}`, to: pickB(['user@example.com', 'ceo@acme.dev', 'jane@yourco.io']), subject: pickB(['Welcome to Acme', 'Your receipt', 'Password reset']), from: 'team@yourco.dev' }),
+  'email.delivered': () => ({ id: `eml_${base62B(10)}`, status: 'delivered', recipient: pickB(['user@example.com', 'ops@acme.dev']), deliveredAt: isoMinutesAgoB(betweenB(1, 60)) }),
+  'email.bounced': () => ({ id: `eml_${base62B(10)}`, status: 'bounced', recipient: pickB(['noreply@acme.dev', 'old@yourco.io']), reason: pickB(['mailbox_full', 'address_not_found', 'blocked']), code: 550 }),
+  'audience.created': () => ({ id: `aud_${base62B(8)}`, name: pickB(['Trial users', 'Enterprise leads', 'Churned accounts']), size: betweenB(100, 50000) }),
+  'audience.updated': () => ({ id: `aud_${base62B(8)}`, name: pickB(['Trial users', 'VIP customers']), size: betweenB(100, 50000), changed: ['filters'] }),
+  'audience.deleted': () => ({ id: `aud_${base62B(8)}`, name: pickB(['Legacy segment']), deletedAt: isoMinutesAgoB(betweenB(1, 120)) }),
+  'usage.warning': () => ({ metric: 'requests', threshold: 80, current: betweenB(81, 95), window: 'day' }),
+  'usage.limit_reached': () => ({ metric: 'requests', limit: 500000, window: 'day', reachedAt: isoMinutesAgoB(betweenB(1, 180)) }),
+  'completion.created': () => ({ id: `cmpl_${base62B(8)}`, model: pickB(['forge-1', 'forge-1-turbo']), status: 'succeeded', tokens: betweenB(200, 4000) }),
+  'completion.failed': () => ({ id: `cmpl_${base62B(8)}`, model: pickB(['forge-1', 'forge-1-turbo']), status: 'failed', error: 'context_length_exceeded' }),
+};
+const deliveryResponseBodies = {
+  200: { ok: true },
+  500: { error: { code: 'internal_error', message: 'Something went wrong on the receiver side.' } },
+  502: { error: { code: 'bad_gateway', message: 'Upstream proxy returned an invalid response.' } },
+  503: { error: { code: 'service_unavailable', message: 'Receiver temporarily overloaded.' } },
+};
+
+function deliveryTimeline(createdAt, status, attempts, latencyMs) {
+  const tl = [];
+  let t = new Date(createdAt).getTime();
+  const push = (state, code, afterMs, lat) => {
+    t += afterMs;
+    tl.push({ at: new Date(t).toISOString(), state, code, latencyMs: lat });
+  };
+  tl.push({ at: new Date(t).toISOString(), state: 'created', code: null, latencyMs: null });
+  push('sent', null, betweenB(20, 90), null);
+  const failedCount = status === 'delivered' ? Math.max(0, attempts - 1) : attempts;
+  const per = Math.max(80, Math.round(latencyMs / Math.max(1, attempts)));
+  for (let i = 0; i < failedCount; i++) {
+    push('failed', pickB([500, 502, 503]), per, per);
+    push('retrying', null, betweenB(45, 180) * 1000, null);
+  }
+  if (status === 'delivered') push('delivered', 200, per, per);
+  else if (status === 'retrying') push('retrying', null, betweenB(45, 180) * 1000, null);
+  return tl;
+}
+
+// Intentionally-authored failure plan so the demo tells a coherent story:
+// two fully-healthy endpoints, one with a single recent failure, one
+// degraded, and one disabled after repeated failures.
+const webhookFailurePlan = {
+  'usage-alerts': { disabled: true },
+  'completion-stream': { fail: 1, retry: 1 },
+  'audience-sync': { fail: 1 },
+  'email-events': {},
+  'staging-email': {},
+  'dev-sink': {},
+};
+const webhookDeliveries = [];
+for (const wh of webhooks) {
+  const plan = webhookFailurePlan[wh.slug] || {};
+  const count = plan.disabled ? 3 : wh.environment === 'test' ? 3 : 5;
+  for (let i = 0; i < count; i++) {
+    const event = pickB(wh.events);
+    let status;
+    if (plan.disabled) status = 'failed';
+    else if (i < (plan.fail || 0)) status = 'failed';
+    else if (i < (plan.fail || 0) + (plan.retry || 0)) status = 'retrying';
+    else status = 'delivered';
+    const attempts = status === 'delivered' ? weightedB([[1, 70], [2, 30]]) : status === 'retrying' ? betweenB(1, 5) : betweenB(1, 6);
+    const latencyMs = status === 'delivered' ? betweenB(180, 900) : betweenB(1200, 6000);
+    const responseCode = status === 'delivered' ? 200 : status === 'failed' ? pickB([500, 502, 503]) : null;
+    const createdAt = isoMinutesAgoB(betweenB(1, 1440));
+    const id = `wd_${base62B(10)}`;
+    webhookDeliveries.push({
+      id,
+      webhookId: wh.id,
+      endpoint: wh.url,
+      event,
+      environment: wh.environment,
+      status,
+      attempts,
+      latencyMs,
+      responseCode,
+      createdAt,
+      payload: eventPayloads[event](),
+      headers: [
+        ['Content-Type', 'application/json'],
+        ['User-Agent', 'APIForge-Webhooks/1.0'],
+        ['X-APIForge-Event', event],
+        ['X-APIForge-Delivery', id],
+        ['X-APIForge-Webhook', wh.id],
+      ],
+      response: status === 'delivered' ? { status: 200, body: deliveryResponseBodies[200] } : status === 'failed' ? { status: responseCode, body: deliveryResponseBodies[responseCode] } : null,
+      signature: `t=${Math.floor(Date.now() / 1000)},sha256=${hexB(64)}`,
+      timeline: deliveryTimeline(createdAt, status, attempts, latencyMs),
+    });
+  }
+}
+webhookDeliveries.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+// Attach derived webhook health (success rate / last delivery) for the list.
+for (const wh of webhooks) {
+  const ds = webhookDeliveries.filter((d) => d.webhookId === wh.id);
+  const delivered = ds.filter((d) => d.status === 'delivered').length;
+  wh.successRate = ds.length ? Math.round((delivered / ds.length) * 1000) / 10 : null;
+  wh.lastDeliveryAt = ds.length ? ds[0].createdAt : null;
+  wh.failures24h = ds.filter((d) => d.status !== 'delivered').length;
+}
+
+// =====================================================================
+// Errors (Phase 3B) — Sentry-style issue records + stack traces.
+// =====================================================================
+const errorFramePool = [
+  { file: 'src/http/client.ts', fns: ['request', 'parseResponse'], inApp: true },
+  { file: 'src/email/provider.ts', fns: ['sendViaProvider', 'handleDelivery'], inApp: true },
+  { file: 'src/audiences/segment.ts', fns: ['applyFilters', 'hydrateAudience'], inApp: true },
+  { file: 'src/ai/inference.ts', fns: ['runCompletion', 'streamResponse'], inApp: true },
+  { file: 'src/db/redis.ts', fns: ['get', 'cacheGet'], inApp: true },
+  { file: 'src/platform/usage.ts', fns: ['readUsage', 'aggregate'], inApp: true },
+  { file: 'node_modules/express/lib/router/index.js', fns: ['handle', 'next'], inApp: false },
+  { file: 'node_modules/axios/lib/adapters/http.js', fns: ['dispatchRequest'], inApp: false },
+  { file: 'node_modules/ioredis/built/connectors/StandaloneConnector.js', fns: ['connect'], inApp: false },
+  { file: 'node:internal/process/task_queues', fns: ['processTicksAndRejections'], inApp: false },
+];
+const errorDefs = [
+  { type: 'TypeError', message: "Cannot read properties of undefined (reading 'id')", method: 'POST', path: '/v1/emails', env: 'live', severity: 'error', occurrences: 12840, status: 'unresolved', assignee: 'Arash P.', frame: { file: 'src/email/send.ts', fn: 'dispatchEmail', line: 142, col: 9, code: 'const user = await users.get(payload.recipientId);' } },
+  { type: 'RangeError', message: 'Invalid array length', method: 'POST', path: '/v1/audiences', env: 'live', severity: 'error', occurrences: 8230, status: 'unresolved', assignee: null, frame: { file: 'src/audiences/segment.ts', fn: 'applyFilters', line: 88, col: 21, code: 'const slice = new Array(filter.limit);' } },
+  { type: 'SyntaxError', message: "Unexpected token '<' in JSON at position 0", method: 'POST', path: '/v1/completions', env: 'live', severity: 'error', occurrences: 5121, status: 'resolved', assignee: 'Sara R.', frame: { file: 'src/ai/inference.ts', fn: 'parseJson', line: 54, col: 11, code: 'return JSON.parse(raw.trim());' } },
+  { type: 'ReferenceError', message: 'handler is not defined', method: 'POST', path: '/v1/emails', env: 'live', severity: 'error', occurrences: 3402, status: 'resolved', assignee: 'Arash P.', frame: { file: 'src/email/routes.ts', fn: 'onEmailSent', line: 39, col: 5, code: 'return handler(event);' } },
+  { type: 'ValidationError', message: "Missing required field: 'to'", method: 'POST', path: '/v1/emails', env: 'live', severity: 'warning', occurrences: 15840, status: 'unresolved', assignee: null, frame: { file: 'src/email/schema.ts', fn: 'validateEmail', line: 23, col: 12, code: "throw new ValidationError(\"Missing required field: 'to'\");" } },
+  { type: 'RateLimitError', message: '429 Too Many Requests — retry after 2s', method: 'POST', path: '/v1/completions', env: 'live', severity: 'warning', occurrences: 9230, status: 'unresolved', assignee: null, frame: { file: 'src/ai/gateway.ts', fn: 'checkQuota', line: 117, col: 7, code: 'throw new RateLimitError(resetIn);' } },
+  { type: 'ETIMEDOUT', message: 'connect ETIMEDOUT 10.0.4.21:6379', method: 'GET', path: '/v1/models', env: 'live', severity: 'error', occurrences: 2170, status: 'resolved', assignee: 'Sara R.', frame: { file: 'src/db/redis.ts', fn: 'cacheGet', line: 71, col: 16, code: 'await client.get(key);' } },
+  { type: 'ECONNREFUSED', message: 'connect ECONNREFUSED 10.0.2.15:5432', method: 'GET', path: '/v1/usage', env: 'staging', severity: 'error', occurrences: 980, status: 'unresolved', assignee: null, frame: { file: 'src/db/pg.ts', fn: 'connect', line: 46, col: 13, code: 'await pool.connect();' } },
+  { type: 'TypeError', message: "Cannot read properties of null (reading 'match')", method: 'GET', path: '/v1/emails/{id}', env: 'live', severity: 'warning', occurrences: 6540, status: 'resolved', assignee: 'Arash P.', frame: { file: 'src/email/parse.ts', fn: 'extractMeta', line: 28, col: 8, code: "return value.match(META_RE);" } },
+  { type: 'ZodError', message: 'Invalid input: expected string, received number', method: 'POST', path: '/v1/embeddings', env: 'test', severity: 'warning', occurrences: 1890, status: 'unresolved', assignee: null, frame: { file: 'src/ai/embeddings.ts', fn: 'validateInput', line: 64, col: 17, code: 'const parsed = schema.parse(input);' } },
+  { type: 'RangeError', message: 'Maximum call stack size exceeded', method: 'POST', path: '/v1/audiences/{id}', env: 'live', severity: 'error', occurrences: 402, status: 'unresolved', assignee: null, frame: { file: 'src/audiences/tree.ts', fn: 'walk', line: 112, col: 3, code: 'return walk(node.children);' } },
+  { type: 'AbortError', message: 'The operation was aborted due to timeout', method: 'POST', path: '/v1/completions', env: 'staging', severity: 'warning', occurrences: 1330, status: 'resolved', assignee: 'Sara R.', frame: { file: 'src/http/client.ts', fn: 'request', line: 93, col: 9, code: 'const res = await fetch(url, { signal });' } },
+];
+const userAgentsB = ['af-sdk-node/1.4.0', 'af-sdk-python/0.9.2', 'af-sdk-go/1.1.0', 'curl/8.5.0'];
+const errorTail = () => {
+  const frames = [];
+  const used = new Set();
+  while (frames.length < 5) {
+    const lib = pickB(errorFramePool);
+    if (used.has(lib.file)) continue;
+    used.add(lib.file);
+    frames.push({ file: lib.file, fn: pickB(lib.fns), line: betweenB(12, 420), col: betweenB(1, 60), code: null, inApp: lib.inApp });
+  }
+  return frames;
+};
+const errors = errorDefs.map((e, i) => ({
+  id: `err_${base62B(10)}`,
+  type: e.type,
+  message: e.message,
+  severity: e.severity,
+  status: e.status,
+  assignee: e.assignee,
+  endpoint: { method: e.method, path: e.path },
+  environment: e.env,
+  occurrences: e.occurrences,
+  firstSeen: isoDaysAgoB(betweenB(2, 40)),
+  lastSeen: isoMinutesAgoB(betweenB(3, 1200)),
+  resolvedAt: e.status === 'resolved' ? isoDaysAgoB(betweenB(1, 10)) : null,
+  request: {
+    id: `req_${base62B(10)}`,
+    url: `https://api${e.env === 'live' ? '' : e.env === 'staging' ? '.staging' : '.test'}.apiforge.dev${e.path.replace('{id}', String(betweenB(1000, 99999)))}`,
+    method: e.method,
+    keyPrefix: `${e.env === 'live' ? 'sk_live' : 'sk_test'}_${base62B(6)}`,
+    userAgent: pickB(userAgentsB),
+    ip: `${betweenB(20, 220)}.${betweenB(0, 255)}.${betweenB(0, 255)}.${betweenB(1, 254)}`,
+  },
+  user: { id: `usr_${base62B(8)}`, email: pickB(['arash@apiforge.dev', 'sara@yourco.io', 'dev@acme.dev']), plan: pickB(['Scale', 'Growth', 'Free']) },
+  stackTrace: [{ ...e.frame, inApp: true }, ...errorTail()],
+}));
+
+// =====================================================================
+// Rate limits (Phase 3B) — current usage + rules + 14-day history.
+// =====================================================================
+const rateLimits = {
+  current: {
+    perMinute: { limit: 15000, used: 12840, label: 'Requests / minute', resetIn: '6s' },
+    perDay: { limit: 500000, used: 431200, label: 'Requests / day', resetIn: '4h 12m' },
+    monthly: { limit: 10000000, used: 5382400, label: 'Monthly quota', resetIn: '23 days', periodLabel: 'September 2026' },
+  },
+  history: Array.from({ length: 14 }, (_, i) => {
+    const used = betweenB(380000, 490000);
+    return { date: isoDaysAgoB(13 - i).slice(0, 10), used, limit: 500000 };
+  }),
+  rules: [
+    { id: 'rl_emails', api: 'Emails API', name: 'emails:write', limit: 50, window: 'per second', current: 31, status: 'ok' },
+    { id: 'rl_completions', api: 'AI Inference', name: 'completions:create', limit: 25, window: 'per second', current: 24, status: 'warning' },
+    { id: 'rl_embeddings', api: 'AI Inference', name: 'embeddings:create', limit: 40, window: 'per second', current: 42, status: 'breached' },
+    { id: 'rl_audiences', api: 'Audiences', name: 'audiences:write', limit: 10, window: 'per second', current: 4, status: 'ok' },
+    { id: 'rl_webhooks', api: 'Webhooks', name: 'deliveries', limit: 100, window: 'per minute', current: 62, status: 'ok' },
+    { id: 'rl_global', api: 'Platform', name: 'global', limit: 250, window: 'per second', current: 208, status: 'warning' },
+  ],
+};
+
+// =====================================================================
+// Variables (Phase 3B) — per-environment secrets & plain values.
+// =====================================================================
+const variableDefs = [
+  { environment: 'live', name: 'DATABASE_URL', value: 'postgres://apiforge:8xK2mQp4@db.apiforge.dev:5432/prod', secret: true },
+  { environment: 'live', name: 'REDIS_URL', value: 'rediss://default:r7Xp2mK9@redis.apiforge.dev:6379', secret: true },
+  { environment: 'live', name: 'WEBHOOK_SIGNING_SECRET', value: 'whsec_live_8f3k2ma1q7x9B4dL2nP', secret: true },
+  { environment: 'live', name: 'OPENAI_API_KEY', value: 'sk-proj-9xK2mQp4r7Xv1L8nB3dF6', secret: true },
+  { environment: 'live', name: 'LOG_LEVEL', value: 'info', secret: false },
+  { environment: 'live', name: 'FEATURE_FLAGS', value: '{"billing_v2":true,"async_email":false}', secret: false },
+  { environment: 'staging', name: 'DATABASE_URL', value: 'postgres://apiforge:9bQx7Kp2@db.staging.apiforge.dev:5432/staging', secret: true },
+  { environment: 'staging', name: 'REDIS_URL', value: 'redis://redis.staging.apiforge.dev:6379', secret: true },
+  { environment: 'staging', name: 'WEBHOOK_SIGNING_SECRET', value: 'whsec_stag_2mQp4r7Xv1L8nB3d', secret: true },
+  { environment: 'staging', name: 'LOG_LEVEL', value: 'debug', secret: false },
+  { environment: 'test', name: 'DATABASE_URL', value: 'postgres://localhost:5432/apiforge_dev', secret: true },
+  { environment: 'test', name: 'REDIS_URL', value: 'redis://localhost:6379', secret: true },
+  { environment: 'test', name: 'WEBHOOK_SIGNING_SECRET', value: 'whsec_test_7Xv1L8nB3dF6mQp4', secret: true },
+  { environment: 'test', name: 'OPENAI_API_KEY', value: 'sk-proj-4r7Xv1L8nB3dF6mQp', secret: true },
+  { environment: 'test', name: 'LOG_LEVEL', value: 'debug', secret: false },
+  { environment: 'test', name: 'PORT', value: '4000', secret: false },
+];
+const variables = variableDefs.map((v) => ({
+  id: `var_${base62B(8)}`,
+  ...v,
+  updatedAt: isoDaysAgoB(betweenB(0, 60)),
+  addedBy: pickB(['Arash P.', 'Sara R.', 'system']),
+}));
+
+// =====================================================================
 // Write everything.
 // =====================================================================
 mkdirSync(OUT_DIR, { recursive: true });
@@ -401,7 +709,14 @@ write('mock-plan.json', plan);
 write('mock-attribution.json', attribution);
 write('mock-activity.json', activity);
 write('mock-metrics.json', metrics);
+write('mock-webhooks.json', webhooks);
+write('mock-webhook-deliveries.json', webhookDeliveries);
+write('mock-errors.json', errors);
+write('mock-rate-limits.json', rateLimits);
+write('mock-variables.json', variables);
 
 console.log(`Generated mock data into ${OUT_DIR}`);
 console.log(`  apis: ${apis.length}, endpoints: ${endpoints.length}, keys: ${keys.length}, logs: ${logs.length}`);
 console.log(`  usage: ${usage.length} days, environments: ${environments.length}, activity: ${activity.length}`);
+console.log(`  webhooks: ${webhooks.length}, deliveries: ${webhookDeliveries.length}, errors: ${errors.length}`);
+console.log(`  rate limits: ${rateLimits.rules.length} rules, variables: ${variables.length}`);

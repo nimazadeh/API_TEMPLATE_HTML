@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
-    <title>APIs — APIForge X</title>
+    <title>Endpoints — APIForge X</title>
     <script>
       (function () {
         var stored = null;
@@ -29,8 +29,8 @@
           </div>
           <div class="nav-group">
             <div class="nav-group__label">Developer</div>
-            <a class="nav-item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
-            <a class="nav-item" href="./endpoints.html"><i data-lucide="braces"></i><span>Endpoints</span></a>
+            <a class="nav-item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+            <a class="nav-item is-active" href="./endpoints.html"><i data-lucide="braces"></i><span>Endpoints</span></a>
             <a class="nav-item" href="./api-keys.html"><i data-lucide="key"></i><span>API Keys</span></a>
             <a class="nav-item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
             <a class="nav-item" href="./webhooks.html"><i data-lucide="webhook"></i><span>Webhooks</span></a>
@@ -83,7 +83,7 @@
         <div class="header-title">
           <span class="crumb">APIForge X</span>
           <span class="crumb-sep">/</span>
-          <span class="title">APIs</span>
+          <span class="title">Endpoints</span>
         </div>
         <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="Search (⌘K)">
           <i data-lucide="search"></i>
@@ -125,63 +125,118 @@
       <main class="app-main">
         <div class="env-banner" data-env-banner hidden>
           <i data-lucide="alert-triangle"></i>
-          You are viewing <strong>test data</strong>. All keys use the <code class="ltr-isolate">sk_test_</code> prefix.
+          You are viewing <strong>test data</strong>.
         </div>
         <div class="app-main__inner">
           <header class="toolbar">
             <div>
-              <h1 class="mb-1">APIs</h1>
-              <p class="text-secondary mb-0">Browse the catalog, read the reference, and test requests live.</p>
+              <h1 class="mb-1">Endpoints</h1>
+              <p class="text-secondary mb-0">Reference for every route — parameters, auth and schemas.</p>
             </div>
             <div class="toolbar__actions">
-              <span class="badge badge-accent">v1 · 15 endpoints</span>
+              <button type="button" class="btn btn-primary" id="endpoint-create" aria-label="New endpoint"><i data-lucide="plus"></i> New endpoint</button>
             </div>
           </header>
 
-          <!-- Catalog -->
-          <section id="apis" class="mb-5">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-              <h2 class="h3 mb-0">API catalog</h2>
+          <div class="filter-bar">
+            <div class="filter-bar__grow">
+              <input class="form-control" id="endpoint-search" type="search" placeholder="Search path or description…" aria-label="Search endpoints" />
             </div>
-            <div class="row g-3" id="api-catalog"></div>
-          </section>
+            <div class="seg" role="group" aria-label="Filter by method">
+              <button type="button" class="seg__item is-active" data-method="all" aria-pressed="true">All</button>
+              <button type="button" class="seg__item" data-method="GET" aria-pressed="false">GET</button>
+              <button type="button" class="seg__item" data-method="POST" aria-pressed="false">POST</button>
+              <button type="button" class="seg__item" data-method="PUT" aria-pressed="false">PUT</button>
+              <button type="button" class="seg__item" data-method="PATCH" aria-pressed="false">PATCH</button>
+              <button type="button" class="seg__item" data-method="DELETE" aria-pressed="false">DELETE</button>
+            </div>
+            <select class="form-select filter-bar__select" id="endpoint-service" aria-label="Filter by service">
+              <option value="all" selected>All services</option>
+            </select>
+            <select class="form-select filter-bar__select" id="endpoint-status" aria-label="Filter by status">
+              <option value="all" selected>All statuses</option>
+              <option value="stable">Stable</option>
+              <option value="beta">Beta</option>
+            </select>
+          </div>
 
-          <!-- Endpoints -->
-          <section id="endpoints" class="mb-5">
-            <div class="d-flex align-items-center justify-content-between mb-3 gap-3 flex-wrap">
-              <h2 class="h3 mb-0">Endpoints</h2>
-              <div class="search-field" style="width: 240px">
-                <i data-lucide="search" class="search-icon"></i>
-                <input class="form-control" id="endpoint-search" type="text" placeholder="Filter endpoints…" aria-label="Filter endpoints" />
-              </div>
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>Path</th>
+                    <th>Service</th>
+                    <th>Version</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="endpoint-list"></tbody>
+              </table>
             </div>
-            <div class="table-card">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Method</th>
-                      <th>Endpoint</th>
-                      <th>Description</th>
-                      <th>API</th>
-                    </tr>
-                  </thead>
-                  <tbody id="endpoint-list"></tbody>
-                </table>
-              </div>
-            </div>
-          </section>
-
-          <!-- Detail + tester -->
-          <section>
-            <h2 class="h3 mb-3">Reference &amp; tester</h2>
-            <div class="split">
-              <div id="api-doc"></div>
-              <div class="tester card card--dense" id="tester"></div>
-            </div>
-          </section>
+            <div class="table-footer"><span id="endpoint-count">—</span></div>
+          </div>
         </div>
       </main>
+    </div>
+
+    <!-- Endpoint detail drawer -->
+    <aside class="offcanvas offcanvas-end inspector" id="endpoint-drawer" tabindex="-1" aria-labelledby="endpoint-drawer-title">
+      <div class="offcanvas-header">
+        <span class="offcanvas-title inspector-title" id="endpoint-drawer-title">Endpoint</span>
+        <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="offcanvas-body"></div>
+    </aside>
+
+    <!-- Create / edit endpoint modal -->
+    <div class="modal fade" id="endpoint-modal" tabindex="-1" aria-labelledby="endpoint-modal-title" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="endpoint-modal-title">New endpoint</h5>
+            <button type="button" class="btn btn-icon" data-bs-dismiss="modal" aria-label="Close"><i data-lucide="x"></i></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="form-label" for="ep-method">Method</label>
+              <select class="form-select" id="ep-method">
+                <option>GET</option>
+                <option>POST</option>
+                <option>PUT</option>
+                <option>PATCH</option>
+                <option>DELETE</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ep-path">Path</label>
+              <input class="form-control form-control--mono ltr-isolate" id="ep-path" type="text" placeholder="/v1/…" spellcheck="false" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ep-service">Service</label>
+              <select class="form-select" id="ep-service"></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ep-auth">Authentication</label>
+              <select class="form-select" id="ep-auth">
+                <option>API key</option>
+                <option>Bearer token</option>
+                <option>Signing secret</option>
+                <option>None</option>
+              </select>
+            </div>
+            <div class="form-group mb-0">
+              <label class="form-label" for="ep-description">Description</label>
+              <textarea class="form-control" id="ep-description" rows="3" placeholder="What does this endpoint do?"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-ghost" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="ep-save">Save endpoint</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Mobile sidebar drawer -->
@@ -198,8 +253,8 @@
         </div>
         <div class="nav-group">
           <div class="nav-group__label">Developer</div>
-          <a class="nav-item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
-          <a class="nav-item" href="./endpoints.html"><i data-lucide="braces"></i><span>Endpoints</span></a>
+          <a class="nav-item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+          <a class="nav-item is-active" href="./endpoints.html"><i data-lucide="braces"></i><span>Endpoints</span></a>
           <a class="nav-item" href="./api-keys.html"><i data-lucide="key"></i><span>API Keys</span></a>
           <a class="nav-item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
           <a class="nav-item" href="./webhooks.html"><i data-lucide="webhook"></i><span>Webhooks</span></a>
@@ -223,7 +278,7 @@
     <!-- Mobile bottom tab bar -->
     <nav class="bottom-tabbar" aria-label="Primary mobile">
       <a class="bottom-tabbar__item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
-      <a class="bottom-tabbar__item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+      <a class="bottom-tabbar__item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
       <a class="bottom-tabbar__item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
       <a class="bottom-tabbar__item" href="./api-keys.html"><i data-lucide="key"></i><span>Keys</span></a>
       <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="More">
@@ -231,6 +286,6 @@
       </button>
     </nav>
 
-    <script type="module" src="/src/js/pages/apis.js"></script>
+    <script type="module" src="/src/js/pages/endpoints.js"></script>
   </body>
 </html>

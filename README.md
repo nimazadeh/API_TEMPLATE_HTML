@@ -6,8 +6,9 @@ A dark-first, keyboard-first, **RTL first-class** HTML template for API platform
 depth-over-breadth developer tool surface in the spirit of Stripe, Resend,
 Vercel and Linear.
 
-> **Status:** Phase 3A — Core Product Experience complete. Five product pages ship
-> as a working vertical slice (Dashboard, APIs, API Keys, Logs, Usage). See
+> **Status:** Phase 3B — Advanced Developer Workflows complete. Ten product pages
+> ship as a working vertical slice (Dashboard, APIs, Endpoints, API Keys, Logs,
+> Webhooks, Errors, Rate Limits, Usage, Environments). See
 > `/project-state/PROJECT_STATE.md`.
 
 ## Stack
@@ -32,15 +33,20 @@ npm run build     # outputs dist/
 npm run preview   # serve the production build
 ```
 
-Product pages (Phase 3A):
+Product pages (Phases 3A + 3B):
 
 | Page | Purpose |
 |------|---------|
 | `/dashboard.html` | Overview — KPI cards, request/latency charts, activity feed, quick actions |
 | `/apis.html` | API explorer — catalog, endpoint reference docs + interactive tester |
+| `/endpoints.html` | Endpoint management — filterable table, reference drawer, create/edit |
 | `/api-keys.html` | API keys — masked list, reveal-once, create/rotate/revoke |
 | `/logs.html` | Request log inspector — filters, dense table, detail drawer + cURL |
+| `/webhooks.html` | Webhooks debugger — endpoints + deliveries, attempt timeline, payload inspector |
+| `/errors.html` | Error monitoring — overview KPIs, issue list, stack-trace drawer, resolve/assign |
+| `/rate-limits.html` | Rate limits — current-limit cards, usage charts, per-API rules |
 | `/usage.html` | Usage — plan consumption, charts, attribution, top endpoints |
+| `/environments.html` | Environments — Production/Staging/Development, variables + keys per environment |
 
 Foundation pages:
 
@@ -65,11 +71,12 @@ src/
                 # tabs, alert, breadcrumb, avatar, stat, chart, loading, palette,
                 # segmented, toolbar, split, inspector, explorer
     layouts/    # app shell, sidebar, header, mobile nav
-    pages/      # per-page styles (rtl-test, usage)
+    pages/      # per-page styles (rtl-test, usage, errors, rate-limits)
     main.scss
   js/
     core/       # bootstrap.js — Bootstrap ESM data-API imports
-    components/ # theme, env switcher, command palette, code block, copy, icons, …
+    components/ # theme, env switcher, command palette, code block, copy, icons,
+                # log/webhook/error detail drawers, charts, …
     data/       # mock JSON (regenerate: node scripts/generate-mock-data.mjs)
     utils/      # formatting (relative time, latency, badges, Persian digits)
     pages/      # per-page entry scripts
@@ -97,9 +104,9 @@ scripts/generate-mock-data.mjs
 
 ## Notes for the next phases
 
-- Remaining app pages (Webhooks, Documentation, Metrics, Team, Billing,
-  Settings) and the marketing pages are Phase 3B–6; add each new HTML entry to
-  the `pageInputs` map in `vite.config.js`.
+- Remaining app pages (Documentation, Metrics, Team, Billing, Settings) and
+  the marketing pages are Phase 3C+; add each new HTML entry to the
+  `pageInputs` map in `vite.config.js`.
 - Add new Lucide icons to `src/js/components/icons.js` (keeps the bundle
   tree-shaken).
 - Charts are registered tree-shaken in `src/js/components/charts.js`

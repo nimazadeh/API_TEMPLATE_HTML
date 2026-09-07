@@ -73,6 +73,9 @@ import {
   Timer,
   LogOut,
   RefreshCw,
+  Bug,
+  FileText,
+  Pencil,
 } from 'lucide';
 
 import { createIcons } from 'lucide';
@@ -145,6 +148,9 @@ export const icons = {
   Timer,
   LogOut,
   RefreshCw,
+  Bug,
+  FileText,
+  Pencil,
 };
 
 export function initIcons() {

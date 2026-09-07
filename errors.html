@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
-    <title>APIs — APIForge X</title>
+    <title>Errors — APIForge X</title>
     <script>
       (function () {
         var stored = null;
@@ -29,7 +29,7 @@
           </div>
           <div class="nav-group">
             <div class="nav-group__label">Developer</div>
-            <a class="nav-item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+            <a class="nav-item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
             <a class="nav-item" href="./endpoints.html"><i data-lucide="braces"></i><span>Endpoints</span></a>
             <a class="nav-item" href="./api-keys.html"><i data-lucide="key"></i><span>API Keys</span></a>
             <a class="nav-item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
@@ -38,7 +38,7 @@
           <div class="nav-group">
             <div class="nav-group__label">Analytics</div>
             <a class="nav-item" href="./usage.html"><i data-lucide="bar-chart-3"></i><span>Usage</span></a>
-            <a class="nav-item" href="./errors.html"><i data-lucide="bug"></i><span>Errors</span></a>
+            <a class="nav-item is-active" href="./errors.html"><i data-lucide="bug"></i><span>Errors</span></a>
             <a class="nav-item" href="./rate-limits.html"><i data-lucide="gauge"></i><span>Rate Limits</span></a>
             <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3C"><i data-lucide="activity"></i><span>Metrics</span></a>
           </div>
@@ -83,7 +83,7 @@
         <div class="header-title">
           <span class="crumb">APIForge X</span>
           <span class="crumb-sep">/</span>
-          <span class="title">APIs</span>
+          <span class="title">Errors</span>
         </div>
         <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="Search (⌘K)">
           <i data-lucide="search"></i>
@@ -125,64 +125,82 @@
       <main class="app-main">
         <div class="env-banner" data-env-banner hidden>
           <i data-lucide="alert-triangle"></i>
-          You are viewing <strong>test data</strong>. All keys use the <code class="ltr-isolate">sk_test_</code> prefix.
+          You are viewing <strong>test data</strong>.
         </div>
         <div class="app-main__inner">
           <header class="toolbar">
             <div>
-              <h1 class="mb-1">APIs</h1>
-              <p class="text-secondary mb-0">Browse the catalog, read the reference, and test requests live.</p>
-            </div>
-            <div class="toolbar__actions">
-              <span class="badge badge-accent">v1 · 15 endpoints</span>
+              <h1 class="mb-1">Errors</h1>
+              <p class="text-secondary mb-0">Track issues across endpoints — stack traces and request context.</p>
             </div>
           </header>
 
-          <!-- Catalog -->
-          <section id="apis" class="mb-5">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-              <h2 class="h3 mb-0">API catalog</h2>
+          <section class="row g-3 mb-4" aria-label="Error overview">
+            <div class="col-sm-6 col-xl-3">
+              <div class="card card--dense kpi" id="err-total"></div>
             </div>
-            <div class="row g-3" id="api-catalog"></div>
-          </section>
-
-          <!-- Endpoints -->
-          <section id="endpoints" class="mb-5">
-            <div class="d-flex align-items-center justify-content-between mb-3 gap-3 flex-wrap">
-              <h2 class="h3 mb-0">Endpoints</h2>
-              <div class="search-field" style="width: 240px">
-                <i data-lucide="search" class="search-icon"></i>
-                <input class="form-control" id="endpoint-search" type="text" placeholder="Filter endpoints…" aria-label="Filter endpoints" />
-              </div>
+            <div class="col-sm-6 col-xl-3">
+              <div class="card card--dense kpi" id="err-endpoints"></div>
             </div>
-            <div class="table-card">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Method</th>
-                      <th>Endpoint</th>
-                      <th>Description</th>
-                      <th>API</th>
-                    </tr>
-                  </thead>
-                  <tbody id="endpoint-list"></tbody>
-                </table>
-              </div>
+            <div class="col-sm-6 col-xl-3">
+              <div class="card card--dense kpi" id="err-rate"></div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+              <div class="card card--dense kpi" id="err-resolved"></div>
             </div>
           </section>
 
-          <!-- Detail + tester -->
-          <section>
-            <h2 class="h3 mb-3">Reference &amp; tester</h2>
-            <div class="split">
-              <div id="api-doc"></div>
-              <div class="tester card card--dense" id="tester"></div>
+          <div class="filter-bar">
+            <div class="filter-bar__grow">
+              <input class="form-control" id="error-search" type="search" placeholder="Search message or endpoint…" aria-label="Search errors" />
             </div>
-          </section>
+            <select class="form-select filter-bar__select" id="error-severity" aria-label="Filter by severity">
+              <option value="all" selected>All severities</option>
+              <option value="error">Error</option>
+              <option value="warning">Warning</option>
+            </select>
+            <select class="form-select filter-bar__select" id="error-status" aria-label="Filter by status">
+              <option value="all" selected>All statuses</option>
+              <option value="unresolved">Unresolved</option>
+              <option value="resolved">Resolved</option>
+            </select>
+            <select class="form-select filter-bar__select" id="error-env" aria-label="Filter by environment">
+              <option value="all" selected>All environments</option>
+              <option value="live">Live</option>
+              <option value="staging">Staging</option>
+              <option value="test">Test</option>
+            </select>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Severity</th>
+                    <th>Message</th>
+                    <th>Endpoint</th>
+                    <th>Occurrences</th>
+                    <th>Last seen</th>
+                  </tr>
+                </thead>
+                <tbody id="error-list"></tbody>
+              </table>
+            </div>
+            <div class="table-footer"><span id="error-count">—</span></div>
+          </div>
         </div>
       </main>
     </div>
+
+    <!-- Error detail drawer -->
+    <aside class="offcanvas offcanvas-end inspector" id="error-drawer" tabindex="-1" aria-labelledby="error-drawer-title">
+      <div class="offcanvas-header">
+        <span class="offcanvas-title inspector-title" id="error-drawer-title">Error details</span>
+        <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="offcanvas-body"></div>
+    </aside>
 
     <!-- Mobile sidebar drawer -->
     <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="Primary">
@@ -198,7 +216,7 @@
         </div>
         <div class="nav-group">
           <div class="nav-group__label">Developer</div>
-          <a class="nav-item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+          <a class="nav-item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
           <a class="nav-item" href="./endpoints.html"><i data-lucide="braces"></i><span>Endpoints</span></a>
           <a class="nav-item" href="./api-keys.html"><i data-lucide="key"></i><span>API Keys</span></a>
           <a class="nav-item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
@@ -207,7 +225,7 @@
         <div class="nav-group">
           <div class="nav-group__label">Analytics</div>
           <a class="nav-item" href="./usage.html"><i data-lucide="bar-chart-3"></i><span>Usage</span></a>
-          <a class="nav-item" href="./errors.html"><i data-lucide="bug"></i><span>Errors</span></a>
+          <a class="nav-item is-active" href="./errors.html"><i data-lucide="bug"></i><span>Errors</span></a>
           <a class="nav-item" href="./rate-limits.html"><i data-lucide="gauge"></i><span>Rate Limits</span></a>
         </div>
         <div class="nav-group">
@@ -223,7 +241,7 @@
     <!-- Mobile bottom tab bar -->
     <nav class="bottom-tabbar" aria-label="Primary mobile">
       <a class="bottom-tabbar__item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
-      <a class="bottom-tabbar__item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+      <a class="bottom-tabbar__item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
       <a class="bottom-tabbar__item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
       <a class="bottom-tabbar__item" href="./api-keys.html"><i data-lucide="key"></i><span>Keys</span></a>
       <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="More">
@@ -231,6 +249,6 @@
       </button>
     </nav>
 
-    <script type="module" src="/src/js/pages/apis.js"></script>
+    <script type="module" src="/src/js/pages/errors.js"></script>
   </body>
 </html>

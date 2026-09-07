@@ -7,6 +7,28 @@
 
 import { copyText, flashCopied } from './copy.js';
 import { currentEnv } from './env-switcher.js';
+import { escapeHtml } from '../utils/format.js';
+
+// Subtle JSON syntax highlighting — 4 colors max (D-009): keys accent,
+// strings green, numbers blue, keywords/comment grey. Token text is
+// escaped so payload data can never inject markup.
+const JSON_TOKEN = /("(?:\\.|[^"\\])*")(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/g;
+export function highlightJson(text) {
+  let out = '';
+  let last = 0;
+  let m;
+  JSON_TOKEN.lastIndex = 0;
+  while ((m = JSON_TOKEN.exec(text))) {
+    out += escapeHtml(text.slice(last, m.index));
+    let cls = 'tok-num';
+    if (m[1] !== undefined) cls = m[2] !== undefined ? 'tok-kw' : 'tok-str';
+    else if (m[3] !== undefined) cls = /true|false/.test(m[3]) ? 'tok-kw' : 'tok-com';
+    out += `<span class="${cls}">${escapeHtml(m[0])}</span>`;
+    last = JSON_TOKEN.lastIndex;
+  }
+  out += escapeHtml(text.slice(last));
+  return out;
+}
 
 const FAKE_KEY_SEED = '4fJk9Lm2XpQz7RvW';
 

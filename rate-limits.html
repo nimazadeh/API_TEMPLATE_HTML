@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
-    <title>APIs — APIForge X</title>
+    <title>Rate Limits — APIForge X</title>
     <script>
       (function () {
         var stored = null;
@@ -29,7 +29,7 @@
           </div>
           <div class="nav-group">
             <div class="nav-group__label">Developer</div>
-            <a class="nav-item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+            <a class="nav-item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
             <a class="nav-item" href="./endpoints.html"><i data-lucide="braces"></i><span>Endpoints</span></a>
             <a class="nav-item" href="./api-keys.html"><i data-lucide="key"></i><span>API Keys</span></a>
             <a class="nav-item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
@@ -39,7 +39,7 @@
             <div class="nav-group__label">Analytics</div>
             <a class="nav-item" href="./usage.html"><i data-lucide="bar-chart-3"></i><span>Usage</span></a>
             <a class="nav-item" href="./errors.html"><i data-lucide="bug"></i><span>Errors</span></a>
-            <a class="nav-item" href="./rate-limits.html"><i data-lucide="gauge"></i><span>Rate Limits</span></a>
+            <a class="nav-item is-active" href="./rate-limits.html"><i data-lucide="gauge"></i><span>Rate Limits</span></a>
             <a class="nav-item is-disabled" href="#" data-bs-toggle="tooltip" data-bs-title="Phase 3C"><i data-lucide="activity"></i><span>Metrics</span></a>
           </div>
           <div class="nav-group">
@@ -83,7 +83,7 @@
         <div class="header-title">
           <span class="crumb">APIForge X</span>
           <span class="crumb-sep">/</span>
-          <span class="title">APIs</span>
+          <span class="title">Rate Limits</span>
         </div>
         <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="Search (⌘K)">
           <i data-lucide="search"></i>
@@ -125,61 +125,66 @@
       <main class="app-main">
         <div class="env-banner" data-env-banner hidden>
           <i data-lucide="alert-triangle"></i>
-          You are viewing <strong>test data</strong>. All keys use the <code class="ltr-isolate">sk_test_</code> prefix.
+          You are viewing <strong>test data</strong>.
         </div>
         <div class="app-main__inner">
           <header class="toolbar">
             <div>
-              <h1 class="mb-1">APIs</h1>
-              <p class="text-secondary mb-0">Browse the catalog, read the reference, and test requests live.</p>
-            </div>
-            <div class="toolbar__actions">
-              <span class="badge badge-accent">v1 · 15 endpoints</span>
+              <h1 class="mb-1">Rate Limits</h1>
+              <p class="text-secondary mb-0">Current limits, remaining capacity and per-API rules.</p>
             </div>
           </header>
 
-          <!-- Catalog -->
-          <section id="apis" class="mb-5">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-              <h2 class="h3 mb-0">API catalog</h2>
-            </div>
-            <div class="row g-3" id="api-catalog"></div>
-          </section>
+          <div id="rl-banner" class="mb-4"></div>
 
-          <!-- Endpoints -->
-          <section id="endpoints" class="mb-5">
-            <div class="d-flex align-items-center justify-content-between mb-3 gap-3 flex-wrap">
-              <h2 class="h3 mb-0">Endpoints</h2>
-              <div class="search-field" style="width: 240px">
-                <i data-lucide="search" class="search-icon"></i>
-                <input class="form-control" id="endpoint-search" type="text" placeholder="Filter endpoints…" aria-label="Filter endpoints" />
+          <div class="limit-grid" id="rl-cards"></div>
+
+          <div class="row g-4 mb-4">
+            <div class="col-lg-7">
+              <div class="card h-100 chart">
+                <div class="chart__head">
+                  <div>
+                    <div class="chart__title">Requests per day</div>
+                    <div class="chart__sentence">Daily usage vs your 500,000 request/day limit, last 14 days.</div>
+                  </div>
+                </div>
+                <div class="chart__body">
+                  <div class="chart__canvas" style="--chart-height: 260px"><canvas id="rl-history-chart"></canvas></div>
+                </div>
               </div>
             </div>
-            <div class="table-card">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Method</th>
-                      <th>Endpoint</th>
-                      <th>Description</th>
-                      <th>API</th>
-                    </tr>
-                  </thead>
-                  <tbody id="endpoint-list"></tbody>
-                </table>
+            <div class="col-lg-5">
+              <div class="card h-100 chart">
+                <div class="chart__head">
+                  <div>
+                    <div class="chart__title">Monthly quota remaining</div>
+                    <div class="chart__sentence">Used vs remaining in the current billing period.</div>
+                  </div>
+                </div>
+                <div class="chart__body">
+                  <div class="chart__canvas" style="--chart-height: 260px"><canvas id="rl-quota-chart"></canvas></div>
+                </div>
               </div>
             </div>
-          </section>
+          </div>
 
-          <!-- Detail + tester -->
-          <section>
-            <h2 class="h3 mb-3">Reference &amp; tester</h2>
-            <div class="split">
-              <div id="api-doc"></div>
-              <div class="tester card card--dense" id="tester"></div>
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>API</th>
+                    <th>Limit</th>
+                    <th>Window</th>
+                    <th>Current usage</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="rl-rules"></tbody>
+              </table>
             </div>
-          </section>
+            <div class="table-footer"><span id="rl-count">—</span></div>
+          </div>
         </div>
       </main>
     </div>
@@ -198,7 +203,7 @@
         </div>
         <div class="nav-group">
           <div class="nav-group__label">Developer</div>
-          <a class="nav-item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+          <a class="nav-item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
           <a class="nav-item" href="./endpoints.html"><i data-lucide="braces"></i><span>Endpoints</span></a>
           <a class="nav-item" href="./api-keys.html"><i data-lucide="key"></i><span>API Keys</span></a>
           <a class="nav-item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
@@ -208,7 +213,7 @@
           <div class="nav-group__label">Analytics</div>
           <a class="nav-item" href="./usage.html"><i data-lucide="bar-chart-3"></i><span>Usage</span></a>
           <a class="nav-item" href="./errors.html"><i data-lucide="bug"></i><span>Errors</span></a>
-          <a class="nav-item" href="./rate-limits.html"><i data-lucide="gauge"></i><span>Rate Limits</span></a>
+          <a class="nav-item is-active" href="./rate-limits.html"><i data-lucide="gauge"></i><span>Rate Limits</span></a>
         </div>
         <div class="nav-group">
           <div class="nav-group__label">Workspace</div>
@@ -223,7 +228,7 @@
     <!-- Mobile bottom tab bar -->
     <nav class="bottom-tabbar" aria-label="Primary mobile">
       <a class="bottom-tabbar__item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
-      <a class="bottom-tabbar__item is-active" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+      <a class="bottom-tabbar__item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
       <a class="bottom-tabbar__item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
       <a class="bottom-tabbar__item" href="./api-keys.html"><i data-lucide="key"></i><span>Keys</span></a>
       <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="More">
@@ -231,6 +236,6 @@
       </button>
     </nav>
 
-    <script type="module" src="/src/js/pages/apis.js"></script>
+    <script type="module" src="/src/js/pages/rate-limits.js"></script>
   </body>
 </html>

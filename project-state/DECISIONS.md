@@ -325,11 +325,35 @@ Additions: Vanilla JS fuzzy search for command palette, not heavy lib.
 **Decision:** Usage-specific layout (`.usage-plan`, `.attribution`, `.top-list`) lives in `src/scss/pages/_usage.scss`; primitives (`.progress`, `.usage-row`, `.stat-strip`, `.chart`, `.card--dense`, `.seg`) are reused from shared partials.
 **Consequences:** No per-page duplication of progress/stat/chart styles; the only new partial is page-scoped and tokens-only.
 
-## Future Decisions (To Be Made in Phase 3B+)
+### D-032: Webhook & Error Detail Are Drawers Reusing the Inspector Pattern (resolves the pending D-027 item)
+
+**Date:** 2026-09-07
+**Decision:** Webhook delivery detail and error detail open as offcanvas drawers, reusing the Phase 3A inspector scaffold (`.offcanvas.inspector`, `.inspector-head`, `.inspector-section`, `.kv`, `.code-block`); the delivery timeline reuses `.timeline` (extended with `is-info`/`is-neutral` node states).
+**Consequences:** New `components/webhook-detail.js` and `components/error-detail.js`; no separate detail pages; drawers are 100% data-driven from `mock-webhook-deliveries.json`/`mock-errors.json`.
+
+### D-033: Phase 3B Data Uses a Second Seeded PRNG to Keep Phase 3A Byte-Identical
+
+**Date:** 2026-09-07
+**Decision:** The generator gains a separate `mulberry32` instance (`randB`, seed `20260907 ^ 0x3b3b1a`) for all Phase 3B entities so the Phase 3A datasets' random values stay byte-identical; only `Date.now()`-relative timestamps drift on regeneration.
+**Consequences:** `mock-keys.json` gains exactly 2 staging keys (appended after the original 6, which stay identical); `mock-environments.json` gains a `staging` entry; all new files are deterministic and regenerable.
+
+### D-034: New Page-Scoped SCSS Only Where Styles Are Genuinely New
+
+**Date:** 2026-09-07
+**Decision:** Only two new partials ship for Phase 3B — `pages/_errors.scss` (stack-frame presentation) and `pages/_rate-limits.scss` (limit cards + rule usage bars). Webhooks/endpoints/environments reuse existing components (`table`, `code-block`, `timeline`, `params-table`, `alert`, `kpi`, `progress`, `seg`) with zero new styles.
+**Consequences:** No duplicated CSS; the QA "no duplicated CSS" check stays green.
+
+### D-035: Endpoint Auth Is Derived Deterministically, Not Stored
+
+**Date:** 2026-09-07
+**Decision:** Endpoint "authentication" (API key / Bearer token / Signing secret / None) is derived from the endpoint's API via a static map in `endpoints.js` rather than added to `mock-endpoints.json`, avoiding churn to Phase 3A data. The create/edit modal stores the user-chosen `auth` on the in-session record.
+**Consequences:** `mock-endpoints.json` untouched by Phase 3B; auth is deterministic and overridable in-session.
+
+## Future Decisions (To Be Made in Phase 3C+)
 
 - Auth pages minimal or with OAuth? Decision: Minimal like Vercel, with optional OAuth buttons.
-- Documentation in-app vs external? Decision: In-app minimal reference + link to external, but same design system.
-- Webhook detail: drawer vs separate page? Decision pending Phase 3B — start with the drawer pattern (D-027), add deep-linkable page if needed.
+- Documentation in-app vs external? Decision: In-app minimal reference + link to external, but same design system (out of 3B scope).
+- Metrics page: build `metrics.html` or fold into Usage? Decision deferred (nav item disabled, tagged Phase 3C).
 
 ---
 
