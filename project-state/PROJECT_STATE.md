@@ -3,9 +3,9 @@
 ## Project: APIForge X — Premium Developer API Platform HTML Template
 
 **Branch:** arena/01a07d58-api-template-html
-**Phase:** PHASE 1 — FOUNDATION & DESIGN SYSTEM
+**Phase:** PHASE 2 — FOUNDATION & DESIGN SYSTEM (PRODUCTION HARDENING)
 **Date:** 2026-09-07
-**Status:** Phase 1 Complete — Ready for Phase 2 Implementation
+**Status:** Phase 2 Complete — Phase 3 (Core App Pages) NOT yet authorized
 
 ---
 
@@ -39,6 +39,35 @@
 - [x] RTL page shows sidebar on the right, code LTR, no broken alignment
 - [x] Command palette opens with ⌘K, fuzzy search works
 - [x] Mock data renders in the table
+
+---
+
+### PHASE 2: FOUNDATION & DESIGN SYSTEM — PRODUCTION HARDENING — COMPLETE ✅
+
+**Objectives Achieved:**
+- [x] Semantic token system: `--surface-*` ladder, borders, elevation, motion, layout, typography, status foregrounds, focus-ring, code-border, shimmer, RGB triplets (dark + light)
+- [x] Five typography lanes persisted: PERSIAN_UI (Vazirmatn) · LATIN_UI (Inter Variable) · TECHNICAL_TERM · CODE (JetBrains Mono) · NUMERIC_DATA — legacy aliases removed
+- [x] All fonts locally bundled via Fontsource (no CDN); single Latin UI font (Inter Variable) documented in `base/_fonts.scss`
+- [x] `@popperjs/core@2.11.8` added as an explicit dependency; curated Bootstrap import in `vendor/_bootstrap.scss`
+- [x] Bootstrap `--bs-*` bridge maps to semantic tokens; no literal colors/spacing in components or layouts
+- [x] Overlays migrated to Bootstrap data-APIs (dropdown/modal/offcanvas/tab/tooltip); custom dropdown/tooltip/modal modules deleted; offcanvas re-themed with logical RTL mirroring
+- [x] Complete primitive set: Button, Icon Button, Input, Select, Search, Badge, Avatar, Tooltip, Dropdown, Tabs, Modal, Offcanvas, Toast, Alert, Table, Code Block, Pagination, Breadcrumb, Card, Stat, Chart Container, Empty State, Error State, Loading State, Skeleton
+- [x] System theme (dark/light/system) with live matchMedia listener + no-flash + localStorage
+- [x] `style-guide.html` hardened as the living component contract; `rtl-test.html` created (mixed RTL/LTR scenarios + theme/direction switching)
+
+**Artifacts Created/Updated:**
+- New tokens: `src/scss/tokens/_{colors,borders,elevation,motion,layout,typography}.scss`
+- New base: `src/scss/base/_fonts.scss`; rewritten `_reset.scss`, `_typography.scss`, `_bootstrap-overrides.scss`
+- New components: `tabs`, `alert`, `breadcrumb`, `avatar`, `stat`, `chart`, `loading`; `empty` gains `.error-state`
+- New: `src/js/core/bootstrap.js`, rewritten `src/js/components/toast.js`, `src/scss/pages/_rtl-test.scss`, `src/js/pages/rtl-test.js`, `rtl-test.html`
+- Deleted: `src/js/components/{dropdown,tooltip,modal}.js`
+- `vite.config.js`: added `rtl-test` page input
+
+**Exit Criteria:**
+- [x] `vite build` green (PASS 2, re-run after refactor)
+- [x] Dev server serves all four pages + module transforms (PASS 3)
+- [x] Static QA clean (PASS 1): no stale overlay attrs, no duplicate IDs, labels present, all Lucide icons resolve
+- [~] Interaction / responsive / visual QA not executed (no browser in sandbox) — recorded honestly, see TEST_STATUS.md
 
 ---
 
@@ -149,18 +178,18 @@
 
 ---
 
-## Next Phase: PHASE 2 — CORE APP PAGES (OBSERVABILITY FIRST)
+## Next Phase: PHASE 3 — CORE APP PAGES (OBSERVABILITY FIRST)
 
-**Ready to start:** Yes — all Phase 1 foundation exists and builds clean.
+**Ready to start:** NOT YET AUTHORIZED — wait for separate authorization.
 
-**Phase 2 Goals (P0):**
+**Phase 3 Goals (P0):**
 - `/app/overview.html` — quickstart card, 4-KPI strip, recent errors/requests, webhook health, usage progress
 - `/app/logs.html` + log detail drawer — filters with URL state, full table, cURL copy, timeline, JSON viewer
 - `/app/keys.html` — key table, create flow with reveal-once, detail drawer, rotate/revoke
 - `/app/usage.html` — time-range selector, area chart (Chart.js), breakdown tables, CSV export
 - URL as state (?status=failed), skeletons, empty states, keyboard, dark/light, RTL
 
-**Reuse from Phase 1:** `boot()`, tokens, tables, badges, code blocks, copy, modal/drawer, command palette (extend its index), env switcher, mock data.
+**Reuse from Phases 1–2:** `boot()`, semantic tokens, five-lane typography, tables, badges, code blocks, copy, Bootstrap modal/offcanvas, command palette (extend its index), env switcher, mock data.
 
 ---
 

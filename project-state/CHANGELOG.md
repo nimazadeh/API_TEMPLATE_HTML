@@ -6,6 +6,45 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## [Phase 2] — 2026-09-07 — FOUNDATION & DESIGN SYSTEM (PRODUCTION HARDENING) COMPLETE ✅
+
+### Added
+- Semantic token layer under `src/scss/tokens/`: colors (surface ladder, status foregrounds, violet/orange families, focus-ring, code-border, shimmer, RGB triplets), borders, elevation, motion, layout, typography — dark + `[data-theme="light"]`
+- `src/scss/base/_fonts.scss` — single source of truth for local font loading (Inter Variable, JetBrains Mono, Vazirmatn); documents the five typography lanes
+- `src/js/core/bootstrap.js` — Bootstrap ESM data-API imports (Dropdown, Modal, Offcanvas, Collapse, Tab, Toast, Tooltip)
+- New primitives: `_tabs.scss`, `_alert.scss`, `_breadcrumb.scss`, `_avatar.scss`, `_stat.scss`, `_chart.scss`, `_loading.scss`; `.error-state` added to `_empty.scss`
+- `rtl-test.html` + `src/js/pages/rtl-test.js` + `src/scss/pages/_rtl-test.scss` — mixed RTL/LTR scenarios with theme (dark/light/system) and direction switching
+- `src/js/components/toast.js` rewritten on Bootstrap `Toast.getOrCreateInstance` (`afxToast`)
+- `@popperjs/core@2.11.8` explicit dependency
+- Directional icons (ArrowRight/Left, ChevronRight/Left) in the Lucide registry
+
+### Changed
+- Curated Bootstrap import (`src/scss/vendor/_bootstrap.scss`): variable overrides + component subset + utilities API; Bootstrap as toolkit, not identity
+- Bootstrap `--bs-*` bridge (`src/scss/base/_bootstrap-overrides.scss`) now maps to semantic tokens (no literal light-theme block)
+- Overlays migrated from custom modules to Bootstrap data-APIs: `data-bs-toggle`/`data-bs-target`/`data-bs-dismiss`/`data-bs-title`
+- Offcanvas re-themed + logical RTL mirroring (`offcanvas-start/end`); `.sidebar-drawer` is now `offcanvas offcanvas-start sidebar-drawer`
+- Sidebar chrome hoisted to top level (`_sidebar.scss`) so the mobile drawer reuses it
+- Shell metrics (256/64/56/1440/24) tokenized into `--sidebar-width`, `--sidebar-rail-width`, `--header-height`, `--bottom-bar-height`, `--content-max-width`, `--content-pad`
+- Legacy font aliases (`--font-sans`, `--font-display`, `--font-mono`, `--font-fa`) removed; canonical five-lane tokens only
+- `style-guide.html` hardened as the living component contract (all primitives + states)
+- RTL heading tracking loosened for Arabic script; focus ring tokenized; scrollbars theme-aware
+
+### Removed
+- `src/js/components/dropdown.js`, `tooltip.js`, `modal.js` (superseded by Bootstrap data-APIs)
+- Legacy `--bg-*` / `--shadow-*` token references
+
+### Decisions
+- D-021…D-027 logged in DECISIONS.md (Bootstrap data-APIs, Inter Variable, five-lane tokens, semantic surface ladder, offcanvas drawers, rtl-test harness, offcanvas-first detail views)
+
+### QA
+- `vite build` green (CSS 268.70 kB / 51.62 kB gzip; main JS 104.79 kB / 33.11 kB gzip)
+- Static + runtime QA clean; interaction/responsive/visual not executed (no browser in sandbox) — recorded honestly in TEST_STATUS.md
+
+### Next
+- Phase 3 (Core App Pages) — NOT yet authorized; wait for separate authorization
+
+---
+
 ## [Phase 0] — 2026-09-07 — PRODUCT INTELLIGENCE COMPLETE ✅
 
 ### Added

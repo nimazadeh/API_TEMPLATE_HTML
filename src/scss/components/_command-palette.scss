@@ -22,10 +22,10 @@
   pointer-events: auto;
   width: 100%;
   max-width: 560px;
-  background: var(--bg-surface-1);
+  background: var(--surface-1);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-floating);
+  box-shadow: var(--elevation-2);
   overflow: hidden;
   opacity: 0;
   transform: translateY(-8px) scale(0.98);
@@ -64,10 +64,10 @@
     }
   }
   kbd {
-    font-family: var(--font-mono);
+    font-family: var(--font-code);
     font-size: var(--fs-mono-sm);
     color: var(--text-tertiary);
-    background: var(--bg-surface-2);
+    background: var(--surface-2);
     border: 1px solid var(--border);
     border-radius: 4px;
     padding: 2px 6px;
@@ -113,7 +113,7 @@
     width: 28px;
     height: 28px;
     border-radius: var(--radius-sm);
-    background: var(--bg-surface-2);
+    background: var(--surface-2);
     border: 1px solid var(--border);
     color: var(--text-secondary);
     flex: none;
@@ -138,13 +138,13 @@
     }
   }
   .cmd-item__hint {
-    font-family: var(--font-mono);
+    font-family: var(--font-code);
     font-size: var(--fs-mono-sm);
     color: var(--text-tertiary);
   }
 
   &.is-selected {
-    background: var(--bg-surface-2);
+    background: var(--surface-2);
     .cmd-item__icon {
       border-color: var(--border-hover);
     }
@@ -169,9 +169,9 @@
     align-items: center;
     gap: 4px;
     kbd {
-      font-family: var(--font-mono);
+      font-family: var(--font-code);
       font-size: var(--fs-mono-sm);
-      background: var(--bg-surface-2);
+      background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: 4px;
       padding: 1px 5px;

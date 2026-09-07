@@ -1,89 +1,70 @@
 // =============================================================
-// APIForge X — Components: Dropdown menu
-// Floating surface (stacked shadow), used for user menu, env
-// switcher, row actions. Anchored with logical positioning.
+// APIForge X — Components: Dropdown (re-theme of Bootstrap)
+// Bootstrap owns positioning (Popper) + .show toggling; we own the
+// surface: hairline border, 12px radius, stacked shadow, item states.
 // =============================================================
 
 @use '../tokens/_index' as *;
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
 .dropdown-menu {
-  position: absolute;
-  z-index: var(--z-dropdown);
-  inset-inline-end: 0;
-  top: calc(100% + 6px);
-  min-width: 200px;
-  padding: 6px;
-  background: var(--bg-surface-1);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-floating);
-  list-style: none;
-  margin: 0;
-  opacity: 0;
-  transform: translateY(-4px) scale(0.98);
-  visibility: hidden;
-  pointer-events: none;
-  @include motion(150ms);
-  transition-property: opacity, transform, visibility;
-  transition-timing-function: $ease-out;
-
-  .dropdown.is-open & {
-    opacity: 1;
-    transform: none;
-    visibility: visible;
-    pointer-events: auto;
-  }
+  --bs-dropdown-zindex: var(--z-dropdown);
+  --bs-dropdown-padding-y: 6px;
+  --bs-dropdown-padding-x: 6px;
+  --bs-dropdown-min-width: 200px;
+  --bs-dropdown-border-radius: var(--radius-md);
+  --bs-dropdown-border-color: var(--border);
+  --bs-dropdown-bg: var(--surface-overlay);
+  --bs-dropdown-link-color: var(--text-secondary);
+  --bs-dropdown-link-hover-color: var(--text-primary);
+  --bs-dropdown-link-hover-bg: var(--surface-interactive);
+  --bs-dropdown-link-active-bg: var(--surface-interactive);
+  --bs-dropdown-link-active-color: var(--text-primary);
+  --bs-dropdown-item-padding-y: 7px;
+  --bs-dropdown-item-padding-x: 10px;
+  --bs-dropdown-divider-bg: var(--border-subtle);
+  --bs-dropdown-divider-margin-y: 6px;
+  box-shadow: var(--elevation-2);
 }
 
 .dropdown-item {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  width: 100%;
-  padding: 7px 10px;
-  font-size: var(--fs-body);
-  color: var(--text-secondary);
-  background: transparent;
-  border: 0;
   border-radius: var(--radius-sm);
-  cursor: pointer;
-  text-align: start;
-  text-decoration: none;
+  font-size: var(--fs-body);
 
-  &:hover {
-    background: var(--bg-surface-2);
-    color: var(--text-primary);
-  }
   svg {
     width: 16px;
     height: 16px;
     flex: none;
+    color: var(--text-tertiary);
   }
-  &.is-danger {
+  &:hover svg,
+  &.active svg {
+    color: inherit;
+  }
+}
+
+.dropdown-item.is-danger {
+  color: var(--error);
+  &:hover,
+  &:focus {
     color: var(--error);
-    &:hover {
-      background: var(--error-bg);
-      color: var(--error);
-    }
+    background: var(--error-bg);
+  }
+  svg {
+    color: var(--error);
   }
 }
 
-.dropdown-divider {
-  height: 1px;
-  margin: 6px 4px;
-  background: var(--border-subtle);
-  border: 0;
-}
-
-.dropdown-label {
+.dropdown-header {
   padding: 6px 10px 2px;
   font-size: var(--fs-eyebrow);
   letter-spacing: var(--track-eyebrow);
   text-transform: uppercase;
   color: var(--text-tertiary);
+}
+
+.dropdown-divider {
+  background-color: var(--border-subtle);
 }

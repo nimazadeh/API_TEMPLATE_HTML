@@ -9,7 +9,7 @@
 
 .code-block {
   background: var(--code-bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--code-border);
   border-radius: var(--radius-md);
   overflow: hidden;
   direction: ltr; // code always LTR
@@ -24,13 +24,13 @@
   min-height: 40px;
   padding: 0 12px;
   background: var(--code-header-bg);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--code-border);
 
   .code-block__lang {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: var(--font-mono);
+    font-family: var(--font-code);
     font-size: var(--fs-mono-sm);
     color: var(--text-secondary);
   }
@@ -47,7 +47,7 @@
   align-items: center;
   gap: 2px;
   padding: 2px;
-  background: var(--bg-surface-2);
+  background: var(--surface-2);
   border-radius: var(--radius-sm);
   direction: ltr;
 }
@@ -56,7 +56,7 @@
   border: 0;
   background: transparent;
   color: var(--text-secondary);
-  font-family: var(--font-mono);
+  font-family: var(--font-code);
   font-size: var(--fs-mono-sm);
   padding: 4px 10px;
   border-radius: 4px;
@@ -66,7 +66,7 @@
     color: var(--text-primary);
   }
   &.is-active {
-    background: var(--bg-surface-3);
+    background: var(--surface-3);
     color: var(--text-primary);
   }
 }
@@ -74,7 +74,7 @@
 .code-block__body {
   margin: 0;
   padding: 16px;
-  font-family: var(--font-mono);
+  font-family: var(--font-code);
   font-size: var(--fs-mono);
   line-height: var(--lh-mono);
   color: var(--code-text);
@@ -102,10 +102,10 @@
 // Inline code — surface chip, LTR isolated
 code:not(pre code),
 .inline-code {
-  font-family: var(--font-mono);
+  font-family: var(--font-code);
   font-size: var(--fs-mono-sm);
   color: var(--text-primary);
-  background: var(--bg-surface-2);
+  background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 2px 6px;
@@ -116,7 +116,7 @@ code:not(pre code),
 
 // Key injection placeholder styling
 .key-placeholder {
-  font-family: var(--font-mono);
+  font-family: var(--font-code);
   color: var(--accent);
   background: var(--accent-subtle-bg);
   border: 1px dashed var(--accent-subtle-border);

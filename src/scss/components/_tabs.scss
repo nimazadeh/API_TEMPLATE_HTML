@@ -1,0 +1,50 @@
+// =============================================================
+// APIForge X — Components: Tabs (re-theme of Bootstrap nav)
+// Underline tabs (nav-tabs) + pill tabs (nav-pills), hairline-based.
+// Behavior: Bootstrap Tab (data-bs-toggle="tab").
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.nav-tabs {
+  --bs-nav-tabs-border-color: var(--border);
+  --bs-nav-tabs-link-hover-border-color: var(--border);
+  --bs-nav-tabs-link-active-color: var(--text-primary);
+  --bs-nav-tabs-link-active-bg: transparent;
+  --bs-nav-tabs-link-active-border-color: var(--border);
+  --bs-nav-link-color: var(--text-secondary);
+  --bs-nav-link-hover-color: var(--text-primary);
+  --bs-nav-link-padding-y: 8px;
+  --bs-nav-link-padding-x: 12px;
+  gap: var(--space-2);
+}
+
+.nav-tabs .nav-link {
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  font-size: var(--fs-body);
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  &.active {
+    border-bottom-color: var(--accent);
+    font-weight: 500;
+  }
+}
+
+// Pill tabs (code-block style, also reusable standalone)
+.nav-pills {
+  --bs-nav-pills-link-active-bg: var(--surface-interactive);
+  --bs-nav-pills-link-active-color: var(--text-primary);
+  gap: var(--space-1);
+}
+.nav-pills .nav-link {
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-body-sm);
+  color: var(--text-secondary);
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+.tab-content > .tab-pane {
+  // Bootstrap hides inactive panes with display:none via JS; nothing needed.
+}

@@ -8,6 +8,7 @@ const pageInputs = {
   main: path.resolve(__dirname, 'index.html'),
   'style-guide': path.resolve(__dirname, 'style-guide.html'),
   rtl: path.resolve(__dirname, 'rtl.html'),
+  'rtl-test': path.resolve(__dirname, 'rtl-test.html'),
 };
 
 export default defineConfig({

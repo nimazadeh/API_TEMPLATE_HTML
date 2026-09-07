@@ -1,0 +1,11 @@
+// =============================================================
+// APIForge X — Design Tokens: Borders
+// Hairline strategy: 1px translucent borders, focus rings on accent.
+// =============================================================
+
+:root {
+  --border-width: 1px;
+  --border-width-subtle: 1px; // dividers use --border-subtle color
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+}

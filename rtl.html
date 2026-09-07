@@ -29,59 +29,62 @@
             <a class="nav-item" href="./style-guide.html">
               <i data-lucide="palette"></i><span>راهنمای استایل</span>
             </a>
+            <a class="nav-item" href="./rtl-test.html">
+              <i data-lucide="languages"></i><span>آزمون راست‌به‌چپ</span>
+            </a>
             <a class="nav-item is-active" href="./rtl.html">
-              <i data-lucide="languages"></i><span>آزمایش راست‌به‌چپ</span>
+              <i data-lucide="flask-conical"></i><span>نمونهٔ فارسی</span>
             </a>
           </div>
 
           <div class="nav-group">
             <div class="nav-group__label">نمای کلی</div>
-            <a class="nav-item" href="#" data-tooltip="فاز ۲" data-tooltip-pos="left">
+            <a class="nav-item" href="#" data-bs-toggle="tooltip" data-bs-title="فاز ۲">
               <i data-lucide="layout-dashboard"></i><span>نمای کلی</span>
             </a>
           </div>
 
           <div class="nav-group">
             <div class="nav-group__label">APIها</div>
-            <a class="nav-item" href="#" data-tooltip="فاز ۲" data-tooltip-pos="left">
+            <a class="nav-item" href="#" data-bs-toggle="tooltip" data-bs-title="فاز ۲">
               <i data-lucide="code-2"></i><span>APIها / نقاط پایانی</span>
             </a>
-            <a class="nav-item" href="#" data-tooltip="فاز ۲" data-tooltip-pos="left">
+            <a class="nav-item" href="#" data-bs-toggle="tooltip" data-bs-title="فاز ۲">
               <i data-lucide="key"></i><span>کلیدهای API</span>
             </a>
-            <a class="nav-item" href="#" data-tooltip="فاز ۲" data-tooltip-pos="left">
+            <a class="nav-item" href="#" data-bs-toggle="tooltip" data-bs-title="فاز ۲">
               <i data-lucide="package"></i><span>SDKها</span>
             </a>
           </div>
 
           <div class="nav-group">
             <div class="nav-group__label">پایش</div>
-            <a class="nav-item" href="#" data-tooltip="فاز ۲" data-tooltip-pos="left">
+            <a class="nav-item" href="#" data-bs-toggle="tooltip" data-bs-title="فاز ۲">
               <i data-lucide="scroll-text"></i><span>لاگ‌ها</span>
             </a>
-            <a class="nav-item" href="#" data-tooltip="فاز ۲" data-tooltip-pos="left">
+            <a class="nav-item" href="#" data-bs-toggle="tooltip" data-bs-title="فاز ۲">
               <i data-lucide="webhook"></i><span>وبهوک‌ها</span>
             </a>
-            <a class="nav-item" href="#" data-tooltip="فاز ۲" data-tooltip-pos="left">
+            <a class="nav-item" href="#" data-bs-toggle="tooltip" data-bs-title="فاز ۲">
               <i data-lucide="alert-triangle"></i><span>خطاها</span>
             </a>
-            <a class="nav-item" href="#" data-tooltip="فاز ۲" data-tooltip-pos="left">
+            <a class="nav-item" href="#" data-bs-toggle="tooltip" data-bs-title="فاز ۲">
               <i data-lucide="gauge"></i><span>محدودیت نرخ</span>
             </a>
-            <a class="nav-item" href="#" data-tooltip="فاز ۲" data-tooltip-pos="left">
+            <a class="nav-item" href="#" data-bs-toggle="tooltip" data-bs-title="فاز ۲">
               <i data-lucide="bar-chart-3"></i><span>میزان استفاده</span>
             </a>
           </div>
 
           <div class="nav-group">
             <div class="nav-group__label">مدیریت</div>
-            <a class="nav-item" href="#" data-tooltip="فاز ۲" data-tooltip-pos="left">
+            <a class="nav-item" href="#" data-bs-toggle="tooltip" data-bs-title="فاز ۲">
               <i data-lucide="users"></i><span>تیم</span>
             </a>
-            <a class="nav-item" href="#" data-tooltip="فاز ۲" data-tooltip-pos="left">
+            <a class="nav-item" href="#" data-bs-toggle="tooltip" data-bs-title="فاز ۲">
               <i data-lucide="credit-card"></i><span>صورت‌حساب</span>
             </a>
-            <a class="nav-item" href="#" data-tooltip="فاز ۲" data-tooltip-pos="left">
+            <a class="nav-item" href="#" data-bs-toggle="tooltip" data-bs-title="فاز ۲">
               <i data-lucide="settings"></i><span>تنظیمات</span>
             </a>
           </div>
@@ -108,7 +111,7 @@
 
       <!-- ============ Header ============ -->
       <header class="app-header">
-        <button type="button" class="btn btn-icon header-burger" aria-label="باز کردن منو" data-drawer-open="#sidebar-drawer">
+        <button type="button" class="btn btn-icon header-burger" aria-label="باز کردن منو" data-bs-toggle="offcanvas" data-bs-target="#sidebar-drawer" aria-controls="sidebar-drawer">
           <i data-lucide="menu"></i>
         </button>
         <div class="header-title">
@@ -126,7 +129,7 @@
             <button type="button" class="env-option" data-env="test"><span class="dot"></span>آزمایشی</button>
             <button type="button" class="env-option" data-env="live"><span class="dot"></span>زنده</button>
           </div>
-          <button type="button" class="btn btn-icon" data-theme-toggle aria-label="تغییر پوسته" data-tooltip="تغییر پوسته">
+          <button type="button" class="btn btn-icon" data-theme-toggle aria-label="تغییر پوسته" data-bs-toggle="tooltip" data-bs-title="تغییر پوسته">
             <i data-lucide="sun-moon"></i>
           </button>
         </div>
@@ -259,18 +262,19 @@ await client.emails.send({ to: 'user@example.com' });</pre>
       </main>
     </div>
 
-    <!-- Mobile drawer -->
-    <div class="sidebar-drawer" data-drawer id="sidebar-drawer" hidden>
+    <!-- Mobile drawer (Bootstrap Offcanvas) -->
+    <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="ناوبری اصلی">
       <div class="sidebar-brand">
         <span class="brand-mark"><i data-lucide="zap"></i></span>
         <span class="brand-name">APIForge X</span>
-        <button type="button" class="btn btn-icon ms-auto" data-close aria-label="بستن منو"><i data-lucide="x"></i></button>
+        <button type="button" class="btn btn-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="بستن منو"><i data-lucide="x"></i></button>
       </div>
       <nav class="sidebar-nav" aria-label="ناوبری اصلی">
         <div class="nav-group">
           <div class="nav-group__label">پایه</div>
           <a class="nav-item" href="./style-guide.html"><i data-lucide="palette"></i><span>راهنمای استایل</span></a>
-          <a class="nav-item is-active" href="./rtl.html"><i data-lucide="languages"></i><span>آزمایش راست‌به‌چپ</span></a>
+          <a class="nav-item" href="./rtl-test.html"><i data-lucide="languages"></i><span>آزمون راست‌به‌چپ</span></a>
+          <a class="nav-item is-active" href="./rtl.html"><i data-lucide="flask-conical"></i><span>نمونهٔ فارسی</span></a>
         </div>
         <div class="nav-group">
           <div class="nav-group__label">نمای کلی</div>

@@ -13,7 +13,7 @@
   gap: 6px;
   height: 20px;
   padding-inline: 8px;
-  font-family: var(--font-mono);
+  font-family: var(--font-code);
   font-size: var(--fs-mono-sm); // 12px
   font-weight: 500;
   line-height: 1;
@@ -44,29 +44,29 @@
   letter-spacing: 0.02em;
 }
 .badge-method--GET {
-  color: #60a5fa;
-  background: rgba(59, 130, 246, 0.12);
-  border-color: rgba(59, 130, 246, 0.24);
+  color: var(--info-fg);
+  background: var(--info-bg);
+  border-color: var(--info-border);
 }
 .badge-method--POST {
-  color: #4ade80;
-  background: rgba(34, 197, 94, 0.12);
-  border-color: rgba(34, 197, 94, 0.24);
+  color: var(--success-fg);
+  background: var(--success-bg);
+  border-color: var(--success-border);
 }
 .badge-method--PUT {
-  color: #fbbf24;
-  background: rgba(245, 158, 11, 0.12);
-  border-color: rgba(245, 158, 11, 0.24);
+  color: var(--warning-fg);
+  background: var(--warning-bg);
+  border-color: var(--warning-border);
 }
 .badge-method--DELETE {
-  color: #f87171;
-  background: rgba(239, 68, 68, 0.12);
-  border-color: rgba(239, 68, 68, 0.24);
+  color: var(--error-fg);
+  background: var(--error-bg);
+  border-color: var(--error-border);
 }
 .badge-method--PATCH {
-  color: #c4b5fd;
-  background: rgba(139, 92, 246, 0.12);
-  border-color: rgba(139, 92, 246, 0.24);
+  color: var(--violet-fg);
+  background: var(--violet-bg);
+  border-color: var(--violet-border);
 }
 
 // Status badges — dot + color. Color = meaning (200 green, 4xx yellow, 429 orange, 5xx red)
@@ -122,9 +122,9 @@
   @extend .badge-status--warning;
 }
 .badge-status--429 {
-  color: #fb923c;
-  background: rgba(251, 146, 60, 0.12);
-  border-color: rgba(251, 146, 60, 0.24);
+  color: var(--orange-fg);
+  background: var(--orange-bg);
+  border-color: var(--orange-border);
 }
 .badge-status--5xx,
 .badge-status--500,

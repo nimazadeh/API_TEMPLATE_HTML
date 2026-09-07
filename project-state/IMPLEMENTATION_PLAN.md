@@ -108,14 +108,71 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 
 ---
 
-## Phase 2: Core App Pages — Observability First (P0)
+## Phase 2: Foundation & Design System — Production Hardening — COMPLETE ✅
+
+**Duration:** 1-2 days (2026-09-07)
+**Goal:** Take the Phase 1 skeleton to a production-quality foundation — semantic
+token system, five-lane typography, Bootstrap-as-toolkit integration, RTL/LTR
+foundation, complete primitive set, and the two visual verification pages.
+**No product/app pages are built in this phase** (those start in Phase 3).
+
+### Tasks:
+
+#### 2.1 Build & Dependency System
+- [x] `@popperjs/core@2.11.8` added as an explicit dependency (Bootstrap dropdown/tooltip positioning) — documented in README
+- [x] Curated Bootstrap import (`src/scss/vendor/_bootstrap.scss`) — variable overrides + component subset + utilities API; Bootstrap is a toolkit, not the identity
+- [x] All fonts locally bundled (Fontsource → versioned woff2); no CDN
+
+#### 2.2 Design Tokens (semantic, single source of truth)
+- [x] Surface ladder: `--surface-canvas`, `--surface-0..3`, `--surface-interactive`, `--surface-overlay`, `--surface-code` (dark/light)
+- [x] Borders, elevation, motion, layout, typography, color token partials under `src/scss/tokens/`
+- [x] Status foregrounds + violet/orange families, focus-ring, code-border, shimmer, RGB-triplet tokens
+- [x] No literal color/spacing values left in components/layouts (all `var(--…)`)
+- [x] Bootstrap `--bs-*` bridge maps to semantic tokens; light theme flips via the same tokens
+
+#### 2.3 Typography — five lanes
+- [x] `PERSIAN_UI` Vazirmatn · `LATIN_UI` Inter Variable (single Latin font) · `TECHNICAL_TERM` · `CODE` JetBrains Mono · `NUMERIC_DATA` tabular
+- [x] Legacy font aliases removed; canonical lane tokens are the only names
+- [x] `.tech`, `.num`/`.tabular-nums`, `.num-fa`/`.num-en`, `.mono` utilities
+- [x] RTL heading tracking loosened so Arabic script is never compressed
+
+#### 2.4 Themes
+- [x] Dark-first + light override via `[data-theme]`; system (OS) mode with live matchMedia listener
+- [x] No-flash inline head script; localStorage persistence; centralized in `components/theme.js`
+
+#### 2.5 Bootstrap integration & primitives (complete set)
+- [x] Overlays migrated to Bootstrap data-APIs (`data-bs-toggle` dropdown/modal/offcanvas/tab/tooltip); custom dropdown/tooltip/modal modules deleted
+- [x] Offcanvas re-themed + RTL mirroring (logical `offcanvas-start/end` overrides)
+- [x] Primitives: Button, Icon Button, Input, Select, Search, Badge, Avatar, Tooltip, Dropdown, Tabs, Modal, Offcanvas/Drawer, Toast, Alert, Table, Code Block, Pagination, Breadcrumb, Card, Stat, Chart Container, Empty State, Error State, Loading State, Skeleton
+- [x] States covered: default/hover/focus/active/disabled/loading/error, dark/light, RTL/LTR, mobile
+
+#### 2.6 Application shell foundation
+- [x] Sidebar → tablet rail → mobile drawer (Bootstrap offcanvas) + bottom tab bar; logical properties throughout
+
+#### 2.7 Verification pages
+- [x] `style-guide.html` — living component contract (all primitives, both themes, RTL/LTR)
+- [x] `rtl-test.html` — mixed RTL/LTR scenarios + theme/direction switching harness
+
+**Exit Criteria (QA loop PASS 1–8):**
+- [x] PASS 1 static: no stale custom overlay attrs, no duplicate IDs, labels present, icons resolve
+- [x] PASS 2 production build: `vite build` green
+- [x] PASS 3 runtime: dev server serves all four pages + module transforms (200)
+- [~] PASS 4 interaction: verified by code path + build (no headless browser in sandbox — not claimed)
+- [~] PASS 5 responsive: CSS breakpoints verified statically (360–1920 not visually tested)
+- [~] PASS 6 accessibility: static checks pass (lang/dir, labels, aria, focus-visible); full audit deferred
+- [~] PASS 7 visual: not performed (no browser/preview tool available — recorded honestly)
+- [x] PASS 8 refactor + rerun: `vite build` re-run after refactor, green
+
+---
+
+## Phase 3: Core App Pages — Observability First (P0)
 
 **Duration:** 5-7 days
 **Goal:** Build most important pages: Overview, Logs, Keys, Usage — the daily-use pages
 
 ### Tasks:
 
-#### 2.1 Overview (`/app/overview.html`)
+#### 3.1 Overview (`/app/overview.html`)
 - [ ] Quickstart card: env selector + key selector + code snippet tabs + copy + run mock
 - [ ] KPI strip: 4 cards (Requests 24h, Error rate, P95 latency, Active keys) with comparison + sparkline (Chart.js)
 - [ ] Recent errors: top 3 with count + link
@@ -124,7 +181,7 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 - [ ] Usage vs limit progress
 - [ ] Empty state variant
 
-#### 2.2 Logs (`/app/logs.html` + `/app/log-detail.html` or drawer)
+#### 3.2 Logs (`/app/logs.html` + `/app/log-detail.html` or drawer)
 - [ ] Filters: search request ID, status multi-select, method, endpoint, key, date range — URL state (?status=failed)
 - [ ] Stats: requests in range, error rate, P95
 - [ ] Table: full with method badges, status badges, latency color, request ID copy, key prefix
@@ -132,13 +189,13 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 - [ ] Pagination URL state
 - [ ] Skeletons, empty
 
-#### 2.3 API Keys (`/app/keys.html`)
+#### 3.3 API Keys (`/app/keys.html`)
 - [ ] Table: name, prefix blur, scopes badges, last used, created, status, actions
 - [ ] Create flow: modal with steps name→scopes→expiration→reveal once with warning + copy + "I copied" checkbox
 - [ ] Detail drawer: usage chart per key, recent requests, rotate, revoke with confirm + undo toast
 - [ ] Empty
 
-#### 2.4 Usage (`/app/usage.html`)
+#### 3.4 Usage (`/app/usage.html`)
 - [ ] Time range selector URL state
 - [ ] KPI: total, billable, errors, cost
 - [ ] Area chart requests over time with comparison dashed
@@ -152,27 +209,27 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 
 ---
 
-## Phase 3: Differentiators — Webhooks, APIs, Errors (P1)
+## Phase 4: Differentiators — Webhooks, APIs, Errors (P1)
 
 **Duration:** 5-7 days
 **Goal:** Build differentiators that make template feel specialized
 
-#### 3.1 Webhooks (`/app/webhooks.html`, `/app/webhook-detail.html`)
+#### 4.1 Webhooks (`/app/webhooks.html`, `/app/webhook-detail.html`)
 - [ ] List: endpoint URL, events badges, status, success rate, last delivery
 - [ ] Create: URL, events checkboxes, secret generate, test
 - [ ] Detail: overview + delivery log table + attempt detail with payload JSON tree + retry timeline visual + signature helper + actions retry/disable/rotate/delete/test
 
-#### 3.2 APIs / Endpoints (`/app/apis.html`, `/app/api-detail.html`)
+#### 4.2 APIs / Endpoints (`/app/apis.html`, `/app/api-detail.html`)
 - [ ] Catalog: grouped by resource, endpoint list with method badge + path + description
 - [ ] Detail: method+path header, description, auth, params table, request body schema, response example, code examples tabs with key injection, interactive tester form → response viewer
 - [ ] Search filter
 - [ ] Version switcher
 
-#### 3.3 Errors & Rate Limits (`/app/errors.html`, `/app/rate-limits.html`)
+#### 4.3 Errors & Rate Limits (`/app/errors.html`, `/app/rate-limits.html`)
 - [ ] Errors: breakdown by code with count, last, %, docs link, detail explanation + fix
 - [ ] Rate Limits: overview current plan limits, usage progress bars, reset timers, per endpoint table, 429 guide, upgrade CTA
 
-#### 3.4 SDKs & Environments (`/app/sdks.html`)
+#### 4.4 SDKs & Environments (`/app/sdks.html`)
 - [ ] Environments explanation, banner, base URLs
 - [ ] SDK cards per language with install command, version, GitHub, code example
 - [ ] Postman, OpenAPI download
@@ -182,27 +239,27 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 
 ---
 
-## Phase 4: Management & Polish (P2)
+## Phase 5: Management & Polish (P2)
 
 **Duration:** 3-4 days
 **Goal:** Team, Billing, Settings, Docs, Auth, plus polish
 
-#### 4.1 Team (`/app/team.html`)
+#### 5.1 Team (`/app/team.html`)
 - Table, invite, roles explanation, audit log
 
-#### 4.2 Billing (`/app/billing.html`)
+#### 5.2 Billing (`/app/billing.html`)
 - Current plan card, usage projection chart, invoices table, payment method, upgrade
 
-#### 4.3 Settings (`/app/settings.html`)
+#### 5.3 Settings (`/app/settings.html`)
 - Profile, workspace, security 2FA, notifications, danger zone — tabs
 
-#### 4.4 Docs In-App (`/app/docs.html`)
+#### 5.4 Docs In-App (`/app/docs.html`)
 - Sidebar groups, main with code blocks, key injection, try-it
 
-#### 4.5 Auth (`/auth/sign-in.html`, `/auth/sign-up.html`)
+#### 5.5 Auth (`/auth/sign-in.html`, `/auth/sign-up.html`)
 - Minimal, like Vercel, dark, with logo, form, OAuth buttons optional
 
-#### 4.6 Polish
+#### 5.6 Polish
 - [ ] All pages have LTR and RTL demo (or lang toggle)
 - [ ] All pages dark/light
 - [ ] Keyboard: ? help modal, g+letter shortcuts, / focus search, Esc close
@@ -218,27 +275,27 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 
 ---
 
-## Phase 5: Marketing + Final Launch
+## Phase 6: Marketing + Final Launch
 
 **Duration:** 2-3 days
 **Goal:** Landing, Pricing, Changelog, Status, final docs, marketplace assets
 
-#### 5.1 Landing (`/index.html`)
+#### 6.1 Landing (`/index.html`)
 - Hero with code + dashboard screenshot, social proof, features (Logs, Webhooks, Keys, Explorer), code examples, pricing teaser, CTA
 - Dark-first, tight tracking, product screenshots as hero (Linear principle)
 
-#### 5.2 Pricing (`/pricing.html`)
+#### 6.2 Pricing (`/pricing.html`)
 - Plans, usage-based, FAQ, comparison
 
-#### 5.3 Changelog (`/changelog.html`) + Status (`/status.html`)
+#### 6.3 Changelog (`/changelog.html`) + Status (`/status.html`)
 - Timeline, uptime
 
-#### 5.4 Documentation for Buyers
+#### 6.4 Documentation for Buyers
 - README.md with setup, theming, RTL, adding endpoint, structure
 - Style guide page
 - Comments in SCSS tokens
 
-#### 5.5 Marketplace Assets
+#### 6.5 Marketplace Assets
 - Screenshots: Overview, Logs, Keys, Webhooks, Usage, RTL Persian, dark/light, command palette, code blocks
 - Preview video (optional)
 - Description copy for RTL-Theme and ThemeForest
@@ -301,23 +358,25 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 ## Timeline Summary
 
 - Phase 0: 1 day (done)
-- Phase 1: 3-5 days (foundation)
-- Phase 2: 5-7 days (P0 core)
-- Phase 3: 5-7 days (P1 differentiators)
-- Phase 4: 3-4 days (P2 management + polish)
-- Phase 5: 2-3 days (marketing + launch)
-- **Total:** ~19-27 days for full premium template
+- Phase 1: 3-5 days (foundation skeleton — done)
+- Phase 2: 1-2 days (foundation hardening — done)
+- Phase 3: 5-7 days (P0 core app pages)
+- Phase 4: 5-7 days (P1 differentiators)
+- Phase 5: 3-4 days (P2 management + polish)
+- Phase 6: 2-3 days (marketing + launch)
+- **Total:** ~20-29 days for full premium template
 
 ---
 
-## Next Immediate Steps (Phase 1 Day 1)
+## Next Immediate Steps (Phase 3)
 
-1. Initialize Vite + Bootstrap 5.3 + SCSS structure
-2. Create tokens: colors dark/light CSS variables
-3. Create base layout: sidebar + header + main with logical properties
-4. Create style guide page showing tokens, typography, buttons, tables, code blocks
-5. Setup theme toggle + no flash + RTL toggle
-6. Test with Vazirmatn + LTR isolation
+Phase 3 is NOT yet authorized. Do not start app pages until separately authorized.
+When it is authorized, begin with:
+
+1. `/app/overview.html` — quickstart card, KPI strip, recent errors/requests, webhook health
+2. Extend `table.js` renderers with URL-state filters and pagination
+3. Chart.js integration with CSS-variable theming + `afx:theme` re-theme listener
+4. Log detail drawer (reuse Bootstrap offcanvas) with JSON viewer + "Copy as cURL"
 
 ---
 

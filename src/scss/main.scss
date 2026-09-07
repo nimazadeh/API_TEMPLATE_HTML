@@ -12,6 +12,7 @@
 @use 'tokens/_index' as *;
 
 // Base
+@use 'base/fonts';
 @use 'base/bootstrap-overrides';
 @use 'base/reset';
 @use 'base/typography';
@@ -27,15 +28,25 @@
 @use 'components/skeletons';
 @use 'components/empty';
 @use 'components/tooltip';
-@use 'components/modal';
+@use 'components/modal'; // includes offcanvas
 @use 'components/progress';
 @use 'components/timeline';
 @use 'components/toast';
 @use 'components/dropdown';
 @use 'components/command-palette';
+@use 'components/tabs';
+@use 'components/alert';
+@use 'components/breadcrumb';
+@use 'components/avatar';
+@use 'components/stat';
+@use 'components/chart';
+@use 'components/loading';
 
 // Layouts
 @use 'layouts/app-shell';
 @use 'layouts/sidebar';
 @use 'layouts/header';
 @use 'layouts/mobile-nav';
+
+// Pages
+@use 'pages/rtl-test';

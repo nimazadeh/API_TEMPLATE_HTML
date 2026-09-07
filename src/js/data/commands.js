@@ -1,7 +1,7 @@
 // =============================================================
 // APIForge X — Command palette index (static)
 // Groups: Navigation, Actions. Extended per-phase (endpoints, recent
-// in Phase 2+). `run` receives the event for context.
+// in Phase 3+). `run` receives the event for context.
 // =============================================================
 
 export const commandGroups = [
@@ -25,21 +25,21 @@ export const commandGroups = [
       {
         id: 'nav-overview',
         title: 'Overview',
-        desc: 'App dashboard (Phase 2)',
+        desc: 'App dashboard (Phase 3)',
         icon: 'layout-dashboard',
         disabled: true,
       },
       {
         id: 'nav-logs',
         title: 'Logs',
-        desc: 'Request log inspector (Phase 2)',
+        desc: 'Request log inspector (Phase 3)',
         icon: 'scroll-text',
         disabled: true,
       },
       {
         id: 'nav-keys',
         title: 'API Keys',
-        desc: 'Key management (Phase 2)',
+        desc: 'Key management (Phase 3)',
         icon: 'key',
         disabled: true,
       },

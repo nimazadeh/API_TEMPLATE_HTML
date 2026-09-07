@@ -1,9 +1,23 @@
 // =============================================================
-// APIForge X — Components: Toast
-// Undo / confirm feedback ("Key copied", "Key revoked — Undo").
+// APIForge X — Components: Toast (re-theme of Bootstrap)
+// Feedback with an optional action (Undo). Bootstrap owns show/hide;
+// we own the surface. Toasts are created via afxToast() (toast.js).
 // =============================================================
 
 @use '../tokens/_index' as *;
+
+.toast {
+  --bs-toast-zindex: var(--z-toast);
+  --bs-toast-padding-x: 14px;
+  --bs-toast-padding-y: 12px;
+  --bs-toast-font-size: var(--fs-body-sm);
+  --bs-toast-color: var(--text-primary);
+  --bs-toast-bg: var(--surface-3);
+  --bs-toast-border-color: var(--border-hover);
+  --bs-toast-border-width: 1px;
+  --bs-toast-border-radius: var(--radius-md);
+  --bs-toast-box-shadow: var(--elevation-2);
+}
 
 .toast-stack {
   position: fixed;
@@ -15,39 +29,23 @@
   gap: var(--space-2);
 }
 
-.toast {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  min-width: 280px;
-  max-width: 360px;
-  padding: 12px 14px;
-  font-size: var(--fs-body);
-  color: var(--text-primary);
-  background: var(--bg-surface-3);
-  border: 1px solid var(--border-hover);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-floating);
-  opacity: 0;
-  transform: translateY(8px);
-  @include motion(200ms);
-  transition-property: opacity, transform;
-  transition-timing-function: $ease-out;
+.toast__icon {
+  flex: none;
+  display: inline-flex;
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+  &.is-success { color: var(--success); }
+  &.is-error { color: var(--error); }
+  &.is-info { color: var(--info); }
+}
 
-  &.is-visible {
-    opacity: 1;
-    transform: none;
-  }
-  .toast__icon {
-    flex: none;
-    color: var(--success);
-    svg {
-      width: 16px;
-      height: 16px;
-    }
-  }
-  .toast__msg {
-    flex: 1;
-    font-size: var(--fs-body-sm);
-  }
+.toast__msg {
+  flex: 1;
+  min-width: 0;
+}
+
+.toast__action {
+  flex: none;
 }

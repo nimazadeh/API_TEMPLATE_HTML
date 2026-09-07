@@ -61,7 +61,7 @@
 // Primary — accent, white text
 .btn-primary {
   background: var(--accent);
-  color: #fff;
+  color: var(--text-on-accent);
   border-color: transparent;
   &:hover {
     background: var(--accent-hover);
@@ -73,11 +73,11 @@
 
 // Secondary — surface + border
 .btn-secondary {
-  background: var(--bg-surface-2);
+  background: var(--surface-2);
   border-color: var(--border);
   color: var(--text-primary);
   &:hover {
-    background: var(--bg-surface-3);
+    background: var(--surface-3);
     border-color: var(--border-hover);
   }
 }
@@ -86,7 +86,7 @@
 .btn-ghost {
   color: var(--text-secondary);
   &:hover {
-    background: var(--bg-surface-2);
+    background: var(--surface-2);
     color: var(--text-primary);
   }
 }
@@ -94,9 +94,9 @@
 // Destructive — filled red
 .btn-danger {
   background: var(--error);
-  color: #fff;
+  color: var(--text-on-accent);
   &:hover {
-    background: #dc2626;
+    background: var(--error-active);
   }
 }
 // Destructive ghost — red text
@@ -126,7 +126,7 @@
   color: var(--text-secondary);
   background: transparent;
   &:hover {
-    background: var(--bg-surface-2);
+    background: var(--surface-2);
     color: var(--text-primary);
   }
   svg {

@@ -1,5 +1,39 @@
 # Test Status — APIForge X
 
+## Phase 2: Foundation & Design System — Production Hardening — Test Status
+
+**Date:** 2026-09-07
+**Status:** PASS ✅ (with honestly-recorded limitations) — build green, static + runtime QA clean; browser interaction/visual not executed (no browser in sandbox)
+
+### QA Loop (PASS 1–8)
+
+- [x] **PASS 1 — Static:** no stale custom overlay attributes (`data-tooltip`/`data-dropdown`/`data-modal`/`data-drawer`/`data-close`), no duplicate IDs, all `<input|select|textarea>` have `for=`/aria labels, every `data-lucide` name (static + `commands.js` data) resolves to a registered icon (verified by script), no literal colors/spacing left in components/layouts
+- [x] **PASS 2 — Production build:** `vite build` green — 4 HTML pages, CSS 268.70 kB (51.62 kB gzip), main JS 104.79 kB (33.11 kB gzip), tree-shaken Lucide + Bootstrap subset
+- [x] **PASS 3 — Runtime:** dev server on 0.0.0.0:3000 serves `/`, `/style-guide.html`, `/rtl.html`, `/rtl-test.html` (200) and module transforms for `main.js`, `style-guide.js`, `rtl.js`, `rtl-test.js`, `main.scss` (200, no compile errors)
+- [~] **PASS 4 — Interaction:** NOT executed end-to-end — no headless browser (chromium/chrome/firefox/playwright) in the sandbox. Behavior is verified by code path + build only; dropdown/modal/offcanvas/tab/tooltip now Bootstrap data-APIs, toast via `Toast.getOrCreateInstance`. Do not claim a click-through pass.
+- [~] **PASS 5 — Responsive:** NOT visually executed at 360/390/430/576/768/834/992/1024/1200/1440/1920. Breakpoints and logical properties are in place; visual verification requires a real browser/preview.
+- [~] **PASS 6 — Accessibility:** static checks pass (lang/dir on all pages, labels, aria-labels on icon-only buttons, `:focus-visible` ring, `prefers-reduced-motion` honored, Bootstrap dialog semantics). Full WCAG audit deferred.
+- [~] **PASS 7 — Visual:** NOT performed — no browser/preview tool available. Dark/light tokens and RTL offcanvas mirroring verified in compiled CSS only.
+- [x] **PASS 8 — Refactor + rerun:** `vite build` re-run after the overlay migration + token cleanup, still green.
+
+### Phase 2 specifics verified
+
+- [x] Semantic surface tokens, RGB triplets, status foregrounds, focus-ring, code-border, shimmer all emitted (dark + `[data-theme="light"]`)
+- [x] `[data-theme=light]` compiled block carries light surfaces, borders, elevation, text
+- [x] RTL offcanvas mirroring compiled: `.offcanvas-start{left:auto;inset-inline-start:0;…}` + `[dir=rtl] .offcanvas-start{transform:translate(100%)}`
+- [x] RTL heading tracking loosened (`[dir=rtl] h1{letter-spacing:-.2px}`)
+- [x] New primitives present in compiled CSS: `.stat`, `.error-state`, `.avatar--xl`, `.nav-tabs`, `.alert-success`, `.breadcrumb`, `.chart__body`, `.spinner`, `.toast-stack`, `.sidebar-drawer`
+- [x] All four HTML pages have `lang` + `dir`; no duplicate IDs
+
+### Known / Deferred
+
+- [ ] ESLint + Prettier — deferred (optional)
+- [ ] Browser interaction / responsive / visual QA — requires a real browser/preview; run manually on the live preview
+- [ ] Chart.js runtime rendering — container primitive shipped; chart wiring lands in Phase 3
+- [ ] `copy.js` is statically + dynamically imported (informational Vite warning; benign)
+
+---
+
 ## Phase 1: Foundation & Design System — Test Status
 
 **Date:** 2026-09-07

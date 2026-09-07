@@ -8,7 +8,7 @@
 @use '../tokens/_index' as *;
 
 .table-card {
-  background: var(--bg-surface-1);
+  background: var(--surface-1);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -32,7 +32,7 @@
     text-transform: uppercase;
     text-align: start;
     color: var(--text-tertiary);
-    background: var(--bg-surface-1);
+    background: var(--surface-1);
     border-bottom: 1px solid var(--border);
     white-space: nowrap;
     // Sortable header affordance
@@ -64,7 +64,7 @@
     }
     // Hover only — no striped rows
     tr:hover td {
-      background: var(--bg-surface-2);
+      background: var(--surface-2);
     }
     // Clickable row affordance
     tr.is-clickable {
@@ -130,11 +130,11 @@
     border: 1px solid transparent;
     border-radius: var(--radius-sm);
     &:hover {
-      background: var(--bg-surface-2);
+      background: var(--surface-2);
       color: var(--text-primary);
     }
     &.is-active {
-      background: var(--bg-surface-2);
+      background: var(--surface-2);
       color: var(--text-primary);
       border-color: var(--border);
     }

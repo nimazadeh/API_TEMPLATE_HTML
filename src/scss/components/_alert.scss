@@ -1,0 +1,64 @@
+// =============================================================
+// APIForge X — Components: Alert (re-theme of Bootstrap)
+// Status-toned, hairline border, icon + text + optional dismiss.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.alert {
+  --bs-alert-padding-x: 14px;
+  --bs-alert-padding-y: 12px;
+  --bs-alert-margin-bottom: 0;
+  --bs-alert-border-radius: var(--radius-md);
+  --bs-alert-border-width: 1px;
+  --bs-alert-color: var(--text-primary);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--fs-body);
+
+  .alert-icon {
+    flex: none;
+    margin-top: 1px;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  .alert-content {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.alert-success {
+  --bs-alert-bg: var(--success-bg);
+  --bs-alert-border-color: var(--success-border);
+  --bs-alert-color: var(--text-primary);
+  .alert-icon { color: var(--success); }
+}
+.alert-danger {
+  --bs-alert-bg: var(--error-bg);
+  --bs-alert-border-color: var(--error-border);
+  .alert-icon { color: var(--error); }
+}
+.alert-warning {
+  --bs-alert-bg: var(--warning-bg);
+  --bs-alert-border-color: var(--warning-border);
+  .alert-icon { color: var(--warning); }
+}
+.alert-info {
+  --bs-alert-bg: var(--info-bg);
+  --bs-alert-border-color: var(--info-border);
+  .alert-icon { color: var(--info); }
+}
+.alert-neutral {
+  --bs-alert-bg: var(--neutral-bg);
+  --bs-alert-border-color: var(--neutral-border);
+  .alert-icon { color: var(--neutral); }
+}
+
+.alert-dismissible .btn-close {
+  padding: 0;
+  margin-top: -2px;
+}

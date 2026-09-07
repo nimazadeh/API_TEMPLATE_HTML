@@ -99,7 +99,7 @@ function render() {
             <span class="cmd-item__icon"><i data-lucide="${item.icon}"></i></span>
             <span class="cmd-item__body">
               <span class="cmd-item__title">${highlight(item.title, state.query)}</span>
-              <span class="cmd-item__desc">${highlight(item.desc, state.query)}${item.disabled ? ' · Phase 2+' : ''}</span>
+              <span class="cmd-item__desc">${highlight(item.desc, state.query)}${item.disabled ? ' · Phase 3+' : ''}</span>
             </span>
             ${item.href ? '<span class="cmd-item__hint">↵</span>' : ''}
           </button>`

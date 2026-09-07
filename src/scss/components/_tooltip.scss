@@ -1,32 +1,23 @@
 // =============================================================
-// APIForge X — Components: Tooltip
-// Minimal, delay before showing. Used only as last resort (inline
-// help first — Vercel principle).
+// APIForge X — Components: Tooltip (re-theme of Bootstrap)
+// Minimal, dark chip, used only as a last resort (inline help first).
 // =============================================================
 
 @use '../tokens/_index' as *;
 
 .tooltip {
-  position: absolute;
-  z-index: var(--z-tooltip);
-  max-width: 240px;
-  padding: 6px 10px;
-  font-size: var(--fs-caption);
-  line-height: 1.4;
-  color: var(--text-primary);
-  background: var(--bg-surface-3);
-  border: 1px solid var(--border-hover);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-overlay);
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(2px);
-  @include motion(150ms);
-  transition-property: opacity, transform;
-  transition-timing-function: $ease-out;
+  --bs-tooltip-zindex: var(--z-tooltip);
+  --bs-tooltip-max-width: 240px;
+  --bs-tooltip-padding-y: 6px;
+  --bs-tooltip-padding-x: 10px;
+  --bs-tooltip-font-size: var(--fs-caption);
+  --bs-tooltip-color: var(--text-primary);
+  --bs-tooltip-bg: var(--surface-3);
+  --bs-tooltip-border-radius: var(--radius-sm);
+  --bs-tooltip-opacity: 1;
+}
 
-  &.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.tooltip-inner {
+  border: 1px solid var(--border-hover);
+  box-shadow: var(--elevation-1);
 }

@@ -249,7 +249,63 @@ Additions: Vanilla JS fuzzy search for command palette, not heavy lib.
 **Rationale:** `position: fixed` children inside `transform`-animated containers resolve against the container, not the viewport — a per-dialog backdrop would break the full-screen dim.
 **Consequences:** `openDialog`/`closeDialog` track an open-count; Escape/backdrop-click close all open dialogs.
 
-## Future Decisions (To Be Made in Phase 2+)
+> **Superseded (Phase 2):** The custom modal/drawer module (and its `.backdrop`/`openDialog` API) was removed. Overlays now use Bootstrap Modal / Offcanvas data-APIs, which manage their own backdrop and Escape handling. See D-021 / D-025.
+
+## Phase 2 Decisions
+
+### D-021: Overlay Behavior — Bootstrap Data-APIs, Not Custom Modules
+
+**Date:** 2026-09-07
+**Decision:** Dropdown, Modal, Offcanvas, Collapse, Tab, Toast, and Tooltip use Bootstrap's ESM data-APIs (delegated `[data-bs-toggle]`/`[data-bs-dismiss]`), imported via `src/js/core/bootstrap.js`. The custom `dropdown.js`, `tooltip.js`, and `modal.js` modules were deleted.
+**Rationale:** Bootstrap is the toolkit — reuse its accessible, Popper-powered positioning and focus/keyboard behavior instead of maintaining parallel custom code; tree-shaking keeps only imported components.
+**Consequences:** Markup uses `data-bs-toggle`/`data-bs-target`/`data-bs-dismiss`/`data-bs-title`; toasts are built programmatically with `Toast.getOrCreateInstance` (`afxToast`); `@popperjs/core` is an explicit dependency.
+
+### D-022: Single Latin UI Font — Inter Variable
+
+**Date:** 2026-09-07
+**Decision:** Inter Variable is the ONE Latin UI/display font. Inter Tight and Geist are not used (and are not mixed).
+**Rationale:** One variable family covers UI text and display (tight tracking via letter-spacing, not a second file); Geist is Vercel-branded and Inter Tight duplicates Inter for marginal gain.
+**Consequences:** `--font-latin-ui` and `--font-technical` both resolve to Inter Variable; documented in `src/scss/base/_fonts.scss`.
+
+### D-023: Five-Lane Typography Tokens Are Canonical
+
+**Date:** 2026-09-07
+**Decision:** The five lanes are the only font tokens: `--font-persian-ui` (Vazirmatn), `--font-latin-ui` (Inter), `--font-technical` (Inter), `--font-code` (JetBrains Mono), `--font-numeric` (tabular). Legacy aliases (`--font-sans`, `--font-display`, `--font-mono`, `--font-fa`) were removed.
+**Rationale:** Unambiguous single source of truth; no interchangeable font mixing (the constraint).
+**Consequences:** Components use the lane tokens directly; `.tech`, `.num`, `.num-fa`, `.num-en`, `.mono` are the lane utilities.
+
+### D-024: Semantic Surface Ladder + Bootstrap `--bs-*` Bridge
+
+**Date:** 2026-09-07
+**Decision:** Replace ad-hoc `--bg-*`/`--shadow-*` with a semantic ladder (`--surface-canvas`, `--surface-0..3`, `--surface-interactive`, `--surface-overlay`, `--surface-code`; `--elevation-1..3`), plus RGB-triplet tokens (`--accent-rgb`, `--text-primary-rgb`, `--surface-canvas-rgb`). Bootstrap's `--bs-*` custom properties are re-mapped to these tokens in `base/_bootstrap-overrides.scss`.
+**Rationale:** A single semantic source of truth; Bootstrap utilities (`.text-*`, `.bg-body`, `.border`) stay theme-aware without per-component overrides; code surfaces stay dark in both themes.
+**Consequences:** No literal colors/spacing in components or layouts; light theme flips through the same tokens.
+
+### D-025: Drawers Are Bootstrap Offcanvas (with Logical RTL Mirroring)
+
+**Date:** 2026-09-07
+**Decision:** Drawers (log detail, request inspector, mobile sidebar) are Bootstrap Offcanvas — `.offcanvas offcanvas-start/end` — with a logical-property override for RTL mirroring (Bootstrap 5.3 SCSS positions offcanvas with physical left/right).
+**Rationale:** Reuses accessible focus trap/Escape/backdrop; the logical override keeps RTL correct without relying on `bootstrap.rtl.css`.
+**Consequences:** `.sidebar-drawer` is now `offcanvas offcanvas-start sidebar-drawer`; the old custom `.drawer`/`.sidebar-drawer` positioning was removed; D-020's custom backdrop is obsolete.
+
+### D-026: `rtl-test.html` Is a Dedicated Test Harness
+
+**Date:** 2026-09-07
+**Decision:** `rtl.html` stays the polished Persian demo; a separate `rtl-test.html` hosts difficult mixed RTL/LTR scenarios plus theme (dark/light/system) and direction (rtl/ltr) switching.
+**Rationale:** The two pages have different jobs — demo vs. regression harness; separation keeps the demo clean and the harness exhaustive.
+**Consequences:** `rtl-test.html` + `src/js/pages/rtl-test.js` + `src/scss/pages/_rtl-test.scss`; registered in `vite.config.js`; system-theme mode with live `matchMedia` listener.
+
+### D-027: Detail Views — Offcanvas Drawer First (resolves old D-024)
+
+**Date:** 2026-09-07
+**Decision:** Log/request/key detail views open as an offcanvas drawer (keeps list context); a deep-linkable page can be added later if needed.
+**Consequences:** Phase 3 detail UIs reuse `.offcanvas`; drawer content is the request inspector (headers, body JSON, timeline, "Copy as cURL").
+
+## Future Decisions (To Be Made in Phase 3+)
+
+- Chart.js vs ApexCharts for usage? Decision: Chart.js for now, but allow Apex if needed for more complex.
+- Auth pages minimal or with OAuth? Decision: Minimal like Vercel, with optional OAuth buttons.
+- Documentation in-app vs external? Decision: In-app minimal reference + link to external, but same design system.
 
 - D-021: Chart.js vs ApexCharts for usage? Decision: Chart.js for now, but allow Apex if needed for more complex.
 - D-022: Auth pages minimal or with OAuth? Decision: Minimal like Vercel, with optional OAuth buttons.

@@ -9,13 +9,13 @@
 
 .app-shell {
   display: grid;
-  grid-template-columns: 256px 1fr;
-  grid-template-rows: 56px 1fr;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: var(--header-height) 1fr;
   grid-template-areas:
     'sidebar header'
     'sidebar main';
   min-height: 100dvh;
-  background: var(--bg-canvas);
+  background: var(--surface-canvas);
 
   // Sidebar is a logical grid area; in RTL the column order mirrors
   // automatically because we place by area name, not by index.
@@ -32,15 +32,15 @@
 
 .app-main {
   overflow-y: auto;
-  background: var(--bg-canvas);
+  background: var(--surface-canvas);
   // Page scroll region
-  height: calc(100dvh - 56px);
+  height: calc(100dvh - var(--header-height));
 }
 
 .app-main__inner {
-  max-width: 1440px;
+  max-width: var(--content-max-width);
   margin-inline: auto;
-  padding: 24px;
+  padding: var(--content-pad);
 
   @include mq-max('md') {
     padding: 16px;
@@ -50,7 +50,7 @@
 // Tablet (768-1199): sidebar collapses to a 64px icon rail
 @include mq-max('xl') {
   .app-shell {
-    grid-template-columns: 64px 1fr;
+    grid-template-columns: var(--sidebar-rail-width) 1fr;
   }
 }
 
@@ -58,7 +58,7 @@
 @include mq-max('md') {
   .app-shell {
     grid-template-columns: 1fr;
-    grid-template-rows: 56px 1fr;
+    grid-template-rows: var(--header-height) 1fr;
     grid-template-areas:
       'header'
       'main';
@@ -67,6 +67,6 @@
     display: none;
   }
   .app-main {
-    height: calc(100dvh - 56px - 56px); // leave room for bottom tab bar
+    height: calc(100dvh - var(--header-height) - var(--bottom-bar-height)); // leave room for bottom tab bar
   }
 }

@@ -21,7 +21,7 @@
     width: 48px;
     height: 48px;
     border-radius: var(--radius-md);
-    background: var(--bg-surface-2);
+    background: var(--surface-2);
     border: 1px solid var(--border);
     color: var(--text-secondary);
     margin-bottom: var(--space-4);
@@ -49,5 +49,23 @@
     width: 100%;
     margin-bottom: var(--space-4);
     text-align: left;
+  }
+}
+
+// Error state — same skeleton as empty, but communicates a failure and
+// offers a retry action (actionable, never a bare "oops").
+.error-state {
+  @extend .empty-state;
+  .error-icon {
+    @extend .empty-icon;
+    background: var(--error-bg);
+    border-color: var(--error-border);
+    color: var(--error);
+  }
+  .error-title {
+    @extend .empty-title;
+  }
+  .error-desc {
+    @extend .empty-desc;
   }
 }

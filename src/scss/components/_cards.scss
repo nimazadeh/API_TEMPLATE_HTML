@@ -8,7 +8,7 @@
 @use '../tokens/_index' as *;
 
 .card {
-  background: var(--bg-surface-1);
+  background: var(--surface-1);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   // Default padding 20px
@@ -27,7 +27,7 @@
   transition-property: background-color, border-color, transform;
   transition-timing-function: $ease-out;
   &:hover {
-    background: var(--bg-surface-2);
+    background: var(--surface-2);
     border-color: var(--border-hover);
   }
   &:active {

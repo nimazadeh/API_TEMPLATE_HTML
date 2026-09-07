@@ -1,120 +1,130 @@
 // =============================================================
-// APIForge X — Components: Modal & Drawer
-// Key reveal-once, log detail, webhook detail. Stacked shadow,
-// 12px radius, backdrop. Transform/opacity motion only.
+// APIForge X — Components: Modal & Offcanvas (re-theme of Bootstrap)
+// Bootstrap owns show/hide + backdrop; we own the surface: hairline
+// border, 12px radius, stacked elevation, header/body/footer rhythm.
 // =============================================================
 
 @use '../tokens/_index' as *;
 
-.backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: var(--z-backdrop);
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(2px);
-  opacity: 0;
-  @include motion(200ms);
-  transition-property: opacity;
-  &.is-open {
-    opacity: 1;
-  }
-}
-
+// ---- Modal ----
 .modal {
-  position: fixed;
-  z-index: var(--z-modal);
-  inset: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 5vh 16px 16px;
-  overflow-y: auto;
-  pointer-events: none;
+  --bs-modal-zindex: var(--z-modal);
+  --bs-modal-width: 480px;
+  --bs-modal-bg: var(--surface-overlay);
+  --bs-modal-border-color: var(--border);
+  --bs-modal-border-width: 1px;
+  --bs-modal-border-radius: var(--radius-md);
+  --bs-modal-box-shadow: var(--elevation-3);
+  --bs-modal-inner-border-radius: calc(var(--radius-md) - 1px);
+  --bs-modal-header-padding: 20px 20px 0;
+  --bs-modal-padding: 20px;
+  --bs-modal-footer-gap: 8px;
 }
 
-.modal-dialog {
-  pointer-events: auto;
-  width: 100%;
-  max-width: 480px;
-  background: var(--bg-surface-1);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-floating);
-  opacity: 0;
-  transform: translateY(-8px) scale(0.98);
-  @include motion(200ms);
-  transition-property: opacity, transform;
-  transition-timing-function: $ease-out;
-
-  .is-open & {
-    opacity: 1;
-    transform: none;
-  }
+.modal-content {
+  box-shadow: var(--elevation-3);
 }
 
 .modal-header {
-  display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: 20px 20px 0;
+  border-bottom: 0;
   .modal-title {
-    margin: 0;
     font-size: var(--fs-h4);
     font-weight: 500;
+    letter-spacing: var(--track-h4);
   }
 }
+
 .modal-body {
-  padding: 16px 20px;
   font-size: var(--fs-body);
   color: var(--text-secondary);
   line-height: var(--lh-body);
 }
+
 .modal-footer {
-  display: flex;
-  align-items: center;
+  border-top: 0;
   justify-content: flex-end;
   gap: var(--space-2);
-  padding: 0 20px 20px;
 }
 
-// Drawer — slides from the inline-end side (mirrors in RTL)
-.drawer {
-  position: fixed;
-  z-index: var(--z-modal);
-  inset-block: 0;
-  inset-inline-end: 0;
-  width: min(560px, 100vw);
-  background: var(--bg-surface-1);
-  border-inline-start: 1px solid var(--border);
-  box-shadow: var(--shadow-floating);
-  transform: translateX(100%);
-  @include motion(250ms);
-  transition-property: transform;
-  transition-timing-function: $ease-out;
+// Bootstrap injects .modal-backdrop; dim it with our overlay token.
+.modal-backdrop {
+  --bs-backdrop-zindex: var(--z-backdrop);
+  --bs-backdrop-bg: var(--overlay-bg);
+  --bs-backdrop-opacity: 1;
+}
 
-  // RTL-aware slide-in
+// ---- Offcanvas (drawer) ----
+.offcanvas {
+  --bs-offcanvas-zindex: var(--z-modal);
+  --bs-offcanvas-width: min(560px, 100vw);
+  --bs-offcanvas-bg: var(--surface-overlay);
+  --bs-offcanvas-border-color: var(--border);
+  --bs-offcanvas-border-width: 1px;
+  --bs-offcanvas-padding-x: 20px;
+  --bs-offcanvas-padding-y: 20px;
+  box-shadow: var(--elevation-3);
+}
+
+// Bootstrap positions offcanvas-start/end with physical left/right and
+// translateX — mirror them with logical properties for RTL.
+.offcanvas-start {
+  left: auto;
+  inset-inline-start: 0;
+  border-right: 0;
+  border-inline-end: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+  transform: translateX(-100%);
+  [dir='rtl'] & {
+    transform: translateX(100%);
+  }
+}
+.offcanvas-end {
+  right: auto;
+  inset-inline-end: 0;
+  border-left: 0;
+  border-inline-start: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+  transform: translateX(100%);
   [dir='rtl'] & {
     transform: translateX(-100%);
   }
-  &.is-open,
-  [dir='rtl'] &.is-open {
-    transform: none;
-  }
+}
 
-  display: flex;
-  flex-direction: column;
+// Mobile sidebar drawer (Bootstrap Offcanvas, re-skinned)
+.offcanvas.sidebar-drawer {
+  --bs-offcanvas-width: min(280px, 85vw);
+  background: var(--surface-0);
 }
-.drawer-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
+
+.offcanvas-header {
+  padding-bottom: 12px;
+  .offcanvas-title {
+    font-size: var(--fs-h4);
+    font-weight: 500;
+    letter-spacing: var(--track-h4);
+  }
 }
-.drawer-body {
-  padding: 20px;
-  overflow-y: auto;
-  flex: 1;
+
+.offcanvas-body {
+  color: var(--text-secondary);
+}
+
+// Bootstrap injects .offcanvas-backdrop.
+.offcanvas-backdrop {
+  --bs-backdrop-zindex: var(--z-backdrop);
+  --bs-backdrop-bg: var(--overlay-bg);
+  --bs-backdrop-opacity: 1;
+}
+
+// Close button (Bootstrap .btn-close) — ghost icon matching our system
+.btn-close {
+  --bs-btn-close-color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  opacity: 1;
+  &:hover {
+    background-color: var(--surface-interactive);
+    color: var(--text-primary);
+  }
 }

@@ -1,0 +1,38 @@
+// =============================================================
+// APIForge X — Pages: RTL/LTR test harness
+// Standalone harness chrome (no app shell) so the test focuses on
+// mixed-direction content, theme switching, and direction switching.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.rtl-test__inner {
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+  padding: var(--content-pad);
+
+  @include mq-max('md') {
+    padding: var(--content-pad-mobile);
+  }
+}
+
+.rtl-test__bar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: var(--surface-0);
+  border-bottom: 1px solid var(--border);
+
+  .rtl-test__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    padding-block: 12px;
+  }
+}
+
+.rtl-test__main {
+  padding-block: var(--space-5);
+}

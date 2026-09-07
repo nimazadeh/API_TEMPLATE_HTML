@@ -6,16 +6,21 @@ A dark-first, keyboard-first, **RTL first-class** HTML template for API platform
 depth-over-breadth developer tool surface in the spirit of Stripe, Resend,
 Vercel and Linear.
 
-> **Status:** Phase 1 — Foundation & Design System (current). Phase 0 — Product
-> Intelligence complete. See `/project-state/PROJECT_STATE.md`.
+> **Status:** Phase 2 — Foundation & Design System (production hardening) complete.
+> Phase 3 (core app pages) not yet started. See `/project-state/PROJECT_STATE.md`.
 
 ## Stack
 
-- **HTML5** + **Bootstrap 5.3.8** (curated subset: grid, utilities, reboot, type)
-- **SCSS** token system — dark-first CSS variables, light via `[data-theme="light"]`
+- **HTML5** + **Bootstrap 5.3.8** as the toolkit (grid, utilities, forms, modal,
+  offcanvas, dropdown, tabs, tooltip, toast, alert, badge, breadcrumb, …) —
+  re-themed via the token system, not the visual identity
+- **SCSS** token system — dark-first CSS variables, light via `[data-theme="light"]`,
+  system via `matchMedia`; all fonts self-hosted (Fontsource, no CDN)
 - **Vite 7** — multi-page build, ES modules, no jQuery
-- **Lucide** icons (tree-shaken registry), **Chart.js** (Phases 2+), **Vazirmatn**
-  + **Inter Variable** + **JetBrains Mono** (self-hosted via Fontsource)
+- **Lucide** icons (tree-shaken registry), **Chart.js** (Phases 3+),
+  **@popperjs/core** (explicit dependency for Bootstrap dropdown/tooltip positioning)
+- **Vazirmatn** (Persian UI) + **Inter Variable** (single Latin UI font) +
+  **JetBrains Mono** (code/data only)
 
 ## Quick start
 
@@ -30,8 +35,9 @@ Foundation pages in this phase:
 
 | Page | Purpose |
 |------|---------|
-| `/` | Temporary foundation hub (landing ships in Phase 5) |
-| `/style-guide.html` | Every core component — tokens, type, buttons, forms, tables, code blocks, overlays |
+| `/` | Temporary foundation hub (landing ships in Phase 6) |
+| `/style-guide.html` | The living component contract — every primitive, both themes, RTL/LTR |
+| `/rtl-test.html` | RTL/LTR test harness — mixed-direction scenarios, theme + direction switching |
 | `/rtl.html` | Persian / RTL demo — sidebar right, Vazirmatn, LTR-isolated code |
 
 ## Structure
@@ -39,14 +45,18 @@ Foundation pages in this phase:
 ```
 src/
   scss/
-    tokens/     # colors, type, spacing, radius, z-index, mixins (CSS variables)
+    tokens/     # colors, borders, elevation, motion, layout, typography, spacing,
+                # radius, z-index, mixins (CSS variables)
     vendor/     # curated Bootstrap import + variable overrides
-    base/       # reset, typography, utilities, Bootstrap var bridge
+    base/       # fonts, reset, typography (5 lanes), utilities, Bootstrap var bridge
     components/ # buttons, forms, badges, tables, cards, code, skeletons, empty,
-                # tooltip, modal, progress, timeline, toast, dropdown, command palette
+                # tooltip, modal/offcanvas, progress, timeline, toast, dropdown,
+                # tabs, alert, breadcrumb, avatar, stat, chart, loading, palette
     layouts/    # app shell, sidebar, header, mobile nav
+    pages/      # per-page styles (rtl-test)
     main.scss
   js/
+    core/       # bootstrap.js — Bootstrap ESM data-API imports
     components/ # theme, env switcher, command palette, code block, copy, icons, …
     data/       # mock JSON (regenerate: node scripts/generate-mock-data.mjs)
     utils/      # formatting (relative time, latency, badges, Persian digits)
@@ -57,11 +67,12 @@ scripts/generate-mock-data.mjs
 
 ## Theming
 
-- Dark-first; light is an override layer on the same tokens.
+- Dark-first; light is an override layer on the same tokens; `system` follows
+  the OS via `matchMedia` (with live listener).
 - Theme resolves from `localStorage('afx-theme')` → `prefers-color-scheme` →
   dark, set inline in `<head>` so there is no flash.
-- Bootstrap utilities are bridged to the token system (`--bs-*` → `--bg-*` /
-  `--accent`) so `.text-primary`, `.bg-body`, `.border` stay theme-aware.
+- Bootstrap utilities are bridged to the token system (`--bs-*` → `--surface-*` /
+  `--accent` / `--border`) so `.text-primary`, `.bg-body`, `.border` stay theme-aware.
 
 ## RTL / Persian
 
@@ -74,8 +85,10 @@ scripts/generate-mock-data.mjs
 
 ## Notes for the next phases
 
-- App pages (`/app/*.html`) and the marketing pages are Phase 2–5; add each new
+- App pages (`/app/*.html`) and the marketing pages are Phase 3–6; add each new
   HTML entry to the `pageInputs` map in `vite.config.js`.
 - Add new Lucide icons to `src/js/components/icons.js` (keeps the bundle
   tree-shaken).
+- Bootstrap JS is bound through `src/js/core/bootstrap.js`; add a component to
+  its import list only if a page needs that data-API.
 - Mock data is deterministic and regenerable via `node scripts/generate-mock-data.mjs`.

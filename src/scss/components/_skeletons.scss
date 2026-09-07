@@ -10,7 +10,7 @@
 .skeleton {
   position: relative;
   overflow: hidden;
-  background: var(--bg-surface-2);
+  background: var(--surface-2);
   border-radius: var(--radius-sm);
 
   &::after {
@@ -21,7 +21,7 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.06),
+      var(--shimmer),
       transparent
     );
     animation: afx-shimmer 1.5s ease-in-out infinite;
@@ -44,7 +44,7 @@
 .skeleton-line {
   height: 12px;
   border-radius: 6px;
-  background: var(--bg-surface-2);
+  background: var(--surface-2);
   @extend .skeleton;
   & + & {
     margin-top: 8px;
@@ -73,7 +73,7 @@
 .skeleton-row {
   height: 40px;
   border-radius: 6px;
-  background: var(--bg-surface-2);
+  background: var(--surface-2);
   @extend .skeleton;
   & + & {
     margin-top: 8px;

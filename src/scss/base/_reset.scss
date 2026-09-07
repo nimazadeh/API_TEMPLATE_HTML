@@ -11,9 +11,9 @@ html {
 }
 
 body {
-  background-color: var(--bg-canvas);
+  background-color: var(--surface-canvas);
   color: var(--text-primary);
-  font-family: var(--font-sans);
+  font-family: var(--font-latin-ui);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   // Slight subpixel smoothing for a crisp, engineered feel
@@ -26,9 +26,17 @@ body {
 // Persian body: Vazirmatn with taller line-height (ascenders need +0.1)
 [dir='rtl'],
 [lang='fa'] {
-  font-family: var(--font-fa);
+  font-family: var(--font-persian-ui);
   line-height: var(--lh-body-fa);
   letter-spacing: 0;
+}
+// Persian headings: keep tight tracking but don't compress Arabic script
+// the way Latin compresses — loosen the negative tracking.
+[dir='rtl'] {
+  h1, .h1 { letter-spacing: -0.2px; }
+  h2, .h2 { letter-spacing: -0.1px; }
+  h3, .h3, h4, .h4 { letter-spacing: 0; }
+  .display { letter-spacing: -0.3px; }
 }
 
 // Selection
@@ -37,17 +45,17 @@ body {
   color: var(--text-primary);
 }
 
-// Scrollbars — subtle, dark
+// Scrollbars — subtle, theme-aware
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+  scrollbar-color: var(--border-active) transparent;
 }
 *::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 *::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--border-hover);
   border: 3px solid transparent;
   background-clip: content-box;
   border-radius: 9999px;
@@ -96,8 +104,8 @@ h4,
 
 // Focus visibility — keyboard users always see focus
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline: var(--focus-ring-width) solid var(--accent);
+  outline-offset: var(--focus-ring-offset);
 }
 
 // Reduced motion: disable smooth scrolling etc.

@@ -47,6 +47,10 @@ import {
   Info,
   BookOpen,
   Activity,
+  ArrowRight,
+  ArrowLeft,
+  ChevronRight,
+  ChevronLeft,
 } from 'lucide';
 
 import { createIcons } from 'lucide';
@@ -93,6 +97,10 @@ export const icons = {
   Info,
   BookOpen,
   Activity,
+  ArrowRight,
+  ArrowLeft,
+  ChevronRight,
+  ChevronLeft,
 };
 
 export function initIcons() {

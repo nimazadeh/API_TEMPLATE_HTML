@@ -1,0 +1,47 @@
+// =============================================================
+// APIForge X — Components: Loading state
+// Spinner sizes + a page/section loading state. Skeletons live in
+// _skeletons.scss and are preferred for content that has shape.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: afx-spin 0.6s linear infinite;
+}
+.spinner--sm { width: 12px; height: 12px; border-width: 1.5px; }
+.spinner--lg { width: 24px; height: 24px; border-width: 2.5px; }
+
+@keyframes afx-spin {
+  to { transform: rotate(360deg); }
+}
+
+// Section / page loading state
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-7) var(--space-4);
+  color: var(--text-secondary);
+  font-size: var(--fs-body-sm);
+
+  .spinner {
+    color: var(--accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+    border-right-color: currentColor;
+    opacity: 0.6;
+  }
+}

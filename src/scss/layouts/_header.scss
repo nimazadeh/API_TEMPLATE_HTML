@@ -10,9 +10,9 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  height: 56px;
+  height: var(--header-height);
   padding-inline: 16px;
-  background: var(--bg-surface-0);
+  background: var(--surface-0);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -48,7 +48,7 @@
     margin-inline: auto;
     // Present as a search field, not a button
     justify-content: flex-start;
-    background: var(--bg-surface-1);
+    background: var(--surface-1);
     border-color: var(--border);
     color: var(--text-tertiary);
     &:hover {
@@ -75,7 +75,7 @@
   display: inline-flex;
   align-items: center;
   padding: 2px;
-  background: var(--bg-surface-2);
+  background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: var(--radius-pill);
   gap: 2px;
@@ -101,7 +101,7 @@
       background: currentColor;
     }
     &.is-active {
-      background: var(--bg-surface-3);
+      background: var(--surface-3);
       color: var(--text-primary);
     }
     &[data-env='test'].is-active,

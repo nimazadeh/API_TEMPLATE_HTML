@@ -14,8 +14,8 @@
     inset-inline: 0;
     bottom: 0;
     z-index: var(--z-header);
-    height: 56px;
-    background: var(--bg-surface-0);
+    height: var(--bottom-bar-height);
+    background: var(--surface-0);
     border-top: 1px solid var(--border);
     // Safe area
     padding-bottom: env(safe-area-inset-bottom);
@@ -51,28 +51,6 @@
   }
 }
 
-// Mobile sidebar drawer
-.sidebar-drawer {
-  position: fixed;
-  z-index: var(--z-modal); // above the shared backdrop
-  inset-block: 0;
-  inset-inline-start: 0;
-  width: min(280px, 85vw);
-  background: var(--bg-surface-0);
-  border-inline-end: 1px solid var(--border);
-  transform: translateX(-100%);
-  @include motion(250ms);
-  transition-property: transform;
-  transition-timing-function: $ease-out;
-
-  [dir='rtl'] & {
-    transform: translateX(100%);
-  }
-  &.is-open,
-  [dir='rtl'] &.is-open {
-    transform: none;
-  }
-
-  display: flex;
-  flex-direction: column;
-}
+// Mobile sidebar drawer is now a Bootstrap Offcanvas
+// (.offcanvas.offcanvas-start.sidebar-drawer) — see components/_modal.scss
+// for the offcanvas theme, RTL mirroring, and drawer width.

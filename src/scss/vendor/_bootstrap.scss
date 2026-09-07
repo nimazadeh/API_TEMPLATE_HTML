@@ -1,13 +1,16 @@
 // =============================================================
-// APIForge X — Bootstrap import (curated subset)
+// APIForge X — Bootstrap import (curated)
 //
 // Bootstrap 5.3.8 ships as a legacy @import-based SCSS library, so
 // variable overrides must be declared in the shared scope BEFORE the
-// variables partial is imported. We pull in only what the template
-// uses — grid, containers, utilities, reboot, typography — and build
-// every component (buttons, forms, tables, cards, badges, code,
-// modals, tooltips, progress, nav) ourselves so it matches the
-// APIForge X design system instead of looking like stock Bootstrap.
+// variables partial is imported.
+//
+// We use Bootstrap as the implementation toolkit — grid, utilities,
+// forms, modal, offcanvas, dropdown, collapse, tabs, pagination,
+// tooltip, toast, alert, badge, breadcrumb — and then re-theme it
+// through the token bridge (base/_bootstrap-overrides.scss) and our
+// component layer (components/*), so Bootstrap stays a toolkit and not
+// the visual identity.
 // =============================================================
 
 // 1. Functions first (needed by some variable defaults)
@@ -58,10 +61,10 @@ $border-radius-xl: 0.75rem;
 $border-radius-xxl: 0.75rem;
 $border-radius-pill: 50rem;
 
-//    No shadows (hairlines over shadows — D-007)
+//    No shadows by default (hairlines over shadows — D-007)
 $enable-shadows: false;
 
-//    We implement our own dark/light system via data-theme (D-004)
+//    We implement our own dark/light/system via data-theme (D-004)
 $enable-dark-mode: false;
 
 //    Focus rings (accent)
@@ -78,7 +81,7 @@ $grid-gutter-width: 1.5rem;
 @import 'bootstrap/scss/mixins';
 @import 'bootstrap/scss/utilities';
 
-// 4. Layout & content (only what we use)
+// 4. Layout & content
 @import 'bootstrap/scss/root';
 @import 'bootstrap/scss/reboot';
 @import 'bootstrap/scss/type';
@@ -87,5 +90,25 @@ $grid-gutter-width: 1.5rem;
 @import 'bootstrap/scss/grid';
 @import 'bootstrap/scss/helpers';
 
-// 5. Utilities API (generates .m-*, .p-*, .text-*, .d-*, .gap-*, etc.)
+// 5. Components (re-themed by our component layer)
+@import 'bootstrap/scss/tables';
+@import 'bootstrap/scss/forms';
+@import 'bootstrap/scss/buttons';
+@import 'bootstrap/scss/button-group';
+@import 'bootstrap/scss/transitions';
+@import 'bootstrap/scss/dropdown';
+@import 'bootstrap/scss/nav';
+@import 'bootstrap/scss/card';
+@import 'bootstrap/scss/breadcrumb';
+@import 'bootstrap/scss/pagination';
+@import 'bootstrap/scss/badge';
+@import 'bootstrap/scss/alert';
+@import 'bootstrap/scss/progress';
+@import 'bootstrap/scss/close';
+@import 'bootstrap/scss/toasts';
+@import 'bootstrap/scss/modal';
+@import 'bootstrap/scss/tooltip';
+@import 'bootstrap/scss/offcanvas';
+
+// 6. Utilities API (generates .m-*, .p-*, .text-*, .d-*, .gap-*, etc.)
 @import 'bootstrap/scss/utilities/api';

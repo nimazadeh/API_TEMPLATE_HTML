@@ -1,0 +1,33 @@
+// =============================================================
+// APIForge X — Font architecture (single source of truth)
+//
+// All fonts are locally bundled (no CDN). Delivered via Fontsource,
+// which ships versioned woff2 files and emits the @font-face rules
+// at build time — Vite rewrites the url()s to hashed local assets.
+//
+// Lanes (D-005 + Phase 2):
+//   PERSIAN_UI   → Vazirmatn            (UI + headings, fa)
+//   LATIN_UI     → Inter Variable       (UI + headings, en) — ONE Latin font
+//   TECHNICAL_TERM → Inter (semantic, inherits Latin UI)
+//   CODE         → JetBrains Mono       (code, paths, identifiers)
+//   NUMERIC_DATA → Inter (tabular-nums) / Vazirmatn (fa)
+//
+// Why Inter Variable (not Inter Tight, not Geist):
+//   • One family covers UI text and display headlines (tight tracking
+//     is applied via letter-spacing, not a second font file).
+//   • Geist is Vercel-branded; Inter Tight duplicates Inter for a
+//     marginal gain. One deliberate, neutral, open choice wins.
+// =============================================================
+
+// Inter — variable (wght 100–900); the single Latin UI/display face.
+@import '@fontsource-variable/inter';
+
+// JetBrains Mono — code / data contexts only. 400 + 500.
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
+// Vazirmatn — Persian UI. 300 / 400 / 500 / 700.
+@import '@fontsource/vazirmatn/300.css';
+@import '@fontsource/vazirmatn/400.css';
+@import '@fontsource/vazirmatn/500.css';
+@import '@fontsource/vazirmatn/700.css';

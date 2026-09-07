@@ -1,6 +1,6 @@
 // =============================================================
 // APIForge X — Table renderers (mock data → <tr>)
-// Logs & keys for the style guide. Real pages (Phase 2+) reuse these
+// Logs & keys for the style guide. Real pages (Phase 3+) reuse these
 // builders with URL-state filters and pagination.
 // =============================================================
 
@@ -29,7 +29,7 @@ export function logRow(log) {
       <td>
         <span class="d-inline-flex align-items-center gap-1">
           <code class="ltr-isolate mono-sm text-secondary">${escapeHtml(log.id)}</code>
-          <button type="button" class="btn btn-icon btn-icon--sm" data-copy="${escapeHtml(log.id)}" aria-label="Copy request ID" data-tooltip="Copy ID">
+          <button type="button" class="btn btn-icon btn-icon--sm" data-copy="${escapeHtml(log.id)}" aria-label="Copy request ID" data-bs-toggle="tooltip" data-bs-title="Copy ID">
             <i data-lucide="copy"></i>
           </button>
         </span>
@@ -49,7 +49,7 @@ export function keyRow(key) {
       <td>
         <span class="d-inline-flex align-items-center gap-1">
           <code class="ltr-isolate mono-sm text-secondary">${escapeHtml(key.prefix)}…</code>
-          <button type="button" class="btn btn-icon btn-icon--sm" data-copy="${escapeHtml(key.prefix)}" aria-label="Copy key" data-tooltip="Copy key">
+          <button type="button" class="btn btn-icon btn-icon--sm" data-copy="${escapeHtml(key.prefix)}" aria-label="Copy key" data-bs-toggle="tooltip" data-bs-title="Copy key">
             <i data-lucide="copy"></i>
           </button>
         </span>

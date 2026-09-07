@@ -1,17 +1,26 @@
 // =============================================================
 // APIForge X — Design Tokens: Typography
-// 3 strict lanes: sans UI (Inter), mono code (JetBrains Mono),
-// Persian (Vazirmatn). Tabular numbers for all metrics.
-// Source of truth: docs/product/DESIGN_DIRECTION.md
+// Five lanes (established in Phase 0/1, formalized here):
+//   PERSIAN_UI     Vazirmatn — Persian interface & headings
+//   LATIN_UI       Inter Variable — English interface & headings
+//   TECHNICAL_TERM Inter — technical terms inside Persian text
+//                  (API, REST API, SDK, endpoint) — must NOT switch
+//                  to Vazirmatn when embedded in RTL
+//   CODE           JetBrains Mono — code, paths, identifiers, JSON
+//   NUMERIC_DATA   Inter/Vazirmatn with tabular-nums (tnum) alignment
+// Source: docs/product/DESIGN_DIRECTION.md (D-005)
 // =============================================================
 
 :root {
-  --font-sans: 'Inter Variable', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  // Canonical five-lane tokens
+  --font-persian-ui: 'Vazirmatn', 'Inter Variable', Tahoma, sans-serif;
+  --font-latin-ui: 'Inter Variable', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     sans-serif;
-  --font-display: 'Inter Variable', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  --font-technical: 'Inter Variable', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-fa: 'Vazirmatn', 'Inter Variable', Tahoma, sans-serif;
+  --font-code: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-numeric: 'Inter Variable', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
 
   // Type scale (app) — see DESIGN_DIRECTION.md type table
   --fs-display: 48px;

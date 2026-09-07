@@ -15,7 +15,7 @@
 
 // Stacked floating shadow (dropdowns, modals, command palette only)
 .floating {
-  box-shadow: var(--shadow-floating);
+  box-shadow: var(--elevation-2);
 }
 
 // No-caret / reset list
@@ -47,7 +47,7 @@
   height: 26px;
   border-radius: 7px;
   background: var(--accent);
-  color: #fff;
+  color: var(--text-on-accent);
   flex: none;
   svg {
     width: 15px;
