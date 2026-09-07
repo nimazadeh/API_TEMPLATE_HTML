@@ -3,9 +3,9 @@
 ## Project: APIForge X — Premium Developer API Platform HTML Template
 
 **Branch:** arena/01a07d58-api-template-html
-**Phase:** PHASE 3B — ADVANCED DEVELOPER WORKFLOWS
+**Phase:** PHASE 3 VISUAL QA & DESIGN REVIEW (gate) — then PHASE 3C remains
 **Date:** 2026-09-07
-**Status:** Phase 3B Complete — Webhooks, Endpoints, Errors, Rate Limits and Environments shipped; Phase 3C (Team/Billing/Settings) plus docs/metrics/marketing remain
+**Status:** Phase 3 Visual QA gate PASS ✅ — 0 P0/P1, 2 P2 fixed (APIs method search, `<th scope="col">`); headless runtime QA 37/37 green; visual/responsive audits static-only (no browser in sandbox). Phase 3C (Team/Billing/Settings) plus docs/metrics/marketing remain.
 
 ---
 
@@ -124,6 +124,22 @@
 - [x] Dev server serves all 14 pages + new modules transform over HTTP (200)
 - [x] Static QA: `getElementById` targets resolve, `data-copy-target` ids resolve, drawers exist on their pages, no broken links, no missing icons, no unused imports, no `Phase 3B` tooltips left in nav
 - [~] Interaction / responsive / visual QA not executed (no browser in sandbox) — recorded honestly, see TEST_STATUS.md
+
+---
+
+### PHASE 3 VISUAL QA & DESIGN REVIEW (gate) — PASS ✅
+
+**Objectives Achieved:**
+- [x] Headless runtime QA via a jsdom harness against the BUILT `dist/` pages: **37/37 interaction scenarios green** across all 10 product pages (dashboard 3, apis 3, api-keys 2, logs 3, usage 2, webhooks 5, endpoints 4, errors 4, rate-limits 4, environments 7) with **0 jsdom/console/module-eval errors**
+- [x] Static design audit vs `DESIGN_DIRECTION.md`: breakpoints (576/768/992/1200/1400 + max-widths), dark multi-layer surface hierarchy, light override, system theme, `[dir=rtl]` + logical properties, `.ltr-isolate`, code/chart LTR forcing, five typography lanes (Inter Variable only, no Inter Tight/Geist, no CDN, fonts local), reduced-motion (35), `:focus-visible` ring
+- [x] Structural a11y audit (13 pages) clean after the `scope="col"` fix
+
+**Fixed (2 P2, low-risk + systemic):**
+- `src/js/pages/apis.js` — search now matches HTTP method (typing "POST" no longer returns empty)
+- 11 HTML files — `<th scope="col">` on all table headers (WCAG 1.3.1)
+
+**Honest limitations (browser unavailable in this sandbox):**
+- Real-browser visual/responsive at 360/390/430/768/1024/1440, real chart painting, keyboard traversal, in-situ contrast, and full WCAG were NOT executed — recorded, not claimed.
 
 ---
 

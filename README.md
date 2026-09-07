@@ -6,10 +6,11 @@ A dark-first, keyboard-first, **RTL first-class** HTML template for API platform
 depth-over-breadth developer tool surface in the spirit of Stripe, Resend,
 Vercel and Linear.
 
-> **Status:** Phase 3B — Advanced Developer Workflows complete. Ten product pages
-> ship as a working vertical slice (Dashboard, APIs, Endpoints, API Keys, Logs,
-> Webhooks, Errors, Rate Limits, Usage, Environments). See
-> `/project-state/PROJECT_STATE.md`.
+> **Status:** Phase 3 Visual QA & Design Review gate **passed** ✅ (0 P0/P1, 2 P2
+> fixed; headless runtime QA 37/37 green; visual/responsive audits static-only —
+> no browser in the sandbox). Ten product pages ship as a working vertical slice
+> (Dashboard, APIs, Endpoints, API Keys, Logs, Webhooks, Errors, Rate Limits,
+> Usage, Environments). See `/project-state/PROJECT_STATE.md`.
 
 ## Stack
 

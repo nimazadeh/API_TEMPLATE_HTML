@@ -1,5 +1,79 @@
 # Test Status — APIForge X
 
+## Phase 3 Visual QA & Design Review Gate — PASS ✅ (with honest limitations)
+
+**Date:** 2026-09-07
+**Status:** PASS ✅ — 0 P0, 0 P1, 2 P2 issues fixed. Runtime interaction QA executed headlessly (37/37 scenario steps green, 0 JS errors); visual/responsive audits are STATIC only — no real browser exists in this sandbox, and the E2B live preview is token-gated. Nothing is marked PASS that was not actually executed.
+
+### Environment honesty (read first)
+
+- **Browser / preview:** NOT available. No chromium/chrome/firefox binaries, no playwright/puppeteer; `fetch_page` → `localhost` returns 400 and the E2B preview returns `Missing Traffic Access Token`.
+- **Strongest available alternative executed:** (1) a jsdom harness that imports each BUILT page chunk into a real DOM and drives interactions with console/jsdom-error capture; (2) static audits of the compiled CSS + markup against `DESIGN_DIRECTION.md`.
+- **Not executed (recorded, not guessed):** real pixel layout at any viewport, real theme rendering, real chart painting, real keyboard/focus traversal, in-situ color/contrast. These remain `[ ]` below.
+
+### 1. Runtime interaction QA — EXECUTED (jsdom), PASS ✅ 37/37
+
+Per-page scenarios driven in a real DOM against `dist/*.html` + built chunks (0 jsdom errors, 0 console errors, 0 module eval errors on all 10 pages):
+
+- `dashboard` 3/3 — env switch→test banner, theme→light, range selector 7d
+- `apis` 3/3 — endpoint row→doc+tester, search "POST"→method-filtered rows, send request→response viewer
+- `api-keys` 2/2 — create modal opens, reveal action
+- `logs` 3/3 — search filter, row→detail drawer, CSV export
+- `usage` 2/2 — CSV export, range switch
+- `webhooks` 5/5 — row→drawer, failed→retry enabled, retry, replay (list 26→27, pending row appears), refresh
+- `endpoints` 4/4 — row→drawer, create modal opens, empty-save→validation toast (0 rows added), create endpoint (15→16)
+- `errors` 4/4 — row→drawer, mark resolved, assign, search empty state
+- `rate-limits` 4/4 — banner, 3 limit cards, 6 rules, 2 charts
+- `environments` 7/7 — production banner, live vars/keys, staging switch, reveal, add variable, delete, undo
+
+### 2. Themes — static PASS
+
+- Dark (primary): token ladder verified — canvas `#0a0a0a`, surface-1 `#141415`, surface-2 `#1a1a1c`, surface-3 `#202023`, overlay `#161618`, code `#0f0f10` — a real multi-layer surface hierarchy, not a flat black panel.
+- Light: intentional `[data-theme='light']` override (canvas `#fcfcfc`, cards `#ffffff`, zinc surfaces); code wells stay dark (Vercel/Stripe discipline). Not an inverted dark theme.
+- System: `theme.js` `system` mode follows `prefers-color-scheme` live; no-flash inline script present.
+- Contrast (computed from tokens): dark text-primary 17.6–19.0:1, secondary 7.2–7.7:1; light primary 17.3–17.7:1, secondary 4.83:1. Observations (per-spec, left unchanged): tertiary `#71717a` on surface-1 = 3.81:1 and accent links ≈4.4:1 — both are the exact values DESIGN_DIRECTION.md specifies; noted, not "fixed" (would be a design decision).
+
+### 3. RTL / LTR — static PASS
+
+- `[dir=rtl]` rules compiled (13); logical properties used throughout (margin-inline 17, padding-inline 19, inset-inline 7, border-inline 7); `.ltr-isolate { direction:ltr; unicode-bidi:isolate; text-align:left }` compiled and applied to endpoints/keys/URLs/JSON/stack frames/headers/IPs/timestamps.
+- Code wells force LTR (`direction:ltr; text-align:left` on `.code-block`), charts force LTR (`direction:ltr` on `.chart__body`).
+- Directional icons mirror only when semantic: `data-dir-icon="back|next"` re-chooses `arrow-left/right` per direction (`rtl-test.js`); non-directional icons untouched. `ArrowLeft/Right`, `ChevronLeft/Right` registered.
+- `rtl.html` (Persian demo) + `rtl-test.html` (dir/theme harness) verified structurally.
+
+### 4. Typography lanes — static PASS
+
+- Five lanes persisted as tokens: PERSIAN_UI (Vazirmatn) · LATIN_UI (Inter Variable — the single Latin font) · TECHNICAL_TERM (Inter) · CODE (JetBrains Mono) · NUMERIC_DATA (tabular-nums). No Inter Tight, no Geist, no CDN (`fonts.googleapis/gstatic/jsdelivr` = 0); all fonts locally bundled via Fontsource woff2.
+
+### 5. Responsive / mobile — STATIC ONLY (not visually executed)
+
+- Breakpoints compiled: `min-width` 576/768/992/1200/1400 present; `max-width` 575.98/767.98/991.98/1199.98 present.
+- Mobile behavior is intentional, not shrunk: `.app-shell` → single column + hidden sidebar + bottom tab bar (`env(safe-area-inset-bottom)`) at ≤767.98px; `.limit-grid`→1fr, `.split` (API explorer)→1fr, `.attribution`→1fr; `.table-responsive{overflow-x:auto}` wraps every table; drawers `min(560px,100vw)`, sidebar drawer `min(280px,85vw)`; toolbars/filter bars `flex-wrap`.
+- 360/390/430 use the same ≤767.98 mobile rules (no device-specific breakpoints, per the doc's breakpoint table). `[ ]` real-device pixel check not executed.
+
+### 6. Accessibility — static PASS (WCAG NOT claimed)
+
+- Global `:focus-visible` accent ring (2px, offset 2px) + `prefers-reduced-motion` (35 rules) compiled.
+- Structural audit (all 13 pages): 0 unlabelled form controls, 0 unlabelled icon-only buttons, 0 tables outside `.table-responsive`, 0 images missing `alt`, 0 duplicate ids, all pages have `lang`.
+
+### Fixed in this gate (2 P2 issues — low-risk, systemic, design-system-consistent)
+
+1. `apis` search did not match the HTTP method — typing "POST" returned an empty list. Now matches method/path/summary/group (`src/js/pages/apis.js`).
+2. Every table header `<th>` lacked `scope` — added `scope="col"` across 11 HTML files (a11y, WCAG 1.3.1 table-header association).
+
+### Harness-only corrections (no product code; recorded for reproducibility)
+
+- jsdom realm gaps that broke Bootstrap interactions in the harness (NOT app bugs): globalized `Event`/`CSS` (Bootstrap's selector-escape uses bare `CSS.escape`; modal `.show` is applied asynchronously ~5–80ms after the transition), corrected `tr[data-endpoint]` (vs `data-id`) selector on `apis`, searched a matchable term on `logs`, and cleared the pre-filled path before the `endpoints` empty-save assertion.
+
+### Remaining limitations
+
+- [ ] Real-browser visual/responsive QA (360/390/430/768/1024/1440) — not executed; no browser/preview available
+- [ ] Chart.js actual painting + `afx:theme` re-render — harness stubs the 2D context (shapes only, no pixels)
+- [ ] Keyboard focus traversal, dialog focus trap, reduced-motion — code present, not exercised in a browser
+- [ ] Full WCAG 2.x claim — NOT made; static checks only
+- [ ] In-situ contrast verification (rendered text on rendered surfaces) — computed from tokens only
+
+---
+
 ## Phase 3B — Verification Gate (post-implementation pass)
 
 **Date:** 2026-09-07

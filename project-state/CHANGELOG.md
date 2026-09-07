@@ -6,6 +6,25 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## [Phase 3 Visual QA & Design Review] — 2026-09-07 — VERIFICATION GATE PASS ✅
+
+### Fixed
+- `src/js/pages/apis.js` — endpoint search now matches the HTTP method (typing "POST" previously returned an empty list); method/path/summary/group all matched
+- 11 HTML files — added `scope="col"` to every table header `<th>` (api-keys, apis, endpoints, environments, errors, logs, rate-limits, rtl-test, rtl, style-guide, webhooks)
+
+### Verified (executed)
+- Headless runtime QA (jsdom, built `dist/` chunks in a real DOM): **37/37 interaction scenario steps PASS** across all 10 product pages with **0 jsdom errors, 0 console errors, 0 module eval errors** (dashboard 3, apis 3, api-keys 2, logs 3, usage 2, webhooks 5, endpoints 4, errors 4, rate-limits 4, environments 7)
+- Static design audits against `DESIGN_DIRECTION.md`: breakpoints (576/768/992/1200/1400 + max-widths), `[dir=rtl]` rules + logical properties, `.ltr-isolate`, code/chart LTR forcing, five typography lanes, local fonts (no Inter Tight/Geist/CDN), reduced-motion (35), `:focus-visible` ring, `color-scheme`
+- Structural a11y audit (13 pages): 0 unlabelled controls/icon-buttons, 0 tables outside `.table-responsive`, 0 missing alt, 0 duplicate ids — after the `scope="col"` fix
+- Contrast computed from tokens (dark primary 17.6–19.0:1, secondary 7.2–7.7:1; light primary 17.3–17.7:1)
+
+### Remaining limitations (recorded honestly — NOT executed)
+- Real-browser visual/responsive QA — no browser/preview available in the sandbox (E2B preview token-gated); nothing marked PASS without execution
+- Chart.js pixel rendering, keyboard focus traversal, in-situ contrast — code present, not browser-verified
+- Full WCAG 2.x claim — NOT made (static checks only)
+
+---
+
 ## [Phase 3B] — 2026-09-07 — ADVANCED DEVELOPER WORKFLOWS COMPLETE ✅
 
 ### Added

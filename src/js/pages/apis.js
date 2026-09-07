@@ -72,7 +72,7 @@ function endpointRows(list) {
 function renderEndpointList(filter = '') {
   const q = filter.trim().toLowerCase();
   const list = endpoints.filter(
-    (ep) => !q || ep.path.toLowerCase().includes(q) || ep.summary.toLowerCase().includes(q) || ep.group.toLowerCase().includes(q)
+    (ep) => !q || ep.method.toLowerCase().includes(q) || ep.path.toLowerCase().includes(q) || ep.summary.toLowerCase().includes(q) || ep.group.toLowerCase().includes(q)
   );
   const tbody = document.getElementById('endpoint-list');
   tbody.innerHTML = list.length
