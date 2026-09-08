@@ -8,10 +8,12 @@
 
 import '../scss/main.scss';
 
+import { initI18n } from './core/i18n.js';
 import { initIcons } from './components/icons.js';
 import { initTheme } from './components/theme.js';
 import { initCopy } from './components/copy.js';
 import { initCodeBlocks } from './components/code-block.js';
+import { initMotion } from './components/motion.js';
 import './core/bootstrap.js';
 
 /**
@@ -43,10 +45,13 @@ function initDrawerLinks() {
 }
 
 export function bootSite() {
+  initI18n();
   initIcons();
   initTheme();
   initCopy();
   initCodeBlocks();
   initNavActive();
   initDrawerLinks();
+  // Last: every reveal is measured after the DOM is final.
+  initMotion();
 }

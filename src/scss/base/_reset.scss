@@ -102,10 +102,21 @@ h4,
   line-height: 1.4;
 }
 
-// Focus visibility — keyboard users always see focus
+// Focus visibility — keyboard users always see focus. The ring grows
+// outward instead of snapping into place (transform-free, 150ms).
 :focus-visible {
   outline: var(--focus-ring-width) solid var(--accent);
   outline-offset: var(--focus-ring-offset);
+  animation: afx-focus-ring var(--motion-fast) var(--ease-standard);
+}
+
+@keyframes afx-focus-ring {
+  from {
+    outline-offset: 0;
+  }
+  to {
+    outline-offset: var(--focus-ring-offset);
+  }
 }
 
 // Reduced motion: disable smooth scrolling etc.
@@ -114,5 +125,9 @@ h4,
   *::before,
   *::after {
     scroll-behavior: auto !important;
+  }
+
+  :focus-visible {
+    animation: none;
   }
 }

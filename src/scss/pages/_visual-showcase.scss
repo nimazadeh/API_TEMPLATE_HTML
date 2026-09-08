@@ -1,0 +1,172 @@
+// =============================================================
+// APIForge X — Pages: Visual showcase (Phase 5.5)
+// QA page for the premium polish pass: backdrop layers, motion
+// tokens, card/button micro-interactions, overlays and toasts.
+// Every value comes from a token — no literals in this file.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+// Content sits above the atmospheric backdrop layer.
+.showcase-page {
+  position: relative;
+  z-index: 1;
+}
+
+.showcase-bar {
+  // Sticks *below* the marketing header, which owns top: 0.
+  position: sticky;
+  top: var(--site-header-height);
+  z-index: calc(var(--z-header) - 1);
+  background: var(--surface-canvas);
+  border-bottom: 1px solid var(--border-subtle);
+
+  @supports (backdrop-filter: blur(1px)) {
+    background: color-mix(in srgb, var(--surface-canvas) 85%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-block: var(--space-3);
+  }
+}
+
+// --- Section scaffolding ----------------------------------------------------
+.showcase-section {
+  padding-block: var(--space-6);
+
+  & + & {
+    border-top: 1px solid var(--border-subtle);
+  }
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+
+  @include mq-max('md') {
+    grid-template-columns: 1fr;
+  }
+}
+
+// --- Backdrop preview tiles -------------------------------------------------
+.showcase-tile {
+  position: relative;
+  height: 168px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-canvas);
+
+  .backdrop {
+    // Inside a tile the layer is a live specimen, not page furniture.
+    opacity: 1;
+    animation: none;
+  }
+
+  &__label {
+    position: absolute;
+    inset-inline-start: var(--space-3);
+    bottom: var(--space-3);
+    font-family: var(--font-code);
+    font-size: var(--fs-caption);
+    color: var(--text-secondary);
+  }
+}
+
+// --- Motion token playground ------------------------------------------------
+.showcase-motion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+
+  &__stage {
+    position: relative;
+    flex: 1;
+    min-width: 220px;
+    height: 96px;
+    display: grid;
+    place-items: center;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface-1);
+  }
+
+  &__dot {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: var(--accent);
+  }
+}
+
+// Motion-speed demos — each uses one token, nothing hardcoded.
+.showcase-motion__dot.is-fast {
+  transition: translate var(--motion-fast) var(--ease-standard),
+    scale var(--motion-fast) var(--ease-standard);
+}
+.showcase-motion__dot.is-normal {
+  transition: translate var(--motion-normal) var(--ease-standard),
+    scale var(--motion-normal) var(--ease-standard);
+}
+.showcase-motion__dot.is-slow {
+  transition: translate var(--motion-slow) var(--ease-standard),
+    scale var(--motion-slow) var(--ease-standard);
+}
+.showcase-motion__dot.is-nudged {
+  translate: 0 calc(var(--motion-shift) * -1.5);
+  scale: 1.12;
+}
+
+// Replay helper: the page clears animations by adding .no-anim, forces a
+// reflow, then removes it so every entrance starts from frame zero.
+.no-anim,
+.no-anim * {
+  animation: none !important;
+}
+
+// --- Specimen rows ----------------------------------------------------------
+.showcase-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.showcase-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--accent-subtle-border);
+  border-radius: var(--radius-md);
+  background: var(--accent-subtle-bg);
+  font-size: var(--fs-body-sm);
+  color: var(--text-secondary);
+
+  svg {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    margin-block-start: 2px;
+    color: var(--accent);
+  }
+}
+
+// Mini hero used by the showcase (same choreography as the landing page).
+.showcase-hero {
+  padding-block: var(--space-7) var(--space-6);
+  text-align: center;
+
+  .hero__inner {
+    max-width: 640px;
+    margin-inline: auto;
+  }
+}

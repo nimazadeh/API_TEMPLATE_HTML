@@ -7,6 +7,7 @@
 // =============================================================
 
 import { Modal } from '../core/bootstrap.js';
+import { t } from '../core/i18n.js';
 
 let pending = null;
 
@@ -20,10 +21,10 @@ export function ask(opts = {}) {
   const bodyEl = document.getElementById(opts.bodyId || 'confirm-modal-body');
   const submit = document.getElementById(opts.submitId || 'confirm-modal-submit');
 
-  if (titleEl) titleEl.textContent = opts.title || 'Are you sure?';
+  if (titleEl) titleEl.textContent = opts.title || t('confirm.areYouSure');
   if (bodyEl) bodyEl.textContent = opts.body || '';
   if (submit) {
-    submit.textContent = opts.confirmLabel || 'Confirm';
+    submit.textContent = opts.confirmLabel || t('action.confirm');
     submit.className = `btn ${opts.danger ? 'btn-danger' : 'btn-primary'}`;
   }
 

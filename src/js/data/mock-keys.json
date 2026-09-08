@@ -1,7 +1,7 @@
 [
   {
     "id": "key_7TkTYBzu",
-    "name": "Production backend",
+    "name": "درگاه پرداخت",
     "prefix": "sk_live_wB0jrqmT",
     "scopes": [
       "emails:read",
@@ -11,14 +11,14 @@
     ],
     "env": "live",
     "permission": "full",
-    "createdAt": "2025-11-14T22:26:10.010Z",
-    "lastUsedAt": "2026-09-04T22:26:10.011Z",
+    "createdAt": "2025-11-15T04:27:36.519Z",
+    "lastUsedAt": "2026-09-05T04:27:36.519Z",
     "lastUsedIp": "168.112.153.208",
     "status": "active"
   },
   {
     "id": "key_fg9TfUCl",
-    "name": "CLI tool",
+    "name": "ابزار خط فرمان",
     "prefix": "sk_live_bFi5nY1R",
     "scopes": [
       "emails:read",
@@ -26,14 +26,14 @@
     ],
     "env": "live",
     "permission": "restricted",
-    "createdAt": "2026-07-01T22:26:10.011Z",
-    "lastUsedAt": "2026-09-06T16:26:10.011Z",
+    "createdAt": "2026-07-02T04:27:36.520Z",
+    "lastUsedAt": "2026-09-06T22:27:36.520Z",
     "lastUsedIp": "92.182.83.87",
     "status": "active"
   },
   {
     "id": "key_Cy9NTCj9",
-    "name": "Staging server",
+    "name": "سرور آزمایشی",
     "prefix": "sk_live_9CK8u1oP",
     "scopes": [
       "audiences:read",
@@ -41,14 +41,14 @@
     ],
     "env": "live",
     "permission": "restricted",
-    "createdAt": "2025-12-16T22:26:10.011Z",
-    "lastUsedAt": "2026-09-05T11:26:10.011Z",
+    "createdAt": "2025-12-17T04:27:36.520Z",
+    "lastUsedAt": "2026-09-05T17:27:36.520Z",
     "lastUsedIp": "133.212.176.142",
     "status": "revoked"
   },
   {
     "id": "key_pcvint10",
-    "name": "CI pipeline",
+    "name": "خط یکپارچه‌سازی (CI)",
     "prefix": "sk_live_GYvKiH58",
     "scopes": [
       "emails:read",
@@ -56,14 +56,14 @@
     ],
     "env": "live",
     "permission": "restricted",
-    "createdAt": "2025-11-01T22:26:10.011Z",
-    "lastUsedAt": "2026-09-06T00:26:10.011Z",
+    "createdAt": "2025-11-02T04:27:36.520Z",
+    "lastUsedAt": "2026-09-06T06:27:36.520Z",
     "lastUsedIp": "153.101.127.193",
     "status": "active"
   },
   {
     "id": "key_blIZSPAp",
-    "name": "Local dev",
+    "name": "توسعهٔ محلی",
     "prefix": "sk_test_1dcDTRVL",
     "scopes": [
       "emails:read",
@@ -72,28 +72,28 @@
     ],
     "env": "test",
     "permission": "full",
-    "createdAt": "2026-03-21T22:26:10.011Z",
-    "lastUsedAt": "2026-09-05T00:26:10.011Z",
+    "createdAt": "2026-03-22T04:27:36.520Z",
+    "lastUsedAt": "2026-09-05T06:27:36.520Z",
     "lastUsedIp": "162.40.169.176",
     "status": "active"
   },
   {
     "id": "key_LZbpJBlK",
-    "name": "Analytics job",
+    "name": "سامانهٔ تحلیل کاربران",
     "prefix": "sk_test_AEhYnBDb",
     "scopes": [
       "usage:read"
     ],
     "env": "test",
     "permission": "restricted",
-    "createdAt": "2026-01-15T22:26:10.011Z",
-    "lastUsedAt": "2026-09-07T00:26:10.011Z",
+    "createdAt": "2026-01-16T04:27:36.520Z",
+    "lastUsedAt": "2026-09-07T06:27:36.520Z",
     "lastUsedIp": "29.138.116.89",
     "status": "active"
   },
   {
     "id": "key_4i0EmAsY",
-    "name": "Staging server",
+    "name": "سرور محیط آزمایشی",
     "prefix": "sk_test_NeCY9S9Y",
     "scopes": [
       "emails:read",
@@ -102,22 +102,22 @@
     ],
     "env": "staging",
     "permission": "restricted",
-    "createdAt": "2026-04-26T22:26:10.011Z",
-    "lastUsedAt": "2026-09-06T01:26:10.011Z",
+    "createdAt": "2026-04-27T04:27:36.520Z",
+    "lastUsedAt": "2026-09-06T07:27:36.520Z",
     "lastUsedIp": "65.57.97.134",
     "status": "active"
   },
   {
     "id": "key_8MYiZKW3",
-    "name": "Preview deploy",
+    "name": "استقرار پیش‌نمایش",
     "prefix": "sk_test_udlVEwhM",
     "scopes": [
       "audiences:read"
     ],
     "env": "staging",
     "permission": "restricted",
-    "createdAt": "2026-04-14T22:26:10.011Z",
-    "lastUsedAt": "2026-09-04T16:26:10.011Z",
+    "createdAt": "2026-04-15T04:27:36.520Z",
+    "lastUsedAt": "2026-09-04T22:27:36.520Z",
     "lastUsedIp": "204.79.61.246",
     "status": "active"
   }

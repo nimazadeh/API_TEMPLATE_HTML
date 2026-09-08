@@ -3,37 +3,37 @@
     "apiId": "api_emails",
     "method": "POST",
     "path": "/v1/emails",
-    "summary": "Send an email",
-    "group": "Emails",
-    "description": "Queues a transactional email for delivery to one or more recipients. Delivery status is available via the returned email id.",
+    "summary": "ارسال ایمیل",
+    "group": "ایمیل",
+    "description": "یک ایمیل تراکنشی را برای تحویل به یک یا چند گیرنده در صف قرار می‌دهد. وضعیت تحویل از طریق شناسهٔ بازگشتی ایمیل قابل پیگیری است.",
     "params": [
       {
         "name": "to",
         "type": "string",
         "location": "body",
         "required": true,
-        "description": "Recipient email address."
+        "description": "نشانی ایمیل گیرنده."
       },
       {
         "name": "subject",
         "type": "string",
         "location": "body",
         "required": true,
-        "description": "Subject line for the email."
+        "description": "موضوع ایمیل."
       },
       {
         "name": "html",
         "type": "string",
         "location": "body",
         "required": false,
-        "description": "HTML body. Either html or text is required."
+        "description": "بدنهٔ HTML. ارسال یکی از html یا text الزامی است."
       },
       {
         "name": "from",
         "type": "string",
         "location": "body",
         "required": false,
-        "description": "Sender address. Defaults to your verified domain."
+        "description": "نشانی فرستنده. پیش‌فرض دامنهٔ تأییدشدهٔ شماست."
       }
     ],
     "responseExample": {
@@ -47,16 +47,16 @@
     "apiId": "api_emails",
     "method": "GET",
     "path": "/v1/emails/{id}",
-    "summary": "Retrieve an email",
-    "group": "Emails",
-    "description": "Returns the delivery status and metadata for a single email.",
+    "summary": "دریافت یک ایمیل",
+    "group": "ایمیل",
+    "description": "وضعیت تحویل و فرادادهٔ یک ایمیل را برمی‌گرداند.",
     "params": [
       {
         "name": "id",
         "type": "string",
         "location": "path",
         "required": true,
-        "description": "The email id (eml_…)."
+        "description": "شناسهٔ ایمیل (eml_…)."
       }
     ],
     "responseExample": {
@@ -70,23 +70,23 @@
     "apiId": "api_emails",
     "method": "GET",
     "path": "/v1/emails",
-    "summary": "List emails",
-    "group": "Emails",
-    "description": "Lists recently sent emails, newest first. Paginate with limit and before.",
+    "summary": "فهرست ایمیل‌ها",
+    "group": "ایمیل",
+    "description": "ایمیل‌های ارسال‌شدهٔ اخیر را از جدید به قدیم فهرست می‌کند. برای صفحه‌بندی از limit و before استفاده کنید.",
     "params": [
       {
         "name": "limit",
         "type": "integer",
         "location": "query",
         "required": false,
-        "description": "Max results to return (default 50, max 100)."
+        "description": "حداکثر تعداد نتایج (پیش‌فرض ۵۰، حداکثر ۱۰۰)."
       },
       {
         "name": "before",
         "type": "string",
         "location": "query",
         "required": false,
-        "description": "Return emails sent before this id."
+        "description": "ایمیل‌های ارسال‌شده پیش از این شناسه را برمی‌گرداند."
       }
     ],
     "responseExample": {
@@ -104,37 +104,37 @@
     "apiId": "api_ai",
     "method": "POST",
     "path": "/v1/completions",
-    "summary": "Create a completion",
-    "group": "AI",
-    "description": "Runs a model inference and streams the completion back.",
+    "summary": "ایجاد تکمیل متن",
+    "group": "هوش مصنوعی",
+    "description": "یک استنتاج مدل را اجرا می‌کند و نتیجه را به‌صورت جریانی برمی‌گرداند.",
     "params": [
       {
         "name": "model",
         "type": "string",
         "location": "body",
         "required": true,
-        "description": "Model id, e.g. forge-1 or forge-1-turbo."
+        "description": "شناسهٔ مدل، برای نمونه forge-1 یا forge-1-turbo."
       },
       {
         "name": "prompt",
         "type": "string",
         "location": "body",
         "required": true,
-        "description": "The prompt to complete."
+        "description": "دستوری که باید تکمیل شود."
       },
       {
         "name": "max_tokens",
         "type": "integer",
         "location": "body",
         "required": false,
-        "description": "Maximum tokens to generate (default 256)."
+        "description": "حداکثر توکن تولیدی (پیش‌فرض ۲۵۶)."
       },
       {
         "name": "temperature",
         "type": "number",
         "location": "body",
         "required": false,
-        "description": "Sampling temperature between 0 and 1."
+        "description": "دمای نمونه‌برداری بین ۰ و ۱."
       }
     ],
     "responseExample": {
@@ -152,23 +152,23 @@
     "apiId": "api_ai",
     "method": "POST",
     "path": "/v1/embeddings",
-    "summary": "Create embeddings",
-    "group": "AI",
-    "description": "Converts input text into a vector embedding for search and clustering.",
+    "summary": "ایجاد بردار (Embedding)",
+    "group": "هوش مصنوعی",
+    "description": "متن ورودی را برای جست‌وجو و خوشه‌بندی به بردار تبدیل می‌کند.",
     "params": [
       {
         "name": "model",
         "type": "string",
         "location": "body",
         "required": true,
-        "description": "Embedding model id, e.g. embed-1."
+        "description": "شناسهٔ مدل بردارساز، برای نمونه embed-1."
       },
       {
         "name": "input",
         "type": "array",
         "location": "body",
         "required": true,
-        "description": "Text to embed — a string or array of strings."
+        "description": "متن ورودی برای تبدیل به بردار — یک رشته یا آرایه‌ای از رشته‌ها."
       }
     ],
     "responseExample": {
@@ -190,9 +190,9 @@
     "apiId": "api_ai",
     "method": "GET",
     "path": "/v1/models",
-    "summary": "List available models",
-    "group": "AI",
-    "description": "Lists the models available to your workspace with capabilities.",
+    "summary": "فهرست مدل‌های در دسترس",
+    "group": "هوش مصنوعی",
+    "description": "مدل‌های در دسترس فضای کاری را همراه با قابلیت‌هایشان فهرست می‌کند.",
     "params": [],
     "responseExample": {
       "data": [
@@ -212,23 +212,23 @@
     "apiId": "api_audiences",
     "method": "POST",
     "path": "/v1/audiences",
-    "summary": "Create an audience",
-    "group": "Audiences",
-    "description": "Creates a new audience segment from a set of filters.",
+    "summary": "ایجاد گروه مخاطب",
+    "group": "مخاطبان",
+    "description": "یک بخش مخاطب جدید را بر اساس مجموعه‌ای از فیلترها ایجاد می‌کند.",
     "params": [
       {
         "name": "name",
         "type": "string",
         "location": "body",
         "required": true,
-        "description": "Audience name."
+        "description": "نام گروه مخاطب."
       },
       {
         "name": "filters",
         "type": "array",
         "location": "body",
         "required": false,
-        "description": "Array of filter conditions."
+        "description": "آرایه‌ای از شرط‌های فیلتر."
       }
     ],
     "responseExample": {
@@ -242,16 +242,16 @@
     "apiId": "api_audiences",
     "method": "GET",
     "path": "/v1/audiences/{id}",
-    "summary": "Retrieve an audience",
-    "group": "Audiences",
-    "description": "Returns a single audience with its current member count.",
+    "summary": "دریافت یک گروه مخاطب",
+    "group": "مخاطبان",
+    "description": "یک گروه مخاطب را همراه با تعداد اعضای فعلی برمی‌گرداند.",
     "params": [
       {
         "name": "id",
         "type": "string",
         "location": "path",
         "required": true,
-        "description": "The audience id (aud_…)."
+        "description": "شناسهٔ گروه مخاطب (aud_…)."
       }
     ],
     "responseExample": {
@@ -265,16 +265,16 @@
     "apiId": "api_audiences",
     "method": "GET",
     "path": "/v1/audiences",
-    "summary": "List audiences",
-    "group": "Audiences",
-    "description": "Lists all audiences in the workspace.",
+    "summary": "فهرست گروه‌های مخاطب",
+    "group": "مخاطبان",
+    "description": "همهٔ گروه‌های مخاطب فضای کاری را فهرست می‌کند.",
     "params": [
       {
         "name": "limit",
         "type": "integer",
         "location": "query",
         "required": false,
-        "description": "Max results (default 50)."
+        "description": "حداکثر تعداد نتایج (پیش‌فرض ۵۰)."
       }
     ],
     "responseExample": {
@@ -293,30 +293,30 @@
     "apiId": "api_webhooks",
     "method": "POST",
     "path": "/v1/webhooks",
-    "summary": "Create a webhook endpoint",
-    "group": "Webhooks",
-    "description": "Registers a URL to receive real-time events for your workspace.",
+    "summary": "ایجاد نقطهٔ پایانی وب‌هوک",
+    "group": "وب‌هوک‌ها",
+    "description": "یک نشانی را برای دریافت رویدادهای لحظه‌ای فضای کاری ثبت می‌کند.",
     "params": [
       {
         "name": "url",
         "type": "string",
         "location": "body",
         "required": true,
-        "description": "HTTPS endpoint that will receive events."
+        "description": "نقطهٔ پایانی HTTPS که رویدادها را دریافت می‌کند."
       },
       {
         "name": "events",
         "type": "array",
         "location": "body",
         "required": true,
-        "description": "Event types to subscribe to, e.g. email.sent."
+        "description": "نوع رویدادهای مورد اشتراک، برای نمونه email.sent."
       },
       {
         "name": "secret",
         "type": "string",
         "location": "body",
         "required": false,
-        "description": "Signing secret to verify deliveries."
+        "description": "کلید امضا برای بررسی تحویل‌ها."
       }
     ],
     "responseExample": {
@@ -330,9 +330,9 @@
     "apiId": "api_webhooks",
     "method": "GET",
     "path": "/v1/webhooks",
-    "summary": "List webhooks",
-    "group": "Webhooks",
-    "description": "Lists registered webhook endpoints and their state.",
+    "summary": "فهرست وب‌هوک‌ها",
+    "group": "وب‌هوک‌ها",
+    "description": "نقاط پایانی وب‌هوک ثبت‌شده و وضعیت آن‌ها را فهرست می‌کند.",
     "params": [],
     "responseExample": {
       "data": [
@@ -348,16 +348,16 @@
     "apiId": "api_webhooks",
     "method": "DELETE",
     "path": "/v1/webhooks/{id}",
-    "summary": "Delete a webhook",
-    "group": "Webhooks",
-    "description": "Permanently deletes a webhook endpoint.",
+    "summary": "حذف یک وب‌هوک",
+    "group": "وب‌هوک‌ها",
+    "description": "یک نقطهٔ پایانی وب‌هوک را برای همیشه حذف می‌کند.",
     "params": [
       {
         "name": "id",
         "type": "string",
         "location": "path",
         "required": true,
-        "description": "The webhook id (wh_…)."
+        "description": "شناسهٔ وب‌هوک (wh_…)."
       }
     ],
     "responseExample": {
@@ -370,30 +370,30 @@
     "apiId": "api_platform",
     "method": "PUT",
     "path": "/v1/api-keys/{id}",
-    "summary": "Update an API key",
-    "group": "Platform",
-    "description": "Renames a key or changes its scope grants.",
+    "summary": "به‌روزرسانی کلید API",
+    "group": "پلتفرم",
+    "description": "نام کلید را تغییر می‌دهد یا حوزه‌های دسترسی آن را اصلاح می‌کند.",
     "params": [
       {
         "name": "id",
         "type": "string",
         "location": "path",
         "required": true,
-        "description": "The key id (key_…)."
+        "description": "شناسهٔ کلید (key_…)."
       },
       {
         "name": "name",
         "type": "string",
         "location": "body",
         "required": false,
-        "description": "New display name."
+        "description": "نام نمایشی جدید."
       },
       {
         "name": "scopes",
         "type": "array",
         "location": "body",
         "required": false,
-        "description": "Replacement scope list."
+        "description": "فهرست جایگزین حوزه‌های دسترسی."
       }
     ],
     "responseExample": {
@@ -407,9 +407,9 @@
     "apiId": "api_platform",
     "method": "DELETE",
     "path": "/v1/api-keys/{id}",
-    "summary": "Revoke an API key",
-    "group": "Platform",
-    "description": "Immediately revokes a key. Requests using it will return 401.",
+    "summary": "ابطال کلید API",
+    "group": "پلتفرم",
+    "description": "کلید را بلافاصله ابطال می‌کند. درخواست‌هایی که از آن استفاده کنند پاسخ ۴۰۱ می‌گیرند.",
     "params": [
       {
         "name": "id",
@@ -429,23 +429,23 @@
     "apiId": "api_platform",
     "method": "GET",
     "path": "/v1/usage",
-    "summary": "Retrieve usage summary",
-    "group": "Platform",
-    "description": "Returns current-billing-period usage, broken out by endpoint.",
+    "summary": "دریافت خلاصهٔ مصرف",
+    "group": "پلتفرم",
+    "description": "مصرف دورهٔ صورت‌حساب جاری را به تفکیک نقطهٔ پایانی برمی‌گرداند.",
     "params": [
       {
         "name": "from",
         "type": "string",
         "location": "query",
         "required": false,
-        "description": "ISO date range start."
+        "description": "ابتدای بازهٔ زمانی (ISO)."
       },
       {
         "name": "to",
         "type": "string",
         "location": "query",
         "required": false,
-        "description": "ISO date range end."
+        "description": "انتهای بازهٔ زمانی (ISO)."
       }
     ],
     "responseExample": {

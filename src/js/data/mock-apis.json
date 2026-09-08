@@ -1,45 +1,45 @@
 [
   {
     "id": "api_emails",
-    "name": "Emails API",
+    "name": "سرویس ایمیل",
     "status": "stable",
-    "description": "Send transactional email and track delivery status.",
+    "description": "ارسال ایمیل تراکنشی و پیگیری وضعیت تحویل.",
     "basePath": "/v1/emails",
     "version": "v1",
     "endpointsCount": 3
   },
   {
     "id": "api_ai",
-    "name": "AI Inference",
+    "name": "هوش مصنوعی",
     "status": "stable",
-    "description": "Run completions and embeddings on hosted models.",
+    "description": "اجرای تکمیل متن و تبدیل به بردار روی مدل‌های میزبانی‌شده.",
     "basePath": "/v1",
     "version": "v1",
     "endpointsCount": 3
   },
   {
     "id": "api_audiences",
-    "name": "Audiences",
+    "name": "مخاطبان",
     "status": "beta",
-    "description": "Build and query audience segments.",
+    "description": "ساخت و جست‌وجوی بخش‌بندی مخاطبان.",
     "basePath": "/v1/audiences",
     "version": "v1",
     "endpointsCount": 3
   },
   {
     "id": "api_webhooks",
-    "name": "Webhooks",
+    "name": "وب‌هوک‌ها",
     "status": "stable",
-    "description": "Receive real-time events for your workspace.",
+    "description": "دریافت رویدادهای لحظه‌ای فضای کاری.",
     "basePath": "/v1/webhooks",
     "version": "v1",
     "endpointsCount": 3
   },
   {
     "id": "api_platform",
-    "name": "Platform",
+    "name": "پلتفرم",
     "status": "stable",
-    "description": "Manage keys and read usage across environments.",
+    "description": "مدیریت کلیدها و مشاهدهٔ مصرف در محیط‌های مختلف.",
     "basePath": "/v1",
     "version": "v1",
     "endpointsCount": 3

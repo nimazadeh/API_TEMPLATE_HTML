@@ -64,7 +64,7 @@
   text-decoration: none;
   font-size: var(--fs-body);
   white-space: nowrap;
-  @include motion(150ms);
+  @include motion(var(--motion-fast));
   transition-property: background-color, color;
 
   svg {

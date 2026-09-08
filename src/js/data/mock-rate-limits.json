@@ -3,91 +3,91 @@
     "perMinute": {
       "limit": 15000,
       "used": 12840,
-      "label": "Requests / minute",
-      "resetIn": "6s"
+      "label": "درخواست در دقیقه",
+      "resetIn": "۶ ثانیه"
     },
     "perDay": {
       "limit": 500000,
       "used": 431200,
-      "label": "Requests / day",
-      "resetIn": "4h 12m"
+      "label": "درخواست در روز",
+      "resetIn": "۴ ساعت و ۱۲ دقیقه"
     },
     "monthly": {
       "limit": 10000000,
       "used": 5382400,
-      "label": "Monthly quota",
-      "resetIn": "23 days",
-      "periodLabel": "September 2026"
+      "label": "سهمیهٔ ماهانه",
+      "resetIn": "۲۳ روز",
+      "periodLabel": "شهریور ۱۴۰۵"
     }
   },
   "history": [
     {
-      "date": "2026-08-25",
+      "date": "2026-08-26",
       "used": 475423,
       "limit": 500000
     },
     {
-      "date": "2026-08-26",
+      "date": "2026-08-27",
       "used": 383637,
       "limit": 500000
     },
     {
-      "date": "2026-08-27",
+      "date": "2026-08-28",
       "used": 482835,
       "limit": 500000
     },
     {
-      "date": "2026-08-28",
+      "date": "2026-08-29",
       "used": 388939,
       "limit": 500000
     },
     {
-      "date": "2026-08-29",
+      "date": "2026-08-30",
       "used": 445186,
       "limit": 500000
     },
     {
-      "date": "2026-08-30",
+      "date": "2026-08-31",
       "used": 382939,
       "limit": 500000
     },
     {
-      "date": "2026-08-31",
+      "date": "2026-09-01",
       "used": 447596,
       "limit": 500000
     },
     {
-      "date": "2026-09-01",
+      "date": "2026-09-02",
       "used": 445340,
       "limit": 500000
     },
     {
-      "date": "2026-09-02",
+      "date": "2026-09-03",
       "used": 481090,
       "limit": 500000
     },
     {
-      "date": "2026-09-03",
+      "date": "2026-09-04",
       "used": 417688,
       "limit": 500000
     },
     {
-      "date": "2026-09-04",
+      "date": "2026-09-05",
       "used": 423403,
       "limit": 500000
     },
     {
-      "date": "2026-09-05",
+      "date": "2026-09-06",
       "used": 468093,
       "limit": 500000
     },
     {
-      "date": "2026-09-06",
+      "date": "2026-09-07",
       "used": 418945,
       "limit": 500000
     },
     {
-      "date": "2026-09-07",
+      "date": "2026-09-08",
       "used": 404672,
       "limit": 500000
     }
@@ -95,55 +95,55 @@
   "rules": [
     {
       "id": "rl_emails",
-      "api": "Emails API",
+      "api": "سرویس ایمیل",
       "name": "emails:write",
       "limit": 50,
-      "window": "per second",
+      "window": "در ثانیه",
       "current": 31,
       "status": "ok"
     },
     {
       "id": "rl_completions",
-      "api": "AI Inference",
+      "api": "هوش مصنوعی",
       "name": "completions:create",
       "limit": 25,
-      "window": "per second",
+      "window": "در ثانیه",
       "current": 24,
       "status": "warning"
     },
     {
       "id": "rl_embeddings",
-      "api": "AI Inference",
+      "api": "هوش مصنوعی",
       "name": "embeddings:create",
       "limit": 40,
-      "window": "per second",
+      "window": "در ثانیه",
       "current": 42,
       "status": "breached"
     },
     {
       "id": "rl_audiences",
-      "api": "Audiences",
+      "api": "مخاطبان",
       "name": "audiences:write",
       "limit": 10,
-      "window": "per second",
+      "window": "در ثانیه",
       "current": 4,
       "status": "ok"
     },
     {
       "id": "rl_webhooks",
-      "api": "Webhooks",
+      "api": "وب‌هوک‌ها",
       "name": "deliveries",
       "limit": 100,
-      "window": "per minute",
+      "window": "در دقیقه",
       "current": 62,
       "status": "ok"
     },
     {
       "id": "rl_global",
-      "api": "Platform",
+      "api": "پلتفرم",
       "name": "global",
       "limit": 250,
-      "window": "per second",
+      "window": "در ثانیه",
       "current": 208,
       "status": "warning"
     }

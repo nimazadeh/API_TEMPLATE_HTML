@@ -1,51 +1,199 @@
 // =============================================================
-// APIForge X — Components: Toast (re-theme of Bootstrap)
-// Feedback with an optional action (Undo). Bootstrap owns show/hide;
-// we own the surface. Toasts are created via afxToast() (toast.js).
+// APIForge X — Components: Toast (Bootstrap controller, our surface)
+// Feedback with an optional title, an optional action (Undo) and a
+// close button. Bootstrap owns show/hide/delay; we own the surface.
+//
+// Structure:   [icon] [ title / message ] [close]
+// Spacing:     16-20px inline · 12-16px block — text never touches
+//              an edge. All logical properties for RTL.
+// Motion:      enter 250ms (opacity 0→1, translateY 8px→0), exit fade.
 // =============================================================
 
 @use '../tokens/_index' as *;
 
+// --- Type → token mapping (no literal colours anywhere) --------------------
 .toast {
+  --toast-accent: var(--info);
+  --toast-tint: var(--info-bg);
+  --toast-edge: var(--info-border);
+
+  &[data-type='success'] {
+    --toast-accent: var(--success);
+    --toast-tint: var(--success-bg);
+    --toast-edge: var(--success-border);
+  }
+  &[data-type='error'] {
+    --toast-accent: var(--error);
+    --toast-tint: var(--error-bg);
+    --toast-edge: var(--error-border);
+  }
+  &[data-type='warning'] {
+    --toast-accent: var(--warning);
+    --toast-tint: var(--warning-bg);
+    --toast-edge: var(--warning-border);
+  }
+}
+
+.toast {
+  // Bootstrap geometry hooks
   --bs-toast-zindex: var(--z-toast);
-  --bs-toast-padding-x: 14px;
-  --bs-toast-padding-y: 12px;
-  --bs-toast-font-size: var(--fs-body-sm);
+  --bs-toast-max-width: 380px;
+  --bs-toast-font-size: var(--fs-body); // 14px
   --bs-toast-color: var(--text-primary);
-  --bs-toast-bg: var(--surface-3);
-  --bs-toast-border-color: var(--border-hover);
+  --bs-toast-bg: var(--surface-overlay);
+  --bs-toast-border-color: var(--toast-edge);
   --bs-toast-border-width: 1px;
   --bs-toast-border-radius: var(--radius-md);
   --bs-toast-box-shadow: var(--elevation-2);
+
+  // Surface
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  width: var(--bs-toast-max-width);
+  max-width: 100%;
+  padding-block: var(--space-3); // 12px
+  padding-inline: var(--space-4); // 16px
+  background: var(--bs-toast-bg);
+  border: var(--bs-toast-border-width) solid var(--toast-edge);
+  border-radius: var(--bs-toast-border-radius);
+  // Elevation + a 2px accent rail on the inline-start edge (mirrors in RTL).
+  box-shadow: var(--elevation-2),
+    inset calc(var(--dir-sign) * 2px) 0 0 0 var(--toast-accent);
+  color: var(--bs-toast-color);
+  font-size: var(--bs-toast-font-size);
+  pointer-events: auto;
+
+  // Enter / exit — transform-free individual properties so nothing here
+  // can fight an inline transform.
+  transition: opacity var(--motion-normal) var(--ease-standard),
+    translate var(--motion-normal) var(--ease-standard);
+
+  // Bootstrap's show/hide lifecycle: `show` + `showing` are both present
+  // for one frame, then `showing` is dropped (enter) or added back (exit).
+  // `showing` must win while it is set, so it is declared last.
+  &.show {
+    opacity: 1;
+    translate: 0 0;
+  }
+  &.showing {
+    opacity: 0;
+    translate: 0 var(--motion-shift);
+  }
 }
 
+// --- Stack -----------------------------------------------------------------
 .toast-stack {
   position: fixed;
   z-index: var(--z-toast);
-  bottom: 16px;
-  inset-inline-end: 16px;
+  top: var(--space-4);
+  inset-inline-end: var(--space-4);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  width: max-content;
+  max-width: calc(100vw - var(--space-4) * 2);
+  // The stack itself never eats clicks — only the toasts do.
+  pointer-events: none;
+
+  @include mq-max('sm') {
+    inset-inline: var(--space-3);
+    width: auto;
+    max-width: none;
+
+    .toast {
+      width: 100%;
+      max-width: none;
+    }
+  }
 }
 
+// --- Parts -----------------------------------------------------------------
 .toast__icon {
   flex: none;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-block-start: 1px; // optical alignment with the first text line
+  color: var(--toast-accent);
+
   svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
-  &.is-success { color: var(--success); }
-  &.is-error { color: var(--error); }
-  &.is-info { color: var(--info); }
 }
 
-.toast__msg {
+.toast__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   flex: 1;
-  min-width: 0;
+  min-width: 0; // lets long messages wrap instead of overflowing
+}
+
+.toast__title {
+  font-size: var(--fs-body);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  color: var(--text-primary);
+}
+
+.toast__message {
+  font-size: var(--fs-body); // 14px
+  line-height: var(--lh-toast); // 1.6 — Persian friendly
+  color: var(--text-secondary);
+  overflow-wrap: anywhere; // long URLs / API paths never overflow
 }
 
 .toast__action {
+  align-self: flex-start;
+  margin-block-start: var(--space-1);
+  padding: 0;
+  background: none;
+  border: 0;
+  font-size: var(--fs-body-sm);
+  font-weight: 500;
+  color: var(--toast-accent);
+  cursor: pointer;
+  @include motion(var(--motion-fast), (color, opacity));
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.toast__close {
   flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-block-start: -2px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  @include motion(var(--motion-fast), (background-color, color));
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  &:hover {
+    background: var(--surface-interactive);
+    color: var(--text-primary);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    transition: opacity var(--motion-fast) linear;
+    translate: 0 0 !important;
+  }
 }

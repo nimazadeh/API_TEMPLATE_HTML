@@ -64,7 +64,7 @@
     color: var(--text-secondary);
     text-decoration: none;
     position: relative;
-    @include motion(150ms);
+    @include motion(var(--motion-fast));
 
     &:hover {
       background: var(--surface-2);
@@ -158,7 +158,7 @@
   color: var(--text-tertiary);
   opacity: 0;
   margin-inline-start: var(--space-1);
-  @include motion(150ms);
+  @include motion(var(--motion-fast));
 
   h2:hover &,
   h3:hover & {

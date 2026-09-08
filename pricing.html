@@ -1,42 +1,55 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-theme="dark">
+<html lang="fa" dir="rtl" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
     <meta name="description" content="APIForge X pricing — Developer, Pro and Scale plans with usage-based overage." />
-    <title>Pricing — APIForge X</title>
+    <title data-i18n="pricing.pricing-apiforge-x">قیمت‌گذاری — APIForge X</title>
     <script>
       (function () {
         var stored = null;
         try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
         var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
         document.documentElement.setAttribute('data-theme', theme);
+        var loc = null;
+        try { loc = localStorage.getItem('afx-locale'); } catch (e) {}
+        if (loc !== 'fa' && loc !== 'en') loc = 'fa';
+        document.documentElement.setAttribute('lang', loc);
+        document.documentElement.setAttribute('dir', loc === 'fa' ? 'rtl' : 'ltr');
       })();
     </script>
   </head>
   <body data-page="pricing">
     <div class="site">
+      <div class="backdrop" data-backdrop aria-hidden="true">
+        <div class="backdrop__grid"></div>
+        <div class="backdrop__glow"></div>
+        <div class="backdrop__mesh"></div>
+      </div>
       <header class="site-header">
         <div class="site-container site-header__inner">
           <a class="site-header__brand" href="./index.html">
             <span class="brand-mark"><i data-lucide="zap"></i></span>
             <span class="brand-name">APIForge X</span>
           </a>
-          <nav class="site-nav" aria-label="Marketing">
-            <a class="site-nav__link" data-nav="home" href="./index.html">Product</a>
-            <a class="site-nav__link" data-nav="docs" href="./docs.html">Docs</a>
-            <a class="site-nav__link" data-nav="pricing" href="./pricing.html">Pricing</a>
-            <a class="site-nav__link" data-nav="changelog" href="./changelog.html">Changelog</a>
-            <a class="site-nav__link" data-nav="status" href="./status.html">Status</a>
+          <nav class="site-nav" aria-label="ناوبری صفحات" data-i18n-attr="aria-label:aria.marketingNav">
+            <a class="site-nav__link" data-nav="home" href="./index.html" data-i18n="site.product">محصول</a>
+            <a class="site-nav__link" data-nav="docs" href="./docs.html" data-i18n="site.docs">مستندات</a>
+            <a class="site-nav__link" data-nav="pricing" href="./pricing.html" data-i18n="site.pricing">قیمت‌گذاری</a>
+            <a class="site-nav__link" data-nav="changelog" href="./changelog.html" data-i18n="site.changelog">گزارش تغییرات</a>
+            <a class="site-nav__link" data-nav="status" href="./status.html" data-i18n="site.status">وضعیت</a>
           </nav>
           <div class="site-header__actions">
-            <button type="button" class="btn btn-icon" data-theme-toggle aria-label="Toggle theme" aria-pressed="false">
+            <button type="button" class="btn btn-icon" data-theme-toggle aria-label="تغییر پوسته" aria-pressed="false" data-i18n-attr="aria-label:aria.toggleTheme">
               <i data-lucide="sun-moon"></i>
             </button>
-            <a class="btn btn-ghost d-none d-sm-inline-flex" href="./login.html">Sign in</a>
-            <a class="btn btn-primary" href="./dashboard.html">Open dashboard</a>
-            <button type="button" class="btn btn-icon d-lg-none" aria-label="Open menu" data-bs-toggle="offcanvas" data-bs-target="#site-drawer" aria-controls="site-drawer">
+            <button type="button" class="btn btn-ghost d-none d-sm-inline-flex" data-locale-toggle aria-label="تغییر زبان" data-i18n-attr="aria-label:aria.switchLanguage">
+              <i data-lucide="languages"></i> <span data-locale-label>EN</span>
+            </button>
+            <a class="btn btn-ghost d-none d-sm-inline-flex" href="./login.html" data-i18n="site.sign-in">ورود</a>
+            <a class="btn btn-primary" href="./dashboard.html" data-i18n="site.open-dashboard">ورود به داشبورد</a>
+            <button type="button" class="btn btn-icon d-lg-none" aria-label="باز کردن منو" data-bs-toggle="offcanvas" data-bs-target="#site-drawer" aria-controls="site-drawer" data-i18n-attr="aria-label:aria.openMenu">
               <i data-lucide="menu"></i>
             </button>
           </div>
@@ -46,16 +59,16 @@
       <div class="offcanvas offcanvas-end" tabindex="-1" id="site-drawer" aria-labelledby="site-drawer-label">
         <div class="offcanvas-header">
           <span class="offcanvas-title" id="site-drawer-label"><span class="brand-mark"><i data-lucide="zap"></i></span> APIForge X</span>
-          <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="Close"><i data-lucide="x"></i></button>
+          <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="بستن" data-i18n-attr="aria-label:aria.close"><i data-lucide="x"></i></button>
         </div>
         <div class="offcanvas-body p-0">
-          <nav class="site-drawer-nav" aria-label="Marketing mobile">
-            <a class="site-drawer-nav__link" data-nav="home" href="./index.html"><i data-lucide="zap"></i> Product</a>
-            <a class="site-drawer-nav__link" data-nav="docs" href="./docs.html"><i data-lucide="book-open"></i> Documentation</a>
-            <a class="site-drawer-nav__link" data-nav="pricing" href="./pricing.html"><i data-lucide="credit-card"></i> Pricing</a>
-            <a class="site-drawer-nav__link" data-nav="changelog" href="./changelog.html"><i data-lucide="clock"></i> Changelog</a>
-            <a class="site-drawer-nav__link" data-nav="status" href="./status.html"><i data-lucide="activity"></i> Status</a>
-            <a class="site-drawer-nav__link" href="./login.html"><i data-lucide="log-in"></i> Sign in</a>
+          <nav class="site-drawer-nav" aria-label="ناوبری موبایل صفحات" data-i18n-attr="aria-label:aria.marketingNavMobile">
+            <a class="site-drawer-nav__link" data-nav="home" href="./index.html" data-i18n="site.navProduct"><i data-lucide="zap"></i> محصول</a>
+            <a class="site-drawer-nav__link" data-nav="docs" href="./docs.html" data-i18n="site.drawerDocs"><i data-lucide="book-open"></i> مستندات</a>
+            <a class="site-drawer-nav__link" data-nav="pricing" href="./pricing.html" data-i18n="site.drawerPricing"><i data-lucide="credit-card"></i> قیمت‌گذاری</a>
+            <a class="site-drawer-nav__link" data-nav="changelog" href="./changelog.html" data-i18n="site.drawerChangelog"><i data-lucide="clock"></i> گزارش تغییرات</a>
+            <a class="site-drawer-nav__link" data-nav="status" href="./status.html" data-i18n="site.drawerStatus"><i data-lucide="activity"></i> وضعیت سرویس</a>
+            <a class="site-drawer-nav__link" href="./login.html" data-i18n="site.drawerSignIn"><i data-lucide="log-in"></i> ورود</a>
           </nav>
         </div>
       </div>
@@ -64,46 +77,43 @@
         <section class="hero">
           <div class="site-container">
             <div class="hero__inner">
-              <span class="eyebrow">Pricing</span>
-              <h1 class="hero__title">Simple plans, <span class="hero__title-accent">usage-based</span> scale</h1>
-              <p class="body-lg text-secondary hero__sub">
-                Start free, upgrade when you ship. Overage is billed per million
-                requests — never a forced plan jump.
-              </p>
+              <span class="eyebrow" data-i18n="site.pricing">قیمت‌گذاری</span>
+              <h1 class="hero__title" data-i18n="pricing.heroTitle">طرح‌های ساده، رشد <span class="hero__title-accent">مبتنی بر مصرف</span></h1>
+              <p class="body-lg text-secondary hero__sub" data-i18n="pricing.start-free-upgrade-when-you-ship-overage-is-bill">رایگان شروع کنید و هر زمان آمادهٔ عرضه شدید ارتقا دهید. مصرف مازاد به ازای هر میلیون درخواست محاسبه می‌شود — بدون هیچ اجباری برای تغییر طرح.</p>
             </div>
           </div>
         </section>
 
         <section class="section site-container">
-          <div class="pricing-grid" id="pricing-grid" aria-label="Plans"></div>
+          <div data-motion-group class="pricing-grid" id="pricing-grid" aria-label="طرح‌ها" data-i18n-attr="aria-label:aria.plans"></div>
         </section>
 
         <section class="section site-container">
-          <div class="card card--dense" style="padding: var(--space-5);">
+          <div data-motion class="card card--dense" style="padding: var(--space-5);">
             <div class="d-flex flex-wrap gap-4 align-items-center justify-content-between">
               <div>
-                <h3 class="mb-1">Usage-based overage</h3>
-                <p class="text-secondary mb-0">Every plan includes its request allowance. Beyond that, requests are billed at a flat rate — no negotiation, no surprises.</p>
+                <h3 class="mb-1" data-i18n="pricing.usage-based-overage">محاسبهٔ مصرف مازاد</h3>
+                <p class="text-secondary mb-0" data-i18n="pricing.every-plan-includes-its-request-allowance-beyond">هر طرح شامل سقف مشخصی از درخواست‌هاست. فراتر از آن، درخواست‌ها با نرخی ثابت محاسبه می‌شوند — نه نیاز به مذاکره است و نه غافلگیری در کار است.</p>
               </div>
-              <div class="mono text-primary">$0.50 / 1M requests</div>
+              <div class="mono text-primary" data-i18n="pricing.overageRate">$0.50 / ۱M درخواست</div>
             </div>
           </div>
         </section>
 
         <section class="section site-container">
-          <div class="section-head">
-            <span class="eyebrow">Compare</span>
-            <h2>Plan comparison</h2>
+          <div data-motion class="section-head">
+            <span class="eyebrow" data-i18n="pricing.compare">مقایسه</span>
+            <h2 data-i18n="pricing.plan-comparison">مقایسهٔ طرح‌ها</h2>
           </div>
-          <div class="table-card">
+          <div data-motion class="table-card">
             <div class="table-responsive">
               <table class="table table--compact" id="pricing-compare">
                 <thead>
                   <tr>
-                    <th scope="col">Feature</th>
-                    <th scope="col">Developer</th>
-                    <th scope="col">Pro</th>
-                    <th scope="col">Scale</th>
+                    <th scope="col" data-i18n="pricing.feature">ویژگی</th>
+                    <th scope="col" data-i18n="shell.developer">توسعه‌دهنده</th>
+                    <th scope="col" data-i18n="pricing.pro">حرفه‌ای</th>
+                    <th scope="col" data-i18n="pricing.scale">سازمانی</th>
                   </tr>
                 </thead>
                 <tbody></tbody>
@@ -113,52 +123,42 @@
         </section>
 
         <section class="section site-container">
-          <div class="section-head">
-            <span class="eyebrow">FAQ</span>
-            <h2>Questions, answered</h2>
+          <div data-motion class="section-head">
+            <span class="eyebrow" data-i18n="pricing.faq">پرسش‌های پرتکرار</span>
+            <h2 data-i18n="pricing.questions-answered">پاسخ پرسش‌های شما</h2>
           </div>
-          <div class="faq">
-            <div class="faq__item">
-              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="false" aria-controls="faq-1">
-                Can I change plans at any time? <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="collapse" id="faq-1"><div class="faq__answer">Yes. Upgrades apply immediately and are prorated. Downgrades apply at the start of your next billing cycle.</div></div>
+          <div data-motion-group class="faq">
+            <div data-motion class="faq__item">
+              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="false" aria-controls="faq-1" data-i18n="pricing.faq1q">آیا می‌توانم هر زمان طرح را تغییر دهم؟ <i data-lucide="chevron-down"></i></button>
+              <div class="collapse" id="faq-1"><div class="faq__answer" data-i18n="pricing.yes-upgrades-apply-immediately-and-are-prorated-">بله. ارتقا بلافاصله اعمال می‌شود و هزینهٔ آن به نسبت زمان باقی‌مانده محاسبه می‌گردد. تنزل طرح از ابتدای دورهٔ صورت‌حساب بعدی اعمال می‌شود.</div></div>
             </div>
-            <div class="faq__item">
-              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-2" aria-expanded="false" aria-controls="faq-2">
-                How is overage billed? <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="collapse" id="faq-2"><div class="faq__answer">Requests beyond your plan allowance are billed at a flat rate per million requests, itemized on your invoice.</div></div>
+            <div data-motion class="faq__item">
+              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-2" aria-expanded="false" aria-controls="faq-2" data-i18n="pricing.faq2q">مصرف مازاد چگونه محاسبه می‌شود؟ <i data-lucide="chevron-down"></i></button>
+              <div class="collapse" id="faq-2"><div class="faq__answer" data-i18n="pricing.requests-beyond-your-plan-allowance-are-billed-a">درخواست‌های فراتر از سقف طرح، با نرخ ثابت به ازای هر میلیون درخواست محاسبه و به صورت ریز در صورت‌حساب شما درج می‌شود.</div></div>
             </div>
-            <div class="faq__item">
-              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-3" aria-expanded="false" aria-controls="faq-3">
-                Do I need a credit card to start? <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="collapse" id="faq-3"><div class="faq__answer">No. The Developer plan is free and requires no payment method. A card is only needed for Pro and Scale.</div></div>
+            <div data-motion class="faq__item">
+              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-3" aria-expanded="false" aria-controls="faq-3" data-i18n="pricing.faq3q">برای شروع به کارت اعتباری نیاز دارم؟ <i data-lucide="chevron-down"></i></button>
+              <div class="collapse" id="faq-3"><div class="faq__answer" data-i18n="pricing.no-the-developer-plan-is-free-and-requires-no-pa">خیر. طرح توسعه‌دهنده رایگان است و به روش پرداختی نیاز ندارد. کارت اعتباری تنها برای طرح‌های حرفه‌ای و سازمانی لازم است.</div></div>
             </div>
-            <div class="faq__item">
-              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-4" aria-expanded="false" aria-controls="faq-4">
-                What happens if I hit my rate limit? <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="collapse" id="faq-4"><div class="faq__answer">Requests above your per-second limit return HTTP 429. Your allowance resets each second — no full-day lockouts.</div></div>
+            <div data-motion class="faq__item">
+              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-4" aria-expanded="false" aria-controls="faq-4" data-i18n="pricing.faq4q">اگر به محدودیت نرخ برسم چه اتفاقی می‌افتد؟ <i data-lucide="chevron-down"></i></button>
+              <div class="collapse" id="faq-4"><div class="faq__answer" data-i18n="pricing.requests-above-your-per-second-limit-return-http">درخواست‌های بیش از سقف مجاز در هر ثانیه با کد ۴۲۹ پاسخ می‌گیرند. سقف شما در هر ثانیه بازنشانی می‌شود — هیچ مسدودسازی روزانه‌ای در کار نیست.</div></div>
             </div>
-            <div class="faq__item">
-              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-5" aria-expanded="false" aria-controls="faq-5">
-                Is there a long-term contract? <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="collapse" id="faq-5"><div class="faq__answer">No. Plans are month-to-month and you can cancel at any time from Billing → Cancel plan.</div></div>
+            <div data-motion class="faq__item">
+              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-5" aria-expanded="false" aria-controls="faq-5" data-i18n="pricing.faq5q">آیا قرارداد بلندمدتی وجود دارد؟ <i data-lucide="chevron-down"></i></button>
+              <div class="collapse" id="faq-5"><div class="faq__answer" data-i18n="pricing.no-plans-are-month-to-month-and-you-can-cancel-a">خیر. طرح‌ها ماه‌به‌ماه هستند و هر زمان بخواهید می‌توانید از بخش صورت‌حساب آن را لغو کنید.</div></div>
             </div>
           </div>
         </section>
 
         <section class="section site-container">
           <div class="cta-band">
-            <span class="eyebrow">Ready when you are</span>
-            <h2 class="mt-2 mb-3">Try every page before you buy</h2>
-            <p class="body-lg text-secondary mb-4">The live demo is the full template — explore it, flip themes, switch to Persian RTL.</p>
+            <span class="eyebrow" data-i18n="pricing.ready-when-you-are">هر زمان که آماده باشید</span>
+            <h2 class="mt-2 mb-3" data-i18n="pricing.try-every-page-before-you-buy">پیش از خرید، همهٔ صفحات را بررسی کنید</h2>
+            <p class="body-lg text-secondary mb-4" data-i18n="pricing.the-live-demo-is-the-full-template-explore-it-fl">نسخهٔ دموی زنده همان قالب کامل است — آن را بررسی کنید، پوسته را عوض کنید و به فارسی راست‌به‌چپ سوئیچ کنید.</p>
             <div class="d-flex flex-wrap justify-content-center gap-2">
-              <a class="btn btn-primary btn-lg" href="./dashboard.html">Open the live demo <i data-lucide="arrow-right"></i></a>
-              <a class="btn btn-ghost btn-lg" href="./changelog.html">See what's new</a>
+              <a class="btn btn-primary btn-lg" href="./dashboard.html" data-i18n="home.heroCtaDemo">مشاهدهٔ نسخهٔ دموی زنده <i data-lucide="arrow-left"></i></a>
+              <a class="btn btn-ghost btn-lg" href="./changelog.html" data-i18n="pricing.see-whats-new">مشاهدهٔ تازه‌ها</a>
             </div>
           </div>
         </section>
@@ -170,29 +170,27 @@
             <div class="site-footer__brand">
               <span class="brand-mark"><i data-lucide="zap"></i></span>
               <span class="brand-name">APIForge X</span>
-              <p class="mt-2">A premium API infrastructure HTML template. Engineered for developer platforms, ready for the Iranian market.</p>
+              <p class="mt-2" data-i18n="site.a-premium-api-infrastructure-html-template-engin">قالب HTML حرفه‌ای زیرساخت API؛ طراحی‌شده برای پلتفرم‌های توسعه‌دهنده و آماده برای بازار ایران.</p>
             </div>
             <div>
-              <div class="site-footer__col-label">Product</div>
-              <a class="site-footer__link" href="./dashboard.html">Overview</a>
-              <a class="site-footer__link" href="./logs.html">Logs</a>
-              <a class="site-footer__link" href="./webhooks.html">Webhooks</a>
-              <a class="site-footer__link" href="./api-keys.html">API Keys</a>
-              <a class="site-footer__link" href="./pricing.html">Pricing</a>
+              <div class="site-footer__col-label" data-i18n="site.product">محصول</div>
+              <a class="site-footer__link" href="./dashboard.html" data-i18n="shell.overview">نمای کلی</a>
+              <a class="site-footer__link" href="./logs.html" data-i18n="site.logs">لاگ‌ها</a>
+              <a class="site-footer__link" href="./webhooks.html" data-i18n="site.webhooks">وب‌هوک‌ها</a>
+              <a class="site-footer__link" href="./api-keys.html" data-i18n="site.api-keys">کلیدهای API</a>
+              <a class="site-footer__link" href="./pricing.html" data-i18n="site.pricing">قیمت‌گذاری</a>
             </div>
             <div>
-              <div class="site-footer__col-label">Resources</div>
-              <a class="site-footer__link" href="./docs.html">Documentation</a>
-              <a class="site-footer__link" href="./style-guide.html">Style guide</a>
-              <a class="site-footer__link" href="./changelog.html">Changelog</a>
-              <a class="site-footer__link" href="./status.html">Status</a>
-              <a class="site-footer__link" href="./rtl.html">RTL demo</a>
+              <div class="site-footer__col-label" data-i18n="site.resources">منابع</div>
+              <a class="site-footer__link" href="./docs.html" data-i18n="site.documentation">مستندات</a>
+              <a class="site-footer__link" href="./style-guide.html" data-i18n="site.style-guide">راهنمای استایل</a>
+              <a class="site-footer__link" href="./changelog.html" data-i18n="site.changelog">گزارش تغییرات</a>
+              <a class="site-footer__link" href="./visual-showcase.html" data-i18n="vs.footerLink">نمایش بصری</a>
+              <a class="site-footer__link" href="./status.html" data-i18n="site.status">وضعیت</a>
+              <a class="site-footer__link" href="./rtl.html" data-i18n="site.rtl-demo">نسخهٔ دموی فارسی</a>
             </div>
           </div>
-          <div class="site-footer__legal">
-            <span>© 2026 APIForge X. Demo product — no real backend.</span>
-            <span>Bootstrap 5 · SCSS · Vite · Chart.js · Lucide</span>
-          </div>
+          <div class="site-footer__legal" data-i18n="site.footerLegal"><span>© ۲۰۲۶ APIForge X. یک محصول نمایشی — بدون بک‌اند واقعی.</span> <span>Bootstrap 5 · SCSS · Vite · Chart.js · Lucide</span></div>
         </div>
       </footer>
     </div>

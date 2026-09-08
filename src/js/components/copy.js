@@ -5,6 +5,7 @@
 // =============================================================
 
 import { icons } from './icons.js';
+import { t } from '../core/i18n.js';
 
 /** Write text to the clipboard with a fallback for non-secure contexts. */
 export async function copyText(text) {
@@ -39,8 +40,7 @@ export function flashCopied(btn, ok = true) {
   const labelEl = btn.querySelector('.copy-label');
   if (labelEl) {
     const original = labelEl.textContent;
-    const rtl = document.documentElement.dir === 'rtl';
-    labelEl.textContent = ok ? (rtl ? 'کپی شد!' : 'Copied!') : (rtl ? 'خطا' : 'Failed');
+    labelEl.textContent = ok ? t('copy.copied') : t('copy.failed');
     setTimeout(() => {
       labelEl.textContent = original;
       if (icon && icons.copy) {

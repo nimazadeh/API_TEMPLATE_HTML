@@ -10,6 +10,7 @@ import { boot } from '../main.js';
 import { Modal, Offcanvas } from '../core/bootstrap.js';
 import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { highlightJson } from '../components/code-block.js';
 import { bindCopyButton } from '../components/copy.js';
 import { escapeHtml, methodBadgeClass } from '../utils/format.js';
@@ -22,10 +23,10 @@ const endpoints = [...endpointsData]; // in-session mutable copy
 const API = Object.fromEntries(apis.map((a) => [a.id, a]));
 
 const AUTH_BY_API = {
-  api_emails: 'Bearer token',
-  api_ai: 'Bearer token',
-  api_audiences: 'Bearer token',
-  api_webhooks: 'Signing secret',
+  api_emails: 'form.bearerToken',
+  api_ai: 'form.bearerToken',
+  api_audiences: 'form.bearerToken',
+  api_webhooks: 'form.signingSecret',
   api_platform: 'API key',
 };
 
@@ -196,7 +197,7 @@ function openModal(ep = null) {
   document.getElementById('ep-method').value = ep ? ep.method : 'GET';
   document.getElementById('ep-path').value = ep ? ep.path : '/v1/';
   document.getElementById('ep-service').value = ep ? ep.apiId : apis[0].id;
-  document.getElementById('ep-auth').value = ep ? authOf(ep) : 'Bearer token';
+  document.getElementById('ep-auth').value = ep ? authOf(ep) : tr('form.bearerToken');
   document.getElementById('ep-description').value = ep ? ep.description || '' : '';
   Modal.getOrCreateInstance(document.getElementById('endpoint-modal')).show();
 }
@@ -209,13 +210,13 @@ function save() {
   const description = document.getElementById('ep-description').value.trim();
 
   if (!path.startsWith('/')) {
-    afxToast({ message: 'Path must start with "/"', type: 'error' });
+    afxToast({ message: tr('endpoints.pathInvalid'), type: 'error' });
     return;
   }
   if (editingId) {
     const ep = endpoints.find((e) => e.id === editingId);
     if (ep) Object.assign(ep, { method, path, apiId, auth, description });
-    afxToast({ message: 'Endpoint updated', type: 'success' });
+    afxToast({ message: tr('endpoints.updated'), type: 'success' });
   } else {
     endpoints.unshift({
       id: `ep_new_${Date.now().toString(36)}`,
@@ -228,7 +229,7 @@ function save() {
       params: [],
       responseExample: { ok: true },
     });
-    afxToast({ message: 'Endpoint created', type: 'success' });
+    afxToast({ message: tr('endpoints.created'), type: 'success' });
   }
   Modal.getOrCreateInstance(document.getElementById('endpoint-modal')).hide();
   render();

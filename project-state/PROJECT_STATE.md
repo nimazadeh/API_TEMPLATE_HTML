@@ -3,9 +3,75 @@
 ## Project: APIForge X — Premium Developer API Platform HTML Template
 
 **Branch:** arena/01a07d58-api-template-html
-**Phase:** FINAL RELEASE AUDIT — COMPLETE ✅ (release-ready, no P0/P1 open)
+**Phase:** PHASE 5.5 — PREMIUM VISUAL POLISH & MOTION SYSTEM — COMPLETE ✅
+**Localization:** Persian-first + live English (fa ⇄ en), 1,347 translation keys, 31/31 pages bilingual — see `/PHASE_5_REPORT.md`
+**Motion:** centralized tokens (150 / 250 / 400ms, `cubic-bezier(.2,.8,.2,1)`), atmospheric backdrop on marketing + auth, transform/opacity only, full `prefers-reduced-motion` support — see `/PHASE_5_5_REPORT.md`
 **Date:** 2026-09-08
 **Status:** Final release audit executed — real-browser QA re-confirmed unavailable (browser CDNs + apt blocked), strongest static + jsdom alternative used. 6 genuine defects fixed (1 P1 dead code-block on the landing; 5 P2 copy/a11y/docs/continuity), 2 new regression scenarios added. Runtime QA **116/116** across 30 pages, build clean (30 inputs, 0 warnings), a11y + static audits clean, link integrity + secrets + CDN scans clean. See the "Final Release Audit" section below for the issue table and scorecard.
+
+---
+
+## PHASE 5.5: PREMIUM VISUAL POLISH & MOTION SYSTEM — COMPLETE ✅
+
+**Objectives Achieved:**
+- [x] **Motion tokens** — `src/scss/tokens/_motion.scss`: `--motion-fast 150ms`,
+      `--motion-normal 250ms`, `--motion-slow 400ms` (hard ceiling),
+      `--ease-standard cubic-bezier(.2,.8,.2,1)`, `--motion-stagger 60ms`,
+      `--motion-shift 8px`, `--dir-sign` (1 / -1 for RTL mirroring)
+- [x] **Atmospheric backdrop** — `src/scss/components/_backdrop.scss` with
+      grid / glow / mesh layers, `--backdrop-*` tokens, `.backdrop--quiet` and
+      `.backdrop--auth` variants; applied to the 9 marketing + auth + docs pages
+      only (workspace pages untouched)
+- [x] **Hero upgrade** — 0 → 100 → 150 → 250 → 350 → 450ms choreography plus a
+      staggered KPI and panel reveal; opacity + transform only, no layout shift
+- [x] **Component micro-interactions** — buttons (hover elevation + focus ring
+      animation), cards, table rows (directional accent rail), tabs (scale-based
+      indicator), dropdowns, modals, drawers, tooltips, toasts
+- [x] **Dashboard polish** — card entrances, skeleton→content settle, animated
+      charts; no decorative background
+- [x] **RTL compatibility** — every directional value is logical or multiplied
+      by `--dir-sign`; entrances travel on Y only; `.ltr-isolate` and code
+      blocks untouched
+- [x] **Performance** — transform/opacity only, one IntersectionObserver
+      (`src/js/components/motion.js`), no looping motion, full reduced-motion support
+- [x] **Token compliance** — zero colour literals outside `tokens/`, zero
+      duration literals outside `tokens/_motion.scss`
+- [x] **`visual-showcase.html`** — the 31st page: hero, backdrop tiles, three-speed
+      motion playground, cards, buttons, modal, drawer, dropdown, tabs and every
+      toast state, live in dark/light/system × RTL/LTR
+- [x] **Toast premium rebuild** — icon / title + message / close, 16px inline and
+      12px block padding, 14px message at 1.6 line-height, logical properties,
+      four token-coloured states, 250ms enter + fade exit, `role` + `aria-live`
+      + `aria-atomic` + a localized close label
+
+**Artifacts Created/Updated:**
+- New: `src/scss/components/_backdrop.scss`, `src/scss/components/_motion.scss`,
+  `src/js/components/motion.js`, `visual-showcase.html`,
+  `src/js/pages/visual-showcase.js`, `src/scss/pages/_visual-showcase.scss`,
+  `PHASE_5_5_REPORT.md`
+- Updated: `src/scss/tokens/_motion.scss`, `src/scss/tokens/_mixins.scss`,
+  `src/scss/tokens/_colors.scss` (`--backdrop-*`), `src/scss/tokens/_typography.scss`
+  (`--lh-toast`), `src/scss/components/{_toast,_buttons,_cards,_tables,_tabs,
+  _dropdown,_modal,_tooltip,_code}.scss`, `src/scss/pages/{_marketing,_auth}.scss`,
+  `src/scss/layouts/{_site,_app-shell}.scss`, `src/scss/base/_reset.scss`,
+  `src/scss/main.scss`, `src/js/components/toast.js`,
+  `src/js/components/charts.js`, `src/js/{main,site}.js`,
+  `src/js/pages/{dashboard,index,pricing}.js`, `src/js/components/icons.js`,
+  `vite.config.js`, `src/locales/{fa,en}.json` (+86 `vs.*` keys each),
+  `README.md`, `marketplace/DESCRIPTION.md`
+
+**Exit Criteria (all passed):**
+- [x] `npm run build` green — 31 page inputs, per-page chunks, no broken imports
+- [x] 31/31 HTML files parse cleanly (parse5, 0 errors)
+- [x] 0 missing translations across both catalogs (1,347 keys each)
+- [x] 88/88 `data-lucide` names resolve in the tree-shaken registry
+- [x] Runtime QA 30/30 jsdom assertions (toast structure/roles/escaping, motion
+      fallbacks, i18n)
+- [x] All 31 pages return 200 from the dev server with modules + SCSS transformed
+- [x] No colour or duration literals outside the token layer
+- [~] Real-browser visual confirmation still unavailable (no browser in the
+      sandbox) — use the live preview (`npm run dev`) or
+      `marketplace/capture-screenshots.mjs`
 
 ---
 

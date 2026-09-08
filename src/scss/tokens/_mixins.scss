@@ -56,13 +56,39 @@ $breakpoints: (
 }
 
 // Respect prefers-reduced-motion by zeroing transform/opacity animation.
-@mixin motion($duration: 200ms) {
+// Transition property + easing are declared by the caller; pass either a
+// raw duration or a --motion-* token.
+@mixin motion($duration: var(--motion-fast), $props: null) {
+  @if $props != null {
+    transition-property: $props;
+  }
   transition-duration: $duration;
+  transition-timing-function: var(--ease-standard);
   @media (prefers-reduced-motion: reduce) {
     transition-duration: 0ms;
     animation-duration: 0ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+// Kill every decorative animation for users who ask for less motion.
+// Applied to entrance/ambient layers only — never to state feedback the
+// user needs to see (a hidden toast must still be hidden).
+@mixin motion-reduce {
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+// Entrance animation helper: opacity + translateY only, fill both ends so
+// the element is invisible before its delay and settled after.
+@mixin motion-enter($delay: 0ms, $duration: var(--motion-slow), $shift: var(--motion-shift)) {
+  animation: afx-rise $duration var(--ease-standard) $delay both;
+  @include motion-reduce;
 }
 
 // Easing tokens (enter = ease-out curve, transform/opacity only).

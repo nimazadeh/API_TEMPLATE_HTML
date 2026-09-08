@@ -7,9 +7,10 @@
 // =============================================================
 
 import { boot } from '../main.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { makeChart, axis, tooltips, initCharts } from '../components/charts.js';
 import { createIcons, icons } from '../components/icons.js';
-import { formatNumber, compactNumber, percent, escapeHtml, methodBadgeClass } from '../utils/format.js';
+import { formatNumber, compactNumber, percent, escapeHtml, methodBadgeClass, number } from '../utils/format.js';
 import obs from '../data/mock-observability.json';
 import apis from '../data/mock-apis.json';
 
@@ -19,7 +20,7 @@ initCharts();
 let range = '24h';
 let compare = 'live';
 
-const RANGE_LABEL = { '1h': 'Last hour', '24h': 'Last 24 hours', '7d': 'Last 7 days', '30d': 'Last 30 days' };
+const RANGE_KEYS = { '1h': 'logs.lastHour', '24h': 'dashboard.range24h', '7d': 'dashboard.range7d', '30d': 'dashboard.range30d' };
 
 function seriesFor() {
   if (range === '1h') return { points: obs.minutes.slice(-12), key: 'at' };
@@ -78,7 +79,7 @@ function renderVolumeChart() {
       options: {
         responsive: true, maintainAspectRatio: false,
         scales: { x: axis(t), y: axis(t) },
-        ...tooltips(t, { callbacks: { label: (c) => `${compactNumber(c.parsed.y)} requests` } }),
+        ...tooltips(t, { callbacks: { label: (c) => `${compactNumber(c.parsed.y)} ${tr('table.requests')}` } }),
       },
     };
   });
@@ -100,7 +101,7 @@ function renderLatencyChart() {
       options: {
         responsive: true, maintainAspectRatio: false,
         scales: { x: axis(t), y: axis(t) },
-        ...tooltips(t, { callbacks: { label: (c) => `${c.dataset.label}: ${c.parsed.y} ms` } }),
+        ...tooltips(t, { callbacks: { label: (c) => `${c.dataset.label}: ${number(c.parsed.y)} ms` } }),
       },
     };
   });
@@ -127,7 +128,7 @@ function renderErrorChart() {
       options: {
         responsive: true, maintainAspectRatio: false,
         scales: { x: axis(t), y: { ...axis(t), ticks: { color: t.textTertiary, maxTicksLimit: 6, callback: (v) => `${v}%` } } },
-        ...tooltips(t, { callbacks: { label: (c) => `${c.parsed.y}% error rate` } }),
+        ...tooltips(t, { callbacks: { label: (c) => `${percent(c.parsed.y)} ${tr('metrics.errorRate')}` } }),
       },
     };
   });
@@ -270,7 +271,7 @@ document.querySelectorAll('[data-range]').forEach((btn) => {
       b.classList.toggle('is-active', b === btn);
       b.setAttribute('aria-pressed', String(b === btn));
     });
-    document.getElementById('metric-range-label').textContent = RANGE_LABEL[range];
+    document.getElementById('metric-range-label').textContent = tr(RANGE_KEYS[range]);
     renderKpis();
     reflowCharts();
   });
@@ -288,3 +289,9 @@ document.querySelectorAll('[data-compare]').forEach((seg) => {
 });
 
 createIcons({ icons });
+
+// Re-render when the locale flips.
+onLocaleChange(() => {
+  const active = document.querySelector('[data-range].is-active');
+  render(active ? active.dataset.range : '24h');
+});

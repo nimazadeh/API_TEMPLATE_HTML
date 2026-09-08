@@ -10,6 +10,7 @@ import { Modal } from '../core/bootstrap.js';
 import { createIcons, icons } from '../components/icons.js';
 import { renderKeys } from '../components/table.js';
 import { afxToast } from '../components/toast.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { currentEnv } from '../components/env-switcher.js';
 import keysData from '../data/mock-keys.json';
 
@@ -69,8 +70,8 @@ function openReveal(key, { isNew = false } = {}) {
   const modal = Modal.getOrCreateInstance(document.getElementById('reveal-modal'));
   document.getElementById('reveal-modal-title').textContent = isNew ? 'Your new API key' : 'Reveal API key';
   document.getElementById('reveal-note').textContent = isNew
-    ? 'Copy this key now — for security, it will never be shown again.'
-    : 'This key is shown once. Copy it now — it will be masked again when you close.';
+    ? tr('keys.copyNow')
+    : tr('keys.copyOnce');
   document.getElementById('reveal-key-value').value = fullKey(key);
   const copied = document.getElementById('reveal-copied');
   const done = document.getElementById('reveal-done');
@@ -87,12 +88,12 @@ function bindRevealModal() {
 
 // --- Confirm modal -----------------------------------------------------
 let pendingAction = null;
-function openConfirm({ title, body, confirmLabel = 'Confirm', onConfirm }) {
+function openConfirm({ title, body, confirmLabel = tr('action.confirm'), onConfirm }) {
   document.getElementById('confirm-modal-title').textContent = title;
   document.getElementById('confirm-modal-body').textContent = body;
   const submit = document.getElementById('confirm-modal-submit');
   submit.textContent = confirmLabel;
-  submit.className = `btn ${confirmLabel === 'Revoke' ? 'btn-danger' : 'btn-primary'}`;
+  submit.className = `btn ${confirmLabel === tr('action.revoke') ? 'btn-danger' : 'btn-primary'}`;
   pendingAction = onConfirm;
   Modal.getOrCreateInstance(document.getElementById('confirm-modal')).show();
 }
@@ -109,14 +110,14 @@ function bindConfirmModal() {
 // --- Actions -----------------------------------------------------------
 function rotate(key) {
   openConfirm({
-    title: 'Rotate API key',
+    title: tr('keys.rotateTitle'),
     body: `Rotate “${key.name}”? A new key will be generated and the old one revoked immediately.`,
-    confirmLabel: 'Rotate',
+    confirmLabel: tr('action.rotate'),
     onConfirm: () => {
       key.prefix = newPrefix(key.env);
       secrets.delete(key.id);
       render();
-      afxToast({ message: `“${key.name}” rotated — copy the new key before closing.`, type: 'success' });
+      afxToast({ message: tr('keys.rotatedToast', { name: key.name }), type: 'success' });
       openReveal(key, { isNew: true });
     },
   });
@@ -124,13 +125,13 @@ function rotate(key) {
 
 function revoke(key) {
   openConfirm({
-    title: 'Revoke API key',
+    title: tr('keys.revokeTitle'),
     body: `Revoke “${key.name}”? Requests using this key will fail immediately. This cannot be undone.`,
-    confirmLabel: 'Revoke',
+    confirmLabel: tr('action.revoke'),
     onConfirm: () => {
       key.status = 'revoked';
       render();
-      afxToast({ message: `“${key.name}” revoked.`, type: 'info' });
+      afxToast({ message: tr('keys.revokedToast', { name: key.name }), type: 'info' });
     },
   });
 }

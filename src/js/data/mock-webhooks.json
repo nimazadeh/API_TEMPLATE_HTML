@@ -3,7 +3,7 @@
     "id": "wh_LzSGKV8u",
     "url": "https://hooks.acme.dev/hooks/email-events",
     "slug": "email-events",
-    "description": "Email delivery events",
+    "description": "رویدادهای تحویل ایمیل",
     "events": [
       "email.sent",
       "email.delivered",
@@ -12,16 +12,16 @@
     "environment": "live",
     "status": "enabled",
     "signingSecret": "whsec_OgZtTkxlNrLDehqYNosT07ue",
-    "createdAt": "2026-08-05T22:26:10.013Z",
+    "createdAt": "2026-08-06T04:27:36.521Z",
     "successRate": 100,
-    "lastDeliveryAt": "2026-09-07T20:22:10.014Z",
+    "lastDeliveryAt": "2026-09-08T02:23:36.523Z",
     "failures24h": 0
   },
   {
     "id": "wh_uhDKvc1N",
     "url": "https://integrations.shopflow.io/hooks/audience-sync",
     "slug": "audience-sync",
-    "description": "Audience sync events",
+    "description": "رویدادهای همگام‌سازی مخاطبان",
     "events": [
       "audience.created",
       "audience.updated",
@@ -30,16 +30,16 @@
     "environment": "live",
     "status": "enabled",
     "signingSecret": "whsec_mD7BCROlwJfyl7pm7kOeds4P",
-    "createdAt": "2025-12-28T22:26:10.013Z",
+    "createdAt": "2025-12-29T04:27:36.521Z",
     "successRate": 80,
-    "lastDeliveryAt": "2026-09-07T20:08:10.016Z",
+    "lastDeliveryAt": "2026-09-08T02:09:36.524Z",
     "failures24h": 1
   },
   {
     "id": "wh_Bm5ssT3X",
     "url": "https://api.mercuryhq.com/hooks/usage-alerts",
     "slug": "usage-alerts",
-    "description": "Usage threshold alerts",
+    "description": "هشدارهای آستانهٔ مصرف",
     "events": [
       "usage.warning",
       "usage.limit_reached"
@@ -47,16 +47,16 @@
     "environment": "live",
     "status": "disabled",
     "signingSecret": "whsec_NpjevZ44mEZKtJwKBU7DmcL2",
-    "createdAt": "2026-06-18T22:26:10.013Z",
+    "createdAt": "2026-06-19T04:27:36.521Z",
     "successRate": 0,
-    "lastDeliveryAt": "2026-09-07T20:38:10.016Z",
+    "lastDeliveryAt": "2026-09-08T02:39:36.524Z",
     "failures24h": 3
   },
   {
     "id": "wh_Io2otLWi",
     "url": "https://events.pulse.run/hooks/completion-stream",
     "slug": "completion-stream",
-    "description": "Model completion stream",
+    "description": "جریان تکمیل مدل",
     "events": [
       "completion.created",
       "completion.failed"
@@ -64,16 +64,16 @@
     "environment": "live",
     "status": "enabled",
     "signingSecret": "whsec_jCwE1VXTiGkTLjLRZtL9440g",
-    "createdAt": "2026-07-21T22:26:10.013Z",
+    "createdAt": "2026-07-22T04:27:36.521Z",
     "successRate": 60,
-    "lastDeliveryAt": "2026-09-07T20:39:10.016Z",
+    "lastDeliveryAt": "2026-09-08T02:40:36.524Z",
     "failures24h": 2
   },
   {
     "id": "wh_nuTqfdwa",
     "url": "https://backend.yourco.dev/hooks/staging-email",
     "slug": "staging-email",
-    "description": "Staging email events",
+    "description": "رویدادهای ایمیل در محیط آزمایشی",
     "events": [
       "email.sent",
       "email.bounced"
@@ -81,25 +81,25 @@
     "environment": "staging",
     "status": "enabled",
     "signingSecret": "whsec_j6Xli31JsdPdwsc5Eh1w76EB",
-    "createdAt": "2026-05-26T22:26:10.013Z",
+    "createdAt": "2026-05-27T04:27:36.521Z",
     "successRate": 100,
-    "lastDeliveryAt": "2026-09-07T15:55:10.016Z",
+    "lastDeliveryAt": "2026-09-07T21:56:36.524Z",
     "failures24h": 0
   },
   {
     "id": "wh_9XWfdl9g",
     "url": "https://sink.local.test/hooks/dev-sink",
     "slug": "dev-sink",
-    "description": "Local development sink",
+    "description": "مقصد محلی توسعه",
     "events": [
       "email.delivered"
     ],
     "environment": "test",
     "status": "enabled",
     "signingSecret": "whsec_QxoaBE4E6asagM6vZNfjsWy5",
-    "createdAt": "2026-02-28T22:26:10.013Z",
+    "createdAt": "2026-03-01T04:27:36.521Z",
     "successRate": 100,
-    "lastDeliveryAt": "2026-09-07T16:31:10.016Z",
+    "lastDeliveryAt": "2026-09-07T22:32:36.524Z",
     "failures24h": 0
   }
 ]

@@ -1,5 +1,49 @@
 # Test Status — APIForge X
 
+## Phase 5.5 — Premium Visual Polish & Motion System — PASS ✅ (with honest limitations)
+
+**Date:** 2026-09-08
+**Status:** PASS ✅ — 31/31 pages build and parse cleanly; 0 missing translations;
+88/88 icon names resolve; **30/30** new jsdom runtime assertions green (toast
+structure/roles/escaping, motion arming + reduced-motion fallbacks, i18n); all 31
+pages return 200 from the dev server with modules + SCSS transformed; no colour
+or duration literals outside the token layer.
+
+### New regression coverage (jsdom, `qa-tmp/` scratch harness — not committed)
+
+- Toast: four states (role + aria-live + data-type + icon/title/message/close
+  structure + localized close label), unknown-type fallback, long-message
+  integrity, HTML escaping, single stack container
+- Motion: every `[data-motion]` target is revealed when `IntersectionObserver`
+  is unavailable; overlay content (`.modal`) is never armed; `revealNow()` is
+  idempotent
+- i18n: default locale, `aria.close`, the new `vs.*` keys
+
+### Static gates
+
+- `parse5` — 31/31 files, 0 errors (1 pre-existing `duplicate-attribute` fixed)
+- Translation coverage — 0 missing keys in `fa.json` / `en.json`
+- Icon registry — 88/88 `data-lucide` names resolve
+- Token compliance — grep for `rgba(` / hex outside `src/scss/tokens/` → 0 hits
+
+### Defects found and fixed
+
+- **P2** `dashboard.html` — two `data-i18n-attr` attributes on one button
+  (tooltip title was never translated)
+- **P2** `icons.js` — `ArrowUpLeft` missing from the registry while
+  `dashboard.html` and `settings.html` used `arrow-up-left` (blank glyph)
+- **P3** `src/scss/pages/_auth.scss` — `--radius-lg` was never defined (the auth
+  card rendered square corners)
+
+### Honest limitations (unchanged)
+
+- Real-browser visual/responsive confirmation of the new motion, backdrop and
+  toast at 360–1920 was NOT executed — no browser exists in this sandbox.
+  `visual-showcase.html` exists precisely so the buyer (or the live preview)
+  can confirm every layer in seconds.
+
+---
+
 ## Final Release Audit — PASS ✅ (with honest limitations)
 
 **Date:** 2026-09-08

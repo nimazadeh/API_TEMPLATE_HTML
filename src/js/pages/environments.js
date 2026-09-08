@@ -7,11 +7,12 @@
 // =============================================================
 
 import { boot } from '../main.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { Modal } from '../core/bootstrap.js';
 import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
 import { bindCopyButton } from '../components/copy.js';
-import { escapeHtml, relativeTime, absoluteTime } from '../utils/format.js';
+import { escapeHtml, relativeTime, absoluteTime, number } from '../utils/format.js';
 import environmentsData from '../data/mock-environments.json';
 import variablesData from '../data/mock-variables.json';
 import keysData from '../data/mock-keys.json';
@@ -110,12 +111,12 @@ function renderVariables() {
         <tr data-id="${escapeHtml(v.id)}">
           <td>
             <code class="ltr-isolate mono-sm text-body">${escapeHtml(v.name)}</code>
-            <div class="text-tertiary caption">${v.secret ? 'Secret' : 'Plain text'} · added by ${escapeHtml(v.addedBy)}</div>
+            <div class="text-tertiary caption">${v.secret ? tr('env.secret') : tr('env.plainText')} · ${tr('env.addedBy', { name: escapeHtml(v.addedBy) })}</div>
           </td>
           <td>
             <span class="d-inline-flex align-items-center gap-2">
               <code class="ltr-isolate mono-sm ${v.secret && !isRevealed ? 'text-secondary' : 'text-body'}">${escapeHtml(shown)}</code>
-              ${v.secret ? `<button type="button" class="btn btn-icon btn-icon--sm" data-var-action="reveal" aria-label="${isRevealed ? 'Hide value' : 'Reveal value'}"><i data-lucide="${isRevealed ? 'eye-off' : 'eye'}"></i></button>` : ''}
+              ${v.secret ? `<button type="button" class="btn btn-icon btn-icon--sm" data-var-action="reveal" aria-label="${isRevealed ? tr('env.hideValue') : tr('env.revealValue')}"><i data-lucide="${isRevealed ? 'eye-off' : 'eye'}"></i></button>` : ''}
               <button type="button" class="btn btn-icon btn-icon--sm" data-var-action="copy" data-copy="${escapeHtml(v.value)}" aria-label="Copy value"><i data-lucide="copy"></i></button>
               <button type="button" class="btn btn-icon btn-icon--sm" data-var-action="delete" aria-label="Delete variable"><i data-lucide="trash-2"></i></button>
             </span>
@@ -125,7 +126,7 @@ function renderVariables() {
       })
       .join('');
   }
-  document.getElementById('var-count').textContent = `${list.length} variables in ${envName(activeEnv)}`;
+  document.getElementById('var-count').textContent = tr('env.varsCount', { count: number(list.length), env: envName(activeEnv) });
   tbody.querySelectorAll('[data-copy]').forEach(bindCopyButton);
   createIcons({ icons });
 }
@@ -147,7 +148,7 @@ function renderKeys() {
         <tr>
           <td>
             <div class="fw-medium text-body">${escapeHtml(k.name)}</div>
-            <div class="text-tertiary caption">${k.permission === 'full' ? 'Full access' : 'Restricted'}</div>
+            <div class="text-tertiary caption">${k.permission === 'full' ? tr('keys.permissionFull') : tr('keys.permissionRestricted')}</div>
           </td>
           <td>
             <span class="d-inline-flex align-items-center gap-2">
@@ -161,7 +162,7 @@ function renderKeys() {
       )
       .join('');
   }
-  document.getElementById('key-count').textContent = `${list.length} keys in ${envName(activeEnv)}`;
+  document.getElementById('key-count').textContent = tr('env.keysCount', { count: number(list.length), env: envName(activeEnv) });
   tbody.querySelectorAll('[data-copy]').forEach(bindCopyButton);
   createIcons({ icons });
 }
@@ -172,7 +173,7 @@ function saveVariable() {
   const value = document.getElementById('var-value').value;
   const secret = document.getElementById('var-secret').checked;
   if (!name || !value) {
-    afxToast({ message: 'Name and value are required', type: 'error' });
+    afxToast({ message: tr('env.nameValueRequired'), type: 'error' });
     return;
   }
   variables.push({
@@ -182,7 +183,7 @@ function saveVariable() {
     secret,
     environment: activeEnv,
     updatedAt: new Date().toISOString(),
-    addedBy: 'Arash P.',
+    addedBy: 'علی رضایی',
   });
   Modal.getOrCreateInstance(document.getElementById('variable-modal')).hide();
   document.getElementById('var-name').value = '';
@@ -248,3 +249,13 @@ document.getElementById('var-list').addEventListener('click', (e) => {
 });
 
 setEnv('live');
+
+function render() {
+  renderNotice();
+  renderSummary();
+  renderVariables();
+  renderKeys();
+}
+
+// Re-render when the locale flips.
+onLocaleChange(render);

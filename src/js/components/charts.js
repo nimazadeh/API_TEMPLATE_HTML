@@ -41,6 +41,16 @@ Chart.defaults.font.size = 11;
 Chart.defaults.color = '#71717a';
 Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
 
+// Phase 5.5 — chart motion. One reveal at the product's slow speed
+// (400ms, the hard ceiling) and nothing at all for reduced-motion users.
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+Chart.defaults.animation = REDUCED_MOTION
+  ? false
+  : { duration: 400, easing: 'easeOutQuart' };
+// Hover feedback is shortened, not removed: charts should still feel
+// like instruments without drifting into decorative motion.
+Chart.defaults.transitions.active.animation = { duration: 120 };
+
 const registry = [];
 
 function readTokens() {

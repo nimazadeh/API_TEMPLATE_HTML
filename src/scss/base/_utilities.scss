@@ -76,3 +76,37 @@
     color: var(--text-primary);
   }
 }
+
+// --- Right-to-left -------------------------------------------------
+// Directional glyphs mirror in RTL so the markup stays locale-agnostic:
+// a translation never has to swap `arrow-right` for `arrow-left`.
+[dir='rtl'] {
+  .lucide-arrow-right,
+  .lucide-arrow-up-right,
+  .lucide-arrow-down-right,
+  .lucide-chevron-right,
+  .lucide-chevrons-right,
+  .lucide-corner-down-right,
+  .lucide-corner-up-right,
+  .lucide-move-right,
+  .lucide-reply,
+  .lucide-redo-2,
+  .lucide-undo-2 {
+    transform: scaleX(-1);
+  }
+
+  // Explicit back/next controls pick their glyph in JS per direction,
+  // so they opt out of the mirror (see rtl-persian-test.js).
+  .no-dir-flip {
+    .lucide-arrow-right,
+    .lucide-arrow-left {
+      transform: none;
+    }
+  }
+}
+
+// The language switcher label sits after the globe icon; keep the
+// pair tight in both directions.
+[data-locale-toggle] {
+  gap: 6px;
+}

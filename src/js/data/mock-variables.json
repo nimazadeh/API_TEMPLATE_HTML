@@ -5,8 +5,8 @@
     "name": "DATABASE_URL",
     "value": "postgres://apiforge:8xK2mQp4@db.apiforge.dev:5432/prod",
     "secret": true,
-    "updatedAt": "2026-09-05T22:26:10.018Z",
-    "addedBy": "Arash P."
+    "updatedAt": "2026-09-06T04:27:36.525Z",
+    "addedBy": "علی رضایی"
   },
   {
     "id": "var_6R6yuVWa",
@@ -14,8 +14,8 @@
     "name": "REDIS_URL",
     "value": "rediss://default:r7Xp2mK9@redis.apiforge.dev:6379",
     "secret": true,
-    "updatedAt": "2026-08-17T22:26:10.018Z",
-    "addedBy": "system"
+    "updatedAt": "2026-08-18T04:27:36.525Z",
+    "addedBy": "سیستم"
   },
   {
     "id": "var_BvhyiXfx",
@@ -23,8 +23,8 @@
     "name": "WEBHOOK_SIGNING_SECRET",
     "value": "whsec_live_8f3k2ma1q7x9B4dL2nP",
     "secret": true,
-    "updatedAt": "2026-07-17T22:26:10.018Z",
-    "addedBy": "Arash P."
+    "updatedAt": "2026-07-18T04:27:36.525Z",
+    "addedBy": "علی رضایی"
   },
   {
     "id": "var_pJPgx0wh",
@@ -32,8 +32,8 @@
     "name": "OPENAI_API_KEY",
     "value": "sk-proj-9xK2mQp4r7Xv1L8nB3dF6",
     "secret": true,
-    "updatedAt": "2026-09-02T22:26:10.018Z",
-    "addedBy": "system"
+    "updatedAt": "2026-09-03T04:27:36.525Z",
+    "addedBy": "سیستم"
   },
   {
     "id": "var_brQFTix5",
@@ -41,8 +41,8 @@
     "name": "LOG_LEVEL",
     "value": "info",
     "secret": false,
-    "updatedAt": "2026-09-02T22:26:10.018Z",
-    "addedBy": "Arash P."
+    "updatedAt": "2026-09-03T04:27:36.525Z",
+    "addedBy": "علی رضایی"
   },
   {
     "id": "var_6yRWUayU",
@@ -50,8 +50,8 @@
     "name": "FEATURE_FLAGS",
     "value": "{\"billing_v2\":true,\"async_email\":false}",
     "secret": false,
-    "updatedAt": "2026-08-31T22:26:10.018Z",
-    "addedBy": "system"
+    "updatedAt": "2026-09-01T04:27:36.525Z",
+    "addedBy": "سیستم"
   },
   {
     "id": "var_0goliNuI",
@@ -59,8 +59,8 @@
     "name": "DATABASE_URL",
     "value": "postgres://apiforge:9bQx7Kp2@db.staging.apiforge.dev:5432/staging",
     "secret": true,
-    "updatedAt": "2026-07-18T22:26:10.018Z",
-    "addedBy": "Sara R."
+    "updatedAt": "2026-07-19T04:27:36.525Z",
+    "addedBy": "سارا احمدی"
   },
   {
     "id": "var_rDKQwX37",
@@ -68,8 +68,8 @@
     "name": "REDIS_URL",
     "value": "redis://redis.staging.apiforge.dev:6379",
     "secret": true,
-    "updatedAt": "2026-08-25T22:26:10.018Z",
-    "addedBy": "system"
+    "updatedAt": "2026-08-26T04:27:36.525Z",
+    "addedBy": "سیستم"
   },
   {
     "id": "var_t10VHB7Q",
@@ -77,8 +77,8 @@
     "name": "WEBHOOK_SIGNING_SECRET",
     "value": "whsec_stag_2mQp4r7Xv1L8nB3d",
     "secret": true,
-    "updatedAt": "2026-08-23T22:26:10.018Z",
-    "addedBy": "Arash P."
+    "updatedAt": "2026-08-24T04:27:36.525Z",
+    "addedBy": "علی رضایی"
   },
   {
     "id": "var_nNPvde6P",
@@ -86,8 +86,8 @@
     "name": "LOG_LEVEL",
     "value": "debug",
     "secret": false,
-    "updatedAt": "2026-08-22T22:26:10.018Z",
-    "addedBy": "Sara R."
+    "updatedAt": "2026-08-23T04:27:36.525Z",
+    "addedBy": "سارا احمدی"
   },
   {
     "id": "var_6jVyPHgt",
@@ -95,8 +95,8 @@
     "name": "DATABASE_URL",
     "value": "postgres://localhost:5432/apiforge_dev",
     "secret": true,
-    "updatedAt": "2026-08-16T22:26:10.018Z",
-    "addedBy": "Arash P."
+    "updatedAt": "2026-08-17T04:27:36.525Z",
+    "addedBy": "علی رضایی"
   },
   {
     "id": "var_Ov8jQo27",
@@ -104,8 +104,8 @@
     "name": "REDIS_URL",
     "value": "redis://localhost:6379",
     "secret": true,
-    "updatedAt": "2026-07-19T22:26:10.018Z",
-    "addedBy": "system"
+    "updatedAt": "2026-07-20T04:27:36.525Z",
+    "addedBy": "سیستم"
   },
   {
     "id": "var_Aa0YpLtt",
@@ -113,8 +113,8 @@
     "name": "WEBHOOK_SIGNING_SECRET",
     "value": "whsec_test_7Xv1L8nB3dF6mQp4",
     "secret": true,
-    "updatedAt": "2026-09-04T22:26:10.018Z",
-    "addedBy": "system"
+    "updatedAt": "2026-09-05T04:27:36.525Z",
+    "addedBy": "سیستم"
   },
   {
     "id": "var_OAVR1hY2",
@@ -122,8 +122,8 @@
     "name": "OPENAI_API_KEY",
     "value": "sk-proj-4r7Xv1L8nB3dF6mQp",
     "secret": true,
-    "updatedAt": "2026-08-05T22:26:10.018Z",
-    "addedBy": "system"
+    "updatedAt": "2026-08-06T04:27:36.525Z",
+    "addedBy": "سیستم"
   },
   {
     "id": "var_vcneOmhx",
@@ -131,8 +131,8 @@
     "name": "LOG_LEVEL",
     "value": "debug",
     "secret": false,
-    "updatedAt": "2026-08-04T22:26:10.018Z",
-    "addedBy": "system"
+    "updatedAt": "2026-08-05T04:27:36.525Z",
+    "addedBy": "سیستم"
   },
   {
     "id": "var_7lF7RmCl",
@@ -140,7 +140,7 @@
     "name": "PORT",
     "value": "4000",
     "secret": false,
-    "updatedAt": "2026-08-24T22:26:10.018Z",
-    "addedBy": "Arash P."
+    "updatedAt": "2026-08-25T04:27:36.525Z",
+    "addedBy": "علی رضایی"
   }
 ]

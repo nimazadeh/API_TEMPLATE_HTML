@@ -6,8 +6,10 @@
 // =============================================================
 
 import { boot } from '../main.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { createIcons, icons } from '../components/icons.js';
 import { renderLogsFull } from '../components/table.js';
+import { number } from '../utils/format.js';
 import { openLogDrawer } from '../components/log-detail.js';
 import logs from '../data/mock-logs.json';
 
@@ -41,14 +43,14 @@ function render() {
       <tr><td colspan="7">
         <div class="empty-state">
           <span class="empty-icon"><i data-lucide="search"></i></span>
-          <h4 class="empty-title">No logs match</h4>
-          <p class="empty-desc mb-0">Adjust or clear the filters to see more results.</p>
+          <h4 class="empty-title">${tr('logs.emptyTitle')}</h4>
+          <p class="empty-desc mb-0">${tr('logs.emptyDesc')}</p>
         </div>
       </td></tr>`;
   } else {
     renderLogsFull(tbody, list);
   }
-  document.getElementById('logs-count').textContent = `${list.length} of ${logs.length} requests`;
+  document.getElementById('logs-count').textContent = tr('logs.countOf', { shown: number(list.length), total: number(logs.length) });
   createIcons({ icons });
 }
 
@@ -133,3 +135,6 @@ document.getElementById('logs-clear').addEventListener('click', () => {
 
 document.getElementById('logs-refresh').addEventListener('click', render);
 document.getElementById('logs-export').addEventListener('click', exportCsv);
+
+// Re-render the table (and its empty state) when the locale flips.
+onLocaleChange(render);

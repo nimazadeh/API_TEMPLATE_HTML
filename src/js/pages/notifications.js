@@ -8,6 +8,8 @@
 import { boot } from '../main.js';
 import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
+import { number } from '../utils/format.js';
 import { escapeHtml, relativeTime } from '../utils/format.js';
 import notificationsData from '../data/mock-notifications.json';
 
@@ -17,14 +19,14 @@ const notifications = [...notificationsData];
 const state = { category: 'all', severity: 'all', query: '' };
 
 const CATEGORY_LABEL = {
-  'api-errors': 'API errors',
-  webhook: 'Webhook',
-  'rate-limit': 'Rate limit',
-  deployment: 'Deployment',
-  billing: 'Billing',
-  team: 'Team',
-  security: 'Security',
-  error: 'Errors',
+  'api-errors': 'notifications.catApiErrors',
+  webhook: 'notifications.catWebhook',
+  'rate-limit': 'notifications.catRateLimit',
+  deployment: 'notifications.catDeployment',
+  billing: 'notifications.catBilling',
+  team: 'notifications.catTeam',
+  security: 'notifications.catSecurity',
+  error: 'notifications.catErrors',
 };
 
 const CATEGORY_ICON = {
@@ -56,7 +58,7 @@ function filtered() {
 
 function envBadge(env) {
   if (!env) return '';
-  const label = env === 'live' ? 'Live' : env === 'staging' ? 'Staging' : 'Test';
+  const label = tr(env === 'live' ? 'env.production' : env === 'staging' ? 'env.staging' : 'env.testOption');
   const cls = env === 'live' ? 'badge-status--success' : env === 'staging' ? 'badge-status--warning' : 'badge-status--info';
   return `<span class="badge badge-status ${cls}"><span class="dot"></span>${label}</span>`;
 }
@@ -71,12 +73,12 @@ function row(n) {
         <div class="notification__meta">
           <span class="ltr-isolate">${relativeTime(n.createdAt)}</span>
           <span>·</span>
-          <span>${escapeHtml(CATEGORY_LABEL[n.category] || n.category)}</span>
+          <span>${escapeHtml(tr(CATEGORY_LABEL[n.category] || '')) || escapeHtml(n.category)}</span>
           ${envBadge(n.env)}
         </div>
       </div>
       <div class="notification__actions">
-        <button type="button" class="btn btn-icon btn-icon--sm" data-toggle-read aria-label="${n.read ? 'Mark unread' : 'Mark read'}"><i data-lucide="${n.read ? 'mail' : 'check-check'}"></i></button>
+        <button type="button" class="btn btn-icon btn-icon--sm" data-toggle-read aria-label="${n.read ? tr('notifications.markUnread') : tr('notifications.markRead')}"><i data-lucide="${n.read ? 'mail' : 'check-check'}"></i></button>
       </div>
     </div>`;
 }
@@ -86,9 +88,9 @@ function render() {
   const wrap = document.getElementById('notification-list');
   wrap.innerHTML = list.length
     ? list.map(row).join('')
-    : `<div class="empty-state py-5"><span class="empty-icon"><i data-lucide="inbox"></i></span><h4 class="empty-title">Nothing here</h4><p class="empty-desc mb-0">No notifications match the current filters.</p></div>`;
+    : `<div class="empty-state py-5"><span class="empty-icon"><i data-lucide="inbox"></i></span><h4 class="empty-title">${tr('notifications.emptyTitle')}</h4><p class="empty-desc mb-0">${tr('notifications.emptyDesc')}</p></div>`;
 
-  document.getElementById('notification-count').textContent = `${unreadCount()} unread`;
+  document.getElementById('notification-count').textContent = tr('notifications.unreadCount', { count: number(unreadCount()) });
   document.getElementById('mark-all').disabled = unreadCount() === 0;
   createIcons({ icons });
 }
@@ -107,7 +109,7 @@ function bind() {
   document.getElementById('mark-all').addEventListener('click', () => {
     notifications.forEach((n) => (n.read = true));
     render();
-    afxToast({ message: 'All notifications marked as read.', type: 'success' });
+    afxToast({ message: tr('notifications.toastAllRead'), type: 'success' });
   });
 
   document.getElementById('notif-category').addEventListener('change', (e) => {
@@ -126,3 +128,6 @@ function bind() {
 
 render();
 bind();
+
+// Re-render when the locale flips.
+onLocaleChange(render);

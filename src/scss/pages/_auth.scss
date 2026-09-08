@@ -7,6 +7,7 @@
 @use '../tokens/_index' as *;
 
 .auth {
+  position: relative; // containing block for the atmospheric backdrop
   min-height: 100dvh;
   display: flex;
   align-items: center;
@@ -14,27 +15,19 @@
   padding: var(--space-5) var(--space-4);
   background: var(--surface-canvas);
 
-  // Subtle atmospheric glow (allowed: radial, behind the card only).
-  &::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(
-      600px 400px at 50% 0%,
-      rgba(99, 102, 241, 0.12),
-      transparent 70%
-    );
-    pointer-events: none;
-  }
+  // The atmospheric glow now lives in the shared .backdrop layer
+  // (components/_backdrop.scss), so the auth card keeps a single source
+  // of atmosphere and zero hardcoded colours.
 }
 
 .auth__card {
   position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 420px;
   background: var(--surface-1);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: var(--space-6);
 }
 

@@ -9,6 +9,7 @@ import { boot } from '../main.js';
 import { Modal } from '../core/bootstrap.js';
 import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { ask, initConfirm } from '../components/confirm.js';
 import { escapeHtml, relativeTime, formatDate } from '../utils/format.js';
 import teamData from '../data/mock-team.json';
@@ -22,7 +23,7 @@ const WORKSPACE = { name: 'APIForge', slug: 'apiforge', id: 'ws_x7k2mQ9p' };
 const members = [...teamData];
 const invitations = [...invitationsData];
 
-const ROLE_LABEL = { Owner: 'Owner', Admin: 'Admin', Developer: 'Developer', Viewer: 'Viewer' };
+const ROLE_LABEL = { Owner: 'profile.owner', Admin: 'role.adminOption', Developer: 'team.roleDeveloper', Viewer: 'role.viewerOption' };
 const ROLE_ICON = { Owner: 'shield-check', Admin: 'shield-check', Developer: 'code-2', Viewer: 'eye' };
 const STATUS_BADGE = {
   active: 'badge-status--success',
@@ -44,17 +45,17 @@ function renderSummary() {
 }
 
 function roleBadge(role) {
-  return `<span class="role-badge badge badge-neutral"><i data-lucide="${ROLE_ICON[role]}"></i> ${ROLE_LABEL[role]}</span>`;
+  return `<span class="role-badge badge badge-neutral"><i data-lucide="${ROLE_ICON[role]}"></i> ${tr(ROLE_LABEL[role]) || role}</span>`;
 }
 
 function statusBadge(status) {
-  const label = status === 'active' ? 'Active' : status === 'pending' ? 'Pending' : 'Suspended';
+  const label = tr(status === 'active' ? 'status.activePlain' : status === 'pending' ? 'webhooks.statusPending' : 'team.suspended');
   return `<span class="badge badge-status ${STATUS_BADGE[status]}"><span class="dot"></span>${label}</span>`;
 }
 
 function memberRow(m) {
   const isOwner = m.role === 'Owner';
-  const roleOptions = ['Admin', 'Developer', 'Viewer']
+  const roleOptions = [tr('role.adminOption'), tr('team.roleDeveloper'), tr('role.viewerOption')]
     .filter((r) => r !== m.role)
     .map((r) => `<button type="button" class="dropdown-item" data-role="${r}"><i data-lucide="${ROLE_ICON[r]}"></i> Make ${r}</button>`)
     .join('');
@@ -145,15 +146,15 @@ function bindInvite() {
       id: `inv_${Date.now().toString(36)}`,
       email: value,
       role: role.value,
-      invitedBy: 'Arash Pashaei',
+      invitedBy: 'علی رضایی',
       sentAt: new Date().toISOString(),
       expiresIn: '7 days',
     });
     Modal.getOrCreateInstance(document.getElementById('invite-modal')).hide();
     email.value = '';
-    role.value = 'Developer';
+    role.value = tr('team.roleDeveloper');
     render();
-    afxToast({ message: `Invitation sent to ${value}.`, type: 'success' });
+    afxToast({ message: tr('team.inviteSent', { email: value }), type: 'success' });
   });
 }
 
@@ -169,20 +170,20 @@ function bindActions() {
     if (actionBtn.dataset.role) {
       member.role = actionBtn.dataset.role;
       render();
-      afxToast({ message: `${member.name} is now ${actionBtn.dataset.role}.`, type: 'success' });
+      afxToast({ message: tr('team.roleChanged', { name: member.name, role: actionBtn.dataset.role }), type: 'success' });
     } else if (actionBtn.dataset.suspend !== undefined) {
-      const ok = await ask({ title: 'Suspend member', body: `Suspend “${member.name}”? They will lose API access immediately.`, confirmLabel: 'Suspend', danger: true });
+      const ok = await ask({ title: tr('team.suspendTitle'), body: tr('team.suspendBody', { name: member.name }), confirmLabel: tr('team.suspend'), danger: true });
       if (ok) {
         member.status = 'suspended';
         render();
-        afxToast({ message: `${member.name} suspended.`, type: 'info' });
+        afxToast({ message: tr('team.suspendedToast', { name: member.name }), type: 'info' });
       }
     } else if (actionBtn.dataset.activate !== undefined) {
       member.status = 'active';
       render();
-      afxToast({ message: `${member.name} re-activated.`, type: 'success' });
+      afxToast({ message: tr('team.reactivatedToast', { name: member.name }), type: 'success' });
     } else if (actionBtn.dataset.remove !== undefined) {
-      const ok = await ask({ title: 'Remove member', body: `Remove “${member.name}” from the workspace? This cannot be undone.`, confirmLabel: 'Remove', danger: true });
+      const ok = await ask({ title: tr('team.removeTitle'), body: tr('team.removeBody', { name: member.name }), confirmLabel: tr('team.remove'), danger: true });
       if (ok) {
         members.splice(members.indexOf(member), 1);
         render();
@@ -213,3 +214,6 @@ renderSummary();
 render();
 bindInvite();
 bindActions();
+
+// Re-render when the locale flips.
+onLocaleChange(render);

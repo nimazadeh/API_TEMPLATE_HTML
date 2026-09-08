@@ -5,8 +5,9 @@
 // =============================================================
 
 import { boot } from '../main.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { makeChart, axis, tooltips, initCharts } from '../components/charts.js';
-import { formatNumber, compactNumber, percent, escapeHtml, methodBadgeClass } from '../utils/format.js';
+import { formatNumber, compactNumber, percent, escapeHtml, methodBadgeClass, latencyText, number } from '../utils/format.js';
 import usage from '../data/mock-usage.json';
 import attribution from '../data/mock-attribution.json';
 import plan from '../data/mock-plan.json';
@@ -35,12 +36,12 @@ function renderPlan() {
 
   const end = new Date(plan.periodEnd).getTime();
   const days = Math.max(0, Math.ceil((end - Date.now()) / 86_400_000));
-  document.getElementById('usage-resets').textContent = Number.isFinite(days) ? `${days} days` : plan.periodLabel;
+  document.getElementById('usage-resets').textContent = Number.isFinite(days) ? tr('usage.daysLeft', { count: number(days) }) : plan.periodLabel;
 
   const k = metrics.kpis['30d'];
   document.getElementById('usage-requests').textContent = compactNumber(plan.requestsUsed);
-  document.getElementById('usage-latency').textContent = `${k.latencyMs} ms`;
-  document.getElementById('usage-success').textContent = `${k.successRate}%`;
+  document.getElementById('usage-latency').textContent = latencyText(k.latencyMs);
+  document.getElementById('usage-success').textContent = percent(k.successRate);
 }
 
 // --- Requests over time --------------------------------------------------
@@ -167,7 +168,7 @@ function renderAttribution() {
     .map((e) => attributionRow(e.method, e.path, e.requests, e.share))
     .join('');
   document.getElementById('attr-by-env').innerHTML = attribution.byEnvironment
-    .map((e) => attributionRow(null, e.env === 'live' ? 'Live environment' : 'Test environment', e.requests, e.share))
+    .map((e) => attributionRow(null, e.env === 'live' ? tr('usage.liveEnvironment') : tr('usage.testEnvironment'), e.requests, e.share))
     .join('');
 }
 
@@ -187,13 +188,20 @@ function exportCsv() {
 }
 
 // --- Wiring ---------------------------------------------------------------------
-renderPlan();
-renderRequestsChart();
-renderConsumptionChart();
-renderTopEndpoints();
-renderAttribution();
+function render() {
+  renderPlan();
+  renderRequestsChart();
+  renderConsumptionChart();
+  renderTopEndpoints();
+  renderAttribution();
+}
+
+render();
 
 document.querySelectorAll('[data-range]').forEach((btn) => {
   btn.addEventListener('click', () => setRange(btn.dataset.range));
 });
 document.getElementById('usage-export').addEventListener('click', exportCsv);
+
+// Re-render when the locale flips.
+onLocaleChange(render);

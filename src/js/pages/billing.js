@@ -9,6 +9,7 @@ import { boot } from '../main.js';
 import { Modal } from '../core/bootstrap.js';
 import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { ask, initConfirm } from '../components/confirm.js';
 import { escapeHtml, compactNumber, formatDate } from '../utils/format.js';
 import plans from '../data/mock-plans.json';
@@ -42,7 +43,7 @@ function renderCurrentPlan() {
 function planCard(p) {
   const isCurrent = p.name === currentPlan.name;
   const isDowngrade = !isCurrent && p.price < currentPlan.price;
-  const ctaLabel = isCurrent ? 'Current plan' : isDowngrade ? 'Downgrade' : `Upgrade to ${p.name}`;
+  const ctaLabel = isCurrent ? tr('billing.currentPlanCta') : isDowngrade ? tr('billing.downgrade') : tr('billing.upgradeTo', { plan: p.name });
   const ctaClass = isCurrent ? 'btn-secondary' : isDowngrade ? 'btn-ghost' : 'btn-primary';
   return `
     <div class="card plan ${isCurrent ? 'plan--current' : ''}">
@@ -85,9 +86,13 @@ function renderInvoices() {
 }
 
 // --- Wiring ------------------------------------------------------------------
-renderCurrentPlan();
-renderPlans();
-renderInvoices();
+function render() {
+  renderCurrentPlan();
+  renderPlans();
+  renderInvoices();
+}
+
+render();
 
 // Plan upgrade / downgrade
 document.getElementById('plan-grid').addEventListener('click', async (e) => {
@@ -96,11 +101,11 @@ document.getElementById('plan-grid').addEventListener('click', async (e) => {
   const target = plans.find((p) => p.id === btn.dataset.plan);
   const isDowngrade = target.price < currentPlan.price;
   const ok = await ask({
-    title: isDowngrade ? 'Downgrade plan' : 'Upgrade plan',
+    title: isDowngrade ? tr('billing.downgradeTitle') : tr('billing.upgradeTitle'),
     body: isDowngrade
       ? `Switch to ${target.name}? You will lose access to ${target.name} tier limits at the end of the billing cycle.`
       : `Upgrade to ${target.name} at ${target.priceLabel}${target.period}? The new limits apply immediately.`,
-    confirmLabel: isDowngrade ? 'Downgrade' : 'Upgrade',
+    confirmLabel: isDowngrade ? tr('billing.downgrade') : tr('billing.upgrade'),
     danger: isDowngrade,
   });
   if (ok) {
@@ -108,7 +113,7 @@ document.getElementById('plan-grid').addEventListener('click', async (e) => {
     currentPlan.price = target.price;
     renderCurrentPlan();
     renderPlans();
-    afxToast({ message: `Switched to the ${target.name} plan.`, type: 'success' });
+    afxToast({ message: tr('billing.switched', { plan: target.name }), type: 'success' });
   }
 });
 
@@ -127,7 +132,7 @@ document.querySelectorAll('[data-cycle]').forEach((seg) => {
 document.getElementById('invoice-list').addEventListener('click', (e) => {
   const btn = e.target.closest('[data-download]');
   if (!btn) return;
-  afxToast({ message: 'Demo action — invoice download is simulated.', type: 'info' });
+  afxToast({ message: tr('billing.invoiceDemo'), type: 'info' });
 });
 
 // Payment method update modal
@@ -147,9 +152,12 @@ function bindPayment() {
     document.getElementById('pm-display').innerHTML = `Visa <span class="ltr-isolate">•••• ${last4}</span>`;
     Modal.getOrCreateInstance(document.getElementById('payment-modal')).hide();
     card.value = '';
-    afxToast({ message: 'Payment method updated (demo).', type: 'success' });
+    afxToast({ message: tr('billing.paymentUpdated'), type: 'success' });
   });
 }
 bindPayment();
 
 createIcons({ icons });
+
+// Re-render when the locale flips.
+onLocaleChange(render);

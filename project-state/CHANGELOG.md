@@ -6,6 +6,108 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## [Phase 5.5] — 2026-09-08 — PREMIUM VISUAL POLISH & MOTION SYSTEM ✅
+
+### Added
+- `src/scss/tokens/_motion.scss` — the centralized motion ladder:
+  `--motion-fast 150ms` · `--motion-normal 250ms` · `--motion-slow 400ms` (hard
+  ceiling), `--ease-standard cubic-bezier(.2,.8,.2,1)`, plus `--motion-stagger`,
+  `--motion-shift` and `--dir-sign` (1 in LTR, -1 in RTL). The old
+  `--duration-*` tokens are kept as aliases
+- `src/scss/tokens/_mixins.scss` — `motion($duration, $props)`, `motion-reduce`
+  and `motion-enter($delay, $duration, $shift)`; every entrance funnels through them
+- `src/scss/components/_backdrop.scss` — the reusable atmospheric layer:
+  `.backdrop__grid` (44px technical grid), `.backdrop__glow` (radial accent) and
+  `.backdrop__mesh` (API-infrastructure lattice), with `.backdrop--quiet`
+  (docs/SDK/reference) and `.backdrop--auth` variants. Applied to index,
+  pricing, changelog, status, docs, sdk, api-reference, login and forgot-password
+- `src/scss/components/_motion.scss` — `afx-rise` / `afx-fade` / `afx-pop` /
+  `afx-drop-in` keyframes, the `[data-motion]` reveal contract and the
+  `[data-motion-group]` / `.motion-stagger` nth-child stagger
+- `src/js/components/motion.js` — one IntersectionObserver for the whole product.
+  Nothing is hidden until JS arms it, overlay content (modal / offcanvas /
+  collapse / inactive tab) is never armed, and `prefers-reduced-motion` skips the
+  observer entirely
+- `visual-showcase.html` + `src/js/pages/visual-showcase.js` +
+  `src/scss/pages/_visual-showcase.scss` — the visual & motion QA page (hero
+  replay, backdrop tiles with a hide toggle, a three-speed motion playground,
+  cards, buttons, modal, drawer, dropdown, tabs and every toast state), live in
+  dark/light/system × RTL/LTR
+
+### Changed
+- Toast rebuilt as a premium component: `[icon] [ title / message ] [close]`,
+  16px inline / 12px block padding, 14px message at `--lh-toast: 1.6`,
+  logical properties throughout, four token-coloured states (success / error /
+  warning / info), a 2px accent rail that mirrors in RTL, a 250ms
+  enter (opacity 0→1, translateY 8px→0) and a fade exit. `role="status"` /
+  `role="alert"` with matching `aria-live`, `aria-atomic`, and a catalog-labelled
+  close button (`aria.close`). The stack moved to the top inline-end corner
+- Landing hero choreography: backdrop 0ms → eyebrow 100 → title 150 →
+  description 250 → CTA 350 → hint 400 → preview 450 → KPI stagger 520+60n →
+  panels 560/620 — opacity and transform only, no layout shift
+- Micro-interactions: hover elevation on solid buttons, `.card--interactive`,
+  `.feature-card` and `.pricing-card`; a 150ms table row hover with a
+  directional accent rail on clickable rows; a `scale`-based sliding tab
+  indicator; 150ms dropdown entrance and tooltip fade (both use the independent
+  `translate` / `scale` properties so Popper's inline transform is untouched);
+  250ms modal fade + 12px travel; 400ms drawer slide
+- Dashboard polish only — no decorative background: card entrances, a
+  skeleton→content settle (`dashboard.js` swaps `.skeleton-kpi` for `.is-loaded`)
+  and animated charts (400ms `easeOutQuart`, disabled under reduced motion)
+- `src/scss/pages/_auth.scss` — the hardcoded glow gradient and the undefined
+  `--radius-lg` were replaced by the shared backdrop layer and `--radius-md`
+- `src/scss/pages/_marketing.scss` — the hero and CTA-band gradients now read
+  `--backdrop-glow*` tokens instead of literal `rgba()`
+- 86 new `vs.*` translation keys in **both** `src/locales/fa.json` and
+  `src/locales/en.json` (1,347 keys each)
+
+### Fixed
+- `dashboard.html` carried two `data-i18n-attr` attributes on one button
+  (parse5 `duplicate-attribute`), so the tooltip title was never translated
+- `arrow-up-left` was used on `dashboard.html` and `settings.html` but missing
+  from the Lucide registry — the glyph never rendered; `ArrowUpLeft` added
+
+---
+
+## [Phase 5] — 2026-09-08 — PERSIAN RTL LOCALIZATION & MARKETPLACE READINESS ✅
+
+### Added
+- `src/locales/fa.json` + `src/locales/en.json` — the full translation catalogs (1,260 keys)
+- `src/js/core/i18n.js` — locale resolution, `t()` with `{var}` interpolation, the
+  `[data-i18n]` / `[data-i18n-attr]` painter, live `setLocale()`, `onLocaleChange()`
+  and `<html lang|dir>` syncing (no-flash restore moved into the inline `<head>` script)
+- Language control on every page: a locale menu in the app shell, a toggle on the
+  marketing and auth pages
+- `src/js/data/docs-content.en.js` + `docs-content.fa.js` behind a locale dispatcher —
+  the 18-article documentation portal is authored per language, not key-by-key
+- `rtl-persian-test.html` — the Persian RTL QA harness (replaces `rtl-test.html`):
+  mixed-script sentences, Persian/Latin digits, LTR isolation, code blocks, tables,
+  forms, charts, dropdowns, modals, pagination, alerts, timelines + live fa/en & theme switching
+- `PHASE_5_REPORT.md` — the phase report and quality-gate scorecard
+
+### Changed
+- All 30 pages now open in Persian (`<html lang="fa" dir="rtl">`) with 2,536 `data-i18n`
+  and 413 `data-i18n-attr` bindings — no hardcoded UI strings remain
+- `src/js/utils/format.js` is locale-aware: numbers, compact numbers, dates (Jalali in
+  Persian), relative time and percentages switch on `afx:localechange`
+- Page modules re-render charts, tables, drawers and empty states on locale change
+- `scripts/generate-mock-data.mjs` now emits Persian content (people, projects, key
+  names, API names, activity, notifications, plans, environments, SDK features,
+  endpoint summaries/descriptions and parameter help) while keeping every technical
+  value (ids, paths, prefixes, IPs, emails, packages, status codes) Latin/LTR
+- `src/scss/base/_utilities.scss` — directional glyphs mirror in RTL; `.no-dir-flip`
+  opts explicit back/next controls out of the mirror
+- `src/scss/components/_dropdown.scss` — `.locale-check` alongside `.theme-check`
+- `README.md` + `marketplace/DESCRIPTION.md` — Phase 5 status, a localization section,
+  and rewritten Rastchin/RTL-Theme listing copy with an Iranian-market requirements table
+- `vite.config.js` — `rtl-test` page input renamed to `rtl-persian-test`
+
+### Fixed
+- Attribute injection no longer corrupts self-closing tags (`<input … />`): i18n
+  attributes are inserted before the trailing solidus
+
+---
+
 ## [Phase 3C] — 2026-09-07 — COMPLETE SAAS PRODUCT EXPERIENCE ✅
 
 ### Added
