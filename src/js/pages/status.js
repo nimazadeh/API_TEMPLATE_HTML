@@ -55,7 +55,7 @@ function renderBars() {
     const degraded = i === 27 || i === 63;
     const height = degraded ? 62 + Math.round(roll * 8) : 92 + Math.round(roll * 8);
     bars.push(
-      `<span class="uptime-bar${degraded ? ' is-degraded' : ''}" style="height:${height}%" title="Day ${90 - i}"></span>`
+      `<span class="uptime-bar${degraded ? ' is-degraded' : ''}" style="height:${height}%" title="${tr('ui.day', { count: number(90 - i) })}"></span>`
     );
   }
   host.innerHTML = bars.join('');

@@ -12,7 +12,7 @@ import { initCodeBlock } from '../components/code-block.js';
 import { bindCopyButton } from '../components/copy.js';
 import { escapeHtml } from '../utils/format.js';
 import { docGroups, docArticles, docOrder } from '../data/docs-content.js';
-import { onLocaleChange } from '../core/i18n.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 
 boot();
 
@@ -24,7 +24,7 @@ function inline(text) {
 }
 
 function slugify(text) {
-  return String(text).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return String(text).toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '');
 }
 
 // --- Block renderers ----------------------------------------------------
@@ -37,7 +37,7 @@ function renderCode(block) {
     <div class="code-block mb-4" data-code-block>
       <div class="code-block__header">
         <div class="code-tabs" role="tablist" aria-label="${escapeHtml(block.label || 'Code')}">${tabs}</div>
-        <div class="code-block__actions"><button type="button" class="btn btn-icon btn-icon--sm" data-code-copy aria-label="Copy code"><i data-lucide="copy"></i></button></div>
+        <div class="code-block__actions"><button type="button" class="btn btn-icon btn-icon--sm" data-code-copy aria-label="${tr('common.copy-code')}"><i data-lucide="copy"></i></button></div>
       </div>
       ${panes}
     </div>`;
@@ -48,7 +48,7 @@ function renderJson(block) {
     <div class="code-block code-block--flush mb-4" data-code-block>
       <div class="code-block__header">
         <span class="code-block__lang"><i data-lucide="braces"></i> ${escapeHtml(block.label || 'JSON')}</span>
-        <div class="code-block__actions"><button type="button" class="btn btn-icon btn-icon--sm" data-code-copy aria-label="Copy JSON"><i data-lucide="copy"></i></button></div>
+        <div class="code-block__actions"><button type="button" class="btn btn-icon btn-icon--sm" data-code-copy aria-label="${tr('aria.copyJson')}"><i data-lucide="copy"></i></button></div>
       </div>
       <pre class="code-block__body" data-code-pane><code>${escapeHtml(block.code)}</code></pre>
     </div>`;
@@ -84,8 +84,8 @@ function renderBlocks(blocks) {
   return blocks
     .map((b) => {
       switch (b.type) {
-        case 'h2': return `<h2 id="${slugify(b.text)}"><span>${escapeHtml(b.text)}</span><a class="docs-anchor" href="#${slugify(b.text)}" aria-label="Link to ${escapeHtml(b.text)}"><i data-lucide="link"></i></a></h2>`;
-        case 'h3': return `<h3 id="${slugify(b.text)}"><span>${escapeHtml(b.text)}</span><a class="docs-anchor" href="#${slugify(b.text)}" aria-label="Link to ${escapeHtml(b.text)}"><i data-lucide="link"></i></a></h3>`;
+        case 'h2': return `<h2 id="${slugify(b.text)}"><span>${escapeHtml(b.text)}</span><a class="docs-anchor" href="#${slugify(b.text)}" aria-label="${tr('ui.linkTo', { heading: escapeHtml(b.text) })}"><i data-lucide="link"></i></a></h2>`;
+        case 'h3': return `<h3 id="${slugify(b.text)}"><span>${escapeHtml(b.text)}</span><a class="docs-anchor" href="#${slugify(b.text)}" aria-label="${tr('ui.linkTo', { heading: escapeHtml(b.text) })}"><i data-lucide="link"></i></a></h3>`;
         case 'p': return `<p>${inline(b.text)}</p>`;
         case 'ul': return `<ul>${b.items.map((i) => `<li>${inline(i)}</li>`).join('')}</ul>`;
         case 'code': return renderCode(b);
@@ -103,7 +103,7 @@ function renderToc(article) {
   const headings = article.blocks.filter((b) => b.type === 'h2' || b.type === 'h3');
   if (!headings.length) return '';
   return `
-    <div class="docs-toc__label">On this page</div>
+    <div class="docs-toc__label">${tr('aria.onThisPage')}</div>
     ${headings
       .map((h) => `<a class="docs-toc__item ${h.type === 'h3' ? 'is-sub' : ''}" href="#${slugify(h.text)}">${escapeHtml(h.text)}</a>`)
       .join('')}`;
@@ -147,8 +147,8 @@ function renderArticle() {
 
   const pager = document.getElementById('docs-pager');
   pager.innerHTML = `
-    ${prev ? `<a class="docs-pager__link" href="#${prev.id}"><span class="docs-pager__dir">← Previous</span><span class="docs-pager__title">${escapeHtml(prev.title)}</span></a>` : '<span></span>'}
-    ${next ? `<a class="docs-pager__link text-end" href="#${next.id}"><span class="docs-pager__dir">Next →</span><span class="docs-pager__title">${escapeHtml(next.title)}</span></a>` : '<span></span>'}`;
+    ${prev ? `<a class="docs-pager__link" href="#${prev.id}"><span class="docs-pager__dir">${tr('ui.previous')}</span><span class="docs-pager__title">${escapeHtml(prev.title)}</span></a>` : '<span></span>'}
+    ${next ? `<a class="docs-pager__link text-end" href="#${next.id}"><span class="docs-pager__dir">${tr('ui.next')}</span><span class="docs-pager__title">${escapeHtml(next.title)}</span></a>` : '<span></span>'}`;
 
   document.querySelectorAll('#docs-article [data-code-block]').forEach(initCodeBlock);
   document.querySelectorAll('#docs-article [data-copy]').forEach(bindCopyButton);

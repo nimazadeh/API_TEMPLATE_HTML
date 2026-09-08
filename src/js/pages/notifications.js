@@ -5,13 +5,16 @@
 // a meaningful empty state.
 // =============================================================
 
+import { localizedFixture } from '../data/localized.js';
 import { boot } from '../main.js';
 import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
-import { number } from '../utils/format.js';
-import { escapeHtml, relativeTime } from '../utils/format.js';
-import notificationsData from '../data/mock-notifications.json';
+import { number, escapeHtml, relativeTime } from '../utils/format.js';
+import notificationsDataFa from '../data/mock-notifications.json';
+import notificationsDataEn from '../data/mock-notifications.en.json';
+
+const notificationsData = localizedFixture(notificationsDataFa, notificationsDataEn);
 
 boot();
 

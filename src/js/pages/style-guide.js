@@ -16,8 +16,10 @@ renderLogs(document.querySelector('#logs-demo'), logs, { limit: 8 });
 // Toast demo.
 document.querySelector('#sg-toast')?.addEventListener('click', () => {
   afxToast({
-    message: 'API key revoked',
+    message: tr('ui.apiKeyRevoked'),
     type: 'success',
-    action: { label: 'Undo', onClick: () => console.log('undo revoke') },
+    action: { label: tr('ui.undo'), onClick: () => console.log('undo revoke') },
   });
 });
+
+onLocaleChange(() => renderLogs(document.querySelector('#logs-demo'), logs, { limit: 8 }));

@@ -4,21 +4,40 @@
 // top endpoints, and endpoint/environment attribution.
 // =============================================================
 
+import {
+  chartDate,
+  formatNumber,
+  compactNumber,
+  percent,
+  escapeHtml,
+  methodBadgeClass,
+  latencyText,
+  number,
+} from '../utils/format.js';
+import { localizedFixture } from '../data/localized.js';
 import { boot } from '../main.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { makeChart, axis, tooltips, initCharts } from '../components/charts.js';
-import { formatNumber, compactNumber, percent, escapeHtml, methodBadgeClass, latencyText, number } from '../utils/format.js';
 import usage from '../data/mock-usage.json';
 import attribution from '../data/mock-attribution.json';
-import plan from '../data/mock-plan.json';
-import metrics from '../data/mock-metrics.json';
-import endpoints from '../data/mock-endpoints.json';
-import apis from '../data/mock-apis.json';
+import faPlan from '../data/mock-plan.json';
+import enPlan from '../data/mock-plan.en.json';
+import metricsFa from '../data/mock-metrics.json';
+import metricsEn from '../data/mock-metrics.en.json';
+import endpointsFa from '../data/mock-endpoints.json';
+import endpointsEn from '../data/mock-endpoints.en.json';
+import apisFa from '../data/mock-apis.json';
+import apisEn from '../data/mock-apis.en.json';
+
+const plan = localizedFixture(faPlan, enPlan);
+const metrics = localizedFixture(metricsFa, metricsEn);
+const endpoints = localizedFixture(endpointsFa, endpointsEn);
+const apis = localizedFixture(apisFa, apisEn);
 
 boot();
 initCharts();
 
-const API_NAMES = Object.fromEntries(apis.map((a) => [a.id, a.name]));
+const apiName = (id) => apis.find((a) => a.id === id)?.name;
 
 function apiOf(path) {
   const ep = endpoints.find((e) => e.path === path);
@@ -30,7 +49,7 @@ function renderPlan() {
   const pct = (plan.requestsUsed / plan.requestsLimit) * 100;
   document.getElementById('usage-period').textContent = plan.periodLabel;
   document.getElementById('usage-bar-fill').style.width = `${pct.toFixed(1)}%`;
-  document.getElementById('usage-bar').setAttribute('aria-label', `${pct.toFixed(1)}% of plan used`);
+  document.getElementById('usage-bar').setAttribute('aria-label', tr('usage.pctUsed', { pct: number(Number(pct.toFixed(1))) }));
   document.getElementById('usage-used').textContent = formatNumber(plan.requestsUsed);
   document.getElementById('usage-limit').textContent = formatNumber(plan.requestsLimit);
 
@@ -51,7 +70,7 @@ let requestsChart = null;
 function requestSeries() {
   const days = range === '7d' ? usage.slice(-7) : usage;
   return {
-    labels: days.map((d) => d.date.slice(5)),
+    labels: days.map((d) => chartDate(d.date)),
     data: days.map((d) => d.requests),
   };
 }
@@ -78,7 +97,7 @@ function renderRequestsChart() {
         responsive: true,
         maintainAspectRatio: false,
         scales: { x: axis(t), y: axis(t) },
-        ...tooltips(t, { callbacks: { label: (c) => `${compactNumber(c.parsed.y)} requests` } }),
+        ...tooltips(t, { callbacks: { label: (c) => `${tr('ui.requestsValue', { value: compactNumber(c.parsed.y) })}` } }),
       },
     };
   });
@@ -112,7 +131,7 @@ function renderConsumptionChart() {
     return {
       type: 'doughnut',
       data: {
-        labels: entries.map(([id]) => API_NAMES[id] || id),
+        labels: entries.map(([id]) => apiName(id) || id),
         datasets: [{
           data: entries.map(([, n]) => n),
           backgroundColor: [t.accent, t.info, t.success, t.warning, t.error],
@@ -126,7 +145,7 @@ function renderConsumptionChart() {
         maintainAspectRatio: false,
         cutout: '62%',
         ...tooltips(t, {
-          callbacks: { label: (c) => `${c.label}: ${compactNumber(c.parsed)} requests` },
+          callbacks: { label: (c) => `${c.label}: ${tr('ui.requestsValue', { value: compactNumber(c.parsed) })}` },
         }),
       },
     };

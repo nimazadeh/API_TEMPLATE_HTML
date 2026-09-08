@@ -44,7 +44,7 @@ function bindSessions() {
     const btn = e.target.closest('[data-revoke-session]');
     if (!btn) return;
     const row = btn.closest('.settings-section__row');
-    const ok = await ask({ title: tr('settings.revokeSessionTitle'), body: tr('settings.revokeSessionBody'), confirmLabel: tr('action.revoke'), danger: true });
+    const ok = await ask({ title: () => (tr('settings.revokeSessionTitle')), body: () => (tr('settings.revokeSessionBody')), confirmLabel: () => (tr('action.revoke')), danger: true });
     if (ok) {
       row.remove();
       afxToast({ message: tr('settings.sessionRevoked'), type: 'info' });
@@ -54,12 +54,12 @@ function bindSessions() {
 
 function bindDanger() {
   document.getElementById('danger-transfer').addEventListener('click', async () => {
-    const ok = await ask({ title: tr('settings.transferOwnership'), body: tr('settings.transferBody'), confirmLabel: tr('action.transfer'), danger: true });
+    const ok = await ask({ title: () => (tr('settings.transferOwnership')), body: () => (tr('settings.transferBody')), confirmLabel: () => (tr('action.transfer')), danger: true });
     if (ok) afxToast({ message: tr('settings.transferDemo'), type: 'info' });
   });
 
   document.getElementById('danger-delete').addEventListener('click', async () => {
-    const ok = await ask({ title: tr('settings.deleteWorkspace'), body: tr('settings.deleteBody'), confirmLabel: tr('settings.deleteWorkspace'), danger: true });
+    const ok = await ask({ title: () => (tr('settings.deleteWorkspace')), body: () => (tr('settings.deleteBody')), confirmLabel: () => (tr('settings.deleteWorkspace')), danger: true });
     if (ok) afxToast({ message: tr('settings.deleteDemo'), type: 'info' });
   });
 }
@@ -73,11 +73,11 @@ function bindGeneral() {
 function bindSecurity() {
   document.getElementById('fa-toggle').addEventListener('click', async () => {
     const ok = await ask({
-      title: tr('settings.twoFactor'),
-      body: 'Demo action — 2FA enrollment and recovery codes are simulated in this prototype. No security backend is configured.',
-      confirmLabel: 'OK',
+      title: () => (tr('settings.twoFactor')),
+      body: () => (tr('settings.twoFactorDemoBody')),
+      confirmLabel: () => tr('action.confirm'),
     });
-    if (ok) afxToast({ message: 'Demo action — 2FA management is simulated.', type: 'info' });
+    if (ok) afxToast({ message: tr('settings.twoFactorDemoToast'), type: 'info' });
   });
 }
 

@@ -4,6 +4,7 @@
 // sign-in with a toast. No real authentication is performed.
 // =============================================================
 
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { boot } from '../main.js';
 import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
@@ -24,17 +25,19 @@ form.addEventListener('submit', (e) => {
   password.classList.toggle('is-invalid', !okPassword);
 
   if (!okEmail || !okPassword) {
-    afxToast({ message: 'یک ایمیل معتبر و گذرواژهٔ دست‌کم ۶ نویسه‌ای وارد کنید.', type: 'error' });
+    afxToast({ message: tr('auth.loginInvalid'), type: 'error' });
     return;
   }
 
   submit.disabled = true;
-  submit.innerHTML = '<span class="spinner"></span> در حال ورود…';
+  submit.dataset.i18n = 'auth.signingIn';
+  submit.innerHTML = tr('auth.signingIn');
   setTimeout(() => {
     submit.disabled = false;
-    submit.innerHTML = '<i data-lucide="log-in"></i> ورود';
+    submit.dataset.i18n = 'auth.signIn';
+    submit.innerHTML = tr('auth.signIn');
     createIcons({ icons });
-    afxToast({ message: 'اقدام نمایشی — احراز هویت شبیه‌سازی شد. برای کاوش به داشبورد بروید.', type: 'success', delay: 5000 });
+    afxToast({ message: tr('auth.loginSuccess'), type: 'success', delay: 5000 });
   }, 700);
 });
 

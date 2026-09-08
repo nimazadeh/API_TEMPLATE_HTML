@@ -192,6 +192,8 @@ label is bound to a translation key.
   numbers, dates (Jalali in Persian), relative time and percentages on
   `afx:localechange`; page modules re-render charts, tables and drawers.
 
+See [localization maintenance and regression tests](docs/localization.md) for paired fixtures, mutable state, inspectors and `npm run test:i18n`.
+
 ## RTL / Persian
 
 - All layout uses logical properties (`margin-inline`, `padding-inline`,

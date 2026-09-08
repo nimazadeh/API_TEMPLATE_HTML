@@ -68,10 +68,10 @@ export function latencyClass(ms) {
   return 'latency--slow';
 }
 
-/** Human latency text — digits follow the locale, the unit stays Latin. */
+/** Human latency text — both digits and units follow the locale. */
 export function latencyText(ms) {
-  if (ms < 1000) return `${number(ms)}\u00a0ms`;
-  return `${number(Number((ms / 1000).toFixed(2)))}\u00a0s`;
+  if (ms < 1000) return t('ui.latencyMs', { value: number(ms) });
+  return t('ui.latencySeconds', { value: number(Number((ms / 1000).toFixed(2))) });
 }
 
 /** Status badge class from HTTP status code. */
@@ -126,4 +126,15 @@ export function formatDate(iso) {
 export function percent(n, digits = 1) {
   const v = Number(n).toFixed(digits);
   return `${getLocale() === 'fa' ? faDigits(v) : v}%`;
+}
+
+/** Short, locale-aware chart date (technical timestamps remain unchanged). */
+export function chartDate(iso) {
+  return new Date(iso).toLocaleDateString(localeTag(), { month: 'short', day: 'numeric' });
+}
+
+/** Environment enums are stable identifiers; only their UI labels translate. */
+export function environmentLabel(env) {
+  const key = { live: 'env.production', production: 'env.production', staging: 'env.staging', test: 'env.testOption' }[env];
+  return key ? t(key) : env;
 }

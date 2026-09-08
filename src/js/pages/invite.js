@@ -5,6 +5,7 @@
 // toast — no backend exists.
 // =============================================================
 
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { boot } from '../main.js';
 import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
@@ -23,13 +24,18 @@ form.addEventListener('submit', (e) => {
   name.classList.toggle('is-invalid', !okName);
   password.classList.toggle('is-invalid', !okPassword);
   if (!okName || !okPassword) {
-    afxToast({ message: 'نام و گذرواژهٔ دست‌کم ۸ نویسه‌ای وارد کنید.', type: 'error' });
+    afxToast({ message: tr('auth.inviteInvalid'), type: 'error' });
     return;
   }
   submit.disabled = true;
-  submit.innerHTML = '<span class="spinner"></span> در حال پیوستن…';
+  submit.dataset.i18n = 'auth.joining';
+  submit.innerHTML = tr('auth.joining');
   setTimeout(() => {
-    afxToast({ message: 'اقدام نمایشی — دعوت‌نامه در این نمونه پذیرفته شد.', type: 'success', delay: 5000 });
+    submit.disabled = false;
+    submit.dataset.i18n = 'auth.joinWorkspace';
+    submit.innerHTML = tr('auth.joinWorkspace');
+    createIcons({ icons });
+    afxToast({ message: tr('auth.inviteSuccess'), type: 'success', delay: 5000 });
   }, 700);
 });
 

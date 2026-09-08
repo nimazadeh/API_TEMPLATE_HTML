@@ -22,3 +22,32 @@ import { getLocale } from '../core/i18n.js';
 export function localizedData(faDataset, enDataset) {
   return getLocale() === 'en' ? enDataset : faDataset;
 }
+
+/**
+ * Mutable demo records with locale-aware prose. Only fields that differ in the
+ * two authored fixtures get a getter; IDs, tokens, API payloads and enum values
+ * remain unchanged. Explicit edits replace the getter with the user's value,
+ * so switching language never resets edits, read flags or selected records.
+ * Both fixtures must have the same shape/order (covered by the locale tests).
+ */
+export function localizedFixture(faValue, enValue) {
+  if (!faValue || typeof faValue !== 'object') return localizedData(faValue, enValue);
+  const result = Array.isArray(faValue) ? [] : {};
+  for (const key of Object.keys(faValue)) {
+    const original = faValue[key];
+    const english = enValue?.[key] ?? original;
+    if (original && typeof original === 'object') {
+      result[key] = localizedFixture(original, english);
+    } else if (typeof original === 'string' && original !== english) {
+      Object.defineProperty(result, key, {
+        enumerable: true,
+        configurable: true,
+        get: () => localizedData(original, english),
+        set(value) {
+          Object.defineProperty(result, key, { value, writable: true, enumerable: true, configurable: true });
+        },
+      });
+    } else result[key] = original;
+  }
+  return result;
+}

@@ -5,16 +5,21 @@
 // info, user context, resolve + assign). In-session mutation only.
 // =============================================================
 
+import { localizedFixture } from '../data/localized.js';
 import { boot } from '../main.js';
 import { createIcons, icons } from '../components/icons.js';
 import { openErrorDrawer } from '../components/error-detail.js';
 import { afxToast } from '../components/toast.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
-import { number } from '../utils/format.js';
-import { escapeHtml, relativeTime, absoluteTime, formatNumber, percent, methodBadgeClass } from '../utils/format.js';
-import errorsData from '../data/mock-errors.json';
-import endpointsData from '../data/mock-endpoints.json';
+import { number, escapeHtml, relativeTime, absoluteTime, formatNumber, percent, methodBadgeClass } from '../utils/format.js';
+import errorsDataFa from '../data/mock-errors.json';
+import errorsDataEn from '../data/mock-errors.en.json';
+import endpointsDataFa from '../data/mock-endpoints.json';
+import endpointsDataEn from '../data/mock-endpoints.en.json';
 import plan from '../data/mock-plan.json';
+
+const errorsData = localizedFixture(errorsDataFa, errorsDataEn);
+const endpointsData = localizedFixture(endpointsDataFa, endpointsDataEn);
 
 boot();
 
@@ -44,21 +49,21 @@ function renderOverview() {
   const resolved = errors.filter((e) => e.status === 'resolved').length;
 
   document.getElementById('err-total').innerHTML = `
-    <span class="kpi-label">Total errors</span>
+    <span class="kpi-label">${tr('ui.totalErrors')}</span>
     <span class="kpi-value">${formatNumber(total)}</span>
-    <span class="stat-foot">occurrences across all endpoints</span>`;
+    <span class="stat-foot">${tr('ui.occurrencesAll')}</span>`;
   document.getElementById('err-endpoints').innerHTML = `
-    <span class="kpi-label">Affected endpoints</span>
-    <span class="kpi-value">${endpoints}</span>
-    <span class="stat-foot">of ${endpointsData.length} endpoints</span>`;
+    <span class="kpi-label">${tr('ui.affectedEndpoints')}</span>
+    <span class="kpi-value">${number(endpoints)}</span>
+    <span class="stat-foot">${tr('ui.ofEndpoints', { count: number(endpointsData.length) })}</span>`;
   document.getElementById('err-rate').innerHTML = `
-    <span class="kpi-label">Error rate</span>
+    <span class="kpi-label">${tr('metrics.errorRate')}</span>
     <span class="kpi-value">${percent(rate, 2)}</span>
-    <span class="stat-foot">of requests · last 30 days</span>`;
+    <span class="stat-foot">${tr('ui.requests30Days')}</span>`;
   document.getElementById('err-resolved').innerHTML = `
-    <span class="kpi-label">Resolved</span>
+    <span class="kpi-label">${tr('status.resolved')}</span>
     <span class="kpi-value">${percent((resolved / errors.length) * 100, 0)}</span>
-    <span class="stat-foot">${resolved} of ${errors.length} issues</span>`;
+    <span class="stat-foot">${tr('ui.issuesOf', { resolved: number(resolved), total: number(errors.length) })}</span>`;
 }
 
 // --- Rendering ---------------------------------------------------------------
@@ -76,14 +81,14 @@ function render() {
       .map(
         (e) => `
         <tr class="is-clickable" tabindex="0" data-id="${escapeHtml(e.id)}">
-          <td><span class="badge badge-status ${SEVERITY_BADGE[e.severity] || 'badge-status--neutral'}"><span class="dot"></span>${e.severity === 'error' ? 'Error' : 'Warning'}</span></td>
+          <td><span class="badge badge-status ${SEVERITY_BADGE[e.severity] || 'badge-status--neutral'}"><span class="dot"></span>${tr(e.severity === 'error' ? 'ui.error' : 'ui.warning')}</span></td>
           <td>
             <div class="fw-medium text-body text-truncate" style="max-width:380px" title="${escapeHtml(e.message)}">${escapeHtml(e.message)}</div>
-            <div class="text-tertiary caption ltr-isolate">${escapeHtml(e.type)}${e.assignee ? ` · assigned to ${escapeHtml(e.assignee)}` : ''}</div>
+            <div class="text-tertiary caption ltr-isolate">${escapeHtml(e.type)}${e.assignee ? ` · ${tr('ui.assignedTo', { name: escapeHtml(e.assignee) })}` : ''}</div>
           </td>
           <td><span class="d-inline-flex align-items-center gap-2"><span class="badge badge-method ${methodBadgeClass(e.endpoint.method)}">${e.endpoint.method}</span><code class="ltr-isolate mono-sm text-secondary">${escapeHtml(e.endpoint.path)}</code></span></td>
           <td class="cell-num">${formatNumber(e.occurrences)}</td>
-          <td class="text-secondary" title="${escapeHtml(absoluteTime(e.lastSeen))}">${relativeTime(e.lastSeen)} · ${ENV[e.environment] || e.environment}</td>
+          <td class="text-secondary" title="${escapeHtml(absoluteTime(e.lastSeen))}">${relativeTime(e.lastSeen)} · ${tr(ENV[e.environment]) || e.environment}</td>
         </tr>`
       )
       .join('');
@@ -154,4 +159,4 @@ document.getElementById('error-env').addEventListener('change', (e) => {
 });
 
 // Re-render when the locale flips.
-onLocaleChange(render);
+onLocaleChange(() => { renderOverview(); render(); });

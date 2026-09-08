@@ -55,7 +55,7 @@ export function logRowFull(log) {
       <td>
         <span class="d-inline-flex align-items-center gap-1">
           <code class="ltr-isolate mono-sm text-secondary">${escapeHtml(log.id)}</code>
-          <button type="button" class="btn btn-icon btn-icon--sm" data-copy="${escapeHtml(log.id)}" aria-label="Copy request ID" data-bs-toggle="tooltip" data-bs-title="Copy ID">
+          <button type="button" class="btn btn-icon btn-icon--sm" data-copy="${escapeHtml(log.id)}" aria-label="${t('common.copy-request-id')}" data-bs-toggle="tooltip" data-bs-title="${t('common.copy-id')}">
             <i data-lucide="copy"></i>
           </button>
         </span>

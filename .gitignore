@@ -29,3 +29,8 @@ Thumbs.db
 
 # Marketplace screenshot output (generated locally)
 marketplace/screenshots/
+
+# Local audits and browser-test output
+.cache/
+test-results/
+playwright-report/

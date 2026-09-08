@@ -6,12 +6,12 @@
 // copy lives in the drawer. Data-driven from mock-*.json.
 // =============================================================
 
+import { number, escapeHtml, relativeTime, absoluteTime, latencyText } from '../utils/format.js';
 import { boot } from '../main.js';
 import { createIcons, icons } from '../components/icons.js';
 import { openDeliveryDrawer, renderDeliveryDrawer } from '../components/webhook-detail.js';
 import { afxToast } from '../components/toast.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
-import { escapeHtml, relativeTime, absoluteTime, latencyText } from '../utils/format.js';
 import webhooksData from '../data/mock-webhooks.json';
 import deliveriesData from '../data/mock-webhook-deliveries.json';
 
@@ -89,7 +89,7 @@ function renderWebhooks() {
         <tr class="is-clickable" tabindex="0" data-id="${escapeHtml(wh.id)}">
           <td>${eventBadges(wh.events)}</td>
           <td><code class="ltr-isolate mono-sm text-body d-block text-truncate" style="max-width:320px" title="${escapeHtml(wh.url)}">${escapeHtml(wh.url)}</code></td>
-          <td><span class="badge ${wh.status === 'enabled' ? 'badge-status--success' : 'badge-neutral'}"><span class="dot"></span>${wh.status === 'enabled' ? 'Enabled' : 'Disabled'}</span></td>
+          <td><span class="badge ${wh.status === 'enabled' ? 'badge-status--success' : 'badge-neutral'}"><span class="dot"></span>${tr(wh.status === 'enabled' ? 'status.enabled' : 'status.disabled')}</span></td>
           <td class="cell-num">${attemptsFor(wh)}</td>
           <td class="text-secondary" ${last ? `title="${escapeHtml(absoluteTime(last))}"` : ''}>${last ? relativeTime(last) : '—'}</td>
           <td>${envBadge(wh.environment)}</td>
@@ -97,7 +97,7 @@ function renderWebhooks() {
       })
       .join('');
   }
-  document.getElementById('webhook-count').textContent = `${webhooks.length} endpoints`;
+  document.getElementById('webhook-count').textContent = tr('ui.endpointsCount', { count: number(webhooks.length) });
 }
 
 function renderDeliveries() {
@@ -124,7 +124,7 @@ function renderDeliveries() {
       )
       .join('');
   }
-  document.getElementById('delivery-count').textContent = `${deliveries.length} deliveries`;
+  document.getElementById('delivery-count').textContent = tr('ui.deliveriesCount', { count: number(deliveries.length) });
 }
 
 function render() {

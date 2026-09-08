@@ -5,6 +5,8 @@
 // Charts stay LTR (their container carries direction: ltr).
 // =============================================================
 
+import { getLocale } from '../core/i18n.js';
+import { localeTag } from '../utils/format.js';
 import {
   Chart,
   LineController,
@@ -70,7 +72,7 @@ function readTokens() {
     borderSubtle: g('--border-subtle'),
     surface2: g('--surface-2'),
     surface3: g('--surface-3'),
-    font: g('--font-latin-ui'),
+    font: g(getLocale() === 'fa' ? '--font-persian-ui' : '--font-latin-ui'),
   };
 }
 
@@ -79,7 +81,7 @@ export function axis(t) {
   return {
     grid: { color: t.borderSubtle, drawTicks: false },
     border: { display: false },
-    ticks: { color: t.textTertiary, maxTicksLimit: 6 },
+    ticks: { color: t.textTertiary, maxTicksLimit: 6, font: { family: t.font } },
   };
 }
 
@@ -95,6 +97,10 @@ export function tooltips(t, opts = {}) {
         borderColor: t.border,
         borderWidth: 1,
         padding: 10,
+        rtl: getLocale() === 'fa',
+        textDirection: getLocale() === 'fa' ? 'rtl' : 'ltr',
+        titleFont: { family: t.font },
+        bodyFont: { family: t.font },
         displayColors: false,
         callbacks: opts.callbacks || {},
       },
@@ -105,7 +111,12 @@ export function tooltips(t, opts = {}) {
 
 /** Create a chart whose config is a function of the current theme tokens. */
 export function makeChart(canvas, factory) {
-  const chart = new Chart(canvas, factory(readTokens()));
+  // A locale/range change may render the same canvas again. Remove the old
+  // instance from both Chart.js and our theme registry before reusing it.
+  destroyChart(Chart.getChart(canvas));
+  const cfg = factory(readTokens());
+  cfg.options = { ...cfg.options, locale: localeTag(), font: { family: readTokens().font } };
+  const chart = new Chart(canvas, cfg);
   registry.push({ chart, factory });
   return chart;
 }
@@ -124,7 +135,7 @@ export function refreshCharts() {
     if (!chart || !chart.canvas) return; // skip destroyed charts
     const cfg = factory(readTokens());
     chart.data = cfg.data;
-    chart.options = cfg.options;
+    chart.options = { ...cfg.options, locale: localeTag(), font: { family: readTokens().font } };
     chart.update('none');
   });
 }

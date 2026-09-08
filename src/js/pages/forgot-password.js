@@ -4,6 +4,7 @@
 // state. No email is actually sent.
 // =============================================================
 
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { boot } from '../main.js';
 import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
@@ -18,12 +19,12 @@ form.addEventListener('submit', (e) => {
   const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
   email.classList.toggle('is-invalid', !okEmail);
   if (!okEmail) {
-    afxToast({ message: 'یک ایمیل معتبر وارد کنید.', type: 'error' });
+    afxToast({ message: tr('auth.emailInvalid'), type: 'error' });
     return;
   }
   document.getElementById('forgot-sent').hidden = false;
   form.hidden = true;
-  afxToast({ message: 'اقدام نمایشی — ایمیلی ارسال نشد.', type: 'info' });
+  afxToast({ message: tr('auth.noEmailSent'), type: 'info' });
 });
 
 createIcons({ icons });

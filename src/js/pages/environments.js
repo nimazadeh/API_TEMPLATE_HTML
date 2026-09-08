@@ -6,6 +6,7 @@
 // environment. In-session mutation only, backed by mock-*.json.
 // =============================================================
 
+import { localizedFixture } from '../data/localized.js';
 import { boot } from '../main.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { Modal } from '../core/bootstrap.js';
@@ -13,9 +14,16 @@ import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
 import { bindCopyButton } from '../components/copy.js';
 import { escapeHtml, relativeTime, absoluteTime, number } from '../utils/format.js';
-import environmentsData from '../data/mock-environments.json';
-import variablesData from '../data/mock-variables.json';
-import keysData from '../data/mock-keys.json';
+import environmentsDataFa from '../data/mock-environments.json';
+import environmentsDataEn from '../data/mock-environments.en.json';
+import variablesDataFa from '../data/mock-variables.json';
+import variablesDataEn from '../data/mock-variables.en.json';
+import keysDataFa from '../data/mock-keys.json';
+import keysDataEn from '../data/mock-keys.en.json';
+
+const environmentsData = localizedFixture(environmentsDataFa, environmentsDataEn);
+const variablesData = localizedFixture(variablesDataFa, variablesDataEn);
+const keysData = localizedFixture(keysDataFa, keysDataEn);
 
 boot();
 
@@ -47,8 +55,8 @@ function renderNotice() {
       <div class="alert alert-warning" role="alert">
         <span class="alert-icon"><i data-lucide="alert-triangle"></i></span>
         <div class="alert-content">
-          <div class="fw-medium">You're working in Production</div>
-          <div class="mt-1">Changes to variables and keys apply to live traffic immediately.</div>
+          <div class="fw-medium">${tr('ui.inProduction')}</div>
+          <div class="mt-1">${tr('ui.productionWarning')}</div>
         </div>
       </div>`;
   } else {
@@ -70,16 +78,16 @@ function renderSummary() {
         <div class="mt-2 d-flex align-items-center gap-3 flex-wrap text-secondary caption">
           <span class="d-inline-flex align-items-center gap-1"><i data-lucide="globe"></i></span>
           <code class="ltr-isolate mono-sm text-body">${escapeHtml(env.baseUrl)}</code>
-          <button type="button" class="btn btn-icon btn-icon--sm" data-copy="${escapeHtml(env.baseUrl)}" aria-label="Copy base URL"><i data-lucide="copy"></i></button>
+          <button type="button" class="btn btn-icon btn-icon--sm" data-copy="${escapeHtml(env.baseUrl)}" aria-label="${tr('ui.copyBaseUrl')}"><i data-lucide="copy"></i></button>
         </div>
       </div>
       <div class="d-flex align-items-center gap-4 text-end">
         <div>
-          <div class="text-tertiary caption">API keys</div>
+          <div class="text-tertiary caption">${tr('env.apiKeysHeading')}</div>
           <div class="fw-medium text-body tabular-nums">${keysFor().length}</div>
         </div>
         <div>
-          <div class="text-tertiary caption">Created</div>
+          <div class="text-tertiary caption">${tr('keys.created')}</div>
           <div class="fw-medium text-body">${escapeHtml(relativeTime(env.created))}</div>
         </div>
       </div>
@@ -99,8 +107,8 @@ function renderVariables() {
   if (!list.length) {
     tbody.innerHTML = `<tr><td colspan="3"><div class="empty-state">
       <span class="empty-icon"><i data-lucide="braces"></i></span>
-      <h4 class="empty-title">No variables</h4>
-      <p class="empty-desc mb-0">Add your first variable for this environment.</p>
+      <h4 class="empty-title">${tr('ui.noVariables')}</h4>
+      <p class="empty-desc mb-0">${tr('ui.addFirstVariable')}</p>
     </div></td></tr>`;
   } else {
     tbody.innerHTML = list
@@ -117,8 +125,8 @@ function renderVariables() {
             <span class="d-inline-flex align-items-center gap-2">
               <code class="ltr-isolate mono-sm ${v.secret && !isRevealed ? 'text-secondary' : 'text-body'}">${escapeHtml(shown)}</code>
               ${v.secret ? `<button type="button" class="btn btn-icon btn-icon--sm" data-var-action="reveal" aria-label="${isRevealed ? tr('env.hideValue') : tr('env.revealValue')}"><i data-lucide="${isRevealed ? 'eye-off' : 'eye'}"></i></button>` : ''}
-              <button type="button" class="btn btn-icon btn-icon--sm" data-var-action="copy" data-copy="${escapeHtml(v.value)}" aria-label="Copy value"><i data-lucide="copy"></i></button>
-              <button type="button" class="btn btn-icon btn-icon--sm" data-var-action="delete" aria-label="Delete variable"><i data-lucide="trash-2"></i></button>
+              <button type="button" class="btn btn-icon btn-icon--sm" data-var-action="copy" data-copy="${escapeHtml(v.value)}" aria-label="${tr('ui.copyValue')}"><i data-lucide="copy"></i></button>
+              <button type="button" class="btn btn-icon btn-icon--sm" data-var-action="delete" aria-label="${tr('ui.deleteVariable')}"><i data-lucide="trash-2"></i></button>
             </span>
           </td>
           <td class="text-secondary" title="${escapeHtml(absoluteTime(v.updatedAt))}">${relativeTime(v.updatedAt)}</td>
@@ -138,8 +146,8 @@ function renderKeys() {
   if (!list.length) {
     tbody.innerHTML = `<tr><td colspan="4"><div class="empty-state">
       <span class="empty-icon"><i data-lucide="key"></i></span>
-      <h4 class="empty-title">No API keys</h4>
-      <p class="empty-desc mb-0">Create a key in this environment to see it here.</p>
+      <h4 class="empty-title">${tr('ui.noKeys')}</h4>
+      <p class="empty-desc mb-0">${tr('ui.firstKey')}</p>
     </div></td></tr>`;
   } else {
     tbody.innerHTML = list
@@ -153,7 +161,7 @@ function renderKeys() {
           <td>
             <span class="d-inline-flex align-items-center gap-2">
               <code class="ltr-isolate mono-sm text-secondary">${escapeHtml(k.prefix)}…</code>
-              <button type="button" class="btn btn-icon btn-icon--sm" data-copy="${escapeHtml(k.prefix)}" aria-label="Copy key prefix"><i data-lucide="copy"></i></button>
+              <button type="button" class="btn btn-icon btn-icon--sm" data-copy="${escapeHtml(k.prefix)}" aria-label="${tr('ui.copyPrefix')}"><i data-lucide="copy"></i></button>
             </span>
           </td>
           <td>${k.scopes.map((s) => `<span class="badge badge-accent ltr-isolate">${escapeHtml(s)}</span>`).join(' ')}</td>
@@ -188,7 +196,7 @@ function saveVariable() {
   Modal.getOrCreateInstance(document.getElementById('variable-modal')).hide();
   document.getElementById('var-name').value = '';
   document.getElementById('var-value').value = '';
-  afxToast({ message: `Variable ${name} added to ${envName(activeEnv)}`, type: 'success' });
+  afxToast({ message: tr('ui.variableAdded', { name, env: envName(activeEnv) }), type: 'success' });
   renderVariables();
 }
 
@@ -197,10 +205,10 @@ function deleteVariable(id) {
   if (idx < 0) return;
   const [removed] = variables.splice(idx, 1);
   afxToast({
-    message: `Deleted ${removed.name}`,
+    message: tr('ui.variableDeleted', { name: removed.name }),
     type: 'info',
     action: {
-      label: 'Undo',
+      label: tr('ui.undo'),
       onClick: () => {
         variables.splice(idx, 0, removed);
         renderVariables();

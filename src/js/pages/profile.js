@@ -8,17 +8,21 @@
 import { boot } from '../main.js';
 import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
-import { t as tr, onLocaleChange } from '../core/i18n.js';
+import { t as tr, onLocaleChange, setLocale, getLocale } from '../core/i18n.js';
+import { formatDate } from '../utils/format.js';
 import { setThemeMode } from '../components/theme.js';
 
 boot();
 
+let customName = null;
+let nameDirty = false;
 const PROFILE = {
-  name: 'علی رضایی',
+  get name() { return customName ?? tr('profile.displayName'); },
+  set name(value) { customName = value; },
   email: 'arash@apiforge.dev',
   role: 'Owner',
   timezone: 'Europe/Berlin',
-  language: 'fa',
+  language: getLocale(),
   handle: 'arash',
   github: 'arashp',
   website: 'https://arash.dev',
@@ -54,8 +58,8 @@ function renderMeta() {
   document.getElementById('pf-display-name').textContent = PROFILE.name;
   document.getElementById('pf-email-display').textContent = PROFILE.email;
   document.getElementById('pf-email').value = PROFILE.email;
-  document.getElementById('pf-role').textContent = PROFILE.role;
-  document.getElementById('pf-joined').textContent = PROFILE.joined;
+  document.getElementById('pf-role').textContent = tr('profile.owner');
+  document.getElementById('pf-joined').textContent = formatDate(PROFILE.joined);
   document.getElementById('pf-dev-id').textContent = PROFILE.developerId;
 }
 
@@ -73,6 +77,7 @@ function validate() {
 }
 
 function bind() {
+  document.getElementById('pf-name').addEventListener('input', () => { nameDirty = true; });
   document.getElementById('pf-save').addEventListener('click', () => {
     if (!validate()) {
       afxToast({ message: tr('profile.fixFields'), type: 'error' });
@@ -86,6 +91,7 @@ function bind() {
     PROFILE.github = document.getElementById('pf-github').value.trim();
     PROFILE.website = document.getElementById('pf-website').value.trim();
     PROFILE.org = document.getElementById('pf-org').value.trim();
+    setLocale(PROFILE.language);
     renderMeta();
     afxToast({ message: tr('profile.saved'), type: 'success' });
   });
@@ -115,3 +121,13 @@ renderMeta();
 fillForm();
 bind();
 createIcons({ icons });
+
+onLocaleChange(() => {
+  document.getElementById('pf-display-name').textContent = PROFILE.name;
+  document.getElementById('pf-avatar').textContent = initialsOf(PROFILE.name);
+  if (!nameDirty) document.getElementById('pf-name').value = PROFILE.name;
+  document.getElementById('pf-role').textContent = tr('profile.owner');
+  document.getElementById('pf-joined').textContent = formatDate(PROFILE.joined);
+  PROFILE.language = getLocale();
+  document.getElementById('pf-language').value = PROFILE.language;
+});
