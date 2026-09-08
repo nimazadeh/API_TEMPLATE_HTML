@@ -6,6 +6,7 @@
 // coexist without collision.
 // =============================================================
 
+import { trackLocalizedView } from './localized-view.js';
 import { Modal } from '../core/bootstrap.js';
 import { t } from '../core/i18n.js';
 
@@ -14,6 +15,7 @@ let pending = null;
 /**
  * Open the confirmation modal and resolve the returned promise with
  * `true` when confirmed. `{ title, body, confirmLabel, danger }`.
+ * Text options can be functions to resolve again when the locale changes.
  */
 export function ask(opts = {}) {
   const modal = document.getElementById(opts.modalId || 'confirm-modal');
@@ -21,12 +23,17 @@ export function ask(opts = {}) {
   const bodyEl = document.getElementById(opts.bodyId || 'confirm-modal-body');
   const submit = document.getElementById(opts.submitId || 'confirm-modal-submit');
 
-  if (titleEl) titleEl.textContent = opts.title || t('confirm.areYouSure');
-  if (bodyEl) bodyEl.textContent = opts.body || '';
-  if (submit) {
-    submit.textContent = opts.confirmLabel || t('action.confirm');
-    submit.className = `btn ${opts.danger ? 'btn-danger' : 'btn-primary'}`;
-  }
+  const resolveText = (value) => typeof value === 'function' ? value() : value;
+  const paint = () => {
+    if (titleEl) titleEl.textContent = resolveText(opts.title) || t('confirm.areYouSure');
+    if (bodyEl) bodyEl.textContent = resolveText(opts.body) || '';
+    if (submit) {
+      submit.textContent = resolveText(opts.confirmLabel) || t('action.confirm');
+      submit.className = `btn ${opts.danger ? 'btn-danger' : 'btn-primary'}`;
+    }
+  };
+  paint();
+  trackLocalizedView(modal, paint);
 
   return new Promise((resolve) => {
     pending = resolve;

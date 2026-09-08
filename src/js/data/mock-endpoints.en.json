@@ -1,0 +1,460 @@
+[
+  {
+    "apiId": "api_emails",
+    "method": "POST",
+    "path": "/v1/emails",
+    "summary": "Send an email",
+    "group": "Email",
+    "description": "Queue a transactional email for delivery to one or more recipients. Track delivery using the returned email ID.",
+    "params": [
+      {
+        "name": "to",
+        "type": "string",
+        "location": "body",
+        "required": true,
+        "description": "Recipient email address."
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "location": "body",
+        "required": true,
+        "description": "Email subject."
+      },
+      {
+        "name": "html",
+        "type": "string",
+        "location": "body",
+        "required": false,
+        "description": "HTML body. Either html or text is required."
+      },
+      {
+        "name": "from",
+        "type": "string",
+        "location": "body",
+        "required": false,
+        "description": "Sender address. Defaults to your verified domain."
+      }
+    ],
+    "responseExample": {
+      "id": "eml_8Fk2mQx1Zw",
+      "status": "queued",
+      "to": "user@example.com"
+    },
+    "id": "ep_yVMglF"
+  },
+  {
+    "apiId": "api_emails",
+    "method": "GET",
+    "path": "/v1/emails/{id}",
+    "summary": "Retrieve an email",
+    "group": "Email",
+    "description": "Return delivery status and metadata for an email.",
+    "params": [
+      {
+        "name": "id",
+        "type": "string",
+        "location": "path",
+        "required": true,
+        "description": "The email ID (eml_…)."
+      }
+    ],
+    "responseExample": {
+      "id": "eml_8Fk2mQx1Zw",
+      "status": "delivered",
+      "deliveredAt": "2026-09-07T19:05:24Z"
+    },
+    "id": "ep_ARMFye"
+  },
+  {
+    "apiId": "api_emails",
+    "method": "GET",
+    "path": "/v1/emails",
+    "summary": "List emails",
+    "group": "Email",
+    "description": "List recent emails, newest first. Use limit and before for pagination.",
+    "params": [
+      {
+        "name": "limit",
+        "type": "integer",
+        "location": "query",
+        "required": false,
+        "description": "Maximum results (default 50, maximum 100)."
+      },
+      {
+        "name": "before",
+        "type": "string",
+        "location": "query",
+        "required": false,
+        "description": "Return emails sent before this ID."
+      }
+    ],
+    "responseExample": {
+      "data": [
+        {
+          "id": "eml_8Fk2mQx1Zw",
+          "status": "delivered"
+        }
+      ],
+      "has_more": false
+    },
+    "id": "ep_eMKF1N"
+  },
+  {
+    "apiId": "api_ai",
+    "method": "POST",
+    "path": "/v1/completions",
+    "summary": "Create a completion",
+    "group": "AI",
+    "description": "Run a model inference and stream the result.",
+    "params": [
+      {
+        "name": "model",
+        "type": "string",
+        "location": "body",
+        "required": true,
+        "description": "Model ID, such as forge-1 or forge-1-turbo."
+      },
+      {
+        "name": "prompt",
+        "type": "string",
+        "location": "body",
+        "required": true,
+        "description": "The prompt to complete."
+      },
+      {
+        "name": "max_tokens",
+        "type": "integer",
+        "location": "body",
+        "required": false,
+        "description": "Maximum generated tokens (default 256)."
+      },
+      {
+        "name": "temperature",
+        "type": "number",
+        "location": "body",
+        "required": false,
+        "description": "Sampling temperature between 0 and 1."
+      }
+    ],
+    "responseExample": {
+      "id": "cmpl_9xK2mQ",
+      "model": "forge-1",
+      "choices": [
+        {
+          "text": "Hello from Forge."
+        }
+      ]
+    },
+    "id": "ep_SitOVD"
+  },
+  {
+    "apiId": "api_ai",
+    "method": "POST",
+    "path": "/v1/embeddings",
+    "summary": "Create an embedding",
+    "group": "AI",
+    "description": "Convert input text into vectors for search and clustering.",
+    "params": [
+      {
+        "name": "model",
+        "type": "string",
+        "location": "body",
+        "required": true,
+        "description": "Embedding model ID, such as embed-1."
+      },
+      {
+        "name": "input",
+        "type": "array",
+        "location": "body",
+        "required": true,
+        "description": "Text to embed — a string or an array of strings."
+      }
+    ],
+    "responseExample": {
+      "object": "list",
+      "data": [
+        {
+          "index": 0,
+          "embedding": [
+            0.014,
+            -0.021,
+            0.038
+          ]
+        }
+      ]
+    },
+    "id": "ep_idB5b2"
+  },
+  {
+    "apiId": "api_ai",
+    "method": "GET",
+    "path": "/v1/models",
+    "summary": "List available models",
+    "group": "AI",
+    "description": "List models available to the workspace and their capabilities.",
+    "params": [],
+    "responseExample": {
+      "data": [
+        {
+          "id": "forge-1",
+          "object": "model"
+        },
+        {
+          "id": "embed-1",
+          "object": "model"
+        }
+      ]
+    },
+    "id": "ep_asbZDI"
+  },
+  {
+    "apiId": "api_audiences",
+    "method": "POST",
+    "path": "/v1/audiences",
+    "summary": "Create an audience",
+    "group": "Audiences",
+    "description": "Create an audience segment from a set of filters.",
+    "params": [
+      {
+        "name": "name",
+        "type": "string",
+        "location": "body",
+        "required": true,
+        "description": "Audience name."
+      },
+      {
+        "name": "filters",
+        "type": "array",
+        "location": "body",
+        "required": false,
+        "description": "Array of filter conditions."
+      }
+    ],
+    "responseExample": {
+      "id": "aud_9xK2mQ",
+      "name": "Trial users",
+      "size": 0
+    },
+    "id": "ep_CwnatD"
+  },
+  {
+    "apiId": "api_audiences",
+    "method": "GET",
+    "path": "/v1/audiences/{id}",
+    "summary": "Retrieve an audience",
+    "group": "Audiences",
+    "description": "Return an audience and its current member count.",
+    "params": [
+      {
+        "name": "id",
+        "type": "string",
+        "location": "path",
+        "required": true,
+        "description": "The audience ID (aud_…)."
+      }
+    ],
+    "responseExample": {
+      "id": "aud_9xK2mQ",
+      "name": "Trial users",
+      "size": 12840
+    },
+    "id": "ep_1IsxOn"
+  },
+  {
+    "apiId": "api_audiences",
+    "method": "GET",
+    "path": "/v1/audiences",
+    "summary": "List audiences",
+    "group": "Audiences",
+    "description": "List all audiences in the workspace.",
+    "params": [
+      {
+        "name": "limit",
+        "type": "integer",
+        "location": "query",
+        "required": false,
+        "description": "Maximum results (default 50)."
+      }
+    ],
+    "responseExample": {
+      "data": [
+        {
+          "id": "aud_9xK2mQ",
+          "name": "Trial users",
+          "size": 12840
+        }
+      ],
+      "has_more": false
+    },
+    "id": "ep_sb68vP"
+  },
+  {
+    "apiId": "api_webhooks",
+    "method": "POST",
+    "path": "/v1/webhooks",
+    "summary": "Create a webhook endpoint",
+    "group": "Webhooks",
+    "description": "Register a URL to receive real-time workspace events.",
+    "params": [
+      {
+        "name": "url",
+        "type": "string",
+        "location": "body",
+        "required": true,
+        "description": "HTTPS endpoint that receives events."
+      },
+      {
+        "name": "events",
+        "type": "array",
+        "location": "body",
+        "required": true,
+        "description": "Subscribed event types, such as email.sent."
+      },
+      {
+        "name": "secret",
+        "type": "string",
+        "location": "body",
+        "required": false,
+        "description": "Signing secret for verifying deliveries."
+      }
+    ],
+    "responseExample": {
+      "id": "wh_8f3k2ma1",
+      "url": "https://example.com/hooks",
+      "enabled": true
+    },
+    "id": "ep_YPhtRY"
+  },
+  {
+    "apiId": "api_webhooks",
+    "method": "GET",
+    "path": "/v1/webhooks",
+    "summary": "List webhooks",
+    "group": "Webhooks",
+    "description": "List registered webhook endpoints and their status.",
+    "params": [],
+    "responseExample": {
+      "data": [
+        {
+          "id": "wh_8f3k2ma1",
+          "enabled": true
+        }
+      ]
+    },
+    "id": "ep_DElNoS"
+  },
+  {
+    "apiId": "api_webhooks",
+    "method": "DELETE",
+    "path": "/v1/webhooks/{id}",
+    "summary": "Delete a webhook",
+    "group": "Webhooks",
+    "description": "Permanently delete a webhook endpoint.",
+    "params": [
+      {
+        "name": "id",
+        "type": "string",
+        "location": "path",
+        "required": true,
+        "description": "The webhook ID (wh_…)."
+      }
+    ],
+    "responseExample": {
+      "id": "wh_8f3k2ma1",
+      "deleted": true
+    },
+    "id": "ep_R8kGT2"
+  },
+  {
+    "apiId": "api_platform",
+    "method": "PUT",
+    "path": "/v1/api-keys/{id}",
+    "summary": "Update an API key",
+    "group": "Platform",
+    "description": "Rename a key or update its scopes.",
+    "params": [
+      {
+        "name": "id",
+        "type": "string",
+        "location": "path",
+        "required": true,
+        "description": "The key ID (key_…)."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "location": "body",
+        "required": false,
+        "description": "New display name."
+      },
+      {
+        "name": "scopes",
+        "type": "array",
+        "location": "body",
+        "required": false,
+        "description": "Replacement list of scopes."
+      }
+    ],
+    "responseExample": {
+      "id": "key_DElNoSR8",
+      "name": "Production backend",
+      "updated": true
+    },
+    "id": "ep_HqnH3s"
+  },
+  {
+    "apiId": "api_platform",
+    "method": "DELETE",
+    "path": "/v1/api-keys/{id}",
+    "summary": "Revoke an API key",
+    "group": "Platform",
+    "description": "Revoke the key immediately. Requests using it will return 401.",
+    "params": [
+      {
+        "name": "id",
+        "type": "string",
+        "location": "path",
+        "required": true,
+        "description": "The key id (key_…)."
+      }
+    ],
+    "responseExample": {
+      "id": "key_DElNoSR8",
+      "revoked": true
+    },
+    "id": "ep_dYNAdp"
+  },
+  {
+    "apiId": "api_platform",
+    "method": "GET",
+    "path": "/v1/usage",
+    "summary": "Get usage summary",
+    "group": "Platform",
+    "description": "Return usage for the current billing period, grouped by endpoint.",
+    "params": [
+      {
+        "name": "from",
+        "type": "string",
+        "location": "query",
+        "required": false,
+        "description": "Start of the time range (ISO)."
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "location": "query",
+        "required": false,
+        "description": "End of the time range (ISO)."
+      }
+    ],
+    "responseExample": {
+      "requests": 5382400,
+      "period": {
+        "start": "2026-09-01",
+        "end": "2026-09-30"
+      }
+    },
+    "id": "ep_9GX0Kl"
+  }
+]

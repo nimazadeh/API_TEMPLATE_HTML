@@ -11,13 +11,13 @@ import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { ask, initConfirm } from '../components/confirm.js';
-import { escapeHtml, compactNumber, formatDate } from '../utils/format.js';
+import { escapeHtml, compactNumber, formatDate, number } from '../utils/format.js';
+import { localizedData, localizedFixture } from '../data/localized.js';
 import faPlans from '../data/mock-plans.json';
 import enPlans from '../data/mock-plans.en.json';
 import invoices from '../data/mock-invoices.json';
 import faPlan from '../data/mock-plan.json';
 import enPlan from '../data/mock-plan.en.json';
-import { localizedData } from '../data/localized.js';
 
 boot();
 initConfirm({ modalId: 'confirm-modal', titleId: 'confirm-modal-title', bodyId: 'confirm-modal-body', submitId: 'confirm-modal-submit' });
@@ -28,9 +28,11 @@ initConfirm({ modalId: 'confirm-modal', titleId: 'confirm-modal-title', bodyId: 
 const currentPlan = { ...faPlan, id: 'scale', price: 199 };
 const INVOICE_BADGE = { paid: 'badge-status--success', pending: 'badge-status--warning', failed: 'badge-status--error' };
 let currentPlanId = 'scale';
+let billingCycle = 'monthly';
+const plans = localizedFixture(faPlans, enPlans);
 
 function getPlans() {
-  return localizedData(faPlans, enPlans);
+  return plans;
 }
 
 /** Mirror the selected tier's localized name + period label onto currentPlan. */
@@ -45,18 +47,18 @@ function refreshCurrentPlanMeta() {
 function renderCurrentPlan() {
   refreshCurrentPlanMeta();
   document.getElementById('billing-plan-name').textContent = currentPlan.name;
-  document.getElementById('billing-price').textContent = `$${currentPlan.price}`;
-  document.getElementById('billing-cycle').textContent = 'per month';
+  document.getElementById('billing-price').textContent = `$${number(currentPlan.price)}`;
+  document.getElementById('billing-cycle').textContent = tr(billingCycle === 'yearly' ? 'ui.perYear' : 'ui.perMonth');
   document.getElementById('billing-renewal').textContent = formatDate(currentPlan.periodEnd);
-  document.getElementById('billing-status').innerHTML = '<span class="badge badge-status badge-status--success"><span class="dot"></span>Active</span>';
+  document.getElementById('billing-status').innerHTML = `<span class="badge badge-status badge-status--success"><span class="dot"></span>${tr('status.activePlain')}</span>`;
 
   const pct = (currentPlan.requestsUsed / currentPlan.requestsLimit) * 100;
   document.getElementById('billing-usage-fill').style.width = `${pct.toFixed(1)}%`;
-  document.getElementById('billing-usage').textContent = `${compactNumber(currentPlan.requestsUsed)} of ${compactNumber(currentPlan.requestsLimit)} requests`;
-  document.getElementById('billing-usage-pct').textContent = `${pct.toFixed(1)}% used`;
+  document.getElementById('billing-usage').textContent = tr('ui.requestsUsed', { used: compactNumber(currentPlan.requestsUsed), total: compactNumber(currentPlan.requestsLimit) });
+  document.getElementById('billing-usage-pct').textContent = tr('usage.pctUsed', { pct: number(Number(pct.toFixed(1))) });
 
   const remaining = Math.max(0, currentPlan.requestsLimit - currentPlan.requestsUsed);
-  document.getElementById('billing-projected').textContent = `Projected for ${currentPlan.periodLabel}: ${compactNumber(currentPlan.requestsUsed + remaining * 0.12)} requests`;
+  document.getElementById('billing-projected').textContent = tr('ui.projected', { period: currentPlan.periodLabel, count: compactNumber(currentPlan.requestsUsed + remaining * 0.12) });
 }
 
 // --- Plan comparison -------------------------------------------------------
@@ -67,18 +69,18 @@ function planCard(p) {
   const ctaClass = isCurrent ? 'btn-secondary' : isDowngrade ? 'btn-ghost' : 'btn-primary';
   return `
     <div class="card plan ${isCurrent ? 'plan--current' : ''}">
-      ${isCurrent ? '<span class="plan__tag">Current plan</span>' : ''}
+      ${isCurrent ? `<span class="plan__tag">${tr('usage.currentPlan')}</span>` : ''}
       <div class="plan__name">${escapeHtml(p.name)}</div>
       <div class="plan__price"><span class="plan__amount">${p.priceLabel}</span><span class="plan__period">${p.period}</span></div>
       <p class="plan__blurb">${escapeHtml(p.blurb)}</p>
       <ul class="plan__features">
-        <li><i data-lucide="check"></i> ${escapeHtml(p.requests)} requests</li>
-        <li><i data-lucide="check"></i> ${escapeHtml(p.environments)} environments</li>
-        <li><i data-lucide="check"></i> ${escapeHtml(p.members)} team members</li>
-        <li><i data-lucide="check"></i> ${escapeHtml(p.webhooks)} webhook endpoints</li>
-        <li><i data-lucide="check"></i> ${escapeHtml(p.retention)} log retention</li>
-        <li><i data-lucide="check"></i> ${escapeHtml(p.rateLimit)} rate limit</li>
-        <li><i data-lucide="check"></i> ${escapeHtml(p.support)} support</li>
+        <li><i data-lucide="check"></i> ${tr('plans.requestsValue', { value: escapeHtml(p.requests) })}</li>
+        <li><i data-lucide="check"></i> ${tr('plans.environmentsValue', { value: number(p.environments) })}</li>
+        <li><i data-lucide="check"></i> ${tr('plans.membersValue', { value: number(p.members) })}</li>
+        <li><i data-lucide="check"></i> ${tr('plans.webhooksValue', { value: number(p.webhooks) })}</li>
+        <li><i data-lucide="check"></i> ${tr('plans.retentionValue', { value: escapeHtml(p.retention) })}</li>
+        <li><i data-lucide="check"></i> ${tr('plans.rateLimitValue', { value: escapeHtml(p.rateLimit) })}</li>
+        <li><i data-lucide="check"></i> ${tr('ui.supportValue', { value: escapeHtml(p.support) })}</li>
       </ul>
       <button type="button" class="btn ${ctaClass} w-100 plan__cta" data-plan="${p.id}" ${isCurrent ? 'disabled' : ''}>${ctaLabel}</button>
     </div>`;
@@ -90,14 +92,14 @@ function renderPlans() {
 
 // --- Invoices ---------------------------------------------------------------
 function invoiceRow(inv) {
-  const label = inv.status.charAt(0).toUpperCase() + inv.status.slice(1);
+  const label = tr(`ui.${inv.status}`);
   return `
     <tr>
       <td><code class="ltr-isolate mono-sm text-body">${escapeHtml(inv.id)}</code></td>
       <td class="text-secondary">${formatDate(inv.date)}</td>
-      <td class="cell-num">$${inv.amount}.00</td>
+      <td class="cell-num">$${number(inv.amount)}</td>
       <td><span class="badge badge-status ${INVOICE_BADGE[inv.status]}"><span class="dot"></span>${label}</span></td>
-      <td class="text-end"><button type="button" class="btn btn-icon btn-icon--sm" data-download aria-label="Download ${escapeHtml(inv.id)}"><i data-lucide="download"></i></button></td>
+      <td class="text-end"><button type="button" class="btn btn-icon btn-icon--sm" data-download aria-label="${tr('ui.downloadInvoice', { id: escapeHtml(inv.id) })}"><i data-lucide="download"></i></button></td>
     </tr>`;
 }
 
@@ -121,11 +123,11 @@ document.getElementById('plan-grid').addEventListener('click', async (e) => {
   const target = getPlans().find((p) => p.id === btn.dataset.plan);
   const isDowngrade = target.price < currentPlan.price;
   const ok = await ask({
-    title: isDowngrade ? tr('billing.downgradeTitle') : tr('billing.upgradeTitle'),
-    body: isDowngrade
-      ? `Switch to ${target.name}? You will lose access to ${target.name} tier limits at the end of the billing cycle.`
-      : `Upgrade to ${target.name} at ${target.priceLabel}${target.period}? The new limits apply immediately.`,
-    confirmLabel: isDowngrade ? tr('billing.downgrade') : tr('billing.upgrade'),
+    title: () => (isDowngrade ? tr('billing.downgradeTitle') : tr('billing.upgradeTitle')),
+    body: () => (isDowngrade
+      ? tr('ui.downgradeBody', { plan: target.name })
+      : tr('ui.upgradeBody', { plan: target.name, price: target.priceLabel, period: target.period })),
+    confirmLabel: () => (isDowngrade ? tr('billing.downgrade') : tr('billing.upgrade')),
     danger: isDowngrade,
   });
   if (ok) {
@@ -144,7 +146,8 @@ document.querySelectorAll('[data-cycle]').forEach((seg) => {
       s.classList.toggle('is-active', s === seg);
       s.setAttribute('aria-pressed', String(s === seg));
     });
-    document.getElementById('billing-cycle').textContent = seg.dataset.cycle === 'yearly' ? 'per year' : 'per month';
+    billingCycle = seg.dataset.cycle;
+    document.getElementById('billing-cycle').textContent = tr(billingCycle === 'yearly' ? 'ui.perYear' : 'ui.perMonth');
   });
 });
 

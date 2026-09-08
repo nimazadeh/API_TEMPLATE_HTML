@@ -216,7 +216,7 @@ const endpointDefs = [
     summary: 'ابطال کلید API', group: 'پلتفرم',
     description: 'کلید را بلافاصله ابطال می‌کند. درخواست‌هایی که از آن استفاده کنند پاسخ ۴۰۱ می‌گیرند.',
     params: [
-      { name: 'id', type: 'string', location: 'path', required: true, description: 'The key id (key_…).' },
+      { name: 'id', type: 'string', location: 'path', required: true, description: 'شناسهٔ کلید (key_…).' },
     ],
     responseExample: { id: 'key_DElNoSR8', revoked: true },
   },
@@ -380,7 +380,7 @@ const environments = [
 // =====================================================================
 const plan = {
   name: 'سازمانی',
-  price: 99,
+  price: 199,
   currency: 'USD',
   requestsLimit: 10000000,
   requestsUsed: 5382400,
@@ -742,24 +742,24 @@ const invitations = [
 // =====================================================================
 const plans = [
   {
-    id: 'developer', name: 'توسعه‌دهنده', price: 0, priceLabel: '$0', period: 'در ماه',
+    id: 'developer', name: 'توسعه‌دهنده', price: 0, priceLabel: '$۰', period: 'در ماه',
     blurb: 'برای پروژه‌های جانبی و نمونه‌های اولیه.',
-    requests: '۱۰۰٬۰۰۰ در ماه', environments: 2, members: 2, webhooks: 5,
-    retention: '۲۴ ساعت', rateLimit: '50 req/s', support: 'انجمن',
+    requests: '۱۰۰٬۰۰۰', environments: 2, members: 2, webhooks: 5,
+    retention: '۲۴ ساعت', rateLimit: '۵۰ درخواست در ثانیه', support: 'انجمن',
     cta: 'تنزل طرح', highlight: false,
   },
   {
-    id: 'pro', name: 'حرفه‌ای', price: 49, priceLabel: '$49', period: 'در ماه',
+    id: 'pro', name: 'حرفه‌ای', price: 49, priceLabel: '$۴۹', period: 'در ماه',
     blurb: 'برای تیم‌های رو به رشد که در محیط تولید عرضه می‌کنند.',
-    requests: '۲٬۰۰۰٬۰۰۰ در ماه', environments: 3, members: 10, webhooks: 25,
-    retention: '۳۰ روز', rateLimit: '150 req/s', support: 'ایمیل',
+    requests: '۲٬۰۰۰٬۰۰۰', environments: 3, members: 10, webhooks: 25,
+    retention: '۳۰ روز', rateLimit: '۱۵۰ درخواست در ثانیه', support: 'ایمیل',
     cta: 'طرح فعلی', highlight: true,
   },
   {
-    id: 'scale', name: 'سازمانی', price: 199, priceLabel: '$199', period: 'در ماه',
+    id: 'scale', name: 'سازمانی', price: 199, priceLabel: '$۱۹۹', period: 'در ماه',
     blurb: 'برای پلتفرم‌های پرمصرف و سازمان‌ها.',
-    requests: '۱۰٬۰۰۰٬۰۰۰ در ماه', environments: 5, members: 50, webhooks: 100,
-    retention: '۹۰ روز', rateLimit: '250 req/s', support: 'ویژه + Slack',
+    requests: '۱۰٬۰۰۰٬۰۰۰', environments: 5, members: 50, webhooks: 100,
+    retention: '۹۰ روز', rateLimit: '۲۵۰ درخواست در ثانیه', support: 'ویژه + Slack',
     cta: 'ارتقا', highlight: false,
   },
 ];

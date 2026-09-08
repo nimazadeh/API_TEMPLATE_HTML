@@ -8,13 +8,13 @@
 // theme (dark/light/system) and language (fa ↔ en, RTL ↔ LTR).
 // =============================================================
 
+import { chartDate, compactNumber } from '../utils/format.js';
 import { boot } from '../main.js';
 import { setTheme } from '../components/theme.js';
 import { renderLogs } from '../components/table.js';
 import { createIcons, icons } from '../components/icons.js';
 import { makeChart, axis, tooltips, initCharts } from '../components/charts.js';
 import { setLocale, getLocale, onLocaleChange, t as tr } from '../core/i18n.js';
-import { compactNumber } from '../utils/format.js';
 import logs from '../data/mock-logs.json';
 import observability from '../data/mock-observability.json';
 
@@ -94,7 +94,7 @@ function renderChart() {
   makeChart(canvas, (theme) => ({
     type: 'line',
     data: {
-      labels: days.map((d) => d.date.slice(5)),
+      labels: days.map((d) => chartDate(d.date)),
       datasets: [{
         data: days.map((d) => d.requests),
         borderColor: theme.accent,

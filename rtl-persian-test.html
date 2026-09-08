@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
-    <title>آزمون راست‌به‌چپ — APIForge X</title>
+    <title data-i18n="qa.sample1">آزمون راست‌به‌چپ — APIForge X</title>
     <script>
       // No-flash theme + direction restore before first paint.
       (function () {
@@ -38,9 +38,9 @@
               <button type="button" class="env-option" data-dir="ltr">LTR</button>
             </div>
             <div class="env-switcher" role="group" aria-label="پوسته" data-i18n-attr="aria-label:aria.theme">
-              <button type="button" class="env-option" data-mode="dark">تیره</button>
-              <button type="button" class="env-option" data-mode="light">روشن</button>
-              <button type="button" class="env-option" data-mode="system">سیستم</button>
+              <button type="button" class="env-option" data-mode="dark"><span data-i18n="qa.sample2">تیره</span></button>
+              <button type="button" class="env-option" data-mode="light"><span data-i18n="qa.sample3">روشن</span></button>
+              <button type="button" class="env-option" data-mode="system"><span data-i18n="qa.sample4">سیستم</span></button>
             </div>
             <button type="button" class="btn btn-sm btn-ghost" data-locale-toggle aria-label="تغییر زبان" data-i18n-attr="aria-label:aria.switchLanguage">
               <i data-lucide="languages"></i> <span data-locale-label>EN</span>
@@ -57,35 +57,35 @@
           <!-- 1. Mixed-script sentence -->
           <section class="card mb-4">
             <div class="card-header">
-              <h3 class="card-title">۱ · جملهٔ ترکیبی</h3>
+              <h3 class="card-title"><span data-i18n="qa.sample5">۱ · جملهٔ ترکیبی</span></h3>
               <div class="card-subtitle" data-i18n="qa.mixedSubtitle">اصطلاح فنی انگلیسی داخل جملهٔ فارسی، بدون شکستن جهت.</div>
             </div>
-            <p class="body-lg"><span data-i18n="qa.mixedLead">برای شروع، یک</span><span class="tech" dir="ltr" data-i18n="keys.apiKeyLabel">کلید API</span> از داشبورد بسازید و آن را در هدر
-              <code dir="ltr" class="ltr-isolate">Authorization: Bearer …</code> بفرستید. نقطهٔ پایانی
-              <code dir="ltr" class="ltr-isolate">POST /v1/emails</code><span data-i18n="qa.mixedSend">ایمیل را می‌فرستد و شناسهٔ</span><code dir="ltr" class="ltr-isolate">req_8Fk2mQx1Zw</code> برمی‌گرداند. مستندات کامل در
-              <a href="#">https://docs.apiforge.dev/fa/quickstart</a> است.
+            <p class="body-lg"><span data-i18n="qa.mixedLead">برای شروع، یک</span><span class="tech" dir="ltr" data-i18n="keys.apiKeyLabel">کلید API</span> <span data-i18n="qa.sample6">از داشبورد بسازید و آن را در هدر</span>
+              <code dir="ltr" class="ltr-isolate">Authorization: Bearer …</code> <span data-i18n="qa.sample7">بفرستید. نقطهٔ پایانی</span>
+              <code dir="ltr" class="ltr-isolate">POST /v1/emails</code><span data-i18n="qa.mixedSend">ایمیل را می‌فرستد و شناسهٔ</span><code dir="ltr" class="ltr-isolate">req_8Fk2mQx1Zw</code> <span data-i18n="qa.sample8">برمی‌گرداند. مستندات کامل در</span>
+              <a href="#">https://docs.apiforge.dev/fa/quickstart</a> <span data-i18n="qa.sample9">است.</span>
             </p>
             <p class="text-secondary mb-0">
-              به عدد <span class="num-en">1,245,088</span> درخواست در ۲۴ ساعت گذشته رسیده‌ایم — یعنی
-              <span class="num-en">99.97%</span> موفق.
+              <span data-i18n="qa.sample10">به عدد</span> <span class="num-en">1,245,088</span> <span data-i18n="qa.sample11">درخواست در ۲۴ ساعت گذشته رسیده‌ایم — یعنی</span>
+              <span class="num-en">99.97%</span> <span data-i18n="qa.sample12">موفق.</span>
             </p>
           </section>
 
           <!-- 2. Numbers & tabular data -->
           <section class="card mb-4">
             <div class="card-header">
-              <h3 class="card-title">۲ · اعداد و جدول اعداد</h3>
-              <div class="card-subtitle">رقم فارسی برای متن، رقم لاتین برای داده، تراز tabular-nums.</div>
+              <h3 class="card-title"><span data-i18n="qa.sample13">۲ · اعداد و جدول اعداد</span></h3>
+              <div class="card-subtitle"><span data-i18n="qa.sample14">رقم فارسی برای متن، رقم لاتین برای داده، تراز tabular-nums.</span></div>
             </div>
             <div class="row g-3">
               <div class="col-md-6">
-                <div class="mb-2 caption text-tertiary">متن (رقم فارسی)</div>
-                <p class="body-lg mb-3">۳ سفارش جدید · ۱۲ دقیقه پیش · صفحهٔ ۲ از ۴۰</p>
-                <div class="mb-2 caption text-tertiary">داده (رقم لاتین، tabular)</div>
+                <div class="mb-2 caption text-tertiary"><span data-i18n="qa.sample15">متن (رقم فارسی)</span></div>
+                <p class="body-lg mb-3"><span data-i18n="qa.sample16">۳ سفارش جدید · ۱۲ دقیقه پیش · صفحهٔ ۲ از ۴۰</span></p>
+                <div class="mb-2 caption text-tertiary"><span data-i18n="qa.sample17">داده (رقم لاتین، tabular)</span></div>
                 <div class="tabular-nums num-en" style="font-size: 22px">1,245,088&nbsp;&nbsp;99.97%&nbsp;&nbsp;0.0042&nbsp;&nbsp;184ms</div>
               </div>
               <div class="col-md-6">
-                <div class="mb-2 caption text-tertiary">تلفن و ارز</div>
+                <div class="mb-2 caption text-tertiary"><span data-i18n="qa.sample18">تلفن و ارز</span></div>
                 <p class="body-lg mb-0"><span class="num-en">+98 21 1234 5678</span> · <span class="num-en">$1,299.00</span> · <span class="num-fa">۱۲۳۴۵۶۷۸۹۰</span></p>
               </div>
             </div>
@@ -94,8 +94,8 @@
           <!-- 3. LTR isolation -->
           <section class="card mb-4">
             <div class="card-header">
-              <h3 class="card-title">۳ · ایزوله‌سازی چپ‌به‌راست</h3>
-              <div class="card-subtitle">کد، کلید و شناسه با dir="ltr" و ltr-isolate هرگز آینه نمی‌شوند.</div>
+              <h3 class="card-title"><span data-i18n="qa.sample20">۳ · ایزوله‌سازی چپ‌به‌راست</span></h3>
+              <div class="card-subtitle"><span data-i18n="qa.sample21">کد، کلید و شناسه با dir="ltr" و ltr-isolate هرگز آینه نمی‌شوند.</span></div>
             </div>
             <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
               <code class="ltr-isolate">sk_live_4fJk9Lm2XpQz7RvW</code>
@@ -104,22 +104,22 @@
               <code class="ltr-isolate">v2.4.1-beta.7</code>
             </div>
             <p class="text-secondary mb-0">
-              جملهٔ فارسی که در آن <code dir="ltr" class="ltr-isolate">GET /v1/logs?limit=50</code>
-              و <code dir="ltr" class="ltr-isolate">"Authorization"</code> داخل گیومه حفظ می‌شوند.
+              <span data-i18n="qa.sample22">جملهٔ فارسی که در آن</span> <code dir="ltr" class="ltr-isolate">GET /v1/logs?limit=50</code>
+              <span data-i18n="qa.sample23">و</span> <code dir="ltr" class="ltr-isolate">"Authorization"</code> <span data-i18n="qa.sample24">داخل گیومه حفظ می‌شوند.</span>
             </p>
           </section>
 
           <!-- 4. Code block always LTR -->
           <section class="mb-4">
-            <h3 class="mb-2">۴ · بلوک کد — همیشه چپ‌به‌راست</h3>
+            <h3 class="mb-2"><span data-i18n="qa.sample25">۴ · بلوک کد — همیشه چپ‌به‌راست</span></h3>
             <div class="code-block" data-code-block>
               <div class="code-block__header">
-                <div class="code-tabs" role="tablist" aria-label="زبان">
+                <div class="code-tabs" role="tablist" aria-label="زبان" data-i18n-attr="aria-label:aria.language">
                   <button type="button" class="code-tabs__tab is-active" data-tab="curl">cURL</button>
                   <button type="button" class="code-tabs__tab" data-tab="node">Node</button>
                 </div>
                 <div class="code-block__actions">
-                  <button type="button" class="btn btn-icon" data-code-copy aria-label="کپی کد"><i data-lucide="copy"></i></button>
+                  <button type="button" class="btn btn-icon" data-code-copy aria-label="کپی کد" data-i18n-attr="aria-label:aria.copyCode"><i data-lucide="copy"></i></button>
                 </div>
               </div>
               <pre class="code-block__body" data-code-pane data-pane="curl">curl https://api.apiforge.dev/v1/emails \
@@ -133,7 +133,7 @@ await client.emails.send({ to: 'user@example.com' });</pre>
 
           <!-- 5. Mixed table -->
           <section class="mb-4">
-            <h3 class="mb-2">۵ · جدول ترکیبی</h3>
+            <h3 class="mb-2"><span data-i18n="qa.sample26">۵ · جدول ترکیبی</span></h3>
             <div class="table-card">
               <div class="table-responsive">
                 <table class="table table--compact">
@@ -156,22 +156,22 @@ await client.emails.send({ to: 'user@example.com' });</pre>
           <!-- 6. Forms -->
           <section class="card mb-4">
             <div class="card-header">
-              <h3 class="card-title">۶ · فرم‌ها</h3>
-              <div class="card-subtitle">فیلدهای URL و کلید چپ‌به‌راست می‌مانند؛ جستجو فارسی است.</div>
+              <h3 class="card-title"><span data-i18n="qa.sample27">۶ · فرم‌ها</span></h3>
+              <div class="card-subtitle"><span data-i18n="qa.sample28">فیلدهای URL و کلید چپ‌به‌راست می‌مانند؛ جستجو فارسی است.</span></div>
             </div>
             <div class="row g-4">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="form-label" for="rt-search">جستجو</label>
+                  <label class="form-label" for="rt-search"><span data-i18n="qa.sample29">جستجو</span></label>
                   <div class="search-field">
                     <i data-lucide="search" class="search-icon"></i>
-                    <input class="form-control" id="rt-search" type="text" placeholder="جستجوی درخواست‌ها…" />
+                    <input class="form-control" id="rt-search" type="text" placeholder="جستجوی درخواست‌ها…" data-i18n-attr="placeholder:qa.attr1505" />
                   </div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="form-label" for="rt-endpoint">نقطهٔ پایانی (LTR)</label>
+                  <label class="form-label" for="rt-endpoint"><span data-i18n="qa.sample30">نقطهٔ پایانی (LTR)</span></label>
                   <input class="form-control form-control--mono ltr-isolate" id="rt-endpoint" type="text" value="https://api.apiforge.dev/v1/emails" dir="ltr" />
                 </div>
               </div>
@@ -181,15 +181,15 @@ await client.emails.send({ to: 'user@example.com' });</pre>
           <!-- 7. Directional icons -->
           <section class="card mb-4">
             <div class="card-header">
-              <h3 class="card-title">۷ · آیکون‌های جهت‌دار</h3>
-              <div class="card-subtitle">آیکون «بازگشت/بعدی» بر اساس جهت انتخاب می‌شود؛ آیکون‌های غیرجهت‌دار ثابت می‌مانند.</div>
+              <h3 class="card-title"><span data-i18n="qa.sample31">۷ · آیکون‌های جهت‌دار</span></h3>
+              <div class="card-subtitle"><span data-i18n="qa.sample32">آیکون «بازگشت/بعدی» بر اساس جهت انتخاب می‌شود؛ آیکون‌های غیرجهت‌دار ثابت می‌مانند.</span></div>
             </div>
             <div class="d-flex flex-wrap gap-2 align-items-center">
               <button type="button" class="btn btn-secondary" id="rt-back">
-                <i data-lucide="arrow-right" data-dir-icon="back"></i> بازگشت
+                <i data-lucide="arrow-right" data-dir-icon="back"></i> <span data-i18n="qa.sample33">بازگشت</span>
               </button>
               <button type="button" class="btn btn-secondary" id="rt-next">
-                بعدی <i data-lucide="arrow-left" data-dir-icon="next"></i>
+                <span data-i18n="qa.sample34">بعدی</span> <i data-lucide="arrow-left" data-dir-icon="next"></i>
               </button>
               <button type="button" class="btn btn-icon" aria-label="تنظیمات" data-i18n-attr="aria-label:aria.settings"><i data-lucide="settings"></i></button>
               <button type="button" class="btn btn-icon" aria-label="راهنما" data-i18n-attr="aria-label:aria.help"><i data-lucide="help-circle"></i></button>
@@ -199,23 +199,23 @@ await client.emails.send({ to: 'user@example.com' });</pre>
           <!-- 8. Breadcrumb & list -->
           <section class="card mb-4">
             <div class="card-header">
-              <h3 class="card-title">۸ · مسیر و فهرست</h3>
+              <h3 class="card-title"><span data-i18n="qa.sample35">۸ · مسیر و فهرست</span></h3>
             </div>
-            <nav aria-label="مسیر">
+            <nav aria-label="مسیر" data-i18n-attr="aria-label:aria.breadcrumb">
               <ol class="breadcrumb mb-3">
-                <li class="breadcrumb-item"><a href="#">APIها</a></li>
-                <li class="breadcrumb-item"><a href="#">تراکنش‌ها</a></li>
+                <li class="breadcrumb-item"><a href="#"><span data-i18n="qa.sample36">APIها</span></a></li>
+                <li class="breadcrumb-item"><a href="#"><span data-i18n="qa.sample37">تراکنش‌ها</span></a></li>
                 <li class="breadcrumb-item active" aria-current="page">req_8Fk2mQx1Zw</li>
               </ol>
             </nav>
             <ul class="list-unstyled d-flex flex-column gap-2">
               <li class="d-flex align-items-center gap-2">
                 <i data-lucide="circle-check" class="text-accent"></i>
-                <span><span data-i18n="rtl.thKey">کلید</span><code dir="ltr" class="ltr-isolate">sk_live_…</code> فعال شد</span>
+                <span><span data-i18n="rtl.thKey">کلید</span><code dir="ltr" class="ltr-isolate">sk_live_…</code> <span data-i18n="qa.sample38">فعال شد</span></span>
               </li>
               <li class="d-flex align-items-center gap-2">
                 <i data-lucide="alert-triangle"></i>
-                <span>۲ وبهوک با خطای <code dir="ltr" class="ltr-isolate">500</code> مواجه شدند</span>
+                <span><span data-i18n="qa.sample39">۲ وبهوک با خطای</span> <code dir="ltr" class="ltr-isolate">500</code> <span data-i18n="qa.sample40">مواجه شدند</span></span>
               </li>
             </ul>
           </section>
@@ -269,8 +269,8 @@ await client.emails.send({ to: 'user@example.com' });</pre>
             <nav class="mb-3" aria-label="صفحه‌بندی" data-i18n-attr="aria-label:aria.pagination">
               <ul class="pagination mb-0">
                 <li class="page-item"><button type="button" class="page-link" data-i18n="pagination.prev">قبلی</button></li>
-                <li class="page-item active"><button type="button" class="page-link">۱</button></li>
-                <li class="page-item"><button type="button" class="page-link">۲</button></li>
+                <li class="page-item active"><button type="button" class="page-link"><span data-i18n="qa.sample41">۱</span></button></li>
+                <li class="page-item"><button type="button" class="page-link"><span data-i18n="qa.sample42">۲</span></button></li>
                 <li class="page-item"><button type="button" class="page-link" data-i18n="pagination.next">بعدی</button></li>
               </ul>
             </nav>

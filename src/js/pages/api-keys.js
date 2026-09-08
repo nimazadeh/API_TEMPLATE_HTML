@@ -5,6 +5,8 @@
 // the deterministic mock-keys.json (mutable in-session only).
 // =============================================================
 
+import { trackLocalizedView } from '../components/localized-view.js';
+import { localizedFixture } from '../data/localized.js';
 import { boot } from '../main.js';
 import { Modal } from '../core/bootstrap.js';
 import { createIcons, icons } from '../components/icons.js';
@@ -12,7 +14,11 @@ import { renderKeys } from '../components/table.js';
 import { afxToast } from '../components/toast.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { currentEnv } from '../components/env-switcher.js';
-import keysData from '../data/mock-keys.json';
+import { number } from '../utils/format.js';
+import keysDataFa from '../data/mock-keys.json';
+import keysDataEn from '../data/mock-keys.en.json';
+
+const keysData = localizedFixture(keysDataFa, keysDataEn);
 
 boot();
 
@@ -61,14 +67,16 @@ function render() {
     const btn = row.querySelector('[data-copy]');
     if (key && btn) btn.dataset.copy = fullKey(key);
   });
-  document.getElementById('keys-count').textContent = `${list.length} key${list.length === 1 ? '' : 's'} · ${currentEnv() === 'live' ? 'Live' : 'Test'} environment`;
+  document.getElementById('keys-count').textContent = tr('ui.keysCount', { count: number(list.length), env: tr(currentEnv() === 'live' ? 'env.liveOption' : 'env.testOption') });
   createIcons({ icons });
 }
 
 // --- Reveal-once modal -------------------------------------------------
 function openReveal(key, { isNew = false } = {}) {
   const modal = Modal.getOrCreateInstance(document.getElementById('reveal-modal'));
-  document.getElementById('reveal-modal-title').textContent = isNew ? 'Your new API key' : 'Reveal API key';
+  document.getElementById('reveal-modal-title').dataset.i18n = isNew ? 'keys.revealTitle' : 'ui.revealKey';
+  document.getElementById('reveal-note').dataset.i18n = isNew ? 'keys.copyNow' : 'keys.copyOnce';
+  document.getElementById('reveal-modal-title').textContent = tr(isNew ? 'keys.revealTitle' : 'ui.revealKey');
   document.getElementById('reveal-note').textContent = isNew
     ? tr('keys.copyNow')
     : tr('keys.copyOnce');
@@ -89,11 +97,16 @@ function bindRevealModal() {
 // --- Confirm modal -----------------------------------------------------
 let pendingAction = null;
 function openConfirm({ title, body, confirmLabel = tr('action.confirm'), onConfirm }) {
-  document.getElementById('confirm-modal-title').textContent = title;
-  document.getElementById('confirm-modal-body').textContent = body;
-  const submit = document.getElementById('confirm-modal-submit');
-  submit.textContent = confirmLabel;
-  submit.className = `btn ${confirmLabel === tr('action.revoke') ? 'btn-danger' : 'btn-primary'}`;
+  const resolveText = (value) => typeof value === 'function' ? value() : value;
+  const paint = () => {
+    document.getElementById('confirm-modal-title').textContent = resolveText(title);
+    document.getElementById('confirm-modal-body').textContent = resolveText(body);
+    const submit = document.getElementById('confirm-modal-submit');
+    submit.textContent = resolveText(confirmLabel);
+    submit.className = `btn ${resolveText(confirmLabel) === tr('action.revoke') ? 'btn-danger' : 'btn-primary'}`;
+  };
+  paint();
+  trackLocalizedView(document.getElementById('confirm-modal'), paint);
   pendingAction = onConfirm;
   Modal.getOrCreateInstance(document.getElementById('confirm-modal')).show();
 }
@@ -110,9 +123,9 @@ function bindConfirmModal() {
 // --- Actions -----------------------------------------------------------
 function rotate(key) {
   openConfirm({
-    title: tr('keys.rotateTitle'),
-    body: `Rotate “${key.name}”? A new key will be generated and the old one revoked immediately.`,
-    confirmLabel: tr('action.rotate'),
+    title: () => (tr('keys.rotateTitle')),
+    body: () => (tr('ui.rotateKeyBody', { name: key.name })),
+    confirmLabel: () => (tr('action.rotate')),
     onConfirm: () => {
       key.prefix = newPrefix(key.env);
       secrets.delete(key.id);
@@ -125,9 +138,9 @@ function rotate(key) {
 
 function revoke(key) {
   openConfirm({
-    title: tr('keys.revokeTitle'),
-    body: `Revoke “${key.name}”? Requests using this key will fail immediately. This cannot be undone.`,
-    confirmLabel: tr('action.revoke'),
+    title: () => (tr('keys.revokeTitle')),
+    body: () => (tr('ui.revokeKeyBody', { name: key.name })),
+    confirmLabel: () => (tr('action.revoke')),
     onConfirm: () => {
       key.status = 'revoked';
       render();
@@ -194,3 +207,5 @@ document.addEventListener('afx:env', render);
 if (window.location.hash === '#create') {
   Modal.getOrCreateInstance(document.getElementById('create-modal')).show();
 }
+
+onLocaleChange(render);

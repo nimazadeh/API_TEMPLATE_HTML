@@ -416,7 +416,7 @@
         "type": "string",
         "location": "path",
         "required": true,
-        "description": "The key id (key_…)."
+        "description": "شناسهٔ کلید (key_…)."
       }
     ],
     "responseExample": {

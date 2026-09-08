@@ -1,0 +1,29 @@
+[
+  {
+    "id": "live",
+    "name": "Production",
+    "baseUrl": "https://api.apiforge.dev",
+    "description": "Real traffic and production data.",
+    "created": "2025-10-23T04:27:36.521Z",
+    "keysCount": 4,
+    "requestsShare": 94.8
+  },
+  {
+    "id": "staging",
+    "name": "Staging",
+    "baseUrl": "https://api.staging.apiforge.dev",
+    "description": "Pre-release validation before production.",
+    "created": "2026-03-12T04:27:36.521Z",
+    "keysCount": 2,
+    "requestsShare": 0
+  },
+  {
+    "id": "test",
+    "name": "Development",
+    "baseUrl": "https://api.test.apiforge.dev",
+    "description": "Isolated sandbox for local development.",
+    "created": "2026-02-10T04:27:36.521Z",
+    "keysCount": 2,
+    "requestsShare": 5.2
+  }
+]

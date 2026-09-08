@@ -3,18 +3,30 @@
 // KPIs + request/latency charts per time range + activity feed.
 // =============================================================
 
+import {
+  chartDate,
+  formatNumber,
+  compactNumber,
+  relativeTime,
+  escapeHtml,
+  latencyText,
+  percent,
+  number,
+} from '../utils/format.js';
+import { localizedFixture, localizedData } from '../data/localized.js';
 import { boot } from '../main.js';
 import { makeChart, destroyChart, axis, tooltips, initCharts } from '../components/charts.js';
 import { createIcons, icons } from '../components/icons.js';
-import { formatNumber, compactNumber, relativeTime, escapeHtml, latencyText, percent, number } from '../utils/format.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
-import metrics from '../data/mock-metrics.json';
+import metricsFa from '../data/mock-metrics.json';
+import metricsEn from '../data/mock-metrics.en.json';
 import usage from '../data/mock-usage.json';
 import faActivity from '../data/mock-activity.json';
 import enActivity from '../data/mock-activity.en.json';
 import faPlan from '../data/mock-plan.json';
 import enPlan from '../data/mock-plan.en.json';
-import { localizedData } from '../data/localized.js';
+
+const metrics = localizedFixture(metricsFa, metricsEn);
 
 boot();
 initCharts();
@@ -34,7 +46,7 @@ function seriesFor(range) {
   }
   const days = usage.slice(range === '7d' ? -7 : -30);
   return {
-    labels: days.map((d) => d.date.slice(5)),
+    labels: days.map((d) => chartDate(d.date)),
     requests: days.map((d) => d.requests),
     latency: days.map((d) => d.latencyMs),
   };
@@ -54,8 +66,8 @@ function renderKpis(range) {
   const cards = grid.querySelectorAll('[data-kpi]');
   const plan = localizedData(faPlan, enPlan);
 
-  const requestsDelta = `${k.requestsDelta > 0 ? '+' : ''}${k.requestsDelta}%`;
-  const successDelta = `${k.successDelta > 0 ? '+' : ''}${k.successDelta}pp`;
+  const requestsDelta = `${k.requestsDelta > 0 ? '+' : ''}${percent(k.requestsDelta)}`;
+  const successDelta = tr('ui.percentagePoints', { value: `${k.successDelta > 0 ? '+' : ''}${number(k.successDelta)}` });
   const latencyDelta = k.latencyDelta < 0 ? `${tr('kpi.faster', { value: number(Math.abs(k.latencyDelta)) })}` : `${tr('kpi.slower', { value: number(k.latencyDelta) })}`;
   const usagePct = plan.requestsUsed / plan.requestsLimit;
 
@@ -124,7 +136,7 @@ function renderCharts(range) {
   );
   latencyChart = makeChart(document.getElementById('chart-latency'), (t) =>
     lineConfig(labels, latency, t, t.info, {
-      label: (c) => `${c.parsed.y}ms P95`,
+      label: (c) => `${latencyText(c.parsed.y)} P95`,
     })
   );
 }

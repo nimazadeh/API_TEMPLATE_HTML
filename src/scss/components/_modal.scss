@@ -132,6 +132,8 @@
 
 // Bootstrap injects .offcanvas-backdrop.
 .offcanvas-backdrop {
+  // Bootstrap emits a literal z-index here, unlike .modal-backdrop.
+  z-index: var(--z-backdrop);
   --bs-backdrop-zindex: var(--z-backdrop);
   --bs-backdrop-bg: var(--overlay-bg);
   --bs-backdrop-opacity: 1;

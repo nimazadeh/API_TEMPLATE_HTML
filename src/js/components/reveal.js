@@ -4,6 +4,7 @@
 // and swaps the eye / eye-off icon.
 // =============================================================
 
+import { t } from '../core/i18n.js';
 import { createIcons, icons } from './icons.js';
 
 export function initReveal() {
@@ -18,7 +19,8 @@ export function initReveal() {
       if (icon && icons[name]) {
         icon.outerHTML = icons[name].toSvg({ width: 14, height: 14, 'stroke-width': 2 });
       }
-      btn.setAttribute('aria-label', reveal ? 'Hide key' : 'Reveal key');
+      btn.dataset.i18nAttr = `aria-label:${reveal ? 'ui.hideKey' : 'ui.revealValue'}`;
+      btn.setAttribute('aria-label', t(reveal ? 'ui.hideKey' : 'ui.revealValue'));
       createIcons({ icons });
     });
   });

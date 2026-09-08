@@ -1,0 +1,962 @@
+[
+  {
+    "id": "err_JrCELdEpig",
+    "type": "TypeError",
+    "message": "Cannot read properties of undefined (reading 'id')",
+    "severity": "error",
+    "status": "unresolved",
+    "assignee": "Ali Rezaei",
+    "endpoint": {
+      "method": "POST",
+      "path": "/v1/emails"
+    },
+    "environment": "live",
+    "occurrences": 12840,
+    "firstSeen": "2026-08-01T04:27:36.525Z",
+    "lastSeen": "2026-09-07T09:48:36.525Z",
+    "resolvedAt": null,
+    "request": {
+      "id": "req_7NAucVHee4",
+      "url": "https://api.apiforge.dev/v1/emails",
+      "method": "POST",
+      "keyPrefix": "sk_live_TNjLSA",
+      "userAgent": "af-sdk-python/0.9.2",
+      "ip": "69.168.20.83"
+    },
+    "user": {
+      "id": "usr_g0iFRS6L",
+      "email": "sara@yourco.io",
+      "plan": "Scale"
+    },
+    "stackTrace": [
+      {
+        "file": "src/email/send.ts",
+        "fn": "dispatchEmail",
+        "line": 142,
+        "col": 9,
+        "code": "const user = await users.get(payload.recipientId);",
+        "inApp": true
+      },
+      {
+        "file": "src/http/client.ts",
+        "fn": "parseResponse",
+        "line": 289,
+        "col": 30,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "node_modules/axios/lib/adapters/http.js",
+        "fn": "dispatchRequest",
+        "line": 347,
+        "col": 15,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/platform/usage.ts",
+        "fn": "aggregate",
+        "line": 365,
+        "col": 34,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/ai/inference.ts",
+        "fn": "runCompletion",
+        "line": 402,
+        "col": 17,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "node_modules/ioredis/built/connectors/StandaloneConnector.js",
+        "fn": "connect",
+        "line": 328,
+        "col": 9,
+        "code": null,
+        "inApp": false
+      }
+    ]
+  },
+  {
+    "id": "err_Zyx5M8YyFg",
+    "type": "RangeError",
+    "message": "Invalid array length",
+    "severity": "error",
+    "status": "unresolved",
+    "assignee": null,
+    "endpoint": {
+      "method": "POST",
+      "path": "/v1/audiences"
+    },
+    "environment": "live",
+    "occurrences": 8230,
+    "firstSeen": "2026-08-27T04:27:36.525Z",
+    "lastSeen": "2026-09-08T01:28:36.525Z",
+    "resolvedAt": null,
+    "request": {
+      "id": "req_dHlSpXJyeh",
+      "url": "https://api.apiforge.dev/v1/audiences",
+      "method": "POST",
+      "keyPrefix": "sk_live_jltvXV",
+      "userAgent": "af-sdk-go/1.1.0",
+      "ip": "38.8.102.34"
+    },
+    "user": {
+      "id": "usr_eZyWROsv",
+      "email": "arash@apiforge.dev",
+      "plan": "Scale"
+    },
+    "stackTrace": [
+      {
+        "file": "src/audiences/segment.ts",
+        "fn": "applyFilters",
+        "line": 88,
+        "col": 21,
+        "code": "const slice = new Array(filter.limit);",
+        "inApp": true
+      },
+      {
+        "file": "node:internal/process/task_queues",
+        "fn": "processTicksAndRejections",
+        "line": 126,
+        "col": 48,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "node_modules/axios/lib/adapters/http.js",
+        "fn": "dispatchRequest",
+        "line": 112,
+        "col": 18,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/db/redis.ts",
+        "fn": "cacheGet",
+        "line": 141,
+        "col": 33,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "node_modules/express/lib/router/index.js",
+        "fn": "next",
+        "line": 375,
+        "col": 6,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/http/client.ts",
+        "fn": "request",
+        "line": 187,
+        "col": 59,
+        "code": null,
+        "inApp": true
+      }
+    ]
+  },
+  {
+    "id": "err_oSzMJ20xue",
+    "type": "SyntaxError",
+    "message": "Unexpected token '<' in JSON at position 0",
+    "severity": "error",
+    "status": "resolved",
+    "assignee": "Sara Ahmadi",
+    "endpoint": {
+      "method": "POST",
+      "path": "/v1/completions"
+    },
+    "environment": "live",
+    "occurrences": 5121,
+    "firstSeen": "2026-08-22T04:27:36.525Z",
+    "lastSeen": "2026-09-07T08:28:36.525Z",
+    "resolvedAt": "2026-08-31T04:27:36.525Z",
+    "request": {
+      "id": "req_2rlPXtBHxe",
+      "url": "https://api.apiforge.dev/v1/completions",
+      "method": "POST",
+      "keyPrefix": "sk_live_4229Sy",
+      "userAgent": "curl/8.5.0",
+      "ip": "52.175.91.152"
+    },
+    "user": {
+      "id": "usr_YBFe9ikk",
+      "email": "arash@apiforge.dev",
+      "plan": "Growth"
+    },
+    "stackTrace": [
+      {
+        "file": "src/ai/inference.ts",
+        "fn": "parseJson",
+        "line": 54,
+        "col": 11,
+        "code": "return JSON.parse(raw.trim());",
+        "inApp": true
+      },
+      {
+        "file": "node_modules/ioredis/built/connectors/StandaloneConnector.js",
+        "fn": "connect",
+        "line": 332,
+        "col": 13,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/ai/inference.ts",
+        "fn": "streamResponse",
+        "line": 404,
+        "col": 22,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "node:internal/process/task_queues",
+        "fn": "processTicksAndRejections",
+        "line": 372,
+        "col": 31,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/http/client.ts",
+        "fn": "request",
+        "line": 417,
+        "col": 9,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/audiences/segment.ts",
+        "fn": "applyFilters",
+        "line": 243,
+        "col": 23,
+        "code": null,
+        "inApp": true
+      }
+    ]
+  },
+  {
+    "id": "err_4xGdnDxAxV",
+    "type": "ReferenceError",
+    "message": "handler is not defined",
+    "severity": "error",
+    "status": "resolved",
+    "assignee": "Ali Rezaei",
+    "endpoint": {
+      "method": "POST",
+      "path": "/v1/emails"
+    },
+    "environment": "live",
+    "occurrences": 3402,
+    "firstSeen": "2026-08-15T04:27:36.525Z",
+    "lastSeen": "2026-09-07T11:15:36.525Z",
+    "resolvedAt": "2026-09-07T04:27:36.525Z",
+    "request": {
+      "id": "req_BJsdS1iY4N",
+      "url": "https://api.apiforge.dev/v1/emails",
+      "method": "POST",
+      "keyPrefix": "sk_live_qhaWNn",
+      "userAgent": "af-sdk-python/0.9.2",
+      "ip": "80.229.228.35"
+    },
+    "user": {
+      "id": "usr_U63D1pm1",
+      "email": "sara@yourco.io",
+      "plan": "Scale"
+    },
+    "stackTrace": [
+      {
+        "file": "src/email/routes.ts",
+        "fn": "onEmailSent",
+        "line": 39,
+        "col": 5,
+        "code": "return handler(event);",
+        "inApp": true
+      },
+      {
+        "file": "node:internal/process/task_queues",
+        "fn": "processTicksAndRejections",
+        "line": 45,
+        "col": 30,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/db/redis.ts",
+        "fn": "cacheGet",
+        "line": 80,
+        "col": 51,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/platform/usage.ts",
+        "fn": "readUsage",
+        "line": 13,
+        "col": 44,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/email/provider.ts",
+        "fn": "sendViaProvider",
+        "line": 232,
+        "col": 56,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "node_modules/express/lib/router/index.js",
+        "fn": "handle",
+        "line": 255,
+        "col": 19,
+        "code": null,
+        "inApp": false
+      }
+    ]
+  },
+  {
+    "id": "err_KJAST7DrMK",
+    "type": "ValidationError",
+    "message": "Missing required field: 'to'",
+    "severity": "warning",
+    "status": "unresolved",
+    "assignee": null,
+    "endpoint": {
+      "method": "POST",
+      "path": "/v1/emails"
+    },
+    "environment": "live",
+    "occurrences": 15840,
+    "firstSeen": "2026-09-01T04:27:36.525Z",
+    "lastSeen": "2026-09-07T19:07:36.525Z",
+    "resolvedAt": null,
+    "request": {
+      "id": "req_YL9PRNQ3Rf",
+      "url": "https://api.apiforge.dev/v1/emails",
+      "method": "POST",
+      "keyPrefix": "sk_live_uh95AY",
+      "userAgent": "curl/8.5.0",
+      "ip": "151.213.228.98"
+    },
+    "user": {
+      "id": "usr_l966N2K7",
+      "email": "dev@acme.dev",
+      "plan": "Growth"
+    },
+    "stackTrace": [
+      {
+        "file": "src/email/schema.ts",
+        "fn": "validateEmail",
+        "line": 23,
+        "col": 12,
+        "code": "throw new ValidationError(\"Missing required field: 'to'\");",
+        "inApp": true
+      },
+      {
+        "file": "src/db/redis.ts",
+        "fn": "cacheGet",
+        "line": 215,
+        "col": 20,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/email/provider.ts",
+        "fn": "sendViaProvider",
+        "line": 284,
+        "col": 51,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/platform/usage.ts",
+        "fn": "aggregate",
+        "line": 254,
+        "col": 55,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "node_modules/axios/lib/adapters/http.js",
+        "fn": "dispatchRequest",
+        "line": 61,
+        "col": 46,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/http/client.ts",
+        "fn": "request",
+        "line": 74,
+        "col": 47,
+        "code": null,
+        "inApp": true
+      }
+    ]
+  },
+  {
+    "id": "err_mBG6KbXMqe",
+    "type": "RateLimitError",
+    "message": "429 Too Many Requests — retry after 2s",
+    "severity": "warning",
+    "status": "unresolved",
+    "assignee": null,
+    "endpoint": {
+      "method": "POST",
+      "path": "/v1/completions"
+    },
+    "environment": "live",
+    "occurrences": 9230,
+    "firstSeen": "2026-08-12T04:27:36.525Z",
+    "lastSeen": "2026-09-07T17:38:36.525Z",
+    "resolvedAt": null,
+    "request": {
+      "id": "req_94tfjkZzYx",
+      "url": "https://api.apiforge.dev/v1/completions",
+      "method": "POST",
+      "keyPrefix": "sk_live_gRAM4x",
+      "userAgent": "af-sdk-python/0.9.2",
+      "ip": "121.247.228.70"
+    },
+    "user": {
+      "id": "usr_VkIMqyBb",
+      "email": "sara@yourco.io",
+      "plan": "Scale"
+    },
+    "stackTrace": [
+      {
+        "file": "src/ai/gateway.ts",
+        "fn": "checkQuota",
+        "line": 117,
+        "col": 7,
+        "code": "throw new RateLimitError(resetIn);",
+        "inApp": true
+      },
+      {
+        "file": "node_modules/express/lib/router/index.js",
+        "fn": "next",
+        "line": 97,
+        "col": 38,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/ai/inference.ts",
+        "fn": "streamResponse",
+        "line": 247,
+        "col": 23,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "node:internal/process/task_queues",
+        "fn": "processTicksAndRejections",
+        "line": 257,
+        "col": 10,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/http/client.ts",
+        "fn": "request",
+        "line": 320,
+        "col": 18,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/db/redis.ts",
+        "fn": "cacheGet",
+        "line": 288,
+        "col": 32,
+        "code": null,
+        "inApp": true
+      }
+    ]
+  },
+  {
+    "id": "err_2WiFogPPPv",
+    "type": "ETIMEDOUT",
+    "message": "connect ETIMEDOUT 10.0.4.21:6379",
+    "severity": "error",
+    "status": "resolved",
+    "assignee": "Sara Ahmadi",
+    "endpoint": {
+      "method": "GET",
+      "path": "/v1/models"
+    },
+    "environment": "live",
+    "occurrences": 2170,
+    "firstSeen": "2026-08-21T04:27:36.525Z",
+    "lastSeen": "2026-09-07T13:39:36.525Z",
+    "resolvedAt": "2026-09-03T04:27:36.525Z",
+    "request": {
+      "id": "req_5lXPv4T3mf",
+      "url": "https://api.apiforge.dev/v1/models",
+      "method": "GET",
+      "keyPrefix": "sk_live_Nbo6zY",
+      "userAgent": "af-sdk-node/1.4.0",
+      "ip": "156.158.201.162"
+    },
+    "user": {
+      "id": "usr_kthAtmk2",
+      "email": "dev@acme.dev",
+      "plan": "Growth"
+    },
+    "stackTrace": [
+      {
+        "file": "src/db/redis.ts",
+        "fn": "cacheGet",
+        "line": 71,
+        "col": 16,
+        "code": "await client.get(key);",
+        "inApp": true
+      },
+      {
+        "file": "src/db/redis.ts",
+        "fn": "cacheGet",
+        "line": 208,
+        "col": 25,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/audiences/segment.ts",
+        "fn": "hydrateAudience",
+        "line": 229,
+        "col": 36,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/http/client.ts",
+        "fn": "parseResponse",
+        "line": 169,
+        "col": 18,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/email/provider.ts",
+        "fn": "handleDelivery",
+        "line": 405,
+        "col": 51,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/ai/inference.ts",
+        "fn": "runCompletion",
+        "line": 103,
+        "col": 21,
+        "code": null,
+        "inApp": true
+      }
+    ]
+  },
+  {
+    "id": "err_Z7FPdbJQre",
+    "type": "ECONNREFUSED",
+    "message": "connect ECONNREFUSED 10.0.2.15:5432",
+    "severity": "error",
+    "status": "unresolved",
+    "assignee": null,
+    "endpoint": {
+      "method": "GET",
+      "path": "/v1/usage"
+    },
+    "environment": "staging",
+    "occurrences": 980,
+    "firstSeen": "2026-08-09T04:27:36.525Z",
+    "lastSeen": "2026-09-08T01:59:36.525Z",
+    "resolvedAt": null,
+    "request": {
+      "id": "req_LL2MipdmaK",
+      "url": "https://api.staging.apiforge.dev/v1/usage",
+      "method": "GET",
+      "keyPrefix": "sk_test_Q9T2xT",
+      "userAgent": "af-sdk-python/0.9.2",
+      "ip": "213.58.217.32"
+    },
+    "user": {
+      "id": "usr_Nt6OM5dN",
+      "email": "arash@apiforge.dev",
+      "plan": "Free"
+    },
+    "stackTrace": [
+      {
+        "file": "src/db/pg.ts",
+        "fn": "connect",
+        "line": 46,
+        "col": 13,
+        "code": "await pool.connect();",
+        "inApp": true
+      },
+      {
+        "file": "node_modules/ioredis/built/connectors/StandaloneConnector.js",
+        "fn": "connect",
+        "line": 53,
+        "col": 16,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "node_modules/axios/lib/adapters/http.js",
+        "fn": "dispatchRequest",
+        "line": 165,
+        "col": 12,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/db/redis.ts",
+        "fn": "get",
+        "line": 156,
+        "col": 15,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "node:internal/process/task_queues",
+        "fn": "processTicksAndRejections",
+        "line": 170,
+        "col": 17,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/http/client.ts",
+        "fn": "request",
+        "line": 152,
+        "col": 47,
+        "code": null,
+        "inApp": true
+      }
+    ]
+  },
+  {
+    "id": "err_Xp01fKLfqr",
+    "type": "TypeError",
+    "message": "Cannot read properties of null (reading 'match')",
+    "severity": "warning",
+    "status": "resolved",
+    "assignee": "Ali Rezaei",
+    "endpoint": {
+      "method": "GET",
+      "path": "/v1/emails/{id}"
+    },
+    "environment": "live",
+    "occurrences": 6540,
+    "firstSeen": "2026-08-06T04:27:36.525Z",
+    "lastSeen": "2026-09-07T12:54:36.525Z",
+    "resolvedAt": "2026-09-03T04:27:36.525Z",
+    "request": {
+      "id": "req_A7U81f48q3",
+      "url": "https://api.apiforge.dev/v1/emails/86282",
+      "method": "GET",
+      "keyPrefix": "sk_live_MOzJhd",
+      "userAgent": "af-sdk-python/0.9.2",
+      "ip": "195.219.3.58"
+    },
+    "user": {
+      "id": "usr_ZMsHHrTx",
+      "email": "arash@apiforge.dev",
+      "plan": "Scale"
+    },
+    "stackTrace": [
+      {
+        "file": "src/email/parse.ts",
+        "fn": "extractMeta",
+        "line": 28,
+        "col": 8,
+        "code": "return value.match(META_RE);",
+        "inApp": true
+      },
+      {
+        "file": "src/db/redis.ts",
+        "fn": "cacheGet",
+        "line": 398,
+        "col": 27,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/platform/usage.ts",
+        "fn": "readUsage",
+        "line": 216,
+        "col": 5,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "node_modules/express/lib/router/index.js",
+        "fn": "next",
+        "line": 249,
+        "col": 6,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "node_modules/ioredis/built/connectors/StandaloneConnector.js",
+        "fn": "connect",
+        "line": 231,
+        "col": 30,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/http/client.ts",
+        "fn": "request",
+        "line": 296,
+        "col": 19,
+        "code": null,
+        "inApp": true
+      }
+    ]
+  },
+  {
+    "id": "err_fXPqlAW7Lk",
+    "type": "ZodError",
+    "message": "Invalid input: expected string, received number",
+    "severity": "warning",
+    "status": "unresolved",
+    "assignee": null,
+    "endpoint": {
+      "method": "POST",
+      "path": "/v1/embeddings"
+    },
+    "environment": "test",
+    "occurrences": 1890,
+    "firstSeen": "2026-07-31T04:27:36.525Z",
+    "lastSeen": "2026-09-07T19:43:36.525Z",
+    "resolvedAt": null,
+    "request": {
+      "id": "req_mqAqS8WzEn",
+      "url": "https://api.test.apiforge.dev/v1/embeddings",
+      "method": "POST",
+      "keyPrefix": "sk_test_6IMubi",
+      "userAgent": "af-sdk-node/1.4.0",
+      "ip": "77.173.242.48"
+    },
+    "user": {
+      "id": "usr_uDWWUfFe",
+      "email": "dev@acme.dev",
+      "plan": "Growth"
+    },
+    "stackTrace": [
+      {
+        "file": "src/ai/embeddings.ts",
+        "fn": "validateInput",
+        "line": 64,
+        "col": 17,
+        "code": "const parsed = schema.parse(input);",
+        "inApp": true
+      },
+      {
+        "file": "node_modules/express/lib/router/index.js",
+        "fn": "handle",
+        "line": 136,
+        "col": 31,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "node_modules/axios/lib/adapters/http.js",
+        "fn": "dispatchRequest",
+        "line": 89,
+        "col": 41,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/email/provider.ts",
+        "fn": "handleDelivery",
+        "line": 407,
+        "col": 46,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/ai/inference.ts",
+        "fn": "runCompletion",
+        "line": 130,
+        "col": 35,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "node_modules/ioredis/built/connectors/StandaloneConnector.js",
+        "fn": "connect",
+        "line": 136,
+        "col": 28,
+        "code": null,
+        "inApp": false
+      }
+    ]
+  },
+  {
+    "id": "err_TobT0Q3kOK",
+    "type": "RangeError",
+    "message": "Maximum call stack size exceeded",
+    "severity": "error",
+    "status": "unresolved",
+    "assignee": null,
+    "endpoint": {
+      "method": "POST",
+      "path": "/v1/audiences/{id}"
+    },
+    "environment": "live",
+    "occurrences": 402,
+    "firstSeen": "2026-08-17T04:27:36.525Z",
+    "lastSeen": "2026-09-07T17:40:36.525Z",
+    "resolvedAt": null,
+    "request": {
+      "id": "req_NhyEk1OHSa",
+      "url": "https://api.apiforge.dev/v1/audiences/28532",
+      "method": "POST",
+      "keyPrefix": "sk_live_5RNoVL",
+      "userAgent": "af-sdk-python/0.9.2",
+      "ip": "87.152.3.53"
+    },
+    "user": {
+      "id": "usr_XOHLKU8D",
+      "email": "arash@apiforge.dev",
+      "plan": "Scale"
+    },
+    "stackTrace": [
+      {
+        "file": "src/audiences/tree.ts",
+        "fn": "walk",
+        "line": 112,
+        "col": 3,
+        "code": "return walk(node.children);",
+        "inApp": true
+      },
+      {
+        "file": "node:internal/process/task_queues",
+        "fn": "processTicksAndRejections",
+        "line": 74,
+        "col": 54,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "node_modules/express/lib/router/index.js",
+        "fn": "handle",
+        "line": 416,
+        "col": 17,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/audiences/segment.ts",
+        "fn": "hydrateAudience",
+        "line": 280,
+        "col": 39,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/db/redis.ts",
+        "fn": "cacheGet",
+        "line": 414,
+        "col": 26,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/http/client.ts",
+        "fn": "request",
+        "line": 100,
+        "col": 46,
+        "code": null,
+        "inApp": true
+      }
+    ]
+  },
+  {
+    "id": "err_cFRyJd7JMl",
+    "type": "AbortError",
+    "message": "The operation was aborted due to timeout",
+    "severity": "warning",
+    "status": "resolved",
+    "assignee": "Sara Ahmadi",
+    "endpoint": {
+      "method": "POST",
+      "path": "/v1/completions"
+    },
+    "environment": "staging",
+    "occurrences": 1330,
+    "firstSeen": "2026-08-19T04:27:36.525Z",
+    "lastSeen": "2026-09-07T11:57:36.525Z",
+    "resolvedAt": "2026-09-04T04:27:36.525Z",
+    "request": {
+      "id": "req_p1RaXMy1kJ",
+      "url": "https://api.staging.apiforge.dev/v1/completions",
+      "method": "POST",
+      "keyPrefix": "sk_test_ywcln5",
+      "userAgent": "curl/8.5.0",
+      "ip": "201.28.45.148"
+    },
+    "user": {
+      "id": "usr_mbYGE6DY",
+      "email": "dev@acme.dev",
+      "plan": "Free"
+    },
+    "stackTrace": [
+      {
+        "file": "src/http/client.ts",
+        "fn": "request",
+        "line": 93,
+        "col": 9,
+        "code": "const res = await fetch(url, { signal });",
+        "inApp": true
+      },
+      {
+        "file": "node:internal/process/task_queues",
+        "fn": "processTicksAndRejections",
+        "line": 268,
+        "col": 37,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/http/client.ts",
+        "fn": "request",
+        "line": 166,
+        "col": 40,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "src/db/redis.ts",
+        "fn": "get",
+        "line": 227,
+        "col": 34,
+        "code": null,
+        "inApp": true
+      },
+      {
+        "file": "node_modules/ioredis/built/connectors/StandaloneConnector.js",
+        "fn": "connect",
+        "line": 40,
+        "col": 4,
+        "code": null,
+        "inApp": false
+      },
+      {
+        "file": "src/ai/inference.ts",
+        "fn": "runCompletion",
+        "line": 358,
+        "col": 24,
+        "code": null,
+        "inApp": true
+      }
+    ]
+  }
+]

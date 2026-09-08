@@ -14,9 +14,9 @@
 // runtime fetch, no flash of untranslated text, works from file://.
 // =============================================================
 
+import { createIcons, icons } from '../components/icons.js';
 import fa from '../../locales/fa.json';
 import en from '../../locales/en.json';
-import { createIcons, icons } from '../components/icons.js';
 
 const STORAGE_KEY = 'afx-locale';
 const DEFAULT_LOCALE = 'fa';
@@ -34,16 +34,15 @@ let current = resolveInitialLocale();
 
 function resolveInitialLocale() {
   // The inline <head> script already set lang/dir without a flash;
-  // trust the DOM first so SSR-less swaps stay consistent.
-  const attr = document.documentElement.getAttribute('lang');
-  if (attr === 'fa' || attr === 'en') return attr;
+  // prefer the persisted choice; fall back to the document on restricted storage.
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored === 'fa' || stored === 'en') return stored;
   } catch {
     /* private mode — ignore */
   }
-  return DEFAULT_LOCALE;
+  const attr = document.documentElement.getAttribute('lang');
+  return catalogs[attr] ? attr : DEFAULT_LOCALE;
 }
 
 /** Active locale code: 'fa' | 'en'. */
@@ -102,11 +101,15 @@ function paint(el, value) {
 
 /** Walk a subtree and (re)apply every translation binding. */
 export function applyTranslations(root = document) {
-  root.querySelectorAll('[data-i18n]').forEach((el) => {
+  const nodes = (selector) => [
+    ...(root.matches?.(selector) ? [root] : []),
+    ...root.querySelectorAll(selector),
+  ];
+  nodes('[data-i18n]').forEach((el) => {
     paint(el, t(el.dataset.i18n));
   });
 
-  root.querySelectorAll('[data-i18n-attr]').forEach((el) => {
+  nodes('[data-i18n-attr]').forEach((el) => {
     el.dataset.i18nAttr.split(',').forEach((pair) => {
       const [attr, key] = pair.split(':');
       if (!attr || !key) return;
@@ -115,7 +118,7 @@ export function applyTranslations(root = document) {
     });
   });
 
-  root.querySelectorAll('[data-i18n-html]').forEach((el) => {
+  nodes('[data-i18n-html]').forEach((el) => {
     el.innerHTML = t(el.dataset.i18nHtml);
   });
 
@@ -185,6 +188,8 @@ export function setLocale(code, { persist: save = true } = {}) {
   refreshMenus();
   refreshToggles();
   document.dispatchEvent(new CustomEvent('afx:localechange', { detail: { locale: code } }));
+  // Page listeners can insert new icon placeholders while re-rendering.
+  createIcons({ icons });
   return current;
 }
 

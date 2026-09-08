@@ -5,12 +5,17 @@
 // Technical content stays LTR.
 // =============================================================
 
+import { localizedFixture } from '../data/localized.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { boot } from '../main.js';
 import { createIcons, icons } from '../components/icons.js';
 import { initCodeBlock } from '../components/code-block.js';
 import { copyText, flashCopied } from '../components/copy.js';
 import { escapeHtml, formatDate } from '../utils/format.js';
-import sdks from '../data/mock-sdks.json';
+import sdksFa from '../data/mock-sdks.json';
+import sdksEn from '../data/mock-sdks.en.json';
+
+const sdks = localizedFixture(sdksFa, sdksEn);
 
 boot();
 
@@ -56,10 +61,10 @@ function sdkCard(sdk) {
           <div class="caption text-tertiary ltr-isolate">${escapeHtml(sdk.package)} · v${escapeHtml(sdk.version)}</div>
         </div>
       </div>
-      <p class="text-secondary mb-3">${escapeHtml(sdk.registry)} · Updated ${formatDate(sdk.updated)}</p>
+      <p class="text-secondary mb-3">${escapeHtml(sdk.registry)} · ${tr('ui.updatedAt', { date: formatDate(sdk.updated) })}</p>
       <div class="install-row d-flex align-items-center gap-2 mb-3">
         <code class="ltr-isolate mono-sm text-body text-truncate flex-grow-1">${escapeHtml(sdk.install)}</code>
-        <button type="button" class="btn btn-icon btn-icon--sm" data-copy="${escapeHtml(sdk.install)}" aria-label="Copy install command"><i data-lucide="copy"></i></button>
+        <button type="button" class="btn btn-icon btn-icon--sm" data-copy="${escapeHtml(sdk.install)}" aria-label="${tr('ui.copyInstall')}"><i data-lucide="copy"></i></button>
       </div>
       <ul class="list-unstyled d-flex flex-column gap-1 mb-4">
         ${sdk.features.map((f) => `<li class="caption text-secondary d-flex align-items-center gap-2"><i data-lucide="check" class="text-accent" style="width:13px;height:13px"></i> ${escapeHtml(f)}</li>`).join('')}
@@ -67,12 +72,12 @@ function sdkCard(sdk) {
       <div class="mt-auto">
         <div class="code-block code-block--flush mb-3" data-code-block>
           <div class="code-block__header">
-            <span class="code-block__lang"><i data-lucide="terminal"></i> Quick start</span>
-            <div class="code-block__actions"><button type="button" class="btn btn-icon btn-icon--sm" data-code-copy aria-label="Copy example"><i data-lucide="copy"></i></button></div>
+            <span class="code-block__lang"><i data-lucide="terminal"></i> ${tr('ui.quickStart')}</span>
+            <div class="code-block__actions"><button type="button" class="btn btn-icon btn-icon--sm" data-code-copy aria-label="${tr('ui.copyExample')}"><i data-lucide="copy"></i></button></div>
           </div>
           <pre class="code-block__body" data-code-pane><code>${escapeHtml(USAGE[sdk.id] || '')}</code></pre>
         </div>
-        <a class="btn btn-ghost btn-sm w-100" href="${sdk.docsUrl}">Documentation <i data-lucide="arrow-up-right"></i></a>
+        <a class="btn btn-ghost btn-sm w-100" href="${sdk.docsUrl}">${tr('site.documentation')} <i data-lucide="arrow-up-right"></i></a>
       </div>
     </article>`;
 }
@@ -83,7 +88,7 @@ function render(filter = '') {
   const wrap = document.getElementById('sdk-grid');
   wrap.innerHTML = list.length
     ? list.map(sdkCard).join('')
-    : `<div class="col-12"><div class="empty-state"><span class="empty-icon"><i data-lucide="package"></i></span><h4 class="empty-title">No SDKs match</h4><p class="empty-desc mb-0">Try a different language or package name.</p></div></div>`;
+    : `<div class="col-12"><div class="empty-state"><span class="empty-icon"><i data-lucide="package"></i></span><h4 class="empty-title">${tr('ui.noSdks')}</h4><p class="empty-desc mb-0">${tr('ui.trySdk')}</p></div></div>`;
 
   wrap.querySelectorAll('[data-code-block]').forEach(initCodeBlock);
   wrap.querySelectorAll('[data-copy]').forEach((btn) => {
@@ -95,3 +100,5 @@ function render(filter = '') {
 render();
 
 document.getElementById('sdk-search').addEventListener('input', (e) => render(e.target.value));
+
+onLocaleChange(() => render(document.getElementById('sdk-search').value));

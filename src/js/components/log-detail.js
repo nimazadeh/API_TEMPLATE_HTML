@@ -6,8 +6,9 @@
 // command. Reused by logs.html; dashboard deep-links to logs.
 // =============================================================
 
+import { trackLocalizedView } from './localized-view.js';
 import { Offcanvas } from '../core/bootstrap.js';
-import { escapeHtml, latencyText, absoluteTime } from '../utils/format.js';
+import { environmentLabel, escapeHtml, latencyText, absoluteTime } from '../utils/format.js';
 import { t } from '../core/i18n.js';
 import { copyText, flashCopied } from './copy.js';
 import { createIcons, icons } from './icons.js';
@@ -180,7 +181,7 @@ export function openLogDrawer(log, drawerEl = document.querySelector('#log-drawe
       <div class="d-flex align-items-center gap-3 mt-2 text-secondary caption">
         <span class="d-inline-flex align-items-center gap-1"><i data-lucide="timer"></i> ${latencyText(d.latencyMs)}</span>
         <span class="d-inline-flex align-items-center gap-1"><i data-lucide="calendar"></i> ${escapeHtml(absoluteTime(d.timestamp))}</span>
-        <span class="d-inline-flex align-items-center gap-1"><i data-lucide="globe"></i> ${d.env}</span>
+        <span class="d-inline-flex align-items-center gap-1"><i data-lucide="globe"></i> ${escapeHtml(environmentLabel(d.env))}</span>
       </div>
     </div>
 
@@ -190,17 +191,17 @@ export function openLogDrawer(log, drawerEl = document.querySelector('#log-drawe
         <div class="timing-row">
           <span class="timing-row__name">${t('inspector.queue')}</span>
           <div class="timing-row__track"><div class="timing-row__fill" style="width:${Math.max(4, (d.timing.queue / d.latencyMs) * 100)}%"></div></div>
-          <span class="timing-row__value">${d.timing.queue}ms</span>
+          <span class="timing-row__value">${latencyText(d.timing.queue)}</span>
         </div>
         <div class="timing-row">
           <span class="timing-row__name">${t('inspector.processing')}</span>
           <div class="timing-row__track"><div class="timing-row__fill is-accent" style="width:${Math.max(4, (d.timing.processing / d.latencyMs) * 100)}%"></div></div>
-          <span class="timing-row__value">${d.timing.processing}ms</span>
+          <span class="timing-row__value">${latencyText(d.timing.processing)}</span>
         </div>
         <div class="timing-row">
           <span class="timing-row__name">${t('inspector.response')}</span>
           <div class="timing-row__track"><div class="timing-row__fill is-muted" style="width:${Math.max(4, (d.timing.response / d.latencyMs) * 100)}%"></div></div>
-          <span class="timing-row__value">${d.timing.response}ms</span>
+          <span class="timing-row__value">${latencyText(d.timing.response)}</span>
         </div>
       </div>
     </section>
@@ -232,7 +233,7 @@ export function openLogDrawer(log, drawerEl = document.querySelector('#log-drawe
           </div>
         </div>` : ''}
       ${jsonWell(d.response.body)}
-      <div class="inspector-sub mt-2">Headers</div>
+      <div class="inspector-sub mt-2">${t('inspector.headers')}</div>
       ${kvTable(d.response.headers)}
     </section>
 
@@ -252,5 +253,6 @@ export function openLogDrawer(log, drawerEl = document.querySelector('#log-drawe
     });
   });
 
+  trackLocalizedView(drawerEl, () => openLogDrawer(log, drawerEl));
   Offcanvas.getOrCreateInstance(drawerEl).show();
 }

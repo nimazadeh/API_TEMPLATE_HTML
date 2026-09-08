@@ -6,8 +6,9 @@
 // 100% data-driven from mock-webhook-deliveries.json (no regeneration).
 // =============================================================
 
+import { trackLocalizedView } from './localized-view.js';
 import { Offcanvas } from '../core/bootstrap.js';
-import { escapeHtml, latencyText, relativeTime, absoluteTime, clockTime } from '../utils/format.js';
+import { environmentLabel, escapeHtml, latencyText, relativeTime, absoluteTime, clockTime } from '../utils/format.js';
 import { copyText, flashCopied, bindCopyButton } from './copy.js';
 import { highlightJson } from './code-block.js';
 import { createIcons, icons } from './icons.js';
@@ -92,7 +93,7 @@ export function renderDeliveryDrawer(delivery, opts = {}) {
         <span class="d-inline-flex align-items-center gap-1"><i data-lucide="rotate-ccw"></i> ${delivery.attempts} ${t('webhooks.attemptsUnit')}</span>
         <span class="d-inline-flex align-items-center gap-1"><i data-lucide="timer"></i> ${latencyText(delivery.latencyMs)}</span>
         <span class="d-inline-flex align-items-center gap-1" title="${escapeHtml(absoluteTime(delivery.createdAt))}"><i data-lucide="calendar"></i> ${relativeTime(delivery.createdAt)}</span>
-        <span class="d-inline-flex align-items-center gap-1"><i data-lucide="globe"></i> ${escapeHtml(delivery.environment)}</span>
+        <span class="d-inline-flex align-items-center gap-1"><i data-lucide="globe"></i> ${escapeHtml(environmentLabel(delivery.environment))}</span>
       </div>
       <div class="d-flex align-items-center gap-2 mt-3">
         <button type="button" class="btn btn-sm btn-secondary" data-delivery-action="retry"${canRetry ? '' : ' disabled'}><i data-lucide="rotate-ccw"></i> ${t('webhooks.retryDelivery')}</button>
@@ -178,5 +179,6 @@ export function openDeliveryDrawer(delivery, opts = {}) {
   const drawer = document.querySelector('#delivery-drawer');
   if (!drawer) return;
   renderDeliveryDrawer(delivery, opts);
+  trackLocalizedView(drawer, () => renderDeliveryDrawer(delivery, opts));
   Offcanvas.getOrCreateInstance(drawer).show();
 }

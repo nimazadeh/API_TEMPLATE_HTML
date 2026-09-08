@@ -1,3 +1,4 @@
+import { localizedFixture } from '../data/localized.js';
 // =============================================================
 // APIForge X — Error detail inspector
 // Sentry/Vercel-style issue drawer: message + type, simulated stack
@@ -6,8 +7,9 @@
 // mock-errors.json.
 // =============================================================
 
+import { trackLocalizedView } from './localized-view.js';
 import { Offcanvas } from '../core/bootstrap.js';
-import { escapeHtml, relativeTime, absoluteTime, formatNumber } from '../utils/format.js';
+import { environmentLabel, escapeHtml, relativeTime, absoluteTime, formatNumber } from '../utils/format.js';
 import { bindCopyButton } from './copy.js';
 import { createIcons, icons } from './icons.js';
 import { t } from '../core/i18n.js';
@@ -17,7 +19,7 @@ const SEVERITY = {
   warning: { key: 'severity.warning', cls: 'badge-status--warning', icon: 'alert-triangle' },
 };
 
-const TEAM = ['علی رضایی', 'سارا احمدی'];
+const TEAM = localizedFixture(['علی رضایی', 'سارا احمدی'], ['Ali Rezaei', 'Sara Ahmadi']);
 
 function kvTable(rows) {
   return `<table class="kv"><tbody>${rows
@@ -64,7 +66,7 @@ export function openErrorDrawer(error, opts = {}) {
       <div class="d-flex align-items-center gap-3 mt-2 text-secondary caption flex-wrap">
         <span class="d-inline-flex align-items-center gap-1"><i data-lucide="activity"></i> ${formatNumber(error.occurrences)} ${t('errors.occurrencesUnit')}</span>
         <span class="d-inline-flex align-items-center gap-1" title="${escapeHtml(absoluteTime(error.lastSeen))}"><i data-lucide="calendar"></i> ${t('errors.lastSeenPrefix')} ${relativeTime(error.lastSeen)}</span>
-        <span class="d-inline-flex align-items-center gap-1"><i data-lucide="globe"></i> ${escapeHtml(error.environment)}</span>
+        <span class="d-inline-flex align-items-center gap-1"><i data-lucide="globe"></i> ${escapeHtml(environmentLabel(error.environment))}</span>
         ${error.assignee ? `<span class="d-inline-flex align-items-center gap-1"><i data-lucide="users"></i> ${escapeHtml(error.assignee)}</span>` : ''}
       </div>
       <div class="d-flex align-items-center gap-2 mt-3">
@@ -102,14 +104,14 @@ export function openErrorDrawer(error, opts = {}) {
       ${kvTable([
         [t('inspector.userId'), error.user.id],
         [t('table.email'), error.user.email],
-        [t('inspector.plan'), error.user.plan],
+        [t('inspector.plan'), t({ Scale: 'pricing.scale', Pro: 'pricing.pro', Developer: 'shell.developer' }[error.user.plan] || error.user.plan)],
       ])}
     </section>
 
     <section class="inspector-section">
       <h4 class="inspector-label">${t('inspector.environment')}</h4>
       ${kvTable([
-        [t('inspector.environment'), error.environment],
+        [t('inspector.environment'), environmentLabel(error.environment)],
         [t('table.endpoint'), `${error.endpoint.method} ${error.endpoint.path}`],
         [t('errors.firstSeen'), absoluteTime(error.firstSeen)],
         [t('errors.lastSeen'), absoluteTime(error.lastSeen)],
@@ -124,5 +126,6 @@ export function openErrorDrawer(error, opts = {}) {
     item.addEventListener('click', () => opts.onAssign?.(error, item.dataset.assign));
   });
 
+  trackLocalizedView(drawer, () => openErrorDrawer(error, opts));
   Offcanvas.getOrCreateInstance(drawer).show();
 }

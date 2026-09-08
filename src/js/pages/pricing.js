@@ -4,12 +4,14 @@
 // deterministic `mock-plans.json` the in-app Billing page uses.
 // =============================================================
 
+import { createIcons, icons } from '../components/icons.js';
+import { number } from '../utils/format.js';
 import { bootSite } from '../site.js';
-import faPlans from '../data/mock-plans.json';
-import enPlans from '../data/mock-plans.en.json';
 import { localizedData } from '../data/localized.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { observeMotion } from '../components/motion.js';
+import faPlans from '../data/mock-plans.json';
+import enPlans from '../data/mock-plans.en.json';
 
 bootSite();
 
@@ -36,9 +38,9 @@ function renderCards() {
         <p class="pricing-card__blurb">${p.blurb}</p>
         <ul class="pricing-card__features">
           <li><i data-lucide="check"></i> ${tr('plans.requestsValue', { value: p.requests })}</li>
-          <li><i data-lucide="check"></i> ${tr('plans.environmentsValue', { value: p.environments })}</li>
-          <li><i data-lucide="check"></i> ${tr('plans.membersValue', { value: p.members })}</li>
-          <li><i data-lucide="check"></i> ${tr('plans.webhooksValue', { value: p.webhooks })}</li>
+          <li><i data-lucide="check"></i> ${tr('plans.environmentsValue', { value: number(p.environments) })}</li>
+          <li><i data-lucide="check"></i> ${tr('plans.membersValue', { value: number(p.members) })}</li>
+          <li><i data-lucide="check"></i> ${tr('plans.webhooksValue', { value: number(p.webhooks) })}</li>
           <li><i data-lucide="check"></i> ${tr('plans.retentionValue', { value: p.retention })}</li>
           <li><i data-lucide="check"></i> ${tr('plans.rateLimitValue', { value: p.rateLimit })}</li>
         </ul>
@@ -46,6 +48,7 @@ function renderCards() {
       </div>`
     )
     .join('');
+  createIcons({ icons });
   observeMotion(grid);
 }
 
@@ -57,7 +60,7 @@ function renderComparison() {
       <tr>
         <th scope="row">${tr(f.labelKey)}</th>
         ${plans
-          .map((p) => `<td class="cell-num">${p[f.key] ?? '—'}</td>`)
+          .map((p) => `<td class="cell-num">${typeof p[f.key] === 'number' ? number(p[f.key]) : p[f.key] ?? '—'}</td>`)
           .join('')}
       </tr>`
   ).join('');

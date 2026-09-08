@@ -6,13 +6,26 @@
 // Production/Staging compare. Deterministic mock-observability.json.
 // =============================================================
 
+import {
+  latencyText,
+  chartDate,
+  formatNumber,
+  compactNumber,
+  percent,
+  escapeHtml,
+  methodBadgeClass,
+  number,
+} from '../utils/format.js';
+import { localizedFixture } from '../data/localized.js';
 import { boot } from '../main.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { makeChart, axis, tooltips, initCharts } from '../components/charts.js';
 import { createIcons, icons } from '../components/icons.js';
-import { formatNumber, compactNumber, percent, escapeHtml, methodBadgeClass, number } from '../utils/format.js';
 import obs from '../data/mock-observability.json';
-import apis from '../data/mock-apis.json';
+import apisFa from '../data/mock-apis.json';
+import apisEn from '../data/mock-apis.en.json';
+
+const apis = localizedFixture(apisFa, apisEn);
 
 boot();
 initCharts();
@@ -46,8 +59,8 @@ function renderKpis() {
   const set = (id, val) => (document.getElementById(id).textContent = val);
   set('metric-requests', compactNumber(k.requests));
   set('metric-error-rate', `${k.errorRate}%`);
-  set('metric-p95', `${k.p95} ms`);
-  set('metric-p99', `${k.p99} ms`);
+  set('metric-p95', latencyText(k.p95));
+  set('metric-p99', latencyText(k.p99));
   set('metric-availability', `${k.availability}%`);
 }
 
@@ -55,7 +68,7 @@ function renderKpis() {
 let volumeChart, latencyChart, errorChart, statusChart;
 
 function labelsOf(series) {
-  return series.points.map((p) => (series.key === 'date' ? p[series.key].slice(5) : p[series.key]));
+  return series.points.map((p) => (series.key === 'date' ? chartDate(p[series.key]) : p[series.key]));
 }
 
 function renderVolumeChart() {
@@ -101,7 +114,7 @@ function renderLatencyChart() {
       options: {
         responsive: true, maintainAspectRatio: false,
         scales: { x: axis(t), y: axis(t) },
-        ...tooltips(t, { callbacks: { label: (c) => `${c.dataset.label}: ${number(c.parsed.y)} ms` } }),
+        ...tooltips(t, { callbacks: { label: (c) => `${c.dataset.label}: ${latencyText(c.parsed.y)}` } }),
       },
     };
   });
@@ -179,8 +192,8 @@ function endpointRows() {
         <td><span class="badge badge-method ${methodBadgeClass(e.method)}">${e.method}</span></td>
         <td><code class="ltr-isolate mono-sm text-body">${escapeHtml(e.path)}</code></td>
         <td class="cell-num">${formatNumber(e.requests)}</td>
-        <td class="cell-num">${e.p95} ms</td>
-        <td class="cell-num"><span class="latency ${e.errorRate > 1 ? 'latency--slow' : e.errorRate > 0.5 ? 'latency--mid' : 'latency--fast'}">${e.errorRate}%</span></td>
+        <td class="cell-num">${latencyText(e.p95)}</td>
+        <td class="cell-num"><span class="latency ${e.errorRate > 1 ? 'latency--slow' : e.errorRate > 0.5 ? 'latency--mid' : 'latency--fast'}">${percent(e.errorRate)}</span></td>
       </tr>`
     )
     .join('');
@@ -190,11 +203,11 @@ function envRows() {
   return obs.byEnvironment
     .map(
       (e) => `<tr>
-        <td class="text-body fw-medium">${e.env === 'live' ? 'Live' : e.env === 'staging' ? 'Staging' : 'Test'}</td>
+        <td class="text-body fw-medium">${tr(e.env === 'live' ? 'env.production' : e.env === 'staging' ? 'env.staging' : 'env.testOption')}</td>
         <td class="cell-num">${formatNumber(e.requests)}</td>
-        <td class="cell-num">${e.p95} ms</td>
-        <td class="cell-num">${e.errorRate}%</td>
-        <td class="cell-num">${e.availability}%</td>
+        <td class="cell-num">${latencyText(e.p95)}</td>
+        <td class="cell-num">${percent(e.errorRate)}</td>
+        <td class="cell-num">${percent(e.availability)}</td>
       </tr>`
     )
     .join('');
@@ -206,7 +219,7 @@ function statusRows() {
       (s) => `<tr>
         <td><code class="ltr-isolate mono-sm text-body">${s.code}</code></td>
         <td class="cell-num">${formatNumber(s.count)}</td>
-        <td class="cell-num">${s.share}%</td>
+        <td class="cell-num">${percent(s.share)}</td>
       </tr>`
     )
     .join('');
@@ -229,8 +242,8 @@ function apiRows() {
       return `<tr>
         <td class="text-body fw-medium">${escapeHtml(names[apiId] || apiId)}</td>
         <td class="cell-num">${formatNumber(agg.requests)}</td>
-        <td class="cell-num">${p95} ms</td>
-        <td class="cell-num"><span class="latency ${errorRate > 1 ? 'latency--slow' : errorRate > 0.5 ? 'latency--mid' : 'latency--fast'}">${errorRate}%</span></td>
+        <td class="cell-num">${latencyText(p95)}</td>
+        <td class="cell-num"><span class="latency ${errorRate > 1 ? 'latency--slow' : errorRate > 0.5 ? 'latency--mid' : 'latency--fast'}">${percent(errorRate)}</span></td>
       </tr>`;
     })
     .join('');
@@ -242,7 +255,7 @@ function methodRows() {
       (m) => `<tr>
         <td><span class="badge badge-method ${methodBadgeClass(m.method)}">${m.method}</span></td>
         <td class="cell-num">${formatNumber(m.requests)}</td>
-        <td class="cell-num">${m.share}%</td>
+        <td class="cell-num">${percent(m.share)}</td>
       </tr>`
     )
     .join('');
@@ -292,6 +305,11 @@ createIcons({ icons });
 
 // Re-render when the locale flips.
 onLocaleChange(() => {
-  const active = document.querySelector('[data-range].is-active');
-  render(active ? active.dataset.range : '24h');
+  renderKpis();
+  renderVolumeChart();
+  renderLatencyChart();
+  renderErrorChart();
+  renderStatusChart();
+  renderBreakdowns();
+  document.getElementById('metric-range-label').textContent = tr(RANGE_KEYS[range]);
 });

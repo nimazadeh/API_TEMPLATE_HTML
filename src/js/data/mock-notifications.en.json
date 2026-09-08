@@ -1,0 +1,142 @@
+[
+  {
+    "id": "ntf_RdD0t2YG",
+    "category": "security",
+    "severity": "warning",
+    "title": "Sign-in from an unknown device",
+    "body": "A new session was created from Tehran, Iran (91.98.14.2). Revoke the session if this was not you.",
+    "env": null,
+    "read": true,
+    "createdAt": "2026-09-07T18:08:36.526Z"
+  },
+  {
+    "id": "ntf_4McC908a",
+    "category": "webhook",
+    "severity": "error",
+    "title": "Webhook delivery failed",
+    "body": "The customer.created event failed 12 times in the past hour. Last response: 500.",
+    "env": "live",
+    "read": false,
+    "createdAt": "2026-09-05T23:36:36.526Z"
+  },
+  {
+    "id": "ntf_bmffni6w",
+    "category": "rate-limit",
+    "severity": "warning",
+    "title": "Rate limit at 85%",
+    "body": "completions:create is approaching its per-second limit. Requests may be throttled.",
+    "env": "live",
+    "read": false,
+    "createdAt": "2026-09-04T18:42:36.526Z"
+  },
+  {
+    "id": "ntf_sdUEeIrB",
+    "category": "billing",
+    "severity": "info",
+    "title": "Invoice payment received",
+    "body": "Your September invoice for $199 was paid successfully.",
+    "env": null,
+    "read": false,
+    "createdAt": "2026-09-03T18:49:36.526Z"
+  },
+  {
+    "id": "ntf_1AcO4NZJ",
+    "category": "deployment",
+    "severity": "success",
+    "title": "Deployment succeeded",
+    "body": "apiforge/api v2.4.1 deployed to production in 42 seconds.",
+    "env": "live",
+    "read": true,
+    "createdAt": "2026-09-01T08:58:36.526Z"
+  },
+  {
+    "id": "ntf_cu1o5b0E",
+    "category": "team",
+    "severity": "info",
+    "title": "Sara invited a new member",
+    "body": "ops@yourco.io was invited as a Viewer.",
+    "env": null,
+    "read": true,
+    "createdAt": "2026-09-03T21:57:36.526Z"
+  },
+  {
+    "id": "ntf_K2VBcmZL",
+    "category": "error",
+    "severity": "error",
+    "title": "Error spike detected",
+    "body": "TypeError: Cannot read properties of null increased 3.2 times in the past hour.",
+    "env": "live",
+    "read": false,
+    "createdAt": "2026-09-01T18:31:36.526Z"
+  },
+  {
+    "id": "ntf_gjqp85Sv",
+    "category": "security",
+    "severity": "error",
+    "title": "Production API key created",
+    "body": "A new live key (sk_live_4fJk…) was created from the dashboard.",
+    "env": "live",
+    "read": true,
+    "createdAt": "2026-09-03T16:07:36.526Z"
+  },
+  {
+    "id": "ntf_VrwHKl3K",
+    "category": "rate-limit",
+    "severity": "error",
+    "title": "Rate limit exceeded",
+    "body": "embeddings:create exceeded 40 requests per second. Requests are returning 429.",
+    "env": "staging",
+    "read": true,
+    "createdAt": "2026-09-06T19:04:36.526Z"
+  },
+  {
+    "id": "ntf_hs4h4OVt",
+    "category": "deployment",
+    "severity": "warning",
+    "title": "Deployment rolled back",
+    "body": "apiforge/api v2.4.2 was rolled back after a failed health check.",
+    "env": "staging",
+    "read": false,
+    "createdAt": "2026-09-07T13:17:36.526Z"
+  },
+  {
+    "id": "ntf_HggGZqGe",
+    "category": "billing",
+    "severity": "warning",
+    "title": "Invoice payment failed",
+    "body": "The July invoice payment failed. Update your payment method to avoid service interruption.",
+    "env": null,
+    "read": false,
+    "createdAt": "2026-09-07T09:35:36.526Z"
+  },
+  {
+    "id": "ntf_IvYDoM3N",
+    "category": "team",
+    "severity": "info",
+    "title": "Dana suspended",
+    "body": "Sara suspended Dana Moradi's access to the workspace.",
+    "env": null,
+    "read": true,
+    "createdAt": "2026-09-06T07:04:36.526Z"
+  },
+  {
+    "id": "ntf_dkcngK1o",
+    "category": "webhook",
+    "severity": "info",
+    "title": "Webhook created",
+    "body": "A new endpoint was registered for email.sent and email.bounced events.",
+    "env": "test",
+    "read": false,
+    "createdAt": "2026-09-07T07:44:36.526Z"
+  },
+  {
+    "id": "ntf_0WBaPqLe",
+    "category": "error",
+    "severity": "warning",
+    "title": "New error type detected",
+    "body": "ECONNREFUSED 10.0.2.15:5432 was first seen on GET /v1/usage.",
+    "env": "staging",
+    "read": false,
+    "createdAt": "2026-09-03T04:16:36.526Z"
+  }
+]

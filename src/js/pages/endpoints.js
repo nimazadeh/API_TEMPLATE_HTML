@@ -6,6 +6,8 @@
 // mutation only, backed by mock-endpoints.json.
 // =============================================================
 
+import { trackLocalizedView } from '../components/localized-view.js';
+import { localizedFixture } from '../data/localized.js';
 import { boot } from '../main.js';
 import { Modal, Offcanvas } from '../core/bootstrap.js';
 import { createIcons, icons } from '../components/icons.js';
@@ -13,9 +15,14 @@ import { afxToast } from '../components/toast.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { highlightJson } from '../components/code-block.js';
 import { bindCopyButton } from '../components/copy.js';
-import { escapeHtml, methodBadgeClass } from '../utils/format.js';
-import endpointsData from '../data/mock-endpoints.json';
-import apis from '../data/mock-apis.json';
+import { escapeHtml, methodBadgeClass, number } from '../utils/format.js';
+import endpointsDataFa from '../data/mock-endpoints.json';
+import endpointsDataEn from '../data/mock-endpoints.en.json';
+import apisFa from '../data/mock-apis.json';
+import apisEn from '../data/mock-apis.en.json';
+
+const endpointsData = localizedFixture(endpointsDataFa, endpointsDataEn);
+const apis = localizedFixture(apisFa, apisEn);
 
 boot();
 
@@ -23,10 +30,10 @@ const endpoints = [...endpointsData]; // in-session mutable copy
 const API = Object.fromEntries(apis.map((a) => [a.id, a]));
 
 const AUTH_BY_API = {
-  api_emails: 'form.bearerToken',
-  api_ai: 'form.bearerToken',
-  api_audiences: 'form.bearerToken',
-  api_webhooks: 'form.signingSecret',
+  api_emails: 'Bearer token',
+  api_ai: 'Bearer token',
+  api_audiences: 'Bearer token',
+  api_webhooks: 'Signing secret',
   api_platform: 'API key',
 };
 
@@ -44,6 +51,11 @@ function statusOf(ep) {
 }
 function authOf(ep) {
   return ep.auth || AUTH_BY_API[ep.apiId] || 'API key';
+}
+
+function authLabel(ep) {
+  const keys = { 'Bearer token': 'form.bearerToken', 'Signing secret': 'form.signingSecret', 'API key': 'keys.apiKeyLabel', 'None': 'form.none' };
+  return tr(keys[authOf(ep)] || 'keys.apiKeyLabel');
 }
 
 function filtered() {
@@ -64,8 +76,8 @@ function render() {
   if (!list.length) {
     tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state">
       <span class="empty-icon"><i data-lucide="braces"></i></span>
-      <h4 class="empty-title">No endpoints match</h4>
-      <p class="empty-desc mb-0">Adjust or clear the filters to see more results.</p>
+      <h4 class="empty-title">${tr('ui.noEndpoints')}</h4>
+      <p class="empty-desc mb-0">${tr('logs.emptyDesc')}</p>
     </div></td></tr>`;
   } else {
     tbody.innerHTML = list
@@ -77,20 +89,20 @@ function render() {
           <td><code class="ltr-isolate mono-sm text-body">${escapeHtml(ep.path)}</code></td>
           <td class="text-secondary">${escapeHtml(serviceName(ep))}</td>
           <td><span class="badge badge-neutral ltr-isolate">${escapeHtml(versionOf(ep))}</span></td>
-          <td><span class="badge badge-status ${status === 'stable' ? 'badge-status--success' : 'badge-status--warning'}"><span class="dot"></span>${status === 'stable' ? 'Stable' : 'Beta'}</span></td>
+          <td><span class="badge badge-status ${status === 'stable' ? 'badge-status--success' : 'badge-status--warning'}"><span class="dot"></span>${tr(status === 'stable' ? 'status.stable' : 'status.beta')}</span></td>
         </tr>`;
       })
       .join('');
   }
-  document.getElementById('endpoint-count').textContent = `${list.length} of ${endpoints.length} endpoints`;
+  document.getElementById('endpoint-count').textContent = tr('ui.endpointCountOf', { shown: number(list.length), total: number(endpoints.length) });
   createIcons({ icons });
 }
 
 function paramsTable(ep) {
-  if (!ep.params || !ep.params.length) return `<div class="text-secondary caption">No parameters.</div>`;
+  if (!ep.params || !ep.params.length) return `<div class="text-secondary caption">${tr('ui.noParams')}</div>`;
   return `
     <table class="params-table">
-      <thead><tr><th>Name</th><th>Type</th><th>Location</th><th>Description</th></tr></thead>
+      <thead><tr><th>${tr('table.name')}</th><th>${tr('ui.type')}</th><th>${tr('ui.location')}</th><th>${tr('table.description')}</th></tr></thead>
       <tbody>${ep.params
         .map(
           (p) => `
@@ -112,7 +124,7 @@ function schemaWell(title, icon, codeId, obj) {
       <div class="code-block__header">
         <span class="code-block__lang"><i data-lucide="${icon}"></i> ${escapeHtml(title)}</span>
         <div class="code-block__actions">
-          <button type="button" class="btn btn-icon btn-icon--sm" data-copy data-copy-target="#${codeId}" aria-label="Copy ${escapeHtml(title)}"><i data-lucide="copy"></i></button>
+          <button type="button" class="btn btn-icon btn-icon--sm" data-copy data-copy-target="#${codeId}" aria-label="${tr('aria.copyX', { name: escapeHtml(title) })}"><i data-lucide="copy"></i></button>
         </div>
       </div>
       <pre class="code-block__body" id="${codeId}"><code>${highlightJson(text)}</code></pre>
@@ -143,44 +155,45 @@ function openDrawer(ep) {
       <div class="d-flex align-items-center gap-2 mt-2 flex-wrap">
         <span class="badge badge-neutral">${escapeHtml(serviceName(ep))}</span>
         <span class="badge badge-neutral ltr-isolate">${escapeHtml(versionOf(ep))}</span>
-        <span class="badge badge-status ${status === 'stable' ? 'badge-status--success' : 'badge-status--warning'}"><span class="dot"></span>${status === 'stable' ? 'Stable' : 'Beta'}</span>
-        <span class="d-inline-flex align-items-center gap-1 text-secondary caption"><i data-lucide="lock"></i> ${escapeHtml(authOf(ep))}</span>
+        <span class="badge badge-status ${status === 'stable' ? 'badge-status--success' : 'badge-status--warning'}"><span class="dot"></span>${tr(status === 'stable' ? 'status.stable' : 'status.beta')}</span>
+        <span class="d-inline-flex align-items-center gap-1 text-secondary caption"><i data-lucide="lock"></i> ${escapeHtml(authLabel(ep))}</span>
       </div>
       <div class="mt-3">
-        <button type="button" class="btn btn-sm btn-secondary" data-endpoint-edit><i data-lucide="pencil"></i> Edit</button>
+        <button type="button" class="btn btn-sm btn-secondary" data-endpoint-edit><i data-lucide="pencil"></i> ${tr('common.edit')}</button>
       </div>
     </div>
 
     <section class="inspector-section">
-      <h4 class="inspector-label">Description</h4>
+      <h4 class="inspector-label">${tr('table.description')}</h4>
       <p class="text-secondary mb-0">${escapeHtml(ep.description || ep.summary || '—')}</p>
     </section>
 
     <section class="inspector-section">
-      <h4 class="inspector-label">Authentication</h4>
+      <h4 class="inspector-label">${tr('form.authentication')}</h4>
       <div class="d-flex align-items-center gap-2">
-        <span class="badge badge-accent"><i data-lucide="shield-check"></i> ${escapeHtml(authOf(ep))}</span>
+        <span class="badge badge-accent"><i data-lucide="shield-check"></i> ${escapeHtml(authLabel(ep))}</span>
       </div>
     </section>
 
     <section class="inspector-section">
-      <h4 class="inspector-label">Parameters</h4>
+      <h4 class="inspector-label">${tr('ui.parameters')}</h4>
       ${paramsTable(ep)}
     </section>
 
     <section class="inspector-section">
-      <h4 class="inspector-label">Request schema</h4>
+      <h4 class="inspector-label">${tr('ui.requestSchema')}</h4>
       ${schemaWell('application/json', 'braces', 'ep-request-schema', requestSchema(ep))}
     </section>
 
     <section class="inspector-section">
-      <h4 class="inspector-label">Response schema</h4>
+      <h4 class="inspector-label">${tr('ui.responseSchema')}</h4>
       ${schemaWell('application/json', 'file-json', 'ep-response-schema', ep.responseExample || {})}
     </section>`;
 
   createIcons({ icons });
   body.querySelectorAll('[data-copy]').forEach(bindCopyButton);
   body.querySelector('[data-endpoint-edit]').addEventListener('click', () => openModal(ep));
+  trackLocalizedView(drawer, () => openDrawer(ep));
   Offcanvas.getOrCreateInstance(drawer).show();
 }
 
@@ -188,16 +201,17 @@ function openDrawer(ep) {
 function fillServices() {
   const options = apis.map((a) => `<option value="${a.id}">${escapeHtml(a.name)}</option>`).join('');
   document.getElementById('ep-service').innerHTML = options;
-  document.getElementById('endpoint-service').insertAdjacentHTML('beforeend', options);
+  document.getElementById('endpoint-service').innerHTML = `<option value="all">${tr('endpoints.allServices')}</option>${options}`;
 }
 
 function openModal(ep = null) {
   editingId = ep ? ep.id : null;
-  document.getElementById('endpoint-modal-title').textContent = ep ? 'Edit endpoint' : 'New endpoint';
+  document.getElementById('endpoint-modal-title').dataset.i18n = ep ? 'ui.editEndpoint' : 'endpoints.newEndpointTitle';
+  document.getElementById('endpoint-modal-title').textContent = tr(ep ? 'ui.editEndpoint' : 'endpoints.newEndpointTitle');
   document.getElementById('ep-method').value = ep ? ep.method : 'GET';
   document.getElementById('ep-path').value = ep ? ep.path : '/v1/';
   document.getElementById('ep-service').value = ep ? ep.apiId : apis[0].id;
-  document.getElementById('ep-auth').value = ep ? authOf(ep) : tr('form.bearerToken');
+  document.getElementById('ep-auth').value = ep ? authOf(ep) : 'Bearer token';
   document.getElementById('ep-description').value = ep ? ep.description || '' : '';
   Modal.getOrCreateInstance(document.getElementById('endpoint-modal')).show();
 }
@@ -281,4 +295,12 @@ document.querySelectorAll('.filter-bar .seg__item[data-method]').forEach((seg) =
     });
     render();
   });
+});
+
+onLocaleChange(() => {
+  const service = document.getElementById('ep-service').value;
+  fillServices();
+  document.getElementById('endpoint-service').value = state.service;
+  document.getElementById('ep-service').value = service;
+  render();
 });

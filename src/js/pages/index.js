@@ -6,18 +6,18 @@
 // fake screenshot. Marketing shell only — no app boot.
 // =============================================================
 
+import { number, chartDate, compactNumber, relativeTime, escapeHtml, percent, latencyText } from '../utils/format.js';
 import { bootSite } from '../site.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { makeChart, axis, tooltips, initCharts } from '../components/charts.js';
 import { createIcons, icons } from '../components/icons.js';
-import { compactNumber, relativeTime, escapeHtml, percent, latencyText } from '../utils/format.js';
 import { observeMotion } from '../components/motion.js';
+import { localizedData } from '../data/localized.js';
 import observability from '../data/mock-observability.json';
 import faActivity from '../data/mock-activity.json';
 import enActivity from '../data/mock-activity.en.json';
 import faPlans from '../data/mock-plans.json';
 import enPlans from '../data/mock-plans.en.json';
-import { localizedData } from '../data/localized.js';
 
 bootSite();
 initCharts();
@@ -58,7 +58,7 @@ function renderChart() {
   makeChart(canvas, (t) => ({
     type: 'line',
     data: {
-      labels: days.map((d) => d.date.slice(5)),
+      labels: days.map((d) => chartDate(d.date)),
       datasets: [
         {
           data: days.map((d) => d.requests),
@@ -121,8 +121,8 @@ function renderPricingTeaser() {
         <p class="pricing-card__blurb">${p.blurb}</p>
         <ul class="pricing-card__features">
           <li><i data-lucide="check"></i> ${tr('plans.requestsValue', { value: p.requests })}</li>
-          <li><i data-lucide="check"></i> ${tr('plans.environmentsValue', { value: p.environments })}</li>
-          <li><i data-lucide="check"></i> ${tr('plans.webhooksValue', { value: p.webhooks })}</li>
+          <li><i data-lucide="check"></i> ${tr('plans.environmentsValue', { value: number(p.environments) })}</li>
+          <li><i data-lucide="check"></i> ${tr('plans.webhooksValue', { value: number(p.webhooks) })}</li>
         </ul>
         <a class="btn ${p.highlight ? 'btn-primary' : 'btn-ghost'} pricing-card__cta" href="./pricing.html">${p.highlight ? tr('pricing.choosePlan', { plan: p.name }) : tr('pricing.startWithPlan', { plan: p.name })}</a>
       </div>`

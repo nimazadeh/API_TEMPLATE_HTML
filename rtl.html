@@ -28,7 +28,7 @@
           <span class="brand-name">APIForge X</span>
         </div>
 
-        <nav class="sidebar-nav" aria-label="ناوبری اصلی">
+        <nav class="sidebar-nav" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
           <div class="nav-group">
             <div class="nav-group__label" data-i18n="rtl.groupFoundation">پایه</div>
             <a class="nav-item" href="./index.html" data-i18n="rtl.navHome"><i data-lucide="zap"></i><span>صفحهٔ اصلی</span></a>
@@ -78,18 +78,18 @@
         </nav>
 
         <div class="sidebar-foot">
-          <div class="env-switcher" data-env-switcher role="group" aria-label="محیط">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="محیط" data-i18n-attr="aria-label:aria.environment">
             <button type="button" class="env-option" data-env="test" data-i18n="rtl.envTest"><span class="dot"></span>آزمایشی</button>
             <button type="button" class="env-option" data-env="live" data-i18n="rtl.envLive"><span class="dot"></span>عملیاتی</button>
           </div>
-          <button type="button" class="btn btn-ghost" data-theme-toggle aria-pressed="false" aria-label="تغییر پوسته" data-i18n="rtl.navTheme"><i data-lucide="sun-moon"></i><span>پوسته</span></button>
+          <button type="button" class="btn btn-ghost" data-theme-toggle aria-pressed="false" aria-label="تغییر پوسته" data-i18n="rtl.navTheme" data-i18n-attr="aria-label:aria.toggleThemeBs"><i data-lucide="sun-moon"></i><span>پوسته</span></button>
           <div class="sidebar-user" data-i18n="rtl.userMenu"><span class="avatar">عر</span> <span class="sidebar-user__meta"> <span class="name">علی رضایی</span> <span class="email ltr-isolate">ali@apiforge.dev</span> </span> <i data-lucide="chevron-down"></i></div>
         </div>
       </aside>
 
       <!-- ============ Header ============ -->
       <header class="app-header">
-        <button type="button" class="btn btn-icon header-burger" aria-label="باز کردن منو" data-bs-toggle="offcanvas" data-bs-target="#sidebar-drawer" aria-controls="sidebar-drawer">
+        <button type="button" class="btn btn-icon header-burger" aria-label="باز کردن منو" data-bs-toggle="offcanvas" data-bs-target="#sidebar-drawer" aria-controls="sidebar-drawer" data-i18n-attr="aria-label:aria.openMenu">
           <i data-lucide="menu"></i>
         </button>
         <div class="header-title">
@@ -97,13 +97,13 @@
           <span class="crumb-sep">/</span>
           <span class="title" data-i18n="rtl.heading">آزمایش راست‌به‌چپ</span>
         </div>
-        <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="جستجو (⌘K)" data-i18n="rtl.search"><i data-lucide="search"></i> <span class="text-tertiary">جستجو…</span> <span class="kbd-hint">⌘K</span></button>
+        <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="جستجو (⌘K)" data-i18n="rtl.search" data-i18n-attr="aria-label:aria.searchCommandK"><i data-lucide="search"></i> <span class="text-tertiary">جستجو…</span> <span class="kbd-hint">⌘K</span></button>
         <div class="header-actions">
-          <div class="env-switcher" data-env-switcher role="group" aria-label="محیط">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="محیط" data-i18n-attr="aria-label:aria.environment">
             <button type="button" class="env-option" data-env="test" data-i18n="rtl.envTest"><span class="dot"></span>آزمایشی</button>
             <button type="button" class="env-option" data-env="live" data-i18n="rtl.envLive"><span class="dot"></span>عملیاتی</button>
           </div>
-          <button type="button" class="btn btn-icon" data-theme-toggle aria-label="تغییر پوسته" data-bs-toggle="tooltip" data-bs-title="تغییر پوسته">
+          <button type="button" class="btn btn-icon" data-theme-toggle aria-label="تغییر پوسته" data-bs-toggle="tooltip" data-bs-title="تغییر پوسته" data-i18n-attr="aria-label:aria.toggleThemeBs">
             <i data-lucide="sun-moon"></i>
           </button>
           <div class="dropdown" data-locale-menu>
@@ -151,12 +151,12 @@
               <div class="col-lg-7">
                 <div class="code-block" data-code-block>
                   <div class="code-block__header">
-                    <div class="code-tabs" role="tablist" aria-label="زبان">
+                    <div class="code-tabs" role="tablist" aria-label="زبان" data-i18n-attr="aria-label:aria.language">
                       <button type="button" class="code-tabs__tab is-active" data-tab="curl">cURL</button>
                       <button type="button" class="code-tabs__tab" data-tab="node">Node</button>
                     </div>
                     <div class="code-block__actions">
-                      <button type="button" class="btn btn-icon" data-code-copy aria-label="کپی کد"><i data-lucide="copy"></i></button>
+                      <button type="button" class="btn btn-icon" data-code-copy aria-label="کپی کد" data-i18n-attr="aria-label:aria.copyCode"><i data-lucide="copy"></i></button>
                     </div>
                   </div>
                   <pre class="code-block__body" data-code-pane data-pane="curl">curl https://api.apiforge.dev/v1/emails \
@@ -229,13 +229,13 @@ await client.emails.send({ to: 'user@example.com' });</pre>
     </div>
 
     <!-- Mobile drawer (Bootstrap Offcanvas) -->
-    <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="ناوبری اصلی">
+    <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
       <div class="sidebar-brand">
         <span class="brand-mark"><i data-lucide="zap"></i></span>
         <span class="brand-name">APIForge X</span>
-        <button type="button" class="btn btn-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="بستن منو"><i data-lucide="x"></i></button>
+        <button type="button" class="btn btn-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="بستن منو" data-i18n-attr="aria-label:aria.closeMenu"><i data-lucide="x"></i></button>
       </div>
-      <nav class="sidebar-nav" aria-label="ناوبری اصلی">
+      <nav class="sidebar-nav" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
         <div class="nav-group">
           <div class="nav-group__label" data-i18n="rtl.groupFoundation">پایه</div>
           <a class="nav-item" href="./index.html" data-i18n="rtl.navHome"><i data-lucide="zap"></i><span>صفحهٔ اصلی</span></a>

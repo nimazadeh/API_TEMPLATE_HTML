@@ -5,12 +5,16 @@
 // and the per-API rules table with warning states. Data-driven.
 // =============================================================
 
+import { chartDate, escapeHtml, formatNumber, compactNumber, number } from '../utils/format.js';
+import { localizedFixture } from '../data/localized.js';
 import { boot } from '../main.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { makeChart, axis, tooltips, initCharts } from '../components/charts.js';
 import { createIcons, icons } from '../components/icons.js';
-import { escapeHtml, formatNumber, compactNumber, number } from '../utils/format.js';
-import rateLimits from '../data/mock-rate-limits.json';
+import rateLimitsFa from '../data/mock-rate-limits.json';
+import rateLimitsEn from '../data/mock-rate-limits.en.json';
+
+const rateLimits = localizedFixture(rateLimitsFa, rateLimitsEn);
 
 boot();
 initCharts();
@@ -61,14 +65,14 @@ function card(label, v, icon) {
       <div class="progress" role="img" aria-label="${tr('usage.pctUsed', { pct: number(Math.round(p)) })}">
         <div class="progress-bar ${barClass(p)}" style="width:${p.toFixed(1)}%"></div>
       </div>
-      <span class="limit-card__reset"><i data-lucide="clock"></i> Resets in ${escapeHtml(v.resetIn)}</span>
+      <span class="limit-card__reset"><i data-lucide="clock"></i> ${tr('ui.resetsIn', { time: escapeHtml(v.resetIn) })}</span>
     </div>`;
 }
 
 function renderCards() {
   document.getElementById('rl-cards').innerHTML =
-    card('Requests / minute', current.perMinute, 'clock') +
-    card('Requests / day', current.perDay, 'calendar') +
+    card(tr('ui.requestsMinute'), current.perMinute, 'clock') +
+    card(tr('ui.requestsDay'), current.perDay, 'calendar') +
     card(tr('ratelimits.monthlyQuota'), current.monthly, 'pie-chart');
   createIcons({ icons });
 }
@@ -78,7 +82,7 @@ function renderHistoryChart() {
   makeChart(document.getElementById('rl-history-chart'), (t) => ({
     type: 'bar',
     data: {
-      labels: history.map((d) => d.date.slice(5)),
+      labels: history.map((d) => chartDate(d.date)),
       datasets: [
         {
           type: 'bar',
@@ -120,7 +124,7 @@ function renderQuotaChart() {
     return {
       type: 'doughnut',
       data: {
-        labels: ['Used', 'Remaining'],
+        labels: [tr('ui.used'), tr('ui.remaining')],
         datasets: [
           {
             data: [used, Math.max(0, limit - used)],
@@ -136,7 +140,7 @@ function renderQuotaChart() {
         maintainAspectRatio: false,
         cutout: '68%',
         ...tooltips(t, {
-          callbacks: { label: (c) => `${c.label}: ${formatNumber(c.parsed)} requests` },
+          callbacks: { label: (c) => `${c.label}: ${tr('ui.requestsValue', { value: formatNumber(c.parsed) })}` },
         }),
       },
     };
@@ -145,9 +149,9 @@ function renderQuotaChart() {
 
 // --- Rules table ------------------------------------------------------------------
 const RULE_STATUS = {
-  ok: { label: 'OK', cls: 'badge-status--success' },
-  warning: { label: 'Warning', cls: 'badge-status--warning' },
-  breached: { label: 'Breached', cls: 'badge-status--error' },
+  ok: { label: 'ui.ok', cls: 'badge-status--success' },
+  warning: { label: 'ui.warning', cls: 'badge-status--warning' },
+  breached: { label: 'ui.breached', cls: 'badge-status--error' },
 };
 
 function renderRules() {
@@ -162,7 +166,7 @@ function renderRules() {
           <div class="fw-medium text-body">${escapeHtml(r.api)}</div>
           <div class="text-tertiary caption ltr-isolate">${escapeHtml(r.name)}</div>
         </td>
-        <td><code class="ltr-isolate mono-sm text-body">${r.limit} req</code></td>
+        <td><code class="ltr-isolate mono-sm text-body">${tr('ui.requestsValue', { value: number(r.limit) })}</code></td>
         <td><span class="badge badge-neutral">${escapeHtml(r.window)}</span></td>
         <td>
           <div class="rule-usage">
@@ -172,11 +176,11 @@ function renderRules() {
             <span class="rule-usage__value">${r.current} / ${r.limit}</span>
           </div>
         </td>
-        <td><span class="badge badge-status ${s.cls}"><span class="dot"></span>${s.label}</span></td>
+        <td><span class="badge badge-status ${s.cls}"><span class="dot"></span>${tr(s.label)}</span></td>
       </tr>`;
     })
     .join('');
-  document.getElementById('rl-count').textContent = `${rules.length} rules`;
+  document.getElementById('rl-count').textContent = tr('ui.rulesCount', { count: number(rules.length) });
   createIcons({ icons });
 }
 
