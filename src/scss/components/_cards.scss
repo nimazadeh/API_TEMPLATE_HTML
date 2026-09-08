@@ -1,0 +1,96 @@
+// =============================================================
+// APIForge X — Components: Cards
+// Hairlines, not shadows. 12px radius, surface-1, 16-20px padding.
+// Variants: default, interactive, code card.
+// Source: docs/product/DESIGN_DIRECTION.md (D-007)
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  // Default padding 20px
+  padding: 20px;
+}
+
+// Dense card (16px padding)
+.card--dense {
+  padding: 16px;
+}
+
+// Interactive card — hover border + surface lift
+.card--interactive {
+  cursor: pointer;
+  @include motion(200ms);
+  transition-property: background-color, border-color, transform;
+  transition-timing-function: $ease-out;
+  &:hover {
+    background: var(--surface-2);
+    border-color: var(--border-hover);
+  }
+  &:active {
+    transform: translateY(0.5px);
+  }
+}
+
+// Card header/footer scaffolding
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: var(--space-4);
+  .card-title {
+    margin: 0;
+  }
+}
+.card-title {
+  font-size: var(--fs-h4);
+  font-weight: 500;
+  letter-spacing: var(--track-h4);
+}
+.card-subtitle {
+  font-size: var(--fs-body-sm);
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+// KPI card — for the 4-KPI strip
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  .kpi-label {
+    font-size: var(--fs-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+  .kpi-value {
+    font-size: var(--fs-h2);
+    font-weight: 600;
+    letter-spacing: var(--track-h2);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .kpi-delta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--fs-body-sm);
+    &.up {
+      color: var(--success);
+    }
+    &.down {
+      color: var(--error);
+    }
+    &.flat {
+      color: var(--text-tertiary);
+    }
+  }
+}

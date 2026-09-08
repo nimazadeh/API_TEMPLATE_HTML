@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <title>ورود — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <main class="auth">
+      <div class="auth__card">
+        <div class="auth__brand">
+          <span class="brand-mark"><i data-lucide="zap"></i></span>
+          <span class="brand-name">APIForge X</span>
+        </div>
+
+        <h1 class="auth__title">ورود به حساب</h1>
+        <p class="auth__subtitle">برای ادامه وارد فضای کاری APIForge شوید.</p>
+
+        <div class="auth__notice" role="note">
+          <i data-lucide="info"></i>
+          <div>این یک نسخهٔ نمایشی است و احراز هویت به‌صورت شبیه‌سازی انجام می‌شود؛ هیچ درخواست واقعی ارسال نمی‌گردد.</div>
+        </div>
+
+        <form id="login-form" novalidate>
+          <div class="form-group mb-3">
+            <label class="form-label" for="login-email">ایمیل</label>
+            <input class="form-control form-control--mono" id="login-email" type="email" dir="ltr" autocomplete="email" placeholder="you@company.com" />
+            <div class="invalid-feedback">یک ایمیل معتبر وارد کنید.</div>
+          </div>
+          <div class="form-group mb-4">
+            <div class="d-flex align-items-center justify-content-between">
+              <label class="form-label mb-0" for="login-password">گذرواژه</label>
+              <a class="caption" href="./forgot-password.html">گذرواژه را فراموش کرده‌اید؟</a>
+            </div>
+            <input class="form-control form-control--mono mt-2" id="login-password" type="password" dir="ltr" autocomplete="current-password" placeholder="••••••••" />
+            <div class="invalid-feedback">گذرواژه باید دست‌کم ۶ نویسه باشد.</div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100" id="login-submit"><i data-lucide="log-in"></i> ورود</button>
+        </form>
+
+        <div class="auth__footer">
+          دعوت‌نامه دریافت کرده‌اید؟ <a href="./invite.html">پذیرش دعوت‌نامه</a>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="/src/js/pages/login.js"></script>
+  </body>
+</html>

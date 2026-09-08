@@ -1,0 +1,44 @@
+// =============================================================
+// APIForge X — Components: Chart container
+// Frame for Chart.js: title, one declarative sentence above the chart,
+// body with a fixed min-height. Charts stay LTR even in RTL.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.chart {
+  .chart__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+  .chart__title {
+    font-size: var(--fs-body);
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  .chart__sentence {
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+  .chart__body {
+    position: relative;
+    min-height: 180px;
+    direction: ltr; // canvas charts always LTR
+  }
+  .chart__canvas {
+    position: relative;
+    height: var(--chart-height, 260px);
+    direction: ltr;
+  }
+  .chart__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--fs-caption);
+    color: var(--text-tertiary);
+  }
+}

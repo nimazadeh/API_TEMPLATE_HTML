@@ -1,0 +1,66 @@
+[
+  {
+    "id": "act_1",
+    "type": "key_created",
+    "title": "API key created",
+    "detail": "“Analytics job” in Test environment",
+    "actor": "Arash P.",
+    "timestamp": "2026-09-07T20:26:10.013Z"
+  },
+  {
+    "id": "act_2",
+    "type": "webhook_failed",
+    "title": "Webhook delivery failed",
+    "detail": "https://example.com/hooks/email-events returned 500",
+    "actor": "system",
+    "timestamp": "2026-09-07T18:26:10.013Z"
+  },
+  {
+    "id": "act_3",
+    "type": "endpoint_updated",
+    "title": "Endpoint updated",
+    "detail": "POST /v1/emails — added `from` parameter",
+    "actor": "Sara R.",
+    "timestamp": "2026-09-07T15:26:10.013Z"
+  },
+  {
+    "id": "act_4",
+    "type": "key_revoked",
+    "title": "API key revoked",
+    "detail": "“Staging server” (sk_live_59TB…)",
+    "actor": "Arash P.",
+    "timestamp": "2026-09-07T11:26:10.013Z"
+  },
+  {
+    "id": "act_5",
+    "type": "rate_limit",
+    "title": "Rate limit reached",
+    "detail": "POST /v1/completions hit 250 req/s for 4s",
+    "actor": "system",
+    "timestamp": "2026-09-07T06:26:10.013Z"
+  },
+  {
+    "id": "act_6",
+    "type": "deploy",
+    "title": "Workspace updated",
+    "detail": "Emails API v1.4.0 rolled out",
+    "actor": "system",
+    "timestamp": "2026-09-07T01:26:10.013Z"
+  },
+  {
+    "id": "act_7",
+    "type": "key_created",
+    "title": "API key created",
+    "detail": "“CI pipeline” in Live environment",
+    "actor": "Sara R.",
+    "timestamp": "2026-09-06T16:26:10.013Z"
+  },
+  {
+    "id": "act_8",
+    "type": "webhook_failed",
+    "title": "Webhook delivery failed",
+    "detail": "usage-alerts endpoint disabled after 6 failures",
+    "actor": "system",
+    "timestamp": "2026-09-06T08:26:10.013Z"
+  }
+]

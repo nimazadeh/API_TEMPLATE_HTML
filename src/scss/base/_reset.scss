@@ -1,0 +1,118 @@
+// =============================================================
+// APIForge X — Base: element reset / polish on top of Reboot
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+html {
+  // Logical property foundation — everything mirrors in RTL.
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--surface-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-latin-ui);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  // Slight subpixel smoothing for a crisp, engineered feel
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  min-height: 100dvh;
+}
+
+// Persian body: Vazirmatn with taller line-height (ascenders need +0.1)
+[dir='rtl'],
+[lang='fa'] {
+  font-family: var(--font-persian-ui);
+  line-height: var(--lh-body-fa);
+  letter-spacing: 0;
+}
+// Persian headings: keep tight tracking but don't compress Arabic script
+// the way Latin compresses — loosen the negative tracking.
+[dir='rtl'] {
+  h1, .h1 { letter-spacing: -0.2px; }
+  h2, .h2 { letter-spacing: -0.1px; }
+  h3, .h3, h4, .h4 { letter-spacing: 0; }
+  .display { letter-spacing: -0.3px; }
+}
+
+// Selection
+::selection {
+  background: var(--accent-subtle-bg);
+  color: var(--text-primary);
+}
+
+// Scrollbars — subtle, theme-aware
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-active) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: 9999px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+// Links — accent, underline on hover only
+a {
+  color: var(--accent);
+  &:hover {
+    color: var(--accent-hover);
+  }
+}
+
+// Headings — tight tracking, never weight 700 (Latin)
+h1,
+.h1 {
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  letter-spacing: var(--track-h1);
+  line-height: var(--lh-tight);
+}
+h2,
+.h2 {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: var(--track-h2);
+  line-height: 1.2;
+}
+h3,
+.h3 {
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  letter-spacing: var(--track-h3);
+  line-height: 1.3;
+}
+h4,
+.h4 {
+  font-size: var(--fs-h4);
+  font-weight: 500;
+  letter-spacing: var(--track-h4);
+  line-height: 1.4;
+}
+
+// Focus visibility — keyboard users always see focus
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--accent);
+  outline-offset: var(--focus-ring-offset);
+}
+
+// Reduced motion: disable smooth scrolling etc.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "kpis": {
+    "24h": {
+      "requests": 842109,
+      "requestsDelta": 12.4,
+      "successRate": 99.42,
+      "successDelta": 0.12,
+      "latencyMs": 184,
+      "latencyDelta": -8.2,
+      "usagePct": 42.1
+    },
+    "7d": {
+      "requests": 5120930,
+      "requestsDelta": 9.1,
+      "successRate": 99.31,
+      "successDelta": -0.21,
+      "latencyMs": 197,
+      "latencyDelta": -3.4,
+      "usagePct": 42.1
+    },
+    "30d": {
+      "requests": 5382400,
+      "requestsDelta": 18.7,
+      "successRate": 99.25,
+      "successDelta": 0.31,
+      "latencyMs": 206,
+      "latencyDelta": 2.1,
+      "usagePct": 42.1
+    }
+  },
+  "hourly": [
+    {
+      "hour": "00:00",
+      "requests": 12440,
+      "latencyMs": 213,
+      "errors": 42
+    },
+    {
+      "hour": "01:00",
+      "requests": 16193,
+      "latencyMs": 184,
+      "errors": 16
+    },
+    {
+      "hour": "02:00",
+      "requests": 15931,
+      "latencyMs": 210,
+      "errors": 37
+    },
+    {
+      "hour": "03:00",
+      "requests": 16210,
+      "latencyMs": 176,
+      "errors": 69
+    },
+    {
+      "hour": "04:00",
+      "requests": 19014,
+      "latencyMs": 169,
+      "errors": 82
+    },
+    {
+      "hour": "05:00",
+      "requests": 20523,
+      "latencyMs": 174,
+      "errors": 78
+    },
+    {
+      "hour": "06:00",
+      "requests": 18719,
+      "latencyMs": 243,
+      "errors": 87
+    },
+    {
+      "hour": "07:00",
+      "requests": 18683,
+      "latencyMs": 197,
+      "errors": 10
+    },
+    {
+      "hour": "08:00",
+      "requests": 20403,
+      "latencyMs": 161,
+      "errors": 34
+    },
+    {
+      "hour": "09:00",
+      "requests": 17058,
+      "latencyMs": 189,
+      "errors": 58
+    },
+    {
+      "hour": "10:00",
+      "requests": 16235,
+      "latencyMs": 213,
+      "errors": 43
+    },
+    {
+      "hour": "11:00",
+      "requests": 12584,
+      "latencyMs": 165,
+      "errors": 78
+    },
+    {
+      "hour": "12:00",
+      "requests": 11010,
+      "latencyMs": 151,
+      "errors": 70
+    },
+    {
+      "hour": "13:00",
+      "requests": 9570,
+      "latencyMs": 170,
+      "errors": 66
+    },
+    {
+      "hour": "14:00",
+      "requests": 9402,
+      "latencyMs": 242,
+      "errors": 47
+    },
+    {
+      "hour": "15:00",
+      "requests": 5048,
+      "latencyMs": 171,
+      "errors": 23
+    },
+    {
+      "hour": "16:00",
+      "requests": 5971,
+      "latencyMs": 170,
+      "errors": 42
+    },
+    {
+      "hour": "17:00",
+      "requests": 5335,
+      "latencyMs": 210,
+      "errors": 17
+    },
+    {
+      "hour": "18:00",
+      "requests": 6200,
+      "latencyMs": 192,
+      "errors": 15
+    },
+    {
+      "hour": "19:00",
+      "requests": 4000,
+      "latencyMs": 157,
+      "errors": 30
+    },
+    {
+      "hour": "20:00",
+      "requests": 4739,
+      "latencyMs": 187,
+      "errors": 8
+    },
+    {
+      "hour": "21:00",
+      "requests": 5607,
+      "latencyMs": 236,
+      "errors": 21
+    },
+    {
+      "hour": "22:00",
+      "requests": 7117,
+      "latencyMs": 146,
+      "errors": 20
+    },
+    {
+      "hour": "23:00",
+      "requests": 10811,
+      "latencyMs": 174,
+      "errors": 79
+    }
+  ]
+}

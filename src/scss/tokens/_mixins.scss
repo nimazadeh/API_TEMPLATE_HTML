@@ -1,0 +1,70 @@
+// =============================================================
+// APIForge X — Mixins & functions
+// =============================================================
+
+// Bootstrap-aligned breakpoints (min-width). xs 0, sm 576, md 768,
+// lg 992, xl 1200, xxl 1400 — see docs/product/DESIGN_DIRECTION.md.
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+  'xxl': 1400px,
+);
+
+@mixin mq($bp) {
+  @if map-has-key($breakpoints, $bp) {
+    @media (min-width: map-get($breakpoints, $bp)) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $bp) {
+      @content;
+    }
+  }
+}
+
+@mixin mq-max($bp) {
+  @if map-has-key($breakpoints, $bp) {
+    @media (max-width: (map-get($breakpoints, $bp) - 0.02px)) {
+      @content;
+    }
+  } @else {
+    @media (max-width: ($bp - 0.02px)) {
+      @content;
+    }
+  }
+}
+
+// Visible focus ring — accent, offset, always shown for keyboard.
+@mixin focus-ring {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+// Screen-reader-only helper.
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Respect prefers-reduced-motion by zeroing transform/opacity animation.
+@mixin motion($duration: 200ms) {
+  transition-duration: $duration;
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0ms;
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+// Easing tokens (enter = ease-out curve, transform/opacity only).
+$ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+$ease-in: cubic-bezier(0.55, 0.06, 0.68, 0.19);

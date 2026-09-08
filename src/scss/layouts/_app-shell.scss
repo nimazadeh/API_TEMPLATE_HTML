@@ -1,0 +1,72 @@
+// =============================================================
+// APIForge X — Layouts: App shell
+// Sidebar 256px + header 56px + fluid main (max 1440, 24px padding).
+// Logical properties throughout so RTL mirrors automatically.
+// Source: docs/product/DESIGN_DIRECTION.md
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.app-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: var(--header-height) 1fr;
+  grid-template-areas:
+    'sidebar header'
+    'sidebar main';
+  min-height: 100dvh;
+  background: var(--surface-canvas);
+
+  // Sidebar is a logical grid area; in RTL the column order mirrors
+  // automatically because we place by area name, not by index.
+  .app-sidebar {
+    grid-area: sidebar;
+  }
+  .app-header {
+    grid-area: header;
+  }
+  .app-main {
+    grid-area: main;
+  }
+}
+
+.app-main {
+  overflow-y: auto;
+  background: var(--surface-canvas);
+  // Page scroll region
+  height: calc(100dvh - var(--header-height));
+}
+
+.app-main__inner {
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+  padding: var(--content-pad);
+
+  @include mq-max('md') {
+    padding: 16px;
+  }
+}
+
+// Tablet (768-1199): sidebar collapses to a 64px icon rail
+@include mq-max('xl') {
+  .app-shell {
+    grid-template-columns: var(--sidebar-rail-width) 1fr;
+  }
+}
+
+// Mobile (<768): sidebar hidden behind drawer; bottom tab bar shown
+@include mq-max('md') {
+  .app-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--header-height) 1fr;
+    grid-template-areas:
+      'header'
+      'main';
+  }
+  .app-sidebar {
+    display: none;
+  }
+  .app-main {
+    height: calc(100dvh - var(--header-height) - var(--bottom-bar-height)); // leave room for bottom tab bar
+  }
+}

@@ -1,0 +1,93 @@
+// =============================================================
+// APIForge X — Pages: Usage
+// Plan usage card, attribution breakdown, and top-endpoint rows.
+// Reuses .progress/.usage-row (progress) and .stat-strip (toolbar).
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.usage-plan {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+
+  .usage-plan__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+  .usage-plan__name {
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    letter-spacing: var(--track-h3);
+    color: var(--text-primary);
+  }
+  .usage-plan__numbers {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+
+    @include mq-max('sm') {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+  }
+  .usage-plan__value {
+    font-size: var(--fs-h4);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-primary);
+  }
+}
+
+// Two-column attribution breakdown (endpoint / environment).
+.attribution {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: var(--space-6);
+
+  @include mq-max('md') {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  .attribution__title {
+    font-size: var(--fs-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-3);
+  }
+  .attribution__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+}
+
+// Top endpoints — compact method / path / volume rows.
+.top-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .top-list__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 6px 8px;
+    border-radius: var(--radius-sm);
+
+    &:hover {
+      background: var(--surface-2);
+    }
+    .top-list__value {
+      margin-inline-start: auto;
+      font-variant-numeric: tabular-nums;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+  }
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "id": "ntf_RdD0t2YG",
+    "category": "security",
+    "severity": "warning",
+    "title": "New sign-in from an unknown device",
+    "body": "A session was created from Tehran, IR (91.98.14.2). If this was not you, revoke the session.",
+    "env": null,
+    "read": true,
+    "createdAt": "2026-09-07T13:33:12.548Z"
+  },
+  {
+    "id": "ntf_4McC908a",
+    "category": "webhook",
+    "severity": "error",
+    "title": "Webhook delivery failing",
+    "body": "customer.created has failed 12 times in the last hour. Last response: 500.",
+    "env": "live",
+    "read": false,
+    "createdAt": "2026-09-05T19:01:12.548Z"
+  },
+  {
+    "id": "ntf_bmffni6w",
+    "category": "rate-limit",
+    "severity": "warning",
+    "title": "Rate limit at 85%",
+    "body": "completions:create is approaching its per-second limit. Requests may be throttled.",
+    "env": "live",
+    "read": false,
+    "createdAt": "2026-09-04T14:07:12.548Z"
+  },
+  {
+    "id": "ntf_sdUEeIrB",
+    "category": "billing",
+    "severity": "info",
+    "title": "Invoice payment received",
+    "body": "Your September invoice for $199 was paid successfully.",
+    "env": null,
+    "read": false,
+    "createdAt": "2026-09-03T14:14:12.548Z"
+  },
+  {
+    "id": "ntf_1AcO4NZJ",
+    "category": "deployment",
+    "severity": "success",
+    "title": "Deployment succeeded",
+    "body": "apiforge/api v2.4.1 deployed to production in 42s.",
+    "env": "live",
+    "read": true,
+    "createdAt": "2026-09-01T04:23:12.548Z"
+  },
+  {
+    "id": "ntf_cu1o5b0E",
+    "category": "team",
+    "severity": "info",
+    "title": "Sara invited a new member",
+    "body": "ops@yourco.io was invited as a Viewer.",
+    "env": null,
+    "read": true,
+    "createdAt": "2026-09-03T17:22:12.548Z"
+  },
+  {
+    "id": "ntf_K2VBcmZL",
+    "category": "error",
+    "severity": "error",
+    "title": "Error spike detected",
+    "body": "TypeError: Cannot read properties of null increased 3.2× in the last hour.",
+    "env": "live",
+    "read": false,
+    "createdAt": "2026-09-01T13:56:12.548Z"
+  },
+  {
+    "id": "ntf_gjqp85Sv",
+    "category": "security",
+    "severity": "error",
+    "title": "API key created in production",
+    "body": "A new live key (sk_live_4fJk…) was created from the dashboard.",
+    "env": "live",
+    "read": true,
+    "createdAt": "2026-09-03T11:32:12.548Z"
+  },
+  {
+    "id": "ntf_VrwHKl3K",
+    "category": "rate-limit",
+    "severity": "error",
+    "title": "Rate limit breached",
+    "body": "embeddings:create exceeded 40 req/s. Requests are returning 429.",
+    "env": "staging",
+    "read": true,
+    "createdAt": "2026-09-06T14:29:12.548Z"
+  },
+  {
+    "id": "ntf_hs4h4OVt",
+    "category": "deployment",
+    "severity": "warning",
+    "title": "Deployment rolled back",
+    "body": "apiforge/api v2.4.2 was rolled back after a failed health check.",
+    "env": "staging",
+    "read": false,
+    "createdAt": "2026-09-07T08:42:12.548Z"
+  },
+  {
+    "id": "ntf_HggGZqGe",
+    "category": "billing",
+    "severity": "warning",
+    "title": "Invoice payment failed",
+    "body": "The July invoice could not be charged. Update your payment method to avoid interruption.",
+    "env": null,
+    "read": false,
+    "createdAt": "2026-09-07T05:00:12.548Z"
+  },
+  {
+    "id": "ntf_IvYDoM3N",
+    "category": "team",
+    "severity": "info",
+    "title": "Dana was suspended",
+    "body": "Sara suspended Dana Moradi from the workspace.",
+    "env": null,
+    "read": true,
+    "createdAt": "2026-09-06T02:29:12.548Z"
+  },
+  {
+    "id": "ntf_dkcngK1o",
+    "category": "webhook",
+    "severity": "info",
+    "title": "Webhook created",
+    "body": "A new endpoint was registered for email.sent and email.bounced.",
+    "env": "test",
+    "read": false,
+    "createdAt": "2026-09-07T03:09:12.548Z"
+  },
+  {
+    "id": "ntf_0WBaPqLe",
+    "category": "error",
+    "severity": "warning",
+    "title": "New error type detected",
+    "body": "ECONNREFUSED 10.0.2.15:5432 first seen on GET /v1/usage.",
+    "env": "staging",
+    "read": false,
+    "createdAt": "2026-09-02T23:41:12.548Z"
+  }
+]

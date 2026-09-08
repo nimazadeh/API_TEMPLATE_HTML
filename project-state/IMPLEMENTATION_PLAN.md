@@ -19,7 +19,7 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 
 ---
 
-## Phase 1: Foundation & Design System (Next)
+## Phase 1: Foundation & Design System — COMPLETE ✅
 
 **Duration:** 3-5 days
 **Goal:** Build the skeleton that makes all pages possible — tokens, layout, core components, RTL system, mock data
@@ -27,9 +27,9 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 ### Tasks:
 
 #### 1.1 Project Setup
-- [ ] Initialize Vite project (vite.config.js) with SCSS, multi-page input (rollupOptions.input for each HTML)
-- [ ] Install Bootstrap 5.3.x, sass, chart.js, lucide
-- [ ] Setup folder structure:
+- [x] Initialize Vite project (vite.config.js) with SCSS, multi-page input (rollupOptions.input for each HTML)
+- [x] Install Bootstrap 5.3.x, sass, chart.js, lucide
+- [x] Setup folder structure:
 ```
 /src
   /assets
@@ -52,52 +52,52 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
     index.html (landing)
     pricing.html
 ```
-- [ ] Setup SCSS architecture: tokens as CSS variables, dark-first, light override via data-theme
-- [ ] Setup ESLint + Prettier (optional but recommended)
+- [x] Setup SCSS architecture: tokens as CSS variables, dark-first, light override via data-theme
+- [ ] Setup ESLint + Prettier (optional — deferred to Phase 4 polish)
 
 #### 1.2 Design Tokens
-- [ ] Colors: dark and light CSS variables (canvas, surfaces, border, text, accent, status) as per DESIGN_DIRECTION.md
-- [ ] Typography: Inter + Vazirmatn + JetBrains Mono, type scale, tracking, tabular numbers utility, Vazirmatn line-height 1.7
-- [ ] Spacing: 4px base, tokens
-- [ ] Radius: 6px, 12px, 9999px
-- [ ] Shadows: stacked for floating only
-- [ ] Z-index: sidebar, header, dropdown, modal, command palette
+- [x] Colors: dark and light CSS variables (canvas, surfaces, border, text, accent, status) as per DESIGN_DIRECTION.md
+- [x] Typography: Inter + Vazirmatn + JetBrains Mono, type scale, tracking, tabular numbers utility, Vazirmatn line-height 1.7
+- [x] Spacing: 4px base, tokens
+- [x] Radius: 6px, 12px, 9999px
+- [x] Shadows: stacked for floating only
+- [x] Z-index: sidebar, header, dropdown, modal, command palette
 
 #### 1.3 Base Layout
-- [ ] App shell: sidebar 256px + header 56px + main fluid, with logical properties (inline-start)
-- [ ] Sidebar: groups, items with Lucide icons, active state, collapsible, bottom user menu + env switcher + theme toggle
-- [ ] Header: breadcrumb/title, search with Cmd+K hint, env switcher pill, help, user
-- [ ] Responsive: sidebar collapses to 64px icon rail on tablet, drawer + bottom tab bar on mobile
-- [ ] Theme toggle: dark/light with localStorage + prefers-color-scheme + no flash script
-- [ ] Env switcher: Test/Live pill + banner when test
-- [ ] RTL: Test sidebar on right when dir="rtl", logical properties
+- [x] App shell: sidebar 256px + header 56px + main fluid, with logical properties (inline-start)
+- [x] Sidebar: groups, items with Lucide icons, active state, collapsible, bottom user menu + env switcher + theme toggle
+- [x] Header: breadcrumb/title, search with Cmd+K hint, env switcher pill, help, user
+- [x] Responsive: sidebar collapses to 64px icon rail on tablet, drawer + bottom tab bar on mobile
+- [x] Theme toggle: dark/light with localStorage + prefers-color-scheme + no flash script
+- [x] Env switcher: Test/Live pill + banner when test
+- [x] RTL: Test sidebar on right when dir="rtl", logical properties
 
 #### 1.4 Core Components (HTML + SCSS + JS)
-- [ ] Buttons: primary, secondary, ghost, destructive, sizes, loading, icon
-- [ ] Forms: input, textarea, select, checkbox, radio, label, help, error, search with Cmd+K
-- [ ] Tables: header uppercase, row 40px, hover, method badges, status badges with dot, latency color, skeleton, empty
-- [ ] Cards: default, interactive, code card
-- [ ] Badges: method (GET blue etc.), status (200 green etc.), scopes, neutral
-- [ ] Code blocks: dark well, header with language + copy + tabs, body mono 13px, LTR isolated, copy feedback, injection placeholder
-- [ ] Inline code: LTR isolated
-- [ ] Empty states: icon + title + description + code snippet + action
-- [ ] Skeletons: table rows, KPI cards, chart shimmer
-- [ ] Command palette: overlay, input autofocus, groups, fuzzy search (vanilla JS), keyboard nav, footer legend
-- [ ] Copy utility: copy button with "Copied!" state
-- [ ] Tooltip: minimal, delay first
-- [ ] Modal/Drawer: for key reveal-once, log detail, webhook detail
-- [ ] Progress: rate limit progress bar, usage progress
-- [ ] Timeline: webhook retry timeline visual
+- [x] Buttons: primary, secondary, ghost, destructive, sizes, loading, icon
+- [x] Forms: input, textarea, select, checkbox, radio, label, help, error, search with Cmd+K
+- [x] Tables: header uppercase, row 40px, hover, method badges, status badges with dot, latency color, skeleton, empty
+- [x] Cards: default, interactive, code card
+- [x] Badges: method (GET blue etc.), status (200 green etc.), scopes, neutral
+- [x] Code blocks: dark well, header with language + copy + tabs, body mono 13px, LTR isolated, copy feedback, injection placeholder
+- [x] Inline code: LTR isolated
+- [x] Empty states: icon + title + description + code snippet + action
+- [x] Skeletons: table rows, KPI cards, chart shimmer
+- [x] Command palette: overlay, input autofocus, groups, fuzzy search (vanilla JS), keyboard nav, footer legend
+- [x] Copy utility: copy button with "Copied!" state
+- [x] Tooltip: minimal, delay first
+- [x] Modal/Drawer: for key reveal-once, log detail, webhook detail
+- [x] Progress: rate limit progress bar, usage progress
+- [x] Timeline: webhook retry timeline visual
 
 #### 1.5 Mock Data & Utilities
-- [ ] Mock JSON: logs (50 entries with method, endpoint, status, latency, request ID, key prefix), keys (5), webhooks (3 endpoints with deliveries), usage (30 days), endpoints (10)
-- [ ] Utilities: format relative time, format latency with color, format status with badge, tabular numbers, copy, LTR isolate, Persian numbers toggle
+- [x] Mock JSON: logs (50 entries with method, endpoint, status, latency, request ID, key prefix), keys (5), webhooks (3 endpoints with deliveries), usage (30 days), endpoints (10)
+- [x] Utilities: format relative time, format latency with color, format status with badge, tabular numbers, copy, LTR isolate, Persian numbers toggle
 
 #### 1.6 RTL System
-- [ ] Vazirmatn font loading (woff2, 300,400,500,700)
-- [ ] Logical properties throughout (margin-inline, etc.)
-- [ ] LTR isolation utility class: .ltr-isolate { direction: ltr; unicode-bidi: isolate; text-align: left; }
-- [ ] Test page with mixed Persian + English code
+- [x] Vazirmatn font loading (woff2, 300,400,500,700)
+- [x] Logical properties throughout (margin-inline, etc.)
+- [x] LTR isolation utility class: .ltr-isolate { direction: ltr; unicode-bidi: isolate; text-align: left; }
+- [x] Test page with mixed Persian + English code
 
 **Exit Criteria:**
 - Vite dev server runs, dark/light toggle works, sidebar responsive, no flash
@@ -108,14 +108,81 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 
 ---
 
-## Phase 2: Core App Pages — Observability First (P0)
+## Phase 2: Foundation & Design System — Production Hardening — COMPLETE ✅
+
+**Duration:** 1-2 days (2026-09-07)
+**Goal:** Take the Phase 1 skeleton to a production-quality foundation — semantic
+token system, five-lane typography, Bootstrap-as-toolkit integration, RTL/LTR
+foundation, complete primitive set, and the two visual verification pages.
+**No product/app pages are built in this phase** (those start in Phase 3).
+
+### Tasks:
+
+#### 2.1 Build & Dependency System
+- [x] `@popperjs/core@2.11.8` added as an explicit dependency (Bootstrap dropdown/tooltip positioning) — documented in README
+- [x] Curated Bootstrap import (`src/scss/vendor/_bootstrap.scss`) — variable overrides + component subset + utilities API; Bootstrap is a toolkit, not the identity
+- [x] All fonts locally bundled (Fontsource → versioned woff2); no CDN
+
+#### 2.2 Design Tokens (semantic, single source of truth)
+- [x] Surface ladder: `--surface-canvas`, `--surface-0..3`, `--surface-interactive`, `--surface-overlay`, `--surface-code` (dark/light)
+- [x] Borders, elevation, motion, layout, typography, color token partials under `src/scss/tokens/`
+- [x] Status foregrounds + violet/orange families, focus-ring, code-border, shimmer, RGB-triplet tokens
+- [x] No literal color/spacing values left in components/layouts (all `var(--…)`)
+- [x] Bootstrap `--bs-*` bridge maps to semantic tokens; light theme flips via the same tokens
+
+#### 2.3 Typography — five lanes
+- [x] `PERSIAN_UI` Vazirmatn · `LATIN_UI` Inter Variable (single Latin font) · `TECHNICAL_TERM` · `CODE` JetBrains Mono · `NUMERIC_DATA` tabular
+- [x] Legacy font aliases removed; canonical lane tokens are the only names
+- [x] `.tech`, `.num`/`.tabular-nums`, `.num-fa`/`.num-en`, `.mono` utilities
+- [x] RTL heading tracking loosened so Arabic script is never compressed
+
+#### 2.4 Themes
+- [x] Dark-first + light override via `[data-theme]`; system (OS) mode with live matchMedia listener
+- [x] No-flash inline head script; localStorage persistence; centralized in `components/theme.js`
+
+#### 2.5 Bootstrap integration & primitives (complete set)
+- [x] Overlays migrated to Bootstrap data-APIs (`data-bs-toggle` dropdown/modal/offcanvas/tab/tooltip); custom dropdown/tooltip/modal modules deleted
+- [x] Offcanvas re-themed + RTL mirroring (logical `offcanvas-start/end` overrides)
+- [x] Primitives: Button, Icon Button, Input, Select, Search, Badge, Avatar, Tooltip, Dropdown, Tabs, Modal, Offcanvas/Drawer, Toast, Alert, Table, Code Block, Pagination, Breadcrumb, Card, Stat, Chart Container, Empty State, Error State, Loading State, Skeleton
+- [x] States covered: default/hover/focus/active/disabled/loading/error, dark/light, RTL/LTR, mobile
+
+#### 2.6 Application shell foundation
+- [x] Sidebar → tablet rail → mobile drawer (Bootstrap offcanvas) + bottom tab bar; logical properties throughout
+
+#### 2.7 Verification pages
+- [x] `style-guide.html` — living component contract (all primitives, both themes, RTL/LTR)
+- [x] `rtl-test.html` — mixed RTL/LTR scenarios + theme/direction switching harness
+
+**Exit Criteria (QA loop PASS 1–8):**
+- [x] PASS 1 static: no stale custom overlay attrs, no duplicate IDs, labels present, icons resolve
+- [x] PASS 2 production build: `vite build` green
+- [x] PASS 3 runtime: dev server serves all four pages + module transforms (200)
+- [~] PASS 4 interaction: verified by code path + build (no headless browser in sandbox — not claimed)
+- [~] PASS 5 responsive: CSS breakpoints verified statically (360–1920 not visually tested)
+- [~] PASS 6 accessibility: static checks pass (lang/dir, labels, aria, focus-visible); full audit deferred
+- [~] PASS 7 visual: not performed (no browser/preview tool available — recorded honestly)
+- [x] PASS 8 refactor + rerun: `vite build` re-run after refactor, green
+
+---
+
+## Phase 3: Core App Pages — Observability First (P0)
+
+> **Phase 3A status: COMPLETE ✅** (2026-09-07) — see the Phase 3A record below.
+> Phase 3A shipped Dashboard, APIs (explorer), API Keys, Logs, Usage as one coherent
+> product slice.
+> **Phase 3B status: COMPLETE ✅** (2026-09-07) — see the Phase 3B record below.
+> Phase 3B shipped Webhooks, Endpoints, Errors, Rate Limits and Environments.
+> **Phase 3C status: COMPLETE ✅** (2026-09-07) — see the Phase 3C record below.
+> Phase 3C shipped Team, Billing, Settings, Profile, Notifications, Documentation,
+> SDKs, API Reference, Metrics and the Persian-first auth screens (login / forgot /
+> invite). All product surface is now complete; only the Phase 4 marketing site remains (out of scope).
 
 **Duration:** 5-7 days
 **Goal:** Build most important pages: Overview, Logs, Keys, Usage — the daily-use pages
 
 ### Tasks:
 
-#### 2.1 Overview (`/app/overview.html`)
+#### 3.1 Overview (`/app/overview.html`)
 - [ ] Quickstart card: env selector + key selector + code snippet tabs + copy + run mock
 - [ ] KPI strip: 4 cards (Requests 24h, Error rate, P95 latency, Active keys) with comparison + sparkline (Chart.js)
 - [ ] Recent errors: top 3 with count + link
@@ -124,7 +191,7 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 - [ ] Usage vs limit progress
 - [ ] Empty state variant
 
-#### 2.2 Logs (`/app/logs.html` + `/app/log-detail.html` or drawer)
+#### 3.2 Logs (`/app/logs.html` + `/app/log-detail.html` or drawer)
 - [ ] Filters: search request ID, status multi-select, method, endpoint, key, date range — URL state (?status=failed)
 - [ ] Stats: requests in range, error rate, P95
 - [ ] Table: full with method badges, status badges, latency color, request ID copy, key prefix
@@ -132,13 +199,13 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 - [ ] Pagination URL state
 - [ ] Skeletons, empty
 
-#### 2.3 API Keys (`/app/keys.html`)
+#### 3.3 API Keys (`/app/keys.html`)
 - [ ] Table: name, prefix blur, scopes badges, last used, created, status, actions
 - [ ] Create flow: modal with steps name→scopes→expiration→reveal once with warning + copy + "I copied" checkbox
 - [ ] Detail drawer: usage chart per key, recent requests, rotate, revoke with confirm + undo toast
 - [ ] Empty
 
-#### 2.4 Usage (`/app/usage.html`)
+#### 3.4 Usage (`/app/usage.html`)
 - [ ] Time range selector URL state
 - [ ] KPI: total, billable, errors, cost
 - [ ] Area chart requests over time with comparison dashed
@@ -150,29 +217,112 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 **Exit Criteria:**
 - 4 pages fully functional with mock data, filters URL state, dark/light, RTL, responsive, keyboard, skeletons, empty
 
+### Phase 3A record — CORE PRODUCT EXPERIENCE (COMPLETE ✅, 2026-09-07)
+
+- [x] **Data:** `scripts/generate-mock-data.mjs` rewritten (seed `20260907`) → 5 APIs, 15 endpoints, 6 keys, 80 logs, 30-day usage, 2 environments, plan, attribution, 8 activity events, metrics; regenerated `src/js/data/mock-*.json`
+- [x] **Shared:** `charts.js`, `log-detail.js`, rewritten `table.js`/`theme.js`, extended `icons.js`/`format.js`/`code-block.js`; new partials `_segmented`/`_toolbar`/`_split`/`_inspector`/`_explorer`/`pages/_usage`
+- [x] **dashboard.html** — toolbar header, 4 KPI cards (skeleton→content), request + latency Chart.js (24h/7d/30d), activity timeline, quick actions
+- [x] **apis.html** — catalog, endpoint filter table, 60/40 docs+tester split, `GET /users`-style endpoint reference (method badge/URL/params/response JSON), cURL/Node/Python SDK tabs, copy, env-key injection, simulated Send (200/400)
+- [x] **api-keys.html** — env-filtered list, masked keys, reveal-once modal, copy/rotate/revoke with confirm, create flow with scopes, deep link `#create`
+- [x] **logs.html** — method/status/env/time/search filters, dense table, row-click → inspector drawer (request/response/timing/context + "Copy as cURL"), CSV export
+- [x] **usage.html** — plan consumption (used/limit/resets), requests-over-time (7d/30d), consumption-by-API doughnut, top endpoints, endpoint+environment attribution
+- [x] **Wiring:** `vite.config.js` pageInputs (9 inputs), command palette (`commands.js`), sidebar nav (later phases disabled + tooltip), `index.html` hub links
+- [x] **QA:** `vite build` green; dev-server HTTP 200 for all pages/modules; static QA clean; interaction/responsive/visual NOT executed (no browser in sandbox)
+
+### Phase 3B record — ADVANCED DEVELOPER WORKFLOWS (COMPLETE ✅, 2026-09-07)
+
+- [x] **Data:** generator extended with a separate `randB` PRNG (keeps Phase 3A byte-identical) → webhooks (6), webhook deliveries (26 with attempt timelines + payload/headers/response/signature), errors (12 with stack traces), rate limits (3 current + 14-day history + 6 rules), variables (16); environments → Production/Staging/Development; keys → +2 staging
+- [x] **Shared:** `webhook-detail.js`, `error-detail.js`, `highlightJson()` in `code-block.js`, `icons.js` +`Bug`/`FileText`/`Pencil`, `_timeline.scss` +`is-info`/`is-neutral`; partials `pages/_errors`, `pages/_rate-limits`
+- [x] **webhooks.html** — endpoint list (event/endpoint/status/attempts/last-delivery/environment) + recent deliveries; delivery drawer (timeline created→sent→delivered/failed/retrying, Payload/Headers/Response/Signature tabs, syntax-highlighted JSON, retry/replay/copy-payload); health strip
+- [x] **endpoints.html** — method/path/service/version/status table with search+method+service+status filters; detail drawer (description/auth/params/request+response schema); Create/Edit modal
+- [x] **errors.html** — KPIs (total/endpoints/rate/resolved), severity/message/endpoint/occurrences/last-seen list with filters; drawer (stack trace with faulting frame, request info, user context, environment) + mark-resolved/assign
+- [x] **rate-limits.html** — current-limit cards (per minute/day/monthly), 14-day bar+limit-line chart + monthly remaining doughnut, rules table (API/limit/window/usage/status), warning/breached banner
+- [x] **environments.html** — Production/Staging/Development switcher, production banner, summary, variables (masked value/reveal/copy/delete/add), API keys per environment
+- [x] **Wiring:** `vite.config.js` pageInputs (14 inputs), sidebar + mobile nav enabled across all app pages, `commands.js`, `index.html` hub
+- [x] **QA:** `vite build` green; dev-server HTTP 200 for all 14 pages/modules; static wiring/icon/link/import audits clean; interaction/responsive/visual NOT executed (no browser in sandbox)
+
+### Phase 3C record — COMPLETE SAAS PRODUCT EXPERIENCE (COMPLETE ✅, 2026-09-07)
+
+- [x] **Data:** generator extended with a separate `randC` PRNG (3A/3B stay byte-identical) → team (8), invitations (2), plans (3), invoices (8), notifications (14), SDKs (6), observability (ranges/series/hourly/minutes/byEndpoint/byStatus/byEnvironment/byMethod); `docs-content.js` authored (5 groups, 23 articles)
+- [x] **Shared:** `confirm.js` (`ask()`/`initConfirm()` destructive-confirm primitive), `icons.js` +17 icons, partials `pages/_workspace` (plan grid, notification center, settings rows, member cells, SDK monograms), `pages/_docs` (3-pane portal + 3-col xl grid), `pages/_auth` (centered auth card)
+- [x] **team.html** — summary (plan/seats/id), members table (role/status/last-active/joined/actions incl. suspended), invite modal with validation, role change/suspend/activate/remove/resend/revoke + destructive confirms, roles & permissions reference, empty states
+- [x] **billing.html** — current plan (cycle/renewal/status), usage consumption + projection, 3-plan comparison, masked payment method, invoice history (paid/pending/failed + simulated download), upgrade/downgrade confirm, cycle selector, payment modal
+- [x] **settings.html** — General/Developer preferences/Security (sessions, 2FA status UI)/Danger zone (transfer, delete) with strong confirms
+- [x] **profile.html** — personal info + preferences (theme/language/timezone/notifications) + developer identity; edit/save/cancel/validation
+- [x] **notifications.html** — category/severity filters + search, unread/read state, mark-all-read, empty state
+- [x] **docs.html** — 3-pane portal (nav/content/TOC + mobile offcanvas), search, anchors, prev/next, tabbed copyable code, callouts/tables/JSON, Getting Started/Core Concepts/Integrations/Webhooks/Reference
+- [x] **sdk.html** — 6-language catalog with install/version/features/quick-usage code/copy/filter
+- [x] **api-reference.html** — service+version selectors, endpoint nav (mobile offcanvas), auth/params/schema/response/errors/code samples
+- [x] **metrics.html** — KPI cards, 4 Chart.js charts (volume/latency/error/status), breakdowns by API/endpoint/environment/status/method, 1h/24h/7d/30d, Production-vs-Staging
+- [x] **login/forgot-password/invite.html** — Persian-first (`lang="fa" dir="rtl"`), `.auth` layout, technical fields LTR-isolated, simulated toasts
+- [x] **Wiring:** `vite.config.js` pageInputs (26 inputs), sidebar + mobile nav regenerated (consistent 5 groups, all items enabled, correct active states), `commands.js` (+ Developer resources group), `index.html` hub
+- [x] **QA:** `vite build` green (26 inputs, 0 warnings); runtime QA 92/92 scenario steps across 22 pages (0 jsdom/console/eval errors); a11y audit clean on 25 pages; static design audit clean; visual/responsive NOT executed (no browser in sandbox)
+
 ---
 
-## Phase 3: Differentiators — Webhooks, APIs, Errors (P1)
+## Phase 4 (RE-SCOPED, 2026-09-08): Marketplace Excellence & Commercial Polish
+
+> **Supersedes the "Phase 4: Differentiators" and "Phase 5" + "Phase 6" sections below.**
+> The original Phase 4 (webhooks/endpoints/errors/rate-limits) and the Phase 5 management
+> pages were pulled forward into 3B/3C and are COMPLETE ✅. What remains of the original
+> roadmap is **Phase 5.6 Polish** + **Phase 6 Marketing**, now delivered as the re-scoped
+> Phase 4: transform the finished APIForge X into a **sellable premium HTML template for
+> the Iranian marketplace (Rastchin)**. Goal is explicitly *not* random features — it is
+> premium commercial polish + marketplace readiness. Same engineering standards, QA after
+> every milestone, stop at a checkpoint.
+
+**Milestone 4A — Marketing layer ✅ COMPLETE (commit f04eb76) (landing + pricing + changelog + status + 404)**
+- [x] `layouts/_site.scss` + `pages/_marketing.scss` — marketing shell (sticky translucent header, centered container, footer, mobile offcanvas nav) + hero/feature/pricing/changelog/status/404 styles; tokens only, no hex literals
+- [x] `index.html` — replace temporary hub with premium landing: eyebrow + `.display` hero, sub, CTA, **live product preview built from real components + seeded data** (honors D-014 "product as hero", impossible to ship a real screenshot without a browser), stats strip, feature grid, code showcase, full page directory (keeps the old hub's usefulness), pricing teaser, CTA band, footer
+- [x] `pricing.html` — 3 tiers + usage-based note + FAQ (Bootstrap collapse) + comparison table + CTA
+- [x] `changelog.html` — versioned timeline of Phases 1→4
+- [x] `status.html` — all-systems banner, 90-day uptime bars, component status, incident history (deterministic mock)
+- [x] `404.html` — branded not-found with code + CTA back to dashboard/landing
+- [x] `src/js/site.js` (`bootSite()`: icons + theme + copy + nav) so marketing pages don't pull the full app boot
+- [x] `vite.config.js` pageInputs += pricing/changelog/status/404; harness scenarios for all 5 new pages
+- **QA gate:** `vite build` clean · runtime harness (5 pages) · static + a11y audit extended to new pages
+
+**Milestone 4B — Commercial polish ✅ COMPLETE (commit 9c387fc) (keyboard shortcuts + RTL/state parity + style-guide)**
+- [x] `components/shortcuts.js` — `?` help modal, `g`+letter navigation, `/` focus search, Esc close; registered in `boot()`, zero changes to the 22 page files
+- [x] Audit empty/error/skeleton coverage across every data table/chart; fill genuine gaps only (shared components/tokens preferred)
+- [x] `style-guide.html` — add a compact "Marketing" section (site header/footer, hero, `.display`/`.eyebrow`, pricing card, changelog/status components)
+- [x] RTL demo parity — confirm `rtl.html`/`rtl-test.html` still reflect the final nav/component set after 4A
+- **QA gate:** build + harness + a11y re-run after shortcut injection (jsdom keyboard events)
+
+**Milestone 4C — Marketplace packaging ✅ COMPLETE (this commit) (buyer docs + assets + copy)**
+- [x] `README.md` — buyer-facing rewrite (setup, theming, RTL, adding an endpoint, structure, pages map, credits/license)
+- [x] SCSS token comments — audit + fill doc gaps in `src/scss/tokens/*`
+- [x] `marketplace/` — `README.md`, `SCREENSHOTS_MANIFEST.md` (required shots + naming + capture steps), `DESCRIPTION.md` (RTL-Theme + ThemeForest copy), `capture-screenshots.mjs` (Playwright script; runnable by the buyer — no browser in this sandbox)
+- [x] project-state docs: PROJECT_STATE / CHANGELOG / TEST_STATUS / IMPLEMENTATION_PLAN (this record) + `DECISIONS.md` D-015 (marketing shell architecture)
+- **QA gate:** build + full harness regression + a11y; final checkpoint report
+
+---
+
+## Phase 4: Differentiators — Webhooks, APIs, Errors (P1)
+
+> **Note (2026-09-07):** Webhooks, Endpoints, Errors and Rate Limits were pulled forward
+> into Phase 3B and are COMPLETE ✅. What remains of the original Phase 4 list is
+> in-app documentation (`docs.html`) and the marketing-to-app continuity pages.
 
 **Duration:** 5-7 days
 **Goal:** Build differentiators that make template feel specialized
 
-#### 3.1 Webhooks (`/app/webhooks.html`, `/app/webhook-detail.html`)
+#### 4.1 Webhooks (`/app/webhooks.html`, `/app/webhook-detail.html`)
 - [ ] List: endpoint URL, events badges, status, success rate, last delivery
 - [ ] Create: URL, events checkboxes, secret generate, test
 - [ ] Detail: overview + delivery log table + attempt detail with payload JSON tree + retry timeline visual + signature helper + actions retry/disable/rotate/delete/test
 
-#### 3.2 APIs / Endpoints (`/app/apis.html`, `/app/api-detail.html`)
+#### 4.2 APIs / Endpoints (`/app/apis.html`, `/app/api-detail.html`)
 - [ ] Catalog: grouped by resource, endpoint list with method badge + path + description
 - [ ] Detail: method+path header, description, auth, params table, request body schema, response example, code examples tabs with key injection, interactive tester form → response viewer
 - [ ] Search filter
 - [ ] Version switcher
 
-#### 3.3 Errors & Rate Limits (`/app/errors.html`, `/app/rate-limits.html`)
+#### 4.3 Errors & Rate Limits (`/app/errors.html`, `/app/rate-limits.html`)
 - [ ] Errors: breakdown by code with count, last, %, docs link, detail explanation + fix
 - [ ] Rate Limits: overview current plan limits, usage progress bars, reset timers, per endpoint table, 429 guide, upgrade CTA
 
-#### 3.4 SDKs & Environments (`/app/sdks.html`)
+#### 4.4 SDKs & Environments (`/app/sdks.html`)
 - [ ] Environments explanation, banner, base URLs
 - [ ] SDK cards per language with install command, version, GitHub, code example
 - [ ] Postman, OpenAPI download
@@ -182,27 +332,27 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 
 ---
 
-## Phase 4: Management & Polish (P2)
+## Phase 5: Management & Polish (P2)
 
 **Duration:** 3-4 days
 **Goal:** Team, Billing, Settings, Docs, Auth, plus polish
 
-#### 4.1 Team (`/app/team.html`)
+#### 5.1 Team (`/app/team.html`)
 - Table, invite, roles explanation, audit log
 
-#### 4.2 Billing (`/app/billing.html`)
+#### 5.2 Billing (`/app/billing.html`)
 - Current plan card, usage projection chart, invoices table, payment method, upgrade
 
-#### 4.3 Settings (`/app/settings.html`)
+#### 5.3 Settings (`/app/settings.html`)
 - Profile, workspace, security 2FA, notifications, danger zone — tabs
 
-#### 4.4 Docs In-App (`/app/docs.html`)
+#### 5.4 Docs In-App (`/app/docs.html`)
 - Sidebar groups, main with code blocks, key injection, try-it
 
-#### 4.5 Auth (`/auth/sign-in.html`, `/auth/sign-up.html`)
+#### 5.5 Auth (`/auth/sign-in.html`, `/auth/sign-up.html`)
 - Minimal, like Vercel, dark, with logo, form, OAuth buttons optional
 
-#### 4.6 Polish
+#### 5.6 Polish
 - [ ] All pages have LTR and RTL demo (or lang toggle)
 - [ ] All pages dark/light
 - [ ] Keyboard: ? help modal, g+letter shortcuts, / focus search, Esc close
@@ -218,27 +368,27 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 
 ---
 
-## Phase 5: Marketing + Final Launch
+## Phase 6: Marketing + Final Launch
 
 **Duration:** 2-3 days
 **Goal:** Landing, Pricing, Changelog, Status, final docs, marketplace assets
 
-#### 5.1 Landing (`/index.html`)
+#### 6.1 Landing (`/index.html`)
 - Hero with code + dashboard screenshot, social proof, features (Logs, Webhooks, Keys, Explorer), code examples, pricing teaser, CTA
 - Dark-first, tight tracking, product screenshots as hero (Linear principle)
 
-#### 5.2 Pricing (`/pricing.html`)
+#### 6.2 Pricing (`/pricing.html`)
 - Plans, usage-based, FAQ, comparison
 
-#### 5.3 Changelog (`/changelog.html`) + Status (`/status.html`)
+#### 6.3 Changelog (`/changelog.html`) + Status (`/status.html`)
 - Timeline, uptime
 
-#### 5.4 Documentation for Buyers
+#### 6.4 Documentation for Buyers
 - README.md with setup, theming, RTL, adding endpoint, structure
 - Style guide page
 - Comments in SCSS tokens
 
-#### 5.5 Marketplace Assets
+#### 6.5 Marketplace Assets
 - Screenshots: Overview, Logs, Keys, Webhooks, Usage, RTL Persian, dark/light, command palette, code blocks
 - Preview video (optional)
 - Description copy for RTL-Theme and ThemeForest
@@ -301,23 +451,25 @@ This plan covers implementation from Phase 0 (complete) through Phase N (launch)
 ## Timeline Summary
 
 - Phase 0: 1 day (done)
-- Phase 1: 3-5 days (foundation)
-- Phase 2: 5-7 days (P0 core)
-- Phase 3: 5-7 days (P1 differentiators)
-- Phase 4: 3-4 days (P2 management + polish)
-- Phase 5: 2-3 days (marketing + launch)
-- **Total:** ~19-27 days for full premium template
+- Phase 1: 3-5 days (foundation skeleton — done)
+- Phase 2: 1-2 days (foundation hardening — done)
+- Phase 3: 5-7 days (P0 core app pages)
+- Phase 4: 5-7 days (P1 differentiators)
+- Phase 5: 3-4 days (P2 management + polish)
+- Phase 6: 2-3 days (marketing + launch)
+- **Total:** ~20-29 days for full premium template
 
 ---
 
-## Next Immediate Steps (Phase 1 Day 1)
+## Next Immediate Steps (Phase 3)
 
-1. Initialize Vite + Bootstrap 5.3 + SCSS structure
-2. Create tokens: colors dark/light CSS variables
-3. Create base layout: sidebar + header + main with logical properties
-4. Create style guide page showing tokens, typography, buttons, tables, code blocks
-5. Setup theme toggle + no flash + RTL toggle
-6. Test with Vazirmatn + LTR isolation
+Phase 3 is NOT yet authorized. Do not start app pages until separately authorized.
+When it is authorized, begin with:
+
+1. `/app/overview.html` — quickstart card, KPI strip, recent errors/requests, webhook health
+2. Extend `table.js` renderers with URL-state filters and pagination
+3. Chart.js integration with CSS-variable theming + `afx:theme` re-theme listener
+4. Log detail drawer (reuse Bootstrap offcanvas) with JSON viewer + "Copy as cURL"
 
 ---
 

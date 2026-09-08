@@ -1,0 +1,56 @@
+// =============================================================
+// APIForge X — Base: Bootstrap CSS-variable bridge
+//
+// Bootstrap's own utilities (.text-primary, .bg-body, .border, …)
+// resolve against its --bs-* custom properties, which are emitted
+// with compile-time values. We re-map the important ones to our
+// theme tokens so Bootstrap utilities stay theme-aware (dark/light)
+// while our own components use the --surface-* / --accent tokens directly.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+:root {
+  --bs-primary: var(--accent);
+  --bs-primary-rgb: var(--accent-rgb);
+  --bs-body-bg: var(--surface-canvas);
+  --bs-body-bg-rgb: var(--surface-canvas-rgb);
+  --bs-body-color: var(--text-primary);
+  --bs-body-color-rgb: var(--text-primary-rgb);
+  --bs-emphasis-color: var(--text-primary);
+  --bs-secondary-color: var(--text-secondary);
+  --bs-tertiary-color: var(--text-tertiary);
+  --bs-secondary-bg: var(--surface-2);
+  --bs-tertiary-bg: var(--surface-3);
+  --bs-border-color: var(--border);
+  --bs-border-color-translucent: var(--border);
+  --bs-link-color: var(--accent);
+  --bs-link-color-rgb: var(--accent-rgb);
+  --bs-link-hover-color: var(--accent-hover);
+  --bs-heading-color: var(--text-primary);
+  --bs-body-font-family: var(--font-latin-ui);
+  --bs-body-font-size: 0.875rem;
+  --bs-body-line-height: var(--lh-body);
+
+  // Theme-color subtle/text-emphasis mappings for Bootstrap components
+  --bs-primary-text-emphasis: var(--accent);
+  --bs-primary-bg-subtle: var(--accent-subtle-bg);
+  --bs-primary-border-subtle: var(--accent-subtle-border);
+  --bs-success-text-emphasis: var(--success);
+  --bs-success-bg-subtle: var(--success-bg);
+  --bs-success-border-subtle: var(--success-border);
+  --bs-danger-text-emphasis: var(--error);
+  --bs-danger-bg-subtle: var(--error-bg);
+  --bs-danger-border-subtle: var(--error-border);
+  --bs-warning-text-emphasis: var(--warning);
+  --bs-warning-bg-subtle: var(--warning-bg);
+  --bs-warning-border-subtle: var(--warning-border);
+  --bs-info-text-emphasis: var(--info);
+  --bs-info-bg-subtle: var(--info-bg);
+  --bs-info-border-subtle: var(--info-border);
+}
+
+// All mappings above reference semantic tokens, which flip under
+// [data-theme='light'] (defined in tokens/_colors.scss), so Bootstrap
+// utilities stay theme-aware with a single source of truth.
+

@@ -1,0 +1,11 @@
+{
+  "name": "Scale",
+  "price": 99,
+  "currency": "USD",
+  "requestsLimit": 10000000,
+  "requestsUsed": 5382400,
+  "rateLimitPerSecond": 250,
+  "periodStart": "2026-09-01",
+  "periodEnd": "2026-09-30",
+  "periodLabel": "September 2026"
+}

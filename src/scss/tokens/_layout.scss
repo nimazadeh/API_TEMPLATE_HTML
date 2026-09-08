@@ -1,0 +1,27 @@
+// =============================================================
+// APIForge X — Design Tokens: Layout & Breakpoints
+// Sizes shared by the application shell. Breakpoints follow the
+// Bootstrap grid (see the mq() mixin in _mixins.scss):
+//   xs 0 · sm 576 · md 768 · lg 992 · xl 1200 · xxl 1400
+// =============================================================
+
+:root {
+  // Application shell
+  --sidebar-width: 256px;
+  --sidebar-rail-width: 64px;
+  --header-height: 56px;
+  --bottom-bar-height: 56px;
+  --content-max-width: 1440px;
+
+  // Spacing around the content region
+  --content-pad: 24px;
+  --content-pad-mobile: 16px;
+  --gutter: 24px;
+
+  // Component geometry
+  --control-height: 32px;
+  --control-height-sm: 28px;
+  --control-height-lg: 36px;
+  --table-row-height: 40px;
+  --table-row-compact: 36px;
+}

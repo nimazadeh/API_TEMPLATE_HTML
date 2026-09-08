@@ -1,0 +1,66 @@
+[
+  {
+    "id": "inv_202609",
+    "date": "2026-09-07T23:52:12.548Z",
+    "amount": 199,
+    "currency": "USD",
+    "status": "paid",
+    "pdf": "#"
+  },
+  {
+    "id": "inv_202608",
+    "date": "2026-08-08T23:52:12.548Z",
+    "amount": 199,
+    "currency": "USD",
+    "status": "paid",
+    "pdf": "#"
+  },
+  {
+    "id": "inv_202607",
+    "date": "2026-07-09T23:52:12.548Z",
+    "amount": 199,
+    "currency": "USD",
+    "status": "paid",
+    "pdf": "#"
+  },
+  {
+    "id": "inv_202606",
+    "date": "2026-06-09T23:52:12.548Z",
+    "amount": 248,
+    "currency": "USD",
+    "status": "paid",
+    "pdf": "#"
+  },
+  {
+    "id": "inv_202605",
+    "date": "2026-05-10T23:52:12.548Z",
+    "amount": 199,
+    "currency": "USD",
+    "status": "paid",
+    "pdf": "#"
+  },
+  {
+    "id": "inv_202604",
+    "date": "2026-04-10T23:52:12.548Z",
+    "amount": 199,
+    "currency": "USD",
+    "status": "pending",
+    "pdf": "#"
+  },
+  {
+    "id": "inv_202603",
+    "date": "2026-03-11T23:52:12.548Z",
+    "amount": 199,
+    "currency": "USD",
+    "status": "failed",
+    "pdf": "#"
+  },
+  {
+    "id": "inv_202602",
+    "date": "2026-02-09T23:52:12.548Z",
+    "amount": 199,
+    "currency": "USD",
+    "status": "paid",
+    "pdf": "#"
+  }
+]

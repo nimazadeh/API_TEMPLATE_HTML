@@ -1,0 +1,142 @@
+// =============================================================
+// APIForge X — Layouts: Header
+// 56px, border-bottom, breadcrumb/title + search (⌘K) + env pill +
+// theme toggle + help + user.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: var(--header-height);
+  padding-inline: 16px;
+  background: var(--surface-0);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+
+  .header-title {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    min-width: 0;
+    .crumb {
+      font-size: var(--fs-body);
+      color: var(--text-tertiary);
+      white-space: nowrap;
+    }
+    .crumb-sep {
+      color: var(--text-tertiary);
+      font-size: var(--fs-caption);
+    }
+    .title {
+      font-size: var(--fs-body-lg);
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .header-search {
+    flex: 1;
+    max-width: 420px;
+    margin-inline: auto;
+    // Present as a search field, not a button
+    justify-content: flex-start;
+    background: var(--surface-1);
+    border-color: var(--border);
+    color: var(--text-tertiary);
+    &:hover {
+      border-color: var(--border-hover);
+    }
+    svg {
+      flex: none;
+    }
+    .kbd-hint {
+      margin-inline-start: auto;
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin-inline-start: auto;
+  }
+}
+
+// Environment switcher pill (Test / Live) — Stripe-like
+.env-switcher {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  gap: 2px;
+
+  .env-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 24px;
+    padding-inline: 10px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: var(--fs-body-sm);
+    font-weight: 500;
+    cursor: pointer;
+    @include motion(150ms);
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    &.is-active {
+      background: var(--surface-3);
+      color: var(--text-primary);
+    }
+    &[data-env='test'].is-active,
+    &[data-env='test'] .dot {
+      color: var(--warning);
+    }
+    &[data-env='live'].is-active,
+    &[data-env='live'] .dot {
+      color: var(--success);
+    }
+  }
+}
+
+// Test-mode banner (below header when env=test)
+.env-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 32px;
+  padding: 6px 16px;
+  background: var(--warning-bg);
+  border-bottom: 1px solid var(--warning-border);
+  color: var(--warning);
+  font-size: var(--fs-body-sm);
+
+  svg {
+    width: 14px;
+    height: 14px;
+    flex: none;
+  }
+}
+
+// Hamburger (mobile only)
+.header-burger {
+  @include mq('md') {
+    display: none;
+  }
+}

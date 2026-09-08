@@ -1,0 +1,81 @@
+// =============================================================
+// APIForge X — Components: Skeletons
+// Shimmer rows/cards/chart that mirror the final layout, not spinners.
+// Static if prefers-reduced-motion.
+// Source: docs/product/DESIGN_DIRECTION.md
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--shimmer),
+      transparent
+    );
+    animation: afx-shimmer 1.5s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      animation: none;
+      transform: none;
+      background: none;
+    }
+  }
+}
+@keyframes afx-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// Skeleton lines
+.skeleton-line {
+  height: 12px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  @extend .skeleton;
+  & + & {
+    margin-top: 8px;
+  }
+  &.w-25 { width: 25%; }
+  &.w-40 { width: 40%; }
+  &.w-60 { width: 60%; }
+  &.w-80 { width: 80%; }
+}
+
+// Skeleton KPI card
+.skeleton-kpi {
+  height: 104px;
+  border-radius: var(--radius-md);
+  @extend .skeleton;
+}
+
+// Skeleton chart (shimmer block)
+.skeleton-chart {
+  height: 180px;
+  border-radius: var(--radius-md);
+  @extend .skeleton;
+}
+
+// Skeleton table rows
+.skeleton-row {
+  height: 40px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  @extend .skeleton;
+  & + & {
+    margin-top: 8px;
+  }
+}

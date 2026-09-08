@@ -1,0 +1,182 @@
+[
+  {
+    "date": "2026-08-09",
+    "requests": 138983,
+    "errors": 370,
+    "latencyMs": 206
+  },
+  {
+    "date": "2026-08-10",
+    "requests": 139108,
+    "errors": 421,
+    "latencyMs": 196
+  },
+  {
+    "date": "2026-08-11",
+    "requests": 126924,
+    "errors": 559,
+    "latencyMs": 199
+  },
+  {
+    "date": "2026-08-12",
+    "requests": 134711,
+    "errors": 355,
+    "latencyMs": 206
+  },
+  {
+    "date": "2026-08-13",
+    "requests": 121697,
+    "errors": 178,
+    "latencyMs": 194
+  },
+  {
+    "date": "2026-08-14",
+    "requests": 109190,
+    "errors": 206,
+    "latencyMs": 211
+  },
+  {
+    "date": "2026-08-15",
+    "requests": 104361,
+    "errors": 174,
+    "latencyMs": 193
+  },
+  {
+    "date": "2026-08-16",
+    "requests": 113935,
+    "errors": 637,
+    "latencyMs": 188
+  },
+  {
+    "date": "2026-08-17",
+    "requests": 107977,
+    "errors": 464,
+    "latencyMs": 177
+  },
+  {
+    "date": "2026-08-18",
+    "requests": 117134,
+    "errors": 487,
+    "latencyMs": 196
+  },
+  {
+    "date": "2026-08-19",
+    "requests": 131182,
+    "errors": 193,
+    "latencyMs": 215
+  },
+  {
+    "date": "2026-08-20",
+    "requests": 123937,
+    "errors": 386,
+    "latencyMs": 217
+  },
+  {
+    "date": "2026-08-21",
+    "requests": 127732,
+    "errors": 397,
+    "latencyMs": 210
+  },
+  {
+    "date": "2026-08-22",
+    "requests": 140491,
+    "errors": 564,
+    "latencyMs": 223
+  },
+  {
+    "date": "2026-08-23",
+    "requests": 140574,
+    "errors": 613,
+    "latencyMs": 221
+  },
+  {
+    "date": "2026-08-24",
+    "requests": 128109,
+    "errors": 504,
+    "latencyMs": 239
+  },
+  {
+    "date": "2026-08-25",
+    "requests": 139026,
+    "errors": 209,
+    "latencyMs": 261
+  },
+  {
+    "date": "2026-08-26",
+    "requests": 131205,
+    "errors": 441,
+    "latencyMs": 249
+  },
+  {
+    "date": "2026-08-27",
+    "requests": 139546,
+    "errors": 550,
+    "latencyMs": 247
+  },
+  {
+    "date": "2026-08-28",
+    "requests": 125612,
+    "errors": 548,
+    "latencyMs": 254
+  },
+  {
+    "date": "2026-08-29",
+    "requests": 122221,
+    "errors": 251,
+    "latencyMs": 264
+  },
+  {
+    "date": "2026-08-30",
+    "requests": 120595,
+    "errors": 140,
+    "latencyMs": 248
+  },
+  {
+    "date": "2026-08-31",
+    "requests": 121492,
+    "errors": 133,
+    "latencyMs": 234
+  },
+  {
+    "date": "2026-09-01",
+    "requests": 124042,
+    "errors": 514,
+    "latencyMs": 225
+  },
+  {
+    "date": "2026-09-02",
+    "requests": 136099,
+    "errors": 241,
+    "latencyMs": 238
+  },
+  {
+    "date": "2026-09-03",
+    "requests": 138051,
+    "errors": 416,
+    "latencyMs": 224
+  },
+  {
+    "date": "2026-09-04",
+    "requests": 150526,
+    "errors": 538,
+    "latencyMs": 245
+  },
+  {
+    "date": "2026-09-05",
+    "requests": 153283,
+    "errors": 260,
+    "latencyMs": 228
+  },
+  {
+    "date": "2026-09-06",
+    "requests": 163674,
+    "errors": 629,
+    "latencyMs": 212
+  },
+  {
+    "date": "2026-09-07",
+    "requests": 167102,
+    "errors": 559,
+    "latencyMs": 217
+  }
+]

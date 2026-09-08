@@ -1,0 +1,78 @@
+// =============================================================
+// APIForge X — Components: Dropdown (re-theme of Bootstrap)
+// Bootstrap owns positioning (Popper) + .show toggling; we own the
+// surface: hairline border, 12px radius, stacked shadow, item states.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.dropdown-menu {
+  --bs-dropdown-zindex: var(--z-dropdown);
+  --bs-dropdown-padding-y: 6px;
+  --bs-dropdown-padding-x: 6px;
+  --bs-dropdown-min-width: 200px;
+  --bs-dropdown-border-radius: var(--radius-md);
+  --bs-dropdown-border-color: var(--border);
+  --bs-dropdown-bg: var(--surface-overlay);
+  --bs-dropdown-link-color: var(--text-secondary);
+  --bs-dropdown-link-hover-color: var(--text-primary);
+  --bs-dropdown-link-hover-bg: var(--surface-interactive);
+  --bs-dropdown-link-active-bg: var(--surface-interactive);
+  --bs-dropdown-link-active-color: var(--text-primary);
+  --bs-dropdown-item-padding-y: 7px;
+  --bs-dropdown-item-padding-x: 10px;
+  --bs-dropdown-divider-bg: var(--border-subtle);
+  --bs-dropdown-divider-margin-y: 6px;
+  box-shadow: var(--elevation-2);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-body);
+
+  svg {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    color: var(--text-tertiary);
+  }
+  &:hover svg,
+  &.active svg {
+    color: inherit;
+  }
+}
+
+.dropdown-item.is-danger {
+  color: var(--error);
+  &:hover,
+  &:focus {
+    color: var(--error);
+    background: var(--error-bg);
+  }
+  svg {
+    color: var(--error);
+  }
+}
+
+// Theme menu items (Dark / Light / System) — trailing check for the active mode
+.dropdown-item .theme-check {
+  margin-inline-start: auto;
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+}
+
+.dropdown-header {
+  padding: 6px 10px 2px;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.dropdown-divider {
+  background-color: var(--border-subtle);
+}

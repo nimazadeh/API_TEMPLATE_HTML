@@ -1,0 +1,149 @@
+// =============================================================
+// APIForge X — Components: Tables (the most important component)
+// Header 12px uppercase; rows 40px; hover only (no stripes);
+// latency color; method/status badges; skeleton + empty support.
+// Source: docs/product/DESIGN_DIRECTION.md (D-008)
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.table-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body);
+  color: var(--text-primary);
+
+  thead th {
+    padding: 8px 16px;
+    font-size: var(--fs-caption);
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    text-align: start;
+    color: var(--text-tertiary);
+    background: var(--surface-1);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    // Sortable header affordance
+    &.is-sortable {
+      cursor: pointer;
+      user-select: none;
+      &:hover {
+        color: var(--text-secondary);
+      }
+      .sort-indicator {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        vertical-align: -3px;
+        color: var(--text-tertiary);
+      }
+    }
+  }
+
+  tbody {
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: middle;
+      // 40px row height achieved via padding on 14px text
+    }
+    tr:last-child td {
+      border-bottom: 0;
+    }
+    // Hover only — no striped rows
+    tr:hover td {
+      background: var(--surface-2);
+    }
+    // Clickable row affordance
+    tr.is-clickable {
+      cursor: pointer;
+    }
+    // Selected row (API explorer endpoint list)
+    tr.is-selected td {
+      background: var(--accent-subtle-bg);
+    }
+    tr.is-selected:hover td {
+      background: var(--accent-subtle-bg);
+    }
+  }
+
+  // Right-aligned numeric cells with tabular numbers
+  .cell-num {
+    text-align: end;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+    white-space: nowrap;
+  }
+
+  // Latency color — green <300ms, yellow <1s, red >1s
+  .latency {
+    font-variant-numeric: tabular-nums;
+    &.latency--fast {
+      color: var(--success);
+    }
+    &.latency--mid {
+      color: var(--warning);
+    }
+    &.latency--slow {
+      color: var(--error);
+    }
+  }
+}
+
+// Compact variant for log tables (36px rows)
+.table--compact {
+  tbody td {
+    padding-block: 10px;
+  }
+}
+
+// Pagination footer
+.table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-body-sm);
+  color: var(--text-secondary);
+}
+.pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  .page-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    padding-inline: 8px;
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    &:hover {
+      background: var(--surface-2);
+      color: var(--text-primary);
+    }
+    &.is-active {
+      background: var(--surface-2);
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+  }
+}

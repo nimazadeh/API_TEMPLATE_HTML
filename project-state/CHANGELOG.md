@@ -6,6 +6,194 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## [Phase 3C] — 2026-09-07 — COMPLETE SAAS PRODUCT EXPERIENCE ✅
+
+### Added
+- Twelve new pages: `team.html`, `billing.html`, `settings.html`, `profile.html`, `notifications.html`, `docs.html`, `sdk.html`, `api-reference.html`, `metrics.html`, plus Persian-first auth `login.html`, `forgot-password.html`, `invite.html` (+ `src/js/pages/*.js` modules)
+- `src/js/components/confirm.js` — reusable destructive-confirm primitive (`ask()` promise + `initConfirm()`), one Bootstrap modal per page
+- `src/js/data/docs-content.js` — authored docs portal content (5 groups, 23 articles, block engine: h2/h3/p/ul/code/json/table/callout)
+- Seven deterministic Phase 3C datasets (separate `randC` PRNG seeded `20260907 ^ 0xc3c3c3`): `mock-team`, `mock-invitations`, `mock-plans`, `mock-invoices`, `mock-notifications`, `mock-sdks`, `mock-observability` (ranges/series/hourly/minutes/byEndpoint/byStatus/byEnvironment/byMethod)
+- `src/scss/pages/_workspace.scss` (plan grid, notification center, settings rows, member cells, SDK monograms), `_docs.scss` (3-pane portal + 3-col xl grid), `_auth.scss` (centered auth card) — registered in `main.scss`
+- Icons added to the Lucide registry: `User`, `BookMarked`, `Mail`, `UserPlus`, `ShieldAlert`, `Smartphone`, `LogIn`, `Inbox`, `CheckCheck`, `Receipt`, `BadgeCheck`, `Link`, `ListChecks`, `FileCode2`, `Send`, `Monitor`, `List`
+- Mobile section offcanvas nav for `docs.html` and `api-reference.html` (desktop `.docs-side` previously disappeared below lg with no alternative)
+
+### Changed
+- `vite.config.js` — `pageInputs` 14 → 26
+- Sidebar + mobile drawer nav regenerated across all app pages into a consistent 5-group structure (Overview / Developer / Analytics / Workspace / Account); all previously `is-disabled` Phase 3C items enabled; correct active state per page
+- `src/js/data/commands.js` — added Metrics/Team/Billing/Settings/Profile/Notifications to Navigate and a new "Developer resources" group (Documentation / SDKs / API Reference)
+- `index.html` hub — retagged Phase 3C and gained 12 new page cards
+
+### Fixed
+- `src/js/pages/team.js` — suspended members now remain visible in the members table (previously only active members rendered); seats count = active members
+- `src/js/pages/billing.js` — plan CTA now correctly says "Downgrade" when a cheaper plan is selected from Scale (was "Upgrade to Pro")
+- `src/js/pages/notifications.js` — wired the search field that was previously a dead input
+- `src/js/pages/api-reference.js` — service selector now actually filters the endpoint nav (was only switching the active endpoint)
+- `src/js/pages/docs.js` / `api-reference.js` — bare `history`/`location` globals replaced with `window.history`/`window.location`
+- `src/js/pages/settings.js` — 2FA "Manage" was a dead button; now opens a demo confirmation
+- `src/js/pages/profile.js` — theme-preference segment + email-notification toggle now functional
+- `settings.html` — `2fa-toggle` id renamed `fa-toggle` (id starting with a digit breaks `querySelector`); session-timeout select gained an `aria-label`
+
+### Verified (executed)
+- `vite build` green — 26 page inputs, 0 Sass/JS warnings
+- Headless runtime QA (jsdom, built `dist/` chunks): **92/92 interaction scenario steps PASS** across 22 pages, 0 jsdom/console/module-eval errors (10 regression pages + 12 new)
+- Structural a11y audit (25 pages): 0 unlabelled controls/icon-buttons, 0 tables outside `.table-responsive`, 0 missing `scope`, 0 duplicate ids
+- Static design audit: breakpoints + `[dir=rtl]` + logical props + `.ltr-isolate` + reduced-motion (38) + `:focus-visible` ring + five typography lanes (no Inter Tight/Geist/CDN); page SCSS has 0 hex literals (tokens only)
+- 3A/3B datasets re-verified byte-identical (generator re-run + `git checkout` on the 8 drift-prone JSONs)
+
+### Remaining limitations (recorded honestly — NOT executed)
+- Real-browser visual/responsive QA (360–1920) — no browser/preview in the sandbox (E2B preview token-gated); nothing marked PASS without execution
+- Chart.js pixel rendering, keyboard focus traversal, in-situ contrast — code present, not browser-verified
+- Full WCAG 2.x claim — NOT made (static checks only)
+
+---
+
+## [Phase 3 Visual QA & Design Review] — 2026-09-07 — VERIFICATION GATE PASS ✅
+
+### Fixed
+- `src/js/pages/apis.js` — endpoint search now matches the HTTP method (typing "POST" previously returned an empty list); method/path/summary/group all matched
+- 11 HTML files — added `scope="col"` to every table header `<th>` (api-keys, apis, endpoints, environments, errors, logs, rate-limits, rtl-test, rtl, style-guide, webhooks)
+
+### Verified (executed)
+- Headless runtime QA (jsdom, built `dist/` chunks in a real DOM): **37/37 interaction scenario steps PASS** across all 10 product pages with **0 jsdom errors, 0 console errors, 0 module eval errors** (dashboard 3, apis 3, api-keys 2, logs 3, usage 2, webhooks 5, endpoints 4, errors 4, rate-limits 4, environments 7)
+- Static design audits against `DESIGN_DIRECTION.md`: breakpoints (576/768/992/1200/1400 + max-widths), `[dir=rtl]` rules + logical properties, `.ltr-isolate`, code/chart LTR forcing, five typography lanes, local fonts (no Inter Tight/Geist/CDN), reduced-motion (35), `:focus-visible` ring, `color-scheme`
+- Structural a11y audit (13 pages): 0 unlabelled controls/icon-buttons, 0 tables outside `.table-responsive`, 0 missing alt, 0 duplicate ids — after the `scope="col"` fix
+- Contrast computed from tokens (dark primary 17.6–19.0:1, secondary 7.2–7.7:1; light primary 17.3–17.7:1)
+
+### Remaining limitations (recorded honestly — NOT executed)
+- Real-browser visual/responsive QA — no browser/preview available in the sandbox (E2B preview token-gated); nothing marked PASS without execution
+- Chart.js pixel rendering, keyboard focus traversal, in-situ contrast — code present, not browser-verified
+- Full WCAG 2.x claim — NOT made (static checks only)
+
+---
+
+## [Phase 3B] — 2026-09-07 — ADVANCED DEVELOPER WORKFLOWS COMPLETE ✅
+
+### Added
+- Five advanced pages: `webhooks.html`, `endpoints.html`, `errors.html`, `rate-limits.html`, `environments.html` + page modules in `src/js/pages/`
+- `src/js/components/webhook-detail.js` — delivery drawer: attempt timeline (created → sent → delivered/failed/retrying) + Payload/Headers/Response/Signature inspector with syntax-highlighted JSON + retry/replay/copy-payload
+- `src/js/components/error-detail.js` — issue drawer: message/type, simulated stack trace (faulting frame highlighted), request info, user context, environment, mark-resolved + assign
+- `highlightJson()` in `src/js/components/code-block.js` — 4-color JSON syntax highlighter (keys/strings/numbers/keywords), escaped, reused by the webhook and endpoint drawers
+- Icons: `Bug`, `FileText`, `Pencil` added to the Lucide registry (now 70 registered)
+- `src/scss/pages/_errors.scss`, `src/scss/pages/_rate-limits.scss` (registered in `main.scss`); `.timeline__node` gained `is-info`/`is-neutral` states
+- Deterministic mock data (seed `20260907`, separate `randB` PRNG keeps Phase 3A byte-identical apart from `Date.now()` timestamps): `mock-webhooks.json` (6), `mock-webhook-deliveries.json` (26 with attempt timelines + payload/headers/response/signature), `mock-errors.json` (12 with stack traces), `mock-rate-limits.json` (3 current + 14-day history + 6 rules), `mock-variables.json` (16); `mock-environments.json` → Production/Staging/Development (3), `mock-keys.json` → +2 staging keys
+- Navigation: sidebar + mobile drawer enabled for Webhooks/Endpoints/Errors/Rate Limits/Environments across all app pages; Metrics retagged to Phase 3C; `commands.js` + `index.html` hub updated
+
+### Changed
+- `vite.config.js` — `pageInputs` 9 → 14 pages
+- `index.html` hub — eyebrow retagged Phase 3B and 5 new product cards added
+
+### Fixed
+- `src/js/pages/endpoints.js` — the service filter select (`#endpoint-service`) had no options (only the modal's select was populated); now both are filled from `mock-apis.json`
+- `src/js/pages/dashboard.js` + `src/js/pages/errors.js` — replaced the dead `.kpi-foot` class (never styled in the design system) with the canonical `.stat-foot`
+
+### Verified (executed)
+- `vite build` green — 14 page inputs; per-page chunks emitted; `dist/*.html` asset refs resolve
+- Runtime HTTP QA — all 14 pages + new page/component modules serve 200 with no transform errors
+- Static wiring QA — every `getElementById` target in the 5 new page modules resolves; `data-copy-target` ids resolve; drawers exist on their pages
+- Icon registry audit — 70 registered / 58 literal `data-lucide` usages / 0 missing
+- Link audit — no broken `./*.html` links
+- Import audit — no unused imports in the 7 new JS files
+- Nav audit — no leftover `Phase 3B` tooltips; Metrics retagged Phase 3C
+
+### Remaining limitations (recorded honestly)
+- Interaction / visual / responsive QA NOT executed — no headless browser in the sandbox; run manually on the live preview
+- Chart.js runtime rendering + theme re-render not observed in a browser (build + module transform only)
+- Full WCAG audit deferred
+
+---
+
+## [Phase 3A — Verification] — 2026-09-07 — POST-IMPLEMENTATION VERIFICATION PASS ✅
+
+### Fixed
+- `src/js/components/icons.js` — added `RefreshCw` (Logs "Refresh" button icon was unregistered and would not render)
+- `api-keys.html` — reveal-once modal "Done" button now dismisses the modal (`data-bs-dismiss="modal"`)
+- `usage.html` + `src/js/pages/usage.js` — "Export" button wired to a daily-usage CSV export (was a dead button)
+- `src/js/pages/logs.js` — removed unused `escapeHtml` import
+- `src/js/pages/dashboard.js` — removed unused `absoluteTime` import
+
+### Verified (executed)
+- `vite build` green — 9 page inputs; per-page chunks for all 5 product pages; `dist/*.html` asset refs all resolve
+- Runtime HTTP QA — all pages + modules serve 200 with no transform errors; dev-server asset refs resolve
+- Static wiring QA — every `getElementById` target in the 5 page modules resolves to a real DOM id; no duplicate ids
+- Icon registry audit — 67 registered / 53 used / 0 missing
+- Import audit — all 24 JS files' relative imports resolve; no unused imports remain
+- RTL/LTR static checks — code blocks LTR, `.ltr-isolate` on technical terms, logical table alignment, directional icons registered; `rtl.html`/`rtl-test.html` serve 200
+- Accessibility static checks — labelled icon buttons, labelled dialogs/offcanvas, labelled checkboxes, `aria-pressed` segments, keyboard-activated rows
+
+### Remaining limitations (recorded honestly)
+- Interaction / visual / responsive QA NOT executed — no headless browser in the sandbox; run manually on the live preview
+- Chart.js runtime rendering + theme re-render not observed in a browser (build + module transform only)
+- Full WCAG audit deferred
+
+---
+
+## [Phase 3A] — 2026-09-07 — CORE PRODUCT EXPERIENCE IMPLEMENTATION COMPLETE ✅
+
+### Added
+- Five product pages: `dashboard.html`, `apis.html`, `api-keys.html`, `logs.html`, `usage.html` + page modules in `src/js/pages/`
+- `src/js/components/charts.js` — tree-shaken Chart.js registration (Line/Bar/Doughnut + Category/Linear + Filler/Tooltip/Legend), CSS-variable theming, `makeChart`/`refreshCharts`/`initCharts`, `axis`/`tooltips` shared options
+- `src/js/components/log-detail.js` — deterministic request inspector (`buildLogDetail`, `cURLFor`, `openLogDrawer` → Bootstrap offcanvas)
+- SCSS partials: `_segmented`, `_toolbar`, `_split`, `_inspector`, `_explorer`, `pages/_usage` (registered in `main.scss`)
+- Icon registry extended (GitBranch, LogOut, Globe, ExternalLink, Play, Braces, FileJson, FolderOpen, Server, Box, Lock, ShieldCheck, Ban, SlidersHorizontal, Filter, Calendar, Database, Download, PieChart, Timer, ArrowUpRight, Check)
+- `format.js` helpers: `compactNumber`, `formatDate`, `percent`
+
+### Changed
+- `scripts/generate-mock-data.mjs` rewritten (seed `20260907`) — 5 APIs, 15 endpoints, 6 keys (env/permission/prefix/scopes/status), 80 enriched logs, 30-day usage, 2 environments, plan, attribution (byEndpoint + byEnvironment), 8 activity events, metrics (24h/7d/30d KPIs + 24h hourly)
+- `table.js` rewritten — `logRow`/`logRowFull`/`keyRow` + `renderLogs`/`renderLogsFull`/`renderKeys` with copy binding
+- `theme.js` rewritten — dark/light/system with 3-option `[data-theme-menu]` (retains `data-theme-toggle`)
+- `code-block.js` — `initCodeBlock(block)` exported for dynamically rendered docs/tester code
+- `_tables.scss` — `.is-selected` row state (API explorer endpoint list)
+- `_toolbar.scss` — `.filter-bar__select` fixed width
+- `vite.config.js` pageInputs += dashboard/apis/api-keys/logs/usage
+- `index.html` hub now links the five product pages (label → Phase 3A)
+
+### QA
+- `vite build` green — 9 HTML pages; per-page JS chunks (`dashboard`, `apis`, `api-keys`, `logs`, `usage`)
+- Dev server serves all pages + module transforms (200); no transform errors
+- Static QA clean (class refs reconciled to `.filter-bar`/`.seg`/`.card--dense`+`.chart`)
+- Interaction / responsive / visual QA NOT executed (no browser in sandbox) — recorded honestly in TEST_STATUS.md
+
+---
+
+## [Phase 2] — 2026-09-07 — FOUNDATION & DESIGN SYSTEM (PRODUCTION HARDENING) COMPLETE ✅
+
+### Added
+- Semantic token layer under `src/scss/tokens/`: colors (surface ladder, status foregrounds, violet/orange families, focus-ring, code-border, shimmer, RGB triplets), borders, elevation, motion, layout, typography — dark + `[data-theme="light"]`
+- `src/scss/base/_fonts.scss` — single source of truth for local font loading (Inter Variable, JetBrains Mono, Vazirmatn); documents the five typography lanes
+- `src/js/core/bootstrap.js` — Bootstrap ESM data-API imports (Dropdown, Modal, Offcanvas, Collapse, Tab, Toast, Tooltip)
+- New primitives: `_tabs.scss`, `_alert.scss`, `_breadcrumb.scss`, `_avatar.scss`, `_stat.scss`, `_chart.scss`, `_loading.scss`; `.error-state` added to `_empty.scss`
+- `rtl-test.html` + `src/js/pages/rtl-test.js` + `src/scss/pages/_rtl-test.scss` — mixed RTL/LTR scenarios with theme (dark/light/system) and direction switching
+- `src/js/components/toast.js` rewritten on Bootstrap `Toast.getOrCreateInstance` (`afxToast`)
+- `@popperjs/core@2.11.8` explicit dependency
+- Directional icons (ArrowRight/Left, ChevronRight/Left) in the Lucide registry
+
+### Changed
+- Curated Bootstrap import (`src/scss/vendor/_bootstrap.scss`): variable overrides + component subset + utilities API; Bootstrap as toolkit, not identity
+- Bootstrap `--bs-*` bridge (`src/scss/base/_bootstrap-overrides.scss`) now maps to semantic tokens (no literal light-theme block)
+- Overlays migrated from custom modules to Bootstrap data-APIs: `data-bs-toggle`/`data-bs-target`/`data-bs-dismiss`/`data-bs-title`
+- Offcanvas re-themed + logical RTL mirroring (`offcanvas-start/end`); `.sidebar-drawer` is now `offcanvas offcanvas-start sidebar-drawer`
+- Sidebar chrome hoisted to top level (`_sidebar.scss`) so the mobile drawer reuses it
+- Shell metrics (256/64/56/1440/24) tokenized into `--sidebar-width`, `--sidebar-rail-width`, `--header-height`, `--bottom-bar-height`, `--content-max-width`, `--content-pad`
+- Legacy font aliases (`--font-sans`, `--font-display`, `--font-mono`, `--font-fa`) removed; canonical five-lane tokens only
+- `style-guide.html` hardened as the living component contract (all primitives + states)
+- RTL heading tracking loosened for Arabic script; focus ring tokenized; scrollbars theme-aware
+
+### Removed
+- `src/js/components/dropdown.js`, `tooltip.js`, `modal.js` (superseded by Bootstrap data-APIs)
+- Legacy `--bg-*` / `--shadow-*` token references
+
+### Decisions
+- D-021…D-027 logged in DECISIONS.md (Bootstrap data-APIs, Inter Variable, five-lane tokens, semantic surface ladder, offcanvas drawers, rtl-test harness, offcanvas-first detail views)
+
+### QA
+- `vite build` green (CSS 268.70 kB / 51.62 kB gzip; main JS 104.79 kB / 33.11 kB gzip)
+- Static + runtime QA clean; interaction/responsive/visual not executed (no browser in sandbox) — recorded honestly in TEST_STATUS.md
+
+### Next
+- Phase 3 (Core App Pages) — NOT yet authorized; wait for separate authorization
+
+---
+
 ## [Phase 0] — 2026-09-07 — PRODUCT INTELLIGENCE COMPLETE ✅
 
 ### Added
@@ -39,6 +227,84 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ### Next
 - Phase 1: Foundation & Design System — Setup Vite + Bootstrap + SCSS + tokens + base layout + core components + RTL system + mock data
+
+---
+
+## [Phase 1] — 2026-09-07 — FOUNDATION & DESIGN SYSTEM COMPLETE ✅
+
+### Added
+- **Project setup:** `package.json` (Vite 7.3.6, Bootstrap 5.3.8, Sass, Lucide, Chart.js, Fontsource fonts), `vite.config.js` (multi-page inputs, `@` alias, relative base, 0.0.0.0 host + `allowedHosts` for the preview proxy), `.gitignore`
+- **Design tokens** (`src/scss/tokens/`): colors (dark-first + light override, monochrome + indigo `#6366f1` + status), typography (Inter Variable / JetBrains Mono / Vazirmatn + type scale + tracking + line-heights), spacing (4px scale), radius (6/12/pill/4), z-index ladder, mixins (breakpoints, focus ring, motion, visually-hidden)
+- **Vendor layer** (`src/scss/vendor/_bootstrap.scss`): curated Bootstrap subset (functions/variables/maps/mixins/utilities/root/reboot/type/images/containers/grid/helpers + utilities API) with variable overrides (dark body, hairline borders, 6/12/pill radius, no shadows, 24px gutters, `$enable-dark-mode: false`)
+- **Base layer** (`src/scss/base/`): reset/polish, typography utilities (`.display`, `.eyebrow`, `.mono`, `.tabular-nums`, `.ltr-isolate`, `.num-fa`/`.num-en`), custom utilities (`.hairline`, `.floating`, `.sr-only`), Bootstrap `--bs-*` variable bridge
+- **Core components** (`src/scss/components/` + JS): buttons (5 types, 3 sizes, icon, loading), forms (input/select/textarea/check/radio/search+⌘K/key reveal), badges (method + status + scope), tables (40px rows, hover, latency color, pagination), cards (default/interactive/KPI), code blocks (always-dark wells, 40px header, language tabs, copy, key injection), skeletons, empty states, tooltip, modal, drawer, progress, timeline, toast, dropdown, command palette (⌘K, fuzzy search, groups, keyboard nav)
+- **Layouts** (`src/scss/layouts/` + `main.scss`): app shell (sidebar 256px + header 56px + fluid main, logical grid areas), sidebar (grouped nav, active state, foot cluster, 64px icon rail on tablet), header (breadcrumb, search field, env switcher, theme toggle, help, user), mobile nav (bottom tab bar + sidebar drawer)
+- **JS architecture** (`src/js/`): `main.js` boot(), per-page entries, components (theme, env-switcher, command-palette, code-block, copy, dropdown, tooltip, modal, toast, reveal, table), formatting utils (relative time, latency class, status/method badges, Persian digits), deterministic mock-data generator
+- **Mock data** (`src/js/data/` + `scripts/generate-mock-data.mjs`): 50 logs, 5 keys, 3 webhooks, 30-day usage, 10 endpoints — seeded & regenerable
+- **Foundation pages:** `/` (temporary hub), `/style-guide.html` (full component showcase), `/rtl.html` (Persian RTL demo with LTR-isolated code + Persian labels)
+- **README.md** — quick start, structure, theming, RTL notes
+
+### Decisions
+- Bootstrap imported as a curated `@import`-based subset (Bootstrap 5.3.8 partials share one scope; variable overrides must precede the import stack)
+- Sass deprecation warnings (Bootstrap's legacy `color-functions`/`import`) silenced by ID via `silenceDeprecations` in Vite
+- Lucide icons registered in a tree-shaken `icons.js` map instead of the full 1800-icon object (main JS bundle 370 KB → 26 KB)
+- Single JS-managed global modal/drawer backdrop (fixed-position children inside transformed containers break against the viewport)
+- RTL demo ships as a separate `rtl.html` with `dir="rtl" lang="fa"` (D-018: `?lang=fa` toggle deferred)
+- Sidebar fixed 256px; resizable deferred (D-016)
+
+### Validated
+- `npm run build` clean (no warnings); CSS 170 KB → 37.2 KB gzip; main JS 26 KB → 9.3 KB gzip
+- Dark/light toggle, env switcher, ⌘K palette, copy-with-feedback, code tabs + key injection all wired
+- Mock logs render in the table; RTL page mirrors the shell with code LTR
+
+### Next
+- Phase 2: Core App Pages — Overview, Logs, Keys, Usage (observability first)
+
+---
+
+## Phase 4 (Re-scoped) — Marketplace Excellence & Commercial Polish — 2026-09-08
+
+### Added
+- **Marketing layer (4A):** `layouts/_site.scss` + `pages/_marketing.scss`; premium landing `index.html` (live product preview from real components + seeded data), `pricing.html` (plans from `mock-plans.json` + comparison + FAQ), `changelog.html`, `status.html` (90 deterministic uptime bars, components, incidents), `404.html`; `src/js/site.js` (`bootSite()`), page JS for all five
+- **Keyboard shortcuts (4B):** `components/shortcuts.js` — `?` help modal, `g`+letter navigation (16 destinations), `/` focus search, Esc; `data-search-target` on 7 search inputs
+- **Marketplace packaging (4C):** `marketplace/` — `README.md`, `SCREENSHOTS_MANIFEST.md`, `DESCRIPTION.md` (ThemeForest EN + RTL-Theme FA), `capture-screenshots.mjs` (Playwright, buyer-runnable)
+
+### Changed
+- `README.md` — buyer-facing: marketing pages, "Adding a page" guide, keyboard shortcuts
+- `style-guide.html` — new Marketing section; nav refreshed (was stale Phase 3)
+- `rtl.html` — stale Phase 2 `#`/tooltip nav replaced with the full real nav (Persian)
+- `vite.config.js` — pageInputs 26 → 30
+- `_radius.scss` — stale "3 radii" header corrected to 4
+
+### Validated
+- `vite build` green (30 inputs, 0 warnings)
+- Runtime QA **114/114** across 30 pages (0 jsdom/console/module-eval errors)
+- Structural a11y audit clean (30 pages); static audit clean
+
+### Next
+- Marketplace screenshots via `node marketplace/capture-screenshots.mjs` on a machine with Chromium
+- Optional: preview video, ThemeForest/RTL-Theme submission
+
+---
+
+## Final Release Audit — 2026-09-08
+
+### Fixed
+- **P1** `site.js` — marketing `bootSite()` now initializes code blocks; the landing's code showcase (language tabs + copy) was dead and now works
+- **P2** `index.html` / `index.js` — pricing teaser renders the product plans from `mock-plans.json` (was template-license pricing, inconsistent with `pricing.html`); "26 pages" → "30 pages"; stat label clarified to "3 themes — dark · light · system"
+- **P2** `billing.js` — removed unused `formatNumber` import
+- **P2** `rtl-test.html` — added the missing `<h1>`
+- **P2** `README.md` — "Customization reference" (colors/fonts/nav/icons) + "Deploying" sections
+- **P2** `commands.js` — "Marketing" command-palette group (app → marketing continuity)
+
+### Validated
+- `vite build` clean (30 inputs, 0 warnings)
+- Runtime QA **116/116** across 30 pages (0 jsdom/console/module-eval errors)
+- Structural a11y audit clean (30 pages); static audit clean; link integrity + secrets + CDN scans clean
+- Real browser UNAVAILABLE (visual/responsive/Lighthouse stay LIMITATION)
+
+### Next
+- Marketplace screenshots + submission (Rastchin / ThemeForest) on a machine with Chromium
 
 ---
 

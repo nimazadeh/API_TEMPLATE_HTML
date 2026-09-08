@@ -1,0 +1,105 @@
+// =============================================================
+// APIForge X — Pages: Auth layout (login, forgot-password, invite)
+// Centered card on the canvas — no app shell. Dark-first, RTL-safe
+// via logical properties. Technical fields stay LTR via .ltr-isolate.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.auth {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5) var(--space-4);
+  background: var(--surface-canvas);
+
+  // Subtle atmospheric glow (allowed: radial, behind the card only).
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+      600px 400px at 50% 0%,
+      rgba(99, 102, 241, 0.12),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+}
+
+.auth__card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.auth__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.auth__title {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: var(--track-h2);
+  margin-bottom: var(--space-1);
+}
+
+.auth__subtitle {
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-5);
+}
+
+.auth__footer {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+  font-size: var(--fs-body-sm);
+  color: var(--text-secondary);
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.auth__notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--accent-subtle-border);
+  background: var(--accent-subtle-bg);
+  font-size: var(--fs-body-sm);
+  color: var(--text-secondary);
+
+  svg {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    margin-top: 1px;
+    color: var(--accent);
+  }
+}

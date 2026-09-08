@@ -1,0 +1,23 @@
+// =============================================================
+// APIForge X — Components: Tooltip (re-theme of Bootstrap)
+// Minimal, dark chip, used only as a last resort (inline help first).
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.tooltip {
+  --bs-tooltip-zindex: var(--z-tooltip);
+  --bs-tooltip-max-width: 240px;
+  --bs-tooltip-padding-y: 6px;
+  --bs-tooltip-padding-x: 10px;
+  --bs-tooltip-font-size: var(--fs-caption);
+  --bs-tooltip-color: var(--text-primary);
+  --bs-tooltip-bg: var(--surface-3);
+  --bs-tooltip-border-radius: var(--radius-sm);
+  --bs-tooltip-opacity: 1;
+}
+
+.tooltip-inner {
+  border: 1px solid var(--border-hover);
+  box-shadow: var(--elevation-1);
+}

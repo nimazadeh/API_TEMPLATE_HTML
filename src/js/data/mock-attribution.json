@@ -1,0 +1,80 @@
+{
+  "byEndpoint": [
+    {
+      "method": "POST",
+      "path": "/v1/emails",
+      "requests": 1842011,
+      "errorRate": 0.4,
+      "p95": 214,
+      "share": 34.2
+    },
+    {
+      "method": "POST",
+      "path": "/v1/completions",
+      "requests": 1120800,
+      "errorRate": 0.8,
+      "p95": 341,
+      "share": 20.8
+    },
+    {
+      "method": "POST",
+      "path": "/v1/embeddings",
+      "requests": 861440,
+      "errorRate": 0.3,
+      "p95": 188,
+      "share": 16
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "requests": 549300,
+      "errorRate": 0.1,
+      "p95": 92,
+      "share": 10.2
+    },
+    {
+      "method": "POST",
+      "path": "/v1/audiences",
+      "requests": 421500,
+      "errorRate": 0.5,
+      "p95": 251,
+      "share": 7.8
+    },
+    {
+      "method": "GET",
+      "path": "/v1/emails/{id}",
+      "requests": 306780,
+      "errorRate": 0.2,
+      "p95": 110,
+      "share": 5.7
+    },
+    {
+      "method": "POST",
+      "path": "/v1/webhooks",
+      "requests": 158430,
+      "errorRate": 0.6,
+      "p95": 276,
+      "share": 2.9
+    },
+    {
+      "method": "GET",
+      "path": "/v1/usage",
+      "requests": 122139,
+      "errorRate": 0,
+      "p95": 84,
+      "share": 2.3
+    }
+  ],
+  "byEnvironment": [
+    {
+      "env": "live",
+      "requests": 5102400,
+      "share": 94.8
+    },
+    {
+      "env": "test",
+      "requests": 280000,
+      "share": 5.2
+    }
+  ]
+}

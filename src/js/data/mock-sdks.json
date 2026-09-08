@@ -1,0 +1,107 @@
+[
+  {
+    "id": "js",
+    "name": "JavaScript",
+    "lang": "JS",
+    "accent": "js",
+    "package": "@apiforge/sdk",
+    "version": "1.7.2",
+    "install": "npm install @apiforge/sdk",
+    "registry": "npm",
+    "updated": "2026-09-04T23:52:12.548Z",
+    "features": [
+      "TypeScript types",
+      "Streaming support",
+      "Retry + idempotency",
+      "Webhook signature helper"
+    ],
+    "docsUrl": "./docs.html"
+  },
+  {
+    "id": "node",
+    "name": "Node.js",
+    "lang": "Node",
+    "accent": "node",
+    "package": "apiforge",
+    "version": "2.1.0",
+    "install": "npm install apiforge",
+    "registry": "npm",
+    "updated": "2026-08-29T23:52:12.548Z",
+    "features": [
+      "Zero-dependency",
+      "Streaming support",
+      "Retry + idempotency",
+      "Works in ESM & CJS"
+    ],
+    "docsUrl": "./docs.html"
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "lang": "Py",
+    "accent": "py",
+    "package": "apiforge",
+    "version": "1.4.1",
+    "install": "pip install apiforge",
+    "registry": "PyPI",
+    "updated": "2026-08-24T23:52:12.548Z",
+    "features": [
+      "Async + sync clients",
+      "Typed responses",
+      "Retry + idempotency",
+      "pytest fixtures"
+    ],
+    "docsUrl": "./docs.html"
+  },
+  {
+    "id": "php",
+    "name": "PHP",
+    "lang": "PHP",
+    "accent": "php",
+    "package": "apiforge/apiforge-php",
+    "version": "0.9.3",
+    "install": "composer require apiforge/apiforge-php",
+    "registry": "Packagist",
+    "updated": "2026-08-16T23:52:12.548Z",
+    "features": [
+      "PSR-18 compatible",
+      "Guzzle transport",
+      "Webhook signature helper"
+    ],
+    "docsUrl": "./docs.html"
+  },
+  {
+    "id": "go",
+    "name": "Go",
+    "lang": "Go",
+    "accent": "go",
+    "package": "github.com/apiforge/apiforge-go",
+    "version": "1.2.4",
+    "install": "go get github.com/apiforge/apiforge-go",
+    "registry": "Go modules",
+    "updated": "2026-08-27T23:52:12.548Z",
+    "features": [
+      "Context-aware",
+      "Zero allocations on hot path",
+      "Retry + idempotency"
+    ],
+    "docsUrl": "./docs.html"
+  },
+  {
+    "id": "ruby",
+    "name": "Ruby",
+    "lang": "Rb",
+    "accent": "rb",
+    "package": "apiforge",
+    "version": "0.8.0",
+    "install": "gem install apiforge",
+    "registry": "RubyGems",
+    "updated": "2026-08-08T23:52:12.548Z",
+    "features": [
+      "ActiveSupport integration",
+      "Retry + idempotency",
+      "Webhook signature helper"
+    ],
+    "docsUrl": "./docs.html"
+  }
+]

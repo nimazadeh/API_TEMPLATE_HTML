@@ -1,0 +1,27 @@
+// =============================================================
+// APIForge X — Components: Breadcrumb (re-theme of Bootstrap)
+// Muted trail with an accent current item, logical separators.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.breadcrumb {
+  --bs-breadcrumb-margin-bottom: 0;
+  --bs-breadcrumb-divider-color: var(--text-tertiary);
+  --bs-breadcrumb-item-active-color: var(--text-secondary);
+  --bs-breadcrumb-font-size: var(--fs-body-sm);
+  align-items: center;
+  margin-bottom: 0;
+
+  .breadcrumb-item {
+    a {
+      color: var(--text-tertiary);
+      &:hover {
+        color: var(--text-primary);
+      }
+    }
+    &.active {
+      color: var(--text-secondary);
+    }
+  }
+}

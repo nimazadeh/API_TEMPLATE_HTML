@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Metrics — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body data-env="live">
+    <div class="app-shell">
+      <aside class="app-sidebar">
+        <div class="sidebar-brand">
+          <span class="brand-mark"><i data-lucide="zap"></i></span>
+          <span class="brand-name">APIForge X</span>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Primary">
+          <div class="nav-group">
+            <div class="nav-group__label">Overview</div>
+            <a class="nav-item" href="./dashboard.html">
+              <i data-lucide="layout-dashboard"></i><span>Overview</span>
+            </a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Developer</div>
+            <a class="nav-item" href="./apis.html">
+              <i data-lucide="code-2"></i><span>APIs</span>
+            </a>
+            <a class="nav-item" href="./endpoints.html">
+              <i data-lucide="braces"></i><span>Endpoints</span>
+            </a>
+            <a class="nav-item" href="./api-keys.html">
+              <i data-lucide="key"></i><span>API Keys</span>
+            </a>
+            <a class="nav-item" href="./logs.html">
+              <i data-lucide="scroll-text"></i><span>Logs</span>
+            </a>
+            <a class="nav-item" href="./webhooks.html">
+              <i data-lucide="webhook"></i><span>Webhooks</span>
+            </a>
+            <a class="nav-item" href="./docs.html">
+              <i data-lucide="book-open"></i><span>Documentation</span>
+            </a>
+            <a class="nav-item" href="./sdk.html">
+              <i data-lucide="package"></i><span>SDKs</span>
+            </a>
+            <a class="nav-item" href="./api-reference.html">
+              <i data-lucide="book-marked"></i><span>API Reference</span>
+            </a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Analytics</div>
+            <a class="nav-item" href="./usage.html">
+              <i data-lucide="bar-chart-3"></i><span>Usage</span>
+            </a>
+            <a class="nav-item" href="./errors.html">
+              <i data-lucide="bug"></i><span>Errors</span>
+            </a>
+            <a class="nav-item" href="./rate-limits.html">
+              <i data-lucide="gauge"></i><span>Rate Limits</span>
+            </a>
+            <a class="nav-item is-active" href="./metrics.html">
+              <i data-lucide="activity"></i><span>Metrics</span>
+            </a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Workspace</div>
+            <a class="nav-item" href="./environments.html">
+              <i data-lucide="server"></i><span>Environments</span>
+            </a>
+            <a class="nav-item" href="./team.html">
+              <i data-lucide="users"></i><span>Team</span>
+            </a>
+            <a class="nav-item" href="./billing.html">
+              <i data-lucide="credit-card"></i><span>Billing</span>
+            </a>
+            <a class="nav-item" href="./notifications.html">
+              <i data-lucide="bell"></i><span>Notifications</span>
+            </a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Account</div>
+            <a class="nav-item" href="./profile.html">
+              <i data-lucide="user"></i><span>Profile</span>
+            </a>
+            <a class="nav-item" href="./settings.html">
+              <i data-lucide="settings"></i><span>Settings</span>
+            </a>
+          </div>
+        </nav>
+
+        <div class="sidebar-foot">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="Environment">
+            <button type="button" class="env-option" data-env="test"><span class="dot"></span>Test</button>
+            <button type="button" class="env-option" data-env="live"><span class="dot"></span>Live</button>
+          </div>
+          <div class="sidebar-user dropdown dropup">
+            <button type="button" class="sidebar-user__toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="avatar">AP</span>
+              <span class="sidebar-user__meta">
+                <span class="name">Arash P.</span>
+                <span class="email">arash@apiforge.dev</span>
+              </span>
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-header">arash@apiforge.dev</div>
+              <a class="dropdown-item" href="./profile.html"><i data-lucide="user"></i> Profile</a>
+              <a class="dropdown-item" href="./settings.html"><i data-lucide="settings"></i> Settings</a>
+              <a class="dropdown-item" href="./docs.html"><i data-lucide="book-open"></i> Documentation</a>
+              <hr class="dropdown-divider" />
+              <a class="dropdown-item is-danger" href="./login.html"><i data-lucide="log-out"></i> Sign out</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <header class="app-header">
+        <button type="button" class="btn btn-icon header-burger" aria-label="Open menu" data-bs-toggle="offcanvas" data-bs-target="#sidebar-drawer" aria-controls="sidebar-drawer">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="header-title">
+          <span class="crumb">APIForge X</span>
+          <span class="crumb-sep">/</span>
+          <span class="title">Metrics</span>
+        </div>
+        <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="Search (⌘K)">
+          <i data-lucide="search"></i>
+          <span class="text-tertiary">Search…</span>
+          <span class="kbd-hint">⌘K</span>
+        </button>
+        <div class="header-actions">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="Environment">
+            <button type="button" class="env-option" data-env="test"><span class="dot"></span>Test</button>
+            <button type="button" class="env-option" data-env="live"><span class="dot"></span>Live</button>
+          </div>
+          <div class="dropdown" data-theme-menu>
+            <button type="button" class="btn btn-icon" aria-label="Theme" data-bs-toggle="dropdown" aria-expanded="false">
+              <i data-lucide="sun-moon"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <button type="button" class="dropdown-item" data-mode="dark" role="menuitemradio"><i data-lucide="sun-moon"></i> Dark <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-mode="light" role="menuitemradio"><i data-lucide="sun-moon"></i> Light <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-mode="system" role="menuitemradio"><i data-lucide="sun-moon"></i> System <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-icon" aria-label="Help" data-bs-toggle="tooltip" data-bs-title="Help">
+            <i data-lucide="help-circle"></i>
+          </button>
+          <a class="btn btn-icon" href="./notifications.html" aria-label="Notifications">
+            <i data-lucide="bell"></i>
+          </a>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <div class="env-banner" data-env-banner hidden>
+          <i data-lucide="alert-triangle"></i>
+          You are viewing <strong>test data</strong>. All keys use the <code class="ltr-isolate">sk_test_</code> prefix.
+        </div>
+        <div class="app-main__inner">
+
+          <header class="toolbar">
+            <div>
+              <h1 class="mb-1">Metrics</h1>
+              <p class="text-secondary mb-0">API observability — volume, latency percentiles, error rate and availability.</p>
+            </div>
+            <div class="toolbar__actions">
+              <div class="seg" role="group" aria-label="Environment compare">
+                <button type="button" class="seg__item is-active" data-compare="live" aria-pressed="true">Production</button>
+                <button type="button" class="seg__item" data-compare="staging" aria-pressed="false">Staging</button>
+              </div>
+              <div class="seg" role="group" aria-label="Time range">
+                <button type="button" class="seg__item" data-range="1h" aria-pressed="false">1h</button>
+                <button type="button" class="seg__item is-active" data-range="24h" aria-pressed="true">24h</button>
+                <button type="button" class="seg__item" data-range="7d" aria-pressed="false">7d</button>
+                <button type="button" class="seg__item" data-range="30d" aria-pressed="false">30d</button>
+              </div>
+            </div>
+          </header>
+
+          <section class="row g-3 mb-4" aria-label="Key metrics">
+            <div class="col-6 col-lg"><div class="card card--dense stat"><span class="stat-label">Requests</span><span class="stat-value" id="metric-requests">—</span><span class="stat-foot" id="metric-range-label">Last 24 hours</span></div></div>
+            <div class="col-6 col-lg"><div class="card card--dense stat"><span class="stat-label">Error rate</span><span class="stat-value" id="metric-error-rate">—</span><span class="stat-foot">Across all endpoints</span></div></div>
+            <div class="col-6 col-lg"><div class="card card--dense stat"><span class="stat-label">P95 latency</span><span class="stat-value" id="metric-p95">—</span><span class="stat-foot">95th percentile</span></div></div>
+            <div class="col-6 col-lg"><div class="card card--dense stat"><span class="stat-label">P99 latency</span><span class="stat-value" id="metric-p99">—</span><span class="stat-foot">99th percentile</span></div></div>
+            <div class="col-6 col-lg"><div class="card card--dense stat"><span class="stat-label">Availability</span><span class="stat-value" id="metric-availability">—</span><span class="stat-foot">Rolling uptime</span></div></div>
+          </section>
+
+          <section class="row g-3 mb-4">
+            <div class="col-12 col-xl-6">
+              <div class="card card--dense h-100">
+                <div class="chart">
+                  <div class="chart__head"><div><div class="chart__title">Request volume</div><div class="chart__sentence">Requests over the selected window.</div></div></div>
+                  <div class="chart__canvas" style="--chart-height: 240px"><canvas id="chart-metric-volume" role="img" aria-label="Request volume over time"></canvas></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-xl-6">
+              <div class="card card--dense h-100">
+                <div class="chart">
+                  <div class="chart__head"><div><div class="chart__title">Latency percentiles</div><div class="chart__sentence">p50, p95 and p99 over the selected window.</div></div></div>
+                  <div class="chart__canvas" style="--chart-height: 240px"><canvas id="chart-metric-latency" role="img" aria-label="Latency percentiles over time"></canvas></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-xl-6">
+              <div class="card card--dense h-100">
+                <div class="chart">
+                  <div class="chart__head"><div><div class="chart__title">Error rate</div><div class="chart__sentence">Percentage of requests returning 4xx/5xx.</div></div></div>
+                  <div class="chart__canvas" style="--chart-height: 240px"><canvas id="chart-metric-errors" role="img" aria-label="Error rate over time"></canvas></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-xl-6">
+              <div class="card card--dense h-100">
+                <div class="chart">
+                  <div class="chart__head"><div><div class="chart__title">Status-code distribution</div><div class="chart__sentence">Share of requests by response class.</div></div></div>
+                  <div class="chart__canvas" style="--chart-height: 240px"><canvas id="chart-metric-status" role="img" aria-label="Status code distribution"></canvas></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="row g-3">
+            <div class="col-12 col-xl-6">
+              <div class="card card--dense mb-3 h-100">
+                <div class="card-header"><div><h4 class="card-title">By endpoint</h4><div class="card-subtitle">Requests, p95 and error rate per endpoint.</div></div></div>
+                <div class="table-responsive">
+                  <table class="table table--compact">
+                    <thead><tr><th scope="col">Method</th><th scope="col">Endpoint</th><th scope="col" class="cell-num">Requests</th><th scope="col" class="cell-num">p95</th><th scope="col" class="cell-num">Errors</th></tr></thead>
+                    <tbody id="breakdown-endpoint"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-xl-6">
+              <div class="card card--dense mb-3 h-100">
+                <div class="card-header"><div><h4 class="card-title">By API</h4><div class="card-subtitle">Request volume and error rate aggregated per service.</div></div></div>
+                <div class="table-responsive">
+                  <table class="table table--compact">
+                    <thead><tr><th scope="col">Service</th><th scope="col" class="cell-num">Requests</th><th scope="col" class="cell-num">p95</th><th scope="col" class="cell-num">Errors</th></tr></thead>
+                    <tbody id="breakdown-api"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-xl-6">
+              <div class="card card--dense mb-3">
+                <div class="card-header"><div><h4 class="card-title">By environment</h4><div class="card-subtitle">Traffic split and health per environment.</div></div></div>
+                <div class="table-responsive">
+                  <table class="table table--compact">
+                    <thead><tr><th scope="col">Environment</th><th scope="col" class="cell-num">Requests</th><th scope="col" class="cell-num">p95</th><th scope="col" class="cell-num">Errors</th><th scope="col" class="cell-num">Uptime</th></tr></thead>
+                    <tbody id="breakdown-env"></tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card card--dense mb-3">
+                <div class="card-header"><div><h4 class="card-title">By status code</h4><div class="card-subtitle">Response class distribution.</div></div></div>
+                <div class="table-responsive">
+                  <table class="table table--compact">
+                    <thead><tr><th scope="col">Class</th><th scope="col" class="cell-num">Requests</th><th scope="col" class="cell-num">Share</th></tr></thead>
+                    <tbody id="breakdown-status"></tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card card--dense">
+                <div class="card-header"><div><h4 class="card-title">By method</h4><div class="card-subtitle">Share of requests by HTTP verb.</div></div></div>
+                <div class="table-responsive">
+                  <table class="table table--compact">
+                    <thead><tr><th scope="col">Method</th><th scope="col" class="cell-num">Requests</th><th scope="col" class="cell-num">Share</th></tr></thead>
+                    <tbody id="breakdown-method"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="Primary">
+      <div class="sidebar-brand">
+        <span class="brand-mark"><i data-lucide="zap"></i></span>
+        <span class="brand-name">APIForge X</span>
+        <button type="button" class="btn btn-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="Close menu"><i data-lucide="x"></i></button>
+      </div>
+      <nav class="sidebar-nav" aria-label="Primary">
+          <div class="nav-group">
+            <div class="nav-group__label">Overview</div>
+            <a class="nav-item" href="./dashboard.html">
+              <i data-lucide="layout-dashboard"></i><span>Overview</span>
+            </a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Developer</div>
+            <a class="nav-item" href="./apis.html">
+              <i data-lucide="code-2"></i><span>APIs</span>
+            </a>
+            <a class="nav-item" href="./endpoints.html">
+              <i data-lucide="braces"></i><span>Endpoints</span>
+            </a>
+            <a class="nav-item" href="./api-keys.html">
+              <i data-lucide="key"></i><span>API Keys</span>
+            </a>
+            <a class="nav-item" href="./logs.html">
+              <i data-lucide="scroll-text"></i><span>Logs</span>
+            </a>
+            <a class="nav-item" href="./webhooks.html">
+              <i data-lucide="webhook"></i><span>Webhooks</span>
+            </a>
+            <a class="nav-item" href="./docs.html">
+              <i data-lucide="book-open"></i><span>Documentation</span>
+            </a>
+            <a class="nav-item" href="./sdk.html">
+              <i data-lucide="package"></i><span>SDKs</span>
+            </a>
+            <a class="nav-item" href="./api-reference.html">
+              <i data-lucide="book-marked"></i><span>API Reference</span>
+            </a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Analytics</div>
+            <a class="nav-item" href="./usage.html">
+              <i data-lucide="bar-chart-3"></i><span>Usage</span>
+            </a>
+            <a class="nav-item" href="./errors.html">
+              <i data-lucide="bug"></i><span>Errors</span>
+            </a>
+            <a class="nav-item" href="./rate-limits.html">
+              <i data-lucide="gauge"></i><span>Rate Limits</span>
+            </a>
+            <a class="nav-item is-active" href="./metrics.html">
+              <i data-lucide="activity"></i><span>Metrics</span>
+            </a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Workspace</div>
+            <a class="nav-item" href="./environments.html">
+              <i data-lucide="server"></i><span>Environments</span>
+            </a>
+            <a class="nav-item" href="./team.html">
+              <i data-lucide="users"></i><span>Team</span>
+            </a>
+            <a class="nav-item" href="./billing.html">
+              <i data-lucide="credit-card"></i><span>Billing</span>
+            </a>
+            <a class="nav-item" href="./notifications.html">
+              <i data-lucide="bell"></i><span>Notifications</span>
+            </a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label">Account</div>
+            <a class="nav-item" href="./profile.html">
+              <i data-lucide="user"></i><span>Profile</span>
+            </a>
+            <a class="nav-item" href="./settings.html">
+              <i data-lucide="settings"></i><span>Settings</span>
+            </a>
+          </div>
+      </nav>
+    </div>
+
+    <nav class="bottom-tabbar" aria-label="Primary mobile">
+      <a class="bottom-tabbar__item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+      <a class="bottom-tabbar__item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
+      <a class="bottom-tabbar__item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
+      <a class="bottom-tabbar__item" href="./api-keys.html"><i data-lucide="key"></i><span>Keys</span></a>
+      <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="More">
+        <i data-lucide="more-horizontal"></i><span>More</span>
+      </button>
+    </nav>
+
+
+    <script type="module" src="/src/js/pages/metrics.js"></script>
+  </body>
+</html>

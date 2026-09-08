@@ -1,0 +1,170 @@
+// =============================================================
+// APIForge X — Components: Buttons
+// Types: primary, secondary, ghost, destructive, link.
+// Sizes: sm 28 / md 32 / lg 36. Icon buttons 32x32.
+// Source: docs/product/DESIGN_DIRECTION.md
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.btn {
+  --btn-h: 32px;
+  --btn-px: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--btn-h);
+  padding-inline: var(--btn-px);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  color: var(--text-primary);
+  background: transparent;
+  @include motion(200ms);
+  transition-property: background-color, border-color, color, opacity, transform;
+  transition-timing-function: $ease-out;
+
+  &:active {
+    transform: translateY(0.5px);
+  }
+  &:disabled,
+  &.is-disabled,
+  &[aria-disabled='true'] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  // Whole button interactive, no dead zones
+  svg {
+    flex: none;
+  }
+}
+
+// Sizes
+.btn-sm {
+  --btn-h: 28px;
+  --btn-px: 10px;
+  font-size: var(--fs-body-sm);
+}
+.btn-lg {
+  --btn-h: 36px;
+  --btn-px: 16px;
+  font-size: var(--fs-body);
+}
+
+// Primary — accent, white text
+.btn-primary {
+  background: var(--accent);
+  color: var(--text-on-accent);
+  border-color: transparent;
+  &:hover {
+    background: var(--accent-hover);
+  }
+  &:active {
+    background: var(--accent-active);
+  }
+}
+
+// Secondary — surface + border
+.btn-secondary {
+  background: var(--surface-2);
+  border-color: var(--border);
+  color: var(--text-primary);
+  &:hover {
+    background: var(--surface-3);
+    border-color: var(--border-hover);
+  }
+}
+
+// Ghost — transparent, text secondary
+.btn-ghost {
+  color: var(--text-secondary);
+  &:hover {
+    background: var(--surface-2);
+    color: var(--text-primary);
+  }
+}
+
+// Destructive — filled red
+.btn-danger {
+  background: var(--error);
+  color: var(--text-on-accent);
+  &:hover {
+    background: var(--error-active);
+  }
+}
+// Destructive ghost — red text
+.btn-danger-ghost {
+  color: var(--error);
+  &:hover {
+    background: var(--error-bg);
+  }
+}
+
+// Link-style
+.btn-link {
+  color: var(--accent);
+  height: auto;
+  padding-inline: 0;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Icon buttons — 32x32, ghost, must carry aria-label
+.btn-icon {
+  --btn-h: 32px;
+  width: 32px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  background: transparent;
+  &:hover {
+    background: var(--surface-2);
+    color: var(--text-primary);
+  }
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+// Small inline icon button (24x24) for table cells
+.btn-icon--sm {
+  width: 24px;
+  height: 24px;
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// Spinner inside loading buttons
+.btn .spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: afx-spin 0.6s linear infinite;
+}
+@keyframes afx-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Inline icon sizing helper
+.btn svg {
+  width: 16px;
+  height: 16px;
+}
+.btn-lg svg {
+  width: 18px;
+  height: 18px;
+}

@@ -1,0 +1,101 @@
+// =============================================================
+// APIForge X — Base: typography utilities & the five lanes
+// Lanes: PERSIAN_UI, LATIN_UI, TECHNICAL_TERM, CODE, NUMERIC_DATA.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+// Display (marketing hero / empty-state headline)
+.display {
+  font-family: var(--font-latin-ui);
+  font-size: var(--fs-display);
+  font-weight: 600;
+  letter-spacing: var(--track-display);
+  line-height: 1;
+}
+
+// Eyebrow label — the ONLY uppercase usage, with increased tracking
+.eyebrow {
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+// Body sizes
+.body-lg {
+  font-size: var(--fs-body-lg);
+  line-height: 1.6;
+}
+.body-sm {
+  font-size: var(--fs-body-sm);
+  color: var(--text-secondary);
+}
+.caption {
+  font-size: var(--fs-caption);
+  color: var(--text-tertiary);
+}
+
+// CODE lane — code, IDs, keys, shortcuts, status codes
+.mono {
+  font-family: var(--font-code);
+  font-size: var(--fs-mono);
+  line-height: var(--lh-mono);
+}
+.mono-sm {
+  font-family: var(--font-code);
+  font-size: var(--fs-mono-sm);
+}
+
+// TECHNICAL_TERM lane — Latin technical terms inside Persian text
+// (API, REST API, SDK, endpoint). Keeps the Latin UI face even when
+// the surrounding text is Vazirmatn. Pair with dir="ltr" for pure-Latin
+// terms so bidi stays predictable.
+.tech {
+  font-family: var(--font-technical);
+  unicode-bidi: isolate;
+}
+
+// NUMERIC_DATA lane — tabular numbers for ALL metrics (KPI, tables,
+// timestamps). .num is the semantic alias; .tabular-nums kept for compat.
+.num,
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+  font-family: var(--font-numeric);
+}
+
+// LTR isolation — code/keys/endpoints/JSON/URLs must never mirror in RTL.
+// Use with dir="ltr" attribute on the element. (D-011)
+.ltr-isolate {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: left;
+}
+
+// Persian number utilities (D-005)
+.num-fa {
+  font-family: var(--font-persian-ui);
+}
+.num-en {
+  font-family: var(--font-latin-ui);
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+// Secondary / tertiary text helpers
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+.text-tertiary {
+  color: var(--text-tertiary) !important;
+}
+.text-disabled {
+  color: var(--text-disabled) !important;
+}
+
+// Accent text
+.text-accent {
+  color: var(--accent) !important;
+}

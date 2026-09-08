@@ -1,0 +1,53 @@
+// =============================================================
+// APIForge X — Components: Segmented control
+// Pill-group toggle for date ranges, time ranges, and any mutually
+// exclusive choice. Mirrors in RTL via logical properties.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+}
+
+.seg__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  height: 24px;
+  padding-inline: 10px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--fs-body-sm);
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  @include motion(150ms);
+  transition-property: background-color, color;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+  &:hover {
+    color: var(--text-primary);
+  }
+  &.is-active {
+    background: var(--surface-3);
+    color: var(--text-primary);
+  }
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

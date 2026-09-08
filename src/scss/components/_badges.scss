@@ -1,0 +1,134 @@
+// =============================================================
+// APIForge X — Components: Badges
+// Method badges (GET/POST/PUT/DELETE/PATCH) + status badges (dot)
+// + scope badges + neutral. Pill radius, mono 12px, 20px height.
+// Source: docs/product/DESIGN_DIRECTION.md (Tables)
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 20px;
+  padding-inline: 8px;
+  font-family: var(--font-code);
+  font-size: var(--fs-mono-sm); // 12px
+  font-weight: 500;
+  line-height: 1;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+// Neutral
+.badge-neutral {
+  color: var(--text-secondary);
+  background: var(--neutral-bg);
+  border-color: var(--neutral-border);
+}
+
+// Accent (scopes, "new", counts)
+.badge-accent {
+  color: var(--accent);
+  background: var(--accent-subtle-bg);
+  border-color: var(--accent-subtle-border);
+}
+
+// Method badges — HTTP verb colors
+.badge-method {
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.badge-method--GET {
+  color: var(--info-fg);
+  background: var(--info-bg);
+  border-color: var(--info-border);
+}
+.badge-method--POST {
+  color: var(--success-fg);
+  background: var(--success-bg);
+  border-color: var(--success-border);
+}
+.badge-method--PUT {
+  color: var(--warning-fg);
+  background: var(--warning-bg);
+  border-color: var(--warning-border);
+}
+.badge-method--DELETE {
+  color: var(--error-fg);
+  background: var(--error-bg);
+  border-color: var(--error-border);
+}
+.badge-method--PATCH {
+  color: var(--violet-fg);
+  background: var(--violet-bg);
+  border-color: var(--violet-border);
+}
+
+// Status badges — dot + color. Color = meaning (200 green, 4xx yellow, 429 orange, 5xx red)
+.badge-status {
+  font-weight: 500;
+  gap: 6px;
+}
+.badge-status .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+.badge-status--success {
+  color: var(--success);
+  background: var(--success-bg);
+  border-color: var(--success-border);
+}
+.badge-status--error {
+  color: var(--error);
+  background: var(--error-bg);
+  border-color: var(--error-border);
+}
+.badge-status--warning {
+  color: var(--warning);
+  background: var(--warning-bg);
+  border-color: var(--warning-border);
+}
+.badge-status--info {
+  color: var(--info);
+  background: var(--info-bg);
+  border-color: var(--info-border);
+}
+.badge-status--neutral {
+  color: var(--text-secondary);
+  background: var(--neutral-bg);
+  border-color: var(--neutral-border);
+}
+
+// Generic status color mapping used by the table renderer (JS adds these)
+.badge-status--2xx,
+.badge-status--200,
+.badge-status--201,
+.badge-status--204 {
+  @extend .badge-status--success;
+}
+.badge-status--4xx,
+.badge-status--400,
+.badge-status--401,
+.badge-status--403,
+.badge-status--404 {
+  @extend .badge-status--warning;
+}
+.badge-status--429 {
+  color: var(--orange-fg);
+  background: var(--orange-bg);
+  border-color: var(--orange-border);
+}
+.badge-status--5xx,
+.badge-status--500,
+.badge-status--502,
+.badge-status--503 {
+  @extend .badge-status--error;
+}

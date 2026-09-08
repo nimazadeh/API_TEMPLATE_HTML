@@ -1,0 +1,51 @@
+// =============================================================
+// APIForge X — Components: Toast (re-theme of Bootstrap)
+// Feedback with an optional action (Undo). Bootstrap owns show/hide;
+// we own the surface. Toasts are created via afxToast() (toast.js).
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.toast {
+  --bs-toast-zindex: var(--z-toast);
+  --bs-toast-padding-x: 14px;
+  --bs-toast-padding-y: 12px;
+  --bs-toast-font-size: var(--fs-body-sm);
+  --bs-toast-color: var(--text-primary);
+  --bs-toast-bg: var(--surface-3);
+  --bs-toast-border-color: var(--border-hover);
+  --bs-toast-border-width: 1px;
+  --bs-toast-border-radius: var(--radius-md);
+  --bs-toast-box-shadow: var(--elevation-2);
+}
+
+.toast-stack {
+  position: fixed;
+  z-index: var(--z-toast);
+  bottom: 16px;
+  inset-inline-end: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.toast__icon {
+  flex: none;
+  display: inline-flex;
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+  &.is-success { color: var(--success); }
+  &.is-error { color: var(--error); }
+  &.is-info { color: var(--info); }
+}
+
+.toast__msg {
+  flex: 1;
+  min-width: 0;
+}
+
+.toast__action {
+  flex: none;
+}

@@ -1,0 +1,13 @@
+// =============================================================
+// APIForge X — Design Tokens: Motion
+// Transform & opacity only. Respects prefers-reduced-motion (see the
+// motion() mixin in _mixins.scss).
+// =============================================================
+
+:root {
+  --duration-fast: 150ms; // tooltip, icon hover
+  --duration-base: 200ms; // hover, focus, buttons, copy feedback
+  --duration-slow: 250ms; // modal, drawer, offcanvas
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+}

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="APIForge X pricing — Developer, Pro and Scale plans with usage-based overage." />
+    <title>Pricing — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body data-page="pricing">
+    <div class="site">
+      <header class="site-header">
+        <div class="site-container site-header__inner">
+          <a class="site-header__brand" href="./index.html">
+            <span class="brand-mark"><i data-lucide="zap"></i></span>
+            <span class="brand-name">APIForge X</span>
+          </a>
+          <nav class="site-nav" aria-label="Marketing">
+            <a class="site-nav__link" data-nav="home" href="./index.html">Product</a>
+            <a class="site-nav__link" data-nav="docs" href="./docs.html">Docs</a>
+            <a class="site-nav__link" data-nav="pricing" href="./pricing.html">Pricing</a>
+            <a class="site-nav__link" data-nav="changelog" href="./changelog.html">Changelog</a>
+            <a class="site-nav__link" data-nav="status" href="./status.html">Status</a>
+          </nav>
+          <div class="site-header__actions">
+            <button type="button" class="btn btn-icon" data-theme-toggle aria-label="Toggle theme" aria-pressed="false">
+              <i data-lucide="sun-moon"></i>
+            </button>
+            <a class="btn btn-ghost d-none d-sm-inline-flex" href="./login.html">Sign in</a>
+            <a class="btn btn-primary" href="./dashboard.html">Open dashboard</a>
+            <button type="button" class="btn btn-icon d-lg-none" aria-label="Open menu" data-bs-toggle="offcanvas" data-bs-target="#site-drawer" aria-controls="site-drawer">
+              <i data-lucide="menu"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="site-drawer" aria-labelledby="site-drawer-label">
+        <div class="offcanvas-header">
+          <span class="offcanvas-title" id="site-drawer-label"><span class="brand-mark"><i data-lucide="zap"></i></span> APIForge X</span>
+          <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="offcanvas-body p-0">
+          <nav class="site-drawer-nav" aria-label="Marketing mobile">
+            <a class="site-drawer-nav__link" data-nav="home" href="./index.html"><i data-lucide="zap"></i> Product</a>
+            <a class="site-drawer-nav__link" data-nav="docs" href="./docs.html"><i data-lucide="book-open"></i> Documentation</a>
+            <a class="site-drawer-nav__link" data-nav="pricing" href="./pricing.html"><i data-lucide="credit-card"></i> Pricing</a>
+            <a class="site-drawer-nav__link" data-nav="changelog" href="./changelog.html"><i data-lucide="clock"></i> Changelog</a>
+            <a class="site-drawer-nav__link" data-nav="status" href="./status.html"><i data-lucide="activity"></i> Status</a>
+            <a class="site-drawer-nav__link" href="./login.html"><i data-lucide="log-in"></i> Sign in</a>
+          </nav>
+        </div>
+      </div>
+
+      <main class="site-main">
+        <section class="hero">
+          <div class="site-container">
+            <div class="hero__inner">
+              <span class="eyebrow">Pricing</span>
+              <h1 class="hero__title">Simple plans, <span class="hero__title-accent">usage-based</span> scale</h1>
+              <p class="body-lg text-secondary hero__sub">
+                Start free, upgrade when you ship. Overage is billed per million
+                requests — never a forced plan jump.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section site-container">
+          <div class="pricing-grid" id="pricing-grid" aria-label="Plans"></div>
+        </section>
+
+        <section class="section site-container">
+          <div class="card card--dense" style="padding: var(--space-5);">
+            <div class="d-flex flex-wrap gap-4 align-items-center justify-content-between">
+              <div>
+                <h3 class="mb-1">Usage-based overage</h3>
+                <p class="text-secondary mb-0">Every plan includes its request allowance. Beyond that, requests are billed at a flat rate — no negotiation, no surprises.</p>
+              </div>
+              <div class="mono text-primary">$0.50 / 1M requests</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section site-container">
+          <div class="section-head">
+            <span class="eyebrow">Compare</span>
+            <h2>Plan comparison</h2>
+          </div>
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="table table--compact" id="pricing-compare">
+                <thead>
+                  <tr>
+                    <th scope="col">Feature</th>
+                    <th scope="col">Developer</th>
+                    <th scope="col">Pro</th>
+                    <th scope="col">Scale</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="section site-container">
+          <div class="section-head">
+            <span class="eyebrow">FAQ</span>
+            <h2>Questions, answered</h2>
+          </div>
+          <div class="faq">
+            <div class="faq__item">
+              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="false" aria-controls="faq-1">
+                Can I change plans at any time? <i data-lucide="chevron-down"></i>
+              </button>
+              <div class="collapse" id="faq-1"><div class="faq__answer">Yes. Upgrades apply immediately and are prorated. Downgrades apply at the start of your next billing cycle.</div></div>
+            </div>
+            <div class="faq__item">
+              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-2" aria-expanded="false" aria-controls="faq-2">
+                How is overage billed? <i data-lucide="chevron-down"></i>
+              </button>
+              <div class="collapse" id="faq-2"><div class="faq__answer">Requests beyond your plan allowance are billed at a flat rate per million requests, itemized on your invoice.</div></div>
+            </div>
+            <div class="faq__item">
+              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-3" aria-expanded="false" aria-controls="faq-3">
+                Do I need a credit card to start? <i data-lucide="chevron-down"></i>
+              </button>
+              <div class="collapse" id="faq-3"><div class="faq__answer">No. The Developer plan is free and requires no payment method. A card is only needed for Pro and Scale.</div></div>
+            </div>
+            <div class="faq__item">
+              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-4" aria-expanded="false" aria-controls="faq-4">
+                What happens if I hit my rate limit? <i data-lucide="chevron-down"></i>
+              </button>
+              <div class="collapse" id="faq-4"><div class="faq__answer">Requests above your per-second limit return HTTP 429. Your allowance resets each second — no full-day lockouts.</div></div>
+            </div>
+            <div class="faq__item">
+              <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-5" aria-expanded="false" aria-controls="faq-5">
+                Is there a long-term contract? <i data-lucide="chevron-down"></i>
+              </button>
+              <div class="collapse" id="faq-5"><div class="faq__answer">No. Plans are month-to-month and you can cancel at any time from Billing → Cancel plan.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section site-container">
+          <div class="cta-band">
+            <span class="eyebrow">Ready when you are</span>
+            <h2 class="mt-2 mb-3">Try every page before you buy</h2>
+            <p class="body-lg text-secondary mb-4">The live demo is the full template — explore it, flip themes, switch to Persian RTL.</p>
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+              <a class="btn btn-primary btn-lg" href="./dashboard.html">Open the live demo <i data-lucide="arrow-right"></i></a>
+              <a class="btn btn-ghost btn-lg" href="./changelog.html">See what's new</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="site-container">
+          <div class="site-footer__grid">
+            <div class="site-footer__brand">
+              <span class="brand-mark"><i data-lucide="zap"></i></span>
+              <span class="brand-name">APIForge X</span>
+              <p class="mt-2">A premium API infrastructure HTML template. Engineered for developer platforms, ready for the Iranian market.</p>
+            </div>
+            <div>
+              <div class="site-footer__col-label">Product</div>
+              <a class="site-footer__link" href="./dashboard.html">Overview</a>
+              <a class="site-footer__link" href="./logs.html">Logs</a>
+              <a class="site-footer__link" href="./webhooks.html">Webhooks</a>
+              <a class="site-footer__link" href="./api-keys.html">API Keys</a>
+              <a class="site-footer__link" href="./pricing.html">Pricing</a>
+            </div>
+            <div>
+              <div class="site-footer__col-label">Resources</div>
+              <a class="site-footer__link" href="./docs.html">Documentation</a>
+              <a class="site-footer__link" href="./style-guide.html">Style guide</a>
+              <a class="site-footer__link" href="./changelog.html">Changelog</a>
+              <a class="site-footer__link" href="./status.html">Status</a>
+              <a class="site-footer__link" href="./rtl.html">RTL demo</a>
+            </div>
+          </div>
+          <div class="site-footer__legal">
+            <span>© 2026 APIForge X. Demo product — no real backend.</span>
+            <span>Bootstrap 5 · SCSS · Vite · Chart.js · Lucide</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="./src/js/pages/pricing.js"></script>
+  </body>
+</html>

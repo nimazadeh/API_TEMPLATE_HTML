@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="robots" content="noindex" />
+    <title>Page not found — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body data-page="404">
+    <div class="site">
+      <header class="site-header">
+        <div class="site-container site-header__inner">
+          <a class="site-header__brand" href="./index.html">
+            <span class="brand-mark"><i data-lucide="zap"></i></span>
+            <span class="brand-name">APIForge X</span>
+          </a>
+          <div class="site-header__actions">
+            <button type="button" class="btn btn-icon" data-theme-toggle aria-label="Toggle theme" aria-pressed="false">
+              <i data-lucide="sun-moon"></i>
+            </button>
+            <a class="btn btn-primary" href="./dashboard.html">Open dashboard</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="site-main">
+        <section class="site-container">
+          <div class="error-page">
+            <div>
+              <div class="error-page__code ltr-isolate">404</div>
+              <h1 class="display mt-3 mb-3">This page doesn't exist</h1>
+              <p class="body-lg text-secondary mb-0" style="max-width: 480px; margin-inline: auto;">
+                The URL may be mistyped, or the page may have moved. The dashboard
+                is a good place to start.
+              </p>
+              <div class="error-page__cta">
+                <a class="btn btn-primary btn-lg" href="./dashboard.html">Open dashboard <i data-lucide="arrow-right"></i></a>
+                <a class="btn btn-ghost btn-lg" href="./index.html">Back to home</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./src/js/pages/404.js"></script>
+  </body>
+</html>

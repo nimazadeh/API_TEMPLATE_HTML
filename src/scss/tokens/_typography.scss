@@ -1,0 +1,55 @@
+// =============================================================
+// APIForge X — Design Tokens: Typography
+// Five lanes (established in Phase 0/1, formalized here):
+//   PERSIAN_UI     Vazirmatn — Persian interface & headings
+//   LATIN_UI       Inter Variable — English interface & headings
+//   TECHNICAL_TERM Inter — technical terms inside Persian text
+//                  (API, REST API, SDK, endpoint) — must NOT switch
+//                  to Vazirmatn when embedded in RTL
+//   CODE           JetBrains Mono — code, paths, identifiers, JSON
+//   NUMERIC_DATA   Inter/Vazirmatn with tabular-nums (tnum) alignment
+// Source: docs/product/DESIGN_DIRECTION.md (D-005)
+// =============================================================
+
+:root {
+  // Canonical five-lane tokens
+  --font-persian-ui: 'Vazirmatn', 'Inter Variable', Tahoma, sans-serif;
+  --font-latin-ui: 'Inter Variable', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  --font-technical: 'Inter Variable', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  --font-code: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-numeric: 'Inter Variable', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+
+  // Type scale (app) — see DESIGN_DIRECTION.md type table
+  --fs-display: 48px;
+  --fs-h1: 32px;
+  --fs-h2: 24px;
+  --fs-h3: 20px;
+  --fs-h4: 16px;
+  --fs-body-lg: 16px;
+  --fs-body: 14px;
+  --fs-body-sm: 13px;
+  --fs-caption: 12px;
+  --fs-eyebrow: 11px;
+  --fs-mono: 13px;
+  --fs-mono-sm: 12px;
+
+  // Line heights
+  --lh-tight: 1.1;
+  --lh-body: 1.5;
+  --lh-body-fa: 1.7; // Vazirmatn needs +0.1 vs English ascenders
+  --lh-mono: 1.6;
+
+  // Tracking (letter-spacing)
+  --track-display: -1.2px;
+  --track-h1: -0.6px;
+  --track-h2: -0.3px;
+  --track-h3: -0.2px;
+  --track-h4: -0.1px;
+  --track-eyebrow: 0.6px;
+}
+
+// Display / heading tracking is deliberately tight; never weight 700
+// for Latin headings (600 max). Uppercase only for eyebrows.

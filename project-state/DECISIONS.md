@@ -213,13 +213,163 @@ Additions: Vanilla JS fuzzy search for command palette, not heavy lib.
 
 ---
 
-## Future Decisions (To Be Made in Phase 1+)
+## Phase 1 Decisions
 
-- D-016: Sidebar resizable? Decision pending Phase 1 — start fixed 256px, add resizable later if easy.
-- D-017: Chart.js vs ApexCharts for usage? Decision: Chart.js for now, but allow Apex if needed for more complex.
-- D-018: Separate /fa/ folder for Persian or ?lang=fa toggle? Decision pending — start with ?lang=fa JS toggle for demo, but provide both options in docs.
-- D-019: Auth pages minimal or with OAuth? Decision: Minimal like Vercel, with optional OAuth buttons.
-- D-020: Documentation in-app vs external? Decision: In-app minimal reference + link to external, but same design system.
+### D-016: Sidebar Resizable — Deferred
+
+**Date:** 2026-09-07
+**Decision:** Fixed 256px (collapsible to 64px icon rail on tablet, drawer + bottom bar on mobile). Resizable drag-handle deferred — no need before buyers ask.
+**Rationale:** Phase 1 is foundation; a drag handle adds complexity without changing the visual system.
+
+### D-017: Bootstrap Import Strategy — Curated @import Subset
+
+**Date:** 2026-09-07
+**Context:** Bootstrap 5.3.8 partials share one Sass scope via legacy `@import`; the `@use … with` mechanism only partially applies.
+**Decision:** Import a curated subset (`functions`, `variables`, `variables-dark`, `maps`, `mixins`, `utilities`, `root`, `reboot`, `type`, `images`, `containers`, `grid`, `helpers`, `utilities/api`) with variable overrides declared before the import stack. Components (buttons/forms/tables/cards/badges/code/modals/tooltips/progress) are built by us.
+**Rationale:** Keeps the bundle lean and guarantees the APIForge look instead of stock Bootstrap.
+**Consequences:** Bootstrap's `color-functions`/`import` Sass deprecations must be silenced via `silenceDeprecations` in Vite.
+
+### D-018: RTL Demo — Separate `rtl.html`
+
+**Date:** 2026-09-07
+**Decision:** Ship a dedicated `rtl.html` with `<html dir="rtl" lang="fa">` (full Persian demo) rather than a `?lang=fa` toggle. A runtime `dir` toggle stays possible later.
+**Rationale:** Simplest, most reliable demo for buyers; logical properties handle mirroring automatically.
+
+### D-019: Lucide Registry — Tree-Shaken Import Map
+
+**Date:** 2026-09-07
+**Decision:** Maintain `src/js/components/icons.js` importing only the icons the template uses; `createIcons({ icons })` maps `data-lucide` kebab names to PascalCase exports. Do not import the full `icons` object.
+**Rationale:** Full `icons` object ballooned the main JS bundle to ~370 KB; the curated registry is ~26 KB (9.3 KB gzip).
+**Consequences:** Each new icon must be added to the registry (documented in README).
+
+### D-020: Modal/Drawer Backdrop — Single Global Element
+
+**Date:** 2026-09-07
+**Decision:** One JS-managed `.backdrop` appended to `<body>`, shared by all modals/drawers, instead of a backdrop inside each dialog.
+**Rationale:** `position: fixed` children inside `transform`-animated containers resolve against the container, not the viewport — a per-dialog backdrop would break the full-screen dim.
+**Consequences:** `openDialog`/`closeDialog` track an open-count; Escape/backdrop-click close all open dialogs.
+
+> **Superseded (Phase 2):** The custom modal/drawer module (and its `.backdrop`/`openDialog` API) was removed. Overlays now use Bootstrap Modal / Offcanvas data-APIs, which manage their own backdrop and Escape handling. See D-021 / D-025.
+
+## Phase 2 Decisions
+
+### D-021: Overlay Behavior — Bootstrap Data-APIs, Not Custom Modules
+
+**Date:** 2026-09-07
+**Decision:** Dropdown, Modal, Offcanvas, Collapse, Tab, Toast, and Tooltip use Bootstrap's ESM data-APIs (delegated `[data-bs-toggle]`/`[data-bs-dismiss]`), imported via `src/js/core/bootstrap.js`. The custom `dropdown.js`, `tooltip.js`, and `modal.js` modules were deleted.
+**Rationale:** Bootstrap is the toolkit — reuse its accessible, Popper-powered positioning and focus/keyboard behavior instead of maintaining parallel custom code; tree-shaking keeps only imported components.
+**Consequences:** Markup uses `data-bs-toggle`/`data-bs-target`/`data-bs-dismiss`/`data-bs-title`; toasts are built programmatically with `Toast.getOrCreateInstance` (`afxToast`); `@popperjs/core` is an explicit dependency.
+
+### D-022: Single Latin UI Font — Inter Variable
+
+**Date:** 2026-09-07
+**Decision:** Inter Variable is the ONE Latin UI/display font. Inter Tight and Geist are not used (and are not mixed).
+**Rationale:** One variable family covers UI text and display (tight tracking via letter-spacing, not a second file); Geist is Vercel-branded and Inter Tight duplicates Inter for marginal gain.
+**Consequences:** `--font-latin-ui` and `--font-technical` both resolve to Inter Variable; documented in `src/scss/base/_fonts.scss`.
+
+### D-023: Five-Lane Typography Tokens Are Canonical
+
+**Date:** 2026-09-07
+**Decision:** The five lanes are the only font tokens: `--font-persian-ui` (Vazirmatn), `--font-latin-ui` (Inter), `--font-technical` (Inter), `--font-code` (JetBrains Mono), `--font-numeric` (tabular). Legacy aliases (`--font-sans`, `--font-display`, `--font-mono`, `--font-fa`) were removed.
+**Rationale:** Unambiguous single source of truth; no interchangeable font mixing (the constraint).
+**Consequences:** Components use the lane tokens directly; `.tech`, `.num`, `.num-fa`, `.num-en`, `.mono` are the lane utilities.
+
+### D-024: Semantic Surface Ladder + Bootstrap `--bs-*` Bridge
+
+**Date:** 2026-09-07
+**Decision:** Replace ad-hoc `--bg-*`/`--shadow-*` with a semantic ladder (`--surface-canvas`, `--surface-0..3`, `--surface-interactive`, `--surface-overlay`, `--surface-code`; `--elevation-1..3`), plus RGB-triplet tokens (`--accent-rgb`, `--text-primary-rgb`, `--surface-canvas-rgb`). Bootstrap's `--bs-*` custom properties are re-mapped to these tokens in `base/_bootstrap-overrides.scss`.
+**Rationale:** A single semantic source of truth; Bootstrap utilities (`.text-*`, `.bg-body`, `.border`) stay theme-aware without per-component overrides; code surfaces stay dark in both themes.
+**Consequences:** No literal colors/spacing in components or layouts; light theme flips through the same tokens.
+
+### D-025: Drawers Are Bootstrap Offcanvas (with Logical RTL Mirroring)
+
+**Date:** 2026-09-07
+**Decision:** Drawers (log detail, request inspector, mobile sidebar) are Bootstrap Offcanvas — `.offcanvas offcanvas-start/end` — with a logical-property override for RTL mirroring (Bootstrap 5.3 SCSS positions offcanvas with physical left/right).
+**Rationale:** Reuses accessible focus trap/Escape/backdrop; the logical override keeps RTL correct without relying on `bootstrap.rtl.css`.
+**Consequences:** `.sidebar-drawer` is now `offcanvas offcanvas-start sidebar-drawer`; the old custom `.drawer`/`.sidebar-drawer` positioning was removed; D-020's custom backdrop is obsolete.
+
+### D-026: `rtl-test.html` Is a Dedicated Test Harness
+
+**Date:** 2026-09-07
+**Decision:** `rtl.html` stays the polished Persian demo; a separate `rtl-test.html` hosts difficult mixed RTL/LTR scenarios plus theme (dark/light/system) and direction (rtl/ltr) switching.
+**Rationale:** The two pages have different jobs — demo vs. regression harness; separation keeps the demo clean and the harness exhaustive.
+**Consequences:** `rtl-test.html` + `src/js/pages/rtl-test.js` + `src/scss/pages/_rtl-test.scss`; registered in `vite.config.js`; system-theme mode with live `matchMedia` listener.
+
+### D-027: Detail Views — Offcanvas Drawer First (resolves old D-024)
+
+**Date:** 2026-09-07
+**Decision:** Log/request/key detail views open as an offcanvas drawer (keeps list context); a deep-linkable page can be added later if needed.
+**Consequences:** Phase 3 detail UIs reuse `.offcanvas`; drawer content is the request inspector (headers, body JSON, timeline, "Copy as cURL").
+
+### D-028: Chart.js Is the Product Charting Layer (resolves the Phase 3 "Chart.js vs ApexCharts" item)
+
+**Date:** 2026-09-07
+**Decision:** Chart.js (4.x) powers all product charts via a thin `components/charts.js` adapter — tree-shaken registration (Line/Bar/Doughnut + Category/Linear + Filler/Tooltip/Legend), CSS-variable theming, and `afx:theme` re-render.
+**Consequences:** No second charting library; charts stay LTR inside an LTR container; pages call `makeChart(canvas, factory(readTokens))` and `initCharts()` once.
+
+### D-029: Mock Keys Are Masked with a Reveal-Once Secret Derived from `prefix`
+
+**Date:** 2026-09-07
+**Decision:** `mock-keys.json` stores only the key `prefix` (e.g. `sk_live_…`); the full secret is a deterministic in-session suffix derived from the key id and only shown through the reveal-once modal.
+**Consequences:** No full secrets hardcoded in data/HTML; copy buttons copy the full secret; rotation regenerates the prefix + clears the derived secret.
+
+### D-030: The Logs Filter Row Reuses `.filter-bar` + `.seg` (not a bespoke widget)
+
+**Date:** 2026-09-07
+**Decision:** Logs filters use the shared `.filter-bar` scaffold (`filter-bar__grow` for search, `filter-bar__select` for selects) and the shared `.seg`/`.seg__item` segmented control for methods.
+**Consequences:** The page-specific `.filterbar`/`.filterbar__segments` markup was removed; filter state lives in the page module (`state` object) and re-renders the shared `renderLogsFull`.
+
+### D-031: Usage Page Uses Page-Scoped SCSS (`pages/_usage.scss`) for Layout Only
+
+**Date:** 2026-09-07
+**Decision:** Usage-specific layout (`.usage-plan`, `.attribution`, `.top-list`) lives in `src/scss/pages/_usage.scss`; primitives (`.progress`, `.usage-row`, `.stat-strip`, `.chart`, `.card--dense`, `.seg`) are reused from shared partials.
+**Consequences:** No per-page duplication of progress/stat/chart styles; the only new partial is page-scoped and tokens-only.
+
+### D-032: Webhook & Error Detail Are Drawers Reusing the Inspector Pattern (resolves the pending D-027 item)
+
+**Date:** 2026-09-07
+**Decision:** Webhook delivery detail and error detail open as offcanvas drawers, reusing the Phase 3A inspector scaffold (`.offcanvas.inspector`, `.inspector-head`, `.inspector-section`, `.kv`, `.code-block`); the delivery timeline reuses `.timeline` (extended with `is-info`/`is-neutral` node states).
+**Consequences:** New `components/webhook-detail.js` and `components/error-detail.js`; no separate detail pages; drawers are 100% data-driven from `mock-webhook-deliveries.json`/`mock-errors.json`.
+
+### D-033: Phase 3B Data Uses a Second Seeded PRNG to Keep Phase 3A Byte-Identical
+
+**Date:** 2026-09-07
+**Decision:** The generator gains a separate `mulberry32` instance (`randB`, seed `20260907 ^ 0x3b3b1a`) for all Phase 3B entities so the Phase 3A datasets' random values stay byte-identical; only `Date.now()`-relative timestamps drift on regeneration.
+**Consequences:** `mock-keys.json` gains exactly 2 staging keys (appended after the original 6, which stay identical); `mock-environments.json` gains a `staging` entry; all new files are deterministic and regenerable.
+
+### D-034: New Page-Scoped SCSS Only Where Styles Are Genuinely New
+
+**Date:** 2026-09-07
+**Decision:** Only two new partials ship for Phase 3B — `pages/_errors.scss` (stack-frame presentation) and `pages/_rate-limits.scss` (limit cards + rule usage bars). Webhooks/endpoints/environments reuse existing components (`table`, `code-block`, `timeline`, `params-table`, `alert`, `kpi`, `progress`, `seg`) with zero new styles.
+**Consequences:** No duplicated CSS; the QA "no duplicated CSS" check stays green.
+
+### D-035: Endpoint Auth Is Derived Deterministically, Not Stored
+
+**Date:** 2026-09-07
+**Decision:** Endpoint "authentication" (API key / Bearer token / Signing secret / None) is derived from the endpoint's API via a static map in `endpoints.js` rather than added to `mock-endpoints.json`, avoiding churn to Phase 3A data. The create/edit modal stores the user-chosen `auth` on the in-session record.
+**Consequences:** `mock-endpoints.json` untouched by Phase 3B; auth is deterministic and overridable in-session.
+
+## Phase 4 (Re-scoped) Decisions
+
+### D-036: Marketing Shell — Separate `site` Layout + `bootSite()`, Live-Preview Hero
+
+**Date:** 2026-09-08
+**Context:** Phase 4 (re-scoped) adds the marketing layer (landing, pricing, changelog, status, 404) on top of the finished app. D-014 says the landing must be minimal, dark-first, with **product screenshots as the hero (Linear principle), not illustrations** — but this sandbox has no browser, so a real screenshot cannot be captured here.
+**Options:**
+1. Ship a static PNG screenshot in the hero (impossible here — no browser; and a fake/AI image would violate the no-illustration rule).
+2. Ship an HTML/CSS "mock" screenshot (a dead replica — violates "every action works").
+3. Build the hero preview as a **live, working mini-dashboard** from the same seeded data the app uses (KPIs + Chart.js chart + activity timeline).
+**Decision:** Option 3 — a live product preview built from real components and `mock-observability.json` / `mock-activity.json`. Marketing pages get their own thin shell (`layouts/_site.scss`) and `src/js/site.js` (`bootSite()`: icons + theme + copy + nav) instead of the app `boot()` — no command palette, env switcher, or reveal-once on marketing pages. Real listing screenshots are produced by `marketplace/capture-screenshots.mjs` on the buyer's machine.
+**Rationale:** Honors D-014 (show the product, not an illustration) without a fake asset; the preview is interactive and truthful; the lighter boot keeps marketing pages lean and avoids app-only chrome.
+**Consequences:** Marketing pages duplicate the site header/footer per page (same convention as the app shell); `site.js` is the marketing entrypoint; the screenshot manifest + capture script are the single source of truth for listing imagery.
+
+---
+
+## Future Decisions (To Be Made in Phase 3C+)
+
+- Auth pages minimal or with OAuth? Decision: Minimal like Vercel, with optional OAuth buttons.
+- Documentation in-app vs external? Decision: In-app minimal reference + link to external, but same design system (out of 3B scope).
+- Metrics page: build `metrics.html` or fold into Usage? Decision deferred (nav item disabled, tagged Phase 3C).
 
 ---
 

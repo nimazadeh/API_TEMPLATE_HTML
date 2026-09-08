@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="APIForge X — a premium API infrastructure HTML template. Dashboard, logs, webhooks, API keys, billing, docs and RTL Persian, built with Bootstrap 5 + SCSS + Vite." />
+    <title>APIForge X — Premium API Infrastructure Template</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body data-page="home">
+    <div class="site">
+      <!-- ============ Header ============ -->
+      <header class="site-header">
+        <div class="site-container site-header__inner">
+          <a class="site-header__brand" href="./index.html">
+            <span class="brand-mark"><i data-lucide="zap"></i></span>
+            <span class="brand-name">APIForge X</span>
+          </a>
+          <nav class="site-nav" aria-label="Marketing">
+            <a class="site-nav__link" data-nav="home" href="./index.html">Product</a>
+            <a class="site-nav__link" data-nav="docs" href="./docs.html">Docs</a>
+            <a class="site-nav__link" data-nav="pricing" href="./pricing.html">Pricing</a>
+            <a class="site-nav__link" data-nav="changelog" href="./changelog.html">Changelog</a>
+            <a class="site-nav__link" data-nav="status" href="./status.html">Status</a>
+          </nav>
+          <div class="site-header__actions">
+            <button type="button" class="btn btn-icon" data-theme-toggle aria-label="Toggle theme" aria-pressed="false">
+              <i data-lucide="sun-moon"></i>
+            </button>
+            <a class="btn btn-ghost d-none d-sm-inline-flex" href="./login.html">Sign in</a>
+            <a class="btn btn-primary" href="./dashboard.html">Open dashboard</a>
+            <button type="button" class="btn btn-icon d-lg-none" aria-label="Open menu" data-bs-toggle="offcanvas" data-bs-target="#site-drawer" aria-controls="site-drawer">
+              <i data-lucide="menu"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Mobile nav drawer -->
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="site-drawer" aria-labelledby="site-drawer-label">
+        <div class="offcanvas-header">
+          <span class="offcanvas-title" id="site-drawer-label"><span class="brand-mark"><i data-lucide="zap"></i></span> APIForge X</span>
+          <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="offcanvas-body p-0">
+          <nav class="site-drawer-nav" aria-label="Marketing mobile">
+            <a class="site-drawer-nav__link" data-nav="home" href="./index.html"><i data-lucide="zap"></i> Product</a>
+            <a class="site-drawer-nav__link" data-nav="docs" href="./docs.html"><i data-lucide="book-open"></i> Documentation</a>
+            <a class="site-drawer-nav__link" data-nav="pricing" href="./pricing.html"><i data-lucide="credit-card"></i> Pricing</a>
+            <a class="site-drawer-nav__link" data-nav="changelog" href="./changelog.html"><i data-lucide="clock"></i> Changelog</a>
+            <a class="site-drawer-nav__link" data-nav="status" href="./status.html"><i data-lucide="activity"></i> Status</a>
+            <a class="site-drawer-nav__link" href="./login.html"><i data-lucide="log-in"></i> Sign in</a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- ============ Main ============ -->
+      <main class="site-main">
+        <!-- Hero -->
+        <section class="hero">
+          <div class="site-container">
+            <div class="hero__inner">
+              <span class="eyebrow">Premium API infrastructure template</span>
+              <h1 class="hero__title">The API platform your customers <span class="hero__title-accent">expect</span></h1>
+              <p class="body-lg text-secondary hero__sub">
+                APIForge X is a complete, hand-built HTML template for developer
+                platforms — dashboards, request logs, webhooks, keys, billing and
+                docs. Dark-first, RTL-ready, and engineered to ship fast.
+              </p>
+              <div class="hero__cta">
+                <a class="btn btn-primary btn-lg" href="./dashboard.html">Open the live demo <i data-lucide="arrow-right"></i></a>
+                <a class="btn btn-ghost btn-lg" href="./pricing.html">View pricing</a>
+              </div>
+              <p class="hero__hint">30 pages · 22 seeded datasets · Bootstrap 5 + SCSS + Vite · no build lock-in</p>
+            </div>
+
+            <!-- Live product preview (real components, real data) -->
+            <div class="hero-preview" aria-label="Product preview">
+              <div class="hero-preview__chrome">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="hero-preview__url ltr-isolate">app.apiforge.dev/dashboard</span>
+              </div>
+              <div class="hero-preview__body">
+                <div class="hero-preview__pane">
+                  <div class="hero-preview__kpis" id="hero-kpis"></div>
+                  <div class="card card--dense">
+                    <div class="chart">
+                      <div class="chart__head">
+                        <div>
+                          <div class="chart__title">Request volume</div>
+                          <div class="chart__sentence" id="hero-chart-sentence">Last 14 days</div>
+                        </div>
+                        <span class="chart__meta">14 days</span>
+                      </div>
+                      <div class="chart__canvas" style="--chart-height: 180px">
+                        <canvas id="hero-chart" role="img" aria-label="Request volume over the last 14 days"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="hero-preview__pane">
+                  <div class="card card--dense">
+                    <div class="card-header">
+                      <div>
+                        <h4 class="card-title">Recent activity</h4>
+                        <div class="card-subtitle">Keys, webhooks and endpoints.</div>
+                      </div>
+                    </div>
+                    <ul class="timeline" id="hero-activity"></ul>
+                  </div>
+                </div>
+                <div class="hero-preview__rail" aria-hidden="true">
+                  <span class="rail-icon is-active"><i data-lucide="layout-dashboard"></i></span>
+                  <span class="rail-icon"><i data-lucide="code-2"></i></span>
+                  <span class="rail-icon"><i data-lucide="key"></i></span>
+                  <span class="rail-icon"><i data-lucide="scroll-text"></i></span>
+                  <span class="rail-icon"><i data-lucide="webhook"></i></span>
+                  <span class="rail-icon"><i data-lucide="bar-chart-3"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="site-container" aria-label="Template facts">
+          <div class="stats">
+            <div class="stats__item"><div class="stats__value">30</div><div class="stats__label">hand-built pages</div></div>
+            <div class="stats__item"><div class="stats__value">22</div><div class="stats__label">seeded datasets</div></div>
+            <div class="stats__item"><div class="stats__value">5</div><div class="stats__label">typography lanes</div></div>
+            <div class="stats__item"><div class="stats__value">3</div><div class="stats__label">themes — dark · light · system</div></div>
+          </div>
+        </section>
+
+        <!-- Features -->
+        <section class="section site-container">
+          <div class="section-head">
+            <span class="eyebrow">Built for developer platforms</span>
+            <h2>Not another admin theme</h2>
+            <p>Every page is purpose-built for API infrastructure — deep, specialized and interactive, not a grid of generic cards.</p>
+          </div>
+          <div class="feature-grid">
+            <a class="feature-card" href="./logs.html">
+              <span class="feature-card__icon"><i data-lucide="scroll-text"></i></span>
+              <span class="feature-card__title">Request log inspector</span>
+              <span class="feature-card__desc">Dense request tables with status, latency, request IDs, and a full inspector — headers, payload, timing, copy as cURL.</span>
+              <span class="feature-card__link">Explore logs <i data-lucide="arrow-right"></i></span>
+            </a>
+            <a class="feature-card" href="./webhooks.html">
+              <span class="feature-card__icon"><i data-lucide="webhook"></i></span>
+              <span class="feature-card__title">Webhook debugger</span>
+              <span class="feature-card__desc">Delivery timelines, retry states, and a payload inspector with signature helpers — Stripe-grade webhook tooling.</span>
+              <span class="feature-card__link">Debug a delivery <i data-lucide="arrow-right"></i></span>
+            </a>
+            <a class="feature-card" href="./api-keys.html">
+              <span class="feature-card__icon"><i data-lucide="key"></i></span>
+              <span class="feature-card__title">Reveal-once API keys</span>
+              <span class="feature-card__desc">Masked keys with reveal-once, rotate, revoke and scoped create flows. The security UX your users expect.</span>
+              <span class="feature-card__link">Manage keys <i data-lucide="arrow-right"></i></span>
+            </a>
+            <a class="feature-card" href="./apis.html">
+              <span class="feature-card__icon"><i data-lucide="code-2"></i></span>
+              <span class="feature-card__title">Live request tester</span>
+              <span class="feature-card__desc">Browse the API catalog and send real-shaped requests with key injection, tabs and JSON responses.</span>
+              <span class="feature-card__link">Test an endpoint <i data-lucide="arrow-right"></i></span>
+            </a>
+            <a class="feature-card" href="./errors.html">
+              <span class="feature-card__icon"><i data-lucide="bug"></i></span>
+              <span class="feature-card__title">Error monitoring</span>
+              <span class="feature-card__desc">Issues with stack traces, request context and severity filters — actionable, not just error counts.</span>
+              <span class="feature-card__link">Inspect an issue <i data-lucide="arrow-right"></i></span>
+            </a>
+            <a class="feature-card" href="./rtl.html">
+              <span class="feature-card__icon"><i data-lucide="languages"></i></span>
+              <span class="feature-card__title">RTL Persian, first-class</span>
+              <span class="feature-card__desc">Vazirmatn, logical properties and LTR-isolated code. A full Persian demo ships in the box — no hacks.</span>
+              <span class="feature-card__link">Open the Persian demo <i data-lucide="arrow-right"></i></span>
+            </a>
+          </div>
+        </section>
+
+        <!-- Code showcase -->
+        <section class="section site-container">
+          <div class="code-showcase">
+            <div>
+              <span class="eyebrow">For engineers</span>
+              <h2 class="mt-2">Built the way you'd build it</h2>
+              <p class="body-lg text-secondary mt-3">
+                HTML5, Bootstrap 5, SCSS with design tokens, ES modules and Vite.
+                Local fonts, tree-shaken icons, Chart.js. No React, no Tailwind,
+                no CDN — nothing between you and the markup.
+              </p>
+              <ul class="mt-4" style="list-style:none; padding:0;">
+                <li class="mb-2"><i data-lucide="check" class="text-success me-2" style="width:15px;height:15px;"></i> Logical properties everywhere — flip the whole app with <code>dir="rtl"</code></li>
+                <li class="mb-2"><i data-lucide="check" class="text-success me-2" style="width:15px;height:15px;"></i> Dark, light and system themes with a no-flash inline script</li>
+                <li class="mb-2"><i data-lucide="check" class="text-success me-2" style="width:15px;height:15px;"></i> Deterministic seeded data — regenerate any dataset from one script</li>
+              </ul>
+            </div>
+            <div class="code-block" data-code-block>
+              <div class="code-block__header">
+                <div class="code-tabs" role="tablist" aria-label="Code language">
+                  <button type="button" class="code-tabs__tab is-active" data-tab="curl">cURL</button>
+                  <button type="button" class="code-tabs__tab" data-tab="node">Node</button>
+                  <button type="button" class="code-tabs__tab" data-tab="python">Python</button>
+                </div>
+                <div class="code-block__actions">
+                  <button type="button" class="btn btn-icon" data-code-copy aria-label="Copy code"><i data-lucide="copy"></i></button>
+                </div>
+              </div>
+              <pre class="code-block__body" data-code-pane data-pane="curl">curl https://api.apiforge.dev/v1/emails \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "to": "dev@example.com", "subject": "Ship faster" }'</pre>
+              <pre class="code-block__body" data-code-pane data-pane="node" hidden>import { ApiForge } from '@apiforge/sdk';
+
+const client = new ApiForge('YOUR_API_KEY');
+await client.emails.send({
+  to: 'dev@example.com',
+  subject: 'Ship faster',
+});</pre>
+              <pre class="code-block__body" data-code-pane data-pane="python" hidden>from apiforge import ApiForge
+
+client = ApiForge("YOUR_API_KEY")
+client.emails.send(
+    to="dev@example.com",
+    subject="Ship faster",
+)</pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page directory -->
+        <section class="section site-container">
+          <div class="section-head">
+            <span class="eyebrow">What's inside</span>
+            <h2>Every page, mapped</h2>
+            <p>The full product surface, organized the way the app nav is. No filler pages.</p>
+          </div>
+          <div class="showcase">
+            <div class="showcase__group">
+              <div class="showcase__label">Developer</div>
+              <a class="showcase__item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i> Overview <code>/dashboard.html</code></a>
+              <a class="showcase__item" href="./apis.html"><i data-lucide="code-2"></i> APIs <code>/apis.html</code></a>
+              <a class="showcase__item" href="./endpoints.html"><i data-lucide="braces"></i> Endpoints <code>/endpoints.html</code></a>
+              <a class="showcase__item" href="./api-keys.html"><i data-lucide="key"></i> API Keys <code>/api-keys.html</code></a>
+              <a class="showcase__item" href="./logs.html"><i data-lucide="scroll-text"></i> Logs <code>/logs.html</code></a>
+              <a class="showcase__item" href="./webhooks.html"><i data-lucide="webhook"></i> Webhooks <code>/webhooks.html</code></a>
+            </div>
+            <div class="showcase__group">
+              <div class="showcase__label">Analytics</div>
+              <a class="showcase__item" href="./usage.html"><i data-lucide="bar-chart-3"></i> Usage <code>/usage.html</code></a>
+              <a class="showcase__item" href="./errors.html"><i data-lucide="bug"></i> Errors <code>/errors.html</code></a>
+              <a class="showcase__item" href="./rate-limits.html"><i data-lucide="gauge"></i> Rate Limits <code>/rate-limits.html</code></a>
+              <a class="showcase__item" href="./metrics.html"><i data-lucide="activity"></i> Metrics <code>/metrics.html</code></a>
+              <div class="showcase__label mt-4">Workspace</div>
+              <a class="showcase__item" href="./environments.html"><i data-lucide="server"></i> Environments <code>/environments.html</code></a>
+              <a class="showcase__item" href="./team.html"><i data-lucide="users"></i> Team <code>/team.html</code></a>
+              <a class="showcase__item" href="./billing.html"><i data-lucide="credit-card"></i> Billing <code>/billing.html</code></a>
+              <a class="showcase__item" href="./notifications.html"><i data-lucide="bell"></i> Notifications <code>/notifications.html</code></a>
+            </div>
+            <div class="showcase__group">
+              <div class="showcase__label">Platform</div>
+              <a class="showcase__item" href="./docs.html"><i data-lucide="book-open"></i> Documentation <code>/docs.html</code></a>
+              <a class="showcase__item" href="./sdk.html"><i data-lucide="package"></i> SDKs <code>/sdk.html</code></a>
+              <a class="showcase__item" href="./api-reference.html"><i data-lucide="book-marked"></i> API Reference <code>/api-reference.html</code></a>
+              <a class="showcase__item" href="./settings.html"><i data-lucide="settings"></i> Settings <code>/settings.html</code></a>
+              <a class="showcase__item" href="./profile.html"><i data-lucide="user"></i> Profile <code>/profile.html</code></a>
+              <a class="showcase__item" href="./style-guide.html"><i data-lucide="palette"></i> Style Guide <code>/style-guide.html</code></a>
+              <a class="showcase__item" href="./rtl.html"><i data-lucide="languages"></i> Persian demo (RTL) <code>/rtl.html</code></a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pricing teaser -->
+        <section class="section site-container">
+          <div class="section-head">
+            <span class="eyebrow">Pricing</span>
+            <h2>Start free, scale with usage</h2>
+            <p>Three plans, usage-based overage, no contracts. <a href="./pricing.html">See the full comparison →</a></p>
+          </div>
+          <div class="pricing-grid" id="pricing-teaser" aria-label="Plans"></div>
+        </section>
+
+        <!-- CTA band -->
+        <section class="section site-container">
+          <div class="cta-band">
+            <span class="eyebrow">Ship this week</span>
+            <h2 class="mt-2 mb-3">Your API platform, not a year of building</h2>
+            <p class="body-lg text-secondary mb-4">Open the live demo, flip it to light, switch to Persian RTL, and decide.</p>
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+              <a class="btn btn-primary btn-lg" href="./dashboard.html">Open the live demo <i data-lucide="arrow-right"></i></a>
+              <a class="btn btn-ghost btn-lg" href="./rtl.html">Try the Persian demo</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- ============ Footer ============ -->
+      <footer class="site-footer">
+        <div class="site-container">
+          <div class="site-footer__grid">
+            <div class="site-footer__brand">
+              <span class="brand-mark"><i data-lucide="zap"></i></span>
+              <span class="brand-name">APIForge X</span>
+              <p class="mt-2">A premium API infrastructure HTML template. Engineered for developer platforms, ready for the Iranian market.</p>
+            </div>
+            <div>
+              <div class="site-footer__col-label">Product</div>
+              <a class="site-footer__link" href="./dashboard.html">Overview</a>
+              <a class="site-footer__link" href="./logs.html">Logs</a>
+              <a class="site-footer__link" href="./webhooks.html">Webhooks</a>
+              <a class="site-footer__link" href="./api-keys.html">API Keys</a>
+              <a class="site-footer__link" href="./pricing.html">Pricing</a>
+            </div>
+            <div>
+              <div class="site-footer__col-label">Resources</div>
+              <a class="site-footer__link" href="./docs.html">Documentation</a>
+              <a class="site-footer__link" href="./style-guide.html">Style guide</a>
+              <a class="site-footer__link" href="./changelog.html">Changelog</a>
+              <a class="site-footer__link" href="./status.html">Status</a>
+              <a class="site-footer__link" href="./rtl.html">RTL demo</a>
+            </div>
+          </div>
+          <div class="site-footer__legal">
+            <span>© 2026 APIForge X. Demo product — no real backend.</span>
+            <span>Bootstrap 5 · SCSS · Vite · Chart.js · Lucide</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="./src/js/pages/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+// =============================================================
+// APIForge X — Components: Code
+// Dark wells ALWAYS (even in light theme), 40px header with language
+// + copy + tabs, mono 13px body, LTR forced. Subtle 4-color syntax.
+// Inline code LTR-isolated. Source: DESIGN_DIRECTION.md (D-009)
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.code-block {
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  direction: ltr; // code always LTR
+  text-align: left;
+}
+
+.code-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 40px;
+  padding: 0 12px;
+  background: var(--code-header-bg);
+  border-bottom: 1px solid var(--code-border);
+
+  .code-block__lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-code);
+    font-size: var(--fs-mono-sm);
+    color: var(--text-secondary);
+  }
+  .code-block__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+}
+
+// Language tabs (cURL / Node / Python / Go) — pill, not underline
+.code-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  direction: ltr;
+}
+.code-tabs__tab {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-code);
+  font-size: var(--fs-mono-sm);
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  @include motion(150ms);
+  &:hover {
+    color: var(--text-primary);
+  }
+  &.is-active {
+    background: var(--surface-3);
+    color: var(--text-primary);
+  }
+}
+
+.code-block__body {
+  margin: 0;
+  padding: 16px;
+  font-family: var(--font-code);
+  font-size: var(--fs-mono);
+  line-height: var(--lh-mono);
+  color: var(--code-text);
+  overflow-x: auto;
+  direction: ltr;
+  text-align: left;
+  tab-size: 2;
+
+  code {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    padding: 0;
+  }
+}
+
+// Subtle syntax — 4 colors max (D-009)
+.tok-kw { color: var(--syn-keyword); }
+.tok-str { color: var(--syn-string); }
+.tok-num { color: var(--syn-number); }
+.tok-com { color: var(--syn-comment); }
+.tok-fn { color: var(--accent-hover); }
+
+// Inline code — surface chip, LTR isolated
+code:not(pre code),
+.inline-code {
+  font-family: var(--font-code);
+  font-size: var(--fs-mono-sm);
+  color: var(--text-primary);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  direction: ltr;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+}
+
+// Key injection placeholder styling
+.key-placeholder {
+  font-family: var(--font-code);
+  color: var(--accent);
+  background: var(--accent-subtle-bg);
+  border: 1px dashed var(--accent-subtle-border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}

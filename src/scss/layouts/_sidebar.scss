@@ -1,0 +1,201 @@
+// =============================================================
+// APIForge X — Layouts: Sidebar
+// 256px, grouped nav (eyebrow + items), 32px items, active state,
+// bottom user menu + env switcher + theme toggle.
+// The nav chrome is hoisted to top level so the mobile offcanvas
+// drawer (.offcanvas.sidebar-drawer) reuses it unchanged.
+// Source: docs/product/INFORMATION_ARCHITECTURE.md
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+// Layout container (desktop/tablet)
+.app-sidebar {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-0);
+  border-inline-end: 1px solid var(--border);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+// ---- Shared chrome (sidebar + mobile drawer) ----
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--header-height);
+  padding-inline: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex: none;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-group__label {
+  padding: 0 12px 6px;
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: var(--fs-body);
+  white-space: nowrap;
+  @include motion(150ms);
+  transition-property: background-color, color;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    flex: none;
+  }
+  &:hover {
+    background: var(--surface-2);
+    color: var(--text-primary);
+  }
+  &.is-active {
+    background: var(--surface-2);
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  // Not-yet-built sections (later phases)
+  &.is-disabled {
+    color: var(--text-disabled);
+    cursor: default;
+    &:hover {
+      background: transparent;
+      color: var(--text-disabled);
+    }
+  }
+  .nav-item__badge {
+    margin-inline-start: auto;
+    display: inline-flex;
+    align-items: center;
+    height: 18px;
+    padding-inline: 6px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+  }
+}
+
+// Bottom cluster: env switcher, theme toggle, user
+.sidebar-foot {
+  flex: none;
+  padding: 12px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+
+  // Account menu — the toggle is a full-width button inside the dropdown.
+  .sidebar-user__toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 1;
+    min-width: 0;
+    padding: 8px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: inherit;
+    text-align: start;
+    cursor: pointer;
+    &:hover {
+      background: var(--surface-2);
+    }
+  }
+  > svg {
+    flex: none;
+    margin-inline-end: 8px;
+  }
+  .avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent-subtle-bg);
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    flex: none;
+  }
+  .sidebar-user__meta {
+    min-width: 0;
+    flex: 1;
+    .name {
+      font-size: var(--fs-body-sm);
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+    .email {
+      font-size: var(--fs-caption);
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+// Tablet icon rail (64px): labels hidden, icons centered — desktop sidebar only
+@include mq-max('xl') {
+  .app-sidebar {
+    .brand-name,
+    .nav-group__label,
+    .nav-item span:not(.nav-item__badge),
+    .nav-item .nav-item__badge,
+    .sidebar-user__meta {
+      display: none;
+    }
+    .sidebar-brand {
+      justify-content: center;
+      padding-inline: 0;
+    }
+    .nav-item {
+      justify-content: center;
+      padding: 0;
+      gap: 0;
+    }
+    .sidebar-user {
+      justify-content: center;
+    }
+  }
+}
