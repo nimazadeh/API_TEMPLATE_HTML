@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="APIForge X changelog — every page, feature and polish item shipped across releases." />
+    <title>Changelog — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body data-page="changelog">
+    <div class="site">
+      <header class="site-header">
+        <div class="site-container site-header__inner">
+          <a class="site-header__brand" href="./index.html">
+            <span class="brand-mark"><i data-lucide="zap"></i></span>
+            <span class="brand-name">APIForge X</span>
+          </a>
+          <nav class="site-nav" aria-label="Marketing">
+            <a class="site-nav__link" data-nav="home" href="./index.html">Product</a>
+            <a class="site-nav__link" data-nav="docs" href="./docs.html">Docs</a>
+            <a class="site-nav__link" data-nav="pricing" href="./pricing.html">Pricing</a>
+            <a class="site-nav__link" data-nav="changelog" href="./changelog.html">Changelog</a>
+            <a class="site-nav__link" data-nav="status" href="./status.html">Status</a>
+          </nav>
+          <div class="site-header__actions">
+            <button type="button" class="btn btn-icon" data-theme-toggle aria-label="Toggle theme" aria-pressed="false">
+              <i data-lucide="sun-moon"></i>
+            </button>
+            <a class="btn btn-ghost d-none d-sm-inline-flex" href="./login.html">Sign in</a>
+            <a class="btn btn-primary" href="./dashboard.html">Open dashboard</a>
+            <button type="button" class="btn btn-icon d-lg-none" aria-label="Open menu" data-bs-toggle="offcanvas" data-bs-target="#site-drawer" aria-controls="site-drawer">
+              <i data-lucide="menu"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="site-drawer" aria-labelledby="site-drawer-label">
+        <div class="offcanvas-header">
+          <span class="offcanvas-title" id="site-drawer-label"><span class="brand-mark"><i data-lucide="zap"></i></span> APIForge X</span>
+          <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="offcanvas-body p-0">
+          <nav class="site-drawer-nav" aria-label="Marketing mobile">
+            <a class="site-drawer-nav__link" data-nav="home" href="./index.html"><i data-lucide="zap"></i> Product</a>
+            <a class="site-drawer-nav__link" data-nav="docs" href="./docs.html"><i data-lucide="book-open"></i> Documentation</a>
+            <a class="site-drawer-nav__link" data-nav="pricing" href="./pricing.html"><i data-lucide="credit-card"></i> Pricing</a>
+            <a class="site-drawer-nav__link" data-nav="changelog" href="./changelog.html"><i data-lucide="clock"></i> Changelog</a>
+            <a class="site-drawer-nav__link" data-nav="status" href="./status.html"><i data-lucide="activity"></i> Status</a>
+            <a class="site-drawer-nav__link" href="./login.html"><i data-lucide="log-in"></i> Sign in</a>
+          </nav>
+        </div>
+      </div>
+
+      <main class="site-main">
+        <section class="hero">
+          <div class="site-container">
+            <div class="hero__inner">
+              <span class="eyebrow">Changelog</span>
+              <h1 class="hero__title">Shipped, <span class="hero__title-accent">versioned</span></h1>
+              <p class="body-lg text-secondary hero__sub">
+                Every release, documented — from the first design token to the
+                marketplace polish.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section site-container">
+          <div class="changelog">
+            <div class="changelog__item">
+              <div class="changelog__meta">
+                <div class="changelog__version">v2.3.0</div>
+                <div class="changelog__date">Sep 08, 2026</div>
+              </div>
+              <div class="changelog__body">
+                <h3>Marketplace polish</h3>
+                <ul>
+                  <li>Premium landing with a live product preview — real components, real seeded data</li>
+                  <li>New <code>pricing.html</code>, <code>changelog.html</code>, <code>status.html</code> and a branded <code>404.html</code></li>
+                  <li>Keyboard shortcuts: <code>?</code> help, <code>g</code> + letter navigation, <code>/</code> focus search, <code>Esc</code> close</li>
+                  <li>Buyer documentation and marketplace screenshot manifest</li>
+                </ul>
+              </div>
+            </div>
+            <div class="changelog__item">
+              <div class="changelog__meta">
+                <div class="changelog__version">v2.2.0</div>
+                <div class="changelog__date">Sep 07, 2026</div>
+              </div>
+              <div class="changelog__body">
+                <h3>Complete SaaS product experience</h3>
+                <ul>
+                  <li><code>team.html</code> — members, roles, invites and a permissions reference</li>
+                  <li><code>billing.html</code> — current plan, usage projection, invoices and payment method</li>
+                  <li><code>settings.html</code>, <code>profile.html</code>, <code>notifications.html</code> — workspace management</li>
+                  <li><code>docs.html</code>, <code>sdk.html</code>, <code>api-reference.html</code> — developer documentation</li>
+                  <li><code>metrics.html</code> — observability with volume, percentiles and availability</li>
+                  <li>Persian-first auth: <code>login.html</code>, <code>forgot-password.html</code>, <code>invite.html</code></li>
+                </ul>
+              </div>
+            </div>
+            <div class="changelog__item">
+              <div class="changelog__meta">
+                <div class="changelog__version">v2.1.0</div>
+                <div class="changelog__date">Sep 07, 2026</div>
+              </div>
+              <div class="changelog__body">
+                <h3>Advanced developer workflows</h3>
+                <ul>
+                  <li><code>webhooks.html</code> — delivery debugger with attempt timeline and payload inspector</li>
+                  <li><code>endpoints.html</code> — endpoint management with schemas and validation</li>
+                  <li><code>errors.html</code> — issue monitoring with stack traces and request context</li>
+                  <li><code>rate-limits.html</code> — current limits, usage charts and per-API rules</li>
+                  <li><code>environments.html</code> — production, staging and development variables and keys</li>
+                </ul>
+              </div>
+            </div>
+            <div class="changelog__item">
+              <div class="changelog__meta">
+                <div class="changelog__version">v2.0.0</div>
+                <div class="changelog__date">Sep 06, 2026</div>
+              </div>
+              <div class="changelog__body">
+                <h3>Core product experience</h3>
+                <ul>
+                  <li><code>dashboard.html</code> — KPIs, request/latency charts and an activity feed</li>
+                  <li><code>apis.html</code> — API catalog with a live request tester</li>
+                  <li><code>api-keys.html</code> — reveal-once keys with rotate and revoke</li>
+                  <li><code>logs.html</code> — request log inspector with copy-as-cURL</li>
+                  <li><code>usage.html</code> — plan consumption and attribution analytics</li>
+                </ul>
+              </div>
+            </div>
+            <div class="changelog__item">
+              <div class="changelog__meta">
+                <div class="changelog__version">v1.1.0</div>
+                <div class="changelog__date">Sep 05, 2026</div>
+              </div>
+              <div class="changelog__body">
+                <h3>Production hardening</h3>
+                <ul>
+                  <li>Semantic token system across colors, borders, elevation, motion and layout</li>
+                  <li>Five typography lanes with locally bundled fonts — no CDN</li>
+                  <li>Curated Bootstrap import with a <code>--bs-*</code> token bridge</li>
+                  <li>System theme (dark / light / system) with a no-flash inline script</li>
+                </ul>
+              </div>
+            </div>
+            <div class="changelog__item">
+              <div class="changelog__meta">
+                <div class="changelog__version">v1.0.0</div>
+                <div class="changelog__date">Sep 04, 2026</div>
+              </div>
+              <div class="changelog__body">
+                <h3>Foundation</h3>
+                <ul>
+                  <li>Vite multi-page build, Bootstrap 5.3, SCSS architecture and design tokens</li>
+                  <li>App shell — sidebar, header, drawer and bottom bar, responsive 360–1920</li>
+                  <li>Core primitives — buttons, forms, tables, cards, badges, code blocks, empty states, skeletons, command palette</li>
+                  <li>RTL system with Vazirmatn, logical properties and LTR isolation</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="site-container">
+          <div class="site-footer__grid">
+            <div class="site-footer__brand">
+              <span class="brand-mark"><i data-lucide="zap"></i></span>
+              <span class="brand-name">APIForge X</span>
+              <p class="mt-2">A premium API infrastructure HTML template. Engineered for developer platforms, ready for the Iranian market.</p>
+            </div>
+            <div>
+              <div class="site-footer__col-label">Product</div>
+              <a class="site-footer__link" href="./dashboard.html">Overview</a>
+              <a class="site-footer__link" href="./logs.html">Logs</a>
+              <a class="site-footer__link" href="./webhooks.html">Webhooks</a>
+              <a class="site-footer__link" href="./api-keys.html">API Keys</a>
+              <a class="site-footer__link" href="./pricing.html">Pricing</a>
+            </div>
+            <div>
+              <div class="site-footer__col-label">Resources</div>
+              <a class="site-footer__link" href="./docs.html">Documentation</a>
+              <a class="site-footer__link" href="./style-guide.html">Style guide</a>
+              <a class="site-footer__link" href="./changelog.html">Changelog</a>
+              <a class="site-footer__link" href="./status.html">Status</a>
+              <a class="site-footer__link" href="./rtl.html">RTL demo</a>
+            </div>
+          </div>
+          <div class="site-footer__legal">
+            <span>© 2026 APIForge X. Demo product — no real backend.</span>
+            <span>Bootstrap 5 · SCSS · Vite · Chart.js · Lucide</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="./src/js/pages/changelog.js"></script>
+  </body>
+</html>

@@ -32,6 +32,11 @@ const pageInputs = {
   login: path.resolve(__dirname, 'login.html'),
   'forgot-password': path.resolve(__dirname, 'forgot-password.html'),
   invite: path.resolve(__dirname, 'invite.html'),
+  // Phase 4 — marketing layer
+  pricing: path.resolve(__dirname, 'pricing.html'),
+  changelog: path.resolve(__dirname, 'changelog.html'),
+  status: path.resolve(__dirname, 'status.html'),
+  404: path.resolve(__dirname, '404.html'),
 };
 
 export default defineConfig({

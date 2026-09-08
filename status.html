@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="APIForge X status — current uptime, system components and incident history." />
+    <title>Status — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body data-page="status">
+    <div class="site">
+      <header class="site-header">
+        <div class="site-container site-header__inner">
+          <a class="site-header__brand" href="./index.html">
+            <span class="brand-mark"><i data-lucide="zap"></i></span>
+            <span class="brand-name">APIForge X</span>
+          </a>
+          <nav class="site-nav" aria-label="Marketing">
+            <a class="site-nav__link" data-nav="home" href="./index.html">Product</a>
+            <a class="site-nav__link" data-nav="docs" href="./docs.html">Docs</a>
+            <a class="site-nav__link" data-nav="pricing" href="./pricing.html">Pricing</a>
+            <a class="site-nav__link" data-nav="changelog" href="./changelog.html">Changelog</a>
+            <a class="site-nav__link" data-nav="status" href="./status.html">Status</a>
+          </nav>
+          <div class="site-header__actions">
+            <button type="button" class="btn btn-icon" data-theme-toggle aria-label="Toggle theme" aria-pressed="false">
+              <i data-lucide="sun-moon"></i>
+            </button>
+            <a class="btn btn-ghost d-none d-sm-inline-flex" href="./login.html">Sign in</a>
+            <a class="btn btn-primary" href="./dashboard.html">Open dashboard</a>
+            <button type="button" class="btn btn-icon d-lg-none" aria-label="Open menu" data-bs-toggle="offcanvas" data-bs-target="#site-drawer" aria-controls="site-drawer">
+              <i data-lucide="menu"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="site-drawer" aria-labelledby="site-drawer-label">
+        <div class="offcanvas-header">
+          <span class="offcanvas-title" id="site-drawer-label"><span class="brand-mark"><i data-lucide="zap"></i></span> APIForge X</span>
+          <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="offcanvas-body p-0">
+          <nav class="site-drawer-nav" aria-label="Marketing mobile">
+            <a class="site-drawer-nav__link" data-nav="home" href="./index.html"><i data-lucide="zap"></i> Product</a>
+            <a class="site-drawer-nav__link" data-nav="docs" href="./docs.html"><i data-lucide="book-open"></i> Documentation</a>
+            <a class="site-drawer-nav__link" data-nav="pricing" href="./pricing.html"><i data-lucide="credit-card"></i> Pricing</a>
+            <a class="site-drawer-nav__link" data-nav="changelog" href="./changelog.html"><i data-lucide="clock"></i> Changelog</a>
+            <a class="site-drawer-nav__link" data-nav="status" href="./status.html"><i data-lucide="activity"></i> Status</a>
+            <a class="site-drawer-nav__link" href="./login.html"><i data-lucide="log-in"></i> Sign in</a>
+          </nav>
+        </div>
+      </div>
+
+      <main class="site-main">
+        <section class="hero">
+          <div class="site-container">
+            <div class="hero__inner">
+              <span class="eyebrow">Status</span>
+              <h1 class="hero__title">All systems <span class="hero__title-accent">operational</span></h1>
+              <p class="body-lg text-secondary hero__sub">
+                Uptime, component health and incident history for the demo
+                platform.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section site-container">
+          <div class="status-banner" id="status-banner">
+            <span class="status-banner__dot" aria-hidden="true"></span>
+            <div>
+              <div class="status-banner__title">All systems operational</div>
+              <div class="status-banner__sub" id="status-updated">Updated just now</div>
+            </div>
+          </div>
+
+          <div class="card card--dense mt-4" style="padding: var(--space-5);">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <h3 class="mb-0">Uptime</h3>
+              <span class="caption text-tertiary">Last 90 days</span>
+            </div>
+            <div class="uptime-bars" id="uptime-bars" role="img" aria-label="90-day uptime bar chart"></div>
+            <div class="caption text-tertiary mt-3">99.95% average · two minor degradations, both resolved within 40 minutes</div>
+          </div>
+
+          <div class="row g-3 mt-4">
+            <div class="col-12 col-lg-7">
+              <div class="card card--dense" style="padding: var(--space-5);">
+                <h3 class="mb-1">Components</h3>
+                <p class="text-secondary mb-3">Current health of each platform service.</p>
+                <div class="status-components" id="components-list"></div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-5">
+              <div class="card card--dense" style="padding: var(--space-5);">
+                <h3 class="mb-1">Incident history</h3>
+                <p class="text-secondary mb-3">Resolved incidents from the last 90 days.</p>
+                <div class="incidents" id="incidents-list"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="site-container">
+          <div class="site-footer__grid">
+            <div class="site-footer__brand">
+              <span class="brand-mark"><i data-lucide="zap"></i></span>
+              <span class="brand-name">APIForge X</span>
+              <p class="mt-2">A premium API infrastructure HTML template. Engineered for developer platforms, ready for the Iranian market.</p>
+            </div>
+            <div>
+              <div class="site-footer__col-label">Product</div>
+              <a class="site-footer__link" href="./dashboard.html">Overview</a>
+              <a class="site-footer__link" href="./logs.html">Logs</a>
+              <a class="site-footer__link" href="./webhooks.html">Webhooks</a>
+              <a class="site-footer__link" href="./api-keys.html">API Keys</a>
+              <a class="site-footer__link" href="./pricing.html">Pricing</a>
+            </div>
+            <div>
+              <div class="site-footer__col-label">Resources</div>
+              <a class="site-footer__link" href="./docs.html">Documentation</a>
+              <a class="site-footer__link" href="./style-guide.html">Style guide</a>
+              <a class="site-footer__link" href="./changelog.html">Changelog</a>
+              <a class="site-footer__link" href="./status.html">Status</a>
+              <a class="site-footer__link" href="./rtl.html">RTL demo</a>
+            </div>
+          </div>
+          <div class="site-footer__legal">
+            <span>© 2026 APIForge X. Demo product — no real backend.</span>
+            <span>Bootstrap 5 · SCSS · Vite · Chart.js · Lucide</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="./src/js/pages/status.js"></script>
+  </body>
+</html>

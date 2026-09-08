@@ -52,12 +52,14 @@
 @use 'layouts/sidebar';
 @use 'layouts/header';
 @use 'layouts/mobile-nav';
+@use 'layouts/site';
 
 // Pages
 @use 'pages/rtl-test';
 @use 'pages/usage';
 @use 'pages/errors';
 @use 'pages/rate-limits';
+@use 'pages/marketing';
 @use 'pages/auth';
 @use 'pages/docs';
 @use 'pages/workspace';

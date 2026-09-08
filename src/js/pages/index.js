@@ -1,7 +1,104 @@
 // =============================================================
-// APIForge X — Foundation hub (temporary; landing ships in Phase 5)
+// APIForge X — Marketing landing (Phase 4)
+// Replaces the temporary foundation hub. Renders a *live* product
+// preview (KPIs, chart, activity) from the same seeded datasets the
+// app pages use, honoring D-014 "product as hero" without shipping a
+// fake screenshot. Marketing shell only — no app boot.
 // =============================================================
 
-import { boot } from '../main.js';
+import { bootSite } from '../site.js';
+import { makeChart, axis, tooltips, initCharts } from '../components/charts.js';
+import { createIcons, icons } from '../components/icons.js';
+import { compactNumber, relativeTime, escapeHtml } from '../utils/format.js';
+import observability from '../data/mock-observability.json';
+import activity from '../data/mock-activity.json';
 
-boot();
+bootSite();
+initCharts();
+
+const ACTIVITY = {
+  key_created: { icon: 'key', cls: 'is-success' },
+  webhook_failed: { icon: 'webhook', cls: 'is-error' },
+  endpoint_updated: { icon: 'code-2', cls: '' },
+  key_revoked: { icon: 'ban', cls: 'is-error' },
+  rate_limit: { icon: 'gauge', cls: 'is-pending' },
+  deploy: { icon: 'zap', cls: 'is-success' },
+};
+
+function renderKpis() {
+  const k = observability.ranges['24h'];
+  const host = document.getElementById('hero-kpis');
+  const cards = [
+    { label: 'Requests · 24h', value: compactNumber(k.requests), foot: 'across all endpoints' },
+    { label: 'Error rate', value: `${k.errorRate}%`, foot: '2xx / non-2xx responses' },
+    { label: 'P95 latency', value: `${k.p95}ms`, foot: 'p99 ' + `${k.p99}ms` },
+    { label: 'Availability', value: `${k.availability}%`, foot: 'rolling 24 hours' },
+  ];
+  host.innerHTML = cards
+    .map(
+      (c) => `
+      <div class="card card--dense kpi">
+        <span class="kpi-label">${c.label}</span>
+        <span class="kpi-value">${c.value}</span>
+        <span class="stat-foot">${c.foot}</span>
+      </div>`
+    )
+    .join('');
+}
+
+function renderChart() {
+  const canvas = document.getElementById('hero-chart');
+  const days = observability.series.slice(-14);
+  makeChart(canvas, (t) => ({
+    type: 'line',
+    data: {
+      labels: days.map((d) => d.date.slice(5)),
+      datasets: [
+        {
+          data: days.map((d) => d.requests),
+          borderColor: t.accent,
+          backgroundColor: t.accentSoft,
+          borderWidth: 1.5,
+          pointRadius: 0,
+          pointHoverRadius: 3,
+          tension: 0.35,
+          fill: true,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: axis(t),
+        y: { ...axis(t), ticks: { ...axis(t).ticks, callback: (v) => compactNumber(v) } },
+      },
+      ...tooltips(t),
+    },
+  }));
+}
+
+function renderActivity() {
+  const feed = document.getElementById('hero-activity');
+  feed.innerHTML = `<ol class="timeline">
+    ${activity
+      .slice(0, 4)
+      .map((a) => {
+        const meta = ACTIVITY[a.type] || { icon: 'activity', cls: '' };
+        return `
+      <li class="timeline__item">
+        <span class="timeline__rail"><span class="timeline__node ${meta.cls}"><i data-lucide="${meta.icon}"></i></span></span>
+        <div class="timeline__content">
+          <div class="timeline__title">${escapeHtml(a.title)}</div>
+          <div class="timeline__meta">${escapeHtml(a.detail)} · ${escapeHtml(relativeTime(a.timestamp))}</div>
+        </div>
+      </li>`;
+      })
+      .join('')}
+  </ol>`;
+  createIcons({ icons });
+}
+
+renderKpis();
+renderChart();
+renderActivity();

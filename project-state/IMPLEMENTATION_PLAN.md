@@ -260,6 +260,44 @@ foundation, complete primitive set, and the two visual verification pages.
 
 ---
 
+## Phase 4 (RE-SCOPED, 2026-09-08): Marketplace Excellence & Commercial Polish
+
+> **Supersedes the "Phase 4: Differentiators" and "Phase 5" + "Phase 6" sections below.**
+> The original Phase 4 (webhooks/endpoints/errors/rate-limits) and the Phase 5 management
+> pages were pulled forward into 3B/3C and are COMPLETE ✅. What remains of the original
+> roadmap is **Phase 5.6 Polish** + **Phase 6 Marketing**, now delivered as the re-scoped
+> Phase 4: transform the finished APIForge X into a **sellable premium HTML template for
+> the Iranian marketplace (Rastchin)**. Goal is explicitly *not* random features — it is
+> premium commercial polish + marketplace readiness. Same engineering standards, QA after
+> every milestone, stop at a checkpoint.
+
+**Milestone 4A — Marketing layer (landing + pricing + changelog + status + 404)**
+- [ ] `layouts/_site.scss` + `pages/_marketing.scss` — marketing shell (sticky translucent header, centered container, footer, mobile offcanvas nav) + hero/feature/pricing/changelog/status/404 styles; tokens only, no hex literals
+- [ ] `index.html` — replace temporary hub with premium landing: eyebrow + `.display` hero, sub, CTA, **live product preview built from real components + seeded data** (honors D-014 "product as hero", impossible to ship a real screenshot without a browser), stats strip, feature grid, code showcase, full page directory (keeps the old hub's usefulness), pricing teaser, CTA band, footer
+- [ ] `pricing.html` — 3 tiers + usage-based note + FAQ (Bootstrap collapse) + comparison table + CTA
+- [ ] `changelog.html` — versioned timeline of Phases 1→4
+- [ ] `status.html` — all-systems banner, 90-day uptime bars, component status, incident history (deterministic mock)
+- [ ] `404.html` — branded not-found with code + CTA back to dashboard/landing
+- [ ] `src/js/site.js` (`bootSite()`: icons + theme + copy + nav) so marketing pages don't pull the full app boot
+- [ ] `vite.config.js` pageInputs += pricing/changelog/status/404; harness scenarios for all 5 new pages
+- **QA gate:** `vite build` clean · runtime harness (5 pages) · static + a11y audit extended to new pages
+
+**Milestone 4B — Commercial polish (keyboard shortcuts + RTL/state parity + style-guide)**
+- [ ] `components/shortcuts.js` — `?` help modal, `g`+letter navigation, `/` focus search, Esc close; registered in `boot()`, zero changes to the 22 page files
+- [ ] Audit empty/error/skeleton coverage across every data table/chart; fill genuine gaps only (shared components/tokens preferred)
+- [ ] `style-guide.html` — add a compact "Marketing" section (site header/footer, hero, `.display`/`.eyebrow`, pricing card, changelog/status components)
+- [ ] RTL demo parity — confirm `rtl.html`/`rtl-test.html` still reflect the final nav/component set after 4A
+- **QA gate:** build + harness + a11y re-run after shortcut injection (jsdom keyboard events)
+
+**Milestone 4C — Marketplace packaging (buyer docs + assets + copy)**
+- [ ] `README.md` — buyer-facing rewrite (setup, theming, RTL, adding an endpoint, structure, pages map, credits/license)
+- [ ] SCSS token comments — audit + fill doc gaps in `src/scss/tokens/*`
+- [ ] `marketplace/` — `README.md`, `SCREENSHOTS_MANIFEST.md` (required shots + naming + capture steps), `DESCRIPTION.md` (RTL-Theme + ThemeForest copy), `capture-screenshots.mjs` (Playwright script; runnable by the buyer — no browser in this sandbox)
+- [ ] project-state docs: PROJECT_STATE / CHANGELOG / TEST_STATUS / IMPLEMENTATION_PLAN (this record) + `DECISIONS.md` D-015 (marketing shell architecture)
+- **QA gate:** build + full harness regression + a11y; final checkpoint report
+
+---
+
 ## Phase 4: Differentiators — Webhooks, APIs, Errors (P1)
 
 > **Note (2026-09-07):** Webhooks, Endpoints, Errors and Rate Limits were pulled forward

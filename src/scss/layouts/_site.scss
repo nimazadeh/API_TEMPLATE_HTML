@@ -1,0 +1,198 @@
+// =============================================================
+// APIForge X — Layouts: Marketing site shell (Phase 4)
+// Top nav + centered content + footer, distinct from the app
+// shell (sidebar + header). Same tokens, logical properties,
+// dark-first. Sticky translucent header.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+.site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--surface-canvas);
+}
+
+.site-container {
+  width: 100%;
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: var(--content-pad);
+
+  @include mq-max('sm') {
+    padding-inline: var(--content-pad-mobile);
+  }
+}
+
+// --- Header ---------------------------------------------------------------
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: var(--surface-canvas);
+  border-bottom: 1px solid var(--border-subtle);
+
+  @supports (backdrop-filter: blur(1px)) {
+    background: color-mix(in srgb, var(--surface-canvas) 80%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    height: 60px;
+  }
+
+  .site-header__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-inline-start: var(--space-6);
+
+  @include mq-max('lg') {
+    display: none;
+  }
+
+  .site-nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    @include motion(150ms);
+
+    &:hover {
+      color: var(--text-primary);
+      background: var(--surface-2);
+    }
+
+    &.is-active {
+      color: var(--text-primary);
+      background: var(--accent-subtle-bg);
+    }
+  }
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-inline-start: auto;
+}
+
+// Mobile nav drawer (marketing) — vertical link list in an offcanvas.
+.site-drawer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3);
+
+  .site-drawer-nav__link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-body);
+    color: var(--text-secondary);
+    text-decoration: none;
+    @include motion(150ms);
+
+    &:hover,
+    &.is-active {
+      color: var(--text-primary);
+      background: var(--surface-2);
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+      flex: none;
+    }
+  }
+}
+
+// --- Main / Footer ---------------------------------------------------------
+.site-main {
+  flex: 1 0 auto;
+}
+
+.site-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding-block: var(--space-8) var(--space-6);
+  margin-top: var(--space-8);
+  background: var(--surface-canvas);
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-6);
+
+    @include mq-max('md') {
+      grid-template-columns: 1fr 1fr;
+    }
+    @include mq-max('sm') {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .site-footer__brand {
+    .brand-name {
+      margin-bottom: var(--space-2);
+    }
+    p {
+      font-size: var(--fs-body-sm);
+      color: var(--text-secondary);
+      max-width: 340px;
+    }
+  }
+
+  .site-footer__col-label {
+    font-size: var(--fs-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-3);
+  }
+
+  .site-footer__link {
+    display: block;
+    padding-block: 3px;
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    @include motion(150ms);
+
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+
+  .site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border-subtle);
+    font-size: var(--fs-caption);
+    color: var(--text-tertiary);
+  }
+}
