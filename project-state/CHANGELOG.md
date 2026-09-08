@@ -262,6 +262,31 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## Phase 4 (Re-scoped) — Marketplace Excellence & Commercial Polish — 2026-09-08
+
+### Added
+- **Marketing layer (4A):** `layouts/_site.scss` + `pages/_marketing.scss`; premium landing `index.html` (live product preview from real components + seeded data), `pricing.html` (plans from `mock-plans.json` + comparison + FAQ), `changelog.html`, `status.html` (90 deterministic uptime bars, components, incidents), `404.html`; `src/js/site.js` (`bootSite()`), page JS for all five
+- **Keyboard shortcuts (4B):** `components/shortcuts.js` — `?` help modal, `g`+letter navigation (16 destinations), `/` focus search, Esc; `data-search-target` on 7 search inputs
+- **Marketplace packaging (4C):** `marketplace/` — `README.md`, `SCREENSHOTS_MANIFEST.md`, `DESCRIPTION.md` (ThemeForest EN + RTL-Theme FA), `capture-screenshots.mjs` (Playwright, buyer-runnable)
+
+### Changed
+- `README.md` — buyer-facing: marketing pages, "Adding a page" guide, keyboard shortcuts
+- `style-guide.html` — new Marketing section; nav refreshed (was stale Phase 3)
+- `rtl.html` — stale Phase 2 `#`/tooltip nav replaced with the full real nav (Persian)
+- `vite.config.js` — pageInputs 26 → 30
+- `_radius.scss` — stale "3 radii" header corrected to 4
+
+### Validated
+- `vite build` green (30 inputs, 0 warnings)
+- Runtime QA **114/114** across 30 pages (0 jsdom/console/module-eval errors)
+- Structural a11y audit clean (30 pages); static audit clean
+
+### Next
+- Marketplace screenshots via `node marketplace/capture-screenshots.mjs` on a machine with Chromium
+- Optional: preview video, ThemeForest/RTL-Theme submission
+
+---
+
 ## Template for Future Phases
 
 ```

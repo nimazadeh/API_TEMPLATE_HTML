@@ -3,9 +3,9 @@
 ## Project: APIForge X — Premium Developer API Platform HTML Template
 
 **Branch:** arena/01a07d58-api-template-html
-**Phase:** PHASE 3C — COMPLETE ✅
-**Date:** 2026-09-07
-**Status:** Phase 3C complete — 12 new pages (team, billing, settings, profile, notifications, docs, sdk, api-reference, metrics + Persian-first login/forgot-password/invite); runtime QA 92/92 scenario steps green across 22 pages; static + a11y audits clean; visual/responsive static-only (no browser in sandbox). Phase 4 (marketing) is out of scope and not started.
+**Phase:** PHASE 4 (RE-SCOPED: Marketplace Excellence & Commercial Polish) — COMPLETE ✅
+**Date:** 2026-09-08
+**Status:** Phase 4 complete — premium marketing layer (landing `index.html` + pricing/changelog/status/404), keyboard shortcuts (`?` help, `g` navigation, `/` search, Esc), RTL/nav parity fixes, buyer README + marketplace assets (screenshot manifest, RTL-Theme + ThemeForest copy, capture script). Runtime QA 114/114 scenario steps green across 30 pages; static + a11y audits clean (30 pages); visual/responsive static-only (no browser in sandbox — screenshots produced by `marketplace/capture-screenshots.mjs` on the buyer's machine).
 
 ---
 
@@ -171,6 +171,43 @@
 - [x] Runtime QA: **92/92 scenario steps PASS** across 22 pages (0 jsdom/console/module-eval errors)
 - [x] Structural a11y audit (25 pages) clean
 - [~] Real-browser visual/responsive QA not executed (no browser in sandbox) — recorded honestly, see TEST_STATUS.md
+
+---
+
+### PHASE 4 (RE-SCOPED): MARKETPLACE EXCELLENCE & COMMERCIAL POLISH — COMPLETE ✅
+
+> Re-scoped from the original "Phase 4: Differentiators" (which was pulled into
+> 3B/3C) + Phase 5.6 Polish + Phase 6 Marketing. Goal: transform the finished
+> APIForge X into a **sellable premium HTML template for the Iranian marketplace
+> (Rastchin)** — premium commercial polish, not random features. Recorded in
+> `IMPLEMENTATION_PLAN.md`; architecture decision D-015.
+
+**Milestone 4A — Marketing layer (commit `f04eb76`):**
+- [x] `layouts/_site.scss` — marketing shell (sticky translucent header, centered container, footer, mobile offcanvas nav); `pages/_marketing.scss` — hero/feature/pricing/changelog/status/404 styles; tokens only, no hex/rgba literals (glow via `var(--accent-rgb)`)
+- [x] `index.html` — premium landing replacing the temp hub: eyebrow + `.display` hero, **live product preview** (real KPI cards + Chart.js 14-day chart + activity timeline, seeded data — honors D-014 "product as hero" without a fake screenshot), stats strip, feature grid, code showcase, full page directory, pricing teaser, CTA band, footer
+- [x] `pricing.html` — 3 plans from `mock-plans.json` + usage-based overage note + comparison table + FAQ (Bootstrap collapse)
+- [x] `changelog.html` — versioned timeline v1.0.0 → v2.3.0
+- [x] `status.html` — all-systems banner, 90 deterministic uptime bars (2 degraded), 6 components, 2 incidents
+- [x] `404.html` — branded not-found with `data-page="404"` + CTA
+- [x] `src/js/site.js` (`bootSite()` — icons/theme/copy/nav, no palette/env-switcher/reveal); `vite.config.js` pageInputs 26 → 30; harness scenarios for all 5 pages
+
+**Milestone 4B — Commercial polish (commit `9c387fc`):**
+- [x] `components/shortcuts.js` — `?` help modal (lazy Bootstrap modal), `g`+letter nav (16 destinations), `/` focus search (7 pages got `data-search-target`), Esc via Bootstrap; registered in `boot()` with zero edits to page files
+- [x] Empty/error/skeleton coverage audited: empty states rendered by 10 page modules, skeleton→content on dashboard, `.error-state` primitive + form validation + `errors.html` — no forced feature injection
+- [x] RTL/nav parity fixed: `rtl.html` and `style-guide.html` had stale Phase 2/3 `href="#"` + tooltip nav — replaced with the full real nav (Persian labels in `rtl.html`); `style-guide.html` bottom tabbar updated
+- [x] `style-guide.html` — new "Marketing" section (hero, feature card, pricing card, status banner, changelog item)
+
+**Milestone 4C — Marketplace packaging (this commit):**
+- [x] `README.md` — buyer-facing: marketing page map, marketing shell in structure, "Adding a page" guide, keyboard-shortcut table, marketplace pointer
+- [x] SCSS token comments audited (already thorough from Phase 1/2); fixed stale `_radius.scss` "3 radii" header → 4
+- [x] `marketplace/` — `README.md`, `SCREENSHOTS_MANIFEST.md` (10 shots + naming + rules), `DESCRIPTION.md` (ThemeForest EN + RTL-Theme FA copy), `capture-screenshots.mjs` (Playwright, runs on buyer's machine); `.gitignore` excludes the screenshot output
+- [x] `DECISIONS.md` D-015 (marketing shell architecture + live-preview hero decision)
+
+**Exit Criteria:**
+- [x] `vite build` green (30 page inputs, 0 warnings)
+- [x] Runtime QA: **114/114 scenario steps PASS** across 30 pages (0 jsdom/console/module-eval errors)
+- [x] Structural a11y audit (30 pages) clean; static audit clean (0 Inter Tight/Geist/CDN, logical props, reduced-motion, tabular-nums)
+- [~] Real-browser visual/responsive QA not executed (no browser in sandbox) — screenshots produced locally via `marketplace/capture-screenshots.mjs`, recorded honestly
 
 ---
 

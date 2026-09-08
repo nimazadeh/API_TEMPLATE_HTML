@@ -1,5 +1,37 @@
 # Test Status — APIForge X
 
+## Phase 4 (Re-scoped) — Marketplace Excellence & Commercial Polish — PASS ✅ (with honest limitations)
+
+**Date:** 2026-09-08
+**Status:** PASS ✅ — 5 marketing pages + keyboard shortcuts + RTL/nav parity + marketplace packaging shipped; runtime QA **114/114 scenario steps green across 30 pages** (0 jsdom/console/module-eval errors); structural a11y audit clean on 30 pages; static design audit clean. Visual/responsive remain STATIC-only — no real browser in this sandbox; real screenshots are produced by `marketplace/capture-screenshots.mjs` on the buyer's machine, and are NOT marked PASS here.
+
+### Runtime interaction QA — EXECUTED (jsdom), PASS ✅ 114/114
+
+Regression (30 pages, all prior scenarios unchanged) + 3 new keyboard-shortcut steps + 18 new marketing steps:
+
+- New marketing pages: `index` 6 (KPIs, chart, activity, features, directory, theme toggle), `pricing` 4 (cards, featured, comparison, FAQ), `changelog` 2, `status` 5 (banner, 90 bars, 2 degraded, 6 components, 2 incidents), `404` 2
+- New polish steps: `dashboard` +2 (`?` help modal opens, `g`+unmapped no-op), `logs` +1 (`/` focuses search)
+- All prior 90 steps across the 26 product/auth/foundation pages still green after the marketing shell + shortcuts landed
+
+### Build
+
+- `vite build` green — 30 page inputs, 0 warnings; marketing pages emitted as `dist/{pricing,changelog,status,404,index}.html`.
+
+### Structural a11y audit — 30 pages, clean
+
+- No missing `scope="col"`, no unlabelled controls, no icon-button-without-label, no duplicate IDs, all `lang` present; marketing pages included (offcanvas nav, FAQ collapse, comparison table).
+
+### Static design audit — clean
+
+- 0 `Inter Tight` / `Geist` / CDN fonts; Vazirmatn + Inter + JetBrains Mono only; logical properties throughout; 43 `prefers-reduced-motion` rules; 16 `tabular-nums`; marketing partials use tokens only (0 hex, glow via `var(--accent-rgb)`).
+
+### Honest limitations (browser unavailable in this sandbox)
+
+- Real-browser visual/responsive at 360/390/430/768/1024/1440, real chart painting, keyboard traversal, in-situ contrast, Lighthouse scores and full WCAG were NOT executed — recorded, not claimed.
+- Marketplace screenshots were NOT generated here (no browser); the capture script + manifest are shipped so the buyer produces them.
+
+---
+
 ## Phase 3C — Complete SaaS Product Experience — PASS ✅ (with honest limitations)
 
 **Date:** 2026-09-07

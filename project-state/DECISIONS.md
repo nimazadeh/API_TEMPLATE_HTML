@@ -349,6 +349,22 @@ Additions: Vanilla JS fuzzy search for command palette, not heavy lib.
 **Decision:** Endpoint "authentication" (API key / Bearer token / Signing secret / None) is derived from the endpoint's API via a static map in `endpoints.js` rather than added to `mock-endpoints.json`, avoiding churn to Phase 3A data. The create/edit modal stores the user-chosen `auth` on the in-session record.
 **Consequences:** `mock-endpoints.json` untouched by Phase 3B; auth is deterministic and overridable in-session.
 
+## Phase 4 (Re-scoped) Decisions
+
+### D-036: Marketing Shell — Separate `site` Layout + `bootSite()`, Live-Preview Hero
+
+**Date:** 2026-09-08
+**Context:** Phase 4 (re-scoped) adds the marketing layer (landing, pricing, changelog, status, 404) on top of the finished app. D-014 says the landing must be minimal, dark-first, with **product screenshots as the hero (Linear principle), not illustrations** — but this sandbox has no browser, so a real screenshot cannot be captured here.
+**Options:**
+1. Ship a static PNG screenshot in the hero (impossible here — no browser; and a fake/AI image would violate the no-illustration rule).
+2. Ship an HTML/CSS "mock" screenshot (a dead replica — violates "every action works").
+3. Build the hero preview as a **live, working mini-dashboard** from the same seeded data the app uses (KPIs + Chart.js chart + activity timeline).
+**Decision:** Option 3 — a live product preview built from real components and `mock-observability.json` / `mock-activity.json`. Marketing pages get their own thin shell (`layouts/_site.scss`) and `src/js/site.js` (`bootSite()`: icons + theme + copy + nav) instead of the app `boot()` — no command palette, env switcher, or reveal-once on marketing pages. Real listing screenshots are produced by `marketplace/capture-screenshots.mjs` on the buyer's machine.
+**Rationale:** Honors D-014 (show the product, not an illustration) without a fake asset; the preview is interactive and truthful; the lighter boot keeps marketing pages lean and avoids app-only chrome.
+**Consequences:** Marketing pages duplicate the site header/footer per page (same convention as the app shell); `site.js` is the marketing entrypoint; the screenshot manifest + capture script are the single source of truth for listing imagery.
+
+---
+
 ## Future Decisions (To Be Made in Phase 3C+)
 
 - Auth pages minimal or with OAuth? Decision: Minimal like Vercel, with optional OAuth buttons.

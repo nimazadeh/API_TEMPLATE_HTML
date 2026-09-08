@@ -6,10 +6,12 @@ A dark-first, keyboard-first, **RTL first-class** HTML template for API platform
 depth-over-breadth developer tool surface in the spirit of Stripe, Resend,
 Vercel and Linear.
 
-> **Status:** Phase 3C **complete** ✅ — 22 product/auth pages (Phases 3A+3B+3C),
-> headless runtime QA 92/92 scenario steps green, static + a11y audits clean,
-> visual/responsive audits static-only (no browser in the sandbox). Phase 4
-> (marketing) is out of scope. See `/project-state/PROJECT_STATE.md`.
+> **Status:** Phase 4 (Marketplace Excellence & Commercial Polish) **complete** ✅ —
+> all 30 pages (26 product/auth + landing/pricing/changelog/status/404), keyboard
+> shortcuts, buyer docs and marketplace assets. Headless runtime QA 114/114
+> scenario steps green across 30 pages; static + a11y audits clean; visual/responsive
+> audits static-only (no browser in the sandbox — see `/marketplace/SCREENSHOTS_MANIFEST.md`
+> for the capture script that produces real screenshots). See `/project-state/PROJECT_STATE.md`.
 
 ## Stack
 
@@ -67,10 +69,19 @@ Foundation pages:
 
 | Page | Purpose |
 |------|---------|
-| `/` | Temporary foundation hub (landing ships in Phase 6) |
-| `/style-guide.html` | The living component contract — every primitive, both themes, RTL/LTR |
+| `/` | Premium marketing landing — hero with a **live** product preview, features, page directory, pricing teaser |
+| `/style-guide.html` | The living component contract — every primitive (incl. marketing), both themes, RTL/LTR |
 | `/rtl-test.html` | RTL/LTR test harness — mixed-direction scenarios, theme + direction switching |
 | `/rtl.html` | Persian / RTL demo — sidebar right, Vazirmatn, LTR-isolated code |
+
+Marketing pages (Phase 4):
+
+| Page | Purpose |
+|------|---------|
+| `/pricing.html` | Plans (Developer/Pro/Scale), usage-based overage, comparison table, FAQ |
+| `/changelog.html` | Versioned release notes from v1.0.0 → v2.3.0 |
+| `/status.html` | Uptime bars, component health, incident history (deterministic) |
+| `/404.html` | Branded not-found with CTA back to the dashboard |
 
 ## Structure
 
@@ -84,19 +95,21 @@ src/
     components/ # buttons, forms, badges, tables, cards, code, skeletons, empty,
                 # tooltip, modal/offcanvas, progress, timeline, toast, dropdown,
                 # tabs, alert, breadcrumb, avatar, stat, chart, loading, palette,
-                # segmented, toolbar, split, inspector, explorer
-    layouts/    # app shell, sidebar, header, mobile nav
-    pages/      # per-page styles (rtl-test, usage, errors, rate-limits)
+                # segmented, toolbar, split, inspector, explorer, shortcuts
+    layouts/    # app shell, sidebar, header, mobile nav, site (marketing shell)
+    pages/      # per-page styles (rtl-test, usage, errors, rate-limits, marketing)
     main.scss
   js/
     core/       # bootstrap.js — Bootstrap ESM data-API imports
     components/ # theme, env switcher, command palette, code block, copy, icons,
-                # log/webhook/error detail drawers, charts, …
+                # log/webhook/error detail drawers, charts, shortcuts, …
     data/       # mock JSON (regenerate: node scripts/generate-mock-data.mjs)
     utils/      # formatting (relative time, latency, badges, Persian digits)
     pages/      # per-page entry scripts
-    main.js     # shared boot()
+    main.js     # shared boot() — app pages
+    site.js     # shared bootSite() — marketing pages (no palette/env switcher)
 scripts/generate-mock-data.mjs
+marketplace/    # buyer assets: screenshot manifest, description copy, capture script
 ```
 
 ## Theming
@@ -117,16 +130,45 @@ scripts/generate-mock-data.mjs
 - Persian digits via `.num-fa`, Western digits via `.num-en`.
 - Charts and code blocks remain LTR regardless of document direction.
 
-## Notes for the next phases
+## Adding a page
 
-- The remaining app surface is the marketing site (homepage, pricing, about,
-  blog, contact, landing pages, marketplace packaging) — Phase 4, out of scope
-  for this session. When it lands, add each new HTML entry to the `pageInputs`
-  map in `vite.config.js`.
-- Add new Lucide icons to `src/js/components/icons.js` (keeps the bundle
-  tree-shaken).
+Every page is a top-level HTML file + a `src/js/pages/*.js` entry, registered in
+`vite.config.js`. To add one (e.g. a new endpoint page):
+
+1. Create `src/js/pages/your-page.js`:
+   ```js
+   import { boot } from '../main.js'; // app shell (sidebar + header)
+   // or: import { bootSite } from '../site.js'; // marketing shell
+   boot();
+   ```
+2. Create `your-page.html`. Copy the shell (sidebar/header/main or the `.site`
+   header/footer) from an existing page, set `<body data-page="your-page">`
+   for marketing pages, and add `<script type="module" src="./src/js/pages/your-page.js">`.
+3. Add the page to `pageInputs` in `vite.config.js`.
+4. Add it to the sidebar nav on every app page (or the site nav on marketing
+   pages) and to `src/js/data/commands.js` (command palette).
+5. Add any new data to `scripts/generate-mock-data.mjs` (deterministic, seeded)
+   and regenerate — never hand-edit the `mock-*.json` files.
+6. Add new Lucide icons to `src/js/components/icons.js` (keeps the bundle tree-shaken).
+
+## Keyboard shortcuts
+
+Wired globally on app pages (`src/js/components/shortcuts.js`):
+
+| Key | Action |
+|-----|--------|
+| `?` | Toggle the shortcut help modal |
+| `⌘K` / `Ctrl+K` | Command palette |
+| `g` then a letter | Jump to a page (e.g. `g l` → Logs, `g d` → Overview) |
+| `/` | Focus the page search (or open the palette where there is no search) |
+| `Esc` | Close dialogs and overlays |
+
+## Notes
+
 - Charts are registered tree-shaken in `src/js/components/charts.js`
   (`makeChart`/`initCharts`); re-theme on `afx:theme` is automatic.
 - Bootstrap JS is bound through `src/js/core/bootstrap.js`; add a component to
   its import list only if a page needs that data-API.
 - Mock data is deterministic and regenerable via `node scripts/generate-mock-data.mjs`.
+- Marketplace screenshots are produced with `node marketplace/capture-screenshots.mjs`
+  (requires a local Chromium) — see `/marketplace/README.md` for the full shot list.
