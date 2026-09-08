@@ -10,8 +10,10 @@ import { formatNumber, compactNumber, relativeTime, escapeHtml, latencyText, per
 import { t as tr, onLocaleChange } from '../core/i18n.js';
 import metrics from '../data/mock-metrics.json';
 import usage from '../data/mock-usage.json';
-import activity from '../data/mock-activity.json';
+import faActivity from '../data/mock-activity.json';
+import enActivity from '../data/mock-activity.en.json';
 import plan from '../data/mock-plan.json';
+import { localizedData } from '../data/localized.js';
 
 boot();
 initCharts();
@@ -136,6 +138,7 @@ const ACTIVITY = {
 
 function renderActivity() {
   const feed = document.getElementById('activity-feed');
+  const activity = localizedData(faActivity, enActivity);
   feed.innerHTML = `
     <ol class="timeline">
       ${activity.map((a) => {

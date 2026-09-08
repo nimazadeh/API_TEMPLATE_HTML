@@ -183,33 +183,12 @@ function close() {
   }, 150);
 }
 
-export function initCommandPalette() {
-  const wrap = buildPalette();
-  const input = wrap.querySelector('input');
-
-  // Re-translate the chrome and the index when the locale flips.
-  onLocaleChange(() => {
-    const w = document.querySelector('.command-palette');
-    if (!w) return;
-    w.setAttribute('aria-label', t('palette.title'));
-    w.innerHTML = paletteMarkup();
-    createIcons({ icons });
-    const box = w.querySelector('.cmd-results');
-    state.results = search(state.query);
-    state.selected = 0;
-    render();
-    if (box) box.scrollTop = 0;
-    wireInput(w.querySelector('input'));
-  });
-
-  wireInput(input);
-}
-
 /**
- * Wire the palette input (re-bound after a locale change rebuilds
- * the dialog markup).
+ * Bind the live input's own events. The <input> is destroyed and
+ * rebuilt inside the (persistent) dialog shell whenever the locale
+ * flips, so this must be re-called after each rebuild.
  */
-function wireInput(input) {
+function bindInput(input) {
   if (!input) return;
   input.addEventListener('input', () => {
     state.query = input.value;
@@ -233,7 +212,32 @@ function wireInput(input) {
       close();
     }
   });
+}
 
+export function initCommandPalette() {
+  const wrap = buildPalette();
+
+  // Re-translate the chrome and re-index when the locale flips. The
+  // dialog <div class="command-palette"> persists, so only its inner
+  // markup (including the <input>) is rebuilt and re-bound.
+  onLocaleChange(() => {
+    const w = document.querySelector('.command-palette');
+    if (!w) return;
+    w.setAttribute('aria-label', t('palette.title'));
+    w.innerHTML = paletteMarkup();
+    createIcons({ icons });
+    state.results = search(state.query);
+    state.selected = 0;
+    render();
+    const box = w.querySelector('.cmd-results');
+    if (box) box.scrollTop = 0;
+    bindInput(w.querySelector('input'));
+  });
+
+  bindInput(wrap.querySelector('input'));
+
+  // Stable, once-only listeners — these live on persistent nodes, so
+  // they must NOT be re-registered on every locale change.
   wrap.addEventListener('click', (e) => {
     if (e.target === wrap) return close();
     const itemBtn = e.target.closest('.cmd-item');

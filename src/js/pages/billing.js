@@ -12,9 +12,11 @@ import { afxToast } from '../components/toast.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { ask, initConfirm } from '../components/confirm.js';
 import { escapeHtml, compactNumber, formatDate } from '../utils/format.js';
-import plans from '../data/mock-plans.json';
+import faPlans from '../data/mock-plans.json';
+import enPlans from '../data/mock-plans.en.json';
 import invoices from '../data/mock-invoices.json';
 import plan from '../data/mock-plan.json';
+import { localizedData } from '../data/localized.js';
 
 boot();
 initConfirm({ modalId: 'confirm-modal', titleId: 'confirm-modal-title', bodyId: 'confirm-modal-body', submitId: 'confirm-modal-submit' });
@@ -64,8 +66,12 @@ function planCard(p) {
     </div>`;
 }
 
+function getPlans() {
+  return localizedData(faPlans, enPlans);
+}
+
 function renderPlans() {
-  document.getElementById('plan-grid').innerHTML = plans.map(planCard).join('');
+  document.getElementById('plan-grid').innerHTML = getPlans().map(planCard).join('');
 }
 
 // --- Invoices ---------------------------------------------------------------
@@ -98,7 +104,7 @@ render();
 document.getElementById('plan-grid').addEventListener('click', async (e) => {
   const btn = e.target.closest('[data-plan]');
   if (!btn || btn.disabled) return;
-  const target = plans.find((p) => p.id === btn.dataset.plan);
+  const target = getPlans().find((p) => p.id === btn.dataset.plan);
   const isDowngrade = target.price < currentPlan.price;
   const ok = await ask({
     title: isDowngrade ? tr('billing.downgradeTitle') : tr('billing.upgradeTitle'),
