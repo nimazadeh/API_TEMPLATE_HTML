@@ -55,13 +55,18 @@ function sha256File(p) {
 }
 
 // ------------------------------------------------------------------
-// 1. Fresh production build
+// 1. Fresh production build (always)
 // ------------------------------------------------------------------
+// dist/ is throwaway build output and must never be reused silently:
+// if a leftover dist/ from an older source tree exists (e.g. the last
+// `npm run build` ran before the latest SCSS/HTML/JS edits), packaging
+// it as-is would ship a release that does not match the current source —
+// and packaging/verify.mjs would still PASS because it audits the stale
+// tree for internal consistency only. Always rebuild first so the
+// release package is generated from the current source, every time.
 const dist = path.join(repo, 'dist');
-if (!fs.existsSync(path.join(dist, 'index.html'))) {
-  console.log('→ vite build');
-  execSync('npm run build', { cwd: repo, stdio: 'inherit' });
-}
+console.log('→ vite build (fresh, always)');
+execSync('npm run build', { cwd: repo, stdio: 'inherit' });
 
 // ------------------------------------------------------------------
 // 2. Clean release/
