@@ -12,7 +12,8 @@ import metrics from '../data/mock-metrics.json';
 import usage from '../data/mock-usage.json';
 import faActivity from '../data/mock-activity.json';
 import enActivity from '../data/mock-activity.en.json';
-import plan from '../data/mock-plan.json';
+import faPlan from '../data/mock-plan.json';
+import enPlan from '../data/mock-plan.en.json';
 import { localizedData } from '../data/localized.js';
 
 boot();
@@ -51,6 +52,7 @@ function renderKpis(range) {
   const k = metrics.kpis[range];
   const grid = document.getElementById('kpi-strip');
   const cards = grid.querySelectorAll('[data-kpi]');
+  const plan = localizedData(faPlan, enPlan);
 
   const requestsDelta = `${k.requestsDelta > 0 ? '+' : ''}${k.requestsDelta}%`;
   const successDelta = `${k.successDelta > 0 ? '+' : ''}${k.successDelta}pp`;
