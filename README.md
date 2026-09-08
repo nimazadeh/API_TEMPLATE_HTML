@@ -132,6 +132,33 @@ scripts/generate-mock-data.mjs
 marketplace/    # buyer assets: screenshot manifest, description copy, capture script
 ```
 
+## Responsive layout and regression tests
+
+The **document owns page scrolling**. Do not put a viewport-height limit or
+`overflow: auto` on `.app-main`; that recreates the nested scrollbar. Grid
+tracks use `minmax(0, 1fr)` so a table/code sample cannot widen the shell.
+The sidebar/header stay sticky; only long navigation, wide tables, code wells
+and overlay bodies scroll locally. The mobile bottom bar has reserved space
+in the document, including the device safe area.
+
+On small screens search becomes an icon and the environment selector lives in
+the sidebar drawer. The marketing header keeps its language toggle accessible.
+`invite.html` shares the login/forgot-password grid-and-glow backdrop.
+
+```bash
+npx playwright install chromium
+npm test                 # all 197 tests (builds and tests the production output)
+npm run test:responsive  # 151 tests; 31 pages × fa/en × dark/light × 9 widths
+npm run test:i18n        # the existing 46 catalog/localization/interaction tests
+```
+
+`CHROMIUM_EXECUTABLE_PATH` can point to an already-installed Chromium browser.
+The responsive suite checks 320–1920px, natural document scrolling, reachable
+mobile controls, short-screen drawers/forms, sticky navigation and RTL/LTR
+placement. This is Chromium coverage, **not** a Safari/Firefox or physical-device
+certification. See [the Persian review report](RESPONSIVE_REVIEW.md) for findings,
+verified results and limitations.
+
 ## Theming
 
 - Dark-first; light is an override layer on the same tokens; `system` follows

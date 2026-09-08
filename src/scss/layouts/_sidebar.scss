@@ -11,12 +11,22 @@
 
 // Layout container (desktop/tablet)
 .app-sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  z-index: var(--z-sidebar);
   display: flex;
   flex-direction: column;
+  height: 100dvh;
+  min-width: 0;
   background: var(--surface-0);
   border-inline-end: 1px solid var(--border);
-  overflow-y: auto;
-  overflow-x: hidden;
+
+  // Keep this after the base display declaration: the old mobile hide
+  // rule in app-shell was overridden by this partial's display:flex.
+  @include mq-max('md') {
+    display: none;
+  }
 }
 
 // ---- Shared chrome (sidebar + mobile drawer) ----
@@ -32,6 +42,11 @@
 
 .sidebar-nav {
   flex: 1;
+  min-height: 0;
+  // Navigation can be longer than a short screen, but must not stretch
+  // the shell or push the account/environment controls off screen.
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
   padding: 16px 12px;
   display: flex;
   flex-direction: column;
@@ -161,11 +176,13 @@
     min-width: 0;
     flex: 1;
     .name {
+      display: block;
       font-size: var(--fs-body-sm);
       font-weight: 500;
       color: var(--text-primary);
     }
     .email {
+      display: block;
       font-size: var(--fs-caption);
       color: var(--text-tertiary);
       white-space: nowrap;
@@ -194,8 +211,24 @@
       padding: 0;
       gap: 0;
     }
+    .sidebar-foot {
+      padding: var(--space-2);
+      > .env-switcher { display: none; } // full pill remains in the header
+      > .btn {
+        align-self: center;
+        width: var(--control-height);
+        padding-inline: 0;
+        > span { display: none; }
+      }
+    }
+    .sidebar-user__toggle {
+      justify-content: center;
+      padding: var(--space-2);
+      > svg { display: none; }
+    }
     .sidebar-user {
       justify-content: center;
+      > svg { display: none; }
     }
   }
 }

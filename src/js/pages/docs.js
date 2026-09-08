@@ -172,7 +172,7 @@ function navigate(id) {
   state.active = id;
   window.history.replaceState(null, '', `#${id}`);
   render();
-  document.querySelector('.app-main')?.scrollTo?.({ top: 0 });
+  window.scrollTo({ top: 0 });
   const offcanvas = document.getElementById('docs-nav-offcanvas');
   if (offcanvas) Offcanvas.getOrCreateInstance(offcanvas).hide();
 }
@@ -200,10 +200,7 @@ render();
 
 window.addEventListener('hashchange', () => {
   const id = window.location.hash.slice(1);
-  if (docArticles()[id]) {
-    state.active = id;
-    render();
-  }
+  if (docArticles()[id]) navigate(id);
 });
 
 // Re-render the article and navigation when the locale flips.

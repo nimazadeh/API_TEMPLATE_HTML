@@ -9,11 +9,17 @@
 .seg {
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
+  max-width: 100%;
   gap: 2px;
   padding: 2px;
   background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: var(--radius-pill);
+
+  @include mq-max('sm') {
+    border-radius: var(--radius-md);
+  }
 }
 
 .seg__item {

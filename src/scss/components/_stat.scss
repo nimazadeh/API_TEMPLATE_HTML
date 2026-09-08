@@ -19,6 +19,9 @@
     color: var(--text-tertiary);
   }
   .stat-value {
+    // Never split a number (or a Persian unit joined with ZWNJ) mid-word
+    // just to force it into a narrow card. The grid must reflow instead.
+    overflow-wrap: normal;
     font-size: var(--fs-h2);
     font-weight: 600;
     letter-spacing: var(--track-h2);

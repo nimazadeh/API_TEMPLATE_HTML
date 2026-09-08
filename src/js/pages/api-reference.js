@@ -217,6 +217,7 @@ function selectEndpoint(id) {
   state.endpoint = id;
   renderNav();
   renderEndpoint();
+  window.scrollTo({ top: 0 });
   const offcanvas = document.getElementById('ref-nav-offcanvas');
   if (offcanvas) Offcanvas.getOrCreateInstance(offcanvas).hide();
 }

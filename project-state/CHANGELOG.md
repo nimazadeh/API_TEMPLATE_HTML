@@ -6,6 +6,32 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## [Responsive review] — 2026-09-08 — Scroll ownership, mobile layout and invite backdrop
+
+### Fixed
+- Removed viewport-height/overflow constraints from `.app-main`; the document
+  now scrolls naturally. Shrinkable grid tracks prevent page-wide overflow.
+- Fixed the mobile sidebar display cascade, constrained sticky desktop nav,
+  retained reachable footer controls and reserved bottom-tab/safe-area space.
+- Compact header controls; mobile environment selector; localized tablet rail
+  labels; mobile offcanvas/backdrop cleanup when resizing to desktop.
+- KPI/card/filter wrapping, inline IDs/URLs, landing preview/headings/header and
+  mobile language access; auth spacing and invite grid/glow parity with login.
+- Docs/reference document-scroll navigation and sticky offsets; scrollable
+  short-screen docs menus; Bootstrap physical-coordinate override specificity
+  for correctly mirrored end drawers.
+- Command search width/height on narrow/short screens, touch close/outside click,
+  keyboard Tab/Escape handling and focus return.
+
+### Added / verified
+- `tests/responsive.spec.js`, `npm test`, `npm run test:responsive`, and a scoped
+  `npm run test:i18n`; Persian findings in `RESPONSIVE_REVIEW.md`.
+- Production build passes; **197/197 tests pass**, including **1,116 layout
+  checks** across 31 pages × 2 locales × 2 themes × 9 widths in real Chromium.
+- Safari/Firefox and physical-device QA remain explicit limitations.
+
+---
+
 ## [Phase 5.5] — 2026-09-08 — PREMIUM VISUAL POLISH & MOTION SYSTEM ✅
 
 ### Added
