@@ -6,17 +6,18 @@
 
 import { bootSite } from '../site.js';
 import plans from '../data/mock-plans.json';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 
 bootSite();
 
 const FEATURES = [
-  { key: 'requests', label: 'Requests / month' },
-  { key: 'environments', label: 'Environments' },
-  { key: 'members', label: 'Team members' },
-  { key: 'webhooks', label: 'Webhook endpoints' },
-  { key: 'retention', label: 'Log retention' },
-  { key: 'rateLimit', label: 'Rate limit' },
-  { key: 'support', label: 'Support' },
+  { key: 'requests', labelKey: 'plans.requests' },
+  { key: 'environments', labelKey: 'plans.environments' },
+  { key: 'members', labelKey: 'plans.members' },
+  { key: 'webhooks', labelKey: 'plans.webhooks' },
+  { key: 'retention', labelKey: 'plans.retention' },
+  { key: 'rateLimit', labelKey: 'plans.rateLimit' },
+  { key: 'support', labelKey: 'plans.support' },
 ];
 
 function renderCards() {
@@ -25,19 +26,19 @@ function renderCards() {
     .map(
       (p) => `
       <div class="pricing-card${p.highlight ? ' is-featured' : ''}">
-        <span class="badge ${p.highlight ? 'badge-accent' : 'badge-neutral'} pricing-card__tag">${p.highlight ? 'Most popular' : p.name}</span>
+        <span class="badge ${p.highlight ? 'badge-accent' : 'badge-neutral'} pricing-card__tag">${p.highlight ? tr('sg.mostPopular') : p.name}</span>
         <div class="pricing-card__name">${p.name}</div>
         <div class="pricing-card__price"><span class="amount">${p.priceLabel}</span><span class="period">${p.period}</span></div>
         <p class="pricing-card__blurb">${p.blurb}</p>
         <ul class="pricing-card__features">
-          <li><i data-lucide="check"></i> ${p.requests} requests</li>
-          <li><i data-lucide="check"></i> ${p.environments} environments</li>
-          <li><i data-lucide="check"></i> ${p.members} team members</li>
-          <li><i data-lucide="check"></i> ${p.webhooks} webhook endpoints</li>
-          <li><i data-lucide="check"></i> ${p.retention} log retention</li>
-          <li><i data-lucide="check"></i> ${p.rateLimit} rate limit</li>
+          <li><i data-lucide="check"></i> ${tr('plans.requestsValue', { value: p.requests })}</li>
+          <li><i data-lucide="check"></i> ${tr('plans.environmentsValue', { value: p.environments })}</li>
+          <li><i data-lucide="check"></i> ${tr('plans.membersValue', { value: p.members })}</li>
+          <li><i data-lucide="check"></i> ${tr('plans.webhooksValue', { value: p.webhooks })}</li>
+          <li><i data-lucide="check"></i> ${tr('plans.retentionValue', { value: p.retention })}</li>
+          <li><i data-lucide="check"></i> ${tr('plans.rateLimitValue', { value: p.rateLimit })}</li>
         </ul>
-        <a class="btn ${p.highlight ? 'btn-primary' : 'btn-ghost'} pricing-card__cta" href="./dashboard.html">${p.highlight ? 'Choose ' + p.name : 'Start with ' + p.name}</a>
+        <a class="btn ${p.highlight ? 'btn-primary' : 'btn-ghost'} pricing-card__cta" href="./dashboard.html">${p.highlight ? tr('pricing.choosePlan', { plan: p.name }) : tr('pricing.startWithPlan', { plan: p.name })}</a>
       </div>`
     )
     .join('');
@@ -48,7 +49,7 @@ function renderComparison() {
   tbody.innerHTML = FEATURES.map(
     (f) => `
       <tr>
-        <th scope="row">${f.label}</th>
+        <th scope="row">${tr(f.labelKey)}</th>
         ${plans
           .map((p) => `<td class="cell-num">${p[f.key] ?? '—'}</td>`)
           .join('')}
@@ -58,3 +59,8 @@ function renderComparison() {
 
 renderCards();
 renderComparison();
+
+onLocaleChange(() => {
+  renderCards();
+  renderComparison();
+});

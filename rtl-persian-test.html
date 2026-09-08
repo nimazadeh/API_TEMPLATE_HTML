@@ -12,10 +12,11 @@
         try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
         var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
         document.documentElement.setAttribute('data-theme', theme);
-        var dir = 'rtl';
-        try { dir = localStorage.getItem('afx-dir') || 'rtl'; } catch (e) {}
-        document.documentElement.setAttribute('dir', dir);
-        if (dir === 'ltr') document.documentElement.setAttribute('lang', 'en');
+        var loc = null;
+        try { loc = localStorage.getItem('afx-locale'); } catch (e) {}
+        if (loc !== 'fa' && loc !== 'en') loc = 'fa';
+        document.documentElement.setAttribute('lang', loc);
+        document.documentElement.setAttribute('dir', loc === 'fa' ? 'rtl' : 'ltr');
       })();
     </script>
   </head>
@@ -27,21 +28,24 @@
           <div class="d-flex align-items-center gap-2">
             <span class="brand-mark"><i data-lucide="languages"></i></span>
             <div>
-              <h1 class="fw-medium mb-0" style="font-size: var(--fs-body);">آزمون راست‌به‌چپ</h1>
-              <div class="caption text-tertiary">RTL/LTR & theme test harness</div>
+              <h1 class="fw-medium mb-0" style="font-size: var(--fs-body);" data-i18n="qa.pageHeading">آزمون راست‌به‌چپ</h1>
+              <div class="caption text-tertiary" data-i18n="qa.pageSub">سنجش راست‌به‌چپ/چپ‌به‌راست و پوسته</div>
             </div>
           </div>
           <div class="d-flex flex-wrap align-items-center gap-2">
-            <div class="env-switcher" role="group" aria-label="Direction">
+            <div class="env-switcher" role="group" aria-label="جهت" data-i18n-attr="aria-label:aria.direction">
               <button type="button" class="env-option" data-dir="rtl">RTL</button>
               <button type="button" class="env-option" data-dir="ltr">LTR</button>
             </div>
-            <div class="env-switcher" role="group" aria-label="Theme">
+            <div class="env-switcher" role="group" aria-label="پوسته" data-i18n-attr="aria-label:aria.theme">
               <button type="button" class="env-option" data-mode="dark">تیره</button>
               <button type="button" class="env-option" data-mode="light">روشن</button>
               <button type="button" class="env-option" data-mode="system">سیستم</button>
             </div>
-            <a class="btn btn-sm btn-ghost" href="./style-guide.html">Style Guide</a>
+            <button type="button" class="btn btn-sm btn-ghost" data-locale-toggle aria-label="تغییر زبان" data-i18n-attr="aria-label:aria.switchLanguage">
+              <i data-lucide="languages"></i> <span data-locale-label>EN</span>
+            </button>
+            <a class="btn btn-sm btn-ghost" href="./style-guide.html" data-i18n="page.style-guide">راهنمای استایل</a>
           </div>
         </div>
       </header>
@@ -53,13 +57,11 @@
           <section class="card mb-4">
             <div class="card-header">
               <h3 class="card-title">۱ · جملهٔ ترکیبی</h3>
-              <div class="card-subtitle">اصطلاح فنی انگلیسی داخل جملهٔ فارسی، بدون شکستن جهت.</div>
+              <div class="card-subtitle" data-i18n="qa.mixedSubtitle">اصطلاح فنی انگلیسی داخل جملهٔ فارسی، بدون شکستن جهت.</div>
             </div>
-            <p class="body-lg">
-              برای شروع، یک <span class="tech" dir="ltr">API key</span> از داشبورد بسازید و آن را در هدر
+            <p class="body-lg"><span data-i18n="qa.mixedLead">برای شروع، یک</span><span class="tech" dir="ltr" data-i18n="keys.apiKeyLabel">کلید API</span> از داشبورد بسازید و آن را در هدر
               <code dir="ltr" class="ltr-isolate">Authorization: Bearer …</code> بفرستید. نقطهٔ پایانی
-              <code dir="ltr" class="ltr-isolate">POST /v1/emails</code> ایمیل را می‌فرستد و شناسهٔ
-              <code dir="ltr" class="ltr-isolate">req_8Fk2mQx1Zw</code> برمی‌گرداند. مستندات کامل در
+              <code dir="ltr" class="ltr-isolate">POST /v1/emails</code><span data-i18n="qa.mixedSend">ایمیل را می‌فرستد و شناسهٔ</span><code dir="ltr" class="ltr-isolate">req_8Fk2mQx1Zw</code> برمی‌گرداند. مستندات کامل در
               <a href="#">https://docs.apiforge.dev/fa/quickstart</a> است.
             </p>
             <p class="text-secondary mb-0">
@@ -136,12 +138,12 @@ await client.emails.send({ to: 'user@example.com' });</pre>
                 <table class="table table--compact">
                   <thead>
                     <tr>
-                      <th scope="col">زمان</th>
-                      <th scope="col">متد</th>
-                      <th scope="col">نقطهٔ پایانی</th>
-                      <th scope="col">وضعیت</th>
-                      <th scope="col" class="cell-num">تأخیر</th>
-                      <th scope="col">شناسهٔ درخواست</th>
+                      <th scope="col" data-i18n="rtl.thTime">زمان</th>
+                      <th scope="col" data-i18n="rtl.thMethod">متد</th>
+                      <th scope="col" data-i18n="rtl.thEndpoint">نقطهٔ پایانی</th>
+                      <th scope="col" data-i18n="rtl.thStatus">وضعیت</th>
+                      <th scope="col" class="cell-num" data-i18n="rtl.thLatency">تاخیر پاسخ</th>
+                      <th scope="col" data-i18n="rtl.thRequestId">شناسهٔ درخواست</th>
                     </tr>
                   </thead>
                   <tbody id="logs-demo"></tbody>
@@ -188,8 +190,8 @@ await client.emails.send({ to: 'user@example.com' });</pre>
               <button type="button" class="btn btn-secondary" id="rt-next">
                 بعدی <i data-lucide="arrow-left" data-dir-icon="next"></i>
               </button>
-              <button type="button" class="btn btn-icon" aria-label="Settings"><i data-lucide="settings"></i></button>
-              <button type="button" class="btn btn-icon" aria-label="Help"><i data-lucide="help-circle"></i></button>
+              <button type="button" class="btn btn-icon" aria-label="تنظیمات" data-i18n-attr="aria-label:aria.settings"><i data-lucide="settings"></i></button>
+              <button type="button" class="btn btn-icon" aria-label="راهنما" data-i18n-attr="aria-label:aria.help"><i data-lucide="help-circle"></i></button>
             </div>
           </section>
 
@@ -208,7 +210,7 @@ await client.emails.send({ to: 'user@example.com' });</pre>
             <ul class="list-unstyled d-flex flex-column gap-2">
               <li class="d-flex align-items-center gap-2">
                 <i data-lucide="circle-check" class="text-accent"></i>
-                <span>کلید <code dir="ltr" class="ltr-isolate">sk_live_…</code> فعال شد</span>
+                <span><span data-i18n="rtl.thKey">کلید</span><code dir="ltr" class="ltr-isolate">sk_live_…</code> فعال شد</span>
               </li>
               <li class="d-flex align-items-center gap-2">
                 <i data-lucide="alert-triangle"></i>
@@ -217,10 +219,104 @@ await client.emails.send({ to: 'user@example.com' });</pre>
             </ul>
           </section>
 
+          <!-- 9. Chart -->
+          <section class="card mb-4">
+            <div class="card-header">
+              <h3 class="card-title" data-i18n="qa.chartTitle">۹ · نمودار</h3>
+              <div class="card-subtitle" data-i18n="qa.chartSubtitle">برچسب‌های محور و راهنما با جهت صفحه هماهنگ می‌شوند.</div>
+            </div>
+            <div class="chart">
+              <div class="chart__head">
+                <div>
+                  <div class="chart__title" data-i18n="usage.requestsOverTime">درخواست‌ها در طول زمان</div>
+                  <div class="chart__sentence" data-i18n="qa.chartSentence">حجم درخواست‌ها در ۱۴ روز گذشته.</div>
+                </div>
+                <span class="chart__meta" data-i18n="sg.last24h">۲۴ ساعت گذشته</span>
+              </div>
+              <div class="chart__canvas" style="--chart-height: 220px">
+                <canvas id="qa-chart"></canvas>
+              </div>
+            </div>
+          </section>
+
+          <!-- 10. Dropdown & modal -->
+          <section class="card mb-4">
+            <div class="card-header">
+              <h3 class="card-title" data-i18n="qa.overlaysTitle">۱۰ · منوی کشویی و پنجره</h3>
+              <div class="card-subtitle" data-i18n="qa.overlaysSubtitle">منوها در راست‌به‌چپ به سمت راستِ دکمه باز می‌شوند.</div>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+              <div class="dropdown">
+                <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false" data-i18n="sg.dropdown">منوی کشویی <i data-lucide="chevron-down"></i></button>
+                <div class="dropdown-menu">
+                  <div class="dropdown-header" data-i18n="keys.scopes">حوزه‌های دسترسی</div>
+                  <button type="button" class="dropdown-item" data-i18n="keys.scopeEmailsRead">emails:read — خواندن ایمیل‌ها</button>
+                  <button type="button" class="dropdown-item" data-i18n="keys.scopeEmailsWrite">emails:write — ارسال ایمیل</button>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#qa-modal">
+                <i data-lucide="plus"></i> <span data-i18n="qa.openModal">باز کردن پنجره</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- 11. Pagination, alerts, timeline -->
+          <section class="card mb-4">
+            <div class="card-header">
+              <h3 class="card-title" data-i18n="qa.miscTitle">۱۱ · صفحه‌بندی، هشدار و خط زمانی</h3>
+            </div>
+            <nav class="mb-3" aria-label="صفحه‌بندی" data-i18n-attr="aria-label:aria.pagination">
+              <ul class="pagination mb-0">
+                <li class="page-item"><button type="button" class="page-link" data-i18n="pagination.prev">قبلی</button></li>
+                <li class="page-item active"><button type="button" class="page-link">۱</button></li>
+                <li class="page-item"><button type="button" class="page-link">۲</button></li>
+                <li class="page-item"><button type="button" class="page-link" data-i18n="pagination.next">بعدی</button></li>
+              </ul>
+            </nav>
+            <div class="alert alert-success mb-2" role="alert">
+              <span class="alert-icon"><i data-lucide="circle-check"></i></span>
+              <div class="alert-content" data-i18n="sg.alertsSuccess">استقرار با موفقیت انجام شد.</div>
+            </div>
+            <ul class="timeline">
+              <li class="timeline__item">
+                <div class="timeline__rail"><span class="timeline__node is-success"><i data-lucide="check"></i></span></div>
+                <div class="timeline__content">
+                  <div class="timeline__title" data-i18n="sg.attempt2Delivered">تلاش ۲ — تحویل شد</div>
+                  <div class="timeline__meta" data-i18n="sg.attempt2Meta">۲۰۰ OK · ۸۴ میلی‌ثانیه</div>
+                </div>
+              </li>
+              <li class="timeline__item">
+                <div class="timeline__rail"><span class="timeline__node is-error"><i data-lucide="x"></i></span></div>
+                <div class="timeline__content">
+                  <div class="timeline__title" data-i18n="sg.attempt1Failed">تلاش ۱ — ناموفق</div>
+                  <div class="timeline__meta" data-i18n="sg.attempt1Meta">خطای داخلی سرور ۵۰۰ · ۲ دقیقه پیش</div>
+                </div>
+              </li>
+            </ul>
+          </section>
+
         </div>
       </main>
+
+      <div class="modal fade" id="qa-modal" tabindex="-1" aria-labelledby="qa-modal-title" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="qa-modal-title" data-i18n="keys.revealTitle">کلید API جدید شما</h4>
+              <button type="button" class="btn btn-icon" data-bs-dismiss="modal" aria-label="بستن" data-i18n-attr="aria-label:aria.close"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+              <p class="text-secondary mb-0" data-i18n="keys.copyOnce">این کلید فقط یک‌بار نمایش داده می‌شود.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-ghost" data-bs-dismiss="modal" data-i18n="action.cancel">انصراف</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-i18n="action.done">پایان</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script type="module" src="/src/js/pages/rtl-test.js"></script>
+    <script type="module" src="/src/js/pages/rtl-persian-test.js"></script>
   </body>
 </html>

@@ -3,140 +3,140 @@
     "id": "ntf_RdD0t2YG",
     "category": "security",
     "severity": "warning",
-    "title": "New sign-in from an unknown device",
-    "body": "A session was created from Tehran, IR (91.98.14.2). If this was not you, revoke the session.",
+    "title": "ورود از دستگاه ناشناس",
+    "body": "یک نشست جدید از تهران، ایران (91.98.14.2) ایجاد شد. اگر این شما نبوده‌اید، نشست را ابطال کنید.",
     "env": null,
     "read": true,
-    "createdAt": "2026-09-07T13:33:12.548Z"
+    "createdAt": "2026-09-07T18:08:36.526Z"
   },
   {
     "id": "ntf_4McC908a",
     "category": "webhook",
     "severity": "error",
-    "title": "Webhook delivery failing",
-    "body": "customer.created has failed 12 times in the last hour. Last response: 500.",
+    "title": "خطا در تحویل وب‌هوک",
+    "body": "رویداد customer.created در یک ساعت گذشته ۱۲ بار ناموفق بوده است. آخرین پاسخ: ۵۰۰.",
     "env": "live",
     "read": false,
-    "createdAt": "2026-09-05T19:01:12.548Z"
+    "createdAt": "2026-09-05T23:36:36.526Z"
   },
   {
     "id": "ntf_bmffni6w",
     "category": "rate-limit",
     "severity": "warning",
-    "title": "Rate limit at 85%",
-    "body": "completions:create is approaching its per-second limit. Requests may be throttled.",
+    "title": "محدودیت نرخ در ۸۵٪",
+    "body": "completions:create به سقف مجاز در هر ثانیه نزدیک شده است. ممکن است درخواست‌ها محدود شوند.",
     "env": "live",
     "read": false,
-    "createdAt": "2026-09-04T14:07:12.548Z"
+    "createdAt": "2026-09-04T18:42:36.526Z"
   },
   {
     "id": "ntf_sdUEeIrB",
     "category": "billing",
     "severity": "info",
-    "title": "Invoice payment received",
-    "body": "Your September invoice for $199 was paid successfully.",
+    "title": "پرداخت فاکتور دریافت شد",
+    "body": "فاکتور شهریور شما به مبلغ ۱۹۹ دلار با موفقیت پرداخت شد.",
     "env": null,
     "read": false,
-    "createdAt": "2026-09-03T14:14:12.548Z"
+    "createdAt": "2026-09-03T18:49:36.526Z"
   },
   {
     "id": "ntf_1AcO4NZJ",
     "category": "deployment",
     "severity": "success",
-    "title": "Deployment succeeded",
-    "body": "apiforge/api v2.4.1 deployed to production in 42s.",
+    "title": "استقرار با موفقیت انجام شد",
+    "body": "apiforge/api نسخهٔ v2.4.1 در ۴۲ ثانیه در محیط تولید مستقر شد.",
     "env": "live",
     "read": true,
-    "createdAt": "2026-09-01T04:23:12.548Z"
+    "createdAt": "2026-09-01T08:58:36.526Z"
   },
   {
     "id": "ntf_cu1o5b0E",
     "category": "team",
     "severity": "info",
-    "title": "Sara invited a new member",
-    "body": "ops@yourco.io was invited as a Viewer.",
+    "title": "سارا یک عضو جدید دعوت کرد",
+    "body": "ops@yourco.io با نقش «ناظر» دعوت شد.",
     "env": null,
     "read": true,
-    "createdAt": "2026-09-03T17:22:12.548Z"
+    "createdAt": "2026-09-03T21:57:36.526Z"
   },
   {
     "id": "ntf_K2VBcmZL",
     "category": "error",
     "severity": "error",
-    "title": "Error spike detected",
-    "body": "TypeError: Cannot read properties of null increased 3.2× in the last hour.",
+    "title": "افزایش ناگهانی خطا",
+    "body": "خطای TypeError: Cannot read properties of null در یک ساعت گذشته ۳٫۲ برابر شده است.",
     "env": "live",
     "read": false,
-    "createdAt": "2026-09-01T13:56:12.548Z"
+    "createdAt": "2026-09-01T18:31:36.526Z"
   },
   {
     "id": "ntf_gjqp85Sv",
     "category": "security",
     "severity": "error",
-    "title": "API key created in production",
-    "body": "A new live key (sk_live_4fJk…) was created from the dashboard.",
+    "title": "ایجاد کلید API در محیط تولید",
+    "body": "یک کلید عملیاتی جدید (sk_live_4fJk…) از داشبورد ایجاد شد.",
     "env": "live",
     "read": true,
-    "createdAt": "2026-09-03T11:32:12.548Z"
+    "createdAt": "2026-09-03T16:07:36.526Z"
   },
   {
     "id": "ntf_VrwHKl3K",
     "category": "rate-limit",
     "severity": "error",
-    "title": "Rate limit breached",
-    "body": "embeddings:create exceeded 40 req/s. Requests are returning 429.",
+    "title": "عبور از محدودیت نرخ",
+    "body": ".embeddings:create از ۴۰ درخواست در ثانیه فراتر رفت. درخواست‌ها با کد ۴۲۹ پاسخ می‌گیرند.",
     "env": "staging",
     "read": true,
-    "createdAt": "2026-09-06T14:29:12.548Z"
+    "createdAt": "2026-09-06T19:04:36.526Z"
   },
   {
     "id": "ntf_hs4h4OVt",
     "category": "deployment",
     "severity": "warning",
-    "title": "Deployment rolled back",
-    "body": "apiforge/api v2.4.2 was rolled back after a failed health check.",
+    "title": "بازگشت استقرار",
+    "body": "نسخهٔ v2.4.2 از apiforge/api پس از ناموفق‌بودن بررسی سلامت بازگردانده شد.",
     "env": "staging",
     "read": false,
-    "createdAt": "2026-09-07T08:42:12.548Z"
+    "createdAt": "2026-09-07T13:17:36.526Z"
   },
   {
     "id": "ntf_HggGZqGe",
     "category": "billing",
     "severity": "warning",
-    "title": "Invoice payment failed",
-    "body": "The July invoice could not be charged. Update your payment method to avoid interruption.",
+    "title": "پرداخت فاکتور ناموفق بود",
+    "body": "پرداخت فاکتور تیر انجام نشد. برای جلوگیری از اختلال در سرویس، روش پرداخت را به‌روزرسانی کنید.",
     "env": null,
     "read": false,
-    "createdAt": "2026-09-07T05:00:12.548Z"
+    "createdAt": "2026-09-07T09:35:36.526Z"
   },
   {
     "id": "ntf_IvYDoM3N",
     "category": "team",
     "severity": "info",
-    "title": "Dana was suspended",
-    "body": "Sara suspended Dana Moradi from the workspace.",
+    "title": "تعلیق دانا",
+    "body": "سارا دسترسی دانا مرادی را در فضای کاری تعلیق کرد.",
     "env": null,
     "read": true,
-    "createdAt": "2026-09-06T02:29:12.548Z"
+    "createdAt": "2026-09-06T07:04:36.526Z"
   },
   {
     "id": "ntf_dkcngK1o",
     "category": "webhook",
     "severity": "info",
-    "title": "Webhook created",
-    "body": "A new endpoint was registered for email.sent and email.bounced.",
+    "title": "وب‌هوک ایجاد شد",
+    "body": "یک نقطهٔ پایانی جدید برای رویدادهای email.sent و email.bounced ثبت شد.",
     "env": "test",
     "read": false,
-    "createdAt": "2026-09-07T03:09:12.548Z"
+    "createdAt": "2026-09-07T07:44:36.526Z"
   },
   {
     "id": "ntf_0WBaPqLe",
     "category": "error",
     "severity": "warning",
-    "title": "New error type detected",
-    "body": "ECONNREFUSED 10.0.2.15:5432 first seen on GET /v1/usage.",
+    "title": "شناسایی نوع خطای جدید",
+    "body": "خطای ECONNREFUSED 10.0.2.15:5432 نخستین‌بار روی GET /v1/usage دیده شد.",
     "env": "staging",
     "read": false,
-    "createdAt": "2026-09-02T23:41:12.548Z"
+    "createdAt": "2026-09-03T04:16:36.526Z"
   }
 ]

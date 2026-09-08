@@ -5,6 +5,7 @@
 import { boot } from '../main.js';
 import { renderLogs } from '../components/table.js';
 import { afxToast } from '../components/toast.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import logs from '../data/mock-logs.json';
 
 boot();

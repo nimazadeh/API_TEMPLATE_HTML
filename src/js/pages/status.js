@@ -6,31 +6,33 @@
 // =============================================================
 
 import { bootSite } from '../site.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { createIcons, icons } from '../components/icons.js';
+import { formatDate, number } from '../utils/format.js';
 
 bootSite();
 
 const COMPONENTS = [
-  { name: 'API gateway', status: 'operational', desc: 'Routing and authentication for all requests.' },
-  { name: 'Request logs', status: 'operational', desc: 'Ingestion pipeline for the log inspector.' },
-  { name: 'Webhooks', status: 'operational', desc: 'Delivery queue, retries and signatures.' },
-  { name: 'Dashboard', status: 'operational', desc: 'The web application and its API.' },
-  { name: 'Billing', status: 'operational', desc: 'Invoices, usage metering and payment processing.' },
-  { name: 'Status page', status: 'operational', desc: 'This page.' },
+  { nameKey: 'status.componentGateway', descKey: 'status.componentGatewayDesc' },
+  { nameKey: 'status.componentLogs', descKey: 'status.componentLogsDesc' },
+  { nameKey: 'status.componentWebhooks', descKey: 'status.componentWebhooksDesc' },
+  { nameKey: 'status.componentDashboard', descKey: 'status.componentDashboardDesc' },
+  { nameKey: 'status.componentBilling', descKey: 'status.componentBillingDesc' },
+  { nameKey: 'status.componentStatus', descKey: 'status.componentStatusDesc' },
 ];
 
 const INCIDENTS = [
   {
-    date: 'Sep 02, 2026',
-    title: 'Elevated webhook delivery latency',
-    desc: 'Delivery retries queued for 38 minutes while a worker pool rescaled. No deliveries lost.',
-    status: 'resolved',
+    date: '2026-09-02',
+    titleKey: 'status.incident1Title',
+    descKey: 'status.incident1Desc',
+    statusKey: 'status.resolved',
   },
   {
-    date: 'Aug 19, 2026',
-    title: 'Log ingestion degraded',
-    desc: 'Log tail latency reached 9s during a database failover. Resolved after 25 minutes.',
-    status: 'resolved',
+    date: '2026-08-19',
+    titleKey: 'status.incident2Title',
+    descKey: 'status.incident2Desc',
+    statusKey: 'status.resolved',
   },
 ];
 
@@ -65,10 +67,10 @@ function renderComponents() {
     (c) => `
       <div class="status-components__row">
         <div>
-          <div class="fw-medium">${c.name}</div>
-          <div class="caption text-tertiary">${c.desc}</div>
+          <div class="fw-medium">${tr(c.nameKey)}</div>
+          <div class="caption text-tertiary">${tr(c.descKey)}</div>
         </div>
-        <span class="badge badge-status--success"><i data-lucide="check"></i> Operational</span>
+        <span class="badge badge-status--success"><i data-lucide="check"></i> ${tr('status.operational')}</span>
       </div>`
   ).join('');
   createIcons({ icons });
@@ -79,16 +81,23 @@ function renderIncidents() {
   host.innerHTML = INCIDENTS.map(
     (inc) => `
       <div class="incidents__item">
-        <span class="incidents__date ltr-isolate">${inc.date}</span>
+        <span class="incidents__date ltr-isolate">${formatDate(inc.date)}</span>
         <div>
-          <div class="incidents__title">${inc.title}</div>
-          <div class="incidents__desc">${inc.desc}</div>
-          <span class="badge badge-neutral mt-2">${inc.status}</span>
+          <div class="incidents__title">${tr(inc.titleKey)}</div>
+          <div class="incidents__desc">${tr(inc.descKey)}</div>
+          <span class="badge badge-neutral mt-2">${tr(inc.statusKey)}</span>
         </div>
       </div>`
   ).join('');
 }
 
-renderBars();
-renderComponents();
-renderIncidents();
+function render() {
+  renderBars();
+  renderComponents();
+  renderIncidents();
+}
+
+render();
+
+// Re-render when the locale flips.
+onLocaleChange(render);

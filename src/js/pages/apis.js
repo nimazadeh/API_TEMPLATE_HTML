@@ -5,6 +5,7 @@
 // =============================================================
 
 import { boot } from '../main.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { initCodeBlock } from '../components/code-block.js';
 import { createIcons, icons } from '../components/icons.js';
 import { bindCopyButton } from '../components/copy.js';

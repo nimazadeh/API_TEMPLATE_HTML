@@ -87,134 +87,134 @@ function weightedB(entries) {
 const endpointDefs = [
   {
     apiId: 'api_emails', method: 'POST', path: '/v1/emails',
-    summary: 'Send an email', group: 'Emails',
-    description: 'Queues a transactional email for delivery to one or more recipients. Delivery status is available via the returned email id.',
+    summary: 'ارسال ایمیل', group: 'ایمیل',
+    description: 'یک ایمیل تراکنشی را برای تحویل به یک یا چند گیرنده در صف قرار می‌دهد. وضعیت تحویل از طریق شناسهٔ بازگشتی ایمیل قابل پیگیری است.',
     params: [
-      { name: 'to', type: 'string', location: 'body', required: true, description: 'Recipient email address.' },
-      { name: 'subject', type: 'string', location: 'body', required: true, description: 'Subject line for the email.' },
-      { name: 'html', type: 'string', location: 'body', required: false, description: 'HTML body. Either html or text is required.' },
-      { name: 'from', type: 'string', location: 'body', required: false, description: 'Sender address. Defaults to your verified domain.' },
+      { name: 'to', type: 'string', location: 'body', required: true, description: 'نشانی ایمیل گیرنده.' },
+      { name: 'subject', type: 'string', location: 'body', required: true, description: 'موضوع ایمیل.' },
+      { name: 'html', type: 'string', location: 'body', required: false, description: 'بدنهٔ HTML. ارسال یکی از html یا text الزامی است.' },
+      { name: 'from', type: 'string', location: 'body', required: false, description: 'نشانی فرستنده. پیش‌فرض دامنهٔ تأییدشدهٔ شماست.' },
     ],
     responseExample: { id: 'eml_8Fk2mQx1Zw', status: 'queued', to: 'user@example.com' },
   },
   {
     apiId: 'api_emails', method: 'GET', path: '/v1/emails/{id}',
-    summary: 'Retrieve an email', group: 'Emails',
-    description: 'Returns the delivery status and metadata for a single email.',
+    summary: 'دریافت یک ایمیل', group: 'ایمیل',
+    description: 'وضعیت تحویل و فرادادهٔ یک ایمیل را برمی‌گرداند.',
     params: [
-      { name: 'id', type: 'string', location: 'path', required: true, description: 'The email id (eml_…).' },
+      { name: 'id', type: 'string', location: 'path', required: true, description: 'شناسهٔ ایمیل (eml_…).' },
     ],
     responseExample: { id: 'eml_8Fk2mQx1Zw', status: 'delivered', deliveredAt: '2026-09-07T19:05:24Z' },
   },
   {
     apiId: 'api_emails', method: 'GET', path: '/v1/emails',
-    summary: 'List emails', group: 'Emails',
-    description: 'Lists recently sent emails, newest first. Paginate with limit and before.',
+    summary: 'فهرست ایمیل‌ها', group: 'ایمیل',
+    description: 'ایمیل‌های ارسال‌شدهٔ اخیر را از جدید به قدیم فهرست می‌کند. برای صفحه‌بندی از limit و before استفاده کنید.',
     params: [
-      { name: 'limit', type: 'integer', location: 'query', required: false, description: 'Max results to return (default 50, max 100).' },
-      { name: 'before', type: 'string', location: 'query', required: false, description: 'Return emails sent before this id.' },
+      { name: 'limit', type: 'integer', location: 'query', required: false, description: 'حداکثر تعداد نتایج (پیش‌فرض ۵۰، حداکثر ۱۰۰).' },
+      { name: 'before', type: 'string', location: 'query', required: false, description: 'ایمیل‌های ارسال‌شده پیش از این شناسه را برمی‌گرداند.' },
     ],
     responseExample: { data: [{ id: 'eml_8Fk2mQx1Zw', status: 'delivered' }], has_more: false },
   },
   {
     apiId: 'api_ai', method: 'POST', path: '/v1/completions',
-    summary: 'Create a completion', group: 'AI',
-    description: 'Runs a model inference and streams the completion back.',
+    summary: 'ایجاد تکمیل متن', group: 'هوش مصنوعی',
+    description: 'یک استنتاج مدل را اجرا می‌کند و نتیجه را به‌صورت جریانی برمی‌گرداند.',
     params: [
-      { name: 'model', type: 'string', location: 'body', required: true, description: 'Model id, e.g. forge-1 or forge-1-turbo.' },
-      { name: 'prompt', type: 'string', location: 'body', required: true, description: 'The prompt to complete.' },
-      { name: 'max_tokens', type: 'integer', location: 'body', required: false, description: 'Maximum tokens to generate (default 256).' },
-      { name: 'temperature', type: 'number', location: 'body', required: false, description: 'Sampling temperature between 0 and 1.' },
+      { name: 'model', type: 'string', location: 'body', required: true, description: 'شناسهٔ مدل، برای نمونه forge-1 یا forge-1-turbo.' },
+      { name: 'prompt', type: 'string', location: 'body', required: true, description: 'دستوری که باید تکمیل شود.' },
+      { name: 'max_tokens', type: 'integer', location: 'body', required: false, description: 'حداکثر توکن تولیدی (پیش‌فرض ۲۵۶).' },
+      { name: 'temperature', type: 'number', location: 'body', required: false, description: 'دمای نمونه‌برداری بین ۰ و ۱.' },
     ],
     responseExample: { id: 'cmpl_9xK2mQ', model: 'forge-1', choices: [{ text: 'Hello from Forge.' }] },
   },
   {
     apiId: 'api_ai', method: 'POST', path: '/v1/embeddings',
-    summary: 'Create embeddings', group: 'AI',
-    description: 'Converts input text into a vector embedding for search and clustering.',
+    summary: 'ایجاد بردار (Embedding)', group: 'هوش مصنوعی',
+    description: 'متن ورودی را برای جست‌وجو و خوشه‌بندی به بردار تبدیل می‌کند.',
     params: [
-      { name: 'model', type: 'string', location: 'body', required: true, description: 'Embedding model id, e.g. embed-1.' },
-      { name: 'input', type: 'array', location: 'body', required: true, description: 'Text to embed — a string or array of strings.' },
+      { name: 'model', type: 'string', location: 'body', required: true, description: 'شناسهٔ مدل بردارساز، برای نمونه embed-1.' },
+      { name: 'input', type: 'array', location: 'body', required: true, description: 'متن ورودی برای تبدیل به بردار — یک رشته یا آرایه‌ای از رشته‌ها.' },
     ],
     responseExample: { object: 'list', data: [{ index: 0, embedding: [0.014, -0.021, 0.038] }] },
   },
   {
     apiId: 'api_ai', method: 'GET', path: '/v1/models',
-    summary: 'List available models', group: 'AI',
-    description: 'Lists the models available to your workspace with capabilities.',
+    summary: 'فهرست مدل‌های در دسترس', group: 'هوش مصنوعی',
+    description: 'مدل‌های در دسترس فضای کاری را همراه با قابلیت‌هایشان فهرست می‌کند.',
     params: [],
     responseExample: { data: [{ id: 'forge-1', object: 'model' }, { id: 'embed-1', object: 'model' }] },
   },
   {
     apiId: 'api_audiences', method: 'POST', path: '/v1/audiences',
-    summary: 'Create an audience', group: 'Audiences',
-    description: 'Creates a new audience segment from a set of filters.',
+    summary: 'ایجاد گروه مخاطب', group: 'مخاطبان',
+    description: 'یک بخش مخاطب جدید را بر اساس مجموعه‌ای از فیلترها ایجاد می‌کند.',
     params: [
-      { name: 'name', type: 'string', location: 'body', required: true, description: 'Audience name.' },
-      { name: 'filters', type: 'array', location: 'body', required: false, description: 'Array of filter conditions.' },
+      { name: 'name', type: 'string', location: 'body', required: true, description: 'نام گروه مخاطب.' },
+      { name: 'filters', type: 'array', location: 'body', required: false, description: 'آرایه‌ای از شرط‌های فیلتر.' },
     ],
     responseExample: { id: 'aud_9xK2mQ', name: 'Trial users', size: 0 },
   },
   {
     apiId: 'api_audiences', method: 'GET', path: '/v1/audiences/{id}',
-    summary: 'Retrieve an audience', group: 'Audiences',
-    description: 'Returns a single audience with its current member count.',
+    summary: 'دریافت یک گروه مخاطب', group: 'مخاطبان',
+    description: 'یک گروه مخاطب را همراه با تعداد اعضای فعلی برمی‌گرداند.',
     params: [
-      { name: 'id', type: 'string', location: 'path', required: true, description: 'The audience id (aud_…).' },
+      { name: 'id', type: 'string', location: 'path', required: true, description: 'شناسهٔ گروه مخاطب (aud_…).' },
     ],
     responseExample: { id: 'aud_9xK2mQ', name: 'Trial users', size: 12840 },
   },
   {
     apiId: 'api_audiences', method: 'GET', path: '/v1/audiences',
-    summary: 'List audiences', group: 'Audiences',
-    description: 'Lists all audiences in the workspace.',
+    summary: 'فهرست گروه‌های مخاطب', group: 'مخاطبان',
+    description: 'همهٔ گروه‌های مخاطب فضای کاری را فهرست می‌کند.',
     params: [
-      { name: 'limit', type: 'integer', location: 'query', required: false, description: 'Max results (default 50).' },
+      { name: 'limit', type: 'integer', location: 'query', required: false, description: 'حداکثر تعداد نتایج (پیش‌فرض ۵۰).' },
     ],
     responseExample: { data: [{ id: 'aud_9xK2mQ', name: 'Trial users', size: 12840 }], has_more: false },
   },
   {
     apiId: 'api_webhooks', method: 'POST', path: '/v1/webhooks',
-    summary: 'Create a webhook endpoint', group: 'Webhooks',
-    description: 'Registers a URL to receive real-time events for your workspace.',
+    summary: 'ایجاد نقطهٔ پایانی وب‌هوک', group: 'وب‌هوک‌ها',
+    description: 'یک نشانی را برای دریافت رویدادهای لحظه‌ای فضای کاری ثبت می‌کند.',
     params: [
-      { name: 'url', type: 'string', location: 'body', required: true, description: 'HTTPS endpoint that will receive events.' },
-      { name: 'events', type: 'array', location: 'body', required: true, description: 'Event types to subscribe to, e.g. email.sent.' },
-      { name: 'secret', type: 'string', location: 'body', required: false, description: 'Signing secret to verify deliveries.' },
+      { name: 'url', type: 'string', location: 'body', required: true, description: 'نقطهٔ پایانی HTTPS که رویدادها را دریافت می‌کند.' },
+      { name: 'events', type: 'array', location: 'body', required: true, description: 'نوع رویدادهای مورد اشتراک، برای نمونه email.sent.' },
+      { name: 'secret', type: 'string', location: 'body', required: false, description: 'کلید امضا برای بررسی تحویل‌ها.' },
     ],
     responseExample: { id: 'wh_8f3k2ma1', url: 'https://example.com/hooks', enabled: true },
   },
   {
     apiId: 'api_webhooks', method: 'GET', path: '/v1/webhooks',
-    summary: 'List webhooks', group: 'Webhooks',
-    description: 'Lists registered webhook endpoints and their state.',
+    summary: 'فهرست وب‌هوک‌ها', group: 'وب‌هوک‌ها',
+    description: 'نقاط پایانی وب‌هوک ثبت‌شده و وضعیت آن‌ها را فهرست می‌کند.',
     params: [],
     responseExample: { data: [{ id: 'wh_8f3k2ma1', enabled: true }] },
   },
   {
     apiId: 'api_webhooks', method: 'DELETE', path: '/v1/webhooks/{id}',
-    summary: 'Delete a webhook', group: 'Webhooks',
-    description: 'Permanently deletes a webhook endpoint.',
+    summary: 'حذف یک وب‌هوک', group: 'وب‌هوک‌ها',
+    description: 'یک نقطهٔ پایانی وب‌هوک را برای همیشه حذف می‌کند.',
     params: [
-      { name: 'id', type: 'string', location: 'path', required: true, description: 'The webhook id (wh_…).' },
+      { name: 'id', type: 'string', location: 'path', required: true, description: 'شناسهٔ وب‌هوک (wh_…).' },
     ],
     responseExample: { id: 'wh_8f3k2ma1', deleted: true },
   },
   {
     apiId: 'api_platform', method: 'PUT', path: '/v1/api-keys/{id}',
-    summary: 'Update an API key', group: 'Platform',
-    description: 'Renames a key or changes its scope grants.',
+    summary: 'به‌روزرسانی کلید API', group: 'پلتفرم',
+    description: 'نام کلید را تغییر می‌دهد یا حوزه‌های دسترسی آن را اصلاح می‌کند.',
     params: [
-      { name: 'id', type: 'string', location: 'path', required: true, description: 'The key id (key_…).' },
-      { name: 'name', type: 'string', location: 'body', required: false, description: 'New display name.' },
-      { name: 'scopes', type: 'array', location: 'body', required: false, description: 'Replacement scope list.' },
+      { name: 'id', type: 'string', location: 'path', required: true, description: 'شناسهٔ کلید (key_…).' },
+      { name: 'name', type: 'string', location: 'body', required: false, description: 'نام نمایشی جدید.' },
+      { name: 'scopes', type: 'array', location: 'body', required: false, description: 'فهرست جایگزین حوزه‌های دسترسی.' },
     ],
     responseExample: { id: 'key_DElNoSR8', name: 'Production backend', updated: true },
   },
   {
     apiId: 'api_platform', method: 'DELETE', path: '/v1/api-keys/{id}',
-    summary: 'Revoke an API key', group: 'Platform',
-    description: 'Immediately revokes a key. Requests using it will return 401.',
+    summary: 'ابطال کلید API', group: 'پلتفرم',
+    description: 'کلید را بلافاصله ابطال می‌کند. درخواست‌هایی که از آن استفاده کنند پاسخ ۴۰۱ می‌گیرند.',
     params: [
       { name: 'id', type: 'string', location: 'path', required: true, description: 'The key id (key_…).' },
     ],
@@ -222,11 +222,11 @@ const endpointDefs = [
   },
   {
     apiId: 'api_platform', method: 'GET', path: '/v1/usage',
-    summary: 'Retrieve usage summary', group: 'Platform',
-    description: 'Returns current-billing-period usage, broken out by endpoint.',
+    summary: 'دریافت خلاصهٔ مصرف', group: 'پلتفرم',
+    description: 'مصرف دورهٔ صورت‌حساب جاری را به تفکیک نقطهٔ پایانی برمی‌گرداند.',
     params: [
-      { name: 'from', type: 'string', location: 'query', required: false, description: 'ISO date range start.' },
-      { name: 'to', type: 'string', location: 'query', required: false, description: 'ISO date range end.' },
+      { name: 'from', type: 'string', location: 'query', required: false, description: 'ابتدای بازهٔ زمانی (ISO).' },
+      { name: 'to', type: 'string', location: 'query', required: false, description: 'انتهای بازهٔ زمانی (ISO).' },
     ],
     responseExample: { requests: 5382400, period: { start: '2026-09-01', end: '2026-09-30' } },
   },
@@ -237,11 +237,11 @@ const endpoints = endpointDefs.map((e) => ({ ...e, id: `ep_${base62(6)}` }));
 // APIs — catalog cards, counts derived from endpoints.
 // =====================================================================
 const apiMeta = {
-  api_emails: { name: 'Emails API', status: 'stable', description: 'Send transactional email and track delivery status.', basePath: '/v1/emails' },
-  api_ai: { name: 'AI Inference', status: 'stable', description: 'Run completions and embeddings on hosted models.', basePath: '/v1' },
-  api_audiences: { name: 'Audiences', status: 'beta', description: 'Build and query audience segments.', basePath: '/v1/audiences' },
-  api_webhooks: { name: 'Webhooks', status: 'stable', description: 'Receive real-time events for your workspace.', basePath: '/v1/webhooks' },
-  api_platform: { name: 'Platform', status: 'stable', description: 'Manage keys and read usage across environments.', basePath: '/v1' },
+  api_emails: { name: 'سرویس ایمیل', status: 'stable', description: 'ارسال ایمیل تراکنشی و پیگیری وضعیت تحویل.', basePath: '/v1/emails' },
+  api_ai: { name: 'هوش مصنوعی', status: 'stable', description: 'اجرای تکمیل متن و تبدیل به بردار روی مدل‌های میزبانی‌شده.', basePath: '/v1' },
+  api_audiences: { name: 'مخاطبان', status: 'beta', description: 'ساخت و جست‌وجوی بخش‌بندی مخاطبان.', basePath: '/v1/audiences' },
+  api_webhooks: { name: 'وب‌هوک‌ها', status: 'stable', description: 'دریافت رویدادهای لحظه‌ای فضای کاری.', basePath: '/v1/webhooks' },
+  api_platform: { name: 'پلتفرم', status: 'stable', description: 'مدیریت کلیدها و مشاهدهٔ مصرف در محیط‌های مختلف.', basePath: '/v1' },
 };
 const apis = Object.entries(apiMeta).map(([id, meta]) => ({
   id,
@@ -254,12 +254,12 @@ const apis = Object.entries(apiMeta).map(([id, meta]) => ({
 // API keys (6) — env, permission, lastUsedIp.
 // =====================================================================
 const keyDefs = [
-  { name: 'Production backend', env: 'live', permission: 'full', scopes: ['emails:read', 'emails:write', 'audiences:read', 'audiences:write'] },
-  { name: 'CLI tool', env: 'live', permission: 'restricted', scopes: ['emails:read', 'emails:write'] },
-  { name: 'Staging server', env: 'live', permission: 'restricted', scopes: ['audiences:read', 'audiences:write'] },
-  { name: 'CI pipeline', env: 'live', permission: 'restricted', scopes: ['emails:read', 'emails:write'] },
-  { name: 'Local dev', env: 'test', permission: 'full', scopes: ['emails:read', 'emails:write', 'audiences:read'] },
-  { name: 'Analytics job', env: 'test', permission: 'restricted', scopes: ['usage:read'] },
+  { name: 'درگاه پرداخت', env: 'live', permission: 'full', scopes: ['emails:read', 'emails:write', 'audiences:read', 'audiences:write'] },
+  { name: 'ابزار خط فرمان', env: 'live', permission: 'restricted', scopes: ['emails:read', 'emails:write'] },
+  { name: 'سرور آزمایشی', env: 'live', permission: 'restricted', scopes: ['audiences:read', 'audiences:write'] },
+  { name: 'خط یکپارچه‌سازی (CI)', env: 'live', permission: 'restricted', scopes: ['emails:read', 'emails:write'] },
+  { name: 'توسعهٔ محلی', env: 'test', permission: 'full', scopes: ['emails:read', 'emails:write', 'audiences:read'] },
+  { name: 'سامانهٔ تحلیل کاربران', env: 'test', permission: 'restricted', scopes: ['usage:read'] },
 ];
 const liveTestKeys = keyDefs.map((k, i) => ({
   id: `key_${base62(8)}`,
@@ -276,8 +276,8 @@ const liveTestKeys = keyDefs.map((k, i) => ({
 
 // Staging keys (Phase 3B) — third environment, non-production prefixes.
 const stagingKeys = [
-  { name: 'Staging server', permission: 'restricted', scopes: ['emails:read', 'emails:write', 'audiences:read'] },
-  { name: 'Preview deploy', permission: 'restricted', scopes: ['audiences:read'] },
+  { name: 'سرور محیط آزمایشی', permission: 'restricted', scopes: ['emails:read', 'emails:write', 'audiences:read'] },
+  { name: 'استقرار پیش‌نمایش', permission: 'restricted', scopes: ['audiences:read'] },
 ].map((k) => ({
   id: `key_${base62B(8)}`,
   name: k.name,
@@ -348,27 +348,27 @@ for (let i = 29; i >= 0; i--) {
 const environments = [
   {
     id: 'live',
-    name: 'Production',
+    name: 'تولید',
     baseUrl: 'https://api.apiforge.dev',
-    description: 'Production traffic and real data.',
+    description: 'ترافیک واقعی و داده‌های اصلی.',
     created: isoDaysAgo(320),
     keysCount: keys.filter((k) => k.env === 'live').length,
     requestsShare: 94.8,
   },
   {
     id: 'staging',
-    name: 'Staging',
+    name: 'آزمایشی',
     baseUrl: 'https://api.staging.apiforge.dev',
-    description: 'Pre-release validation before Production.',
+    description: 'اعتبارسنجی پیش از عرضه در محیط تولید.',
     created: isoDaysAgo(180),
     keysCount: keys.filter((k) => k.env === 'staging').length,
     requestsShare: 0,
   },
   {
     id: 'test',
-    name: 'Development',
+    name: 'توسعه',
     baseUrl: 'https://api.test.apiforge.dev',
-    description: 'Isolated sandbox for local development.',
+    description: 'محیط ایزوله برای توسعهٔ محلی.',
     created: isoDaysAgo(210),
     keysCount: keys.filter((k) => k.env === 'test').length,
     requestsShare: 5.2,
@@ -379,7 +379,7 @@ const environments = [
 // Plan — limits and billing period.
 // =====================================================================
 const plan = {
-  name: 'Scale',
+  name: 'سازمانی',
   price: 99,
   currency: 'USD',
   requestsLimit: 10000000,
@@ -387,7 +387,7 @@ const plan = {
   rateLimitPerSecond: 250,
   periodStart: '2026-09-01',
   periodEnd: '2026-09-30',
-  periodLabel: 'September 2026',
+  periodLabel: 'شهریور ۱۴۰۵',
 };
 
 // =====================================================================
@@ -415,14 +415,14 @@ const attribution = {
 // Activity feed (8 events).
 // =====================================================================
 const activity = [
-  { id: 'act_1', type: 'key_created', title: 'API key created', detail: '“Analytics job” in Test environment', actor: 'Arash P.', timestamp: isoHoursAgo(2) },
-  { id: 'act_2', type: 'webhook_failed', title: 'Webhook delivery failed', detail: 'https://example.com/hooks/email-events returned 500', actor: 'system', timestamp: isoHoursAgo(4) },
-  { id: 'act_3', type: 'endpoint_updated', title: 'Endpoint updated', detail: 'POST /v1/emails — added `from` parameter', actor: 'Sara R.', timestamp: isoHoursAgo(7) },
-  { id: 'act_4', type: 'key_revoked', title: 'API key revoked', detail: '“Staging server” (sk_live_59TB…)', actor: 'Arash P.', timestamp: isoHoursAgo(11) },
-  { id: 'act_5', type: 'rate_limit', title: 'Rate limit reached', detail: 'POST /v1/completions hit 250 req/s for 4s', actor: 'system', timestamp: isoHoursAgo(16) },
-  { id: 'act_6', type: 'deploy', title: 'Workspace updated', detail: 'Emails API v1.4.0 rolled out', actor: 'system', timestamp: isoHoursAgo(21) },
-  { id: 'act_7', type: 'key_created', title: 'API key created', detail: '“CI pipeline” in Live environment', actor: 'Sara R.', timestamp: isoHoursAgo(30) },
-  { id: 'act_8', type: 'webhook_failed', title: 'Webhook delivery failed', detail: 'usage-alerts endpoint disabled after 6 failures', actor: 'system', timestamp: isoHoursAgo(38) },
+  { id: 'act_1', type: 'key_created', title: 'کلید API ایجاد شد', detail: '«سامانهٔ تحلیل کاربران» در محیط آزمایشی', actor: 'علی رضایی', timestamp: isoHoursAgo(2) },
+  { id: 'act_2', type: 'webhook_failed', title: 'تحویل وب‌هوک ناموفق بود', detail: 'https://example.com/hooks/email-events پاسخ ۵۰۰ داد', actor: 'سیستم', timestamp: isoHoursAgo(4) },
+  { id: 'act_3', type: 'endpoint_updated', title: 'نقطهٔ پایانی به‌روزرسانی شد', detail: 'POST /v1/emails — پارامتر `from` اضافه شد', actor: 'سارا احمدی', timestamp: isoHoursAgo(7) },
+  { id: 'act_4', type: 'key_revoked', title: 'کلید API ابطال شد', detail: '«سرور آزمایشی» (sk_live_59TB…)', actor: 'علی رضایی', timestamp: isoHoursAgo(11) },
+  { id: 'act_5', type: 'rate_limit', title: 'محدودیت نرخ اعمال شد', detail: 'POST /v1/completions به‌مدت ۴ ثانیه به ۲۵۰ درخواست در ثانیه رسید', actor: 'سیستم', timestamp: isoHoursAgo(16) },
+  { id: 'act_6', type: 'deploy', title: 'فضای کاری به‌روزرسانی شد', detail: 'نسخهٔ v1.4.0 سرویس ایمیل عرضه شد', actor: 'سیستم', timestamp: isoHoursAgo(21) },
+  { id: 'act_7', type: 'key_created', title: 'کلید API ایجاد شد', detail: '«خط یکپارچه‌سازی (CI)» در محیط عملیاتی', actor: 'سارا احمدی', timestamp: isoHoursAgo(30) },
+  { id: 'act_8', type: 'webhook_failed', title: 'تحویل وب‌هوک ناموفق بود', detail: 'نقطهٔ پایانی usage-alerts پس از ۶ خطا غیرفعال شد', actor: 'سیستم', timestamp: isoHoursAgo(38) },
 ];
 
 // =====================================================================
@@ -453,12 +453,12 @@ const webhookHosts = [
   'events.pulse.run', 'backend.yourco.dev', 'sink.local.test',
 ];
 const webhookDefs = [
-  { slug: 'email-events', description: 'Email delivery events', events: ['email.sent', 'email.delivered', 'email.bounced'], environment: 'live', status: 'enabled' },
-  { slug: 'audience-sync', description: 'Audience sync events', events: ['audience.created', 'audience.updated', 'audience.deleted'], environment: 'live', status: 'enabled' },
-  { slug: 'usage-alerts', description: 'Usage threshold alerts', events: ['usage.warning', 'usage.limit_reached'], environment: 'live', status: 'disabled' },
-  { slug: 'completion-stream', description: 'Model completion stream', events: ['completion.created', 'completion.failed'], environment: 'live', status: 'enabled' },
-  { slug: 'staging-email', description: 'Staging email events', events: ['email.sent', 'email.bounced'], environment: 'staging', status: 'enabled' },
-  { slug: 'dev-sink', description: 'Local development sink', events: ['email.delivered'], environment: 'test', status: 'enabled' },
+  { slug: 'email-events', description: 'رویدادهای تحویل ایمیل', events: ['email.sent', 'email.delivered', 'email.bounced'], environment: 'live', status: 'enabled' },
+  { slug: 'audience-sync', description: 'رویدادهای همگام‌سازی مخاطبان', events: ['audience.created', 'audience.updated', 'audience.deleted'], environment: 'live', status: 'enabled' },
+  { slug: 'usage-alerts', description: 'هشدارهای آستانهٔ مصرف', events: ['usage.warning', 'usage.limit_reached'], environment: 'live', status: 'disabled' },
+  { slug: 'completion-stream', description: 'جریان تکمیل مدل', events: ['completion.created', 'completion.failed'], environment: 'live', status: 'enabled' },
+  { slug: 'staging-email', description: 'رویدادهای ایمیل در محیط آزمایشی', events: ['email.sent', 'email.bounced'], environment: 'staging', status: 'enabled' },
+  { slug: 'dev-sink', description: 'مقصد محلی توسعه', events: ['email.delivered'], environment: 'test', status: 'enabled' },
 ];
 const webhooks = webhookDefs.map((w, i) => ({
   id: `wh_${base62B(8)}`,
@@ -591,18 +591,18 @@ const errorFramePool = [
   { file: 'node:internal/process/task_queues', fns: ['processTicksAndRejections'], inApp: false },
 ];
 const errorDefs = [
-  { type: 'TypeError', message: "Cannot read properties of undefined (reading 'id')", method: 'POST', path: '/v1/emails', env: 'live', severity: 'error', occurrences: 12840, status: 'unresolved', assignee: 'Arash P.', frame: { file: 'src/email/send.ts', fn: 'dispatchEmail', line: 142, col: 9, code: 'const user = await users.get(payload.recipientId);' } },
+  { type: 'TypeError', message: "Cannot read properties of undefined (reading 'id')", method: 'POST', path: '/v1/emails', env: 'live', severity: 'error', occurrences: 12840, status: 'unresolved', assignee: 'علی رضایی', frame: { file: 'src/email/send.ts', fn: 'dispatchEmail', line: 142, col: 9, code: 'const user = await users.get(payload.recipientId);' } },
   { type: 'RangeError', message: 'Invalid array length', method: 'POST', path: '/v1/audiences', env: 'live', severity: 'error', occurrences: 8230, status: 'unresolved', assignee: null, frame: { file: 'src/audiences/segment.ts', fn: 'applyFilters', line: 88, col: 21, code: 'const slice = new Array(filter.limit);' } },
-  { type: 'SyntaxError', message: "Unexpected token '<' in JSON at position 0", method: 'POST', path: '/v1/completions', env: 'live', severity: 'error', occurrences: 5121, status: 'resolved', assignee: 'Sara R.', frame: { file: 'src/ai/inference.ts', fn: 'parseJson', line: 54, col: 11, code: 'return JSON.parse(raw.trim());' } },
-  { type: 'ReferenceError', message: 'handler is not defined', method: 'POST', path: '/v1/emails', env: 'live', severity: 'error', occurrences: 3402, status: 'resolved', assignee: 'Arash P.', frame: { file: 'src/email/routes.ts', fn: 'onEmailSent', line: 39, col: 5, code: 'return handler(event);' } },
+  { type: 'SyntaxError', message: "Unexpected token '<' in JSON at position 0", method: 'POST', path: '/v1/completions', env: 'live', severity: 'error', occurrences: 5121, status: 'resolved', assignee: 'سارا احمدی', frame: { file: 'src/ai/inference.ts', fn: 'parseJson', line: 54, col: 11, code: 'return JSON.parse(raw.trim());' } },
+  { type: 'ReferenceError', message: 'handler is not defined', method: 'POST', path: '/v1/emails', env: 'live', severity: 'error', occurrences: 3402, status: 'resolved', assignee: 'علی رضایی', frame: { file: 'src/email/routes.ts', fn: 'onEmailSent', line: 39, col: 5, code: 'return handler(event);' } },
   { type: 'ValidationError', message: "Missing required field: 'to'", method: 'POST', path: '/v1/emails', env: 'live', severity: 'warning', occurrences: 15840, status: 'unresolved', assignee: null, frame: { file: 'src/email/schema.ts', fn: 'validateEmail', line: 23, col: 12, code: "throw new ValidationError(\"Missing required field: 'to'\");" } },
   { type: 'RateLimitError', message: '429 Too Many Requests — retry after 2s', method: 'POST', path: '/v1/completions', env: 'live', severity: 'warning', occurrences: 9230, status: 'unresolved', assignee: null, frame: { file: 'src/ai/gateway.ts', fn: 'checkQuota', line: 117, col: 7, code: 'throw new RateLimitError(resetIn);' } },
-  { type: 'ETIMEDOUT', message: 'connect ETIMEDOUT 10.0.4.21:6379', method: 'GET', path: '/v1/models', env: 'live', severity: 'error', occurrences: 2170, status: 'resolved', assignee: 'Sara R.', frame: { file: 'src/db/redis.ts', fn: 'cacheGet', line: 71, col: 16, code: 'await client.get(key);' } },
+  { type: 'ETIMEDOUT', message: 'connect ETIMEDOUT 10.0.4.21:6379', method: 'GET', path: '/v1/models', env: 'live', severity: 'error', occurrences: 2170, status: 'resolved', assignee: 'سارا احمدی', frame: { file: 'src/db/redis.ts', fn: 'cacheGet', line: 71, col: 16, code: 'await client.get(key);' } },
   { type: 'ECONNREFUSED', message: 'connect ECONNREFUSED 10.0.2.15:5432', method: 'GET', path: '/v1/usage', env: 'staging', severity: 'error', occurrences: 980, status: 'unresolved', assignee: null, frame: { file: 'src/db/pg.ts', fn: 'connect', line: 46, col: 13, code: 'await pool.connect();' } },
-  { type: 'TypeError', message: "Cannot read properties of null (reading 'match')", method: 'GET', path: '/v1/emails/{id}', env: 'live', severity: 'warning', occurrences: 6540, status: 'resolved', assignee: 'Arash P.', frame: { file: 'src/email/parse.ts', fn: 'extractMeta', line: 28, col: 8, code: "return value.match(META_RE);" } },
+  { type: 'TypeError', message: "Cannot read properties of null (reading 'match')", method: 'GET', path: '/v1/emails/{id}', env: 'live', severity: 'warning', occurrences: 6540, status: 'resolved', assignee: 'علی رضایی', frame: { file: 'src/email/parse.ts', fn: 'extractMeta', line: 28, col: 8, code: "return value.match(META_RE);" } },
   { type: 'ZodError', message: 'Invalid input: expected string, received number', method: 'POST', path: '/v1/embeddings', env: 'test', severity: 'warning', occurrences: 1890, status: 'unresolved', assignee: null, frame: { file: 'src/ai/embeddings.ts', fn: 'validateInput', line: 64, col: 17, code: 'const parsed = schema.parse(input);' } },
   { type: 'RangeError', message: 'Maximum call stack size exceeded', method: 'POST', path: '/v1/audiences/{id}', env: 'live', severity: 'error', occurrences: 402, status: 'unresolved', assignee: null, frame: { file: 'src/audiences/tree.ts', fn: 'walk', line: 112, col: 3, code: 'return walk(node.children);' } },
-  { type: 'AbortError', message: 'The operation was aborted due to timeout', method: 'POST', path: '/v1/completions', env: 'staging', severity: 'warning', occurrences: 1330, status: 'resolved', assignee: 'Sara R.', frame: { file: 'src/http/client.ts', fn: 'request', line: 93, col: 9, code: 'const res = await fetch(url, { signal });' } },
+  { type: 'AbortError', message: 'The operation was aborted due to timeout', method: 'POST', path: '/v1/completions', env: 'staging', severity: 'warning', occurrences: 1330, status: 'resolved', assignee: 'سارا احمدی', frame: { file: 'src/http/client.ts', fn: 'request', line: 93, col: 9, code: 'const res = await fetch(url, { signal });' } },
 ];
 const userAgentsB = ['af-sdk-node/1.4.0', 'af-sdk-python/0.9.2', 'af-sdk-go/1.1.0', 'curl/8.5.0'];
 const errorTail = () => {
@@ -646,21 +646,21 @@ const errors = errorDefs.map((e, i) => ({
 // =====================================================================
 const rateLimits = {
   current: {
-    perMinute: { limit: 15000, used: 12840, label: 'Requests / minute', resetIn: '6s' },
-    perDay: { limit: 500000, used: 431200, label: 'Requests / day', resetIn: '4h 12m' },
-    monthly: { limit: 10000000, used: 5382400, label: 'Monthly quota', resetIn: '23 days', periodLabel: 'September 2026' },
+    perMinute: { limit: 15000, used: 12840, label: 'درخواست در دقیقه', resetIn: '۶ ثانیه' },
+    perDay: { limit: 500000, used: 431200, label: 'درخواست در روز', resetIn: '۴ ساعت و ۱۲ دقیقه' },
+    monthly: { limit: 10000000, used: 5382400, label: 'سهمیهٔ ماهانه', resetIn: '۲۳ روز', periodLabel: 'شهریور ۱۴۰۵' },
   },
   history: Array.from({ length: 14 }, (_, i) => {
     const used = betweenB(380000, 490000);
     return { date: isoDaysAgoB(13 - i).slice(0, 10), used, limit: 500000 };
   }),
   rules: [
-    { id: 'rl_emails', api: 'Emails API', name: 'emails:write', limit: 50, window: 'per second', current: 31, status: 'ok' },
-    { id: 'rl_completions', api: 'AI Inference', name: 'completions:create', limit: 25, window: 'per second', current: 24, status: 'warning' },
-    { id: 'rl_embeddings', api: 'AI Inference', name: 'embeddings:create', limit: 40, window: 'per second', current: 42, status: 'breached' },
-    { id: 'rl_audiences', api: 'Audiences', name: 'audiences:write', limit: 10, window: 'per second', current: 4, status: 'ok' },
-    { id: 'rl_webhooks', api: 'Webhooks', name: 'deliveries', limit: 100, window: 'per minute', current: 62, status: 'ok' },
-    { id: 'rl_global', api: 'Platform', name: 'global', limit: 250, window: 'per second', current: 208, status: 'warning' },
+    { id: 'rl_emails', api: 'سرویس ایمیل', name: 'emails:write', limit: 50, window: 'در ثانیه', current: 31, status: 'ok' },
+    { id: 'rl_completions', api: 'هوش مصنوعی', name: 'completions:create', limit: 25, window: 'در ثانیه', current: 24, status: 'warning' },
+    { id: 'rl_embeddings', api: 'هوش مصنوعی', name: 'embeddings:create', limit: 40, window: 'در ثانیه', current: 42, status: 'breached' },
+    { id: 'rl_audiences', api: 'مخاطبان', name: 'audiences:write', limit: 10, window: 'در ثانیه', current: 4, status: 'ok' },
+    { id: 'rl_webhooks', api: 'وب‌هوک‌ها', name: 'deliveries', limit: 100, window: 'در دقیقه', current: 62, status: 'ok' },
+    { id: 'rl_global', api: 'پلتفرم', name: 'global', limit: 250, window: 'در ثانیه', current: 208, status: 'warning' },
   ],
 };
 
@@ -689,7 +689,7 @@ const variables = variableDefs.map((v) => ({
   id: `var_${base62B(8)}`,
   ...v,
   updatedAt: isoDaysAgoB(betweenB(0, 60)),
-  addedBy: pickB(['Arash P.', 'Sara R.', 'system']),
+  addedBy: pickB(['علی رضایی', 'سارا احمدی', 'سیستم']),
 }));
 
 // =====================================================================
@@ -714,14 +714,14 @@ const isoMinutesAgoC = (m) => new Date(Date.now() - m * 60e3).toISOString();
 // Team (Phase 3C) — members + pending invitations.
 // =====================================================================
 const teamMemberDefs = [
-  { name: 'Arash Pashaei', email: 'arash@apiforge.dev', role: 'Owner', status: 'active' },
-  { name: 'Sara Rahimi', email: 'sara@apiforge.dev', role: 'Admin', status: 'active' },
-  { name: 'Mehdi Karimi', email: 'mehdi@apiforge.dev', role: 'Developer', status: 'active' },
-  { name: 'Niloofar Azimi', email: 'niloofar@apiforge.dev', role: 'Developer', status: 'active' },
-  { name: 'Reza Hosseini', email: 'reza@apiforge.dev', role: 'Viewer', status: 'active' },
-  { name: 'Dana Moradi', email: 'dana@apiforge.dev', role: 'Viewer', status: 'suspended' },
-  { name: 'Kaveh Nouri', email: 'kaveh@apiforge.dev', role: 'Developer', status: 'active' },
-  { name: 'Leyla Farhadi', email: 'leyla@apiforge.dev', role: 'Developer', status: 'active' },
+  { name: 'علی رضایی', email: 'ali@apiforge.dev', role: 'Owner', status: 'active' },
+  { name: 'سارا احمدی', email: 'sara@apiforge.dev', role: 'Admin', status: 'active' },
+  { name: 'مهدی کریمی', email: 'mehdi@apiforge.dev', role: 'Developer', status: 'active' },
+  { name: 'نیلوفر عظیمی', email: 'niloofar@apiforge.dev', role: 'Developer', status: 'active' },
+  { name: 'رضا حسینی', email: 'reza@apiforge.dev', role: 'Viewer', status: 'active' },
+  { name: 'دانا مرادی', email: 'dana@apiforge.dev', role: 'Viewer', status: 'suspended' },
+  { name: 'کاوه نوری', email: 'kaveh@apiforge.dev', role: 'Developer', status: 'active' },
+  { name: 'لیلا فرهادی', email: 'leyla@apiforge.dev', role: 'Developer', status: 'active' },
 ];
 const team = teamMemberDefs.map((m, i) => ({
   id: `usr_${base62C(8)}`,
@@ -733,8 +733,8 @@ const team = teamMemberDefs.map((m, i) => ({
 }));
 
 const invitations = [
-  { id: `inv_${base62C(8)}`, email: 'dev@yourco.io', role: 'Developer', invitedBy: 'Arash Pashaei', sentAt: isoDaysAgoC(2), expiresIn: '5 days' },
-  { id: `inv_${base62C(8)}`, email: 'ops@yourco.io', role: 'Viewer', invitedBy: 'Sara Rahimi', sentAt: isoDaysAgoC(5), expiresIn: '2 days' },
+  { id: `inv_${base62C(8)}`, email: 'dev@yourco.io', role: 'Developer', invitedBy: 'علی رضایی', sentAt: isoDaysAgoC(2), expiresIn: '5 days' },
+  { id: `inv_${base62C(8)}`, email: 'ops@yourco.io', role: 'Viewer', invitedBy: 'سارا احمدی', sentAt: isoDaysAgoC(5), expiresIn: '2 days' },
 ];
 
 // =====================================================================
@@ -742,25 +742,25 @@ const invitations = [
 // =====================================================================
 const plans = [
   {
-    id: 'developer', name: 'Developer', price: 0, priceLabel: '$0', period: '/ month',
-    blurb: 'For side projects and early prototypes.',
-    requests: '100,000 / mo', environments: 2, members: 2, webhooks: 5,
-    retention: '24 hours', rateLimit: '50 req/s', support: 'Community',
-    cta: 'Downgrade', highlight: false,
+    id: 'developer', name: 'توسعه‌دهنده', price: 0, priceLabel: '$0', period: 'در ماه',
+    blurb: 'برای پروژه‌های جانبی و نمونه‌های اولیه.',
+    requests: '۱۰۰٬۰۰۰ در ماه', environments: 2, members: 2, webhooks: 5,
+    retention: '۲۴ ساعت', rateLimit: '50 req/s', support: 'انجمن',
+    cta: 'تنزل طرح', highlight: false,
   },
   {
-    id: 'pro', name: 'Pro', price: 49, priceLabel: '$49', period: '/ month',
-    blurb: 'For growing teams shipping in production.',
-    requests: '2,000,000 / mo', environments: 3, members: 10, webhooks: 25,
-    retention: '30 days', rateLimit: '150 req/s', support: 'Email',
-    cta: 'Current plan', highlight: true,
+    id: 'pro', name: 'حرفه‌ای', price: 49, priceLabel: '$49', period: 'در ماه',
+    blurb: 'برای تیم‌های رو به رشد که در محیط تولید عرضه می‌کنند.',
+    requests: '۲٬۰۰۰٬۰۰۰ در ماه', environments: 3, members: 10, webhooks: 25,
+    retention: '۳۰ روز', rateLimit: '150 req/s', support: 'ایمیل',
+    cta: 'طرح فعلی', highlight: true,
   },
   {
-    id: 'scale', name: 'Scale', price: 199, priceLabel: '$199', period: '/ month',
-    blurb: 'For high-volume platforms and enterprises.',
-    requests: '10,000,000 / mo', environments: 5, members: 50, webhooks: 100,
-    retention: '90 days', rateLimit: '250 req/s', support: 'Priority + Slack',
-    cta: 'Upgrade', highlight: false,
+    id: 'scale', name: 'سازمانی', price: 199, priceLabel: '$199', period: 'در ماه',
+    blurb: 'برای پلتفرم‌های پرمصرف و سازمان‌ها.',
+    requests: '۱۰٬۰۰۰٬۰۰۰ در ماه', environments: 5, members: 50, webhooks: 100,
+    retention: '۹۰ روز', rateLimit: '250 req/s', support: 'ویژه + Slack',
+    cta: 'ارتقا', highlight: false,
   },
 ];
 
@@ -790,20 +790,20 @@ const invoices = invoiceDefs.map((inv, i) => {
 // Notifications (Phase 3C) — developer infrastructure notification center.
 // =====================================================================
 const notificationDefs = [
-  { category: 'security', severity: 'warning', title: 'New sign-in from an unknown device', body: 'A session was created from Tehran, IR (91.98.14.2). If this was not you, revoke the session.', env: null },
-  { category: 'webhook', severity: 'error', title: 'Webhook delivery failing', body: 'customer.created has failed 12 times in the last hour. Last response: 500.', env: 'live' },
-  { category: 'rate-limit', severity: 'warning', title: 'Rate limit at 85%', body: 'completions:create is approaching its per-second limit. Requests may be throttled.', env: 'live' },
-  { category: 'billing', severity: 'info', title: 'Invoice payment received', body: 'Your September invoice for $199 was paid successfully.', env: null },
-  { category: 'deployment', severity: 'success', title: 'Deployment succeeded', body: 'apiforge/api v2.4.1 deployed to production in 42s.', env: 'live' },
-  { category: 'team', severity: 'info', title: 'Sara invited a new member', body: 'ops@yourco.io was invited as a Viewer.', env: null },
-  { category: 'error', severity: 'error', title: 'Error spike detected', body: 'TypeError: Cannot read properties of null increased 3.2× in the last hour.', env: 'live' },
-  { category: 'security', severity: 'error', title: 'API key created in production', body: 'A new live key (sk_live_4fJk…) was created from the dashboard.', env: 'live' },
-  { category: 'rate-limit', severity: 'error', title: 'Rate limit breached', body: 'embeddings:create exceeded 40 req/s. Requests are returning 429.', env: 'staging' },
-  { category: 'deployment', severity: 'warning', title: 'Deployment rolled back', body: 'apiforge/api v2.4.2 was rolled back after a failed health check.', env: 'staging' },
-  { category: 'billing', severity: 'warning', title: 'Invoice payment failed', body: 'The July invoice could not be charged. Update your payment method to avoid interruption.', env: null },
-  { category: 'team', severity: 'info', title: 'Dana was suspended', body: 'Sara suspended Dana Moradi from the workspace.', env: null },
-  { category: 'webhook', severity: 'info', title: 'Webhook created', body: 'A new endpoint was registered for email.sent and email.bounced.', env: 'test' },
-  { category: 'error', severity: 'warning', title: 'New error type detected', body: 'ECONNREFUSED 10.0.2.15:5432 first seen on GET /v1/usage.', env: 'staging' },
+  { category: 'security', severity: 'warning', title: 'ورود از دستگاه ناشناس', body: 'یک نشست جدید از تهران، ایران (91.98.14.2) ایجاد شد. اگر این شما نبوده‌اید، نشست را ابطال کنید.', env: null },
+  { category: 'webhook', severity: 'error', title: 'خطا در تحویل وب‌هوک', body: 'رویداد customer.created در یک ساعت گذشته ۱۲ بار ناموفق بوده است. آخرین پاسخ: ۵۰۰.', env: 'live' },
+  { category: 'rate-limit', severity: 'warning', title: 'محدودیت نرخ در ۸۵٪', body: 'completions:create به سقف مجاز در هر ثانیه نزدیک شده است. ممکن است درخواست‌ها محدود شوند.', env: 'live' },
+  { category: 'billing', severity: 'info', title: 'پرداخت فاکتور دریافت شد', body: 'فاکتور شهریور شما به مبلغ ۱۹۹ دلار با موفقیت پرداخت شد.', env: null },
+  { category: 'deployment', severity: 'success', title: 'استقرار با موفقیت انجام شد', body: 'apiforge/api نسخهٔ v2.4.1 در ۴۲ ثانیه در محیط تولید مستقر شد.', env: 'live' },
+  { category: 'team', severity: 'info', title: 'سارا یک عضو جدید دعوت کرد', body: 'ops@yourco.io با نقش «ناظر» دعوت شد.', env: null },
+  { category: 'error', severity: 'error', title: 'افزایش ناگهانی خطا', body: 'خطای TypeError: Cannot read properties of null در یک ساعت گذشته ۳٫۲ برابر شده است.', env: 'live' },
+  { category: 'security', severity: 'error', title: 'ایجاد کلید API در محیط تولید', body: 'یک کلید عملیاتی جدید (sk_live_4fJk…) از داشبورد ایجاد شد.', env: 'live' },
+  { category: 'rate-limit', severity: 'error', title: 'عبور از محدودیت نرخ', body: '.embeddings:create از ۴۰ درخواست در ثانیه فراتر رفت. درخواست‌ها با کد ۴۲۹ پاسخ می‌گیرند.', env: 'staging' },
+  { category: 'deployment', severity: 'warning', title: 'بازگشت استقرار', body: 'نسخهٔ v2.4.2 از apiforge/api پس از ناموفق‌بودن بررسی سلامت بازگردانده شد.', env: 'staging' },
+  { category: 'billing', severity: 'warning', title: 'پرداخت فاکتور ناموفق بود', body: 'پرداخت فاکتور تیر انجام نشد. برای جلوگیری از اختلال در سرویس، روش پرداخت را به‌روزرسانی کنید.', env: null },
+  { category: 'team', severity: 'info', title: 'تعلیق دانا', body: 'سارا دسترسی دانا مرادی را در فضای کاری تعلیق کرد.', env: null },
+  { category: 'webhook', severity: 'info', title: 'وب‌هوک ایجاد شد', body: 'یک نقطهٔ پایانی جدید برای رویدادهای email.sent و email.bounced ثبت شد.', env: 'test' },
+  { category: 'error', severity: 'warning', title: 'شناسایی نوع خطای جدید', body: 'خطای ECONNREFUSED 10.0.2.15:5432 نخستین‌بار روی GET /v1/usage دیده شد.', env: 'staging' },
 ];
 const notifications = notificationDefs.map((n) => ({
   id: `ntf_${base62C(8)}`,
@@ -820,42 +820,42 @@ const sdks = [
     id: 'js', name: 'JavaScript', lang: 'JS', accent: 'js',
     package: '@apiforge/sdk', version: '1.7.2', install: 'npm install @apiforge/sdk',
     registry: 'npm', updated: isoDaysAgoC(3),
-    features: ['TypeScript types', 'Streaming support', 'Retry + idempotency', 'Webhook signature helper'],
+    features: ['تایپ‌های TypeScript', 'پشتیبانی از جریان', 'تلاش مجدد و یکتایی', 'ابزار بررسی امضای وب‌هوک'],
     docsUrl: './docs.html',
   },
   {
     id: 'node', name: 'Node.js', lang: 'Node', accent: 'node',
     package: 'apiforge', version: '2.1.0', install: 'npm install apiforge',
     registry: 'npm', updated: isoDaysAgoC(9),
-    features: ['Zero-dependency', 'Streaming support', 'Retry + idempotency', 'Works in ESM & CJS'],
+    features: ['بدون وابستگی', 'پشتیبانی از جریان', 'تلاش مجدد و یکتایی', 'سازگار با ESM و CJS'],
     docsUrl: './docs.html',
   },
   {
     id: 'python', name: 'Python', lang: 'Py', accent: 'py',
     package: 'apiforge', version: '1.4.1', install: 'pip install apiforge',
     registry: 'PyPI', updated: isoDaysAgoC(14),
-    features: ['Async + sync clients', 'Typed responses', 'Retry + idempotency', 'pytest fixtures'],
+    features: ['کلاینت همزمان و ناهمزمان', 'پاسخ‌های تایپ‌شده', 'تلاش مجدد و یکتایی', 'فیکسچرهای pytest'],
     docsUrl: './docs.html',
   },
   {
     id: 'php', name: 'PHP', lang: 'PHP', accent: 'php',
     package: 'apiforge/apiforge-php', version: '0.9.3', install: 'composer require apiforge/apiforge-php',
     registry: 'Packagist', updated: isoDaysAgoC(22),
-    features: ['PSR-18 compatible', 'Guzzle transport', 'Webhook signature helper'],
+    features: ['سازگار با PSR-18', 'انتقال بر پایهٔ Guzzle', 'ابزار بررسی امضای وب‌هوک'],
     docsUrl: './docs.html',
   },
   {
     id: 'go', name: 'Go', lang: 'Go', accent: 'go',
     package: 'github.com/apiforge/apiforge-go', version: '1.2.4', install: 'go get github.com/apiforge/apiforge-go',
     registry: 'Go modules', updated: isoDaysAgoC(11),
-    features: ['Context-aware', 'Zero allocations on hot path', 'Retry + idempotency'],
+    features: ['آگاه از context', 'بدون تخصیص حافظه در مسیر پرمصرف', 'تلاش مجدد و یکتایی'],
     docsUrl: './docs.html',
   },
   {
     id: 'ruby', name: 'Ruby', lang: 'Rb', accent: 'rb',
     package: 'apiforge', version: '0.8.0', install: 'gem install apiforge',
     registry: 'RubyGems', updated: isoDaysAgoC(30),
-    features: ['ActiveSupport integration', 'Retry + idempotency', 'Webhook signature helper'],
+    features: ['یکپارچه با ActiveSupport', 'تلاش مجدد و یکتایی', 'ابزار بررسی امضای وب‌هوک'],
     docsUrl: './docs.html',
   },
 ];

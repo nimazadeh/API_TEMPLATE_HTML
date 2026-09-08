@@ -6,6 +6,45 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## [Phase 5] — 2026-09-08 — PERSIAN RTL LOCALIZATION & MARKETPLACE READINESS ✅
+
+### Added
+- `src/locales/fa.json` + `src/locales/en.json` — the full translation catalogs (1,260 keys)
+- `src/js/core/i18n.js` — locale resolution, `t()` with `{var}` interpolation, the
+  `[data-i18n]` / `[data-i18n-attr]` painter, live `setLocale()`, `onLocaleChange()`
+  and `<html lang|dir>` syncing (no-flash restore moved into the inline `<head>` script)
+- Language control on every page: a locale menu in the app shell, a toggle on the
+  marketing and auth pages
+- `src/js/data/docs-content.en.js` + `docs-content.fa.js` behind a locale dispatcher —
+  the 18-article documentation portal is authored per language, not key-by-key
+- `rtl-persian-test.html` — the Persian RTL QA harness (replaces `rtl-test.html`):
+  mixed-script sentences, Persian/Latin digits, LTR isolation, code blocks, tables,
+  forms, charts, dropdowns, modals, pagination, alerts, timelines + live fa/en & theme switching
+- `PHASE_5_REPORT.md` — the phase report and quality-gate scorecard
+
+### Changed
+- All 30 pages now open in Persian (`<html lang="fa" dir="rtl">`) with 2,536 `data-i18n`
+  and 413 `data-i18n-attr` bindings — no hardcoded UI strings remain
+- `src/js/utils/format.js` is locale-aware: numbers, compact numbers, dates (Jalali in
+  Persian), relative time and percentages switch on `afx:localechange`
+- Page modules re-render charts, tables, drawers and empty states on locale change
+- `scripts/generate-mock-data.mjs` now emits Persian content (people, projects, key
+  names, API names, activity, notifications, plans, environments, SDK features,
+  endpoint summaries/descriptions and parameter help) while keeping every technical
+  value (ids, paths, prefixes, IPs, emails, packages, status codes) Latin/LTR
+- `src/scss/base/_utilities.scss` — directional glyphs mirror in RTL; `.no-dir-flip`
+  opts explicit back/next controls out of the mirror
+- `src/scss/components/_dropdown.scss` — `.locale-check` alongside `.theme-check`
+- `README.md` + `marketplace/DESCRIPTION.md` — Phase 5 status, a localization section,
+  and rewritten Rastchin/RTL-Theme listing copy with an Iranian-market requirements table
+- `vite.config.js` — `rtl-test` page input renamed to `rtl-persian-test`
+
+### Fixed
+- Attribute injection no longer corrupts self-closing tags (`<input … />`): i18n
+  attributes are inserted before the trailing solidus
+
+---
+
 ## [Phase 3C] — 2026-09-07 — COMPLETE SAAS PRODUCT EXPERIENCE ✅
 
 ### Added

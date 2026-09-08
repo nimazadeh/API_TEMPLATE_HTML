@@ -9,6 +9,8 @@ import { boot } from '../main.js';
 import { createIcons, icons } from '../components/icons.js';
 import { openErrorDrawer } from '../components/error-detail.js';
 import { afxToast } from '../components/toast.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
+import { number } from '../utils/format.js';
 import { escapeHtml, relativeTime, absoluteTime, formatNumber, percent, methodBadgeClass } from '../utils/format.js';
 import errorsData from '../data/mock-errors.json';
 import endpointsData from '../data/mock-endpoints.json';
@@ -19,7 +21,7 @@ boot();
 const errors = [...errorsData]; // in-session mutable copy
 
 const SEVERITY_BADGE = { error: 'badge-status--error', warning: 'badge-status--warning' };
-const ENV = { live: 'Live', staging: 'Staging', test: 'Test' };
+const ENV = { live: 'env.production', staging: 'env.staging', test: 'env.testOption' };
 
 const state = { search: '', severity: 'all', status: 'all', env: 'all' };
 
@@ -66,8 +68,8 @@ function render() {
   if (!list.length) {
     tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state">
       <span class="empty-icon"><i data-lucide="bug"></i></span>
-      <h4 class="empty-title">No errors match</h4>
-      <p class="empty-desc mb-0">Adjust or clear the filters to see more results.</p>
+      <h4 class="empty-title">${tr('errors.emptyTitle')}</h4>
+      <p class="empty-desc mb-0">${tr('errors.emptyDesc')}</p>
     </div></td></tr>`;
   } else {
     tbody.innerHTML = list
@@ -86,7 +88,7 @@ function render() {
       )
       .join('');
   }
-  document.getElementById('error-count').textContent = `${list.length} of ${errors.length} issues`;
+  document.getElementById('error-count').textContent = tr('errors.countOf', { shown: number(list.length), total: number(errors.length) });
   createIcons({ icons });
 }
 
@@ -95,11 +97,11 @@ function onResolve(e) {
   if (e.status === 'resolved') {
     e.status = 'unresolved';
     e.resolvedAt = null;
-    afxToast({ message: 'Issue reopened', type: 'info' });
+    afxToast({ message: tr('errors.toastReopened'), type: 'info' });
   } else {
     e.status = 'resolved';
     e.resolvedAt = new Date().toISOString();
-    afxToast({ message: 'Issue marked resolved', type: 'success' });
+    afxToast({ message: tr('errors.toastResolved'), type: 'success' });
   }
   render();
   openErrorDrawer(e, { onResolve, onAssign });
@@ -107,7 +109,7 @@ function onResolve(e) {
 
 function onAssign(e, name) {
   e.assignee = name || null;
-  afxToast({ message: name ? `Assigned to ${name}` : 'Assignment cleared', type: 'success' });
+  afxToast({ message: name ? tr('errors.toastAssigned', { name }) : tr('errors.toastUnassigned'), type: 'success' });
   render();
   openErrorDrawer(e, { onResolve, onAssign });
 }
@@ -150,3 +152,6 @@ document.getElementById('error-env').addEventListener('change', (e) => {
   state.env = e.target.value;
   render();
 });
+
+// Re-render when the locale flips.
+onLocaleChange(render);

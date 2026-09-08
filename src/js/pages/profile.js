@@ -8,12 +8,13 @@
 import { boot } from '../main.js';
 import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { setThemeMode } from '../components/theme.js';
 
 boot();
 
 const PROFILE = {
-  name: 'Arash Pashaei',
+  name: 'علی رضایی',
   email: 'arash@apiforge.dev',
   role: 'Owner',
   timezone: 'Europe/Berlin',
@@ -49,7 +50,7 @@ function initialsOf(name) {
 }
 
 function renderMeta() {
-  document.getElementById('pf-avatar').textContent = initialsOf(PROFILE.name) || 'AP';
+  document.getElementById('pf-avatar').textContent = initialsOf(PROFILE.name) || 'عر';
   document.getElementById('pf-display-name').textContent = PROFILE.name;
   document.getElementById('pf-email-display').textContent = PROFILE.email;
   document.getElementById('pf-email').value = PROFILE.email;
@@ -74,7 +75,7 @@ function validate() {
 function bind() {
   document.getElementById('pf-save').addEventListener('click', () => {
     if (!validate()) {
-      afxToast({ message: 'Please fix the highlighted fields.', type: 'error' });
+      afxToast({ message: tr('profile.fixFields'), type: 'error' });
       return;
     }
     PROFILE.name = document.getElementById('pf-name').value.trim();
@@ -86,12 +87,12 @@ function bind() {
     PROFILE.website = document.getElementById('pf-website').value.trim();
     PROFILE.org = document.getElementById('pf-org').value.trim();
     renderMeta();
-    afxToast({ message: 'Profile saved (demo).', type: 'success' });
+    afxToast({ message: tr('profile.saved'), type: 'success' });
   });
 
   document.getElementById('pf-cancel').addEventListener('click', () => {
     fillForm();
-    afxToast({ message: 'Changes discarded.', type: 'info' });
+    afxToast({ message: tr('profile.discarded'), type: 'info' });
   });
 
   document.querySelectorAll('[data-pref]').forEach((seg) => {
@@ -101,12 +102,12 @@ function bind() {
         s.setAttribute('aria-pressed', String(s === seg));
       });
       setThemeMode(seg.dataset.pref);
-      afxToast({ message: 'Theme preference updated.', type: 'success' });
+      afxToast({ message: tr('profile.themeUpdated'), type: 'success' });
     });
   });
 
   document.getElementById('pf-notify').addEventListener('change', (e) => {
-    afxToast({ message: e.target.checked ? 'Email notifications enabled (demo).' : 'Email notifications paused (demo).', type: 'info' });
+    afxToast({ message: e.target.checked ? tr('profile.notificationsOn') : tr('profile.notificationsOff'), type: 'info' });
   });
 }
 

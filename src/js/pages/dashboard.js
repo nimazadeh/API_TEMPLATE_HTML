@@ -6,7 +6,8 @@
 import { boot } from '../main.js';
 import { makeChart, destroyChart, axis, tooltips, initCharts } from '../components/charts.js';
 import { createIcons, icons } from '../components/icons.js';
-import { formatNumber, compactNumber, relativeTime, escapeHtml } from '../utils/format.js';
+import { formatNumber, compactNumber, relativeTime, escapeHtml, latencyText, percent, number } from '../utils/format.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import metrics from '../data/mock-metrics.json';
 import usage from '../data/mock-usage.json';
 import activity from '../data/mock-activity.json';
@@ -15,7 +16,8 @@ import plan from '../data/mock-plan.json';
 boot();
 initCharts();
 
-const RANGE_LABELS = { '24h': 'Last 24 hours', '7d': 'Last 7 days', '30d': 'Last 30 days' };
+const RANGE_KEYS = { '24h': 'dashboard.range24h', '7d': 'dashboard.range7d', '30d': 'dashboard.range30d' };
+const RANGE_SHORT = { '24h': 'dashboard.rangeShort24h', '7d': 'dashboard.rangeShort7d', '30d': 'dashboard.rangeShort30d' };
 let requestsChart = null;
 let latencyChart = null;
 
@@ -50,17 +52,17 @@ function renderKpis(range) {
 
   const requestsDelta = `${k.requestsDelta > 0 ? '+' : ''}${k.requestsDelta}%`;
   const successDelta = `${k.successDelta > 0 ? '+' : ''}${k.successDelta}pp`;
-  const latencyDelta = k.latencyDelta < 0 ? `${Math.abs(k.latencyDelta)}% faster` : `${k.latencyDelta}% slower`;
+  const latencyDelta = k.latencyDelta < 0 ? `${tr('kpi.faster', { value: number(Math.abs(k.latencyDelta)) })}` : `${tr('kpi.slower', { value: number(k.latencyDelta) })}`;
   const usagePct = plan.requestsUsed / plan.requestsLimit;
 
-  cards[0].innerHTML = kpiInner('Requests · ' + RANGE_LABELS[range].toLowerCase().replace('last ', ''), formatNumber(k.requests), `${requestsDelta} <i data-lucide="trending-up"></i>`, k.requestsDelta >= 0 ? 'up' : 'down', 'vs previous period');
-  cards[1].innerHTML = kpiInner('Success rate', `${k.successRate}%`, `${successDelta} <i data-lucide="${k.successDelta >= 0 ? 'trending-up' : 'trending-down'}"></i>`, k.successDelta >= 0 ? 'up' : 'down', '2xx responses');
-  cards[2].innerHTML = kpiInner('Average latency', `${k.latencyMs}ms`, `${latencyDelta} <i data-lucide="timer"></i>`, k.latencyDelta <= 0 ? 'up' : 'down', 'P95 across endpoints');
+  cards[0].innerHTML = kpiInner(`${tr('table.requests')} · ${tr(RANGE_SHORT[range])}`, formatNumber(k.requests), `${requestsDelta} <i data-lucide="trending-up"></i>`, k.requestsDelta >= 0 ? 'up' : 'down', tr('kpi.vsPreviousPeriod'));
+  cards[1].innerHTML = kpiInner(tr('kpi.successRate'), `${percent(k.successRate)}`, `${successDelta} <i data-lucide="${k.successDelta >= 0 ? 'trending-up' : 'trending-down'}"></i>`, k.successDelta >= 0 ? 'up' : 'down', tr('kpi.twoXxResponses'));
+  cards[2].innerHTML = kpiInner(tr('dashboard.averageLatency'), latencyText(k.latencyMs), `${latencyDelta} <i data-lucide="timer"></i>`, k.latencyDelta <= 0 ? 'up' : 'down', tr('kpi.p95AcrossEndpoints'));
   cards[3].innerHTML = `
-    <span class="kpi-label">Monthly usage</span>
+    <span class="kpi-label">${tr('usage.monthlyUsage')}</span>
     <span class="kpi-value">${formatNumber(plan.requestsUsed)}</span>
-    <span class="kpi-delta flat">of ${formatNumber(plan.requestsLimit)} requests</span>
-    <div class="progress mt-1" role="img" aria-label="${Math.round(usagePct * 100)}% of plan used">
+    <span class="kpi-delta flat">${tr('usage.ofRequests', { count: formatNumber(plan.requestsLimit) })}</span>
+    <div class="progress mt-1" role="img" aria-label="${tr('usage.pctUsed', { pct: number(Math.round(usagePct * 100)) })}">
       <div class="progress-bar" style="width:${(usagePct * 100).toFixed(1)}%"></div>
     </div>
     <span class="stat-foot">${plan.periodLabel}</span>`;
@@ -96,16 +98,20 @@ function lineConfig(labels, data, t, color, callbacks) {
 
 function renderCharts(range) {
   const { labels, requests, latency } = seriesFor(range);
-  document.querySelector('[data-chart-range]').textContent = RANGE_LABELS[range];
+  document.querySelector('[data-chart-range]').textContent = tr(RANGE_KEYS[range]);
+  const rDelta = metrics.kpis[range].requestsDelta;
   document.querySelector('[data-chart-sentence="requests"]').textContent =
-    `Requests ${metrics.kpis[range].requestsDelta >= 0 ? 'up' : 'down'} ${Math.abs(metrics.kpis[range].requestsDelta)}% vs previous period, driven by /v1/emails.`;
+    tr(rDelta >= 0 ? 'dashboard.requestsSentenceUp' : 'dashboard.requestsSentenceDown', {
+      delta: number(Math.abs(rDelta)),
+      endpoint: '/v1/emails',
+    });
 
   if (requestsChart) destroyChart(requestsChart);
   if (latencyChart) destroyChart(latencyChart);
 
   requestsChart = makeChart(document.getElementById('chart-requests'), (t) =>
     lineConfig(labels, requests, t, t.accent, {
-      label: (c) => `${compactNumber(c.parsed.y)} requests`,
+      label: (c) => `${compactNumber(c.parsed.y)} ${tr('table.requests')}`,
     })
   );
   latencyChart = makeChart(document.getElementById('chart-latency'), (t) =>
@@ -158,6 +164,12 @@ document.querySelectorAll('[data-range]').forEach((btn) => {
     });
     render(btn.dataset.range);
   });
+});
+
+// Re-render everything when the locale flips (labels, digits, dates).
+onLocaleChange(() => {
+  const active = document.querySelector('[data-range].is-active');
+  render(active ? active.dataset.range : '24h');
 });
 
 // Skeleton → content (short simulated load so the loading state is visible).

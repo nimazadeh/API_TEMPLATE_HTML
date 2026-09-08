@@ -1,16 +1,21 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-theme="dark">
+<html lang="fa" dir="rtl" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
-    <title>Usage — APIForge X</title>
+    <title data-i18n="header.title.usage">میزان استفاده — APIForge X</title>
     <script>
       (function () {
         var stored = null;
         try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
         var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
         document.documentElement.setAttribute('data-theme', theme);
+        var loc = null;
+        try { loc = localStorage.getItem('afx-locale'); } catch (e) {}
+        if (loc !== 'fa' && loc !== 'en') loc = 'fa';
+        document.documentElement.setAttribute('lang', loc);
+        document.documentElement.setAttribute('dir', loc === 'fa' ? 'rtl' : 'ltr');
       })();
     </script>
   </head>
@@ -22,105 +27,60 @@
           <span class="brand-mark"><i data-lucide="zap"></i></span>
           <span class="brand-name">APIForge X</span>
         </div>
-                <nav class="sidebar-nav" aria-label="Primary">
+                <nav class="sidebar-nav" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
 
           <div class="nav-group">
-            <div class="nav-group__label">Overview</div>
-            <a class="nav-item" href="./dashboard.html">
-              <i data-lucide="layout-dashboard"></i><span>Overview</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.overview">نمای کلی</div>
+            <a class="nav-item" href="./dashboard.html" data-i18n="nav.overview"><i data-lucide="layout-dashboard"></i><span data-i18n="rtl.groupOverview">نمای کلی</span></a>
           </div>
 
           <div class="nav-group">
-            <div class="nav-group__label">Developer</div>
-            <a class="nav-item" href="./apis.html">
-              <i data-lucide="code-2"></i><span>APIs</span>
-            </a>
-            <a class="nav-item" href="./endpoints.html">
-              <i data-lucide="braces"></i><span>Endpoints</span>
-            </a>
-            <a class="nav-item" href="./api-keys.html">
-              <i data-lucide="key"></i><span>API Keys</span>
-            </a>
-            <a class="nav-item" href="./logs.html">
-              <i data-lucide="scroll-text"></i><span>Logs</span>
-            </a>
-            <a class="nav-item" href="./webhooks.html">
-              <i data-lucide="webhook"></i><span>Webhooks</span>
-            </a>
-            <a class="nav-item" href="./docs.html">
-              <i data-lucide="book-open"></i><span>Documentation</span>
-            </a>
-            <a class="nav-item" href="./sdk.html">
-              <i data-lucide="package"></i><span>SDKs</span>
-            </a>
-            <a class="nav-item" href="./api-reference.html">
-              <i data-lucide="book-marked"></i><span>API Reference</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.developer">توسعه‌دهنده</div>
+            <a class="nav-item" href="./apis.html" data-i18n="nav.apis"><i data-lucide="code-2"></i><span>APIها</span></a>
+            <a class="nav-item" href="./endpoints.html" data-i18n="nav.endpoints"><i data-lucide="braces"></i><span>نقاط پایانی</span></a>
+            <a class="nav-item" href="./api-keys.html" data-i18n="nav.apiKeys"><i data-lucide="key"></i><span>کلیدهای API</span></a>
+            <a class="nav-item" href="./logs.html" data-i18n="nav.logs"><i data-lucide="scroll-text"></i><span>لاگ‌ها</span></a>
+            <a class="nav-item" href="./webhooks.html" data-i18n="nav.webhooks"><i data-lucide="webhook"></i><span>وب‌هوک‌ها</span></a>
+            <a class="nav-item" href="./docs.html" data-i18n="nav.docs"><i data-lucide="book-open"></i><span>مستندات</span></a>
+            <a class="nav-item" href="./sdk.html" data-i18n="nav.sdks"><i data-lucide="package"></i><span>SDKها</span></a>
+            <a class="nav-item" href="./api-reference.html" data-i18n="nav.apiReference"><i data-lucide="book-marked"></i><span>مرجع API</span></a>
           </div>
 
           <div class="nav-group">
-            <div class="nav-group__label">Analytics</div>
-            <a class="nav-item is-active" href="./usage.html">
-              <i data-lucide="bar-chart-3"></i><span>Usage</span>
-            </a>
-            <a class="nav-item" href="./errors.html">
-              <i data-lucide="bug"></i><span>Errors</span>
-            </a>
-            <a class="nav-item" href="./rate-limits.html">
-              <i data-lucide="gauge"></i><span>Rate Limits</span>
-            </a>
-            <a class="nav-item" href="./metrics.html">
-              <i data-lucide="activity"></i><span>Metrics</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.analytics">تحلیل‌ها</div>
+            <a class="nav-item is-active" href="./usage.html" data-i18n="nav.usage"><i data-lucide="bar-chart-3"></i><span>میزان استفاده</span></a>
+            <a class="nav-item" href="./errors.html" data-i18n="nav.errors"><i data-lucide="bug"></i><span>خطاها</span></a>
+            <a class="nav-item" href="./rate-limits.html" data-i18n="nav.rateLimits"><i data-lucide="gauge"></i><span>محدودیت نرخ</span></a>
+            <a class="nav-item" href="./metrics.html" data-i18n="nav.metrics"><i data-lucide="activity"></i><span>متریک‌ها</span></a>
           </div>
 
           <div class="nav-group">
-            <div class="nav-group__label">Workspace</div>
-            <a class="nav-item" href="./environments.html">
-              <i data-lucide="server"></i><span>Environments</span>
-            </a>
-            <a class="nav-item" href="./team.html">
-              <i data-lucide="users"></i><span>Team</span>
-            </a>
-            <a class="nav-item" href="./billing.html">
-              <i data-lucide="credit-card"></i><span>Billing</span>
-            </a>
-            <a class="nav-item" href="./notifications.html">
-              <i data-lucide="bell"></i><span>Notifications</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.workspace">فضای کاری</div>
+            <a class="nav-item" href="./environments.html" data-i18n="nav.environments"><i data-lucide="server"></i><span>محیط‌ها</span></a>
+            <a class="nav-item" href="./team.html" data-i18n="nav.team"><i data-lucide="users"></i><span>تیم</span></a>
+            <a class="nav-item" href="./billing.html" data-i18n="nav.billing"><i data-lucide="credit-card"></i><span>صورت‌حساب</span></a>
+            <a class="nav-item" href="./notifications.html" data-i18n="nav.notifications"><i data-lucide="bell"></i><span>اعلان‌ها</span></a>
           </div>
 
           <div class="nav-group">
-            <div class="nav-group__label">Account</div>
-            <a class="nav-item" href="./profile.html">
-              <i data-lucide="user"></i><span>Profile</span>
-            </a>
-            <a class="nav-item" href="./settings.html">
-              <i data-lucide="settings"></i><span>Settings</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.account">حساب کاربری</div>
+            <a class="nav-item" href="./profile.html" data-i18n="nav.profile"><i data-lucide="user"></i><span>نمایه</span></a>
+            <a class="nav-item" href="./settings.html" data-i18n="nav.settings"><i data-lucide="settings"></i><span>تنظیمات</span></a>
           </div>
         </nav>
         <div class="sidebar-foot">
-          <div class="env-switcher" data-env-switcher role="group" aria-label="Environment">
-            <button type="button" class="env-option" data-env="test"><span class="dot"></span>Test</button>
-            <button type="button" class="env-option" data-env="live"><span class="dot"></span>Live</button>
+          <div class="env-switcher" data-env-switcher role="group" aria-label="محیط" data-i18n-attr="aria-label:aria.environment">
+            <button type="button" class="env-option" data-env="test" data-i18n="env.test"><span class="dot"></span>آزمایشی</button>
+            <button type="button" class="env-option" data-env="live" data-i18n="env.live"><span class="dot"></span>عملیاتی</button>
           </div>
           <div class="sidebar-user dropdown dropup">
-            <button type="button" class="sidebar-user__toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              <span class="avatar">AP</span>
-              <span class="sidebar-user__meta">
-                <span class="name">Arash P.</span>
-                <span class="email">arash@apiforge.dev</span>
-              </span>
-              <i data-lucide="chevron-down"></i>
-            </button>
+            <button type="button" class="sidebar-user__toggle" data-bs-toggle="dropdown" aria-expanded="false" data-i18n="shell.userMenu"><span class="avatar">عر</span> <span class="sidebar-user__meta"> <span class="name">علی رضایی</span> <span class="email ltr-isolate">ali@apiforge.dev</span> </span> <i data-lucide="chevron-down"></i></button>
             <div class="dropdown-menu">
-              <div class="dropdown-header">arash@apiforge.dev</div>
-              <button type="button" class="dropdown-item"><i data-lucide="users"></i> Profile</button>
-              <button type="button" class="dropdown-item"><i data-lucide="settings"></i> Settings</button>
+              <div class="dropdown-header" data-i18n="shell.userEmail">ali@apiforge.dev</div>
+              <button type="button" class="dropdown-item" data-i18n="action.profile"><i data-lucide="users"></i> نمایه</button>
+              <button type="button" class="dropdown-item" data-i18n="action.settings"><i data-lucide="settings"></i> تنظیمات</button>
               <hr class="dropdown-divider" />
-              <button type="button" class="dropdown-item is-danger"><i data-lucide="log-out"></i> Sign out</button>
+              <button type="button" class="dropdown-item is-danger" data-i18n="action.signOut"><i data-lucide="log-out"></i> خروج</button>
             </div>
           </div>
         </div>
@@ -128,45 +88,47 @@
 
       <!-- ============ Header ============ -->
       <header class="app-header">
-        <button type="button" class="btn btn-icon header-burger" aria-label="Open menu" data-bs-toggle="offcanvas" data-bs-target="#sidebar-drawer" aria-controls="sidebar-drawer">
+        <button type="button" class="btn btn-icon header-burger" aria-label="باز کردن منو" data-bs-toggle="offcanvas" data-bs-target="#sidebar-drawer" aria-controls="sidebar-drawer" data-i18n-attr="aria-label:aria.openMenu">
           <i data-lucide="menu"></i>
         </button>
-        <div class="header-title">
-          <span class="crumb">APIForge X</span>
-          <span class="crumb-sep">/</span>
-          <span class="title">Usage</span>
-        </div>
-        <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="Search (⌘K)">
-          <i data-lucide="search"></i>
-          <span class="text-tertiary">Search…</span>
-          <span class="kbd-hint">⌘K</span>
-        </button>
+        <div class="header-title" data-i18n="header.crumb.usage"><span class="crumb">APIForge X</span> <span class="crumb-sep">/</span> <span class="title">میزان استفاده</span></div>
+        <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="جستجو (⌘K)" data-i18n-attr="aria-label:aria.searchCommandK" data-i18n="shell.search"><i data-lucide="search"></i> <span class="text-tertiary">جستجو…</span> <span class="kbd-hint">⌘K</span></button>
         <div class="header-actions">
-          <div class="env-switcher" data-env-switcher role="group" aria-label="Environment">
-            <button type="button" class="env-option" data-env="test"><span class="dot"></span>Test</button>
-            <button type="button" class="env-option" data-env="live"><span class="dot"></span>Live</button>
+          <div class="env-switcher" data-env-switcher role="group" aria-label="محیط" data-i18n-attr="aria-label:aria.environment">
+            <button type="button" class="env-option" data-env="test" data-i18n="env.test"><span class="dot"></span>آزمایشی</button>
+            <button type="button" class="env-option" data-env="live" data-i18n="env.live"><span class="dot"></span>عملیاتی</button>
           </div>
           <div class="dropdown" data-theme-menu>
-            <button type="button" class="btn btn-icon" aria-label="Theme" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn btn-icon" aria-label="پوسته" data-bs-toggle="dropdown" aria-expanded="false" data-i18n-attr="aria-label:aria.theme">
               <i data-lucide="sun-moon"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-end">
-              <button type="button" class="dropdown-item" data-mode="dark" role="menuitemradio"><i data-lucide="sun-moon"></i> Dark <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
-              <button type="button" class="dropdown-item" data-mode="light" role="menuitemradio"><i data-lucide="sun-moon"></i> Light <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
-              <button type="button" class="dropdown-item" data-mode="system" role="menuitemradio"><i data-lucide="sun-moon"></i> System <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-mode="dark" role="menuitemradio" data-i18n="theme.dark"><i data-lucide="sun-moon"></i> تیره <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-mode="light" role="menuitemradio" data-i18n="theme.light"><i data-lucide="sun-moon"></i> روشن <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-mode="system" role="menuitemradio" data-i18n="theme.system"><i data-lucide="sun-moon"></i> سیستم <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
             </div>
           </div>
-          <button type="button" class="btn btn-icon" aria-label="Help" data-bs-toggle="tooltip" data-bs-title="Help">
+          <div class="dropdown" data-locale-menu>
+            <button type="button" class="btn btn-icon" aria-label="تغییر زبان" data-bs-toggle="dropdown" aria-expanded="false" data-i18n-attr="aria-label:aria.switchLanguage">
+              <i data-lucide="languages"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <button type="button" class="dropdown-item" data-locale="fa" role="menuitemradio" aria-checked="true">فارسی <span class="locale-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-locale="en" role="menuitemradio" aria-checked="false">English <span class="locale-check" hidden><i data-lucide="check"></i></span></button>
+            </div>
+          </div>
+          
+          <button type="button" class="btn btn-icon" aria-label="راهنما" data-bs-toggle="tooltip" data-bs-title="راهنما" data-i18n-attr="aria-label:aria.help,data-bs-title:aria.helpTooltip">
             <i data-lucide="help-circle"></i>
           </button>
           <div class="dropdown">
-            <button type="button" class="btn btn-icon" aria-label="Notifications" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn btn-icon" aria-label="اعلان‌ها" data-bs-toggle="dropdown" aria-expanded="false" data-i18n-attr="aria-label:aria.notifications">
               <i data-lucide="bell"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-end">
-              <div class="dropdown-header">Notifications</div>
-              <button type="button" class="dropdown-item"><i data-lucide="alert-triangle"></i> 2 webhooks failing</button>
-              <button type="button" class="dropdown-item"><i data-lucide="circle-check"></i> Deployment succeeded</button>
+              <div class="dropdown-header" data-i18n="shell.notifications">اعلان‌ها</div>
+              <button type="button" class="dropdown-item" data-i18n="shell.notifWebhooksFailing"><i data-lucide="alert-triangle"></i> خطا در ۲ وب‌هوک</button>
+              <button type="button" class="dropdown-item" data-i18n="shell.notifDeployOk"><i data-lucide="circle-check"></i> استقرار با موفقیت انجام شد</button>
             </div>
           </div>
         </div>
@@ -174,19 +136,16 @@
 
       <!-- ============ Main ============ -->
       <main class="app-main">
-        <div class="env-banner" data-env-banner hidden>
-          <i data-lucide="alert-triangle"></i>
-          You are viewing <strong>test data</strong>.
-        </div>
+        <div class="env-banner" data-env-banner hidden data-i18n="shell.envBannerShort"><i data-lucide="alert-triangle"></i> شما در حال مشاهدهٔ <strong>داده‌های آزمایشی</strong> هستید.</div>
         <div class="app-main__inner">
           <header class="toolbar">
             <div>
-              <h1 class="mb-1">Usage</h1>
-              <p class="text-secondary mb-0">Track consumption against your plan and see where it comes from.</p>
+              <h1 class="mb-1" data-i18n="page.usage">میزان استفاده</h1>
+              <p class="text-secondary mb-0" data-i18n="usage.track-consumption-against-your-plan-and-see-wher">مصرف خود را نسبت به سقف طرح پیگیری کنید و ببینید از کجا می‌آید.</p>
             </div>
             <div class="toolbar__actions">
               <span class="badge badge-neutral" id="usage-period">—</span>
-              <button type="button" class="btn btn-secondary" id="usage-export"><i data-lucide="download"></i> Export</button>
+              <button type="button" class="btn btn-secondary" id="usage-export" data-i18n="action.export"><i data-lucide="download"></i> دریافت خروجی</button>
             </div>
           </header>
 
@@ -195,27 +154,27 @@
             <div class="usage-plan">
               <div class="usage-plan__head">
                 <div>
-                  <div class="caption text-tertiary">Current plan</div>
-                  <div class="usage-plan__name">Scale</div>
+                  <div class="caption text-tertiary" data-i18n="usage.currentPlan">طرح فعلی</div>
+                  <div class="usage-plan__name" data-i18n="pricing.scale">سازمانی</div>
                 </div>
-                <span class="badge badge-status badge-status--success"><span class="dot"></span>Active</span>
+                <span class="badge badge-status badge-status--success" data-i18n="status.active"><span class="dot"></span>فعال</span>
               </div>
-              <div class="progress" role="img" id="usage-bar" aria-label="Plan usage">
+              <div class="progress" role="img" id="usage-bar" aria-label="مصرف طرح" data-i18n-attr="aria-label:aria.planUsage">
                 <div class="progress-bar" id="usage-bar-fill" style="width: 0%"></div>
               </div>
               <div class="usage-plan__numbers">
-                <div><div class="caption text-tertiary">Used</div><div class="usage-plan__value" id="usage-used">—</div></div>
-                <div><div class="caption text-tertiary">Limit</div><div class="usage-plan__value" id="usage-limit">—</div></div>
-                <div><div class="caption text-tertiary">Resets in</div><div class="usage-plan__value" id="usage-resets">—</div></div>
+                <div><div class="caption text-tertiary" data-i18n="usage.used">مصرف‌شده</div><div class="usage-plan__value" id="usage-used">—</div></div>
+                <div><div class="caption text-tertiary" data-i18n="usage.limit">سقف مجاز</div><div class="usage-plan__value" id="usage-limit">—</div></div>
+                <div><div class="caption text-tertiary" data-i18n="usage.resetsIn">بازنشانی تا</div><div class="usage-plan__value" id="usage-resets">—</div></div>
               </div>
             </div>
           </section>
 
           <!-- Period stats -->
           <div class="stat-strip">
-            <div class="stat-strip__item"><span class="stat-strip__label">Requests this period</span><span class="stat-strip__value" id="usage-requests">—</span></div>
-            <div class="stat-strip__item"><span class="stat-strip__label">Avg latency</span><span class="stat-strip__value" id="usage-latency">—</span></div>
-            <div class="stat-strip__item"><span class="stat-strip__label">Success rate</span><span class="stat-strip__value" id="usage-success">—</span></div>
+            <div class="stat-strip__item" data-i18n="usage.statRequests"><span class="stat-strip__label">درخواست‌های این دوره</span><span class="stat-strip__value" id="usage-requests">—</span></div>
+            <div class="stat-strip__item" data-i18n="usage.statLatency"><span class="stat-strip__label">میانگین تاخیر</span><span class="stat-strip__value" id="usage-latency">—</span></div>
+            <div class="stat-strip__item" data-i18n="usage.statSuccess"><span class="stat-strip__label">نرخ موفقیت</span><span class="stat-strip__value" id="usage-success">—</span></div>
           </div>
 
           <!-- Requests over time -->
@@ -223,16 +182,16 @@
             <div class="chart">
               <div class="chart__head">
                 <div>
-                  <div class="chart__title">Requests over time</div>
-                  <div class="chart__sentence">Daily request volume for the current period.</div>
+                  <div class="chart__title" data-i18n="usage.requestsOverTime">درخواست‌ها در طول زمان</div>
+                  <div class="chart__sentence" data-i18n="usage.daily-request-volume-for-the-current-period">حجم روزانهٔ درخواست‌ها در دورهٔ جاری.</div>
                 </div>
-                <div class="seg" role="group" aria-label="Time range">
-                  <button type="button" class="seg__item is-active" data-range="7d" aria-pressed="true">7d</button>
-                  <button type="button" class="seg__item" data-range="30d" aria-pressed="false">30d</button>
+                <div class="seg" role="group" aria-label="بازهٔ زمانی" data-i18n-attr="aria-label:aria.timeRange">
+                  <button type="button" class="seg__item is-active" data-range="7d" aria-pressed="true" data-i18n="dashboard.7d">۷ روز</button>
+                  <button type="button" class="seg__item" data-range="30d" aria-pressed="false" data-i18n="dashboard.30d">۳۰ روز</button>
                 </div>
               </div>
               <div class="chart__canvas" style="--chart-height: 260px">
-                <canvas id="usage-requests-chart" role="img" aria-label="Requests over time"></canvas>
+                <canvas id="usage-requests-chart" role="img" aria-label="درخواست‌ها در طول زمان" data-i18n-attr="aria-label:aria.requestsOverTime"></canvas>
               </div>
             </div>
           </section>
@@ -244,12 +203,12 @@
                 <div class="chart">
                   <div class="chart__head">
                     <div>
-                      <div class="chart__title">Consumption by API</div>
-                      <div class="chart__sentence">Share of requests across APIs this period.</div>
+                      <div class="chart__title" data-i18n="usage.consumptionByApi">مصرف به تفکیک API</div>
+                      <div class="chart__sentence" data-i18n="usage.share-of-requests-across-apis-this-period">سهم درخواست‌ها به تفکیک APIها در این دوره.</div>
                     </div>
                   </div>
                   <div class="chart__canvas" style="--chart-height: 260px">
-                    <canvas id="usage-consumption-chart" role="img" aria-label="Consumption by API"></canvas>
+                    <canvas id="usage-consumption-chart" role="img" aria-label="مصرف به تفکیک API" data-i18n-attr="aria-label:aria.consumptionByApi"></canvas>
                   </div>
                 </div>
               </div>
@@ -258,8 +217,8 @@
               <div class="card card--dense h-100">
                 <div class="card-header">
                   <div>
-                    <h4 class="card-title">Top endpoints</h4>
-                    <div class="card-subtitle">By request volume this period.</div>
+                    <h4 class="card-title" data-i18n="usage.topEndpoints">پرتکرارترین نقاط پایانی</h4>
+                    <div class="card-subtitle" data-i18n="usage.by-request-volume-this-period">بر اساس حجم درخواست‌ها در این دوره.</div>
                   </div>
                 </div>
                 <div id="usage-top-endpoints" class="top-list"></div>
@@ -271,17 +230,17 @@
           <section class="card card--dense">
             <div class="card-header">
               <div>
-                <h4 class="card-title">Where usage comes from</h4>
-                <div class="card-subtitle">Breakdown by endpoint and environment.</div>
+                <h4 class="card-title" data-i18n="usage.whereFrom">منشأ مصرف</h4>
+                <div class="card-subtitle" data-i18n="usage.breakdown-by-endpoint-and-environment">تفکیک بر اساس نقطهٔ پایانی و محیط.</div>
               </div>
             </div>
             <div class="attribution">
               <div class="attribution__group">
-                <div class="attribution__title">By endpoint</div>
+                <div class="attribution__title" data-i18n="usage.byEndpoint">به تفکیک نقطهٔ پایانی</div>
                 <ul class="attribution__list list-unstyled" id="attr-by-endpoint"></ul>
               </div>
               <div class="attribution__group">
-                <div class="attribution__title">By environment</div>
+                <div class="attribution__title" data-i18n="usage.byEnvironment">به تفکیک محیط</div>
                 <ul class="attribution__list list-unstyled" id="attr-by-env"></ul>
               </div>
             </div>
@@ -291,102 +250,62 @@
     </div>
 
     <!-- Mobile sidebar drawer -->
-    <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="Primary">
+    <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
       <div class="sidebar-brand">
         <span class="brand-mark"><i data-lucide="zap"></i></span>
         <span class="brand-name">APIForge X</span>
-        <button type="button" class="btn btn-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="Close menu"><i data-lucide="x"></i></button>
+        <button type="button" class="btn btn-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="بستن منو" data-i18n-attr="aria-label:aria.closeMenu"><i data-lucide="x"></i></button>
       </div>
-              <nav class="sidebar-nav" aria-label="Primary">
+              <nav class="sidebar-nav" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
 
           <div class="nav-group">
-            <div class="nav-group__label">Overview</div>
-            <a class="nav-item" href="./dashboard.html">
-              <i data-lucide="layout-dashboard"></i><span>Overview</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.overview">نمای کلی</div>
+            <a class="nav-item" href="./dashboard.html" data-i18n="nav.overview"><i data-lucide="layout-dashboard"></i><span data-i18n="rtl.groupOverview">نمای کلی</span></a>
           </div>
 
           <div class="nav-group">
-            <div class="nav-group__label">Developer</div>
-            <a class="nav-item" href="./apis.html">
-              <i data-lucide="code-2"></i><span>APIs</span>
-            </a>
-            <a class="nav-item" href="./endpoints.html">
-              <i data-lucide="braces"></i><span>Endpoints</span>
-            </a>
-            <a class="nav-item" href="./api-keys.html">
-              <i data-lucide="key"></i><span>API Keys</span>
-            </a>
-            <a class="nav-item" href="./logs.html">
-              <i data-lucide="scroll-text"></i><span>Logs</span>
-            </a>
-            <a class="nav-item" href="./webhooks.html">
-              <i data-lucide="webhook"></i><span>Webhooks</span>
-            </a>
-            <a class="nav-item" href="./docs.html">
-              <i data-lucide="book-open"></i><span>Documentation</span>
-            </a>
-            <a class="nav-item" href="./sdk.html">
-              <i data-lucide="package"></i><span>SDKs</span>
-            </a>
-            <a class="nav-item" href="./api-reference.html">
-              <i data-lucide="book-marked"></i><span>API Reference</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.developer">توسعه‌دهنده</div>
+            <a class="nav-item" href="./apis.html" data-i18n="nav.apis"><i data-lucide="code-2"></i><span>APIها</span></a>
+            <a class="nav-item" href="./endpoints.html" data-i18n="nav.endpoints"><i data-lucide="braces"></i><span>نقاط پایانی</span></a>
+            <a class="nav-item" href="./api-keys.html" data-i18n="nav.apiKeys"><i data-lucide="key"></i><span>کلیدهای API</span></a>
+            <a class="nav-item" href="./logs.html" data-i18n="nav.logs"><i data-lucide="scroll-text"></i><span>لاگ‌ها</span></a>
+            <a class="nav-item" href="./webhooks.html" data-i18n="nav.webhooks"><i data-lucide="webhook"></i><span>وب‌هوک‌ها</span></a>
+            <a class="nav-item" href="./docs.html" data-i18n="nav.docs"><i data-lucide="book-open"></i><span>مستندات</span></a>
+            <a class="nav-item" href="./sdk.html" data-i18n="nav.sdks"><i data-lucide="package"></i><span>SDKها</span></a>
+            <a class="nav-item" href="./api-reference.html" data-i18n="nav.apiReference"><i data-lucide="book-marked"></i><span>مرجع API</span></a>
           </div>
 
           <div class="nav-group">
-            <div class="nav-group__label">Analytics</div>
-            <a class="nav-item is-active" href="./usage.html">
-              <i data-lucide="bar-chart-3"></i><span>Usage</span>
-            </a>
-            <a class="nav-item" href="./errors.html">
-              <i data-lucide="bug"></i><span>Errors</span>
-            </a>
-            <a class="nav-item" href="./rate-limits.html">
-              <i data-lucide="gauge"></i><span>Rate Limits</span>
-            </a>
-            <a class="nav-item" href="./metrics.html">
-              <i data-lucide="activity"></i><span>Metrics</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.analytics">تحلیل‌ها</div>
+            <a class="nav-item is-active" href="./usage.html" data-i18n="nav.usage"><i data-lucide="bar-chart-3"></i><span>میزان استفاده</span></a>
+            <a class="nav-item" href="./errors.html" data-i18n="nav.errors"><i data-lucide="bug"></i><span>خطاها</span></a>
+            <a class="nav-item" href="./rate-limits.html" data-i18n="nav.rateLimits"><i data-lucide="gauge"></i><span>محدودیت نرخ</span></a>
+            <a class="nav-item" href="./metrics.html" data-i18n="nav.metrics"><i data-lucide="activity"></i><span>متریک‌ها</span></a>
           </div>
 
           <div class="nav-group">
-            <div class="nav-group__label">Workspace</div>
-            <a class="nav-item" href="./environments.html">
-              <i data-lucide="server"></i><span>Environments</span>
-            </a>
-            <a class="nav-item" href="./team.html">
-              <i data-lucide="users"></i><span>Team</span>
-            </a>
-            <a class="nav-item" href="./billing.html">
-              <i data-lucide="credit-card"></i><span>Billing</span>
-            </a>
-            <a class="nav-item" href="./notifications.html">
-              <i data-lucide="bell"></i><span>Notifications</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.workspace">فضای کاری</div>
+            <a class="nav-item" href="./environments.html" data-i18n="nav.environments"><i data-lucide="server"></i><span>محیط‌ها</span></a>
+            <a class="nav-item" href="./team.html" data-i18n="nav.team"><i data-lucide="users"></i><span>تیم</span></a>
+            <a class="nav-item" href="./billing.html" data-i18n="nav.billing"><i data-lucide="credit-card"></i><span>صورت‌حساب</span></a>
+            <a class="nav-item" href="./notifications.html" data-i18n="nav.notifications"><i data-lucide="bell"></i><span>اعلان‌ها</span></a>
           </div>
 
           <div class="nav-group">
-            <div class="nav-group__label">Account</div>
-            <a class="nav-item" href="./profile.html">
-              <i data-lucide="user"></i><span>Profile</span>
-            </a>
-            <a class="nav-item" href="./settings.html">
-              <i data-lucide="settings"></i><span>Settings</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.account">حساب کاربری</div>
+            <a class="nav-item" href="./profile.html" data-i18n="nav.profile"><i data-lucide="user"></i><span>نمایه</span></a>
+            <a class="nav-item" href="./settings.html" data-i18n="nav.settings"><i data-lucide="settings"></i><span>تنظیمات</span></a>
           </div>
         </nav>
     </div>
 
     <!-- Mobile bottom tab bar -->
-    <nav class="bottom-tabbar" aria-label="Primary mobile">
-      <a class="bottom-tabbar__item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
-      <a class="bottom-tabbar__item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
-      <a class="bottom-tabbar__item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
-      <a class="bottom-tabbar__item" href="./api-keys.html"><i data-lucide="key"></i><span>Keys</span></a>
-      <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="More">
-        <i data-lucide="more-horizontal"></i><span>More</span>
-      </button>
+    <nav class="bottom-tabbar" aria-label="ناوبری موبایل" data-i18n-attr="aria-label:aria.primaryNavMobile">
+      <a class="bottom-tabbar__item" href="./dashboard.html" data-i18n="nav.overview"><i data-lucide="layout-dashboard"></i><span data-i18n="rtl.groupOverview">نمای کلی</span></a>
+      <a class="bottom-tabbar__item" href="./apis.html" data-i18n="nav.apis"><i data-lucide="code-2"></i><span>APIها</span></a>
+      <a class="bottom-tabbar__item" href="./logs.html" data-i18n="nav.logs"><i data-lucide="scroll-text"></i><span>لاگ‌ها</span></a>
+      <a class="bottom-tabbar__item" href="./api-keys.html" data-i18n="nav.keysShort"><i data-lucide="key"></i><span>کلیدها</span></a>
+      <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="بیشتر" data-i18n-attr="aria-label:aria.more" data-i18n="nav.more"><i data-lucide="more-horizontal"></i><span>بیشتر</span></button>
     </nav>
 
     <script type="module" src="/src/js/pages/usage.js"></script>

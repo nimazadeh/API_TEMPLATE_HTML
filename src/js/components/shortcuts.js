@@ -11,25 +11,26 @@
 
 import { Modal } from 'bootstrap';
 import { createIcons, icons } from './icons.js';
+import { t, onLocaleChange } from '../core/i18n.js';
 
 // g + letter → page. One mnemonic letter per destination.
 const G_NAV = {
-  d: { href: './dashboard.html', label: 'Overview' },
-  a: { href: './apis.html', label: 'APIs' },
-  e: { href: './endpoints.html', label: 'Endpoints' },
-  k: { href: './api-keys.html', label: 'API Keys' },
-  l: { href: './logs.html', label: 'Logs' },
-  w: { href: './webhooks.html', label: 'Webhooks' },
-  u: { href: './usage.html', label: 'Usage' },
-  r: { href: './rate-limits.html', label: 'Rate Limits' },
-  m: { href: './metrics.html', label: 'Metrics' },
-  v: { href: './environments.html', label: 'Environments' },
-  t: { href: './team.html', label: 'Team' },
-  b: { href: './billing.html', label: 'Billing' },
-  n: { href: './notifications.html', label: 'Notifications' },
-  s: { href: './settings.html', label: 'Settings' },
-  p: { href: './profile.html', label: 'Profile' },
-  h: { href: './index.html', label: 'Home' },
+  d: { href: './dashboard.html', key: 'page.dashboard' },
+  a: { href: './apis.html', key: 'page.apis' },
+  e: { href: './endpoints.html', key: 'page.endpoints' },
+  k: { href: './api-keys.html', key: 'page.api-keys' },
+  l: { href: './logs.html', key: 'page.logs' },
+  w: { href: './webhooks.html', key: 'page.webhooks' },
+  u: { href: './usage.html', key: 'page.usage' },
+  r: { href: './rate-limits.html', key: 'page.rate-limits' },
+  m: { href: './metrics.html', key: 'page.metrics' },
+  v: { href: './environments.html', key: 'page.environments' },
+  t: { href: './team.html', key: 'page.team' },
+  b: { href: './billing.html', key: 'page.billing' },
+  n: { href: './notifications.html', key: 'page.notifications' },
+  s: { href: './settings.html', key: 'page.settings' },
+  p: { href: './profile.html', key: 'page.profile' },
+  h: { href: './index.html', key: 'cmd.homeTitle' },
 };
 
 const G_WINDOW_MS = 800;
@@ -48,7 +49,7 @@ function buildHelpModal() {
   if (helpModal) return helpModal;
 
   const gKeys = Object.entries(G_NAV)
-    .map(([letter, item]) => `<span class="kbd-hint">g&nbsp;${letter}</span> ${item.label}`)
+    .map(([letter, item]) => `<span class="kbd-hint">g&nbsp;${letter}</span> ${t(item.key)}`)
     .join(' · ');
 
   const wrap = document.createElement('div');
@@ -63,19 +64,19 @@ function buildHelpModal() {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="shortcuts-modal-title">Keyboard shortcuts</h4>
-          <button type="button" class="btn btn-icon" data-bs-dismiss="modal" aria-label="Close"><i data-lucide="x"></i></button>
+          <h4 class="modal-title" id="shortcuts-modal-title">${t('shortcuts.title')}</h4>
+          <button type="button" class="btn btn-icon" data-bs-dismiss="modal" aria-label="${t('aria.close')}"><i data-lucide="x"></i></button>
         </div>
         <div class="modal-body">
           <table class="kv">
             <tbody>
-              <tr><th><span class="kbd-hint">?</span></th><td>Toggle this panel</td></tr>
-              <tr><th><span class="kbd-hint">⌘K</span></th><td>Command palette</td></tr>
-              <tr><th><span class="kbd-hint">/</span></th><td>Focus the page search</td></tr>
-              <tr><th><span class="kbd-hint">Esc</span></th><td>Close dialogs and overlays</td></tr>
+              <tr><th><span class="kbd-hint">?</span></th><td>${t('shortcuts.togglePanel')}</td></tr>
+              <tr><th><span class="kbd-hint">⌘K</span></th><td>${t('palette.title')}</td></tr>
+              <tr><th><span class="kbd-hint">/</span></th><td>${t('shortcuts.focusSearch')}</td></tr>
+              <tr><th><span class="kbd-hint">Esc</span></th><td>${t('shortcuts.closeOverlays')}</td></tr>
             </tbody>
           </table>
-          <div class="form-label mt-4 mb-2">Jump to a page — press <span class="kbd-hint">g</span>, then a letter</div>
+          <div class="form-label mt-4 mb-2">${t('shortcuts.jumpHint')}</div>
           <p class="caption mb-0">${gKeys}</p>
         </div>
       </div>
@@ -84,6 +85,32 @@ function buildHelpModal() {
   createIcons({ icons });
   helpModal = Modal.getOrCreateInstance(wrap, { keyboard: true });
   return helpModal;
+}
+
+/** Rebuild the help panel copy when the locale flips. */
+function refreshHelpModal() {
+  if (!helpModal) return;
+  const wrap = helpModal._element;
+  if (!wrap) return;
+  const body = wrap.querySelector('.modal-body');
+  const title = wrap.querySelector('.modal-title');
+  if (title) title.textContent = t('shortcuts.title');
+  if (body) {
+    const gKeys = Object.entries(G_NAV)
+      .map(([letter, item]) => `<span class="kbd-hint">g&nbsp;${letter}</span> ${t(item.key)}`)
+      .join(' · ');
+    body.innerHTML = `
+      <table class="kv">
+        <tbody>
+          <tr><th><span class="kbd-hint">?</span></th><td>${t('shortcuts.togglePanel')}</td></tr>
+          <tr><th><span class="kbd-hint">⌘K</span></th><td>${t('palette.title')}</td></tr>
+          <tr><th><span class="kbd-hint">/</span></th><td>${t('shortcuts.focusSearch')}</td></tr>
+          <tr><th><span class="kbd-hint">Esc</span></th><td>${t('shortcuts.closeOverlays')}</td></tr>
+        </tbody>
+      </table>
+      <div class="form-label mt-4 mb-2">${t('shortcuts.jumpHint')}</div>
+      <p class="caption mb-0">${gKeys}</p>`;
+  }
 }
 
 function toggleHelp() {
@@ -123,6 +150,7 @@ function focusSearch() {
 }
 
 export function initShortcuts() {
+  onLocaleChange(refreshHelpModal);
   document.addEventListener('keydown', (e) => {
     if (isTyping(e)) return;
     if (e.metaKey || e.ctrlKey || e.altKey) return;

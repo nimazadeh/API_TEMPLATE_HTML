@@ -6,6 +6,8 @@
 // (Chart.js re-themes from it).
 // =============================================================
 
+import { t } from '../core/i18n.js';
+
 const STORAGE_KEY = 'afx-theme';
 const systemMedia = window.matchMedia('(prefers-color-scheme: light)');
 
@@ -70,7 +72,7 @@ function refreshToggles() {
   const dark = currentTheme() === 'dark';
   document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
     btn.setAttribute('aria-pressed', String(!dark));
-    btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    btn.setAttribute('aria-label', dark ? t('theme.switchToLight') : t('theme.switchToDark'));
   });
 }
 

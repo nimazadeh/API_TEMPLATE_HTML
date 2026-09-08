@@ -1,17 +1,22 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-theme="dark">
+<html lang="fa" dir="rtl" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
     <meta name="description" content="APIForge X changelog — every page, feature and polish item shipped across releases." />
-    <title>Changelog — APIForge X</title>
+    <title data-i18n="changelog.changelog-apiforge-x">گزارش تغییرات — APIForge X</title>
     <script>
       (function () {
         var stored = null;
         try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
         var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
         document.documentElement.setAttribute('data-theme', theme);
+        var loc = null;
+        try { loc = localStorage.getItem('afx-locale'); } catch (e) {}
+        if (loc !== 'fa' && loc !== 'en') loc = 'fa';
+        document.documentElement.setAttribute('lang', loc);
+        document.documentElement.setAttribute('dir', loc === 'fa' ? 'rtl' : 'ltr');
       })();
     </script>
   </head>
@@ -23,20 +28,23 @@
             <span class="brand-mark"><i data-lucide="zap"></i></span>
             <span class="brand-name">APIForge X</span>
           </a>
-          <nav class="site-nav" aria-label="Marketing">
-            <a class="site-nav__link" data-nav="home" href="./index.html">Product</a>
-            <a class="site-nav__link" data-nav="docs" href="./docs.html">Docs</a>
-            <a class="site-nav__link" data-nav="pricing" href="./pricing.html">Pricing</a>
-            <a class="site-nav__link" data-nav="changelog" href="./changelog.html">Changelog</a>
-            <a class="site-nav__link" data-nav="status" href="./status.html">Status</a>
+          <nav class="site-nav" aria-label="ناوبری صفحات" data-i18n-attr="aria-label:aria.marketingNav">
+            <a class="site-nav__link" data-nav="home" href="./index.html" data-i18n="site.product">محصول</a>
+            <a class="site-nav__link" data-nav="docs" href="./docs.html" data-i18n="site.docs">مستندات</a>
+            <a class="site-nav__link" data-nav="pricing" href="./pricing.html" data-i18n="site.pricing">قیمت‌گذاری</a>
+            <a class="site-nav__link" data-nav="changelog" href="./changelog.html" data-i18n="site.changelog">گزارش تغییرات</a>
+            <a class="site-nav__link" data-nav="status" href="./status.html" data-i18n="site.status">وضعیت</a>
           </nav>
           <div class="site-header__actions">
-            <button type="button" class="btn btn-icon" data-theme-toggle aria-label="Toggle theme" aria-pressed="false">
+            <button type="button" class="btn btn-icon" data-theme-toggle aria-label="تغییر پوسته" aria-pressed="false" data-i18n-attr="aria-label:aria.toggleTheme">
               <i data-lucide="sun-moon"></i>
             </button>
-            <a class="btn btn-ghost d-none d-sm-inline-flex" href="./login.html">Sign in</a>
-            <a class="btn btn-primary" href="./dashboard.html">Open dashboard</a>
-            <button type="button" class="btn btn-icon d-lg-none" aria-label="Open menu" data-bs-toggle="offcanvas" data-bs-target="#site-drawer" aria-controls="site-drawer">
+            <button type="button" class="btn btn-ghost d-none d-sm-inline-flex" data-locale-toggle aria-label="تغییر زبان" data-i18n-attr="aria-label:aria.switchLanguage">
+              <i data-lucide="languages"></i> <span data-locale-label>EN</span>
+            </button>
+            <a class="btn btn-ghost d-none d-sm-inline-flex" href="./login.html" data-i18n="site.sign-in">ورود</a>
+            <a class="btn btn-primary" href="./dashboard.html" data-i18n="site.open-dashboard">ورود به داشبورد</a>
+            <button type="button" class="btn btn-icon d-lg-none" aria-label="باز کردن منو" data-bs-toggle="offcanvas" data-bs-target="#site-drawer" aria-controls="site-drawer" data-i18n-attr="aria-label:aria.openMenu">
               <i data-lucide="menu"></i>
             </button>
           </div>
@@ -46,16 +54,16 @@
       <div class="offcanvas offcanvas-end" tabindex="-1" id="site-drawer" aria-labelledby="site-drawer-label">
         <div class="offcanvas-header">
           <span class="offcanvas-title" id="site-drawer-label"><span class="brand-mark"><i data-lucide="zap"></i></span> APIForge X</span>
-          <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="Close"><i data-lucide="x"></i></button>
+          <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="بستن" data-i18n-attr="aria-label:aria.close"><i data-lucide="x"></i></button>
         </div>
         <div class="offcanvas-body p-0">
-          <nav class="site-drawer-nav" aria-label="Marketing mobile">
-            <a class="site-drawer-nav__link" data-nav="home" href="./index.html"><i data-lucide="zap"></i> Product</a>
-            <a class="site-drawer-nav__link" data-nav="docs" href="./docs.html"><i data-lucide="book-open"></i> Documentation</a>
-            <a class="site-drawer-nav__link" data-nav="pricing" href="./pricing.html"><i data-lucide="credit-card"></i> Pricing</a>
-            <a class="site-drawer-nav__link" data-nav="changelog" href="./changelog.html"><i data-lucide="clock"></i> Changelog</a>
-            <a class="site-drawer-nav__link" data-nav="status" href="./status.html"><i data-lucide="activity"></i> Status</a>
-            <a class="site-drawer-nav__link" href="./login.html"><i data-lucide="log-in"></i> Sign in</a>
+          <nav class="site-drawer-nav" aria-label="ناوبری موبایل صفحات" data-i18n-attr="aria-label:aria.marketingNavMobile">
+            <a class="site-drawer-nav__link" data-nav="home" href="./index.html" data-i18n="site.navProduct"><i data-lucide="zap"></i> محصول</a>
+            <a class="site-drawer-nav__link" data-nav="docs" href="./docs.html" data-i18n="site.drawerDocs"><i data-lucide="book-open"></i> مستندات</a>
+            <a class="site-drawer-nav__link" data-nav="pricing" href="./pricing.html" data-i18n="site.drawerPricing"><i data-lucide="credit-card"></i> قیمت‌گذاری</a>
+            <a class="site-drawer-nav__link" data-nav="changelog" href="./changelog.html" data-i18n="site.drawerChangelog"><i data-lucide="clock"></i> گزارش تغییرات</a>
+            <a class="site-drawer-nav__link" data-nav="status" href="./status.html" data-i18n="site.drawerStatus"><i data-lucide="activity"></i> وضعیت سرویس</a>
+            <a class="site-drawer-nav__link" href="./login.html" data-i18n="site.drawerSignIn"><i data-lucide="log-in"></i> ورود</a>
           </nav>
         </div>
       </div>
@@ -64,12 +72,9 @@
         <section class="hero">
           <div class="site-container">
             <div class="hero__inner">
-              <span class="eyebrow">Changelog</span>
-              <h1 class="hero__title">Shipped, <span class="hero__title-accent">versioned</span></h1>
-              <p class="body-lg text-secondary hero__sub">
-                Every release, documented — from the first design token to the
-                marketplace polish.
-              </p>
+              <span class="eyebrow" data-i18n="site.changelog">گزارش تغییرات</span>
+              <h1 class="hero__title" data-i18n="changelog.heroTitle">عرضه‌شده، <span class="hero__title-accent">نسخه‌بندی‌شده</span></h1>
+              <p class="body-lg text-secondary hero__sub" data-i18n="changelog.every-release-documented-from-the-first-design-t">مستندسازی همهٔ نسخه‌ها — از نخستین توکن طراحی تا آماده‌سازی برای عرضه در بازار.</p>
             </div>
           </div>
         </section>
@@ -79,94 +84,94 @@
             <div class="changelog__item">
               <div class="changelog__meta">
                 <div class="changelog__version">v2.3.0</div>
-                <div class="changelog__date">Sep 08, 2026</div>
+                <div class="changelog__date" data-i18n="changelog.sep-08-2026">۱۷ شهریور ۱۴۰۵</div>
               </div>
               <div class="changelog__body">
-                <h3>Marketplace polish</h3>
+                <h3 data-i18n="changelog.marketplace-polish">آماده‌سازی برای عرضه در بازار</h3>
                 <ul>
-                  <li>Premium landing with a live product preview — real components, real seeded data</li>
-                  <li>New <code>pricing.html</code>, <code>changelog.html</code>, <code>status.html</code> and a branded <code>404.html</code></li>
-                  <li>Keyboard shortcuts: <code>?</code> help, <code>g</code> + letter navigation, <code>/</code> focus search, <code>Esc</code> close</li>
-                  <li>Buyer documentation and marketplace screenshot manifest</li>
+                  <li data-i18n="changelog.premium-landing-with-a-live-product-preview-real">صفحهٔ فرود حرفه‌ای با پیش‌نمایش زندهٔ محصول — کامپوننت‌های واقعی با داده‌های واقعی</li>
+                  <li data-i18n="changelog.new-code-pricing-html-code-code-changelog-html-c">افزوده شدن صفحات <code>pricing.html</code>، <code>changelog.html</code>، <code>status.html</code> و یک <code>404.html</code> اختصاصی</li>
+                  <li data-i18n="changelog.keyboard-shortcuts-code-code-help-code-g-code-le">میانبرهای صفحه‌کلید: <code>؟</code> راهنما، <code>g</code> به همراه حرف برای ناوبری، <code>/</code> تمرکز روی جستجو، <code>Esc</code> بستن</li>
+                  <li data-i18n="changelog.buyer-documentation-and-marketplace-screenshot-m">مستندات راهنمای خریدار و فهرست تصاویر بازارچه</li>
                 </ul>
               </div>
             </div>
             <div class="changelog__item">
               <div class="changelog__meta">
                 <div class="changelog__version">v2.2.0</div>
-                <div class="changelog__date">Sep 07, 2026</div>
+                <div class="changelog__date" data-i18n="changelog.sep-07-2026">۱۶ شهریور ۱۴۰۵</div>
               </div>
               <div class="changelog__body">
-                <h3>Complete SaaS product experience</h3>
+                <h3 data-i18n="changelog.complete-saas-product-experience">تجربهٔ کامل یک محصول SaaS</h3>
                 <ul>
-                  <li><code>team.html</code> — members, roles, invites and a permissions reference</li>
-                  <li><code>billing.html</code> — current plan, usage projection, invoices and payment method</li>
-                  <li><code>settings.html</code>, <code>profile.html</code>, <code>notifications.html</code> — workspace management</li>
-                  <li><code>docs.html</code>, <code>sdk.html</code>, <code>api-reference.html</code> — developer documentation</li>
-                  <li><code>metrics.html</code> — observability with volume, percentiles and availability</li>
-                  <li>Persian-first auth: <code>login.html</code>, <code>forgot-password.html</code>, <code>invite.html</code></li>
+                  <li data-i18n="changelog.code-team-html-code-members-roles-invites-and-a-"><code>team.html</code> — اعضا، نقش‌ها، دعوت‌نامه‌ها و مرجع سطوح دسترسی</li>
+                  <li data-i18n="changelog.code-billing-html-code-current-plan-usage-projec"><code>billing.html</code> — طرح فعلی، پیش‌بینی مصرف، صورت‌حساب‌ها و روش پرداخت</li>
+                  <li data-i18n="changelog.code-settings-html-code-code-profile-html-code-c"><code>settings.html</code>، <code>profile.html</code>، <code>notifications.html</code> — مدیریت فضای کاری</li>
+                  <li data-i18n="changelog.code-docs-html-code-code-sdk-html-code-code-api-"><code>docs.html</code>، <code>sdk.html</code>، <code>api-reference.html</code> — مستندات توسعه‌دهندگان</li>
+                  <li data-i18n="changelog.code-metrics-html-code-observability-with-volume"><code>metrics.html</code> — مشاهده‌پذیری با حجم درخواست‌ها، صدک‌ها و میزان در دسترس‌بودن</li>
+                  <li data-i18n="changelog.persian-first-auth-code-login-html-code-code-for">احراز هویت فارسی‌محور: <code>login.html</code>، <code>forgot-password.html</code>، <code>invite.html</code></li>
                 </ul>
               </div>
             </div>
             <div class="changelog__item">
               <div class="changelog__meta">
                 <div class="changelog__version">v2.1.0</div>
-                <div class="changelog__date">Sep 07, 2026</div>
+                <div class="changelog__date" data-i18n="changelog.sep-07-2026">۱۶ شهریور ۱۴۰۵</div>
               </div>
               <div class="changelog__body">
-                <h3>Advanced developer workflows</h3>
+                <h3 data-i18n="changelog.advanced-developer-workflows">جریان‌های کاری پیشرفتهٔ توسعه‌دهندگان</h3>
                 <ul>
-                  <li><code>webhooks.html</code> — delivery debugger with attempt timeline and payload inspector</li>
-                  <li><code>endpoints.html</code> — endpoint management with schemas and validation</li>
-                  <li><code>errors.html</code> — issue monitoring with stack traces and request context</li>
-                  <li><code>rate-limits.html</code> — current limits, usage charts and per-API rules</li>
-                  <li><code>environments.html</code> — production, staging and development variables and keys</li>
+                  <li data-i18n="changelog.code-webhooks-html-code-delivery-debugger-with-a"><code>webhooks.html</code> — اشکال‌زدای تحویل با خط زمانی تلاش‌ها و بازرس بدنهٔ درخواست</li>
+                  <li data-i18n="changelog.code-endpoints-html-code-endpoint-management-wit"><code>endpoints.html</code> — مدیریت نقاط پایانی با طرح‌واره و اعتبارسنجی</li>
+                  <li data-i18n="changelog.code-errors-html-code-issue-monitoring-with-stac"><code>errors.html</code> — مانیتورینگ خطاها با ردیابی پشته و زمینهٔ درخواست</li>
+                  <li data-i18n="changelog.code-rate-limits-html-code-current-limits-usage-"><code>rate-limits.html</code> — محدودیت‌های فعلی، نمودارهای مصرف و قوانین هر API</li>
+                  <li data-i18n="changelog.code-environments-html-code-production-staging-a"><code>environments.html</code> — متغیرها و کلیدهای محیط‌های تولید، آزمایشی و توسعه</li>
                 </ul>
               </div>
             </div>
             <div class="changelog__item">
               <div class="changelog__meta">
                 <div class="changelog__version">v2.0.0</div>
-                <div class="changelog__date">Sep 06, 2026</div>
+                <div class="changelog__date" data-i18n="changelog.sep-06-2026">۱۵ شهریور ۱۴۰۵</div>
               </div>
               <div class="changelog__body">
-                <h3>Core product experience</h3>
+                <h3 data-i18n="changelog.core-product-experience">تجربهٔ اصلی محصول</h3>
                 <ul>
-                  <li><code>dashboard.html</code> — KPIs, request/latency charts and an activity feed</li>
-                  <li><code>apis.html</code> — API catalog with a live request tester</li>
-                  <li><code>api-keys.html</code> — reveal-once keys with rotate and revoke</li>
-                  <li><code>logs.html</code> — request log inspector with copy-as-cURL</li>
-                  <li><code>usage.html</code> — plan consumption and attribution analytics</li>
+                  <li data-i18n="changelog.code-dashboard-html-code-kpis-request-latency-ch"><code>dashboard.html</code> — شاخص‌های کلیدی، نمودارهای درخواست و تاخیر و فید فعالیت‌ها</li>
+                  <li data-i18n="changelog.code-apis-html-code-api-catalog-with-a-live-requ"><code>apis.html</code> — کاتالوگ APIها با تستر درخواست زنده</li>
+                  <li data-i18n="changelog.code-api-keys-html-code-reveal-once-keys-with-ro"><code>api-keys.html</code> — کلیدهای با نمایش یک‌باره همراه با امکان چرخش و ابطال</li>
+                  <li data-i18n="changelog.code-logs-html-code-request-log-inspector-with-c"><code>logs.html</code> — کاوشگر لاگ درخواست‌ها با قابلیت کپی در قالب cURL</li>
+                  <li data-i18n="changelog.code-usage-html-code-plan-consumption-and-attrib"><code>usage.html</code> — تحلیل مصرف طرح و انتساب درخواست‌ها</li>
                 </ul>
               </div>
             </div>
             <div class="changelog__item">
               <div class="changelog__meta">
                 <div class="changelog__version">v1.1.0</div>
-                <div class="changelog__date">Sep 05, 2026</div>
+                <div class="changelog__date" data-i18n="changelog.sep-05-2026">۱۴ شهریور ۱۴۰۵</div>
               </div>
               <div class="changelog__body">
-                <h3>Production hardening</h3>
+                <h3 data-i18n="changelog.production-hardening">آماده‌سازی برای محیط تولید</h3>
                 <ul>
-                  <li>Semantic token system across colors, borders, elevation, motion and layout</li>
-                  <li>Five typography lanes with locally bundled fonts — no CDN</li>
-                  <li>Curated Bootstrap import with a <code>--bs-*</code> token bridge</li>
-                  <li>System theme (dark / light / system) with a no-flash inline script</li>
+                  <li data-i18n="changelog.semantic-token-system-across-colors-borders-elev">سیستم توکن‌های معنایی برای رنگ‌ها، حاشیه‌ها، سایه‌ها، انیمیشن‌ها و چیدمان</li>
+                  <li data-i18n="changelog.five-typography-lanes-with-locally-bundled-fonts">پنج مسیر تایپوگرافی با فونت‌های محلی — بدون CDN</li>
+                  <li data-i18n="changelog.curated-bootstrap-import-with-a-code-bs-code-tok">دریافت هدفمند بوت‌استرپ با پل ارتباطی توکن‌های <code>--bs-*</code></li>
+                  <li data-i18n="changelog.system-theme-dark-light-system-with-a-no-flash-i">پوستهٔ سیستمی (تیره / روشن / سیستم) با اسکریپت داخلی بدون پرش تصویر</li>
                 </ul>
               </div>
             </div>
             <div class="changelog__item">
               <div class="changelog__meta">
                 <div class="changelog__version">v1.0.0</div>
-                <div class="changelog__date">Sep 04, 2026</div>
+                <div class="changelog__date" data-i18n="changelog.sep-04-2026">۱۳ شهریور ۱۴۰۵</div>
               </div>
               <div class="changelog__body">
-                <h3>Foundation</h3>
+                <h3 data-i18n="changelog.foundation">زیرساخت اولیه</h3>
                 <ul>
-                  <li>Vite multi-page build, Bootstrap 5.3, SCSS architecture and design tokens</li>
-                  <li>App shell — sidebar, header, drawer and bottom bar, responsive 360–1920</li>
-                  <li>Core primitives — buttons, forms, tables, cards, badges, code blocks, empty states, skeletons, command palette</li>
-                  <li>RTL system with Vazirmatn, logical properties and LTR isolation</li>
+                  <li data-i18n="changelog.vite-multi-page-build-bootstrap-5-3-scss-archite">ساخت چندصفحه‌ای با Vite، بوت‌استرپ ۵.۳، معماری SCSS و توکن‌های طراحی</li>
+                  <li data-i18n="changelog.app-shell-sidebar-header-drawer-and-bottom-bar-r">اسکلت برنامه — نوار کناری، هدر، کشو و نوار پایین؛ واکنش‌گرا از ۳۶۰ تا ۱۹۲۰ پیکسل</li>
+                  <li data-i18n="changelog.core-primitives-buttons-forms-tables-cards-badge">اجزای پایه — دکمه‌ها، فرم‌ها، جدول‌ها، کارت‌ها، نشان‌ها، بلوک‌های کد، وضعیت‌های خالی، اسکلت‌های بارگذاری و پالت فرمان</li>
+                  <li data-i18n="changelog.rtl-system-with-vazirmatn-logical-properties-and">سیستم راست‌به‌چپ با فونت وزیرمتن، ویژگی‌های منطقی CSS و جداسازی محتوای چپ‌به‌راست</li>
                 </ul>
               </div>
             </div>
@@ -180,29 +185,26 @@
             <div class="site-footer__brand">
               <span class="brand-mark"><i data-lucide="zap"></i></span>
               <span class="brand-name">APIForge X</span>
-              <p class="mt-2">A premium API infrastructure HTML template. Engineered for developer platforms, ready for the Iranian market.</p>
+              <p class="mt-2" data-i18n="site.a-premium-api-infrastructure-html-template-engin">قالب HTML حرفه‌ای زیرساخت API؛ طراحی‌شده برای پلتفرم‌های توسعه‌دهنده و آماده برای بازار ایران.</p>
             </div>
             <div>
-              <div class="site-footer__col-label">Product</div>
-              <a class="site-footer__link" href="./dashboard.html">Overview</a>
-              <a class="site-footer__link" href="./logs.html">Logs</a>
-              <a class="site-footer__link" href="./webhooks.html">Webhooks</a>
-              <a class="site-footer__link" href="./api-keys.html">API Keys</a>
-              <a class="site-footer__link" href="./pricing.html">Pricing</a>
+              <div class="site-footer__col-label" data-i18n="site.product">محصول</div>
+              <a class="site-footer__link" href="./dashboard.html" data-i18n="shell.overview">نمای کلی</a>
+              <a class="site-footer__link" href="./logs.html" data-i18n="site.logs">لاگ‌ها</a>
+              <a class="site-footer__link" href="./webhooks.html" data-i18n="site.webhooks">وب‌هوک‌ها</a>
+              <a class="site-footer__link" href="./api-keys.html" data-i18n="site.api-keys">کلیدهای API</a>
+              <a class="site-footer__link" href="./pricing.html" data-i18n="site.pricing">قیمت‌گذاری</a>
             </div>
             <div>
-              <div class="site-footer__col-label">Resources</div>
-              <a class="site-footer__link" href="./docs.html">Documentation</a>
-              <a class="site-footer__link" href="./style-guide.html">Style guide</a>
-              <a class="site-footer__link" href="./changelog.html">Changelog</a>
-              <a class="site-footer__link" href="./status.html">Status</a>
-              <a class="site-footer__link" href="./rtl.html">RTL demo</a>
+              <div class="site-footer__col-label" data-i18n="site.resources">منابع</div>
+              <a class="site-footer__link" href="./docs.html" data-i18n="site.documentation">مستندات</a>
+              <a class="site-footer__link" href="./style-guide.html" data-i18n="site.style-guide">راهنمای استایل</a>
+              <a class="site-footer__link" href="./changelog.html" data-i18n="site.changelog">گزارش تغییرات</a>
+              <a class="site-footer__link" href="./status.html" data-i18n="site.status">وضعیت</a>
+              <a class="site-footer__link" href="./rtl.html" data-i18n="site.rtl-demo">نسخهٔ دموی فارسی</a>
             </div>
           </div>
-          <div class="site-footer__legal">
-            <span>© 2026 APIForge X. Demo product — no real backend.</span>
-            <span>Bootstrap 5 · SCSS · Vite · Chart.js · Lucide</span>
-          </div>
+          <div class="site-footer__legal" data-i18n="site.footerLegal"><span>© ۲۰۲۶ APIForge X. یک محصول نمایشی — بدون بک‌اند واقعی.</span> <span>Bootstrap 5 · SCSS · Vite · Chart.js · Lucide</span></div>
         </div>
       </footer>
     </div>

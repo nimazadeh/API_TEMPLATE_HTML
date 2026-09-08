@@ -12,6 +12,7 @@ import { initCodeBlock } from '../components/code-block.js';
 import { bindCopyButton } from '../components/copy.js';
 import { escapeHtml } from '../utils/format.js';
 import { docGroups, docArticles, docOrder } from '../data/docs-content.js';
+import { onLocaleChange } from '../core/i18n.js';
 
 boot();
 
@@ -111,8 +112,8 @@ function renderToc(article) {
 // --- Nav -----------------------------------------------------------------
 function renderNav() {
   const q = state.query.trim().toLowerCase();
-  const match = (id) => !q || (docArticles[id].title + ' ' + docArticles[id].lead).toLowerCase().includes(q);
-  return docGroups
+  const match = (id) => !q || (docArticles()[id].title + ' ' + docArticles()[id].lead).toLowerCase().includes(q);
+  return docGroups()
     .map((group) => {
       const items = group.items.filter(match);
       if (!items.length) return '';
@@ -121,7 +122,7 @@ function renderNav() {
           <div class="docs-nav__label">${escapeHtml(group.label)}</div>
           ${items
             .map(
-              (id) => `<a class="docs-nav__item ${state.active === id ? 'is-active' : ''}" href="#${id}" data-doc="${id}">${escapeHtml(docArticles[id].title)}</a>`
+              (id) => `<a class="docs-nav__item ${state.active === id ? 'is-active' : ''}" href="#${id}" data-doc="${id}">${escapeHtml(docArticles()[id].title)}</a>`
             )
             .join('')}
         </div>`;
@@ -131,10 +132,12 @@ function renderNav() {
 
 // --- Article + pager -------------------------------------------------------
 function renderArticle() {
-  const article = docArticles[state.active] || docArticles.intro;
-  const idx = docOrder.indexOf(article.id);
-  const prev = idx > 0 ? docArticles[docOrder[idx - 1]] : null;
-  const next = idx < docOrder.length - 1 ? docArticles[docOrder[idx + 1]] : null;
+  const articles = docArticles();
+  const order = docOrder();
+  const article = articles[state.active] || articles.intro;
+  const idx = order.indexOf(article.id);
+  const prev = idx > 0 ? articles[order[idx - 1]] : null;
+  const next = idx < order.length - 1 ? articles[order[idx + 1]] : null;
 
   document.getElementById('docs-crumb').textContent = article.title;
   document.getElementById('docs-article').innerHTML = `
@@ -161,7 +164,7 @@ function renderNavInto() {
 
 function render() {
   renderNavInto();
-  document.getElementById('docs-toc').innerHTML = renderToc(docArticles[state.active] || docArticles.intro);
+  document.getElementById('docs-toc').innerHTML = renderToc(docArticles()[state.active] || docArticles().intro);
   renderArticle();
 }
 
@@ -197,8 +200,11 @@ render();
 
 window.addEventListener('hashchange', () => {
   const id = window.location.hash.slice(1);
-  if (docArticles[id]) {
+  if (docArticles()[id]) {
     state.active = id;
     render();
   }
 });
+
+// Re-render the article and navigation when the locale flips.
+onLocaleChange(render);

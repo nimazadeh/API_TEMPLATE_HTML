@@ -7,6 +7,7 @@
 // =============================================================
 
 import { boot } from '../main.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { Offcanvas } from '../core/bootstrap.js';
 import { createIcons, icons } from '../components/icons.js';
 import { initCodeBlock } from '../components/code-block.js';
@@ -19,20 +20,20 @@ import endpoints from '../data/mock-endpoints.json';
 boot();
 
 const AUTH_BY_API = {
-  api_emails: 'Bearer token',
-  api_ai: 'Bearer token',
-  api_audiences: 'Bearer token',
-  api_webhooks: 'Signing secret',
+  api_emails: 'form.bearerToken',
+  api_ai: 'form.bearerToken',
+  api_audiences: 'form.bearerToken',
+  api_webhooks: 'form.signingSecret',
   api_platform: 'API key',
 };
 
 const ERROR_CODES = {
-  400: { code: 'invalid_request', message: 'The request body could not be parsed.' },
-  401: { code: 'invalid_api_key', message: 'The Authorization header was missing or invalid.' },
-  403: { code: 'insufficient_scope', message: 'This key is missing the required scope.' },
-  404: { code: 'not_found', message: 'The requested resource does not exist.' },
-  429: { code: 'rate_limit_exceeded', message: 'You have exceeded your rate limit.' },
-  500: { code: 'internal_error', message: 'Something went wrong on our side.' },
+  400: { code: 'invalid_request', messageKey: 'error.invalidRequestMessage' },
+  401: { code: 'invalid_api_key', messageKey: 'error.invalidKeyMessage' },
+  403: { code: 'insufficient_scope', messageKey: 'error.insufficientScopeMessage' },
+  404: { code: 'not_found', messageKey: 'error.notFoundMessage' },
+  429: { code: 'rate_limit_exceeded', messageKey: 'error.rateLimitMessage' },
+  500: { code: 'internal_error', messageKey: 'error.internalMessage' },
 };
 
 const state = { service: 'all', endpoint: endpoints[0].id };
@@ -188,7 +189,7 @@ function renderEndpoint() {
                 (s) => `<tr>
                   <td><span class="badge badge-status ${s === 429 ? 'badge-status--429' : 'badge-status--warning'}">${s}</span></td>
                   <td><code class="ltr-isolate mono-sm text-body">${ERROR_CODES[s].code}</code></td>
-                  <td class="text-secondary">${escapeHtml(ERROR_CODES[s].message)}</td>
+                  <td class="text-secondary">${escapeHtml(tr(ERROR_CODES[s].messageKey))}</td>
                 </tr>`
               )
               .join('')}</tbody>

@@ -58,7 +58,8 @@
 }
 
 // Theme menu items (Dark / Light / System) — trailing check for the active mode
-.dropdown-item .theme-check {
+.dropdown-item .theme-check,
+.dropdown-item .locale-check {
   margin-inline-start: auto;
   width: 14px;
   height: 14px;

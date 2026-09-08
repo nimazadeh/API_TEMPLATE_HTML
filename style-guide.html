@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-theme="dark">
+<html lang="fa" dir="rtl" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
-    <title>Style Guide — APIForge X</title>
+    <title data-i18n="sg.style-guide-apiforge-x">راهنمای استایل — APIForge X</title>
     <script>
       // No-flash theme: resolve theme before first paint.
       (function () {
@@ -12,6 +12,11 @@
         try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
         var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
         document.documentElement.setAttribute('data-theme', theme);
+        var loc = null;
+        try { loc = localStorage.getItem('afx-locale'); } catch (e) {}
+        if (loc !== 'fa' && loc !== 'en') loc = 'fa';
+        document.documentElement.setAttribute('lang', loc);
+        document.documentElement.setAttribute('dir', loc === 'fa' ? 'rtl' : 'ltr');
       })();
     </script>
   </head>
@@ -24,154 +29,101 @@
           <span class="brand-name">APIForge X</span>
         </div>
 
-        <nav class="sidebar-nav" aria-label="Primary">
+        <nav class="sidebar-nav" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
           <div class="nav-group">
-            <div class="nav-group__label">Foundation</div>
-            <a class="nav-item" href="./index.html">
-              <i data-lucide="zap"></i><span>Home</span>
-            </a>
-            <a class="nav-item is-active" href="./style-guide.html">
-              <i data-lucide="palette"></i><span>Style Guide</span>
-            </a>
-            <a class="nav-item" href="./rtl-test.html">
-              <i data-lucide="languages"></i><span>RTL Test</span>
-            </a>
-            <a class="nav-item" href="./rtl.html">
-              <i data-lucide="flask-conical"></i><span>Persian Demo</span>
-            </a>
+            <div class="nav-group__label" data-i18n="changelog.foundation">زیرساخت اولیه</div>
+            <a class="nav-item" href="./index.html" data-i18n="sg.navHome"><i data-lucide="zap"></i><span>صفحهٔ اصلی</span></a>
+            <a class="nav-item is-active" href="./style-guide.html" data-i18n="sg.navStyleGuide"><i data-lucide="palette"></i><span>راهنمای استایل</span></a>
+            <a class="nav-item" href="./rtl-persian-test.html" data-i18n="sg.navRtlTest"><i data-lucide="languages"></i><span data-i18n="qa.pageHeading">آزمون راست‌به‌چپ</span></a>
+            <a class="nav-item" href="./rtl.html" data-i18n="sg.navPersianDemo"><i data-lucide="flask-conical"></i><span>نمونهٔ فارسی</span></a>
           </div>
 
           <div class="nav-group">
-            <div class="nav-group__label">Overview</div>
-            <a class="nav-item" href="./dashboard.html">
-              <i data-lucide="layout-dashboard"></i><span>Overview</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.overview">نمای کلی</div>
+            <a class="nav-item" href="./dashboard.html" data-i18n="nav.overview"><i data-lucide="layout-dashboard"></i><span data-i18n="rtl.groupOverview">نمای کلی</span></a>
           </div>
 
           <div class="nav-group">
-            <div class="nav-group__label">Developer</div>
-            <a class="nav-item" href="./apis.html">
-              <i data-lucide="code-2"></i><span>APIs</span>
-            </a>
-            <a class="nav-item" href="./endpoints.html">
-              <i data-lucide="braces"></i><span>Endpoints</span>
-            </a>
-            <a class="nav-item" href="./api-keys.html">
-              <i data-lucide="key"></i><span>API Keys</span>
-            </a>
-            <a class="nav-item" href="./logs.html">
-              <i data-lucide="scroll-text"></i><span>Logs</span>
-            </a>
-            <a class="nav-item" href="./webhooks.html">
-              <i data-lucide="webhook"></i><span>Webhooks</span>
-            </a>
-            <a class="nav-item" href="./docs.html">
-              <i data-lucide="book-open"></i><span>Documentation</span>
-            </a>
-            <a class="nav-item" href="./sdk.html">
-              <i data-lucide="package"></i><span>SDKs</span>
-            </a>
-            <a class="nav-item" href="./api-reference.html">
-              <i data-lucide="book-marked"></i><span>API Reference</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.developer">توسعه‌دهنده</div>
+            <a class="nav-item" href="./apis.html" data-i18n="nav.apis"><i data-lucide="code-2"></i><span>APIها</span></a>
+            <a class="nav-item" href="./endpoints.html" data-i18n="nav.endpoints"><i data-lucide="braces"></i><span>نقاط پایانی</span></a>
+            <a class="nav-item" href="./api-keys.html" data-i18n="nav.apiKeys"><i data-lucide="key"></i><span>کلیدهای API</span></a>
+            <a class="nav-item" href="./logs.html" data-i18n="nav.logs"><i data-lucide="scroll-text"></i><span>لاگ‌ها</span></a>
+            <a class="nav-item" href="./webhooks.html" data-i18n="nav.webhooks"><i data-lucide="webhook"></i><span>وب‌هوک‌ها</span></a>
+            <a class="nav-item" href="./docs.html" data-i18n="nav.docs"><i data-lucide="book-open"></i><span>مستندات</span></a>
+            <a class="nav-item" href="./sdk.html" data-i18n="nav.sdks"><i data-lucide="package"></i><span>SDKها</span></a>
+            <a class="nav-item" href="./api-reference.html" data-i18n="nav.apiReference"><i data-lucide="book-marked"></i><span>مرجع API</span></a>
           </div>
 
           <div class="nav-group">
-            <div class="nav-group__label">Analytics</div>
-            <a class="nav-item" href="./usage.html">
-              <i data-lucide="bar-chart-3"></i><span>Usage</span>
-            </a>
-            <a class="nav-item" href="./errors.html">
-              <i data-lucide="bug"></i><span>Errors</span>
-            </a>
-            <a class="nav-item" href="./rate-limits.html">
-              <i data-lucide="gauge"></i><span>Rate Limits</span>
-            </a>
-            <a class="nav-item" href="./metrics.html">
-              <i data-lucide="activity"></i><span>Metrics</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.analytics">تحلیل‌ها</div>
+            <a class="nav-item" href="./usage.html" data-i18n="nav.usage"><i data-lucide="bar-chart-3"></i><span>میزان استفاده</span></a>
+            <a class="nav-item" href="./errors.html" data-i18n="nav.errors"><i data-lucide="bug"></i><span>خطاها</span></a>
+            <a class="nav-item" href="./rate-limits.html" data-i18n="nav.rateLimits"><i data-lucide="gauge"></i><span>محدودیت نرخ</span></a>
+            <a class="nav-item" href="./metrics.html" data-i18n="nav.metrics"><i data-lucide="activity"></i><span>متریک‌ها</span></a>
           </div>
 
           <div class="nav-group">
-            <div class="nav-group__label">Workspace</div>
-            <a class="nav-item" href="./environments.html">
-              <i data-lucide="server"></i><span>Environments</span>
-            </a>
-            <a class="nav-item" href="./team.html">
-              <i data-lucide="users"></i><span>Team</span>
-            </a>
-            <a class="nav-item" href="./billing.html">
-              <i data-lucide="credit-card"></i><span>Billing</span>
-            </a>
-            <a class="nav-item" href="./notifications.html">
-              <i data-lucide="bell"></i><span>Notifications</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.workspace">فضای کاری</div>
+            <a class="nav-item" href="./environments.html" data-i18n="nav.environments"><i data-lucide="server"></i><span>محیط‌ها</span></a>
+            <a class="nav-item" href="./team.html" data-i18n="nav.team"><i data-lucide="users"></i><span>تیم</span></a>
+            <a class="nav-item" href="./billing.html" data-i18n="nav.billing"><i data-lucide="credit-card"></i><span>صورت‌حساب</span></a>
+            <a class="nav-item" href="./notifications.html" data-i18n="nav.notifications"><i data-lucide="bell"></i><span>اعلان‌ها</span></a>
           </div>
 
           <div class="nav-group">
-            <div class="nav-group__label">Account</div>
-            <a class="nav-item" href="./profile.html">
-              <i data-lucide="user"></i><span>Profile</span>
-            </a>
-            <a class="nav-item" href="./settings.html">
-              <i data-lucide="settings"></i><span>Settings</span>
-            </a>
+            <div class="nav-group__label" data-i18n="shell.account">حساب کاربری</div>
+            <a class="nav-item" href="./profile.html" data-i18n="nav.profile"><i data-lucide="user"></i><span>نمایه</span></a>
+            <a class="nav-item" href="./settings.html" data-i18n="nav.settings"><i data-lucide="settings"></i><span>تنظیمات</span></a>
           </div>
         </nav>
 
         <div class="sidebar-foot">
-          <div class="env-switcher" data-env-switcher role="group" aria-label="Environment">
-            <button type="button" class="env-option" data-env="test"><span class="dot"></span>Test</button>
-            <button type="button" class="env-option" data-env="live"><span class="dot"></span>Live</button>
+          <div class="env-switcher" data-env-switcher role="group" aria-label="محیط" data-i18n-attr="aria-label:aria.environment">
+            <button type="button" class="env-option" data-env="test" data-i18n="env.test"><span class="dot"></span>آزمایشی</button>
+            <button type="button" class="env-option" data-env="live" data-i18n="env.live"><span class="dot"></span>عملیاتی</button>
           </div>
-          <button type="button" class="btn btn-ghost" data-theme-toggle aria-pressed="false" aria-label="Toggle theme">
-            <i data-lucide="sun-moon"></i><span>Theme</span>
-          </button>
-          <div class="sidebar-user">
-            <span class="avatar">AP</span>
-            <span class="sidebar-user__meta">
-              <span class="name">Arash P.</span>
-              <span class="email">arash@apiforge.dev</span>
-            </span>
-            <i data-lucide="chevron-down"></i>
-          </div>
+          <button type="button" class="btn btn-ghost" data-theme-toggle aria-pressed="false" aria-label="تغییر پوسته" data-i18n-attr="aria-label:aria.toggleTheme" data-i18n="sg.navTheme"><i data-lucide="sun-moon"></i><span>پوسته</span></button>
+          <div class="sidebar-user" data-i18n="shell.userMenu"><span class="avatar">عر</span> <span class="sidebar-user__meta"> <span class="name">علی رضایی</span> <span class="email ltr-isolate">ali@apiforge.dev</span> </span> <i data-lucide="chevron-down"></i></div>
         </div>
       </aside>
 
       <!-- ============ Header ============ -->
       <header class="app-header">
-        <button type="button" class="btn btn-icon header-burger" aria-label="Open menu" data-bs-toggle="offcanvas" data-bs-target="#sidebar-drawer" aria-controls="sidebar-drawer">
+        <button type="button" class="btn btn-icon header-burger" aria-label="باز کردن منو" data-bs-toggle="offcanvas" data-bs-target="#sidebar-drawer" aria-controls="sidebar-drawer" data-i18n-attr="aria-label:aria.openMenu">
           <i data-lucide="menu"></i>
         </button>
-        <div class="header-title">
-          <span class="crumb">APIForge X</span>
-          <span class="crumb-sep">/</span>
-          <span class="title">Style Guide</span>
-        </div>
-        <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="Search (⌘K)">
-          <i data-lucide="search"></i>
-          <span class="text-tertiary">Search…</span>
-          <span class="kbd-hint">⌘K</span>
-        </button>
+        <div class="header-title" data-i18n="header.crumb.style-guide"><span class="crumb">APIForge X</span> <span class="crumb-sep">/</span> <span class="title">راهنمای استایل</span></div>
+        <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="جستجو (⌘K)" data-i18n-attr="aria-label:aria.searchCommandK" data-i18n="shell.search"><i data-lucide="search"></i> <span class="text-tertiary">جستجو…</span> <span class="kbd-hint">⌘K</span></button>
         <div class="header-actions">
-          <div class="env-switcher" data-env-switcher role="group" aria-label="Environment">
-            <button type="button" class="env-option" data-env="test"><span class="dot"></span>Test</button>
-            <button type="button" class="env-option" data-env="live"><span class="dot"></span>Live</button>
+          <div class="env-switcher" data-env-switcher role="group" aria-label="محیط" data-i18n-attr="aria-label:aria.environment">
+            <button type="button" class="env-option" data-env="test" data-i18n="env.test"><span class="dot"></span>آزمایشی</button>
+            <button type="button" class="env-option" data-env="live" data-i18n="env.live"><span class="dot"></span>عملیاتی</button>
           </div>
-          <button type="button" class="btn btn-icon" data-theme-toggle aria-label="Toggle theme" data-bs-toggle="tooltip" data-bs-title="Toggle theme">
+          <button type="button" class="btn btn-icon" data-theme-toggle aria-label="تغییر پوسته" data-bs-toggle="tooltip" data-bs-title="تغییر پوسته" data-i18n-attr="aria-label:aria.toggleTheme">
             <i data-lucide="sun-moon"></i>
           </button>
-          <button type="button" class="btn btn-icon" aria-label="Help" data-bs-toggle="tooltip" data-bs-title="Help">
+          <div class="dropdown" data-locale-menu>
+            <button type="button" class="btn btn-icon" aria-label="تغییر زبان" data-bs-toggle="dropdown" aria-expanded="false" data-i18n-attr="aria-label:aria.switchLanguage">
+              <i data-lucide="languages"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <button type="button" class="dropdown-item" data-locale="fa" role="menuitemradio" aria-checked="true">فارسی <span class="locale-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-locale="en" role="menuitemradio" aria-checked="false">English <span class="locale-check" hidden><i data-lucide="check"></i></span></button>
+            </div>
+          </div>
+          
+          <button type="button" class="btn btn-icon" aria-label="راهنما" data-bs-toggle="tooltip" data-bs-title="راهنما" data-i18n-attr="aria-label:aria.help,data-bs-title:aria.helpTooltip">
             <i data-lucide="help-circle"></i>
           </button>
           <div class="dropdown">
-            <button type="button" class="btn btn-icon" aria-label="Notifications" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn btn-icon" aria-label="اعلان‌ها" data-bs-toggle="dropdown" aria-expanded="false" data-i18n-attr="aria-label:aria.notifications">
               <i data-lucide="bell"></i>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-header">Notifications</div>
-              <button type="button" class="dropdown-item"><i data-lucide="circle-check"></i> Deployment succeeded</button>
-              <button type="button" class="dropdown-item"><i data-lucide="alert-triangle"></i> 2 webhooks failing</button>
+              <div class="dropdown-header" data-i18n="shell.notifications">اعلان‌ها</div>
+              <button type="button" class="dropdown-item" data-i18n="shell.notifDeployOk"><i data-lucide="circle-check"></i> استقرار با موفقیت انجام شد</button>
+              <button type="button" class="dropdown-item" data-i18n="shell.notifWebhooksFailing"><i data-lucide="alert-triangle"></i> خطا در ۲ وب‌هوک</button>
             </div>
           </div>
         </div>
@@ -180,27 +132,22 @@
       <!-- ============ Main ============ -->
       <main class="app-main">
         <!-- Test mode banner -->
-        <div class="env-banner" data-env-banner hidden>
-          <i data-lucide="alert-triangle"></i>
-          You are viewing <strong>test data</strong>. All keys use the <code>sk_test_</code> prefix.
-        </div>
+        <div class="env-banner" data-env-banner hidden data-i18n="sg.envBanner"><i data-lucide="alert-triangle"></i> شما در حال مشاهدهٔ <strong>داده‌های آزمایشی</strong> هستید. همهٔ کلیدها از پیشوند <code>sk_test_</code> استفاده می‌کنند.</div>
         <div class="app-main__inner">
           <div class="d-flex align-items-end justify-content-between mb-4 gap-3 flex-wrap">
             <div>
-              <h1 class="mb-1">Style Guide</h1>
-              <p class="text-secondary mb-0">The living component contract — dark/light themes, RTL/LTR, semantic tokens, Bootstrap as the toolkit, Lucide only.</p>
+              <h1 class="mb-1" data-i18n="page.style-guide">راهنمای استایل</h1>
+              <p class="text-secondary mb-0" data-i18n="sg.the-living-component-contract-dark-light-themes-">قرارداد زندهٔ کامپوننت‌ها — پوستهٔ تیره/روشن، راست‌به‌چپ/چپ‌به‌راست، توکن‌های معنایی، بوت‌استرپ به‌عنوان ابزار و تنها آیکون‌های لوساید.</p>
             </div>
-            <button type="button" class="btn btn-secondary" data-command-palette>
-              <i data-lucide="command"></i> Open palette <span class="kbd-hint">⌘K</span>
-            </button>
+            <button type="button" class="btn btn-secondary" data-command-palette data-i18n="sg.openPalette"><i data-lucide="command"></i> باز کردن پالت فرمان <span class="kbd-hint">⌘K</span></button>
           </div>
 
           <!-- Colors -->
           <section class="card mb-4">
             <div class="card-header">
               <div>
-                <h3 class="card-title">Color tokens</h3>
-                <div class="card-subtitle">Monochrome + one indigo accent + status. Color = meaning.</div>
+                <h3 class="card-title" data-i18n="sg.colorTokens">توکن‌های رنگ</h3>
+                <div class="card-subtitle" data-i18n="sg.monochrome-one-indigo-accent-status-color-meanin">تک‌رنگ به همراه یک رنگ تأکیدی نیلی و رنگ‌های وضعیت. اینجا رنگ معنا دارد.</div>
               </div>
             </div>
             <div class="row g-3">
@@ -243,38 +190,38 @@
           <section class="card mb-4">
             <div class="card-header">
               <div>
-                <h3 class="card-title">Typography</h3>
-                <div class="card-subtitle">5 lanes: Persian UI (Vazirmatn) · Latin UI (Inter) · Technical term · Code (JetBrains Mono) · Numeric data.</div>
+                <h3 class="card-title" data-i18n="sg.typography">تایپوگرافی</h3>
+                <div class="card-subtitle" data-i18n="sg.5-lanes-persian-ui-vazirmatn-latin-ui-inter-tech">۵ مسیر: رابط فارسی (وزیرمتن) · رابط لاتین (Inter) · اصطلاح فنی · کد (JetBrains Mono) · دادهٔ عددی.</div>
               </div>
             </div>
             <div class="row g-4 align-items-start">
               <div class="col-md-6">
-                <div class="display mb-2">48px Display</div>
-                <h1 class="mb-2">32px Heading one</h1>
-                <h2 class="mb-2">24px Heading two</h2>
-                <h3 class="mb-2">20px Heading three</h3>
-                <h4 class="mb-3">16px Heading four</h4>
-                <div class="eyebrow mb-2">Eyebrow label · 11px uppercase</div>
-                <p class="body-lg text-body">16px lead — a calm, focused sentence for intros.</p>
-                <p class="text-body">14px body — the default UI size. High density, low clutter.</p>
-                <p class="body-sm">13px secondary — descriptions and secondary text.</p>
-                <p class="caption">12px caption — meta, timestamps, fine print.</p>
+                <div class="display mb-2" data-i18n="sg.typeDisplay">۴۸ پیکسل — نمایشی</div>
+                <h1 class="mb-2" data-i18n="sg.typeH1">۳۲ پیکسل — سرفصل یک</h1>
+                <h2 class="mb-2" data-i18n="sg.typeH2">۲۴ پیکسل — سرفصل دو</h2>
+                <h3 class="mb-2" data-i18n="sg.typeH3">۲۰ پیکسل — سرفصل سه</h3>
+                <h4 class="mb-3" data-i18n="sg.typeH4">۱۶ پیکسل — سرفصل چهار</h4>
+                <div class="eyebrow mb-2" data-i18n="sg.typeEyebrow">برچسب بالای عنوان · ۱۱ پیکسل</div>
+                <p class="body-lg text-body" data-i18n="sg.16px-lead-a-calm-focused-sentence-for-intros">۱۶ پیکسل — جمله‌ای آرام و متمرکز برای مقدمه‌ها.</p>
+                <p class="text-body" data-i18n="sg.14px-body-the-default-ui-size-high-density-low-c">۱۴ پیکسل — اندازهٔ پیش‌فرض رابط. تراکم بالا، شلوغی کم.</p>
+                <p class="body-sm" data-i18n="sg.13px-secondary-descriptions-and-secondary-text">۱۳ پیکسل — توضیحات و متن‌های ثانویه.</p>
+                <p class="caption" data-i18n="sg.12px-caption-meta-timestamps-fine-print">۱۲ پیکسل — فراداده، زمان‌ها و نوشته‌های ریز.</p>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
-                  <div class="eyebrow mb-1">Monospace</div>
+                  <div class="eyebrow mb-1" data-i18n="sg.monospace">تک‌فاصله</div>
                   <code class="ltr-isolate">req_8Fk2mQx1Zw</code>
                   <code class="ltr-isolate">sk_live_4fJk9Lm2Xp</code>
                   <code class="ltr-isolate">POST /v1/emails</code>
                 </div>
                 <div class="mb-3">
-                  <div class="eyebrow mb-1">Tabular numbers</div>
+                  <div class="eyebrow mb-1" data-i18n="sg.tabularNumbers">اعداد جدولی</div>
                   <div class="tabular-nums" style="font-size: 20px;">1,245,088 &nbsp; 99.97% &nbsp; 0.0042</div>
                 </div>
                 <div>
-                  <div class="eyebrow mb-1">Persian (Vazirmatn)</div>
-                  <p dir="rtl" lang="fa" class="text-body mb-1">نمای کلی درخواست‌ها و کلیدهای API</p>
-                  <p dir="rtl" lang="fa" class="text-secondary mb-0">کد همیشه چپ‌به‌راست می‌ماند: <code dir="ltr" class="ltr-isolate">sk_live_4fJk9Lm2Xp</code></p>
+                  <div class="eyebrow mb-1" data-i18n="sg.persianLane">فارسی (وزیرمتن)</div>
+                  <p dir="rtl" lang="fa" class="text-body mb-1" data-i18n="sg.persianSample">نمای کلی درخواست‌ها و کلیدهای API</p>
+                  <p dir="rtl" lang="fa" class="text-secondary mb-0" data-i18n="sg.ltrSample">کد همیشه چپ‌به‌راست می‌ماند: <code dir="ltr" class="ltr-isolate">sk_live_4fJk9Lm2Xp</code></p>
                 </div>
               </div>
             </div>
@@ -284,28 +231,28 @@
           <section class="card mb-4">
             <div class="card-header">
               <div>
-                <h3 class="card-title">Buttons</h3>
-                <div class="card-subtitle">32px default · 28px sm · 36px lg · icon 32px.</div>
+                <h3 class="card-title" data-i18n="sg.buttons">دکمه‌ها</h3>
+                <div class="card-subtitle" data-i18n="sg.32px-default-28px-sm-36px-lg-icon-32px">پیش‌فرض ۳۲ پیکسل · کوچک ۲۸ · بزرگ ۳۶ · آیکون ۳۲ پیکسل.</div>
               </div>
             </div>
             <div class="d-flex flex-wrap gap-2 align-items-center">
-              <button type="button" class="btn btn-primary">Primary</button>
-              <button type="button" class="btn btn-primary"><i data-lucide="plus"></i> New API key</button>
-              <button type="button" class="btn btn-secondary">Secondary</button>
-              <button type="button" class="btn btn-ghost">Ghost</button>
-              <button type="button" class="btn btn-danger">Revoke</button>
-              <button type="button" class="btn btn-danger-ghost">Danger ghost</button>
-              <button type="button" class="btn btn-link">Link button</button>
-              <button type="button" class="btn btn-primary" disabled>Disabled</button>
-              <button type="button" class="btn btn-primary"><span class="spinner"></span> Loading</button>
+              <button type="button" class="btn btn-primary" data-i18n="sg.btnPrimary">اصلی</button>
+              <button type="button" class="btn btn-primary" data-i18n="sg.btnNewKey"><i data-lucide="plus"></i> کلید API جدید</button>
+              <button type="button" class="btn btn-secondary" data-i18n="sg.btnSecondary">ثانویه</button>
+              <button type="button" class="btn btn-ghost" data-i18n="sg.btnGhost">بی‌زمینه</button>
+              <button type="button" class="btn btn-danger" data-i18n="action.revoke">ابطال</button>
+              <button type="button" class="btn btn-danger-ghost" data-i18n="sg.btnDangerGhost">خطر — بی‌زمینه</button>
+              <button type="button" class="btn btn-link" data-i18n="sg.btnLink">دکمهٔ پیوندی</button>
+              <button type="button" class="btn btn-primary" disabled data-i18n="sg.btnDisabled">غیرفعال</button>
+              <button type="button" class="btn btn-primary" data-i18n="sg.btnLoading"><span class="spinner"></span> در حال بارگذاری</button>
             </div>
             <hr class="hairline my-3" />
             <div class="d-flex flex-wrap gap-2 align-items-center">
-              <button type="button" class="btn btn-primary btn-sm">Small</button>
-              <button type="button" class="btn btn-secondary btn-sm">Small</button>
-              <button type="button" class="btn btn-primary btn-lg">Large</button>
-              <button type="button" class="btn btn-icon" aria-label="Settings"><i data-lucide="settings"></i></button>
-              <button type="button" class="btn btn-icon" aria-label="Copy"><i data-lucide="copy"></i></button>
+              <button type="button" class="btn btn-primary btn-sm" data-i18n="sg.btnSmall">کوچک</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-i18n="sg.btnSmall">کوچک</button>
+              <button type="button" class="btn btn-primary btn-lg" data-i18n="sg.btnLarge">بزرگ</button>
+              <button type="button" class="btn btn-icon" aria-label="تنظیمات" data-i18n-attr="aria-label:aria.settings"><i data-lucide="settings"></i></button>
+              <button type="button" class="btn btn-icon" aria-label="کپی" data-i18n-attr="aria-label:aria.copy"><i data-lucide="copy"></i></button>
             </div>
           </section>
 
@@ -313,67 +260,67 @@
           <section class="card mb-4">
             <div class="card-header">
               <div>
-                <h3 class="card-title">Forms</h3>
-                <div class="card-subtitle">32px inputs, hairline borders, accent focus ring.</div>
+                <h3 class="card-title" data-i18n="sg.forms">فرم‌ها</h3>
+                <div class="card-subtitle" data-i18n="sg.32px-inputs-hairline-borders-accent-focus-ring">ورودی‌های ۳۲ پیکسلی، حاشیه‌های نازک و حلقهٔ تمرکز تأکیدی.</div>
               </div>
             </div>
             <div class="row g-4">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="form-label" for="sg-name">Key name</label>
-                  <input class="form-control" id="sg-name" type="text" placeholder="Production backend" />
-                  <div class="form-text">Give this key a memorable name.</div>
+                  <label class="form-label" for="sg-name" data-i18n="keys.keyName">نام کلید</label>
+                  <input class="form-control" id="sg-name" type="text" placeholder="بک‌اند محیط تولید" data-i18n-attr="placeholder:form.productionBackend" />
+                  <div class="form-text" data-i18n="sg.give-this-key-a-memorable-name">برای این کلید نامی به‌یادماندنی انتخاب کنید.</div>
                 </div>
                 <div class="form-group">
-                  <label class="form-label" for="sg-env">Environment</label>
+                  <label class="form-label" for="sg-env" data-i18n="table.environment">محیط</label>
                   <select class="form-select" id="sg-env">
-                    <option>Test</option>
-                    <option selected>Live</option>
+                    <option data-i18n="env.testOption">آزمایشی</option>
+                    <option selected data-i18n="env.liveOption">عملیاتی</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="form-label" for="sg-scopes">Scopes</label>
+                  <label class="form-label" for="sg-scopes" data-i18n="keys.scopes">حوزه‌های دسترسی</label>
                   <label class="form-check mb-2">
                     <input class="form-check-input" type="checkbox" checked />
-                    <span class="form-check-label">emails:write — send emails</span>
+                    <span class="form-check-label" data-i18n="keys.scopeEmailsWrite">emails:write — ارسال ایمیل</span>
                   </label>
                   <label class="form-check mb-2">
                     <input class="form-check-input" type="checkbox" />
-                    <span class="form-check-label">audiences:read — read audiences</span>
+                    <span class="form-check-label" data-i18n="keys.scopeAudiencesRead">audiences:read — خواندن مخاطبان</span>
                   </label>
                   <label class="form-check">
                     <input class="form-check-input" type="radio" name="sg-radio" />
-                    <span class="form-check-label">Expires in 90 days</span>
+                    <span class="form-check-label" data-i18n="sg.expires90">انقضا پس از ۹۰ روز</span>
                   </label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="form-label" for="sg-key">API key</label>
+                  <label class="form-label" for="sg-key" data-i18n="keys.apiKeyLabel">کلید API</label>
                   <div class="input-group">
                     <input class="form-control form-control--mono" id="sg-key" type="password" value="sk_live_4fJk9Lm2XpQz7RvW" readonly />
                     <span class="input-group-text">
-                      <button type="button" class="btn btn-icon btn-icon--sm" data-reveal aria-label="Reveal key"><i data-lucide="eye"></i></button>
-                      <button type="button" class="btn btn-icon btn-icon--sm" data-copy="sk_live_4fJk9Lm2XpQz7RvW" aria-label="Copy key"><i data-lucide="copy"></i></button>
+                      <button type="button" class="btn btn-icon btn-icon--sm" data-reveal aria-label="نمایش کلید" data-i18n-attr="aria-label:aria.revealKey"><i data-lucide="eye"></i></button>
+                      <button type="button" class="btn btn-icon btn-icon--sm" data-copy="sk_live_4fJk9Lm2XpQz7RvW" aria-label="کپی کلید" data-i18n-attr="aria-label:aria.copyKey"><i data-lucide="copy"></i></button>
                     </span>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="form-label" for="sg-search">Search</label>
+                  <label class="form-label" for="sg-search" data-i18n="sg.search">جستجو</label>
                   <div class="search-field">
                     <i data-lucide="search" class="search-icon"></i>
-                    <input class="form-control" id="sg-search" type="text" placeholder="Search requests…" />
+                    <input class="form-control" id="sg-search" type="text" placeholder="جستجوی درخواست‌ها…" data-i18n-attr="placeholder:form.searchRequests" />
                     <span class="kbd-hint">⌘K</span>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="form-label" for="sg-note">Notes</label>
+                  <label class="form-label" for="sg-note" data-i18n="sg.notes">یادداشت‌ها</label>
                   <textarea class="form-control" id="sg-note" placeholder="Optional notes…"></textarea>
                 </div>
                 <div class="form-group mb-0">
-                  <label class="form-label" for="sg-err">With error</label>
+                  <label class="form-label" for="sg-err" data-i18n="sg.withError">همراه با خطا</label>
                   <input class="form-control is-invalid" id="sg-err" type="text" value="bad_value" />
-                  <div class="form-error">This value is not valid.</div>
+                  <div class="form-error" data-i18n="sg.this-value-is-not-valid">این مقدار معتبر نیست.</div>
                 </div>
               </div>
             </div>
@@ -383,36 +330,36 @@
           <section class="mb-4">
             <div class="d-flex align-items-center justify-content-between mb-2">
               <div>
-                <h3 class="mb-0">Tables</h3>
-                <div class="text-secondary">The most important component. 40px rows, hover only, badges + latency color.</div>
+                <h3 class="mb-0" data-i18n="sg.tables">جدول‌ها</h3>
+                <div class="text-secondary" data-i18n="sg.the-most-important-component-40px-rows-hover-onl">مهم‌ترین کامپوننت. سطرهای ۴۰ پیکسلی، تنها افکت هاور، نشان‌ها و رنگ‌بندی تاخیر.</div>
               </div>
-              <span class="badge badge-accent">mock data</span>
+              <span class="badge badge-accent" data-i18n="sg.mockData">دادهٔ نمایشی</span>
             </div>
             <div class="table-card">
               <div class="table-responsive">
                 <table class="table table--compact">
                   <thead>
                     <tr>
-                      <th scope="col">Time</th>
-                      <th scope="col">Method</th>
-                      <th scope="col">Endpoint</th>
-                      <th scope="col">Status</th>
-                      <th scope="col" class="cell-num">Latency</th>
-                      <th scope="col">Request ID</th>
-                      <th scope="col">Key</th>
+                      <th scope="col" data-i18n="table.time">زمان</th>
+                      <th scope="col" data-i18n="table.method">متد</th>
+                      <th scope="col" data-i18n="table.endpoint">نقطهٔ پایانی</th>
+                      <th scope="col" data-i18n="site.status">وضعیت</th>
+                      <th scope="col" class="cell-num" data-i18n="table.latency">تاخیر پاسخ</th>
+                      <th scope="col" data-i18n="table.requestId">شناسهٔ درخواست</th>
+                      <th scope="col" data-i18n="table.key">کلید</th>
                     </tr>
                   </thead>
                   <tbody id="logs-demo"></tbody>
                 </table>
               </div>
               <div class="table-footer">
-                <span>Showing <strong>8</strong> of <strong>50</strong> requests</span>
-                <nav class="pagination" aria-label="Pagination">
-                  <button type="button" class="page-link" disabled>Prev</button>
+                <span data-i18n="sg.showingRows">نمایش <strong>۸</strong> از <strong>۵۰</strong> درخواست</span>
+                <nav class="pagination" aria-label="صفحه‌بندی" data-i18n-attr="aria-label:aria.pagination">
+                  <button type="button" class="page-link" disabled data-i18n="pagination.prev">قبلی</button>
                   <button type="button" class="page-link is-active">1</button>
                   <button type="button" class="page-link">2</button>
                   <button type="button" class="page-link">3</button>
-                  <button type="button" class="page-link">Next</button>
+                  <button type="button" class="page-link" data-i18n="pagination.next">بعدی</button>
                 </nav>
               </div>
             </div>
@@ -420,62 +367,40 @@
 
           <!-- Cards & KPI -->
           <section class="mb-4">
-            <h3 class="mb-2">Cards & KPI</h3>
+            <h3 class="mb-2" data-i18n="sg.cardsKpi">کارت‌ها و شاخص‌ها</h3>
             <div class="row g-3 mb-3">
               <div class="col-6 col-xl-3">
-                <div class="card card--dense kpi">
-                  <span class="kpi-label">Requests · 24h</span>
-                  <span class="kpi-value">1.2M</span>
-                  <span class="kpi-delta up"><i data-lucide="trending-up"></i> 12.4% vs last week</span>
-                </div>
+                <div class="card card--dense kpi" data-i18n="sg.kpiRequests"><span class="kpi-label">درخواست‌ها · ۲۴ ساعت</span> <span class="kpi-value">1.2M</span> <span class="kpi-delta up"><i data-lucide="trending-up"></i> ۱۲.۴٪ نسبت به هفتهٔ گذشته</span></div>
               </div>
               <div class="col-6 col-xl-3">
-                <div class="card card--dense kpi">
-                  <span class="kpi-label">Error rate</span>
-                  <span class="kpi-value">0.41%</span>
-                  <span class="kpi-delta down"><i data-lucide="trending-down"></i> 0.08% worse</span>
-                </div>
+                <div class="card card--dense kpi" data-i18n="sg.kpiErrorRate"><span class="kpi-label">نرخ خطا</span> <span class="kpi-value">0.41%</span> <span class="kpi-delta down"><i data-lucide="trending-down"></i> ۰.۰۸٪ بدتر</span></div>
               </div>
               <div class="col-6 col-xl-3">
-                <div class="card card--dense kpi">
-                  <span class="kpi-label">P95 latency</span>
-                  <span class="kpi-value">184ms</span>
-                  <span class="kpi-delta up"><i data-lucide="trending-up"></i> 22ms faster</span>
-                </div>
+                <div class="card card--dense kpi" data-i18n="sg.kpiP95"><span class="kpi-label">تاخیر P95</span> <span class="kpi-value">184ms</span> <span class="kpi-delta up"><i data-lucide="trending-up"></i> ۲۲ میلی‌ثانیه سریع‌تر</span></div>
               </div>
               <div class="col-6 col-xl-3">
-                <div class="card card--dense kpi">
-                  <span class="kpi-label">Active keys</span>
-                  <span class="kpi-value">5</span>
-                  <span class="kpi-delta flat">No change</span>
-                </div>
+                <div class="card card--dense kpi" data-i18n="sg.kpiActiveKeys"><span class="kpi-label">کلیدهای فعال</span> <span class="kpi-value">۵</span> <span class="kpi-delta flat">بدون تغییر</span></div>
               </div>
             </div>
             <div class="row g-3">
               <div class="col-md-4">
                 <div class="card card--interactive">
-                  <h4 class="mb-1">Interactive card</h4>
-                  <p class="text-secondary mb-0">Hover to see the surface lift and border change.</p>
+                  <h4 class="mb-1" data-i18n="sg.interactiveCard">کارت تعاملی</h4>
+                  <p class="text-secondary mb-0" data-i18n="sg.hover-to-see-the-surface-lift-and-border-change">با هاور کردن، برجستگی سطح و تغییر حاشیه را می‌بینید.</p>
                 </div>
               </div>
               <div class="col-md-8">
                 <div class="card card--dense">
                   <div class="card-header">
-                    <h4 class="card-title">Usage this month</h4>
-                    <button type="button" class="btn btn-sm btn-ghost">View report</button>
+                    <h4 class="card-title" data-i18n="sg.usageThisMonth">مصرف این ماه</h4>
+                    <button type="button" class="btn btn-sm btn-ghost" data-i18n="action.viewReport">مشاهدهٔ گزارش</button>
                   </div>
                   <div class="usage-row mb-3">
-                    <div class="usage-row__head">
-                      <span class="usage-row__label">Requests</span>
-                      <span class="usage-row__value">8.4M / 10M</span>
-                    </div>
+                    <div class="usage-row__head" data-i18n="sg.usageRequests"><span class="usage-row__label">درخواست‌ها</span> <span class="usage-row__value">8.4M / 10M</span></div>
                     <div class="progress"><div class="progress-bar" style="width: 84%"></div></div>
                   </div>
                   <div class="usage-row">
-                    <div class="usage-row__head">
-                      <span class="usage-row__label">Rate limit</span>
-                      <span class="usage-row__value">80 / 100 req/s</span>
-                    </div>
+                    <div class="usage-row__head" data-i18n="sg.usageRateLimit"><span class="usage-row__label">محدودیت نرخ</span> <span class="usage-row__value">80 / 100 req/s</span></div>
                     <div class="progress"><div class="progress-bar progress-bar--warning" style="width: 80%"></div></div>
                   </div>
                 </div>
@@ -485,18 +410,18 @@
 
           <!-- Code blocks -->
           <section class="mb-4">
-            <h3 class="mb-2">Code blocks</h3>
+            <h3 class="mb-2" data-i18n="sg.codeBlocks">بلوک‌های کد</h3>
             <div class="row g-3">
               <div class="col-lg-6">
                 <div class="code-block" data-code-block>
                   <div class="code-block__header">
-                    <div class="code-tabs" role="tablist" aria-label="Language">
+                    <div class="code-tabs" role="tablist" aria-label="زبان" data-i18n-attr="aria-label:aria.language">
                       <button type="button" class="code-tabs__tab is-active" data-tab="curl">cURL</button>
                       <button type="button" class="code-tabs__tab" data-tab="node">Node</button>
                       <button type="button" class="code-tabs__tab" data-tab="python">Python</button>
                     </div>
                     <div class="code-block__actions">
-                      <button type="button" class="btn btn-icon" data-code-copy aria-label="Copy code"><i data-lucide="copy"></i></button>
+                      <button type="button" class="btn btn-icon" data-code-copy aria-label="کپی کد" data-i18n-attr="aria-label:aria.copyCode"><i data-lucide="copy"></i></button>
                     </div>
                   </div>
                   <pre class="code-block__body" data-code-pane data-pane="curl">curl https://api.apiforge.dev/v1/emails \
@@ -518,11 +443,11 @@ client.emails.send(to="user@example.com")</pre>
               <div class="col-lg-6">
                 <div class="card card--dense h-100">
                   <div class="card-header">
-                    <h4 class="card-title">Inline code & injection</h4>
+                    <h4 class="card-title" data-i18n="sg.inlineCode">کد درون‌خطی و تزریق</h4>
                   </div>
-                  <p class="text-secondary">Your key is <code class="ltr-isolate">sk_live_4fJk9Lm2Xp</code> and lives in <code class="ltr-isolate">Authorization</code>.</p>
-                  <p class="text-secondary">Syntax lanes: <code class="ltr-isolate"><span class="tok-kw">const</span> <span class="tok-fn">send</span> = <span class="tok-str">"ok"</span>; <span class="tok-com">// 4 colors max</span></code></p>
-                  <p class="text-secondary mb-0">Switch environment in the header — the code blocks re-inject <code class="ltr-isolate">sk_test_…</code> vs <code class="ltr-isolate">sk_live_…</code>.</p>
+                  <p class="text-secondary" data-i18n="sg.your-key-is-code-class-ltr-isolate-sk-live-4fjk9">کلید شما <code class="ltr-isolate">sk_live_4fJk9Lm2Xp</code> است و در هدر <code class="ltr-isolate">Authorization</code> ارسال می‌شود.</p>
+                  <p class="text-secondary" data-i18n="sg.syntaxLanes">مسیرهای نحو: <code class="ltr-isolate"><span class="tok-kw">const</span> <span class="tok-fn">send</span> = <span class="tok-str">"ok"</span>; <span class="tok-com">// 4 colors max</span></code></p>
+                  <p class="text-secondary mb-0" data-i18n="sg.switch-environment-in-the-header-the-code-blocks">محیط را از هدر تغییر دهید — بلوک‌های کد به‌طور خودکار <code class="ltr-isolate">sk_test_…</code> یا <code class="ltr-isolate">sk_live_…</code> را تزریق می‌کنند.</p>
                 </div>
               </div>
             </div>
@@ -532,8 +457,8 @@ client.emails.send(to="user@example.com")</pre>
           <section class="card mb-4">
             <div class="card-header">
               <div>
-                <h3 class="card-title">Badges</h3>
-                <div class="card-subtitle">Method + status + scope + neutral.</div>
+                <h3 class="card-title" data-i18n="sg.badges">نشان‌ها</h3>
+                <div class="card-subtitle" data-i18n="sg.method-status-scope-neutral">متد + وضعیت + حوزهٔ دسترسی + خنثی.</div>
               </div>
             </div>
             <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
@@ -550,19 +475,15 @@ client.emails.send(to="user@example.com")</pre>
               <span class="badge badge-status badge-status--error"><span class="dot"></span>500</span>
               <span class="badge badge-status badge-status--neutral"><span class="dot"></span>—</span>
             </div>
-            <div class="d-flex flex-wrap gap-2 align-items-center">
-              <span class="badge badge-accent">emails:write</span>
-              <span class="badge badge-accent">audiences:read</span>
-              <span class="badge badge-neutral">neutral</span>
-            </div>
+            <div class="d-flex flex-wrap gap-2 align-items-center" data-i18n="sg.badgeRow"><span class="badge badge-accent">emails:write</span> <span class="badge badge-accent">audiences:read</span> <span class="badge badge-neutral">خنثی</span></div>
           </section>
 
           <!-- Skeletons -->
           <section class="card mb-4">
             <div class="card-header">
               <div>
-                <h3 class="card-title">Skeletons</h3>
-                <div class="card-subtitle">Shimmer that mirrors the final layout — never a spinner.</div>
+                <h3 class="card-title" data-i18n="sg.skeletons">اسکلت‌ها</h3>
+                <div class="card-subtitle" data-i18n="sg.shimmer-that-mirrors-the-final-layout-never-a-sp">درخششی که چیدمان نهایی را بازتاب می‌دهد — هرگز از اسپینر استفاده نمی‌کنیم.</div>
               </div>
             </div>
             <div class="row g-3">
@@ -584,25 +505,25 @@ client.emails.send(to="user@example.com")</pre>
           <section class="card mb-4">
             <div class="card-header">
               <div>
-                <h3 class="card-title">Empty state</h3>
-                <div class="card-subtitle">Designed, teaching, actionable.</div>
+                <h3 class="card-title" data-i18n="sg.emptyState">وضعیت خالی</h3>
+                <div class="card-subtitle" data-i18n="sg.designed-teaching-actionable">طراحی‌شده، آموزنده و همراه با گام بعدی.</div>
               </div>
             </div>
             <div class="empty-state">
               <span class="empty-icon"><i data-lucide="scroll-text"></i></span>
-              <h4 class="empty-title">No requests yet</h4>
-              <p class="empty-desc">Send your first request and it will show up here in real time.</p>
+              <h4 class="empty-title" data-i18n="sg.noRequests">هنوز درخواستی ثبت نشده است</h4>
+              <p class="empty-desc" data-i18n="sg.send-your-first-request-and-it-will-show-up-here">نخستین درخواست را ارسال کنید تا همین‌جا و به‌صورت زنده نمایش داده شود.</p>
               <div class="code-block empty-code">
                 <div class="code-block__header">
                   <span class="code-block__lang"><i data-lucide="terminal"></i> cURL</span>
                   <div class="code-block__actions">
-                    <button type="button" class="btn btn-icon" data-code-copy aria-label="Copy code"><i data-lucide="copy"></i></button>
+                    <button type="button" class="btn btn-icon" data-code-copy aria-label="کپی کد" data-i18n-attr="aria-label:aria.copyCode"><i data-lucide="copy"></i></button>
                   </div>
                 </div>
                 <pre class="code-block__body" data-code-pane data-pane="curl">curl https://api.apiforge.dev/v1/emails \
   -H "Authorization: Bearer YOUR_API_KEY"</pre>
               </div>
-              <button type="button" class="btn btn-primary"><i data-lucide="plus"></i> Create API key</button>
+              <button type="button" class="btn btn-primary" data-i18n="action.createApiKey"><i data-lucide="plus"></i> ایجاد کلید API</button>
             </div>
           </section>
 
@@ -612,28 +533,28 @@ client.emails.send(to="user@example.com")</pre>
               <div class="col-lg-6">
                 <div class="card card--dense h-100">
                   <div class="card-header">
-                    <h4 class="card-title">Tabs</h4>
+                    <h4 class="card-title" data-i18n="sg.tabs">تب‌ها</h4>
                   </div>
                   <ul class="nav nav-tabs mb-3" role="tablist">
                     <li class="nav-item" role="presentation">
-                      <button class="nav-link active" id="tab-a" data-bs-toggle="tab" data-bs-target="#pane-a" type="button" role="tab" aria-controls="pane-a" aria-selected="true">Overview</button>
+                      <button class="nav-link active" id="tab-a" data-bs-toggle="tab" data-bs-target="#pane-a" type="button" role="tab" aria-controls="pane-a" aria-selected="true" data-i18n="shell.overview">نمای کلی</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                      <button class="nav-link" id="tab-b" data-bs-toggle="tab" data-bs-target="#pane-b" type="button" role="tab" aria-controls="pane-b" aria-selected="false">Security</button>
+                      <button class="nav-link" id="tab-b" data-bs-toggle="tab" data-bs-target="#pane-b" type="button" role="tab" aria-controls="pane-b" aria-selected="false" data-i18n="settings.security">امنیت</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                      <button class="nav-link" id="tab-c" data-bs-toggle="tab" data-bs-target="#pane-c" type="button" role="tab" aria-controls="pane-c" aria-selected="false">Webhooks</button>
+                      <button class="nav-link" id="tab-c" data-bs-toggle="tab" data-bs-target="#pane-c" type="button" role="tab" aria-controls="pane-c" aria-selected="false" data-i18n="site.webhooks">وب‌هوک‌ها</button>
                     </li>
                   </ul>
                   <div class="tab-content">
                     <div class="tab-pane fade show active" id="pane-a" role="tabpanel" aria-labelledby="tab-a" tabindex="0">
-                      <p class="text-secondary mb-0">Underline tabs on a hairline. The active tab carries the accent underline, never a filled background.</p>
+                      <p class="text-secondary mb-0" data-i18n="sg.underline-tabs-on-a-hairline-the-active-tab-carr">تب‌های زیرخط‌دار روی یک خط نازک. تب فعال تنها زیرخط تأکیدی دارد و هرگز زمینهٔ پرشده ندارد.</p>
                     </div>
                     <div class="tab-pane fade" id="pane-b" role="tabpanel" aria-labelledby="tab-b" tabindex="0">
-                      <p class="text-secondary mb-0">Security scopes, TOTP, and session controls land here in Phase 3 pages.</p>
+                      <p class="text-secondary mb-0" data-i18n="sg.security-scopes-totp-and-session-controls-land-h">حوزه‌های امنیتی، رمز یک‌بارمصرف زمان‌دار و کنترل‌های نشست در صفحات فاز ۳ اینجا قرار می‌گیرند.</p>
                     </div>
                     <div class="tab-pane fade" id="pane-c" role="tabpanel" aria-labelledby="tab-c" tabindex="0">
-                      <p class="text-secondary mb-0">Webhook delivery attempts and retry policy.</p>
+                      <p class="text-secondary mb-0" data-i18n="sg.webhook-delivery-attempts-and-retry-policy">تلاش‌های تحویل وب‌هوک و سیاست تلاش مجدد.</p>
                     </div>
                   </div>
                 </div>
@@ -641,24 +562,24 @@ client.emails.send(to="user@example.com")</pre>
               <div class="col-lg-6">
                 <div class="card card--dense h-100">
                   <div class="card-header">
-                    <h4 class="card-title">Alerts</h4>
+                    <h4 class="card-title" data-i18n="sg.alerts">هشدارها</h4>
                   </div>
                   <div class="d-flex flex-column gap-2">
                     <div class="alert alert-success" role="alert">
                       <span class="alert-icon"><i data-lucide="circle-check"></i></span>
-                      <div class="alert-content">Deployment <strong>succeeded</strong> — all webhooks healthy.</div>
+                      <div class="alert-content" data-i18n="sg.deployment-strong-succeeded-strong-all-webhooks-">استقرار <strong>با موفقیت</strong> انجام شد — همهٔ وب‌هوک‌ها سالم هستند.</div>
                     </div>
                     <div class="alert alert-info" role="alert">
                       <span class="alert-icon"><i data-lucide="info"></i></span>
-                      <div class="alert-content">Rate limit window resets in 2 minutes.</div>
+                      <div class="alert-content" data-i18n="sg.rate-limit-window-resets-in-2-minutes">بازهٔ محدودیت نرخ تا ۲ دقیقهٔ دیگر بازنشانی می‌شود.</div>
                     </div>
                     <div class="alert alert-warning" role="alert">
                       <span class="alert-icon"><i data-lucide="alert-triangle"></i></span>
-                      <div class="alert-content">2 webhooks are failing with 500s.</div>
+                      <div class="alert-content" data-i18n="sg.2-webhooks-are-failing-with-500s">۲ وب‌هوک با خطای ۵۰۰ مواجه شده‌اند.</div>
                     </div>
                     <div class="alert alert-danger" role="alert">
                       <span class="alert-icon"><i data-lucide="alert-circle"></i></span>
-                      <div class="alert-content">API key <code class="ltr-isolate">sk_live_…XpQz</code> was revoked.</div>
+                      <div class="alert-content" data-i18n="sg.api-key-code-class-ltr-isolate-sk-live-xpqz-code">کلید API <code class="ltr-isolate">sk_live_…XpQz</code> ابطال شد.</div>
                     </div>
                   </div>
                 </div>
@@ -668,51 +589,29 @@ client.emails.send(to="user@example.com")</pre>
               <div class="col-lg-6">
                 <div class="card card--dense h-100">
                   <div class="card-header">
-                    <h4 class="card-title">Breadcrumb</h4>
+                    <h4 class="card-title" data-i18n="sg.breadcrumb">مسیر راهنما</h4>
                   </div>
-                  <nav aria-label="breadcrumb">
+                  <nav aria-label="مسیر راهنما" data-i18n-attr="aria-label:aria.breadcrumb">
                     <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="#">APIs</a></li>
-                      <li class="breadcrumb-item"><a href="#">Transactions</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Request req_8Fk2mQx1Zw</li>
+                      <li class="breadcrumb-item"><a href="#" data-i18n="page.apis">APIها</a></li>
+                      <li class="breadcrumb-item"><a href="#" data-i18n="sg.transactions">تراکنش‌ها</a></li>
+                      <li class="breadcrumb-item active" aria-current="page" data-i18n="sg.breadcrumbRequest">درخواست req_8Fk2mQx1Zw</li>
                     </ol>
                   </nav>
-                  <div class="d-flex align-items-center gap-3 flex-wrap mt-3">
-                    <span class="avatar">AP</span>
-                    <span class="avatar avatar--sm">AP</span>
-                    <span class="avatar avatar--lg">AP</span>
-                    <span class="avatar avatar--xl">AP</span>
-                    <span class="avatar"><i data-lucide="settings"></i></span>
-                    <span class="avatar"><span class="avatar-status is-online"></span>AP</span>
-                    <span class="avatar-group">
-                      <span class="avatar">AP</span>
-                      <span class="avatar">SR</span>
-                      <span class="avatar">+2</span>
-                    </span>
-                  </div>
+                  <div class="d-flex align-items-center gap-3 flex-wrap mt-3" data-i18n="sg.avatars"><span class="avatar">عر</span> <span class="avatar avatar--sm">عر</span> <span class="avatar avatar--lg">عر</span> <span class="avatar avatar--xl">عر</span> <span class="avatar"><i data-lucide="settings"></i></span> <span class="avatar"><span class="avatar-status is-online"></span>عر</span> <span class="avatar-group"> <span class="avatar">عر</span> <span class="avatar">س‌ا</span> <span class="avatar">۲+</span> </span></div>
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="card card--dense h-100">
                   <div class="card-header">
-                    <h4 class="card-title">Stat</h4>
+                    <h4 class="card-title" data-i18n="sg.stat">آماره</h4>
                   </div>
                   <div class="row g-3">
                     <div class="col-6">
-                      <div class="stat">
-                        <span class="stat-label">Requests · 24h</span>
-                        <span class="stat-value">1.2M</span>
-                        <span class="stat-delta up"><i data-lucide="trending-up"></i> 12.4%</span>
-                        <span class="stat-foot">vs previous 24h</span>
-                      </div>
+                      <div class="stat" data-i18n="sg.statRequests"><span class="stat-label">درخواست‌ها · ۲۴ ساعت</span> <span class="stat-value">1.2M</span> <span class="stat-delta up"><i data-lucide="trending-up"></i> ۱۲.۴٪</span> <span class="stat-foot">نسبت به ۲۴ ساعت قبل</span></div>
                     </div>
                     <div class="col-6">
-                      <div class="stat">
-                        <span class="stat-label">Error rate</span>
-                        <span class="stat-value">0.41%</span>
-                        <span class="stat-delta down"><i data-lucide="trending-down"></i> 0.08%</span>
-                        <span class="stat-foot">last hour</span>
-                      </div>
+                      <div class="stat" data-i18n="sg.statErrorRate"><span class="stat-label">نرخ خطا</span> <span class="stat-value">0.41%</span> <span class="stat-delta down"><i data-lucide="trending-down"></i> ۰.۰۸٪</span> <span class="stat-foot">یک ساعت گذشته</span></div>
                     </div>
                   </div>
                 </div>
@@ -726,15 +625,15 @@ client.emails.send(to="user@example.com")</pre>
               <div class="col-lg-6">
                 <div class="card card--dense">
                   <div class="card-header">
-                    <h4 class="card-title">Chart container</h4>
+                    <h4 class="card-title" data-i18n="sg.chartContainer">ظرف نمودار</h4>
                   </div>
                   <div class="chart">
                     <div class="chart__head">
                       <div>
-                        <div class="chart__title">Requests by hour</div>
-                        <div class="chart__sentence">Throughput rose 12% after the deploy at 14:00.</div>
+                        <div class="chart__title" data-i18n="sg.requestsByHour">درخواست‌ها به تفکیک ساعت</div>
+                        <div class="chart__sentence" data-i18n="sg.throughput-rose-12-after-the-deploy-at-14-00">توان عملیاتی پس از استقرار ساعت ۱۴:۰۰ حدود ۱۲٪ افزایش یافت.</div>
                       </div>
-                      <span class="chart__meta">Last 24h</span>
+                      <span class="chart__meta" data-i18n="sg.last24h">۲۴ ساعت گذشته</span>
                     </div>
                     <div class="chart__body" aria-hidden="true">
                       <svg viewBox="0 0 320 120" width="100%" height="120" preserveAspectRatio="none" role="img">
@@ -760,19 +659,14 @@ client.emails.send(to="user@example.com")</pre>
               <div class="col-lg-6">
                 <div class="card card--dense h-100">
                   <div class="card-header">
-                    <h4 class="card-title">Loading & error states</h4>
+                    <h4 class="card-title" data-i18n="sg.loadingErrorStates">وضعیت‌های بارگذاری و خطا</h4>
                   </div>
-                  <div class="d-flex align-items-center gap-2 mb-3">
-                    <span class="spinner spinner--sm"></span>
-                    <span class="spinner"></span>
-                    <span class="spinner spinner--lg"></span>
-                    <span class="text-secondary">Inline spinners — used only for indeterminate waits.</span>
-                  </div>
+                  <div class="d-flex align-items-center gap-2 mb-3" data-i18n="sg.spinners"><span class="spinner spinner--sm"></span> <span class="spinner"></span> <span class="spinner spinner--lg"></span> <span class="text-secondary">اسپینرهای درون‌خطی — فقط برای انتظارهای نامشخص.</span></div>
                   <div class="error-state mb-0">
                     <span class="error-icon"><i data-lucide="alert-circle"></i></span>
-                    <h4 class="error-title">Couldn't load requests</h4>
-                    <p class="error-desc">The server returned a 503. Check your connection and try again.</p>
-                    <button type="button" class="btn btn-primary"><i data-lucide="rotate-ccw"></i> Retry</button>
+                    <h4 class="error-title" data-i18n="sg.couldNotLoad">بارگذاری درخواست‌ها ناموفق بود</h4>
+                    <p class="error-desc" data-i18n="sg.the-server-returned-a-503-check-your-connection-">سرور پاسخ ۵۰۳ داد. اتصال خود را بررسی کنید و دوباره تلاش کنید.</p>
+                    <button type="button" class="btn btn-primary" data-i18n="action.retry"><i data-lucide="rotate-ccw"></i> تلاش دوباره</button>
                   </div>
                 </div>
               </div>
@@ -785,28 +679,28 @@ client.emails.send(to="user@example.com")</pre>
               <div class="col-lg-6">
                 <div class="card card--dense h-100">
                   <div class="card-header">
-                    <h4 class="card-title">Webhook retry timeline</h4>
+                    <h4 class="card-title" data-i18n="sg.retryTimeline">خط زمانی تلاش مجدد وب‌هوک</h4>
                   </div>
                   <ol class="timeline">
                     <li class="timeline__item">
                       <span class="timeline__rail"><span class="timeline__node is-error"><i data-lucide="x"></i></span></span>
                       <div class="timeline__content">
-                        <div class="timeline__title">Attempt 1 — failed</div>
-                        <div class="timeline__meta">500 Internal Server Error · 2m ago</div>
+                        <div class="timeline__title" data-i18n="sg.attempt1Failed">تلاش ۱ — ناموفق</div>
+                        <div class="timeline__meta" data-i18n="sg.attempt1Meta">خطای داخلی سرور ۵۰۰ · ۲ دقیقه پیش</div>
                       </div>
                     </li>
                     <li class="timeline__item">
                       <span class="timeline__rail"><span class="timeline__node is-pending"><i data-lucide="clock"></i></span></span>
                       <div class="timeline__content">
-                        <div class="timeline__title">Retrying in 2 minutes</div>
-                        <div class="timeline__meta">Exponential backoff · attempt 2 of 5</div>
+                        <div class="timeline__title" data-i18n="sg.retryingIn2">تلاش مجدد تا ۲ دقیقهٔ دیگر</div>
+                        <div class="timeline__meta" data-i18n="sg.backoff">تأخیر نمایی · تلاش ۲ از ۵</div>
                       </div>
                     </li>
                     <li class="timeline__item">
                       <span class="timeline__rail"><span class="timeline__node is-success"><i data-lucide="check"></i></span></span>
                       <div class="timeline__content">
-                        <div class="timeline__title">Attempt 2 — delivered</div>
-                        <div class="timeline__meta">200 OK · 84ms</div>
+                        <div class="timeline__title" data-i18n="sg.attempt2Delivered">تلاش ۲ — تحویل شد</div>
+                        <div class="timeline__meta" data-i18n="sg.attempt2Meta">۲۰۰ OK · ۸۴ میلی‌ثانیه</div>
                       </div>
                     </li>
                   </ol>
@@ -815,19 +709,19 @@ client.emails.send(to="user@example.com")</pre>
               <div class="col-lg-6">
                 <div class="card card--dense h-100">
                   <div class="card-header">
-                    <h4 class="card-title">Overlays & feedback</h4>
+                    <h4 class="card-title" data-i18n="sg.overlays">لایه‌های رویی و بازخورد</h4>
                   </div>
                   <div class="d-flex flex-wrap gap-2">
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#sg-modal">Open modal</button>
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#sg-drawer">Open drawer</button>
-                    <button type="button" class="btn btn-secondary" id="sg-toast">Show toast</button>
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#sg-modal" data-i18n="sg.openModal">باز کردن پنجره</button>
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#sg-drawer" data-i18n="sg.openDrawer">باز کردن کشو</button>
+                    <button type="button" class="btn btn-secondary" id="sg-toast" data-i18n="sg.showToast">نمایش پیام</button>
                     <div class="dropdown">
-                      <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false">Dropdown <i data-lucide="chevron-down"></i></button>
+                      <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false" data-i18n="sg.dropdown">منوی کشویی <i data-lucide="chevron-down"></i></button>
                       <div class="dropdown-menu">
-                        <button type="button" class="dropdown-item"><i data-lucide="copy"></i> Duplicate</button>
-                        <button type="button" class="dropdown-item"><i data-lucide="rotate-ccw"></i> Rotate key</button>
+                        <button type="button" class="dropdown-item" data-i18n="action.duplicate"><i data-lucide="copy"></i> ایجاد کپی</button>
+                        <button type="button" class="dropdown-item" data-i18n="action.rotateKey"><i data-lucide="rotate-ccw"></i> چرخش کلید</button>
                         <hr class="dropdown-divider" />
-                        <button type="button" class="dropdown-item is-danger"><i data-lucide="trash-2"></i> Revoke</button>
+                        <button type="button" class="dropdown-item is-danger" data-i18n="action.revokeIcon"><i data-lucide="trash-2"></i> ابطال</button>
                       </div>
                     </div>
                   </div>
@@ -840,51 +734,46 @@ client.emails.send(to="user@example.com")</pre>
           <section class="card mb-4">
             <div class="card-header">
               <div>
-                <h3 class="card-title">Marketing</h3>
-                <div class="card-subtitle">Landing, pricing, changelog, status and 404 — the <code>layouts/_site</code> shell + <code>pages/_marketing</code> styles. Same tokens, no illustrations.</div>
+                <h3 class="card-title" data-i18n="sg.marketing">صفحات بازاریابی</h3>
+                <div class="card-subtitle" data-i18n="sg.landing-pricing-changelog-status-and-404-the-cod">صفحهٔ فرود، قیمت‌گذاری، گزارش تغییرات، وضعیت و ۴۰۴ — اسکلت <code>layouts/_site</code> به همراه استایل‌های <code>pages/_marketing</code>. توکن‌های یکسان، بدون تصویرسازی.</div>
               </div>
             </div>
             <div class="row g-4">
               <div class="col-lg-6">
-                <div class="eyebrow mb-2">Eyebrow · uppercase only</div>
-                <div class="display mb-2">Display hero</div>
-                <p class="body-lg text-secondary mb-3">Body-large supporting copy under the display headline. Engineered, not decorated.</p>
+                <div class="eyebrow mb-2" data-i18n="sg.eyebrowUpper">برچسب بالای عنوان · فقط حروف بزرگ</div>
+                <div class="display mb-2" data-i18n="sg.displayHero">سرفصل نمایشی</div>
+                <p class="body-lg text-secondary mb-3" data-i18n="sg.body-large-supporting-copy-under-the-display-hea">متن پشتیبانِ بزرگ زیر سرفصل نمایشی. مهندسی‌شده، نه تزئینی.</p>
                 <div class="d-flex gap-2 flex-wrap mb-4">
-                  <a class="btn btn-primary btn-lg" href="./dashboard.html">Primary CTA <i data-lucide="arrow-right"></i></a>
-                  <a class="btn btn-ghost btn-lg" href="./pricing.html">Ghost CTA</a>
+                  <a class="btn btn-primary btn-lg" href="./dashboard.html" data-i18n="sg.primaryCta">دکمهٔ اصلی <i data-lucide="arrow-left"></i></a>
+                  <a class="btn btn-ghost btn-lg" href="./pricing.html" data-i18n="sg.ghostCta">دکمهٔ بی‌زمینه</a>
                 </div>
-                <a class="feature-card" href="./logs.html">
-                  <span class="feature-card__icon"><i data-lucide="scroll-text"></i></span>
-                  <span class="feature-card__title">Feature card</span>
-                  <span class="feature-card__desc">Hover to lift. Links to the matching product page — no dead cards.</span>
-                  <span class="feature-card__link">Explore <i data-lucide="arrow-right"></i></span>
-                </a>
+                <a class="feature-card" href="./logs.html" data-i18n="sg.featureCard"><span class="feature-card__icon"><i data-lucide="scroll-text"></i></span> <span class="feature-card__title">کارت ویژگی</span> <span class="feature-card__desc">با هاور برجسته می‌شود و به صفحهٔ مرتبط محصول پیوند دارد — هیچ کارت بی‌هدفی وجود ندارد.</span> <span class="feature-card__link">بررسی کنید <i data-lucide="arrow-left"></i></span></a>
               </div>
               <div class="col-lg-6">
                 <div class="pricing-card is-featured mb-3">
-                  <span class="badge badge-accent pricing-card__tag">Most popular</span>
-                  <div class="pricing-card__name">Pro</div>
-                  <div class="pricing-card__price"><span class="amount">$49</span><span class="period">/ month</span></div>
+                  <span class="badge badge-accent pricing-card__tag" data-i18n="sg.mostPopular">پرطرفدارترین</span>
+                  <div class="pricing-card__name" data-i18n="pricing.pro">حرفه‌ای</div>
+                  <div class="pricing-card__price" data-i18n="sg.price"><span class="amount">$49</span><span class="period">در ماه</span></div>
                   <ul class="pricing-card__features">
-                    <li><i data-lucide="check"></i> 2,000,000 requests</li>
-                    <li><i data-lucide="check"></i> 3 environments</li>
+                    <li data-i18n="sg.planRequests"><i data-lucide="check"></i> ۲٬۰۰۰٬۰۰۰ درخواست</li>
+                    <li data-i18n="sg.planEnvs"><i data-lucide="check"></i> ۳ محیط</li>
                   </ul>
                 </div>
                 <div class="status-banner mb-3">
                   <span class="status-banner__dot" aria-hidden="true"></span>
                   <div>
-                    <div class="status-banner__title">All systems operational</div>
-                    <div class="status-banner__sub">Status banner</div>
+                    <div class="status-banner__title" data-i18n="status.all-systems-operational">همهٔ سرویس‌ها در دسترس هستند</div>
+                    <div class="status-banner__sub" data-i18n="sg.statusBanner">نوار وضعیت</div>
                   </div>
                 </div>
                 <div class="changelog__item">
                   <div class="changelog__meta">
                     <div class="changelog__version">v2.3.0</div>
-                    <div class="changelog__date">Sep 08, 2026</div>
+                    <div class="changelog__date" data-i18n="changelog.sep-08-2026">۱۷ شهریور ۱۴۰۵</div>
                   </div>
                   <div class="changelog__body">
-                    <h3>Changelog entry</h3>
-                    <ul><li>Versioned release notes with <code>mono</code> tokens.</li></ul>
+                    <h3 data-i18n="sg.changelogEntry">مدخل گزارش تغییرات</h3>
+                    <ul><li data-i18n="sg.versioned-release-notes-with-code-mono-code-toke">یادداشت‌های انتشار نسخه‌بندی‌شده با توکن‌های <code>mono</code>.</li></ul>
                   </div>
                 </div>
               </div>
@@ -895,66 +784,64 @@ client.emails.send(to="user@example.com")</pre>
     </div>
 
     <!-- Mobile sidebar drawer (Bootstrap Offcanvas) -->
-    <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="Primary">
+    <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
       <div class="sidebar-brand">
         <span class="brand-mark"><i data-lucide="zap"></i></span>
         <span class="brand-name">APIForge X</span>
-        <button type="button" class="btn btn-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="Close menu"><i data-lucide="x"></i></button>
+        <button type="button" class="btn btn-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="بستن منو" data-i18n-attr="aria-label:aria.closeMenu"><i data-lucide="x"></i></button>
       </div>
-      <nav class="sidebar-nav" aria-label="Primary">
+      <nav class="sidebar-nav" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
         <div class="nav-group">
-          <div class="nav-group__label">Foundation</div>
-          <a class="nav-item" href="./index.html"><i data-lucide="zap"></i><span>Home</span></a>
-          <a class="nav-item is-active" href="./style-guide.html"><i data-lucide="palette"></i><span>Style Guide</span></a>
-          <a class="nav-item" href="./rtl-test.html"><i data-lucide="languages"></i><span>RTL Test</span></a>
-          <a class="nav-item" href="./rtl.html"><i data-lucide="flask-conical"></i><span>Persian Demo</span></a>
+          <div class="nav-group__label" data-i18n="changelog.foundation">زیرساخت اولیه</div>
+          <a class="nav-item" href="./index.html" data-i18n="sg.navHome"><i data-lucide="zap"></i><span>صفحهٔ اصلی</span></a>
+          <a class="nav-item is-active" href="./style-guide.html" data-i18n="sg.navStyleGuide"><i data-lucide="palette"></i><span>راهنمای استایل</span></a>
+          <a class="nav-item" href="./rtl-persian-test.html" data-i18n="sg.navRtlTest"><i data-lucide="languages"></i><span data-i18n="qa.pageHeading">آزمون راست‌به‌چپ</span></a>
+          <a class="nav-item" href="./rtl.html" data-i18n="sg.navPersianDemo"><i data-lucide="flask-conical"></i><span>نمونهٔ فارسی</span></a>
         </div>
         <div class="nav-group">
-          <div class="nav-group__label">Overview</div>
-          <a class="nav-item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+          <div class="nav-group__label" data-i18n="shell.overview">نمای کلی</div>
+          <a class="nav-item" href="./dashboard.html" data-i18n="nav.overview"><i data-lucide="layout-dashboard"></i><span data-i18n="rtl.groupOverview">نمای کلی</span></a>
         </div>
         <div class="nav-group">
-          <div class="nav-group__label">Developer</div>
-          <a class="nav-item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
-          <a class="nav-item" href="./endpoints.html"><i data-lucide="braces"></i><span>Endpoints</span></a>
-          <a class="nav-item" href="./api-keys.html"><i data-lucide="key"></i><span>API Keys</span></a>
-          <a class="nav-item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
-          <a class="nav-item" href="./webhooks.html"><i data-lucide="webhook"></i><span>Webhooks</span></a>
-          <a class="nav-item" href="./docs.html"><i data-lucide="book-open"></i><span>Documentation</span></a>
-          <a class="nav-item" href="./sdk.html"><i data-lucide="package"></i><span>SDKs</span></a>
-          <a class="nav-item" href="./api-reference.html"><i data-lucide="book-marked"></i><span>API Reference</span></a>
+          <div class="nav-group__label" data-i18n="shell.developer">توسعه‌دهنده</div>
+          <a class="nav-item" href="./apis.html" data-i18n="nav.apis"><i data-lucide="code-2"></i><span>APIها</span></a>
+          <a class="nav-item" href="./endpoints.html" data-i18n="nav.endpoints"><i data-lucide="braces"></i><span>نقاط پایانی</span></a>
+          <a class="nav-item" href="./api-keys.html" data-i18n="nav.apiKeys"><i data-lucide="key"></i><span>کلیدهای API</span></a>
+          <a class="nav-item" href="./logs.html" data-i18n="nav.logs"><i data-lucide="scroll-text"></i><span>لاگ‌ها</span></a>
+          <a class="nav-item" href="./webhooks.html" data-i18n="nav.webhooks"><i data-lucide="webhook"></i><span>وب‌هوک‌ها</span></a>
+          <a class="nav-item" href="./docs.html" data-i18n="nav.docs"><i data-lucide="book-open"></i><span>مستندات</span></a>
+          <a class="nav-item" href="./sdk.html" data-i18n="nav.sdks"><i data-lucide="package"></i><span>SDKها</span></a>
+          <a class="nav-item" href="./api-reference.html" data-i18n="nav.apiReference"><i data-lucide="book-marked"></i><span>مرجع API</span></a>
         </div>
         <div class="nav-group">
-          <div class="nav-group__label">Analytics</div>
-          <a class="nav-item" href="./usage.html"><i data-lucide="bar-chart-3"></i><span>Usage</span></a>
-          <a class="nav-item" href="./errors.html"><i data-lucide="bug"></i><span>Errors</span></a>
-          <a class="nav-item" href="./rate-limits.html"><i data-lucide="gauge"></i><span>Rate Limits</span></a>
-          <a class="nav-item" href="./metrics.html"><i data-lucide="activity"></i><span>Metrics</span></a>
+          <div class="nav-group__label" data-i18n="shell.analytics">تحلیل‌ها</div>
+          <a class="nav-item" href="./usage.html" data-i18n="nav.usage"><i data-lucide="bar-chart-3"></i><span>میزان استفاده</span></a>
+          <a class="nav-item" href="./errors.html" data-i18n="nav.errors"><i data-lucide="bug"></i><span>خطاها</span></a>
+          <a class="nav-item" href="./rate-limits.html" data-i18n="nav.rateLimits"><i data-lucide="gauge"></i><span>محدودیت نرخ</span></a>
+          <a class="nav-item" href="./metrics.html" data-i18n="nav.metrics"><i data-lucide="activity"></i><span>متریک‌ها</span></a>
         </div>
         <div class="nav-group">
-          <div class="nav-group__label">Workspace</div>
-          <a class="nav-item" href="./environments.html"><i data-lucide="server"></i><span>Environments</span></a>
-          <a class="nav-item" href="./team.html"><i data-lucide="users"></i><span>Team</span></a>
-          <a class="nav-item" href="./billing.html"><i data-lucide="credit-card"></i><span>Billing</span></a>
-          <a class="nav-item" href="./notifications.html"><i data-lucide="bell"></i><span>Notifications</span></a>
+          <div class="nav-group__label" data-i18n="shell.workspace">فضای کاری</div>
+          <a class="nav-item" href="./environments.html" data-i18n="nav.environments"><i data-lucide="server"></i><span>محیط‌ها</span></a>
+          <a class="nav-item" href="./team.html" data-i18n="nav.team"><i data-lucide="users"></i><span>تیم</span></a>
+          <a class="nav-item" href="./billing.html" data-i18n="nav.billing"><i data-lucide="credit-card"></i><span>صورت‌حساب</span></a>
+          <a class="nav-item" href="./notifications.html" data-i18n="nav.notifications"><i data-lucide="bell"></i><span>اعلان‌ها</span></a>
         </div>
         <div class="nav-group">
-          <div class="nav-group__label">Account</div>
-          <a class="nav-item" href="./profile.html"><i data-lucide="user"></i><span>Profile</span></a>
-          <a class="nav-item" href="./settings.html"><i data-lucide="settings"></i><span>Settings</span></a>
+          <div class="nav-group__label" data-i18n="shell.account">حساب کاربری</div>
+          <a class="nav-item" href="./profile.html" data-i18n="nav.profile"><i data-lucide="user"></i><span>نمایه</span></a>
+          <a class="nav-item" href="./settings.html" data-i18n="nav.settings"><i data-lucide="settings"></i><span>تنظیمات</span></a>
         </div>
       </nav>
     </div>
 
     <!-- Mobile bottom tab bar -->
-    <nav class="bottom-tabbar" aria-label="Primary mobile">
-      <a class="bottom-tabbar__item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
-      <a class="bottom-tabbar__item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
-      <a class="bottom-tabbar__item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
-      <a class="bottom-tabbar__item is-active" href="./style-guide.html"><i data-lucide="palette"></i><span>Style</span></a>
-      <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="More">
-        <i data-lucide="more-horizontal"></i><span>More</span>
-      </button>
+    <nav class="bottom-tabbar" aria-label="ناوبری موبایل" data-i18n-attr="aria-label:aria.primaryNavMobile">
+      <a class="bottom-tabbar__item" href="./dashboard.html" data-i18n="nav.overview"><i data-lucide="layout-dashboard"></i><span data-i18n="rtl.groupOverview">نمای کلی</span></a>
+      <a class="bottom-tabbar__item" href="./apis.html" data-i18n="nav.apis"><i data-lucide="code-2"></i><span>APIها</span></a>
+      <a class="bottom-tabbar__item" href="./logs.html" data-i18n="nav.logs"><i data-lucide="scroll-text"></i><span>لاگ‌ها</span></a>
+      <a class="bottom-tabbar__item is-active" href="./style-guide.html" data-i18n="sg.tabStyle"><i data-lucide="palette"></i><span>استایل</span></a>
+      <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="بیشتر" data-i18n-attr="aria-label:aria.more" data-i18n="nav.more"><i data-lucide="more-horizontal"></i><span>بیشتر</span></button>
     </nav>
 
     <!-- Modal demo (Bootstrap Modal) -->
@@ -962,26 +849,26 @@ client.emails.send(to="user@example.com")</pre>
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="sg-modal-title">Create API key</h4>
-            <button type="button" class="btn btn-icon" data-bs-dismiss="modal" aria-label="Close"><i data-lucide="x"></i></button>
+            <h4 class="modal-title" id="sg-modal-title" data-i18n="dashboard.create-api-key">ایجاد کلید API</h4>
+            <button type="button" class="btn btn-icon" data-bs-dismiss="modal" aria-label="بستن" data-i18n-attr="aria-label:aria.close"><i data-lucide="x"></i></button>
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <label class="form-label" for="sg-modal-name">Name</label>
-              <input class="form-control" id="sg-modal-name" type="text" placeholder="Production backend" autofocus />
+              <label class="form-label" for="sg-modal-name" data-i18n="table.name">نام</label>
+              <input class="form-control" id="sg-modal-name" type="text" placeholder="بک‌اند محیط تولید" autofocus data-i18n-attr="placeholder:form.productionBackend" />
             </div>
             <div class="form-group mb-0">
-              <label class="form-label" for="sg-modal-exp">Expiration</label>
+              <label class="form-label" for="sg-modal-exp" data-i18n="keys.expiration">زمان انقضا</label>
               <select class="form-select" id="sg-modal-exp">
-                <option>Never</option>
-                <option>30 days</option>
-                <option>90 days</option>
+                <option data-i18n="keys.never">هرگز</option>
+                <option data-i18n="keys.thirtyDays">۳۰ روز</option>
+                <option data-i18n="keys.ninetyDays">۹۰ روز</option>
               </select>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-ghost" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Create key</button>
+            <button type="button" class="btn btn-ghost" data-bs-dismiss="modal" data-i18n="action.cancel">انصراف</button>
+            <button type="button" class="btn btn-primary" data-i18n="action.createKey">ایجاد کلید</button>
           </div>
         </div>
       </div>
@@ -990,11 +877,11 @@ client.emails.send(to="user@example.com")</pre>
     <!-- Drawer demo (Bootstrap Offcanvas) -->
     <div class="offcanvas offcanvas-end" id="sg-drawer" tabindex="-1" aria-labelledby="sg-drawer-title">
       <div class="offcanvas-header">
-        <h4 class="offcanvas-title" id="sg-drawer-title">Request details</h4>
-        <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="Close"><i data-lucide="x"></i></button>
+        <h4 class="offcanvas-title" id="sg-drawer-title" data-i18n="logs.requestDetails">جزئیات درخواست</h4>
+        <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="بستن" data-i18n-attr="aria-label:aria.close"><i data-lucide="x"></i></button>
       </div>
       <div class="offcanvas-body">
-        <p class="text-secondary">Phase 3 wires this drawer to a full request inspector — headers, body JSON, timeline and a "Copy as cURL" action.</p>
+        <p class="text-secondary" data-i18n="sg.phase-3-wires-this-drawer-to-a-full-request-insp">در فاز ۳، این کشو به یک بازرس کامل درخواست متصل می‌شود — هدرها، بدنهٔ JSON، خط زمانی و عملیات «کپی در قالب cURL».</p>
       </div>
     </div>
 

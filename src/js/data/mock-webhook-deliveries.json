@@ -9,7 +9,7 @@
     "attempts": 1,
     "latencyMs": 694,
     "responseCode": 200,
-    "createdAt": "2026-09-07T20:39:10.016Z",
+    "createdAt": "2026-09-08T02:40:36.524Z",
     "payload": {
       "id": "cmpl_SlHDeMB6",
       "model": "forge-1",
@@ -44,22 +44,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=fd17af392ae90e8441e1d6c034ec3f7c463c04dd55dacc59d310e953858e8a36",
+    "signature": "t=1788841656,sha256=fd17af392ae90e8441e1d6c034ec3f7c463c04dd55dacc59d310e953858e8a36",
     "timeline": [
       {
-        "at": "2026-09-07T20:39:10.016Z",
+        "at": "2026-09-08T02:40:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T20:39:10.039Z",
+        "at": "2026-09-08T02:40:36.547Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T20:39:10.733Z",
+        "at": "2026-09-08T02:40:37.241Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 694
@@ -76,7 +76,7 @@
     "attempts": 2,
     "latencyMs": 1991,
     "responseCode": 500,
-    "createdAt": "2026-09-07T20:38:10.016Z",
+    "createdAt": "2026-09-08T02:39:36.524Z",
     "payload": {
       "metric": "requests",
       "threshold": 80,
@@ -114,40 +114,40 @@
         }
       }
     },
-    "signature": "t=1788819970,sha256=96ae9bc7786a5785eafa8f41203216b47573034d4fb7c53900c0f3c5605caf55",
+    "signature": "t=1788841656,sha256=96ae9bc7786a5785eafa8f41203216b47573034d4fb7c53900c0f3c5605caf55",
     "timeline": [
       {
-        "at": "2026-09-07T20:38:10.016Z",
+        "at": "2026-09-08T02:39:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T20:38:10.090Z",
+        "at": "2026-09-08T02:39:36.598Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T20:38:11.086Z",
+        "at": "2026-09-08T02:39:37.594Z",
         "state": "failed",
         "code": 500,
         "latencyMs": 996
       },
       {
-        "at": "2026-09-07T20:40:27.086Z",
+        "at": "2026-09-08T02:41:53.594Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T20:40:28.082Z",
+        "at": "2026-09-08T02:41:54.590Z",
         "state": "failed",
         "code": 502,
         "latencyMs": 996
       },
       {
-        "at": "2026-09-07T20:41:55.082Z",
+        "at": "2026-09-08T02:43:21.590Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
@@ -164,7 +164,7 @@
     "attempts": 1,
     "latencyMs": 637,
     "responseCode": 200,
-    "createdAt": "2026-09-07T20:22:10.014Z",
+    "createdAt": "2026-09-08T02:23:36.523Z",
     "payload": {
       "id": "eml_fqUHK1hJB8",
       "to": "user@example.com",
@@ -199,22 +199,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=169e65f3b50a68217c137ae08352ea9c642704dd82608f604a1b30b6fed04a73",
+    "signature": "t=1788841656,sha256=169e65f3b50a68217c137ae08352ea9c642704dd82608f604a1b30b6fed04a73",
     "timeline": [
       {
-        "at": "2026-09-07T20:22:10.014Z",
+        "at": "2026-09-08T02:23:36.523Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T20:22:10.062Z",
+        "at": "2026-09-08T02:23:36.571Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T20:22:10.699Z",
+        "at": "2026-09-08T02:23:37.208Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 637
@@ -231,7 +231,7 @@
     "attempts": 1,
     "latencyMs": 489,
     "responseCode": 200,
-    "createdAt": "2026-09-07T20:08:10.016Z",
+    "createdAt": "2026-09-08T02:09:36.524Z",
     "payload": {
       "id": "aud_p8n2wgUr",
       "name": "Trial users",
@@ -268,22 +268,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=bc481bd2b354c1fbdd1580a9ea8699186f76d5dc944c8353bc1ea4bc46b13fbf",
+    "signature": "t=1788841656,sha256=bc481bd2b354c1fbdd1580a9ea8699186f76d5dc944c8353bc1ea4bc46b13fbf",
     "timeline": [
       {
-        "at": "2026-09-07T20:08:10.016Z",
+        "at": "2026-09-08T02:09:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T20:08:10.070Z",
+        "at": "2026-09-08T02:09:36.578Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T20:08:10.559Z",
+        "at": "2026-09-08T02:09:37.067Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 489
@@ -300,7 +300,7 @@
     "attempts": 2,
     "latencyMs": 404,
     "responseCode": 200,
-    "createdAt": "2026-09-07T19:40:10.015Z",
+    "createdAt": "2026-09-08T01:41:36.523Z",
     "payload": {
       "id": "aud_v8YplKl6",
       "name": "Churned accounts",
@@ -334,34 +334,34 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=5bd5f847635db82d294ba75f53d1e5f0d130150802f40d5f050bd00c88657091",
+    "signature": "t=1788841656,sha256=5bd5f847635db82d294ba75f53d1e5f0d130150802f40d5f050bd00c88657091",
     "timeline": [
       {
-        "at": "2026-09-07T19:40:10.015Z",
+        "at": "2026-09-08T01:41:36.523Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T19:40:10.059Z",
+        "at": "2026-09-08T01:41:36.567Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T19:40:10.261Z",
+        "at": "2026-09-08T01:41:36.769Z",
         "state": "failed",
         "code": 500,
         "latencyMs": 202
       },
       {
-        "at": "2026-09-07T19:42:56.261Z",
+        "at": "2026-09-08T01:44:22.769Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T19:42:56.463Z",
+        "at": "2026-09-08T01:44:22.971Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 202
@@ -378,7 +378,7 @@
     "attempts": 3,
     "latencyMs": 3454,
     "responseCode": 503,
-    "createdAt": "2026-09-07T19:11:10.016Z",
+    "createdAt": "2026-09-08T01:12:36.524Z",
     "payload": {
       "id": "cmpl_FjzsArdG",
       "model": "forge-1-turbo",
@@ -416,52 +416,52 @@
         }
       }
     },
-    "signature": "t=1788819970,sha256=8b543a60d9689ce5f66ec362b2b0a1ac3f1f3254d066017f2fc609ccdadb0142",
+    "signature": "t=1788841656,sha256=8b543a60d9689ce5f66ec362b2b0a1ac3f1f3254d066017f2fc609ccdadb0142",
     "timeline": [
       {
-        "at": "2026-09-07T19:11:10.016Z",
+        "at": "2026-09-08T01:12:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T19:11:10.039Z",
+        "at": "2026-09-08T01:12:36.547Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T19:11:11.190Z",
+        "at": "2026-09-08T01:12:37.698Z",
         "state": "failed",
         "code": 502,
         "latencyMs": 1151
       },
       {
-        "at": "2026-09-07T19:12:46.190Z",
+        "at": "2026-09-08T01:14:12.698Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T19:12:47.341Z",
+        "at": "2026-09-08T01:14:13.849Z",
         "state": "failed",
         "code": 500,
         "latencyMs": 1151
       },
       {
-        "at": "2026-09-07T19:14:17.341Z",
+        "at": "2026-09-08T01:15:43.849Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T19:14:18.492Z",
+        "at": "2026-09-08T01:15:45.000Z",
         "state": "failed",
         "code": 502,
         "latencyMs": 1151
       },
       {
-        "at": "2026-09-07T19:15:20.492Z",
+        "at": "2026-09-08T01:16:47.000Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
@@ -478,12 +478,12 @@
     "attempts": 1,
     "latencyMs": 364,
     "responseCode": 200,
-    "createdAt": "2026-09-07T18:33:10.014Z",
+    "createdAt": "2026-09-08T00:34:36.522Z",
     "payload": {
       "id": "eml_6MjLlCwFXM",
       "status": "delivered",
       "recipient": "user@example.com",
-      "deliveredAt": "2026-09-07T21:47:10.014Z"
+      "deliveredAt": "2026-09-08T03:48:36.522Z"
     },
     "headers": [
       [
@@ -513,22 +513,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=12a558a1c2ebc01cb095498630621d39de3ec8c4e14dfddae0e63460114ccaa7",
+    "signature": "t=1788841656,sha256=12a558a1c2ebc01cb095498630621d39de3ec8c4e14dfddae0e63460114ccaa7",
     "timeline": [
       {
-        "at": "2026-09-07T18:33:10.014Z",
+        "at": "2026-09-08T00:34:36.522Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T18:33:10.092Z",
+        "at": "2026-09-08T00:34:36.600Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T18:33:10.456Z",
+        "at": "2026-09-08T00:34:36.964Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 364
@@ -545,7 +545,7 @@
     "attempts": 1,
     "latencyMs": 572,
     "responseCode": 200,
-    "createdAt": "2026-09-07T18:18:10.016Z",
+    "createdAt": "2026-09-08T00:19:36.524Z",
     "payload": {
       "id": "cmpl_ZJ8rDpyN",
       "model": "forge-1-turbo",
@@ -580,22 +580,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=b048ecb97aab67c0b1b2ee9af2963e81eb6802a354489c92e8038ef4c28b2122",
+    "signature": "t=1788841656,sha256=b048ecb97aab67c0b1b2ee9af2963e81eb6802a354489c92e8038ef4c28b2122",
     "timeline": [
       {
-        "at": "2026-09-07T18:18:10.016Z",
+        "at": "2026-09-08T00:19:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T18:18:10.052Z",
+        "at": "2026-09-08T00:19:36.560Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T18:18:10.624Z",
+        "at": "2026-09-08T00:19:37.132Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 572
@@ -612,11 +612,11 @@
     "attempts": 4,
     "latencyMs": 1278,
     "responseCode": 503,
-    "createdAt": "2026-09-07T18:09:10.015Z",
+    "createdAt": "2026-09-08T00:10:36.523Z",
     "payload": {
       "id": "aud_N2RhEt4F",
       "name": "Legacy segment",
-      "deletedAt": "2026-09-07T21:25:10.015Z"
+      "deletedAt": "2026-09-08T03:26:36.523Z"
     },
     "headers": [
       [
@@ -649,64 +649,64 @@
         }
       }
     },
-    "signature": "t=1788819970,sha256=d2824e5ad21ce0ad66db80523546f3e83e304cf1126636e8d5fbdbdb082c2b81",
+    "signature": "t=1788841656,sha256=d2824e5ad21ce0ad66db80523546f3e83e304cf1126636e8d5fbdbdb082c2b81",
     "timeline": [
       {
-        "at": "2026-09-07T18:09:10.015Z",
+        "at": "2026-09-08T00:10:36.523Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T18:09:10.042Z",
+        "at": "2026-09-08T00:10:36.550Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T18:09:10.362Z",
+        "at": "2026-09-08T00:10:36.870Z",
         "state": "failed",
         "code": 502,
         "latencyMs": 320
       },
       {
-        "at": "2026-09-07T18:09:59.362Z",
+        "at": "2026-09-08T00:11:25.870Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T18:09:59.682Z",
+        "at": "2026-09-08T00:11:26.190Z",
         "state": "failed",
         "code": 500,
         "latencyMs": 320
       },
       {
-        "at": "2026-09-07T18:12:12.682Z",
+        "at": "2026-09-08T00:13:39.190Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T18:12:13.002Z",
+        "at": "2026-09-08T00:13:39.510Z",
         "state": "failed",
         "code": 502,
         "latencyMs": 320
       },
       {
-        "at": "2026-09-07T18:13:16.002Z",
+        "at": "2026-09-08T00:14:42.510Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T18:13:16.322Z",
+        "at": "2026-09-08T00:14:42.830Z",
         "state": "failed",
         "code": 502,
         "latencyMs": 320
       },
       {
-        "at": "2026-09-07T18:14:32.322Z",
+        "at": "2026-09-08T00:15:58.830Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
@@ -723,7 +723,7 @@
     "attempts": 1,
     "latencyMs": 752,
     "responseCode": 200,
-    "createdAt": "2026-09-07T17:16:10.016Z",
+    "createdAt": "2026-09-07T23:17:36.524Z",
     "payload": {
       "id": "cmpl_xmw1Oz6A",
       "model": "forge-1",
@@ -758,22 +758,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=9fe09938fd5ebbfea30374cb5156e49ba82e64ab0b7d36741e8cbc969529a714",
+    "signature": "t=1788841656,sha256=9fe09938fd5ebbfea30374cb5156e49ba82e64ab0b7d36741e8cbc969529a714",
     "timeline": [
       {
-        "at": "2026-09-07T17:16:10.016Z",
+        "at": "2026-09-07T23:17:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T17:16:10.075Z",
+        "at": "2026-09-07T23:17:36.583Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T17:16:10.827Z",
+        "at": "2026-09-07T23:17:37.335Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 752
@@ -790,12 +790,12 @@
     "attempts": 1,
     "latencyMs": 189,
     "responseCode": 200,
-    "createdAt": "2026-09-07T16:31:10.016Z",
+    "createdAt": "2026-09-07T22:32:36.524Z",
     "payload": {
       "id": "eml_7p8li0HGE8",
       "status": "delivered",
       "recipient": "ops@acme.dev",
-      "deliveredAt": "2026-09-07T22:21:10.016Z"
+      "deliveredAt": "2026-09-08T04:22:36.524Z"
     },
     "headers": [
       [
@@ -825,22 +825,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=61f6d2b07e01d5b7d4561ac572d69d5deced6a22dc89c48ed3ea73660bc7652b",
+    "signature": "t=1788841656,sha256=61f6d2b07e01d5b7d4561ac572d69d5deced6a22dc89c48ed3ea73660bc7652b",
     "timeline": [
       {
-        "at": "2026-09-07T16:31:10.016Z",
+        "at": "2026-09-07T22:32:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T16:31:10.065Z",
+        "at": "2026-09-07T22:32:36.573Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T16:31:10.254Z",
+        "at": "2026-09-07T22:32:36.762Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 189
@@ -857,11 +857,11 @@
     "attempts": 1,
     "latencyMs": 255,
     "responseCode": 200,
-    "createdAt": "2026-09-07T16:11:10.016Z",
+    "createdAt": "2026-09-07T22:12:36.523Z",
     "payload": {
       "id": "aud_Lujb4asz",
       "name": "Legacy segment",
-      "deletedAt": "2026-09-07T20:42:10.016Z"
+      "deletedAt": "2026-09-08T02:43:36.523Z"
     },
     "headers": [
       [
@@ -891,22 +891,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=4abdc3bc17b4360b2b16c1b9636ec67f4d85ab69ffccc6c4679d36708ea43bf5",
+    "signature": "t=1788841656,sha256=4abdc3bc17b4360b2b16c1b9636ec67f4d85ab69ffccc6c4679d36708ea43bf5",
     "timeline": [
       {
-        "at": "2026-09-07T16:11:10.016Z",
+        "at": "2026-09-07T22:12:36.523Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T16:11:10.093Z",
+        "at": "2026-09-07T22:12:36.600Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T16:11:10.348Z",
+        "at": "2026-09-07T22:12:36.855Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 255
@@ -923,7 +923,7 @@
     "attempts": 1,
     "latencyMs": 617,
     "responseCode": 200,
-    "createdAt": "2026-09-07T15:55:10.016Z",
+    "createdAt": "2026-09-07T21:56:36.524Z",
     "payload": {
       "id": "eml_ItXYnBGoRY",
       "status": "bounced",
@@ -959,22 +959,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=a3a30434bbfa9abfed158dd880a97e53dc02688c62da1f1cec5885bd1242684d",
+    "signature": "t=1788841656,sha256=a3a30434bbfa9abfed158dd880a97e53dc02688c62da1f1cec5885bd1242684d",
     "timeline": [
       {
-        "at": "2026-09-07T15:55:10.016Z",
+        "at": "2026-09-07T21:56:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T15:55:10.038Z",
+        "at": "2026-09-07T21:56:36.546Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T15:55:10.655Z",
+        "at": "2026-09-07T21:56:37.163Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 617
@@ -991,7 +991,7 @@
     "attempts": 3,
     "latencyMs": 1926,
     "responseCode": 500,
-    "createdAt": "2026-09-07T15:37:10.016Z",
+    "createdAt": "2026-09-07T21:38:36.524Z",
     "payload": {
       "metric": "requests",
       "threshold": 80,
@@ -1029,52 +1029,52 @@
         }
       }
     },
-    "signature": "t=1788819970,sha256=d9f199c8f8bb7c3a045dccc41bab1277584a756a4b87692b84f67134f06d7d75",
+    "signature": "t=1788841656,sha256=d9f199c8f8bb7c3a045dccc41bab1277584a756a4b87692b84f67134f06d7d75",
     "timeline": [
       {
-        "at": "2026-09-07T15:37:10.016Z",
+        "at": "2026-09-07T21:38:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T15:37:10.059Z",
+        "at": "2026-09-07T21:38:36.567Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T15:37:10.701Z",
+        "at": "2026-09-07T21:38:37.209Z",
         "state": "failed",
         "code": 503,
         "latencyMs": 642
       },
       {
-        "at": "2026-09-07T15:39:30.701Z",
+        "at": "2026-09-07T21:40:57.209Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T15:39:31.343Z",
+        "at": "2026-09-07T21:40:57.851Z",
         "state": "failed",
         "code": 502,
         "latencyMs": 642
       },
       {
-        "at": "2026-09-07T15:41:31.343Z",
+        "at": "2026-09-07T21:42:57.851Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T15:41:31.985Z",
+        "at": "2026-09-07T21:42:58.493Z",
         "state": "failed",
         "code": 502,
         "latencyMs": 642
       },
       {
-        "at": "2026-09-07T15:43:05.985Z",
+        "at": "2026-09-07T21:44:32.493Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
@@ -1091,7 +1091,7 @@
     "attempts": 1,
     "latencyMs": 396,
     "responseCode": 200,
-    "createdAt": "2026-09-07T13:37:10.016Z",
+    "createdAt": "2026-09-07T19:38:36.524Z",
     "payload": {
       "id": "eml_d5t8EdZEJZ",
       "status": "bounced",
@@ -1127,22 +1127,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=2058b5f69c78c65a05924e7121f7bbe350b5f76d31d1f36e153096e813f94c66",
+    "signature": "t=1788841656,sha256=2058b5f69c78c65a05924e7121f7bbe350b5f76d31d1f36e153096e813f94c66",
     "timeline": [
       {
-        "at": "2026-09-07T13:37:10.016Z",
+        "at": "2026-09-07T19:38:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T13:37:10.104Z",
+        "at": "2026-09-07T19:38:36.612Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T13:37:10.500Z",
+        "at": "2026-09-07T19:38:37.008Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 396
@@ -1159,7 +1159,7 @@
     "attempts": 1,
     "latencyMs": 485,
     "responseCode": 200,
-    "createdAt": "2026-09-07T10:52:10.014Z",
+    "createdAt": "2026-09-07T16:53:36.523Z",
     "payload": {
       "id": "eml_qz7wruQ2iI",
       "to": "user@example.com",
@@ -1194,22 +1194,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=9f073af30d2d7a0432eec2c294ba631bc80b7be8227e120119745284307ca9bb",
+    "signature": "t=1788841656,sha256=9f073af30d2d7a0432eec2c294ba631bc80b7be8227e120119745284307ca9bb",
     "timeline": [
       {
-        "at": "2026-09-07T10:52:10.014Z",
+        "at": "2026-09-07T16:53:36.523Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T10:52:10.080Z",
+        "at": "2026-09-07T16:53:36.589Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T10:52:10.565Z",
+        "at": "2026-09-07T16:53:37.074Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 485
@@ -1226,7 +1226,7 @@
     "attempts": 1,
     "latencyMs": 4766,
     "responseCode": null,
-    "createdAt": "2026-09-07T10:51:10.016Z",
+    "createdAt": "2026-09-07T16:52:36.524Z",
     "payload": {
       "id": "cmpl_IdGjG5a6",
       "model": "forge-1",
@@ -1256,34 +1256,34 @@
       ]
     ],
     "response": null,
-    "signature": "t=1788819970,sha256=a6ea44f48e556198cbcd25331c1629a048731138a01b68c60fb7a6306219d6b3",
+    "signature": "t=1788841656,sha256=a6ea44f48e556198cbcd25331c1629a048731138a01b68c60fb7a6306219d6b3",
     "timeline": [
       {
-        "at": "2026-09-07T10:51:10.016Z",
+        "at": "2026-09-07T16:52:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T10:51:10.060Z",
+        "at": "2026-09-07T16:52:36.568Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T10:51:14.826Z",
+        "at": "2026-09-07T16:52:41.334Z",
         "state": "failed",
         "code": 502,
         "latencyMs": 4766
       },
       {
-        "at": "2026-09-07T10:52:23.826Z",
+        "at": "2026-09-07T16:53:50.334Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T10:54:13.826Z",
+        "at": "2026-09-07T16:55:40.334Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
@@ -1300,12 +1300,12 @@
     "attempts": 1,
     "latencyMs": 871,
     "responseCode": 200,
-    "createdAt": "2026-09-07T10:06:10.014Z",
+    "createdAt": "2026-09-07T16:07:36.522Z",
     "payload": {
       "id": "eml_0sMtFKt0of",
       "status": "delivered",
       "recipient": "ops@acme.dev",
-      "deliveredAt": "2026-09-07T21:26:10.014Z"
+      "deliveredAt": "2026-09-08T03:27:36.522Z"
     },
     "headers": [
       [
@@ -1335,22 +1335,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=207dcb31e07cf5c12c22f6d0a8f52f67a64c608e9f515e857c62edae73bcef6e",
+    "signature": "t=1788841656,sha256=207dcb31e07cf5c12c22f6d0a8f52f67a64c608e9f515e857c62edae73bcef6e",
     "timeline": [
       {
-        "at": "2026-09-07T10:06:10.014Z",
+        "at": "2026-09-07T16:07:36.522Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T10:06:10.048Z",
+        "at": "2026-09-07T16:07:36.556Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T10:06:10.919Z",
+        "at": "2026-09-07T16:07:37.427Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 871
@@ -1367,11 +1367,11 @@
     "attempts": 2,
     "latencyMs": 815,
     "responseCode": 200,
-    "createdAt": "2026-09-07T08:45:10.015Z",
+    "createdAt": "2026-09-07T14:46:36.523Z",
     "payload": {
       "id": "aud_T4hqNvNU",
       "name": "Legacy segment",
-      "deletedAt": "2026-09-07T22:16:10.015Z"
+      "deletedAt": "2026-09-08T04:17:36.523Z"
     },
     "headers": [
       [
@@ -1401,34 +1401,34 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=d764d8d545e84c3e71b0deae663b623b3419fb8bf66d44511ff47d070c7a269e",
+    "signature": "t=1788841656,sha256=d764d8d545e84c3e71b0deae663b623b3419fb8bf66d44511ff47d070c7a269e",
     "timeline": [
       {
-        "at": "2026-09-07T08:45:10.015Z",
+        "at": "2026-09-07T14:46:36.523Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T08:45:10.098Z",
+        "at": "2026-09-07T14:46:36.606Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T08:45:10.506Z",
+        "at": "2026-09-07T14:46:37.014Z",
         "state": "failed",
         "code": 503,
         "latencyMs": 408
       },
       {
-        "at": "2026-09-07T08:46:25.506Z",
+        "at": "2026-09-07T14:47:52.014Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T08:46:25.914Z",
+        "at": "2026-09-07T14:47:52.422Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 408
@@ -1445,12 +1445,12 @@
     "attempts": 1,
     "latencyMs": 531,
     "responseCode": 200,
-    "createdAt": "2026-09-07T07:03:10.016Z",
+    "createdAt": "2026-09-07T13:04:36.524Z",
     "payload": {
       "id": "eml_1m6boX1wks",
       "status": "delivered",
       "recipient": "user@example.com",
-      "deliveredAt": "2026-09-07T21:55:10.016Z"
+      "deliveredAt": "2026-09-08T03:56:36.524Z"
     },
     "headers": [
       [
@@ -1480,22 +1480,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=62c6321fe85a2a47bb2f16550d1a9f22742d75ba9d753356c27320766abf15b0",
+    "signature": "t=1788841656,sha256=62c6321fe85a2a47bb2f16550d1a9f22742d75ba9d753356c27320766abf15b0",
     "timeline": [
       {
-        "at": "2026-09-07T07:03:10.016Z",
+        "at": "2026-09-07T13:04:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T07:03:10.094Z",
+        "at": "2026-09-07T13:04:36.602Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T07:03:10.625Z",
+        "at": "2026-09-07T13:04:37.133Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 531
@@ -1512,7 +1512,7 @@
     "attempts": 2,
     "latencyMs": 666,
     "responseCode": 200,
-    "createdAt": "2026-09-07T06:19:10.016Z",
+    "createdAt": "2026-09-07T12:20:36.524Z",
     "payload": {
       "id": "eml_svrRxSFx1H",
       "to": "jane@yourco.io",
@@ -1547,34 +1547,34 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=111078e4c9a644a9703dc467d07c800563bc4e0712a950179163688af9c5ce36",
+    "signature": "t=1788841656,sha256=111078e4c9a644a9703dc467d07c800563bc4e0712a950179163688af9c5ce36",
     "timeline": [
       {
-        "at": "2026-09-07T06:19:10.016Z",
+        "at": "2026-09-07T12:20:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T06:19:10.062Z",
+        "at": "2026-09-07T12:20:36.570Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T06:19:10.395Z",
+        "at": "2026-09-07T12:20:36.903Z",
         "state": "failed",
         "code": 502,
         "latencyMs": 333
       },
       {
-        "at": "2026-09-07T06:20:39.395Z",
+        "at": "2026-09-07T12:22:05.903Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T06:20:39.728Z",
+        "at": "2026-09-07T12:22:06.236Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 333
@@ -1591,7 +1591,7 @@
     "attempts": 1,
     "latencyMs": 218,
     "responseCode": 200,
-    "createdAt": "2026-09-07T04:29:10.016Z",
+    "createdAt": "2026-09-07T10:30:36.524Z",
     "payload": {
       "id": "eml_kuoXPsQgPV",
       "to": "jane@yourco.io",
@@ -1626,22 +1626,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=d09525a5eeb292d983210962a5f7f067349613acca636c40ebdc4ac5e7e37a18",
+    "signature": "t=1788841656,sha256=d09525a5eeb292d983210962a5f7f067349613acca636c40ebdc4ac5e7e37a18",
     "timeline": [
       {
-        "at": "2026-09-07T04:29:10.016Z",
+        "at": "2026-09-07T10:30:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T04:29:10.046Z",
+        "at": "2026-09-07T10:30:36.554Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T04:29:10.264Z",
+        "at": "2026-09-07T10:30:36.772Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 218
@@ -1658,7 +1658,7 @@
     "attempts": 2,
     "latencyMs": 426,
     "responseCode": 200,
-    "createdAt": "2026-09-07T04:11:10.016Z",
+    "createdAt": "2026-09-07T10:12:36.524Z",
     "payload": {
       "id": "eml_4O4vNBmVtS",
       "status": "bounced",
@@ -1694,34 +1694,34 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=d3d0f9ca045362e8762bb54c9d979cf77572ac9b61495aed137cfd3d23cf7665",
+    "signature": "t=1788841656,sha256=d3d0f9ca045362e8762bb54c9d979cf77572ac9b61495aed137cfd3d23cf7665",
     "timeline": [
       {
-        "at": "2026-09-07T04:11:10.016Z",
+        "at": "2026-09-07T10:12:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T04:11:10.099Z",
+        "at": "2026-09-07T10:12:36.607Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T04:11:10.312Z",
+        "at": "2026-09-07T10:12:36.820Z",
         "state": "failed",
         "code": 502,
         "latencyMs": 213
       },
       {
-        "at": "2026-09-07T04:13:09.312Z",
+        "at": "2026-09-07T10:14:35.820Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T04:13:09.525Z",
+        "at": "2026-09-07T10:14:36.033Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 213
@@ -1738,12 +1738,12 @@
     "attempts": 1,
     "latencyMs": 847,
     "responseCode": 200,
-    "createdAt": "2026-09-07T01:18:10.016Z",
+    "createdAt": "2026-09-07T07:19:36.524Z",
     "payload": {
       "id": "eml_oiBk3zBy5E",
       "status": "delivered",
       "recipient": "user@example.com",
-      "deliveredAt": "2026-09-07T21:42:10.016Z"
+      "deliveredAt": "2026-09-08T03:43:36.524Z"
     },
     "headers": [
       [
@@ -1773,22 +1773,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=08d0ef5c6629d5a5c8b18e1e4eb64b64050d9543a3a5d92320a19c0612aa6fae",
+    "signature": "t=1788841656,sha256=08d0ef5c6629d5a5c8b18e1e4eb64b64050d9543a3a5d92320a19c0612aa6fae",
     "timeline": [
       {
-        "at": "2026-09-07T01:18:10.016Z",
+        "at": "2026-09-07T07:19:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T01:18:10.047Z",
+        "at": "2026-09-07T07:19:36.555Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T01:18:10.894Z",
+        "at": "2026-09-07T07:19:37.402Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 847
@@ -1805,12 +1805,12 @@
     "attempts": 4,
     "latencyMs": 5315,
     "responseCode": 500,
-    "createdAt": "2026-09-07T00:45:10.016Z",
+    "createdAt": "2026-09-07T06:46:36.524Z",
     "payload": {
       "metric": "requests",
       "limit": 500000,
       "window": "day",
-      "reachedAt": "2026-09-07T21:45:10.016Z"
+      "reachedAt": "2026-09-08T03:46:36.524Z"
     },
     "headers": [
       [
@@ -1843,64 +1843,64 @@
         }
       }
     },
-    "signature": "t=1788819970,sha256=e0caa2f931135e12ebb195edec5542796abf5dca594fc47f856253ae16c0dd98",
+    "signature": "t=1788841656,sha256=e0caa2f931135e12ebb195edec5542796abf5dca594fc47f856253ae16c0dd98",
     "timeline": [
       {
-        "at": "2026-09-07T00:45:10.016Z",
+        "at": "2026-09-07T06:46:36.524Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T00:45:10.097Z",
+        "at": "2026-09-07T06:46:36.605Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T00:45:11.426Z",
+        "at": "2026-09-07T06:46:37.934Z",
         "state": "failed",
         "code": 503,
         "latencyMs": 1329
       },
       {
-        "at": "2026-09-07T00:46:41.426Z",
+        "at": "2026-09-07T06:48:07.934Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T00:46:42.755Z",
+        "at": "2026-09-07T06:48:09.263Z",
         "state": "failed",
         "code": 503,
         "latencyMs": 1329
       },
       {
-        "at": "2026-09-07T00:48:23.755Z",
+        "at": "2026-09-07T06:49:50.263Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T00:48:25.084Z",
+        "at": "2026-09-07T06:49:51.592Z",
         "state": "failed",
         "code": 500,
         "latencyMs": 1329
       },
       {
-        "at": "2026-09-07T00:51:20.084Z",
+        "at": "2026-09-07T06:52:46.592Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-07T00:51:21.413Z",
+        "at": "2026-09-07T06:52:47.921Z",
         "state": "failed",
         "code": 503,
         "latencyMs": 1329
       },
       {
-        "at": "2026-09-07T00:52:54.413Z",
+        "at": "2026-09-07T06:54:20.921Z",
         "state": "retrying",
         "code": null,
         "latencyMs": null
@@ -1917,7 +1917,7 @@
     "attempts": 1,
     "latencyMs": 404,
     "responseCode": 200,
-    "createdAt": "2026-09-06T23:01:10.014Z",
+    "createdAt": "2026-09-07T05:02:36.523Z",
     "payload": {
       "id": "eml_TGSXpqbSFj",
       "status": "bounced",
@@ -1953,22 +1953,22 @@
         "ok": true
       }
     },
-    "signature": "t=1788819970,sha256=8333d836fac022959153c604efff77c8c056dc2c6eac0e5b0fe011c61457cfd5",
+    "signature": "t=1788841656,sha256=8333d836fac022959153c604efff77c8c056dc2c6eac0e5b0fe011c61457cfd5",
     "timeline": [
       {
-        "at": "2026-09-06T23:01:10.014Z",
+        "at": "2026-09-07T05:02:36.523Z",
         "state": "created",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-06T23:01:10.090Z",
+        "at": "2026-09-07T05:02:36.599Z",
         "state": "sent",
         "code": null,
         "latencyMs": null
       },
       {
-        "at": "2026-09-06T23:01:10.494Z",
+        "at": "2026-09-07T05:02:37.003Z",
         "state": "delivered",
         "code": 200,
         "latencyMs": 404

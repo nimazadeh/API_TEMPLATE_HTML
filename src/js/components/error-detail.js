@@ -10,13 +10,14 @@ import { Offcanvas } from '../core/bootstrap.js';
 import { escapeHtml, relativeTime, absoluteTime, formatNumber } from '../utils/format.js';
 import { bindCopyButton } from './copy.js';
 import { createIcons, icons } from './icons.js';
+import { t } from '../core/i18n.js';
 
 const SEVERITY = {
-  error: { label: 'Error', cls: 'badge-status--error', icon: 'alert-circle' },
-  warning: { label: 'Warning', cls: 'badge-status--warning', icon: 'alert-triangle' },
+  error: { key: 'severity.error', cls: 'badge-status--error', icon: 'alert-circle' },
+  warning: { key: 'severity.warning', cls: 'badge-status--warning', icon: 'alert-triangle' },
 };
 
-const TEAM = ['Arash P.', 'Sara R.'];
+const TEAM = ['علی رضایی', 'سارا احمدی'];
 
 function kvTable(rows) {
   return `<table class="kv"><tbody>${rows
@@ -33,9 +34,9 @@ function stackBlock(error) {
   return `
     <div class="code-block code-block--flush stack">
       <div class="code-block__header">
-        <span class="code-block__lang"><i data-lucide="bug"></i> Stack trace</span>
+        <span class="code-block__lang"><i data-lucide="bug"></i> ${t('errors.stackTrace')}</span>
         <div class="code-block__actions">
-          <button type="button" class="btn btn-icon btn-icon--sm" data-copy data-copy-target="#err-stack" aria-label="Copy stack trace"><i data-lucide="copy"></i></button>
+          <button type="button" class="btn btn-icon btn-icon--sm" data-copy data-copy-target="#err-stack" aria-label="${t('aria.copyStackTrace')}"><i data-lucide="copy"></i></button>
         </div>
       </div>
       <pre class="code-block__body" id="err-stack"><code>${lines.join('\n')}</code></pre>
@@ -55,64 +56,64 @@ export function openErrorDrawer(error, opts = {}) {
   body.innerHTML = `
     <div class="inspector-head">
       <div class="d-flex align-items-center gap-2 flex-wrap mb-2">
-        <span class="badge badge-status ${severity.cls}"><span class="dot"></span>${severity.label}</span>
+        <span class="badge badge-status ${severity.cls}"><span class="dot"></span>${t(severity.key)}</span>
         <span class="badge badge-neutral ltr-isolate">${escapeHtml(error.type)}</span>
-        <span class="badge badge-status ${resolved ? 'badge-status--success' : 'badge-status--warning'}"><span class="dot"></span>${resolved ? 'Resolved' : 'Unresolved'}</span>
+        <span class="badge badge-status ${resolved ? 'badge-status--success' : 'badge-status--warning'}"><span class="dot"></span>${resolved ? t('status.resolved') : t('status.unresolved')}</span>
       </div>
       <div class="fw-medium text-body ltr-isolate" style="word-break:break-word">${escapeHtml(error.message)}</div>
       <div class="d-flex align-items-center gap-3 mt-2 text-secondary caption flex-wrap">
-        <span class="d-inline-flex align-items-center gap-1"><i data-lucide="activity"></i> ${formatNumber(error.occurrences)} occurrences</span>
-        <span class="d-inline-flex align-items-center gap-1" title="${escapeHtml(absoluteTime(error.lastSeen))}"><i data-lucide="calendar"></i> last seen ${relativeTime(error.lastSeen)}</span>
+        <span class="d-inline-flex align-items-center gap-1"><i data-lucide="activity"></i> ${formatNumber(error.occurrences)} ${t('errors.occurrencesUnit')}</span>
+        <span class="d-inline-flex align-items-center gap-1" title="${escapeHtml(absoluteTime(error.lastSeen))}"><i data-lucide="calendar"></i> ${t('errors.lastSeenPrefix')} ${relativeTime(error.lastSeen)}</span>
         <span class="d-inline-flex align-items-center gap-1"><i data-lucide="globe"></i> ${escapeHtml(error.environment)}</span>
         ${error.assignee ? `<span class="d-inline-flex align-items-center gap-1"><i data-lucide="users"></i> ${escapeHtml(error.assignee)}</span>` : ''}
       </div>
       <div class="d-flex align-items-center gap-2 mt-3">
-        <button type="button" class="btn btn-sm btn-secondary" data-error-action="resolve"><i data-lucide="circle-check"></i> ${resolved ? 'Reopen' : 'Mark resolved'}</button>
+        <button type="button" class="btn btn-sm btn-secondary" data-error-action="resolve"><i data-lucide="circle-check"></i> ${resolved ? t('errors.reopen') : t('errors.markResolved')}</button>
         <div class="dropdown" data-error-assign>
-          <button type="button" class="btn btn-sm btn-ghost" data-bs-toggle="dropdown" aria-expanded="false"><i data-lucide="users"></i> Assign</button>
+          <button type="button" class="btn btn-sm btn-ghost" data-bs-toggle="dropdown" aria-expanded="false"><i data-lucide="users"></i> ${t('errors.assign')}</button>
           <div class="dropdown-menu">
             ${TEAM.map((name) => `<button type="button" class="dropdown-item" data-assign="${escapeHtml(name)}"><i data-lucide="users"></i> ${escapeHtml(name)}</button>`).join('')}
             <hr class="dropdown-divider" />
-            <button type="button" class="dropdown-item" data-assign=""><i data-lucide="ban"></i> Unassigned</button>
+            <button type="button" class="dropdown-item" data-assign=""><i data-lucide="ban"></i> ${t('errors.unassigned')}</button>
           </div>
         </div>
       </div>
     </div>
 
     <section class="inspector-section">
-      <h4 class="inspector-label">Stack trace</h4>
+      <h4 class="inspector-label">${t('errors.stackTrace')}</h4>
       ${stackBlock(error)}
     </section>
 
     <section class="inspector-section">
-      <h4 class="inspector-label">Request information</h4>
+      <h4 class="inspector-label">${t('errors.requestInfo')}</h4>
       ${kvTable([
-        ['Method', error.request.method],
-        ['URL', error.request.url],
-        ['API key', error.request.keyPrefix + '…'],
-        ['User-Agent', error.request.userAgent],
-        ['IP address', error.request.ip],
-        ['Request ID', error.request.id],
+        [t('table.method'), error.request.method],
+        [t('inspector.url'), error.request.url],
+        [t('inspector.apiKey'), error.request.keyPrefix + '…'],
+        [t('inspector.userAgent'), error.request.userAgent],
+        [t('inspector.ip'), error.request.ip],
+        [t('table.requestId'), error.request.id],
       ])}
     </section>
 
     <section class="inspector-section">
-      <h4 class="inspector-label">User context</h4>
+      <h4 class="inspector-label">${t('errors.userContext')}</h4>
       ${kvTable([
-        ['User ID', error.user.id],
-        ['Email', error.user.email],
-        ['Plan', error.user.plan],
+        [t('inspector.userId'), error.user.id],
+        [t('table.email'), error.user.email],
+        [t('inspector.plan'), error.user.plan],
       ])}
     </section>
 
     <section class="inspector-section">
-      <h4 class="inspector-label">Environment</h4>
+      <h4 class="inspector-label">${t('inspector.environment')}</h4>
       ${kvTable([
-        ['Environment', error.environment],
-        ['Endpoint', `${error.endpoint.method} ${error.endpoint.path}`],
-        ['First seen', absoluteTime(error.firstSeen)],
-        ['Last seen', absoluteTime(error.lastSeen)],
-        ...(error.resolvedAt ? [['Resolved at', absoluteTime(error.resolvedAt)]] : []),
+        [t('inspector.environment'), error.environment],
+        [t('table.endpoint'), `${error.endpoint.method} ${error.endpoint.path}`],
+        [t('errors.firstSeen'), absoluteTime(error.firstSeen)],
+        [t('errors.lastSeen'), absoluteTime(error.lastSeen)],
+        ...(error.resolvedAt ? [[t('errors.resolvedAt'), absoluteTime(error.resolvedAt)]] : []),
       ])}
     </section>`;
 

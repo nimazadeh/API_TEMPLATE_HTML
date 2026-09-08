@@ -7,7 +7,8 @@
 // =============================================================
 
 import { Offcanvas } from '../core/bootstrap.js';
-import { escapeHtml, latencyText } from '../utils/format.js';
+import { escapeHtml, latencyText, absoluteTime } from '../utils/format.js';
+import { t } from '../core/i18n.js';
 import { copyText, flashCopied } from './copy.js';
 import { createIcons, icons } from './icons.js';
 
@@ -36,16 +37,28 @@ const STATUS_TEXT = {
   500: 'Internal Server Error', 502: 'Bad Gateway', 503: 'Service Unavailable',
 };
 
+// Error explanations are user-facing copy, so they are translated on
+// read (never at import time) — flipping the locale re-renders them.
 const ERRORS = {
-  400: { code: 'invalid_request', message: 'The request body could not be parsed.', explanation: 'Check that all required fields are present and correctly typed, then retry.', docsUrl: 'https://docs.apiforge.dev/errors/invalid_request' },
-  401: { code: 'invalid_api_key', message: 'The Authorization header was missing or invalid.', explanation: 'Pass a valid API key as a Bearer token. Keys are managed under API Keys.', docsUrl: 'https://docs.apiforge.dev/errors/invalid_api_key' },
-  403: { code: 'insufficient_scope', message: 'This key is missing the required scope.', explanation: 'Add the required scope to the key, or use a key with broader grants.', docsUrl: 'https://docs.apiforge.dev/errors/insufficient_scope' },
-  404: { code: 'not_found', message: 'The requested resource does not exist.', explanation: 'Verify the id in the path and that the resource has not been deleted.', docsUrl: 'https://docs.apiforge.dev/errors/not_found' },
-  429: { code: 'rate_limit_exceeded', message: 'You have exceeded your rate limit.', explanation: 'Back off and retry after the reset window, or upgrade your plan.', docsUrl: 'https://docs.apiforge.dev/errors/rate_limit_exceeded' },
-  500: { code: 'internal_error', message: 'Something went wrong on our side.', explanation: 'This is unexpected. Our team has been notified — retry in a moment.', docsUrl: 'https://docs.apiforge.dev/errors/internal_error' },
-  502: { code: 'upstream_unavailable', message: 'An upstream dependency timed out.', explanation: 'Retry with exponential backoff; the upstream is recovering.', docsUrl: 'https://docs.apiforge.dev/errors/upstream_unavailable' },
-  503: { code: 'service_unavailable', message: 'The service is temporarily overloaded.', explanation: 'Retry after a short wait; the Retry-After header hints the delay.', docsUrl: 'https://docs.apiforge.dev/errors/service_unavailable' },
+  400: { code: 'invalid_request', messageKey: 'error.invalidRequestMessage', explanationKey: 'error.invalidRequestExplanation', docsUrl: 'https://docs.apiforge.dev/errors/invalid_request' },
+  401: { code: 'invalid_api_key', messageKey: 'error.invalidKeyMessage', explanationKey: 'error.invalidKeyExplanation', docsUrl: 'https://docs.apiforge.dev/errors/invalid_api_key' },
+  403: { code: 'insufficient_scope', messageKey: 'error.insufficientScopeMessage', explanationKey: 'error.insufficientScopeExplanation', docsUrl: 'https://docs.apiforge.dev/errors/insufficient_scope' },
+  404: { code: 'not_found', messageKey: 'error.notFoundMessage', explanationKey: 'error.notFoundExplanation', docsUrl: 'https://docs.apiforge.dev/errors/not_found' },
+  429: { code: 'rate_limit_exceeded', messageKey: 'error.rateLimitMessage', explanationKey: 'error.rateLimitExplanation', docsUrl: 'https://docs.apiforge.dev/errors/rate_limit_exceeded' },
+  500: { code: 'internal_error', messageKey: 'error.internalMessage', explanationKey: 'error.internalExplanation', docsUrl: 'https://docs.apiforge.dev/errors/internal_error' },
+  502: { code: 'upstream_unavailable', messageKey: 'error.upstreamMessage', explanationKey: 'error.upstreamExplanation', docsUrl: 'https://docs.apiforge.dev/errors/upstream_unavailable' },
+  503: { code: 'service_unavailable', messageKey: 'error.unavailableMessage', explanationKey: 'error.unavailableExplanation', docsUrl: 'https://docs.apiforge.dev/errors/service_unavailable' },
 };
+
+function errorFor(status) {
+  const raw = ERRORS[status] || ERRORS[500];
+  return {
+    code: raw.code,
+    message: t(raw.messageKey),
+    explanation: t(raw.explanationKey),
+    docsUrl: raw.docsUrl,
+  };
+}
 
 const REQUEST_BODIES = {
   '/v1/emails': { to: 'user@example.com', subject: 'Welcome to APIForge', html: '<p>Thanks for signing up.</p>', from: 'team@yourco.dev' },
@@ -75,7 +88,7 @@ export function buildLogDetail(log) {
   const base = baseOf(log.path);
   const isGet = log.method === 'GET';
   const statusText = STATUS_TEXT[log.status] || 'Unknown';
-  const error = log.status >= 400 ? ERRORS[log.status] || ERRORS[500] : null;
+  const error = log.status >= 400 ? errorFor(log.status) : null;
 
   const queue = Math.round(log.latencyMs * (0.08 + rnd() * 0.1));
   const processing = Math.round(log.latencyMs * (0.55 + rnd() * 0.15));
@@ -140,7 +153,7 @@ function jsonWell(body) {
       <div class="code-block__header">
         <span class="code-block__lang"><i data-lucide="braces"></i> JSON</span>
         <div class="code-block__actions">
-          <button type="button" class="btn btn-icon btn-icon--sm" data-copy-json aria-label="Copy JSON"><i data-lucide="copy"></i></button>
+          <button type="button" class="btn btn-icon btn-icon--sm" data-copy-json aria-label="${t('aria.copyJson')}"><i data-lucide="copy"></i></button>
         </div>
       </div>
       <pre class="code-block__body"><code>${escapeHtml(text)}</code></pre>
@@ -166,26 +179,26 @@ export function openLogDrawer(log, drawerEl = document.querySelector('#log-drawe
       </div>
       <div class="d-flex align-items-center gap-3 mt-2 text-secondary caption">
         <span class="d-inline-flex align-items-center gap-1"><i data-lucide="timer"></i> ${latencyText(d.latencyMs)}</span>
-        <span class="d-inline-flex align-items-center gap-1"><i data-lucide="calendar"></i> ${escapeHtml(new Date(d.timestamp).toLocaleString('en-GB'))}</span>
+        <span class="d-inline-flex align-items-center gap-1"><i data-lucide="calendar"></i> ${escapeHtml(absoluteTime(d.timestamp))}</span>
         <span class="d-inline-flex align-items-center gap-1"><i data-lucide="globe"></i> ${d.env}</span>
       </div>
     </div>
 
     <section class="inspector-section">
-      <h4 class="inspector-label">Timing</h4>
+      <h4 class="inspector-label">${t('inspector.timing')}</h4>
       <div class="timing-bars">
         <div class="timing-row">
-          <span class="timing-row__name">Queue</span>
+          <span class="timing-row__name">${t('inspector.queue')}</span>
           <div class="timing-row__track"><div class="timing-row__fill" style="width:${Math.max(4, (d.timing.queue / d.latencyMs) * 100)}%"></div></div>
           <span class="timing-row__value">${d.timing.queue}ms</span>
         </div>
         <div class="timing-row">
-          <span class="timing-row__name">Processing</span>
+          <span class="timing-row__name">${t('inspector.processing')}</span>
           <div class="timing-row__track"><div class="timing-row__fill is-accent" style="width:${Math.max(4, (d.timing.processing / d.latencyMs) * 100)}%"></div></div>
           <span class="timing-row__value">${d.timing.processing}ms</span>
         </div>
         <div class="timing-row">
-          <span class="timing-row__name">Response</span>
+          <span class="timing-row__name">${t('inspector.response')}</span>
           <div class="timing-row__track"><div class="timing-row__fill is-muted" style="width:${Math.max(4, (d.timing.response / d.latencyMs) * 100)}%"></div></div>
           <span class="timing-row__value">${d.timing.response}ms</span>
         </div>
@@ -194,8 +207,8 @@ export function openLogDrawer(log, drawerEl = document.querySelector('#log-drawe
 
     <section class="inspector-section">
       <div class="d-flex align-items-center justify-content-between mb-2">
-        <h4 class="inspector-label mb-0">Request</h4>
-        <button type="button" class="btn btn-sm btn-ghost" data-copy-curl aria-label="Copy as cURL"><i data-lucide="copy"></i> Copy as cURL</button>
+        <h4 class="inspector-label mb-0">${t('inspector.request')}</h4>
+        <button type="button" class="btn btn-sm btn-ghost" data-copy-curl aria-label="${t('inspector.copyAsCurl')}"><i data-lucide="copy"></i> ${t('inspector.copyAsCurl')}</button>
       </div>
       <div class="code-block code-block--flush mb-2">
         <div class="code-block__header"><span class="code-block__lang"><i data-lucide="terminal"></i> cURL</span></div>
@@ -203,19 +216,19 @@ export function openLogDrawer(log, drawerEl = document.querySelector('#log-drawe
       </div>
       ${d.request.query ? kvTable(Object.entries(d.request.query)) : ''}
       ${d.request.body ? jsonWell(d.request.body) : ''}
-      <div class="inspector-sub mt-2">Headers</div>
+      <div class="inspector-sub mt-2">${t('inspector.headers')}</div>
       ${kvTable(d.request.headers)}
     </section>
 
     <section class="inspector-section">
-      <h4 class="inspector-label">Response</h4>
+      <h4 class="inspector-label">${t('inspector.response')}</h4>
       ${d.error ? `
         <div class="alert alert-danger mb-2" role="alert">
           <span class="alert-icon"><i data-lucide="alert-circle"></i></span>
           <div class="alert-content">
             <div class="fw-medium">${escapeHtml(d.error.message)}</div>
             <div class="mt-1">${escapeHtml(d.error.explanation)}</div>
-            <a class="d-inline-flex align-items-center gap-1 mt-1" href="${d.error.docsUrl}" target="_blank" rel="noopener">Read the docs <i data-lucide="external-link"></i></a>
+            <a class="d-inline-flex align-items-center gap-1 mt-1" href="${d.error.docsUrl}" target="_blank" rel="noopener">${t('inspector.readDocs')} <i data-lucide="external-link"></i></a>
           </div>
         </div>` : ''}
       ${jsonWell(d.response.body)}
@@ -224,8 +237,8 @@ export function openLogDrawer(log, drawerEl = document.querySelector('#log-drawe
     </section>
 
     <section class="inspector-section">
-      <h4 class="inspector-label">Context</h4>
-      ${kvTable([['Environment', d.env], ['API key', d.key + '…'], ['IP address', d.ip], ['Region', d.region]])}
+      <h4 class="inspector-label">${t('inspector.context')}</h4>
+      ${kvTable([[t('inspector.environment'), d.env], [t('inspector.apiKey'), d.key + '…'], [t('inspector.ip'), d.ip], [t('inspector.region'), d.region]])}
     </section>`;
 
   createIcons({ icons });

@@ -4,7 +4,8 @@
 // (↑ ↓ Enter Esc). Vanilla JS, no library. Source: D-010.
 // =============================================================
 
-import { commandGroups } from '../data/commands.js';
+import { getCommandGroups } from '../data/commands.js';
+import { t, onLocaleChange } from '../core/i18n.js';
 import { createIcons, icons } from './icons.js';
 import { escapeHtml } from '../utils/format.js';
 
@@ -46,6 +47,23 @@ function highlight(text, query) {
   return out;
 }
 
+function paletteMarkup() {
+  return `
+    <div class="cmd-dialog">
+      <div class="cmd-input-row">
+        <i data-lucide="search"></i>
+        <input type="text" placeholder="${t('palette.placeholder')}" aria-label="${t('palette.searchAria')}" autocomplete="off" spellcheck="false" />
+        <kbd>esc</kbd>
+      </div>
+      <div class="cmd-results" role="listbox"></div>
+      <div class="cmd-footer">
+        <span class="cmd-footer__key"><kbd>↑</kbd><kbd>↓</kbd> ${t('palette.navigate')}</span>
+        <span class="cmd-footer__key"><kbd>↵</kbd> ${t('palette.select')}</span>
+        <span class="cmd-footer__key"><kbd>esc</kbd> ${t('palette.close')}</span>
+      </div>
+    </div>`;
+}
+
 function buildPalette() {
   let wrap = document.querySelector('.command-palette');
   if (wrap) return wrap;
@@ -53,22 +71,9 @@ function buildPalette() {
   wrap.className = 'command-palette';
   wrap.setAttribute('role', 'dialog');
   wrap.setAttribute('aria-modal', 'true');
-  wrap.setAttribute('aria-label', 'Command palette');
+  wrap.setAttribute('aria-label', t('palette.title'));
   wrap.hidden = true;
-  wrap.innerHTML = `
-    <div class="cmd-dialog">
-      <div class="cmd-input-row">
-        <i data-lucide="search"></i>
-        <input type="text" placeholder="Search pages and actions…" aria-label="Search commands" autocomplete="off" spellcheck="false" />
-        <kbd>esc</kbd>
-      </div>
-      <div class="cmd-results" role="listbox"></div>
-      <div class="cmd-footer">
-        <span class="cmd-footer__key"><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
-        <span class="cmd-footer__key"><kbd>↵</kbd> select</span>
-        <span class="cmd-footer__key"><kbd>esc</kbd> close</span>
-      </div>
-    </div>`;
+  wrap.innerHTML = paletteMarkup();
   document.body.appendChild(wrap);
   createIcons({ icons });
   return wrap;
@@ -83,7 +88,7 @@ function render() {
   if (!box) return;
   const flat = flatResults();
   if (!flat.length) {
-    box.innerHTML = `<div class="cmd-empty">No results for “${escapeHtml(state.query)}”</div>`;
+    box.innerHTML = `<div class="cmd-empty">${t('palette.noResults', { query: escapeHtml(state.query) })}</div>`;
     return;
   }
   const selected = flat[Math.min(state.selected, flat.length - 1)];
@@ -99,7 +104,7 @@ function render() {
             <span class="cmd-item__icon"><i data-lucide="${item.icon}"></i></span>
             <span class="cmd-item__body">
               <span class="cmd-item__title">${highlight(item.title, state.query)}</span>
-              <span class="cmd-item__desc">${highlight(item.desc, state.query)}${item.disabled ? ' · Phase 3+' : ''}</span>
+              <span class="cmd-item__desc">${highlight(item.desc, state.query)}${item.disabled ? ' · ' + t('common.soon') : ''}</span>
             </span>
             ${item.href ? '<span class="cmd-item__hint">↵</span>' : ''}
           </button>`
@@ -112,7 +117,7 @@ function render() {
 }
 
 function search(query) {
-  return commandGroups
+  return getCommandGroups()
     .map((g) => ({
       label: g.label,
       items: g.items
@@ -182,13 +187,36 @@ export function initCommandPalette() {
   const wrap = buildPalette();
   const input = wrap.querySelector('input');
 
+  // Re-translate the chrome and the index when the locale flips.
+  onLocaleChange(() => {
+    const w = document.querySelector('.command-palette');
+    if (!w) return;
+    w.setAttribute('aria-label', t('palette.title'));
+    w.innerHTML = paletteMarkup();
+    createIcons({ icons });
+    const box = w.querySelector('.cmd-results');
+    state.results = search(state.query);
+    state.selected = 0;
+    render();
+    if (box) box.scrollTop = 0;
+    wireInput(w.querySelector('input'));
+  });
+
+  wireInput(input);
+}
+
+/**
+ * Wire the palette input (re-bound after a locale change rebuilds
+ * the dialog markup).
+ */
+function wireInput(input) {
+  if (!input) return;
   input.addEventListener('input', () => {
     state.query = input.value;
     state.results = search(input.value);
     state.selected = 0;
     render();
   });
-
   input.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();

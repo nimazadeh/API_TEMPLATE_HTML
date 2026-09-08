@@ -8,12 +8,12 @@
     "version": "1.7.2",
     "install": "npm install @apiforge/sdk",
     "registry": "npm",
-    "updated": "2026-09-04T23:52:12.548Z",
+    "updated": "2026-09-05T04:27:36.526Z",
     "features": [
-      "TypeScript types",
-      "Streaming support",
-      "Retry + idempotency",
-      "Webhook signature helper"
+      "تایپ‌های TypeScript",
+      "پشتیبانی از جریان",
+      "تلاش مجدد و یکتایی",
+      "ابزار بررسی امضای وب‌هوک"
     ],
     "docsUrl": "./docs.html"
   },
@@ -26,12 +26,12 @@
     "version": "2.1.0",
     "install": "npm install apiforge",
     "registry": "npm",
-    "updated": "2026-08-29T23:52:12.548Z",
+    "updated": "2026-08-30T04:27:36.526Z",
     "features": [
-      "Zero-dependency",
-      "Streaming support",
-      "Retry + idempotency",
-      "Works in ESM & CJS"
+      "بدون وابستگی",
+      "پشتیبانی از جریان",
+      "تلاش مجدد و یکتایی",
+      "سازگار با ESM و CJS"
     ],
     "docsUrl": "./docs.html"
   },
@@ -44,12 +44,12 @@
     "version": "1.4.1",
     "install": "pip install apiforge",
     "registry": "PyPI",
-    "updated": "2026-08-24T23:52:12.548Z",
+    "updated": "2026-08-25T04:27:36.526Z",
     "features": [
-      "Async + sync clients",
-      "Typed responses",
-      "Retry + idempotency",
-      "pytest fixtures"
+      "کلاینت همزمان و ناهمزمان",
+      "پاسخ‌های تایپ‌شده",
+      "تلاش مجدد و یکتایی",
+      "فیکسچرهای pytest"
     ],
     "docsUrl": "./docs.html"
   },
@@ -62,11 +62,11 @@
     "version": "0.9.3",
     "install": "composer require apiforge/apiforge-php",
     "registry": "Packagist",
-    "updated": "2026-08-16T23:52:12.548Z",
+    "updated": "2026-08-17T04:27:36.526Z",
     "features": [
-      "PSR-18 compatible",
-      "Guzzle transport",
-      "Webhook signature helper"
+      "سازگار با PSR-18",
+      "انتقال بر پایهٔ Guzzle",
+      "ابزار بررسی امضای وب‌هوک"
     ],
     "docsUrl": "./docs.html"
   },
@@ -79,11 +79,11 @@
     "version": "1.2.4",
     "install": "go get github.com/apiforge/apiforge-go",
     "registry": "Go modules",
-    "updated": "2026-08-27T23:52:12.548Z",
+    "updated": "2026-08-28T04:27:36.526Z",
     "features": [
-      "Context-aware",
-      "Zero allocations on hot path",
-      "Retry + idempotency"
+      "آگاه از context",
+      "بدون تخصیص حافظه در مسیر پرمصرف",
+      "تلاش مجدد و یکتایی"
     ],
     "docsUrl": "./docs.html"
   },
@@ -96,11 +96,11 @@
     "version": "0.8.0",
     "install": "gem install apiforge",
     "registry": "RubyGems",
-    "updated": "2026-08-08T23:52:12.548Z",
+    "updated": "2026-08-09T04:27:36.526Z",
     "features": [
-      "ActiveSupport integration",
-      "Retry + idempotency",
-      "Webhook signature helper"
+      "یکپارچه با ActiveSupport",
+      "تلاش مجدد و یکتایی",
+      "ابزار بررسی امضای وب‌هوک"
     ],
     "docsUrl": "./docs.html"
   }

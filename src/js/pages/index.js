@@ -7,9 +7,10 @@
 // =============================================================
 
 import { bootSite } from '../site.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { makeChart, axis, tooltips, initCharts } from '../components/charts.js';
 import { createIcons, icons } from '../components/icons.js';
-import { compactNumber, relativeTime, escapeHtml } from '../utils/format.js';
+import { compactNumber, relativeTime, escapeHtml, percent, latencyText } from '../utils/format.js';
 import observability from '../data/mock-observability.json';
 import activity from '../data/mock-activity.json';
 import plans from '../data/mock-plans.json';
@@ -30,10 +31,10 @@ function renderKpis() {
   const k = observability.ranges['24h'];
   const host = document.getElementById('hero-kpis');
   const cards = [
-    { label: 'Requests · 24h', value: compactNumber(k.requests), foot: 'across all endpoints' },
-    { label: 'Error rate', value: `${k.errorRate}%`, foot: '2xx / non-2xx responses' },
-    { label: 'P95 latency', value: `${k.p95}ms`, foot: 'p99 ' + `${k.p99}ms` },
-    { label: 'Availability', value: `${k.availability}%`, foot: 'rolling 24 hours' },
+    { label: tr('kpi.requests24h'), value: compactNumber(k.requests), foot: tr('dashboard.acrossEndpoints') },
+    { label: tr('metrics.errorRate'), value: percent(k.errorRate), foot: tr('kpi.responseSplit') },
+    { label: tr('kpi.p95Latency'), value: latencyText(k.p95), foot: `${tr('kpi.p99')} ${latencyText(k.p99)}` },
+    { label: tr('kpi.availability'), value: percent(k.availability, 2), foot: tr('kpi.rolling24') },
   ];
   host.innerHTML = cards
     .map(
@@ -108,16 +109,16 @@ function renderPricingTeaser() {
     .map(
       (p) => `
       <div class="pricing-card${p.highlight ? ' is-featured' : ''}">
-        <span class="badge ${p.highlight ? 'badge-accent' : 'badge-neutral'} pricing-card__tag">${p.highlight ? 'Most popular' : p.name}</span>
+        <span class="badge ${p.highlight ? 'badge-accent' : 'badge-neutral'} pricing-card__tag">${p.highlight ? tr('sg.mostPopular') : p.name}</span>
         <div class="pricing-card__name">${p.name}</div>
         <div class="pricing-card__price"><span class="amount">${p.priceLabel}</span><span class="period">${p.period}</span></div>
         <p class="pricing-card__blurb">${p.blurb}</p>
         <ul class="pricing-card__features">
-          <li><i data-lucide="check"></i> ${p.requests} requests</li>
-          <li><i data-lucide="check"></i> ${p.environments} environments</li>
-          <li><i data-lucide="check"></i> ${p.webhooks} webhook endpoints</li>
+          <li><i data-lucide="check"></i> ${tr('plans.requestsValue', { value: p.requests })}</li>
+          <li><i data-lucide="check"></i> ${tr('plans.environmentsValue', { value: p.environments })}</li>
+          <li><i data-lucide="check"></i> ${tr('plans.webhooksValue', { value: p.webhooks })}</li>
         </ul>
-        <a class="btn ${p.highlight ? 'btn-primary' : 'btn-ghost'} pricing-card__cta" href="./pricing.html">${p.highlight ? 'Choose ' + p.name : 'Start with ' + p.name}</a>
+        <a class="btn ${p.highlight ? 'btn-primary' : 'btn-ghost'} pricing-card__cta" href="./pricing.html">${p.highlight ? tr('pricing.choosePlan', { plan: p.name }) : tr('pricing.startWithPlan', { plan: p.name })}</a>
       </div>`
     )
     .join('');
@@ -128,3 +129,11 @@ renderKpis();
 renderChart();
 renderActivity();
 renderPricingTeaser();
+
+// Re-render the live preview when the locale flips.
+onLocaleChange(() => {
+  renderKpis();
+  renderChart();
+  renderActivity();
+  renderPricingTeaser();
+});

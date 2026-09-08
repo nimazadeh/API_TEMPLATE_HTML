@@ -8,6 +8,7 @@
 
 import '../scss/main.scss';
 
+import { initI18n } from './core/i18n.js';
 import { initIcons } from './components/icons.js';
 import { initTheme } from './components/theme.js';
 import { initCopy } from './components/copy.js';
@@ -43,6 +44,7 @@ function initDrawerLinks() {
 }
 
 export function bootSite() {
+  initI18n();
   initIcons();
   initTheme();
   initCopy();

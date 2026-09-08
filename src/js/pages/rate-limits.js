@@ -6,9 +6,10 @@
 // =============================================================
 
 import { boot } from '../main.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { makeChart, axis, tooltips, initCharts } from '../components/charts.js';
 import { createIcons, icons } from '../components/icons.js';
-import { escapeHtml, formatNumber, compactNumber } from '../utils/format.js';
+import { escapeHtml, formatNumber, compactNumber, number } from '../utils/format.js';
 import rateLimits from '../data/mock-rate-limits.json';
 
 boot();
@@ -40,8 +41,8 @@ function renderBanner() {
     <div class="alert ${hasBreach ? 'alert-danger' : 'alert-warning'}" role="alert">
       <span class="alert-icon"><i data-lucide="${hasBreach ? 'alert-circle' : 'alert-triangle'}"></i></span>
       <div class="alert-content">
-        <div class="fw-medium">${hasBreach ? `Rate limit breached: ${escapeHtml(names)}` : 'Approaching your rate limits'}</div>
-        <div class="mt-1">${hasBreach ? 'Requests are returning 429 until the window resets. Review your limits below.' : 'One or more limits are above 80%. Consider raising limits or upgrading your plan.'}</div>
+        <div class="fw-medium">${hasBreach ? tr('ratelimits.breached', { names: escapeHtml(names) }) : tr('ratelimits.approaching')}</div>
+        <div class="mt-1">${hasBreach ? tr('ratelimits.breachedBody') : tr('ratelimits.approachingBody')}</div>
       </div>
     </div>`;
   createIcons({ icons });
@@ -57,7 +58,7 @@ function card(label, v, icon) {
         <i data-lucide="${icon}"></i>
       </div>
       <div class="limit-card__value">${formatNumber(v.used)} <span class="limit-card__limit">/ ${formatNumber(v.limit)}</span></div>
-      <div class="progress" role="img" aria-label="${Math.round(p)}% used">
+      <div class="progress" role="img" aria-label="${tr('usage.pctUsed', { pct: number(Math.round(p)) })}">
         <div class="progress-bar ${barClass(p)}" style="width:${p.toFixed(1)}%"></div>
       </div>
       <span class="limit-card__reset"><i data-lucide="clock"></i> Resets in ${escapeHtml(v.resetIn)}</span>
@@ -68,7 +69,7 @@ function renderCards() {
   document.getElementById('rl-cards').innerHTML =
     card('Requests / minute', current.perMinute, 'clock') +
     card('Requests / day', current.perDay, 'calendar') +
-    card('Monthly quota', current.monthly, 'pie-chart');
+    card(tr('ratelimits.monthlyQuota'), current.monthly, 'pie-chart');
   createIcons({ icons });
 }
 
@@ -81,7 +82,7 @@ function renderHistoryChart() {
       datasets: [
         {
           type: 'bar',
-          label: 'Requests',
+          label: tr('table.requests'),
           data: history.map((d) => d.used),
           backgroundColor: t.accent,
           hoverBackgroundColor: t.accent,
@@ -91,7 +92,7 @@ function renderHistoryChart() {
         },
         {
           type: 'line',
-          label: 'Daily limit',
+          label: tr('ratelimits.dailyLimit'),
           data: history.map((d) => d.limit),
           borderColor: t.error,
           borderDash: [6, 4],
@@ -165,7 +166,7 @@ function renderRules() {
         <td><span class="badge badge-neutral">${escapeHtml(r.window)}</span></td>
         <td>
           <div class="rule-usage">
-            <div class="progress" role="img" aria-label="${Math.round(p)}% used">
+            <div class="progress" role="img" aria-label="${tr('usage.pctUsed', { pct: number(Math.round(p)) })}">
               <div class="progress-bar ${barClass(p)}" style="width:${p.toFixed(1)}%"></div>
             </div>
             <span class="rule-usage__value">${r.current} / ${r.limit}</span>
@@ -185,3 +186,14 @@ renderCards();
 renderHistoryChart();
 renderQuotaChart();
 renderRules();
+
+function render() {
+  renderBanner();
+  renderCards();
+  renderHistoryChart();
+  renderQuotaChart();
+  renderRules();
+}
+
+// Re-render when the locale flips.
+onLocaleChange(render);

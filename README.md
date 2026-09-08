@@ -6,12 +6,17 @@ A dark-first, keyboard-first, **RTL first-class** HTML template for API platform
 depth-over-breadth developer tool surface in the spirit of Stripe, Resend,
 Vercel and Linear.
 
-> **Status:** Phase 4 (Marketplace Excellence & Commercial Polish) **complete** ✅ —
-> all 30 pages (26 product/auth + landing/pricing/changelog/status/404), keyboard
-> shortcuts, buyer docs and marketplace assets. Headless runtime QA 114/114
-> scenario steps green across 30 pages; static + a11y audits clean; visual/responsive
-> audits static-only (no browser in the sandbox — see `/marketplace/SCREENSHOTS_MANIFEST.md`
-> for the capture script that produces real screenshots). See `/project-state/PROJECT_STATE.md`.
+> **Status:** Phase 5 (Persian RTL Localization & Marketplace Readiness) **complete** ✅ —
+> the template is now **Persian-first and bilingual (fa ⇄ en)**: every page ships in
+> Farsi with `dir="rtl"`, ~1,260 translation keys in `src/locales/fa.json` +
+> `src/locales/en.json`, a live language/direction switch in every header, Jalali dates,
+> Persian digits, Persian seeded mock data, and a dedicated `rtl-persian-test.html`
+> QA harness. All 30 pages build; no hardcoded UI strings remain. See
+> `/PHASE_5_REPORT.md` and `/project-state/PROJECT_STATE.md`.
+
+> **فتح بازار ایران:** متن رابط کاملاً فارسی و تخصصی، راست‌به‌چپ واقعی با ویژگی‌های
+> منطقی، فونت وزیرمتن محلی، تاریخ شمسی و ارقام فارسی، دادهٔ نمایشی فارسی و تغییر
+> زنده به انگلیسی — آمادهٔ فروش در راست‌چین.
 
 ## Stack
 
@@ -71,7 +76,7 @@ Foundation pages:
 |------|---------|
 | `/` | Premium marketing landing — hero with a **live** product preview, features, page directory, pricing teaser |
 | `/style-guide.html` | The living component contract — every primitive (incl. marketing), both themes, RTL/LTR |
-| `/rtl-test.html` | RTL/LTR test harness — mixed-direction scenarios, theme + direction switching |
+| `/rtl-persian-test.html` | **Persian RTL QA harness** — mixed-script sentences, digits, LTR isolation, code blocks, tables, forms, charts, dropdowns, modals, pagination, alerts + live fa/en & theme switching |
 | `/rtl.html` | Persian / RTL demo — sidebar right, Vazirmatn, LTR-isolated code |
 
 Marketing pages (Phase 4):
@@ -99,11 +104,14 @@ src/
     layouts/    # app shell, sidebar, header, mobile nav, site (marketing shell)
     pages/      # per-page styles (rtl-test, usage, errors, rate-limits, marketing)
     main.scss
+  locales/    # fa.json + en.json — the full translation catalogs (~1,260 keys)
   js/
     core/       # bootstrap.js — Bootstrap ESM data-API imports
+                # i18n.js — locale resolution, t(), [data-i18n] painter, RTL/LTR sync
     components/ # theme, env switcher, command palette, code block, copy, icons,
                 # log/webhook/error detail drawers, charts, shortcuts, …
     data/       # mock JSON (regenerate: node scripts/generate-mock-data.mjs)
+                # docs-content.{en,fa}.js — long-form docs, authored per locale
     utils/      # formatting (relative time, latency, badges, Persian digits)
     pages/      # per-page entry scripts
     main.js     # shared boot() — app pages
@@ -121,14 +129,43 @@ marketplace/    # buyer assets: screenshot manifest, description copy, capture s
 - Bootstrap utilities are bridged to the token system (`--bs-*` → `--surface-*` /
   `--accent` / `--border`) so `.text-primary`, `.bg-body`, `.border` stay theme-aware.
 
+## Localization (Persian ⇄ English)
+
+The template is **Persian-first**: the markup ships in Farsi and every visible
+label is bound to a translation key.
+
+| Piece | Where |
+|-------|-------|
+| Translation catalogs | `src/locales/fa.json`, `src/locales/en.json` |
+| Runtime | `src/js/core/i18n.js` — `t()`, `setLocale()`, `onLocaleChange()`, `[data-i18n]` painter |
+| Binding a static string | `data-i18n="nav.logs"` (uses `innerHTML` when the value carries markup) |
+| Binding an attribute | `data-i18n-attr="aria-label:aria.searchLogs,placeholder:form.searchEndpoint"` |
+| Binding a JS string | `import { t } from '../core/i18n.js'` — `t('logs.countOf', { shown, total })` |
+| Long-form docs | `src/js/data/docs-content.{en,fa}.js` + the `docs-content.js` locale dispatcher |
+
+- **No flash.** An inline `<head>` script reads `localStorage('afx-locale')` and sets
+  `<html lang dir>` before first paint; `initI18n()` then paints the catalog.
+- **Live switching.** A language control in every header (app, marketing and auth
+  pages) flips locale, direction and every JS-rendered string without a reload.
+- **Locale-aware formatting.** `src/js/utils/format.js` switches numbers, compact
+  numbers, dates (Jalali in Persian), relative time and percentages on
+  `afx:localechange`; page modules re-render charts, tables and drawers.
+
 ## RTL / Persian
 
-- All layout uses logical properties (`margin-inline`, `inset-inline-end`, …) so
-  the app mirrors automatically under `<html dir="rtl" lang="fa">`.
-- Code, keys, endpoints, IDs and URLs are LTR-isolated:
+- All layout uses logical properties (`margin-inline`, `padding-inline`,
+  `inset-inline`, `border-inline`) so the app mirrors automatically under
+  `<html dir="rtl" lang="fa">`.
+- Code, keys, endpoints, IDs, tokens, IPs, UUIDs and URLs are LTR-isolated:
   `dir="ltr"` + `.ltr-isolate { direction: ltr; unicode-bidi: isolate; }`.
-- Persian digits via `.num-fa`, Western digits via `.num-en`.
+- Persian digits for prose and counts (`Intl` with `fa-IR`), Latin digits for
+  tabular data; Jalali dates in the Persian locale.
 - Charts and code blocks remain LTR regardless of document direction.
+- Directional glyphs (arrow / chevron) mirror in RTL; explicit back/next controls
+  pick their glyph per direction (`.no-dir-flip`).
+- **`rtl.html`** — the polished Persian app demo.
+  **`rtl-persian-test.html`** — the RTL QA harness (mixed-script sentences, digits,
+  isolation, code, tables, forms, charts, dropdowns, modals, pagination, alerts).
 
 ## Customization reference
 
@@ -140,8 +177,9 @@ Every common change is one file:
 | Change spacing / radius / type scale | `src/scss/tokens/_spacing.scss` / `_radius.scss` / `_typography.scss` |
 | Change the fonts | `src/scss/base/_fonts.scss` (self-hosted Fontsource imports) |
 | Change the sidebar / nav items | the `<nav class="sidebar-nav">` block on every page, and `src/js/data/commands.js` for the palette |
+| Add or change a translation | `src/locales/fa.json` + `src/locales/en.json` (keys are referenced by `data-i18n` / `t()`) |
 | Change marketing nav / footer | the `.site-header` / `.site-footer` blocks on the marketing pages |
-| Flip the whole app to RTL | set `<html dir="rtl" lang="fa">` (logical properties handle the rest; see `rtl.html`) |
+| Flip the whole app to RTL | `setLocale('fa')` — or set `<html dir="rtl" lang="fa">`; logical properties handle the rest (see `rtl.html`) |
 | Add or change an icon | `src/js/components/icons.js` (tree-shaken registry) |
 | Add a page | see “Adding a page” below |
 

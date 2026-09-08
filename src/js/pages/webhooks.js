@@ -10,6 +10,7 @@ import { boot } from '../main.js';
 import { createIcons, icons } from '../components/icons.js';
 import { openDeliveryDrawer, renderDeliveryDrawer } from '../components/webhook-detail.js';
 import { afxToast } from '../components/toast.js';
+import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { escapeHtml, relativeTime, absoluteTime, latencyText } from '../utils/format.js';
 import webhooksData from '../data/mock-webhooks.json';
 import deliveriesData from '../data/mock-webhook-deliveries.json';
@@ -25,20 +26,25 @@ const STATUS_BADGE = {
   retrying: 'badge-status--warning',
   pending: 'badge-status--info',
 };
-const STATUS_LABEL = { delivered: 'Delivered', failed: 'Failed', retrying: 'Retrying', pending: 'Pending' };
+const STATUS_LABEL = {
+  delivered: 'webhooks.statusDelivered',
+  failed: 'webhooks.statusFailed',
+  retrying: 'webhooks.statusRetrying',
+  pending: 'webhooks.statusPending',
+};
 const ENV = {
-  live: { label: 'Live', cls: 'badge-status--success' },
-  staging: { label: 'Staging', cls: 'badge-status--warning' },
-  test: { label: 'Test', cls: 'badge-status--info' },
+  live: { label: 'env.production', cls: 'badge-status--success' },
+  staging: { label: 'env.staging', cls: 'badge-status--warning' },
+  test: { label: 'env.testOption', cls: 'badge-status--info' },
 };
 
 function envBadge(env) {
   const e = ENV[env] || ENV.live;
-  return `<span class="badge badge-status ${e.cls}"><span class="dot"></span>${e.label}</span>`;
+  return `<span class="badge badge-status ${e.cls}"><span class="dot"></span>${tr(e.label)}</span>`;
 }
 
 function statusBadge(status) {
-  return `<span class="badge badge-status ${STATUS_BADGE[status] || STATUS_BADGE.pending}"><span class="dot"></span>${STATUS_LABEL[status] || STATUS_LABEL.pending}</span>`;
+  return `<span class="badge badge-status ${STATUS_BADGE[status] || STATUS_BADGE.pending}"><span class="dot"></span>${tr(STATUS_LABEL[status] || STATUS_LABEL.pending)}</span>`;
 }
 
 function eventBadges(events) {
@@ -72,8 +78,8 @@ function renderWebhooks() {
   if (!webhooks.length) {
     tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state">
       <span class="empty-icon"><i data-lucide="webhook"></i></span>
-      <h4 class="empty-title">No webhook endpoints</h4>
-      <p class="empty-desc mb-0">Add your first endpoint to start receiving real-time events.</p>
+      <h4 class="empty-title">${tr('webhooks.noEndpointsTitle')}</h4>
+      <p class="empty-desc mb-0">${tr('webhooks.noEndpointsDesc')}</p>
     </div></td></tr>`;
   } else {
     tbody.innerHTML = webhooks
@@ -99,8 +105,8 @@ function renderDeliveries() {
   if (!deliveries.length) {
     tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state">
       <span class="empty-icon"><i data-lucide="scroll-text"></i></span>
-      <h4 class="empty-title">No deliveries yet</h4>
-      <p class="empty-desc mb-0">Deliveries will appear here as events are sent to your endpoints.</p>
+      <h4 class="empty-title">${tr('webhooks.noDeliveriesTitle')}</h4>
+      <p class="empty-desc mb-0">${tr('webhooks.noDeliveriesDesc')}</p>
     </div></td></tr>`;
   } else {
     tbody.innerHTML = deliveries
@@ -137,7 +143,7 @@ function onRetry(d) {
   const now = new Date().toISOString();
   d.timeline.push({ at: now, state: 'sent', code: null, latencyMs: null });
   d.timeline.push({ at: now, state: 'delivered', code: 200, latencyMs: d.latencyMs });
-  afxToast({ message: 'Delivery retried — 200 OK', type: 'success' });
+  afxToast({ message: tr('webhooks.toastRetried'), type: 'success' });
   render();
   renderDeliveryDrawer(d, { onRetry, onReplay });
 }
@@ -154,7 +160,7 @@ function onReplay(d) {
     timeline: [],
   };
   deliveries.unshift(copy);
-  afxToast({ message: 'Event replayed — delivery queued', type: 'success' });
+  afxToast({ message: tr('webhooks.toastReplayed'), type: 'success' });
   render();
 }
 
@@ -163,7 +169,7 @@ function openFromRow(row, source) {
     const wh = webhooks.find((w) => w.id === row.dataset.id);
     const d = wh && latestDelivery(wh);
     if (d) openDeliveryDrawer(d, { onRetry, onReplay });
-    else afxToast({ message: 'No deliveries for this endpoint yet', type: 'info' });
+    else afxToast({ message: tr('webhooks.toastNoDeliveries'), type: 'info' });
   } else {
     const d = deliveries.find((x) => x.id === row.dataset.id);
     if (d) openDeliveryDrawer(d, { onRetry, onReplay });
@@ -192,5 +198,8 @@ for (const [tbody, source] of [[webhookTbody, 'webhook'], [deliveryTbody, 'deliv
 
 document.getElementById('webhooks-refresh').addEventListener('click', () => {
   render();
-  afxToast({ message: 'Refreshed — showing the latest deliveries', type: 'info' });
+  afxToast({ message: tr('webhooks.toastRefreshed'), type: 'info' });
 });
+
+// Re-render tables and badges when the locale flips.
+onLocaleChange(render);
