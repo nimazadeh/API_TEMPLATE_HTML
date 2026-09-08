@@ -1,0 +1,1111 @@
+{
+  "ranges": {
+    "1h": {
+      "requests": 6092,
+      "errorRate": 0.77,
+      "p95": 221,
+      "p99": 352,
+      "availability": 99.973
+    },
+    "24h": {
+      "requests": 106618,
+      "errorRate": 0.71,
+      "p95": 210,
+      "p99": 317,
+      "availability": 99.957
+    },
+    "7d": {
+      "requests": 761306,
+      "errorRate": 0.77,
+      "p95": 228,
+      "p99": 351,
+      "availability": 99.913
+    },
+    "30d": {
+      "requests": 2890342,
+      "errorRate": 1.06,
+      "p95": 191,
+      "p99": 295,
+      "availability": 99.916
+    }
+  },
+  "series": [
+    {
+      "date": "2026-08-09",
+      "requests": 168109,
+      "p50": 72,
+      "p95": 208,
+      "p99": 380,
+      "errorRate": 0.7,
+      "availability": 99.927
+    },
+    {
+      "date": "2026-08-10",
+      "requests": 165379,
+      "p50": 87,
+      "p95": 203,
+      "p99": 278,
+      "errorRate": 1.02,
+      "availability": 99.895
+    },
+    {
+      "date": "2026-08-11",
+      "requests": 202586,
+      "p50": 70,
+      "p95": 164,
+      "p99": 365,
+      "errorRate": 0.58,
+      "availability": 99.894
+    },
+    {
+      "date": "2026-08-12",
+      "requests": 180281,
+      "p50": 79,
+      "p95": 240,
+      "p99": 356,
+      "errorRate": 0.36,
+      "availability": 99.972
+    },
+    {
+      "date": "2026-08-13",
+      "requests": 171443,
+      "p50": 81,
+      "p95": 249,
+      "p99": 265,
+      "errorRate": 0.65,
+      "availability": 99.85
+    },
+    {
+      "date": "2026-08-14",
+      "requests": 164874,
+      "p50": 71,
+      "p95": 233,
+      "p99": 352,
+      "errorRate": 0.9,
+      "availability": 99.904
+    },
+    {
+      "date": "2026-08-15",
+      "requests": 160203,
+      "p50": 78,
+      "p95": 166,
+      "p99": 302,
+      "errorRate": 0.94,
+      "availability": 99.965
+    },
+    {
+      "date": "2026-08-16",
+      "requests": 192063,
+      "p50": 88,
+      "p95": 211,
+      "p99": 357,
+      "errorRate": 0.89,
+      "availability": 99.942
+    },
+    {
+      "date": "2026-08-17",
+      "requests": 152318,
+      "p50": 75,
+      "p95": 216,
+      "p99": 276,
+      "errorRate": 1,
+      "availability": 99.941
+    },
+    {
+      "date": "2026-08-18",
+      "requests": 178213,
+      "p50": 82,
+      "p95": 168,
+      "p99": 372,
+      "errorRate": 0.74,
+      "availability": 99.883
+    },
+    {
+      "date": "2026-08-19",
+      "requests": 185621,
+      "p50": 90,
+      "p95": 209,
+      "p99": 380,
+      "errorRate": 0.95,
+      "availability": 99.953
+    },
+    {
+      "date": "2026-08-20",
+      "requests": 156452,
+      "p50": 81,
+      "p95": 227,
+      "p99": 255,
+      "errorRate": 0.61,
+      "availability": 99.856
+    },
+    {
+      "date": "2026-08-21",
+      "requests": 178437,
+      "p50": 90,
+      "p95": 191,
+      "p99": 340,
+      "errorRate": 0.45,
+      "availability": 99.857
+    },
+    {
+      "date": "2026-08-22",
+      "requests": 173195,
+      "p50": 79,
+      "p95": 225,
+      "p99": 355,
+      "errorRate": 0.72,
+      "availability": 99.923
+    },
+    {
+      "date": "2026-08-23",
+      "requests": 152695,
+      "p50": 89,
+      "p95": 167,
+      "p99": 396,
+      "errorRate": 0.94,
+      "availability": 99.911
+    },
+    {
+      "date": "2026-08-24",
+      "requests": 169111,
+      "p50": 76,
+      "p95": 193,
+      "p99": 400,
+      "errorRate": 0.64,
+      "availability": 99.913
+    },
+    {
+      "date": "2026-08-25",
+      "requests": 152964,
+      "p50": 90,
+      "p95": 212,
+      "p99": 293,
+      "errorRate": 0.38,
+      "availability": 99.984
+    },
+    {
+      "date": "2026-08-26",
+      "requests": 164531,
+      "p50": 74,
+      "p95": 175,
+      "p99": 284,
+      "errorRate": 0.56,
+      "availability": 99.922
+    },
+    {
+      "date": "2026-08-27",
+      "requests": 206219,
+      "p50": 70,
+      "p95": 220,
+      "p99": 318,
+      "errorRate": 0.39,
+      "availability": 99.908
+    },
+    {
+      "date": "2026-08-28",
+      "requests": 172319,
+      "p50": 71,
+      "p95": 187,
+      "p99": 276,
+      "errorRate": 0.88,
+      "availability": 99.877
+    },
+    {
+      "date": "2026-08-29",
+      "requests": 169264,
+      "p50": 77,
+      "p95": 167,
+      "p99": 357,
+      "errorRate": 1.03,
+      "availability": 99.931
+    },
+    {
+      "date": "2026-08-30",
+      "requests": 162354,
+      "p50": 76,
+      "p95": 193,
+      "p99": 346,
+      "errorRate": 0.86,
+      "availability": 99.903
+    },
+    {
+      "date": "2026-08-31",
+      "requests": 188315,
+      "p50": 70,
+      "p95": 203,
+      "p99": 254,
+      "errorRate": 0.32,
+      "availability": 99.871
+    },
+    {
+      "date": "2026-09-01",
+      "requests": 151326,
+      "p50": 88,
+      "p95": 211,
+      "p99": 372,
+      "errorRate": 0.51,
+      "availability": 99.854
+    },
+    {
+      "date": "2026-09-02",
+      "requests": 205601,
+      "p50": 84,
+      "p95": 167,
+      "p99": 362,
+      "errorRate": 0.89,
+      "availability": 99.974
+    },
+    {
+      "date": "2026-09-03",
+      "requests": 206759,
+      "p50": 73,
+      "p95": 231,
+      "p99": 336,
+      "errorRate": 0.73,
+      "availability": 99.873
+    },
+    {
+      "date": "2026-09-04",
+      "requests": 181015,
+      "p50": 74,
+      "p95": 205,
+      "p99": 277,
+      "errorRate": 0.94,
+      "availability": 99.879
+    },
+    {
+      "date": "2026-09-05",
+      "requests": 187470,
+      "p50": 85,
+      "p95": 164,
+      "p99": 283,
+      "errorRate": 0.62,
+      "availability": 99.948
+    },
+    {
+      "date": "2026-09-06",
+      "requests": 178160,
+      "p50": 88,
+      "p95": 226,
+      "p99": 279,
+      "errorRate": 0.66,
+      "availability": 99.868
+    },
+    {
+      "date": "2026-09-07",
+      "requests": 162626,
+      "p50": 76,
+      "p95": 186,
+      "p99": 318,
+      "errorRate": 0.66,
+      "availability": 99.972
+    }
+  ],
+  "seriesStaging": [
+    {
+      "date": "2026-08-09",
+      "requests": 4888,
+      "p50": 58,
+      "p95": 133,
+      "p99": 245,
+      "errorRate": 1.12,
+      "availability": 99.509
+    },
+    {
+      "date": "2026-08-10",
+      "requests": 4917,
+      "p50": 62,
+      "p95": 189,
+      "p99": 214,
+      "errorRate": 0.9,
+      "availability": 99.593
+    },
+    {
+      "date": "2026-08-11",
+      "requests": 4814,
+      "p50": 50,
+      "p95": 177,
+      "p99": 241,
+      "errorRate": 0.87,
+      "availability": 99.334
+    },
+    {
+      "date": "2026-08-12",
+      "requests": 5629,
+      "p50": 63,
+      "p95": 168,
+      "p99": 264,
+      "errorRate": 0.96,
+      "availability": 99.771
+    },
+    {
+      "date": "2026-08-13",
+      "requests": 7241,
+      "p50": 53,
+      "p95": 133,
+      "p99": 295,
+      "errorRate": 1.09,
+      "availability": 99.616
+    },
+    {
+      "date": "2026-08-14",
+      "requests": 5599,
+      "p50": 62,
+      "p95": 148,
+      "p99": 231,
+      "errorRate": 1.37,
+      "availability": 99.225
+    },
+    {
+      "date": "2026-08-15",
+      "requests": 7822,
+      "p50": 68,
+      "p95": 133,
+      "p99": 259,
+      "errorRate": 1.08,
+      "availability": 99.439
+    },
+    {
+      "date": "2026-08-16",
+      "requests": 8560,
+      "p50": 59,
+      "p95": 196,
+      "p99": 275,
+      "errorRate": 1.15,
+      "availability": 99.286
+    },
+    {
+      "date": "2026-08-17",
+      "requests": 5228,
+      "p50": 63,
+      "p95": 163,
+      "p99": 241,
+      "errorRate": 1.53,
+      "availability": 99.739
+    },
+    {
+      "date": "2026-08-18",
+      "requests": 6428,
+      "p50": 59,
+      "p95": 186,
+      "p99": 315,
+      "errorRate": 1.56,
+      "availability": 99.513
+    },
+    {
+      "date": "2026-08-19",
+      "requests": 7779,
+      "p50": 69,
+      "p95": 181,
+      "p99": 295,
+      "errorRate": 1.8,
+      "availability": 99.234
+    },
+    {
+      "date": "2026-08-20",
+      "requests": 6347,
+      "p50": 64,
+      "p95": 174,
+      "p99": 287,
+      "errorRate": 2.09,
+      "availability": 99.682
+    },
+    {
+      "date": "2026-08-21",
+      "requests": 4357,
+      "p50": 54,
+      "p95": 159,
+      "p99": 299,
+      "errorRate": 1.99,
+      "availability": 99.265
+    },
+    {
+      "date": "2026-08-22",
+      "requests": 6807,
+      "p50": 69,
+      "p95": 172,
+      "p99": 252,
+      "errorRate": 1.71,
+      "availability": 99.271
+    },
+    {
+      "date": "2026-08-23",
+      "requests": 6210,
+      "p50": 58,
+      "p95": 164,
+      "p99": 227,
+      "errorRate": 1.56,
+      "availability": 99.357
+    },
+    {
+      "date": "2026-08-24",
+      "requests": 6479,
+      "p50": 63,
+      "p95": 152,
+      "p99": 285,
+      "errorRate": 1.05,
+      "availability": 99.714
+    },
+    {
+      "date": "2026-08-25",
+      "requests": 6383,
+      "p50": 62,
+      "p95": 132,
+      "p99": 278,
+      "errorRate": 1.03,
+      "availability": 99.332
+    },
+    {
+      "date": "2026-08-26",
+      "requests": 5233,
+      "p50": 68,
+      "p95": 187,
+      "p99": 216,
+      "errorRate": 2,
+      "availability": 99.242
+    },
+    {
+      "date": "2026-08-27",
+      "requests": 7614,
+      "p50": 56,
+      "p95": 161,
+      "p99": 254,
+      "errorRate": 1.09,
+      "availability": 99.448
+    },
+    {
+      "date": "2026-08-28",
+      "requests": 8621,
+      "p50": 55,
+      "p95": 194,
+      "p99": 230,
+      "errorRate": 0.94,
+      "availability": 99.465
+    },
+    {
+      "date": "2026-08-29",
+      "requests": 5012,
+      "p50": 61,
+      "p95": 144,
+      "p99": 292,
+      "errorRate": 2.03,
+      "availability": 99.57
+    },
+    {
+      "date": "2026-08-30",
+      "requests": 7032,
+      "p50": 52,
+      "p95": 193,
+      "p99": 262,
+      "errorRate": 1.02,
+      "availability": 99.624
+    },
+    {
+      "date": "2026-08-31",
+      "requests": 4202,
+      "p50": 67,
+      "p95": 186,
+      "p99": 254,
+      "errorRate": 1.06,
+      "availability": 99.494
+    },
+    {
+      "date": "2026-09-01",
+      "requests": 8064,
+      "p50": 52,
+      "p95": 131,
+      "p99": 229,
+      "errorRate": 1,
+      "availability": 99.317
+    },
+    {
+      "date": "2026-09-02",
+      "requests": 4902,
+      "p50": 53,
+      "p95": 165,
+      "p99": 215,
+      "errorRate": 0.81,
+      "availability": 99.516
+    },
+    {
+      "date": "2026-09-03",
+      "requests": 5625,
+      "p50": 57,
+      "p95": 194,
+      "p99": 221,
+      "errorRate": 1.68,
+      "availability": 99.676
+    },
+    {
+      "date": "2026-09-04",
+      "requests": 7501,
+      "p50": 70,
+      "p95": 153,
+      "p99": 300,
+      "errorRate": 1.42,
+      "availability": 99.367
+    },
+    {
+      "date": "2026-09-05",
+      "requests": 5880,
+      "p50": 70,
+      "p95": 182,
+      "p99": 283,
+      "errorRate": 1.48,
+      "availability": 99.299
+    },
+    {
+      "date": "2026-09-06",
+      "requests": 7390,
+      "p50": 56,
+      "p95": 174,
+      "p99": 316,
+      "errorRate": 1.12,
+      "availability": 99.523
+    },
+    {
+      "date": "2026-09-07",
+      "requests": 7793,
+      "p50": 57,
+      "p95": 176,
+      "p99": 267,
+      "errorRate": 2,
+      "availability": 99.434
+    }
+  ],
+  "hourly": [
+    {
+      "hour": "00:00",
+      "requests": 30870,
+      "p50": 93,
+      "p95": 158,
+      "p99": 390,
+      "errorRate": 0.81,
+      "availability": 99.954
+    },
+    {
+      "hour": "01:00",
+      "requests": 51061,
+      "p50": 87,
+      "p95": 158,
+      "p99": 318,
+      "errorRate": 0.61,
+      "availability": 99.87
+    },
+    {
+      "hour": "02:00",
+      "requests": 41280,
+      "p50": 69,
+      "p95": 187,
+      "p99": 290,
+      "errorRate": 0.39,
+      "availability": 99.96
+    },
+    {
+      "hour": "03:00",
+      "requests": 33829,
+      "p50": 87,
+      "p95": 178,
+      "p99": 293,
+      "errorRate": 1.15,
+      "availability": 99.877
+    },
+    {
+      "hour": "04:00",
+      "requests": 39763,
+      "p50": 95,
+      "p95": 203,
+      "p99": 311,
+      "errorRate": 0.2,
+      "availability": 99.951
+    },
+    {
+      "hour": "05:00",
+      "requests": 34210,
+      "p50": 91,
+      "p95": 208,
+      "p99": 393,
+      "errorRate": 0.43,
+      "availability": 99.887
+    },
+    {
+      "hour": "06:00",
+      "requests": 50553,
+      "p50": 79,
+      "p95": 229,
+      "p99": 380,
+      "errorRate": 0.26,
+      "availability": 99.929
+    },
+    {
+      "hour": "07:00",
+      "requests": 47313,
+      "p50": 76,
+      "p95": 175,
+      "p99": 257,
+      "errorRate": 0.23,
+      "availability": 99.872
+    },
+    {
+      "hour": "08:00",
+      "requests": 48267,
+      "p50": 72,
+      "p95": 240,
+      "p99": 330,
+      "errorRate": 0.48,
+      "availability": 99.833
+    },
+    {
+      "hour": "09:00",
+      "requests": 45171,
+      "p50": 92,
+      "p95": 220,
+      "p99": 266,
+      "errorRate": 1.19,
+      "availability": 99.842
+    },
+    {
+      "hour": "10:00",
+      "requests": 46306,
+      "p50": 93,
+      "p95": 160,
+      "p99": 371,
+      "errorRate": 1,
+      "availability": 99.911
+    },
+    {
+      "hour": "11:00",
+      "requests": 50219,
+      "p50": 82,
+      "p95": 177,
+      "p99": 369,
+      "errorRate": 0.81,
+      "availability": 99.921
+    },
+    {
+      "hour": "12:00",
+      "requests": 47006,
+      "p50": 77,
+      "p95": 209,
+      "p99": 325,
+      "errorRate": 0.73,
+      "availability": 99.847
+    },
+    {
+      "hour": "13:00",
+      "requests": 25866,
+      "p50": 79,
+      "p95": 216,
+      "p99": 365,
+      "errorRate": 0.88,
+      "availability": 99.867
+    },
+    {
+      "hour": "14:00",
+      "requests": 33506,
+      "p50": 84,
+      "p95": 250,
+      "p99": 368,
+      "errorRate": 0.58,
+      "availability": 99.971
+    },
+    {
+      "hour": "15:00",
+      "requests": 48447,
+      "p50": 75,
+      "p95": 228,
+      "p99": 371,
+      "errorRate": 0.68,
+      "availability": 99.878
+    },
+    {
+      "hour": "16:00",
+      "requests": 47890,
+      "p50": 74,
+      "p95": 161,
+      "p99": 314,
+      "errorRate": 0.93,
+      "availability": 99.921
+    },
+    {
+      "hour": "17:00",
+      "requests": 48457,
+      "p50": 85,
+      "p95": 171,
+      "p99": 346,
+      "errorRate": 0.4,
+      "availability": 99.949
+    },
+    {
+      "hour": "18:00",
+      "requests": 50900,
+      "p50": 80,
+      "p95": 198,
+      "p99": 400,
+      "errorRate": 0.42,
+      "availability": 99.952
+    },
+    {
+      "hour": "19:00",
+      "requests": 49342,
+      "p50": 80,
+      "p95": 176,
+      "p99": 363,
+      "errorRate": 1.06,
+      "availability": 99.978
+    },
+    {
+      "hour": "20:00",
+      "requests": 34989,
+      "p50": 90,
+      "p95": 189,
+      "p99": 384,
+      "errorRate": 0.74,
+      "availability": 99.804
+    },
+    {
+      "hour": "21:00",
+      "requests": 46596,
+      "p50": 63,
+      "p95": 221,
+      "p99": 285,
+      "errorRate": 0.9,
+      "availability": 99.954
+    },
+    {
+      "hour": "22:00",
+      "requests": 43649,
+      "p50": 71,
+      "p95": 238,
+      "p99": 366,
+      "errorRate": 0.98,
+      "availability": 99.862
+    },
+    {
+      "hour": "23:00",
+      "requests": 49196,
+      "p50": 61,
+      "p95": 160,
+      "p99": 302,
+      "errorRate": 0.5,
+      "availability": 99.804
+    }
+  ],
+  "minutes": [
+    {
+      "at": "00:00",
+      "requests": 7405,
+      "p50": 75,
+      "p95": 200,
+      "p99": 282,
+      "errorRate": 0.42
+    },
+    {
+      "at": "05:02",
+      "requests": 6003,
+      "p50": 83,
+      "p95": 168,
+      "p99": 304,
+      "errorRate": 0.59
+    },
+    {
+      "at": "10:05",
+      "requests": 3949,
+      "p50": 69,
+      "p95": 154,
+      "p99": 324,
+      "errorRate": 0.79
+    },
+    {
+      "at": "15:07",
+      "requests": 7868,
+      "p50": 67,
+      "p95": 194,
+      "p99": 255,
+      "errorRate": 0.86
+    },
+    {
+      "at": "20:10",
+      "requests": 6030,
+      "p50": 66,
+      "p95": 226,
+      "p99": 340,
+      "errorRate": 0.42
+    },
+    {
+      "at": "25:12",
+      "requests": 4841,
+      "p50": 63,
+      "p95": 175,
+      "p99": 305,
+      "errorRate": 0.88
+    },
+    {
+      "at": "30:15",
+      "requests": 7107,
+      "p50": 57,
+      "p95": 227,
+      "p99": 307,
+      "errorRate": 0.83
+    },
+    {
+      "at": "35:17",
+      "requests": 8894,
+      "p50": 71,
+      "p95": 153,
+      "p99": 273,
+      "errorRate": 0.74
+    },
+    {
+      "at": "40:20",
+      "requests": 7311,
+      "p50": 75,
+      "p95": 213,
+      "p99": 277,
+      "errorRate": 0.92
+    },
+    {
+      "at": "45:22",
+      "requests": 7187,
+      "p50": 56,
+      "p95": 202,
+      "p99": 240,
+      "errorRate": 1.06
+    },
+    {
+      "at": "50:25",
+      "requests": 6646,
+      "p50": 73,
+      "p95": 229,
+      "p99": 250,
+      "errorRate": 0.99
+    },
+    {
+      "at": "55:27",
+      "requests": 5019,
+      "p50": 86,
+      "p95": 178,
+      "p99": 374,
+      "errorRate": 0.86
+    },
+    {
+      "at": "00:30",
+      "requests": 7467,
+      "p50": 81,
+      "p95": 236,
+      "p99": 367,
+      "errorRate": 0.48
+    },
+    {
+      "at": "05:32",
+      "requests": 4147,
+      "p50": 66,
+      "p95": 227,
+      "p99": 274,
+      "errorRate": 1.12
+    },
+    {
+      "at": "10:35",
+      "requests": 4831,
+      "p50": 67,
+      "p95": 158,
+      "p99": 364,
+      "errorRate": 1.08
+    },
+    {
+      "at": "15:37",
+      "requests": 8219,
+      "p50": 84,
+      "p95": 231,
+      "p99": 323,
+      "errorRate": 1.02
+    },
+    {
+      "at": "20:40",
+      "requests": 5169,
+      "p50": 70,
+      "p95": 201,
+      "p99": 291,
+      "errorRate": 0.37
+    },
+    {
+      "at": "25:42",
+      "requests": 4391,
+      "p50": 69,
+      "p95": 183,
+      "p99": 281,
+      "errorRate": 1.04
+    },
+    {
+      "at": "30:45",
+      "requests": 5120,
+      "p50": 57,
+      "p95": 187,
+      "p99": 351,
+      "errorRate": 1.11
+    },
+    {
+      "at": "35:47",
+      "requests": 7909,
+      "p50": 89,
+      "p95": 176,
+      "p99": 243,
+      "errorRate": 0.99
+    },
+    {
+      "at": "40:50",
+      "requests": 8056,
+      "p50": 58,
+      "p95": 182,
+      "p99": 357,
+      "errorRate": 1.12
+    },
+    {
+      "at": "45:52",
+      "requests": 4802,
+      "p50": 76,
+      "p95": 156,
+      "p99": 260,
+      "errorRate": 0.5
+    },
+    {
+      "at": "50:55",
+      "requests": 5413,
+      "p50": 72,
+      "p95": 210,
+      "p99": 280,
+      "errorRate": 0.85
+    },
+    {
+      "at": "55:57",
+      "requests": 8452,
+      "p50": 64,
+      "p95": 170,
+      "p99": 281,
+      "errorRate": 0.76
+    }
+  ],
+  "byEndpoint": [
+    {
+      "apiId": "api_emails",
+      "method": "POST",
+      "path": "/v1/emails",
+      "requests": 1842011,
+      "p95": 214,
+      "errorRate": 0.4
+    },
+    {
+      "apiId": "api_ai",
+      "method": "POST",
+      "path": "/v1/completions",
+      "requests": 1120800,
+      "p95": 341,
+      "errorRate": 0.8
+    },
+    {
+      "apiId": "api_ai",
+      "method": "POST",
+      "path": "/v1/embeddings",
+      "requests": 861440,
+      "p95": 188,
+      "errorRate": 0.3
+    },
+    {
+      "apiId": "api_ai",
+      "method": "GET",
+      "path": "/v1/models",
+      "requests": 549300,
+      "p95": 92,
+      "errorRate": 0.1
+    },
+    {
+      "apiId": "api_audiences",
+      "method": "POST",
+      "path": "/v1/audiences",
+      "requests": 421500,
+      "p95": 251,
+      "errorRate": 0.5
+    },
+    {
+      "apiId": "api_emails",
+      "method": "GET",
+      "path": "/v1/emails/{id}",
+      "requests": 306780,
+      "p95": 110,
+      "errorRate": 0.2
+    },
+    {
+      "apiId": "api_webhooks",
+      "method": "POST",
+      "path": "/v1/webhooks",
+      "requests": 158430,
+      "p95": 276,
+      "errorRate": 0.6
+    },
+    {
+      "apiId": "api_platform",
+      "method": "GET",
+      "path": "/v1/usage",
+      "requests": 122139,
+      "p95": 84,
+      "errorRate": 0
+    }
+  ],
+  "byStatus": [
+    {
+      "code": "2xx",
+      "count": 5319400,
+      "share": 98.8
+    },
+    {
+      "code": "4xx",
+      "count": 48400,
+      "share": 0.9
+    },
+    {
+      "code": "5xx",
+      "count": 10800,
+      "share": 0.2
+    },
+    {
+      "code": "429",
+      "count": 5400,
+      "share": 0.1
+    }
+  ],
+  "byEnvironment": [
+    {
+      "env": "live",
+      "requests": 5102400,
+      "errorRate": 0.6,
+      "p95": 198,
+      "availability": 99.96
+    },
+    {
+      "env": "staging",
+      "requests": 262000,
+      "errorRate": 1.9,
+      "p95": 172,
+      "availability": 99.61
+    },
+    {
+      "env": "test",
+      "requests": 18000,
+      "errorRate": 2.4,
+      "p95": 140,
+      "availability": 99.2
+    }
+  ],
+  "byMethod": [
+    {
+      "method": "POST",
+      "requests": 3800200,
+      "share": 70.6
+    },
+    {
+      "method": "GET",
+      "requests": 1582600,
+      "share": 29.4
+    }
+  ]
+}

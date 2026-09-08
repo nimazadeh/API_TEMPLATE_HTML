@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <title>پذیرش دعوت‌نامه — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <main class="auth">
+      <div class="auth__card">
+        <div class="auth__brand">
+          <span class="brand-mark"><i data-lucide="zap"></i></span>
+          <span class="brand-name">APIForge X</span>
+        </div>
+
+        <h1 class="auth__title">پذیرش دعوت‌نامه</h1>
+        <p class="auth__subtitle">به فضای کاری <strong>APIForge</strong> دعوت شده‌اید.</p>
+
+        <div class="auth__notice" role="note">
+          <i data-lucide="shield-check"></i>
+          <div>نقش شما در این فضای کاری: <strong>توسعه‌دهنده</strong> (Developer). پس از ثبت‌نام، به کلیدها و لاگ‌های فضای کاری دسترسی خواهید داشت.</div>
+        </div>
+
+        <form id="invite-form" novalidate>
+          <div class="form-group mb-3">
+            <label class="form-label" for="invite-name">نام کامل</label>
+            <input class="form-control" id="invite-name" type="text" autocomplete="name" />
+            <div class="invalid-feedback">نام خود را وارد کنید (دست‌کم ۲ نویسه).</div>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label" for="invite-password">گذرواژه</label>
+            <input class="form-control form-control--mono" id="invite-password" type="password" dir="ltr" autocomplete="new-password" placeholder="••••••••" />
+            <div class="invalid-feedback">گذرواژه باید دست‌کم ۸ نویسه باشد.</div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100" id="invite-submit"><i data-lucide="user-plus"></i> پیوستن به فضای کاری</button>
+        </form>
+
+        <div class="auth__footer">
+          حساب دارید؟ <a href="./login.html">ورود</a>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="/src/js/pages/invite.js"></script>
+  </body>
+</html>

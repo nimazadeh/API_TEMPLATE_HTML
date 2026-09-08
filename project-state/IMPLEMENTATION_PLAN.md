@@ -172,7 +172,10 @@ foundation, complete primitive set, and the two visual verification pages.
 > product slice.
 > **Phase 3B status: COMPLETE ✅** (2026-09-07) — see the Phase 3B record below.
 > Phase 3B shipped Webhooks, Endpoints, Errors, Rate Limits and Environments.
-> Remaining scope (docs/metrics/team/billing/settings) moves to Phase 3C+.
+> **Phase 3C status: COMPLETE ✅** (2026-09-07) — see the Phase 3C record below.
+> Phase 3C shipped Team, Billing, Settings, Profile, Notifications, Documentation,
+> SDKs, API Reference, Metrics and the Persian-first auth screens (login / forgot /
+> invite). All product surface is now complete; only the Phase 4 marketing site remains (out of scope).
 
 **Duration:** 5-7 days
 **Goal:** Build most important pages: Overview, Logs, Keys, Usage — the daily-use pages
@@ -237,6 +240,23 @@ foundation, complete primitive set, and the two visual verification pages.
 - [x] **environments.html** — Production/Staging/Development switcher, production banner, summary, variables (masked value/reveal/copy/delete/add), API keys per environment
 - [x] **Wiring:** `vite.config.js` pageInputs (14 inputs), sidebar + mobile nav enabled across all app pages, `commands.js`, `index.html` hub
 - [x] **QA:** `vite build` green; dev-server HTTP 200 for all 14 pages/modules; static wiring/icon/link/import audits clean; interaction/responsive/visual NOT executed (no browser in sandbox)
+
+### Phase 3C record — COMPLETE SAAS PRODUCT EXPERIENCE (COMPLETE ✅, 2026-09-07)
+
+- [x] **Data:** generator extended with a separate `randC` PRNG (3A/3B stay byte-identical) → team (8), invitations (2), plans (3), invoices (8), notifications (14), SDKs (6), observability (ranges/series/hourly/minutes/byEndpoint/byStatus/byEnvironment/byMethod); `docs-content.js` authored (5 groups, 23 articles)
+- [x] **Shared:** `confirm.js` (`ask()`/`initConfirm()` destructive-confirm primitive), `icons.js` +17 icons, partials `pages/_workspace` (plan grid, notification center, settings rows, member cells, SDK monograms), `pages/_docs` (3-pane portal + 3-col xl grid), `pages/_auth` (centered auth card)
+- [x] **team.html** — summary (plan/seats/id), members table (role/status/last-active/joined/actions incl. suspended), invite modal with validation, role change/suspend/activate/remove/resend/revoke + destructive confirms, roles & permissions reference, empty states
+- [x] **billing.html** — current plan (cycle/renewal/status), usage consumption + projection, 3-plan comparison, masked payment method, invoice history (paid/pending/failed + simulated download), upgrade/downgrade confirm, cycle selector, payment modal
+- [x] **settings.html** — General/Developer preferences/Security (sessions, 2FA status UI)/Danger zone (transfer, delete) with strong confirms
+- [x] **profile.html** — personal info + preferences (theme/language/timezone/notifications) + developer identity; edit/save/cancel/validation
+- [x] **notifications.html** — category/severity filters + search, unread/read state, mark-all-read, empty state
+- [x] **docs.html** — 3-pane portal (nav/content/TOC + mobile offcanvas), search, anchors, prev/next, tabbed copyable code, callouts/tables/JSON, Getting Started/Core Concepts/Integrations/Webhooks/Reference
+- [x] **sdk.html** — 6-language catalog with install/version/features/quick-usage code/copy/filter
+- [x] **api-reference.html** — service+version selectors, endpoint nav (mobile offcanvas), auth/params/schema/response/errors/code samples
+- [x] **metrics.html** — KPI cards, 4 Chart.js charts (volume/latency/error/status), breakdowns by API/endpoint/environment/status/method, 1h/24h/7d/30d, Production-vs-Staging
+- [x] **login/forgot-password/invite.html** — Persian-first (`lang="fa" dir="rtl"`), `.auth` layout, technical fields LTR-isolated, simulated toasts
+- [x] **Wiring:** `vite.config.js` pageInputs (26 inputs), sidebar + mobile nav regenerated (consistent 5 groups, all items enabled, correct active states), `commands.js` (+ Developer resources group), `index.html` hub
+- [x] **QA:** `vite build` green (26 inputs, 0 warnings); runtime QA 92/92 scenario steps across 22 pages (0 jsdom/console/eval errors); a11y audit clean on 25 pages; static design audit clean; visual/responsive NOT executed (no browser in sandbox)
 
 ---
 

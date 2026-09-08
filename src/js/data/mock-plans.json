@@ -1,0 +1,53 @@
+[
+  {
+    "id": "developer",
+    "name": "Developer",
+    "price": 0,
+    "priceLabel": "$0",
+    "period": "/ month",
+    "blurb": "For side projects and early prototypes.",
+    "requests": "100,000 / mo",
+    "environments": 2,
+    "members": 2,
+    "webhooks": 5,
+    "retention": "24 hours",
+    "rateLimit": "50 req/s",
+    "support": "Community",
+    "cta": "Downgrade",
+    "highlight": false
+  },
+  {
+    "id": "pro",
+    "name": "Pro",
+    "price": 49,
+    "priceLabel": "$49",
+    "period": "/ month",
+    "blurb": "For growing teams shipping in production.",
+    "requests": "2,000,000 / mo",
+    "environments": 3,
+    "members": 10,
+    "webhooks": 25,
+    "retention": "30 days",
+    "rateLimit": "150 req/s",
+    "support": "Email",
+    "cta": "Current plan",
+    "highlight": true
+  },
+  {
+    "id": "scale",
+    "name": "Scale",
+    "price": 199,
+    "priceLabel": "$199",
+    "period": "/ month",
+    "blurb": "For high-volume platforms and enterprises.",
+    "requests": "10,000,000 / mo",
+    "environments": 5,
+    "members": 50,
+    "webhooks": 100,
+    "retention": "90 days",
+    "rateLimit": "250 req/s",
+    "support": "Priority + Slack",
+    "cta": "Upgrade",
+    "highlight": false
+  }
+]

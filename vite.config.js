@@ -20,6 +20,18 @@ const pageInputs = {
   errors: path.resolve(__dirname, 'errors.html'),
   'rate-limits': path.resolve(__dirname, 'rate-limits.html'),
   environments: path.resolve(__dirname, 'environments.html'),
+  team: path.resolve(__dirname, 'team.html'),
+  billing: path.resolve(__dirname, 'billing.html'),
+  settings: path.resolve(__dirname, 'settings.html'),
+  profile: path.resolve(__dirname, 'profile.html'),
+  notifications: path.resolve(__dirname, 'notifications.html'),
+  docs: path.resolve(__dirname, 'docs.html'),
+  sdk: path.resolve(__dirname, 'sdk.html'),
+  'api-reference': path.resolve(__dirname, 'api-reference.html'),
+  metrics: path.resolve(__dirname, 'metrics.html'),
+  login: path.resolve(__dirname, 'login.html'),
+  'forgot-password': path.resolve(__dirname, 'forgot-password.html'),
+  invite: path.resolve(__dirname, 'invite.html'),
 };
 
 export default defineConfig({

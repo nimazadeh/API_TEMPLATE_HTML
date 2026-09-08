@@ -3,9 +3,9 @@
 ## Project: APIForge X — Premium Developer API Platform HTML Template
 
 **Branch:** arena/01a07d58-api-template-html
-**Phase:** PHASE 3 VISUAL QA & DESIGN REVIEW (gate) — then PHASE 3C remains
+**Phase:** PHASE 3C — COMPLETE ✅
 **Date:** 2026-09-07
-**Status:** Phase 3 Visual QA gate PASS ✅ — 0 P0/P1, 2 P2 fixed (APIs method search, `<th scope="col">`); headless runtime QA 37/37 green; visual/responsive audits static-only (no browser in sandbox). Phase 3C (Team/Billing/Settings) plus docs/metrics/marketing remain.
+**Status:** Phase 3C complete — 12 new pages (team, billing, settings, profile, notifications, docs, sdk, api-reference, metrics + Persian-first login/forgot-password/invite); runtime QA 92/92 scenario steps green across 22 pages; static + a11y audits clean; visual/responsive static-only (no browser in sandbox). Phase 4 (marketing) is out of scope and not started.
 
 ---
 
@@ -143,6 +143,37 @@
 
 ---
 
+### PHASE 3C: COMPLETE SAAS PRODUCT EXPERIENCE — COMPLETE ✅
+
+**Objectives Achieved:**
+- [x] `team.html` — workspace summary (plan/seats/id), members table (Member/Role/Status/Last active/Joined/Actions; Owner/Admin/Developer/Viewer; Active/Pending/Suspended), invite modal (email+role+validation+toast), change-role/suspend/activate/remove/resend/revoke with destructive-confirm, roles & permissions reference, empty states
+- [x] `billing.html` — current plan (Scale $199, cycle/renewal/status), usage quota/consumption/projection + next-invoice estimate, restrained 3-plan comparison, masked payment method, invoice history (paid/pending/failed, simulated download), upgrade/downgrade confirmation, cycle selector, payment-method modal, toasts
+- [x] `settings.html` — General (workspace name/slug/timezone/default env), Developer Preferences, Security (session timeout, 2FA status UI, active sessions, guidance — no real-backend claims), Danger Zone (transfer ownership, delete workspace) with strong confirmation
+- [x] `profile.html` — avatar/name/email/role/timezone/language/dev handle/created; editable personal info, preferences (theme/language/timezone/notifications), developer identity (GitHub/website/org/developer ID); edit/save/cancel/validation/toast
+- [x] `notifications.html` — developer infrastructure notification center: API errors, webhook failures, rate-limit warnings, deploy/env, billing, team, security; unread count/read state/timestamps/severity/category/env; mark read/unread/all-read, category + severity filters + search, empty state
+- [x] `docs.html` — docs portal (left nav / center content / right TOC; mobile section offcanvas), search, active section, breadcrumbs, tabbed copyable code, anchor links, prev/next; sections: Getting Started, Core Concepts, Integrations, Webhooks, Reference; realistic cURL/JS/Node/Python/PHP; no lorem
+- [x] `sdk.html` — SDK catalog for JavaScript, Node.js, Python, PHP, Go, Ruby; install/version/features/updated/docs link, tabbed quick-usage code, copy, search/filter; technical content LTR
+- [x] `api-reference.html` — dedicated docs-style API reference distinct from `apis.html`: API/service + version selectors, endpoint nav (mobile offcanvas), method/path/auth, params, request body, response schema/example, errors, code samples; dense dev-doc layout
+- [x] `metrics.html` — observability: KPI cards (request volume, error rate, P95/P99, availability), Chart.js volume/latency-percentiles/error-rate/status-distribution, breakdowns by API/endpoint/environment/status/method, 1h/24h/7d/30d, Production-vs-Staging compare; deterministic, themed for both themes
+- [x] Command palette — extended with all Phase 3C pages + a dedicated "Developer resources" group (docs/SDKs/API reference) visually distinct from app pages/actions; no overengineered fuzzy search
+- [x] Auth-only (Persian-first, RTL): `login.html`, `forgot-password.html`, `invite.html` reusing a single `.auth` layout; technical fields/emails/code LTR-isolated
+- [x] New shared primitive: `src/js/components/confirm.js` (`ask()` + `initConfirm()`) — one reusable destructive-confirm modal per page
+
+**Artifacts Created/Updated:**
+- New pages: `team`, `billing`, `settings`, `profile`, `notifications`, `docs`, `sdk`, `api-reference`, `metrics`, `login`, `forgot-password`, `invite` (12 × HTML + `src/js/pages/*.js`)
+- New component: `src/js/components/confirm.js`; extended `icons.js` (+`List` and the Phase 3C set), `charts.js` unchanged (reused)
+- New partials: `src/scss/pages/_workspace.scss`, `_docs.scss`, `_auth.scss` (registered in `main.scss`); `_docs.scss` gained the 3-column xl grid
+- New data: `src/js/data/docs-content.js` (authored) + `mock-team`, `mock-invitations`, `mock-plans`, `mock-invoices`, `mock-notifications`, `mock-sdks`, `mock-observability` (seed `20260907`, separate `randC` PRNG — 3A/3B datasets left byte-identical)
+- `vite.config.js` `pageInputs` 14 → 26; `commands.js` + `index.html` hub extended; sidebar/drawer nav regenerated across all app pages with a consistent 5-group structure and correct active states
+
+**Exit Criteria:**
+- [x] `vite build` green (26 page inputs, 0 warnings)
+- [x] Runtime QA: **92/92 scenario steps PASS** across 22 pages (0 jsdom/console/module-eval errors)
+- [x] Structural a11y audit (25 pages) clean
+- [~] Real-browser visual/responsive QA not executed (no browser in sandbox) — recorded honestly, see TEST_STATUS.md
+
+---
+
 ### PHASE 0: PRODUCT INTELLIGENCE — COMPLETE ✅ (historical)
 
 **Objectives Achieved:**
@@ -250,17 +281,9 @@
 
 ---
 
-## Next Phase: PHASE 3C — WORKSPACE MANAGEMENT (Team · Billing · Settings)
+## Next Phase: PHASE 4 — MARKETING SITE (out of scope for this session)
 
-**Ready to start:** NOT YET AUTHORIZED — wait for separate authorization.
-
-**Phase 3C Scope (draft):**
-- `team.html` — members table (avatar, name, email, role, last active), invite flow, roles/permissions, audit log
-- `billing.html` — current plan card, usage projection, invoices table, payment method, upgrade/downgrade
-- `settings.html` — profile, workspace, security (2FA/sessions), notifications, danger zone
-- Remaining out-of-scope items (not scheduled): in-app `docs.html`, `metrics.html` (nav item currently disabled), marketing landing/pricing/changelog/status
-
-**Reuse from Phase 3A/3B:** `boot()`, `charts.js`, `log-detail.js`/`webhook-detail.js`/`error-detail.js` drawer pattern, `table.js` renderers, `.filter-bar`/`.seg`/`.toolbar`/`.offcanvas`/`.modal`/`.kpi`/`.empty-state`, command palette index, env switcher, deterministic mock data.
+Phase 3C is complete and committed. **Phase 4 (marketing homepage, pricing marketing, about, blog, contact, landing pages, marketplace packaging) is explicitly out of scope and was NOT started** — per instruction, work stops here.
 
 ---
 

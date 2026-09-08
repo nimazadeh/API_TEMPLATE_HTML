@@ -6,11 +6,10 @@ A dark-first, keyboard-first, **RTL first-class** HTML template for API platform
 depth-over-breadth developer tool surface in the spirit of Stripe, Resend,
 Vercel and Linear.
 
-> **Status:** Phase 3 Visual QA & Design Review gate **passed** ✅ (0 P0/P1, 2 P2
-> fixed; headless runtime QA 37/37 green; visual/responsive audits static-only —
-> no browser in the sandbox). Ten product pages ship as a working vertical slice
-> (Dashboard, APIs, Endpoints, API Keys, Logs, Webhooks, Errors, Rate Limits,
-> Usage, Environments). See `/project-state/PROJECT_STATE.md`.
+> **Status:** Phase 3C **complete** ✅ — 22 product/auth pages (Phases 3A+3B+3C),
+> headless runtime QA 92/92 scenario steps green, static + a11y audits clean,
+> visual/responsive audits static-only (no browser in the sandbox). Phase 4
+> (marketing) is out of scope. See `/project-state/PROJECT_STATE.md`.
 
 ## Stack
 
@@ -48,6 +47,21 @@ Product pages (Phases 3A + 3B):
 | `/rate-limits.html` | Rate limits — current-limit cards, usage charts, per-API rules |
 | `/usage.html` | Usage — plan consumption, charts, attribution, top endpoints |
 | `/environments.html` | Environments — Production/Staging/Development, variables + keys per environment |
+
+Phase 3C pages:
+
+| Page | Purpose |
+|------|---------|
+| `/team.html` | Team — members, roles/status, invitations, role change/suspend/remove |
+| `/billing.html` | Billing — plan, usage + projection, invoices, payment method, upgrade/downgrade |
+| `/settings.html` | Settings — workspace, developer preferences, security, sessions, danger zone |
+| `/profile.html` | Profile — personal info, preferences, developer identity |
+| `/notifications.html` | Notification center — errors, webhooks, rate limits, billing, team, security |
+| `/docs.html` | Documentation portal — 3-pane guides with search, TOC and code samples |
+| `/sdk.html` | SDK catalog — JS/Node/Python/PHP/Go/Ruby with install + quick-usage code |
+| `/api-reference.html` | API reference — endpoint parameters, schemas, responses, errors, code samples |
+| `/metrics.html` | Metrics — observability KPIs, charts, breakdowns, Production-vs-Staging |
+| `/login.html` · `/forgot-password.html` · `/invite.html` | Persian-first auth screens (simulated) |
 
 Foundation pages:
 
@@ -105,9 +119,10 @@ scripts/generate-mock-data.mjs
 
 ## Notes for the next phases
 
-- Remaining app pages (Documentation, Metrics, Team, Billing, Settings) and
-  the marketing pages are Phase 3C+; add each new HTML entry to the
-  `pageInputs` map in `vite.config.js`.
+- The remaining app surface is the marketing site (homepage, pricing, about,
+  blog, contact, landing pages, marketplace packaging) — Phase 4, out of scope
+  for this session. When it lands, add each new HTML entry to the `pageInputs`
+  map in `vite.config.js`.
 - Add new Lucide icons to `src/js/components/icons.js` (keeps the bundle
   tree-shaken).
 - Charts are registered tree-shaken in `src/js/components/charts.js`

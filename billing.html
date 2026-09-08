@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
-    <title>API Keys — APIForge X</title>
+    <title>Billing — APIForge X</title>
     <script>
       (function () {
         var stored = null;
@@ -16,21 +16,19 @@
   </head>
   <body data-env="live">
     <div class="app-shell">
-      <!-- ============ Sidebar ============ -->
       <aside class="app-sidebar">
         <div class="sidebar-brand">
           <span class="brand-mark"><i data-lucide="zap"></i></span>
           <span class="brand-name">APIForge X</span>
         </div>
-                <nav class="sidebar-nav" aria-label="Primary">
 
+        <nav class="sidebar-nav" aria-label="Primary">
           <div class="nav-group">
             <div class="nav-group__label">Overview</div>
             <a class="nav-item" href="./dashboard.html">
               <i data-lucide="layout-dashboard"></i><span>Overview</span>
             </a>
           </div>
-
           <div class="nav-group">
             <div class="nav-group__label">Developer</div>
             <a class="nav-item" href="./apis.html">
@@ -39,7 +37,7 @@
             <a class="nav-item" href="./endpoints.html">
               <i data-lucide="braces"></i><span>Endpoints</span>
             </a>
-            <a class="nav-item is-active" href="./api-keys.html">
+            <a class="nav-item" href="./api-keys.html">
               <i data-lucide="key"></i><span>API Keys</span>
             </a>
             <a class="nav-item" href="./logs.html">
@@ -58,7 +56,6 @@
               <i data-lucide="book-marked"></i><span>API Reference</span>
             </a>
           </div>
-
           <div class="nav-group">
             <div class="nav-group__label">Analytics</div>
             <a class="nav-item" href="./usage.html">
@@ -74,7 +71,6 @@
               <i data-lucide="activity"></i><span>Metrics</span>
             </a>
           </div>
-
           <div class="nav-group">
             <div class="nav-group__label">Workspace</div>
             <a class="nav-item" href="./environments.html">
@@ -83,14 +79,13 @@
             <a class="nav-item" href="./team.html">
               <i data-lucide="users"></i><span>Team</span>
             </a>
-            <a class="nav-item" href="./billing.html">
+            <a class="nav-item is-active" href="./billing.html">
               <i data-lucide="credit-card"></i><span>Billing</span>
             </a>
             <a class="nav-item" href="./notifications.html">
               <i data-lucide="bell"></i><span>Notifications</span>
             </a>
           </div>
-
           <div class="nav-group">
             <div class="nav-group__label">Account</div>
             <a class="nav-item" href="./profile.html">
@@ -101,6 +96,7 @@
             </a>
           </div>
         </nav>
+
         <div class="sidebar-foot">
           <div class="env-switcher" data-env-switcher role="group" aria-label="Environment">
             <button type="button" class="env-option" data-env="test"><span class="dot"></span>Test</button>
@@ -117,16 +113,16 @@
             </button>
             <div class="dropdown-menu">
               <div class="dropdown-header">arash@apiforge.dev</div>
-              <button type="button" class="dropdown-item"><i data-lucide="users"></i> Profile</button>
-              <button type="button" class="dropdown-item"><i data-lucide="settings"></i> Settings</button>
+              <a class="dropdown-item" href="./profile.html"><i data-lucide="user"></i> Profile</a>
+              <a class="dropdown-item" href="./settings.html"><i data-lucide="settings"></i> Settings</a>
+              <a class="dropdown-item" href="./docs.html"><i data-lucide="book-open"></i> Documentation</a>
               <hr class="dropdown-divider" />
-              <button type="button" class="dropdown-item is-danger"><i data-lucide="log-out"></i> Sign out</button>
+              <a class="dropdown-item is-danger" href="./login.html"><i data-lucide="log-out"></i> Sign out</a>
             </div>
           </div>
         </div>
       </aside>
 
-      <!-- ============ Header ============ -->
       <header class="app-header">
         <button type="button" class="btn btn-icon header-burger" aria-label="Open menu" data-bs-toggle="offcanvas" data-bs-target="#sidebar-drawer" aria-controls="sidebar-drawer">
           <i data-lucide="menu"></i>
@@ -134,7 +130,7 @@
         <div class="header-title">
           <span class="crumb">APIForge X</span>
           <span class="crumb-sep">/</span>
-          <span class="title">API Keys</span>
+          <span class="title">Billing</span>
         </div>
         <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="Search (⌘K)">
           <i data-lucide="search"></i>
@@ -159,74 +155,108 @@
           <button type="button" class="btn btn-icon" aria-label="Help" data-bs-toggle="tooltip" data-bs-title="Help">
             <i data-lucide="help-circle"></i>
           </button>
-          <div class="dropdown">
-            <button type="button" class="btn btn-icon" aria-label="Notifications" data-bs-toggle="dropdown" aria-expanded="false">
-              <i data-lucide="bell"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-end">
-              <div class="dropdown-header">Notifications</div>
-              <button type="button" class="dropdown-item"><i data-lucide="alert-triangle"></i> 2 webhooks failing</button>
-              <button type="button" class="dropdown-item"><i data-lucide="circle-check"></i> Deployment succeeded</button>
-            </div>
-          </div>
+          <a class="btn btn-icon" href="./notifications.html" aria-label="Notifications">
+            <i data-lucide="bell"></i>
+          </a>
         </div>
       </header>
 
-      <!-- ============ Main ============ -->
       <main class="app-main">
         <div class="env-banner" data-env-banner hidden>
           <i data-lucide="alert-triangle"></i>
           You are viewing <strong>test data</strong>. All keys use the <code class="ltr-isolate">sk_test_</code> prefix.
         </div>
         <div class="app-main__inner">
+
           <header class="toolbar">
             <div>
-              <h1 class="mb-1">API Keys</h1>
-              <p class="text-secondary mb-0">Keys grant programmatic access to your workspace. Treat them like passwords.</p>
+              <h1 class="mb-1">Billing</h1>
+              <p class="text-secondary mb-0">Subscription, usage-based billing and invoices.</p>
             </div>
             <div class="toolbar__actions">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-modal"><i data-lucide="plus"></i> Create API key</button>
+              <div class="seg" role="group" aria-label="Billing cycle">
+                <button type="button" class="seg__item is-active" data-cycle="monthly" aria-pressed="true">Monthly</button>
+                <button type="button" class="seg__item" data-cycle="yearly" aria-pressed="false">Yearly</button>
+              </div>
+              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#payment-modal"><i data-lucide="credit-card"></i> Payment method</button>
             </div>
           </header>
 
-          <div class="table-card">
+          <section class="row g-3 mb-4">
+            <div class="col-lg-7">
+              <div class="card card--dense h-100">
+                <div class="card-header">
+                  <div>
+                    <h4 class="card-title">Current plan</h4>
+                    <div class="card-subtitle" id="billing-status"><span class="badge badge-status badge-status--success"><span class="dot"></span>Active</span></div>
+                  </div>
+                  <span class="badge badge-accent"><i data-lucide="badge-check"></i> <span id="billing-plan-name">Scale</span></span>
+                </div>
+                <div class="d-flex align-items-baseline gap-2 mb-4">
+                  <span class="stat-value" id="billing-price">$199</span>
+                  <span class="text-tertiary" id="billing-cycle">per month</span>
+                </div>
+                <div class="mb-2 d-flex align-items-center justify-content-between caption">
+                  <span class="text-secondary" id="billing-usage">5,382,400 of 10,000,000 requests</span>
+                  <span class="text-tertiary" id="billing-usage-pct">53.8% used</span>
+                </div>
+                <div class="progress mb-4"><div class="progress-bar" id="billing-usage-fill" style="width:53.8%"></div></div>
+                <div class="d-flex flex-wrap gap-4 caption text-secondary">
+                  <span>Renews <strong class="text-body" id="billing-renewal">Sep 30, 2026</strong></span>
+                  <span id="billing-projected" class="text-tertiary">Projected usage</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card card--dense h-100">
+                <div class="card-header">
+                  <div><h4 class="card-title">Payment method</h4><div class="card-subtitle">Billed at the end of each cycle.</div></div>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                  <span class="empty-icon" style="width:36px;height:36px;margin:0"><i data-lucide="credit-card"></i></span>
+                  <div>
+                    <div class="fw-medium" id="pm-display">Visa <span class="ltr-isolate">•••• 4242</span></div>
+                    <div class="text-tertiary caption">Expires 08/28</div>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-ghost ms-auto" data-bs-toggle="modal" data-bs-target="#payment-modal">Update</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="mb-4">
+            <div class="mb-3"><h2 class="h3 mb-1">Plans</h2><p class="text-secondary mb-0">Switch plans at any time — changes apply at the start of the next cycle.</p></div>
+            <div class="plan-grid" id="plan-grid"></div>
+          </section>
+
+          <section class="card card--dense">
+            <div class="card-header">
+              <div><h4 class="card-title">Invoice history</h4><div class="card-subtitle">Downloadable PDFs for every billing cycle.</div></div>
+            </div>
             <div class="table-responsive">
               <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Key</th>
-                    <th scope="col">Permission</th>
-                    <th scope="col">Environment</th>
-                    <th scope="col">Last used</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody id="keys-list"></tbody>
+                <thead><tr><th scope="col">Invoice</th><th scope="col">Date</th><th scope="col" class="cell-num">Amount</th><th scope="col">Status</th><th scope="col" class="text-end">Download</th></tr></thead>
+                <tbody id="invoice-list"></tbody>
               </table>
             </div>
-            <div class="table-footer"><span id="keys-count">—</span></div>
-          </div>
+          </section>
         </div>
       </main>
     </div>
 
-    <!-- Mobile sidebar drawer -->
     <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="Primary">
       <div class="sidebar-brand">
         <span class="brand-mark"><i data-lucide="zap"></i></span>
         <span class="brand-name">APIForge X</span>
         <button type="button" class="btn btn-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="Close menu"><i data-lucide="x"></i></button>
       </div>
-              <nav class="sidebar-nav" aria-label="Primary">
-
+      <nav class="sidebar-nav" aria-label="Primary">
           <div class="nav-group">
             <div class="nav-group__label">Overview</div>
             <a class="nav-item" href="./dashboard.html">
               <i data-lucide="layout-dashboard"></i><span>Overview</span>
             </a>
           </div>
-
           <div class="nav-group">
             <div class="nav-group__label">Developer</div>
             <a class="nav-item" href="./apis.html">
@@ -235,7 +265,7 @@
             <a class="nav-item" href="./endpoints.html">
               <i data-lucide="braces"></i><span>Endpoints</span>
             </a>
-            <a class="nav-item is-active" href="./api-keys.html">
+            <a class="nav-item" href="./api-keys.html">
               <i data-lucide="key"></i><span>API Keys</span>
             </a>
             <a class="nav-item" href="./logs.html">
@@ -254,7 +284,6 @@
               <i data-lucide="book-marked"></i><span>API Reference</span>
             </a>
           </div>
-
           <div class="nav-group">
             <div class="nav-group__label">Analytics</div>
             <a class="nav-item" href="./usage.html">
@@ -270,7 +299,6 @@
               <i data-lucide="activity"></i><span>Metrics</span>
             </a>
           </div>
-
           <div class="nav-group">
             <div class="nav-group__label">Workspace</div>
             <a class="nav-item" href="./environments.html">
@@ -279,14 +307,13 @@
             <a class="nav-item" href="./team.html">
               <i data-lucide="users"></i><span>Team</span>
             </a>
-            <a class="nav-item" href="./billing.html">
+            <a class="nav-item is-active" href="./billing.html">
               <i data-lucide="credit-card"></i><span>Billing</span>
             </a>
             <a class="nav-item" href="./notifications.html">
               <i data-lucide="bell"></i><span>Notifications</span>
             </a>
           </div>
-
           <div class="nav-group">
             <div class="nav-group__label">Account</div>
             <a class="nav-item" href="./profile.html">
@@ -296,115 +323,60 @@
               <i data-lucide="settings"></i><span>Settings</span>
             </a>
           </div>
-        </nav>
+      </nav>
     </div>
 
-    <!-- Mobile bottom tab bar -->
     <nav class="bottom-tabbar" aria-label="Primary mobile">
       <a class="bottom-tabbar__item" href="./dashboard.html"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
       <a class="bottom-tabbar__item" href="./apis.html"><i data-lucide="code-2"></i><span>APIs</span></a>
       <a class="bottom-tabbar__item" href="./logs.html"><i data-lucide="scroll-text"></i><span>Logs</span></a>
-      <a class="bottom-tabbar__item is-active" href="./api-keys.html"><i data-lucide="key"></i><span>Keys</span></a>
+      <a class="bottom-tabbar__item" href="./api-keys.html"><i data-lucide="key"></i><span>Keys</span></a>
       <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="More">
         <i data-lucide="more-horizontal"></i><span>More</span>
       </button>
     </nav>
 
-    <!-- Create key modal -->
-    <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="create-modal-title" aria-hidden="true">
-      <div class="modal-dialog">
+
+    <div class="modal fade" id="payment-modal" tabindex="-1" aria-labelledby="payment-modal-title" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="create-modal-title">Create API key</h4>
+            <h5 class="modal-title" id="payment-modal-title">Update payment method</h5>
             <button type="button" class="btn btn-icon" data-bs-dismiss="modal" aria-label="Close"><i data-lucide="x"></i></button>
           </div>
           <div class="modal-body">
-            <div class="form-group">
-              <label class="form-label" for="key-name">Key name</label>
-              <input class="form-control" id="key-name" type="text" placeholder="Production backend" autocomplete="off" />
-              <div class="form-text">A memorable name for where this key is used.</div>
+            <div class="form-group mb-3">
+              <label class="form-label" for="pm-card-number">Card number</label>
+              <input class="form-control form-control--mono ltr-isolate" id="pm-card-number" type="text" dir="ltr" placeholder="4242 4242 4242 4242" inputmode="numeric" />
             </div>
-            <div class="form-group">
-              <label class="form-label">Scopes</label>
-              <label class="form-check mb-2"><input class="form-check-input" type="checkbox" value="emails:read" checked /><span class="form-check-label">emails:read — read emails</span></label>
-              <label class="form-check mb-2"><input class="form-check-input" type="checkbox" value="emails:write" checked /><span class="form-check-label">emails:write — send emails</span></label>
-              <label class="form-check mb-2"><input class="form-check-input" type="checkbox" value="audiences:read" /><span class="form-check-label">audiences:read — read audiences</span></label>
-              <label class="form-check mb-2"><input class="form-check-input" type="checkbox" value="audiences:write" /><span class="form-check-label">audiences:write — manage audiences</span></label>
-              <label class="form-check mb-2"><input class="form-check-input" type="checkbox" value="ai:inference" /><span class="form-check-label">ai:inference — run models</span></label>
-              <label class="form-check"><input class="form-check-input" type="checkbox" value="usage:read" /><span class="form-check-label">usage:read — read usage</span></label>
-            </div>
-            <div class="form-group mb-0">
-              <label class="form-label" for="key-expiration">Expiration</label>
-              <select class="form-select" id="key-expiration">
-                <option selected>Never</option>
-                <option>30 days</option>
-                <option>90 days</option>
-              </select>
+            <div class="alert alert-neutral">
+              <span class="alert-icon"><i data-lucide="info"></i></span>
+              <div class="alert-content">Demo action — no payment information is transmitted or stored.</div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-ghost" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" id="key-create-submit">Create key</button>
+            <button type="button" class="btn btn-primary" id="pm-save">Save card</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Reveal-once modal -->
-    <div class="modal fade" id="reveal-modal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="reveal-modal-title" aria-hidden="true" data-bs-backdrop="static">
-      <div class="modal-dialog">
+    <div class="modal fade" id="confirm-modal" tabindex="-1" aria-labelledby="confirm-modal-title" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="reveal-modal-title">Your new API key</h4>
+            <h5 class="modal-title" id="confirm-modal-title">Confirm</h5>
             <button type="button" class="btn btn-icon" data-bs-dismiss="modal" aria-label="Close"><i data-lucide="x"></i></button>
           </div>
-          <div class="modal-body">
-            <div class="alert alert-warning" role="alert">
-              <span class="alert-icon"><i data-lucide="shield-check"></i></span>
-              <div class="alert-content" id="reveal-note">Copy this key now — for security, it will never be shown again.</div>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="reveal-key-value">API key</label>
-              <div class="input-group">
-                <input class="form-control form-control--mono ltr-isolate" id="reveal-key-value" type="text" dir="ltr" readonly />
-                <span class="input-group-text">
-                  <button type="button" class="btn btn-icon btn-icon--sm" data-copy data-copy-target="#reveal-key-value" aria-label="Copy key"><i data-lucide="copy"></i></button>
-                </span>
-              </div>
-            </div>
-            <div class="form-group mb-0">
-              <label class="form-check">
-                <input class="form-check-input" type="checkbox" id="reveal-copied" />
-                <span class="form-check-label">I've copied this key.</span>
-              </label>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary w-100" id="reveal-done" data-bs-dismiss="modal" disabled>Done</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Confirm modal (rotate / revoke) -->
-    <div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="confirm-modal-title">Confirm</h4>
-            <button type="button" class="btn btn-icon" data-bs-dismiss="modal" aria-label="Close"><i data-lucide="x"></i></button>
-          </div>
-          <div class="modal-body">
-            <p class="text-secondary mb-0" id="confirm-modal-body"></p>
-          </div>
+          <div class="modal-body"><p class="text-secondary mb-0" id="confirm-modal-body"></p></div>
           <div class="modal-footer">
             <button type="button" class="btn btn-ghost" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-danger" id="confirm-modal-submit">Confirm</button>
+            <button type="button" class="btn btn-primary" id="confirm-modal-submit">Confirm</button>
           </div>
         </div>
       </div>
     </div>
-
-    <script type="module" src="/src/js/pages/api-keys.js"></script>
+    <script type="module" src="/src/js/pages/billing.js"></script>
   </body>
 </html>

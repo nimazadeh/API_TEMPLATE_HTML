@@ -6,6 +6,47 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## [Phase 3C] — 2026-09-07 — COMPLETE SAAS PRODUCT EXPERIENCE ✅
+
+### Added
+- Twelve new pages: `team.html`, `billing.html`, `settings.html`, `profile.html`, `notifications.html`, `docs.html`, `sdk.html`, `api-reference.html`, `metrics.html`, plus Persian-first auth `login.html`, `forgot-password.html`, `invite.html` (+ `src/js/pages/*.js` modules)
+- `src/js/components/confirm.js` — reusable destructive-confirm primitive (`ask()` promise + `initConfirm()`), one Bootstrap modal per page
+- `src/js/data/docs-content.js` — authored docs portal content (5 groups, 23 articles, block engine: h2/h3/p/ul/code/json/table/callout)
+- Seven deterministic Phase 3C datasets (separate `randC` PRNG seeded `20260907 ^ 0xc3c3c3`): `mock-team`, `mock-invitations`, `mock-plans`, `mock-invoices`, `mock-notifications`, `mock-sdks`, `mock-observability` (ranges/series/hourly/minutes/byEndpoint/byStatus/byEnvironment/byMethod)
+- `src/scss/pages/_workspace.scss` (plan grid, notification center, settings rows, member cells, SDK monograms), `_docs.scss` (3-pane portal + 3-col xl grid), `_auth.scss` (centered auth card) — registered in `main.scss`
+- Icons added to the Lucide registry: `User`, `BookMarked`, `Mail`, `UserPlus`, `ShieldAlert`, `Smartphone`, `LogIn`, `Inbox`, `CheckCheck`, `Receipt`, `BadgeCheck`, `Link`, `ListChecks`, `FileCode2`, `Send`, `Monitor`, `List`
+- Mobile section offcanvas nav for `docs.html` and `api-reference.html` (desktop `.docs-side` previously disappeared below lg with no alternative)
+
+### Changed
+- `vite.config.js` — `pageInputs` 14 → 26
+- Sidebar + mobile drawer nav regenerated across all app pages into a consistent 5-group structure (Overview / Developer / Analytics / Workspace / Account); all previously `is-disabled` Phase 3C items enabled; correct active state per page
+- `src/js/data/commands.js` — added Metrics/Team/Billing/Settings/Profile/Notifications to Navigate and a new "Developer resources" group (Documentation / SDKs / API Reference)
+- `index.html` hub — retagged Phase 3C and gained 12 new page cards
+
+### Fixed
+- `src/js/pages/team.js` — suspended members now remain visible in the members table (previously only active members rendered); seats count = active members
+- `src/js/pages/billing.js` — plan CTA now correctly says "Downgrade" when a cheaper plan is selected from Scale (was "Upgrade to Pro")
+- `src/js/pages/notifications.js` — wired the search field that was previously a dead input
+- `src/js/pages/api-reference.js` — service selector now actually filters the endpoint nav (was only switching the active endpoint)
+- `src/js/pages/docs.js` / `api-reference.js` — bare `history`/`location` globals replaced with `window.history`/`window.location`
+- `src/js/pages/settings.js` — 2FA "Manage" was a dead button; now opens a demo confirmation
+- `src/js/pages/profile.js` — theme-preference segment + email-notification toggle now functional
+- `settings.html` — `2fa-toggle` id renamed `fa-toggle` (id starting with a digit breaks `querySelector`); session-timeout select gained an `aria-label`
+
+### Verified (executed)
+- `vite build` green — 26 page inputs, 0 Sass/JS warnings
+- Headless runtime QA (jsdom, built `dist/` chunks): **92/92 interaction scenario steps PASS** across 22 pages, 0 jsdom/console/module-eval errors (10 regression pages + 12 new)
+- Structural a11y audit (25 pages): 0 unlabelled controls/icon-buttons, 0 tables outside `.table-responsive`, 0 missing `scope`, 0 duplicate ids
+- Static design audit: breakpoints + `[dir=rtl]` + logical props + `.ltr-isolate` + reduced-motion (38) + `:focus-visible` ring + five typography lanes (no Inter Tight/Geist/CDN); page SCSS has 0 hex literals (tokens only)
+- 3A/3B datasets re-verified byte-identical (generator re-run + `git checkout` on the 8 drift-prone JSONs)
+
+### Remaining limitations (recorded honestly — NOT executed)
+- Real-browser visual/responsive QA (360–1920) — no browser/preview in the sandbox (E2B preview token-gated); nothing marked PASS without execution
+- Chart.js pixel rendering, keyboard focus traversal, in-situ contrast — code present, not browser-verified
+- Full WCAG 2.x claim — NOT made (static checks only)
+
+---
+
 ## [Phase 3 Visual QA & Design Review] — 2026-09-07 — VERIFICATION GATE PASS ✅
 
 ### Fixed

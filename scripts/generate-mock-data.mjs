@@ -693,6 +693,253 @@ const variables = variableDefs.map((v) => ({
 }));
 
 // =====================================================================
+// Phase 3C helpers — another SEPARATE seeded PRNG so Phase 3A/3B
+// datasets stay byte-identical while new entities (team, plans,
+// invoices, notifications, SDKs, observability) remain deterministic.
+// =====================================================================
+const randC = mulberry32(20260907 ^ 0xc3c3c3);
+const pickC = (arr) => arr[Math.floor(randC() * arr.length)];
+const betweenC = (min, max) => min + Math.floor(randC() * (max - min + 1));
+const base62C = (len) => {
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let out = '';
+  for (let i = 0; i < len; i++) out += chars[Math.floor(randC() * chars.length)];
+  return out;
+};
+const isoDaysAgoC = (d) => new Date(Date.now() - d * 864e5).toISOString();
+const isoHoursAgoC = (h) => new Date(Date.now() - h * 3600e3).toISOString();
+const isoMinutesAgoC = (m) => new Date(Date.now() - m * 60e3).toISOString();
+
+// =====================================================================
+// Team (Phase 3C) — members + pending invitations.
+// =====================================================================
+const teamMemberDefs = [
+  { name: 'Arash Pashaei', email: 'arash@apiforge.dev', role: 'Owner', status: 'active' },
+  { name: 'Sara Rahimi', email: 'sara@apiforge.dev', role: 'Admin', status: 'active' },
+  { name: 'Mehdi Karimi', email: 'mehdi@apiforge.dev', role: 'Developer', status: 'active' },
+  { name: 'Niloofar Azimi', email: 'niloofar@apiforge.dev', role: 'Developer', status: 'active' },
+  { name: 'Reza Hosseini', email: 'reza@apiforge.dev', role: 'Viewer', status: 'active' },
+  { name: 'Dana Moradi', email: 'dana@apiforge.dev', role: 'Viewer', status: 'suspended' },
+  { name: 'Kaveh Nouri', email: 'kaveh@apiforge.dev', role: 'Developer', status: 'active' },
+  { name: 'Leyla Farhadi', email: 'leyla@apiforge.dev', role: 'Developer', status: 'active' },
+];
+const team = teamMemberDefs.map((m, i) => ({
+  id: `usr_${base62C(8)}`,
+  ...m,
+  initials: m.name.split(' ').map((p) => p[0]).slice(0, 2).join('').toUpperCase(),
+  lastActive: isoHoursAgoC(betweenC(0, 96)),
+  joined: isoDaysAgoC(betweenC(30, 700)),
+  twoFactor: i < 4,
+}));
+
+const invitations = [
+  { id: `inv_${base62C(8)}`, email: 'dev@yourco.io', role: 'Developer', invitedBy: 'Arash Pashaei', sentAt: isoDaysAgoC(2), expiresIn: '5 days' },
+  { id: `inv_${base62C(8)}`, email: 'ops@yourco.io', role: 'Viewer', invitedBy: 'Sara Rahimi', sentAt: isoDaysAgoC(5), expiresIn: '2 days' },
+];
+
+// =====================================================================
+// Plans + invoices (Phase 3C).
+// =====================================================================
+const plans = [
+  {
+    id: 'developer', name: 'Developer', price: 0, priceLabel: '$0', period: '/ month',
+    blurb: 'For side projects and early prototypes.',
+    requests: '100,000 / mo', environments: 2, members: 2, webhooks: 5,
+    retention: '24 hours', rateLimit: '50 req/s', support: 'Community',
+    cta: 'Downgrade', highlight: false,
+  },
+  {
+    id: 'pro', name: 'Pro', price: 49, priceLabel: '$49', period: '/ month',
+    blurb: 'For growing teams shipping in production.',
+    requests: '2,000,000 / mo', environments: 3, members: 10, webhooks: 25,
+    retention: '30 days', rateLimit: '150 req/s', support: 'Email',
+    cta: 'Current plan', highlight: true,
+  },
+  {
+    id: 'scale', name: 'Scale', price: 199, priceLabel: '$199', period: '/ month',
+    blurb: 'For high-volume platforms and enterprises.',
+    requests: '10,000,000 / mo', environments: 5, members: 50, webhooks: 100,
+    retention: '90 days', rateLimit: '250 req/s', support: 'Priority + Slack',
+    cta: 'Upgrade', highlight: false,
+  },
+];
+
+const invoiceDefs = [
+  { amount: 199, status: 'paid' },
+  { amount: 199, status: 'paid' },
+  { amount: 199, status: 'paid' },
+  { amount: 248, status: 'paid' },
+  { amount: 199, status: 'paid' },
+  { amount: 199, status: 'pending' },
+  { amount: 199, status: 'failed' },
+  { amount: 199, status: 'paid' },
+];
+const invoices = invoiceDefs.map((inv, i) => {
+  const period = new Date(Date.now() - i * 30 * 864e5);
+  return {
+    id: `inv_${period.getUTCFullYear()}${String(period.getUTCMonth() + 1).padStart(2, '0')}`,
+    date: period.toISOString(),
+    amount: inv.amount,
+    currency: 'USD',
+    status: inv.status,
+    pdf: '#',
+  };
+});
+
+// =====================================================================
+// Notifications (Phase 3C) — developer infrastructure notification center.
+// =====================================================================
+const notificationDefs = [
+  { category: 'security', severity: 'warning', title: 'New sign-in from an unknown device', body: 'A session was created from Tehran, IR (91.98.14.2). If this was not you, revoke the session.', env: null },
+  { category: 'webhook', severity: 'error', title: 'Webhook delivery failing', body: 'customer.created has failed 12 times in the last hour. Last response: 500.', env: 'live' },
+  { category: 'rate-limit', severity: 'warning', title: 'Rate limit at 85%', body: 'completions:create is approaching its per-second limit. Requests may be throttled.', env: 'live' },
+  { category: 'billing', severity: 'info', title: 'Invoice payment received', body: 'Your September invoice for $199 was paid successfully.', env: null },
+  { category: 'deployment', severity: 'success', title: 'Deployment succeeded', body: 'apiforge/api v2.4.1 deployed to production in 42s.', env: 'live' },
+  { category: 'team', severity: 'info', title: 'Sara invited a new member', body: 'ops@yourco.io was invited as a Viewer.', env: null },
+  { category: 'error', severity: 'error', title: 'Error spike detected', body: 'TypeError: Cannot read properties of null increased 3.2× in the last hour.', env: 'live' },
+  { category: 'security', severity: 'error', title: 'API key created in production', body: 'A new live key (sk_live_4fJk…) was created from the dashboard.', env: 'live' },
+  { category: 'rate-limit', severity: 'error', title: 'Rate limit breached', body: 'embeddings:create exceeded 40 req/s. Requests are returning 429.', env: 'staging' },
+  { category: 'deployment', severity: 'warning', title: 'Deployment rolled back', body: 'apiforge/api v2.4.2 was rolled back after a failed health check.', env: 'staging' },
+  { category: 'billing', severity: 'warning', title: 'Invoice payment failed', body: 'The July invoice could not be charged. Update your payment method to avoid interruption.', env: null },
+  { category: 'team', severity: 'info', title: 'Dana was suspended', body: 'Sara suspended Dana Moradi from the workspace.', env: null },
+  { category: 'webhook', severity: 'info', title: 'Webhook created', body: 'A new endpoint was registered for email.sent and email.bounced.', env: 'test' },
+  { category: 'error', severity: 'warning', title: 'New error type detected', body: 'ECONNREFUSED 10.0.2.15:5432 first seen on GET /v1/usage.', env: 'staging' },
+];
+const notifications = notificationDefs.map((n) => ({
+  id: `ntf_${base62C(8)}`,
+  ...n,
+  read: randC() < 0.45,
+  createdAt: isoMinutesAgoC(betweenC(2, 10080)),
+}));
+
+// =====================================================================
+// SDKs (Phase 3C) — official client catalog.
+// =====================================================================
+const sdks = [
+  {
+    id: 'js', name: 'JavaScript', lang: 'JS', accent: 'js',
+    package: '@apiforge/sdk', version: '1.7.2', install: 'npm install @apiforge/sdk',
+    registry: 'npm', updated: isoDaysAgoC(3),
+    features: ['TypeScript types', 'Streaming support', 'Retry + idempotency', 'Webhook signature helper'],
+    docsUrl: './docs.html',
+  },
+  {
+    id: 'node', name: 'Node.js', lang: 'Node', accent: 'node',
+    package: 'apiforge', version: '2.1.0', install: 'npm install apiforge',
+    registry: 'npm', updated: isoDaysAgoC(9),
+    features: ['Zero-dependency', 'Streaming support', 'Retry + idempotency', 'Works in ESM & CJS'],
+    docsUrl: './docs.html',
+  },
+  {
+    id: 'python', name: 'Python', lang: 'Py', accent: 'py',
+    package: 'apiforge', version: '1.4.1', install: 'pip install apiforge',
+    registry: 'PyPI', updated: isoDaysAgoC(14),
+    features: ['Async + sync clients', 'Typed responses', 'Retry + idempotency', 'pytest fixtures'],
+    docsUrl: './docs.html',
+  },
+  {
+    id: 'php', name: 'PHP', lang: 'PHP', accent: 'php',
+    package: 'apiforge/apiforge-php', version: '0.9.3', install: 'composer require apiforge/apiforge-php',
+    registry: 'Packagist', updated: isoDaysAgoC(22),
+    features: ['PSR-18 compatible', 'Guzzle transport', 'Webhook signature helper'],
+    docsUrl: './docs.html',
+  },
+  {
+    id: 'go', name: 'Go', lang: 'Go', accent: 'go',
+    package: 'github.com/apiforge/apiforge-go', version: '1.2.4', install: 'go get github.com/apiforge/apiforge-go',
+    registry: 'Go modules', updated: isoDaysAgoC(11),
+    features: ['Context-aware', 'Zero allocations on hot path', 'Retry + idempotency'],
+    docsUrl: './docs.html',
+  },
+  {
+    id: 'ruby', name: 'Ruby', lang: 'Rb', accent: 'rb',
+    package: 'apiforge', version: '0.8.0', install: 'gem install apiforge',
+    registry: 'RubyGems', updated: isoDaysAgoC(30),
+    features: ['ActiveSupport integration', 'Retry + idempotency', 'Webhook signature helper'],
+    docsUrl: './docs.html',
+  },
+];
+
+// =====================================================================
+// Observability (Phase 3C) — metrics page data.
+// =====================================================================
+const obsRange = (scale, errBase) => ({
+  requests: Math.round(betweenC(90000, 120000) * scale),
+  errorRate: +(errBase + randC() * 0.5).toFixed(2),
+  p95: betweenC(170, 240),
+  p99: betweenC(260, 380),
+  availability: +(99.9 + randC() * 0.09).toFixed(3),
+});
+const observability = {
+  ranges: {
+    '1h': obsRange(0.06, 0.3),
+    '24h': obsRange(1, 0.5),
+    '7d': obsRange(6.4, 0.6),
+    '30d': obsRange(26, 0.7),
+  },
+  series: Array.from({ length: 30 }, (_, i) => ({
+    date: isoDaysAgoC(29 - i).slice(0, 10),
+    requests: betweenC(150000, 210000),
+    p50: betweenC(70, 90),
+    p95: betweenC(160, 250),
+    p99: betweenC(250, 400),
+    errorRate: +(0.3 + randC() * 0.9).toFixed(2),
+    availability: +(99.85 + randC() * 0.14).toFixed(3),
+  })),
+  seriesStaging: Array.from({ length: 30 }, (_, i) => ({
+    date: isoDaysAgoC(29 - i).slice(0, 10),
+    requests: betweenC(4000, 9000),
+    p50: betweenC(50, 70),
+    p95: betweenC(130, 200),
+    p99: betweenC(200, 320),
+    errorRate: +(0.8 + randC() * 1.6).toFixed(2),
+    availability: +(99.2 + randC() * 0.6).toFixed(3),
+  })),
+  hourly: Array.from({ length: 24 }, (_, i) => ({
+    hour: `${String(i).padStart(2, '0')}:00`,
+    requests: betweenC(24000, 52000),
+    p50: betweenC(60, 95),
+    p95: betweenC(150, 260),
+    p99: betweenC(250, 410),
+    errorRate: +(0.2 + randC() * 1.1).toFixed(2),
+    availability: +(99.8 + randC() * 0.18).toFixed(3),
+  })),
+  minutes: Array.from({ length: 24 }, (_, i) => ({
+    at: `${String((i * 5) % 60).padStart(2, '0')}:${String(Math.floor(i * 2.5) % 60).padStart(2, '0')}`,
+    requests: betweenC(3800, 9000),
+    p50: betweenC(55, 90),
+    p95: betweenC(140, 240),
+    p99: betweenC(240, 380),
+    errorRate: +(0.2 + randC() * 1.0).toFixed(2),
+  })),
+  byEndpoint: [
+    { apiId: 'api_emails', method: 'POST', path: '/v1/emails', requests: 1842011, p95: 214, errorRate: 0.4 },
+    { apiId: 'api_ai', method: 'POST', path: '/v1/completions', requests: 1120800, p95: 341, errorRate: 0.8 },
+    { apiId: 'api_ai', method: 'POST', path: '/v1/embeddings', requests: 861440, p95: 188, errorRate: 0.3 },
+    { apiId: 'api_ai', method: 'GET', path: '/v1/models', requests: 549300, p95: 92, errorRate: 0.1 },
+    { apiId: 'api_audiences', method: 'POST', path: '/v1/audiences', requests: 421500, p95: 251, errorRate: 0.5 },
+    { apiId: 'api_emails', method: 'GET', path: '/v1/emails/{id}', requests: 306780, p95: 110, errorRate: 0.2 },
+    { apiId: 'api_webhooks', method: 'POST', path: '/v1/webhooks', requests: 158430, p95: 276, errorRate: 0.6 },
+    { apiId: 'api_platform', method: 'GET', path: '/v1/usage', requests: 122139, p95: 84, errorRate: 0.0 },
+  ],
+  byStatus: [
+    { code: '2xx', count: 5319400, share: 98.8 },
+    { code: '4xx', count: 48400, share: 0.9 },
+    { code: '5xx', count: 10800, share: 0.2 },
+    { code: '429', count: 5400, share: 0.1 },
+  ],
+  byEnvironment: [
+    { env: 'live', requests: 5102400, errorRate: 0.6, p95: 198, availability: 99.96 },
+    { env: 'staging', requests: 262000, errorRate: 1.9, p95: 172, availability: 99.61 },
+    { env: 'test', requests: 18000, errorRate: 2.4, p95: 140, availability: 99.2 },
+  ],
+  byMethod: [
+    { method: 'POST', requests: 3800200, share: 70.6 },
+    { method: 'GET', requests: 1582600, share: 29.4 },
+  ],
+};
+
+// =====================================================================
 // Write everything.
 // =====================================================================
 mkdirSync(OUT_DIR, { recursive: true });
@@ -714,9 +961,19 @@ write('mock-webhook-deliveries.json', webhookDeliveries);
 write('mock-errors.json', errors);
 write('mock-rate-limits.json', rateLimits);
 write('mock-variables.json', variables);
+write('mock-team.json', team);
+write('mock-invitations.json', invitations);
+write('mock-plans.json', plans);
+write('mock-invoices.json', invoices);
+write('mock-notifications.json', notifications);
+write('mock-sdks.json', sdks);
+write('mock-observability.json', observability);
 
 console.log(`Generated mock data into ${OUT_DIR}`);
 console.log(`  apis: ${apis.length}, endpoints: ${endpoints.length}, keys: ${keys.length}, logs: ${logs.length}`);
 console.log(`  usage: ${usage.length} days, environments: ${environments.length}, activity: ${activity.length}`);
 console.log(`  webhooks: ${webhooks.length}, deliveries: ${webhookDeliveries.length}, errors: ${errors.length}`);
 console.log(`  rate limits: ${rateLimits.rules.length} rules, variables: ${variables.length}`);
+console.log(`  team: ${team.length} members, invitations: ${invitations.length}, plans: ${plans.length}`);
+console.log(`  invoices: ${invoices.length}, notifications: ${notifications.length}, sdks: ${sdks.length}`);
+console.log(`  observability: ${observability.series.length} days`);
