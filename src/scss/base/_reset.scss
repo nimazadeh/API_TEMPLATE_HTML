@@ -13,7 +13,8 @@ html {
 body {
   background-color: var(--surface-canvas);
   color: var(--text-primary);
-  font-family: var(--font-latin-ui);
+  // Locale-resolved: Vazirmatn in Persian (default), Inter in English.
+  font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   // Slight subpixel smoothing for a crisp, engineered feel

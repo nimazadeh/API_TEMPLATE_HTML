@@ -37,7 +37,8 @@
   height: 32px;
   padding: 0 12px;
   font-size: var(--fs-body);
-  font-family: var(--font-latin-ui);
+  // Locale-resolved — Persian input text must render in Vazirmatn.
+  font-family: var(--font-body);
   color: var(--text-primary);
   background-color: var(--surface-1);
   border: 1px solid var(--border);
@@ -88,7 +89,8 @@ textarea.form-control {
   height: 32px;
   padding: 0 32px 0 12px;
   font-size: var(--fs-body);
-  font-family: var(--font-latin-ui);
+  // Locale-resolved — Persian option labels must render in Vazirmatn.
+  font-family: var(--font-body);
   color: var(--text-primary);
   background-color: var(--surface-1);
   border: 1px solid var(--border);

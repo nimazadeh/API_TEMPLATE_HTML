@@ -28,7 +28,9 @@
   --bs-link-color-rgb: var(--accent-rgb);
   --bs-link-hover-color: var(--accent-hover);
   --bs-heading-color: var(--text-primary);
-  --bs-body-font-family: var(--font-latin-ui);
+  // Locale-resolved (Vazirmatn fa / Inter en) — buttons, form controls
+  // and every Bootstrap component inherit this instead of a fixed face.
+  --bs-body-font-family: var(--font-body);
   --bs-body-font-size: 0.875rem;
   --bs-body-line-height: var(--lh-body);
 

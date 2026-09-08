@@ -5,9 +5,10 @@
 
 @use '../tokens/_index' as *;
 
-// Display (marketing hero / empty-state headline)
+// Display (marketing hero / empty-state headline) — locale-resolved
+// so Persian hero copy renders in Vazirmatn, not the Latin face.
 .display {
-  font-family: var(--font-latin-ui);
+  font-family: var(--font-body);
   font-size: var(--fs-display);
   font-weight: 600;
   letter-spacing: var(--track-display);

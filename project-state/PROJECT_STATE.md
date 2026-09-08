@@ -2,12 +2,52 @@
 
 ## Project: APIForge X — Premium Developer API Platform HTML Template
 
-**Branch:** arena/01a080e8-api-template-html
-**Phase:** PHASE 5.5 — PREMIUM VISUAL POLISH & MOTION SYSTEM — COMPLETE ✅
+**Branch:** arena/01a081cc-api-template-html
+**Phase:** PHASE 6 — MARKETPLACE RELEASE PACKAGE — COMPLETE ✅ (ZIP-ready)
 **Localization:** Persian-first + live English (fa ⇄ en), 1,347 translation keys, 31/31 pages bilingual — see `/PHASE_5_REPORT.md`
+**Typography:** **Vazirmatn is the primary Persian face across every UI lane** — locale-resolved `--font-body` token (fa/rtl → Vazirmatn, en/ltr → Inter Variable), self-hosted woff2 at 300–700; fixed the lanes (body, display, numerics, forms) that were pinned to the Latin face
 **Motion:** centralized tokens (150 / 250 / 400ms, `cubic-bezier(.2,.8,.2,1)`), atmospheric backdrop on marketing + auth, transform/opacity only, full `prefers-reduced-motion` support — see `/PHASE_5_5_REPORT.md`
 **Date:** 2026-09-08
-**Status:** Responsive/scroll review complete — natural document scrolling replaces the nested main viewport, mobile/RTL layout defects fixed, invite backdrop matches login. Production build passes; **197/197 Playwright tests pass**, including **1,116 layout checks** across all 31 pages, fa/en, dark/light and 320–1920px in real Chromium 149. Safari/Firefox and physical-device QA remain unverified. See [`RESPONSIVE_REVIEW.md`](../RESPONSIVE_REVIEW.md). Earlier audit sections below are historical; their no-browser limitations do not describe this run.
+**Status:** Commercial release package assembled and verified — see `/RELEASE-VERIFICATION.md`. `release/APIForge-X-v1.0.0.zip` = 30-page production HTML package + full Vite source + buyer Documentation (5 guides) + marketplace listing kit (description EN/FA, features, changelog, screenshot guide) + LICENSE + PACKAGE-MANIFEST.json (SHA-256 per file). Release QA: per-page reference audit, CSS/JS/font integrity (Vazirmatn 300–700 arabic subset), dev-file exclusion, static-server smoke test 30/30 pages + all assets. Playwright browser unavailable in this sandbox (CDN blocked); the 197-test suite remains certified from the dev-environment run (Chromium 149).
+
+---
+
+## PHASE 6: MARKETPLACE RELEASE PACKAGE — COMPLETE ✅
+
+**Objectives Achieved:**
+- [x] **Vazirmatn fix** — `--font-body` locale-resolved token in
+      `src/scss/tokens/_typography.scss`; body, `.display`, `.form-control`,
+      `.form-select` and `--bs-body-font-family` all read it; Vazirmatn 600
+      added (headings/buttons). Persian text no longer falls back to system
+      fonts; EN mode unchanged (Inter Variable)
+- [x] **Release audit + build verification** — `node packaging/assemble.mjs`
+      (fresh `vite build`, relative `base: './'`, all 30 required pages,
+      hashed assets, fonts, zero 404 references)
+- [x] **Distribution compatibility** — sub-folder/shared-hosting safe
+      (relative paths verified), local-server smoke test, `file://` guidance
+      documented (Chrome/Safari ES-module limitation)
+- [x] **Professional release structure** — `release/APIForge-X-HTML/`,
+      `release/APIForge-X-Source/`, `release/Documentation/`
+      (Installation, Customization, RTL-Guide, Theme-System, File-Structure),
+      `release/marketplace/` (Product-Description, Features, Changelog,
+      Screenshot-Guide), `LICENSE.txt`, `PACKAGE-MANIFEST.json`
+- [x] **Buyer experience** — docs cover install (cPanel/Nginx/Netlify/local
+      server), color/font/theme customization, RTL mechanics, adding pages,
+      modifying components, rebuilding production files
+- [x] **Final QA** — `node packaging/verify.mjs` → PASS (see
+      `/RELEASE-VERIFICATION.md`); dev/QA files excluded from the buyer HTML
+      package (`rtl-persian-test.html` source-only, in-page links stripped)
+
+**Artifacts Created/Updated:**
+- New: `packaging/Marketplace/{Product-Description,Features,Screenshot-Guide}.md`,
+  `packaging/Documentation/{RTL-Guide,Theme-System}.md`, `packaging/verify.mjs`
+- Rewritten: `packaging/assemble.mjs` (new structure + manifest + SHA-256),
+  `packaging/Documentation/{Installation,Customization,File-Structure}.md`,
+  `packaging/CHANGELOG.md`, `packaging/README.md`
+- Removed: superseded docs (`Adding-Pages`, `HTML-Version`, `Source-Version`,
+  old `RTL.md`/`Theme.md`, `packaging/Documentation/Marketplace/`,
+  `packaging/PACKAGE-README.md`)
+- Zip: `release/APIForge-X-v1.0.0.zip` (replaced with the corrected package)
 
 ---
 
