@@ -1,0 +1,66 @@
+[
+  {
+    "id": "act_1",
+    "type": "key_created",
+    "title": "API key created",
+    "detail": "\"User Analytics\" created in the staging environment",
+    "actor": "Ali Rezaei",
+    "timestamp": "2026-09-08T02:27:36.521Z"
+  },
+  {
+    "id": "act_2",
+    "type": "webhook_failed",
+    "title": "Webhook delivery failed",
+    "detail": "https://example.com/hooks/email-events returned a 500",
+    "actor": "System",
+    "timestamp": "2026-09-08T00:27:36.521Z"
+  },
+  {
+    "id": "act_3",
+    "type": "endpoint_updated",
+    "title": "Endpoint updated",
+    "detail": "POST /v1/emails — added the `from` parameter",
+    "actor": "Sara Ahmadi",
+    "timestamp": "2026-09-07T21:27:36.521Z"
+  },
+  {
+    "id": "act_4",
+    "type": "key_revoked",
+    "title": "API key revoked",
+    "detail": "\"Test server\" (sk_live_59TB…)",
+    "actor": "Ali Rezaei",
+    "timestamp": "2026-09-07T17:27:36.521Z"
+  },
+  {
+    "id": "act_5",
+    "type": "rate_limit",
+    "title": "Rate limit applied",
+    "detail": "POST /v1/completions hit 250 requests/sec for 4 seconds",
+    "actor": "System",
+    "timestamp": "2026-09-07T12:27:36.521Z"
+  },
+  {
+    "id": "act_6",
+    "type": "deploy",
+    "title": "Workspace updated",
+    "detail": "Released v1.4.0 of the email service",
+    "actor": "System",
+    "timestamp": "2026-09-07T07:27:36.521Z"
+  },
+  {
+    "id": "act_7",
+    "type": "key_created",
+    "title": "API key created",
+    "detail": "\"CI integration\" created in the production environment",
+    "actor": "Sara Ahmadi",
+    "timestamp": "2026-09-06T22:27:36.521Z"
+  },
+  {
+    "id": "act_8",
+    "type": "webhook_failed",
+    "title": "Webhook delivery failed",
+    "detail": "usage-alerts endpoint disabled after 6 failures",
+    "actor": "System",
+    "timestamp": "2026-09-06T14:27:36.521Z"
+  }
+]

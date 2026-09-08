@@ -12,18 +12,38 @@ import { afxToast } from '../components/toast.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { ask, initConfirm } from '../components/confirm.js';
 import { escapeHtml, compactNumber, formatDate } from '../utils/format.js';
-import plans from '../data/mock-plans.json';
+import faPlans from '../data/mock-plans.json';
+import enPlans from '../data/mock-plans.en.json';
 import invoices from '../data/mock-invoices.json';
-import plan from '../data/mock-plan.json';
+import faPlan from '../data/mock-plan.json';
+import enPlan from '../data/mock-plan.en.json';
+import { localizedData } from '../data/localized.js';
 
 boot();
 initConfirm({ modalId: 'confirm-modal', titleId: 'confirm-modal-title', bodyId: 'confirm-modal-body', submitId: 'confirm-modal-submit' });
 
-const currentPlan = { ...plan, name: 'Scale', price: 199 };
+// The active plan's usage numbers are static demo data; its name and the
+// current billing-period label are resolved from the locale-aware dataset so
+// they render in the active language (fa/en) on every re-render.
+const currentPlan = { ...faPlan, id: 'scale', price: 199 };
 const INVOICE_BADGE = { paid: 'badge-status--success', pending: 'badge-status--warning', failed: 'badge-status--error' };
+let currentPlanId = 'scale';
+
+function getPlans() {
+  return localizedData(faPlans, enPlans);
+}
+
+/** Mirror the selected tier's localized name + period label onto currentPlan. */
+function refreshCurrentPlanMeta() {
+  const tier = getPlans().find((p) => p.id === currentPlanId) || getPlans()[getPlans().length - 1];
+  const period = localizedData(faPlan, enPlan);
+  currentPlan.name = tier.name;
+  currentPlan.periodLabel = period.periodLabel;
+}
 
 // --- Current plan ---------------------------------------------------------
 function renderCurrentPlan() {
+  refreshCurrentPlanMeta();
   document.getElementById('billing-plan-name').textContent = currentPlan.name;
   document.getElementById('billing-price').textContent = `$${currentPlan.price}`;
   document.getElementById('billing-cycle').textContent = 'per month';
@@ -41,7 +61,7 @@ function renderCurrentPlan() {
 
 // --- Plan comparison -------------------------------------------------------
 function planCard(p) {
-  const isCurrent = p.name === currentPlan.name;
+  const isCurrent = p.id === currentPlanId;
   const isDowngrade = !isCurrent && p.price < currentPlan.price;
   const ctaLabel = isCurrent ? tr('billing.currentPlanCta') : isDowngrade ? tr('billing.downgrade') : tr('billing.upgradeTo', { plan: p.name });
   const ctaClass = isCurrent ? 'btn-secondary' : isDowngrade ? 'btn-ghost' : 'btn-primary';
@@ -65,7 +85,7 @@ function planCard(p) {
 }
 
 function renderPlans() {
-  document.getElementById('plan-grid').innerHTML = plans.map(planCard).join('');
+  document.getElementById('plan-grid').innerHTML = getPlans().map(planCard).join('');
 }
 
 // --- Invoices ---------------------------------------------------------------
@@ -98,7 +118,7 @@ render();
 document.getElementById('plan-grid').addEventListener('click', async (e) => {
   const btn = e.target.closest('[data-plan]');
   if (!btn || btn.disabled) return;
-  const target = plans.find((p) => p.id === btn.dataset.plan);
+  const target = getPlans().find((p) => p.id === btn.dataset.plan);
   const isDowngrade = target.price < currentPlan.price;
   const ok = await ask({
     title: isDowngrade ? tr('billing.downgradeTitle') : tr('billing.upgradeTitle'),
@@ -109,7 +129,7 @@ document.getElementById('plan-grid').addEventListener('click', async (e) => {
     danger: isDowngrade,
   });
   if (ok) {
-    currentPlan.name = target.name;
+    currentPlanId = target.id;
     currentPlan.price = target.price;
     renderCurrentPlan();
     renderPlans();

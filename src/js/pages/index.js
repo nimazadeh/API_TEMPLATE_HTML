@@ -13,8 +13,11 @@ import { createIcons, icons } from '../components/icons.js';
 import { compactNumber, relativeTime, escapeHtml, percent, latencyText } from '../utils/format.js';
 import { observeMotion } from '../components/motion.js';
 import observability from '../data/mock-observability.json';
-import activity from '../data/mock-activity.json';
-import plans from '../data/mock-plans.json';
+import faActivity from '../data/mock-activity.json';
+import enActivity from '../data/mock-activity.en.json';
+import faPlans from '../data/mock-plans.json';
+import enPlans from '../data/mock-plans.en.json';
+import { localizedData } from '../data/localized.js';
 
 bootSite();
 initCharts();
@@ -83,6 +86,7 @@ function renderChart() {
 
 function renderActivity() {
   const feed = document.getElementById('hero-activity');
+  const activity = localizedData(faActivity, enActivity);
   feed.innerHTML = `<ol class="timeline">
     ${activity
       .slice(0, 4)
@@ -106,6 +110,7 @@ function renderActivity() {
 function renderPricingTeaser() {
   const grid = document.getElementById('pricing-teaser');
   if (!grid) return;
+  const plans = localizedData(faPlans, enPlans);
   grid.innerHTML = plans
     .map(
       (p) => `

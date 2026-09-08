@@ -5,7 +5,9 @@
 // =============================================================
 
 import { bootSite } from '../site.js';
-import plans from '../data/mock-plans.json';
+import faPlans from '../data/mock-plans.json';
+import enPlans from '../data/mock-plans.en.json';
+import { localizedData } from '../data/localized.js';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { observeMotion } from '../components/motion.js';
 
@@ -23,6 +25,7 @@ const FEATURES = [
 
 function renderCards() {
   const grid = document.getElementById('pricing-grid');
+  const plans = localizedData(faPlans, enPlans);
   grid.innerHTML = plans
     .map(
       (p) => `
@@ -48,6 +51,7 @@ function renderCards() {
 
 function renderComparison() {
   const tbody = document.querySelector('#pricing-compare tbody');
+  const plans = localizedData(faPlans, enPlans);
   tbody.innerHTML = FEATURES.map(
     (f) => `
       <tr>
