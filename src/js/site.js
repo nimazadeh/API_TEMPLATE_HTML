@@ -6,6 +6,8 @@
 // reveal-once — those are app-shell concerns.
 // =============================================================
 
+import '../scss/main.scss';
+
 import { initIcons } from './components/icons.js';
 import { initTheme } from './components/theme.js';
 import { initCopy } from './components/copy.js';
