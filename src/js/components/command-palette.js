@@ -10,6 +10,8 @@ import { createIcons, icons } from './icons.js';
 import { escapeHtml } from '../utils/format.js';
 
 const state = { open: false, results: [], selected: 0, query: '' };
+let returnFocus = null;
+let closeTimer = null;
 
 function fuzzyScore(query, text) {
   const q = query.toLowerCase();
@@ -53,7 +55,7 @@ function paletteMarkup() {
       <div class="cmd-input-row">
         <i data-lucide="search"></i>
         <input type="text" placeholder="${t('palette.placeholder')}" aria-label="${t('palette.searchAria')}" autocomplete="off" spellcheck="false" />
-        <kbd>esc</kbd>
+        <button type="button" class="btn btn-icon" data-command-close aria-label="${t('aria.close')}"><i data-lucide="x"></i></button>
       </div>
       <div class="cmd-results" role="listbox"></div>
       <div class="cmd-footer">
@@ -160,6 +162,8 @@ function activate(item) {
 }
 
 function open() {
+  clearTimeout(closeTimer);
+  returnFocus = document.activeElement;
   const wrap = buildPalette();
   wrap.hidden = false;
   state.open = true;
@@ -175,10 +179,11 @@ function open() {
 
 function close() {
   const wrap = document.querySelector('.command-palette');
-  if (!wrap) return;
+  if (!wrap || !state.open) return;
   state.open = false;
   wrap.classList.remove('is-open');
-  setTimeout(() => {
+  returnFocus?.focus({ preventScroll: true });
+  closeTimer = setTimeout(() => {
     wrap.hidden = true;
   }, 150);
 }
@@ -231,7 +236,10 @@ export function initCommandPalette() {
     render();
     const box = w.querySelector('.cmd-results');
     if (box) box.scrollTop = 0;
-    bindInput(w.querySelector('input'));
+    const input = w.querySelector('input');
+    input.value = state.query;
+    bindInput(input);
+    if (state.open) input.focus({ preventScroll: true });
   });
 
   bindInput(wrap.querySelector('input'));
@@ -239,11 +247,32 @@ export function initCommandPalette() {
   // Stable, once-only listeners — these live on persistent nodes, so
   // they must NOT be re-registered on every locale change.
   wrap.addEventListener('click', (e) => {
-    if (e.target === wrap) return close();
+    if (e.target === wrap || e.target.closest('[data-command-close]')) return close();
     const itemBtn = e.target.closest('.cmd-item');
     if (itemBtn) {
       const flat = flatResults();
       activate(flat.find((i) => i.id === itemBtn.dataset.id));
+    }
+  });
+
+  // The mobile close button is keyboard-accessible too. Keep Tab within
+  // the dialog and allow Escape from results/close, not just from the input.
+  wrap.addEventListener('keydown', (e) => {
+    if (!state.open) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      close();
+    } else if (e.key === 'Tab') {
+      const controls = [...wrap.querySelectorAll('input,button:not(:disabled)')];
+      const first = controls[0];
+      const last = controls.at(-1);
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
     }
   });
 

@@ -10,6 +10,7 @@ import '../scss/main.scss';
 
 import { initI18n } from './core/i18n.js';
 import { initIcons } from './components/icons.js';
+import { initAppShell } from './components/app-shell.js';
 import { initTheme } from './components/theme.js';
 import { initEnvSwitcher } from './components/env-switcher.js';
 import { initCommandPalette } from './components/command-palette.js';
@@ -24,6 +25,7 @@ import './core/bootstrap.js';
 export function boot() {
   // Localization first — every later component paints into a translated DOM.
   initI18n();
+  initAppShell();
   initIcons();
   initTheme();
   initEnvSwitcher();

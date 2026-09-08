@@ -1,5 +1,37 @@
 # Test Status — APIForge X
 
+## Responsive / scrolling review — 2026-09-08 — PASS
+
+- `npm run build`: success, all 31 HTML entries.
+- `npm test`: **197/197 passed** against the production build.
+- Existing catalog/localization/interaction suite: **46/46 passed**.
+- New `tests/responsive.spec.js`: **151/151 passed** (124 layout-matrix cases
+  plus 27 interaction cases).
+- **1,116 layout checks:** 31 pages × fa/en × dark/light × 9 widths
+  (320, 360, 390, 576, 768, 992, 1200, 1440, 1920px). Light cases also show
+  the Test environment banner. No document horizontal overflow, clipped
+  audited controls, nested main scrolling or page runtime errors detected.
+- Interaction checks: document wheel scrolling and reachable last card,
+  sticky header/sidebar, mobile navigation/environment/locale/theme controls,
+  resize cleanup, tablet icon labels, local table scrolling, RTL/LTR inspectors,
+  docs pager/anchors and short-screen navigation, command search/close/Tab/Escape,
+  auth backdrop parity/validation on short screens, live marketing locale toggle,
+  and motion-enabled final-card reveal.
+- `git diff --check`: clean.
+
+**Execution:** real headless Chromium `149.0.7827.0` with Playwright, not jsdom.
+The normal browser CDN download was unavailable; a local Chromium binary from
+`@sparticuz/chromium` (scratch-only, not a project dependency) was used through
+`CHROMIUM_EXECUTABLE_PATH`. Browser binaries, audit JSON, screenshots and test
+output remain in ignored scratch/output paths, not in the source patch.
+
+**Limitations:** Safari, Firefox, physical phones/virtual keyboards and real
+safe-area behavior were not tested. No full WCAG or Lighthouse certification.
+See [`RESPONSIVE_REVIEW.md`](../RESPONSIVE_REVIEW.md) for the Persian issue report.
+Historical "browser unavailable" notes below belong to earlier audits.
+
+---
+
 ## Phase 5.5 — Premium Visual Polish & Motion System — PASS ✅ (with honest limitations)
 
 **Date:** 2026-09-08

@@ -8,7 +8,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test:i18n": "playwright test"
+    "test": "playwright test",
+    "test:i18n": "playwright test tests/catalogs.spec.js tests/localization.spec.js",
+    "test:responsive": "playwright test tests/responsive.spec.js"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.5",

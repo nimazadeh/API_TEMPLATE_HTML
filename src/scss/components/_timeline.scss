@@ -87,6 +87,8 @@
 }
 
 .timeline__content {
+  min-width: 0;
+  overflow-wrap: anywhere; // long request IDs/URLs must not widen a flex row
   padding-top: 2px;
   .timeline__title {
     font-size: var(--fs-body);

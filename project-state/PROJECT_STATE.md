@@ -2,12 +2,12 @@
 
 ## Project: APIForge X — Premium Developer API Platform HTML Template
 
-**Branch:** arena/01a07d58-api-template-html
+**Branch:** arena/01a080e8-api-template-html
 **Phase:** PHASE 5.5 — PREMIUM VISUAL POLISH & MOTION SYSTEM — COMPLETE ✅
 **Localization:** Persian-first + live English (fa ⇄ en), 1,347 translation keys, 31/31 pages bilingual — see `/PHASE_5_REPORT.md`
 **Motion:** centralized tokens (150 / 250 / 400ms, `cubic-bezier(.2,.8,.2,1)`), atmospheric backdrop on marketing + auth, transform/opacity only, full `prefers-reduced-motion` support — see `/PHASE_5_5_REPORT.md`
 **Date:** 2026-09-08
-**Status:** Final release audit executed — real-browser QA re-confirmed unavailable (browser CDNs + apt blocked), strongest static + jsdom alternative used. 6 genuine defects fixed (1 P1 dead code-block on the landing; 5 P2 copy/a11y/docs/continuity), 2 new regression scenarios added. Runtime QA **116/116** across 30 pages, build clean (30 inputs, 0 warnings), a11y + static audits clean, link integrity + secrets + CDN scans clean. See the "Final Release Audit" section below for the issue table and scorecard.
+**Status:** Responsive/scroll review complete — natural document scrolling replaces the nested main viewport, mobile/RTL layout defects fixed, invite backdrop matches login. Production build passes; **197/197 Playwright tests pass**, including **1,116 layout checks** across all 31 pages, fa/en, dark/light and 320–1920px in real Chromium 149. Safari/Firefox and physical-device QA remain unverified. See [`RESPONSIVE_REVIEW.md`](../RESPONSIVE_REVIEW.md). Earlier audit sections below are historical; their no-browser limitations do not describe this run.
 
 ---
 

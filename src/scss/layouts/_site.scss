@@ -203,3 +203,26 @@
     color: var(--text-tertiary);
   }
 }
+
+// Compact site chrome: preserve every primary control without a horizontally
+// scrolling header. The logo keeps its screen-reader name when text is hidden.
+@include mq-max('xl') {
+  .site-header .site-header__inner { gap: var(--space-2); }
+  .site-nav {
+    margin-inline-start: 0;
+    .site-nav__link { padding-inline: var(--space-2); }
+  }
+  .site-header__actions { gap: var(--space-1); }
+}
+
+@include mq-max('md') {
+  .site-header__actions [data-locale-toggle] {
+    width: var(--control-height);
+    padding-inline: 0;
+    > [data-locale-label] { display: none; }
+  }
+}
+
+@include mq-max('sm') {
+  .site-header__brand .brand-name { @include visually-hidden; }
+}

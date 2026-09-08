@@ -88,27 +88,34 @@
   box-shadow: var(--elevation-3);
 }
 
-// Bootstrap positions offcanvas-start/end with physical left/right and
-// translateX — mirror them with logical properties for RTL.
-.offcanvas-start {
+// Match Bootstrap's two-class specificity when clearing its physical
+// coordinates. Leaving both left:0 and right:0 pins RTL end-drawers to
+// the wrong side even though their entrance animation is mirrored.
+.offcanvas.offcanvas-start,
+.offcanvas.offcanvas-end {
   left: auto;
-  inset-inline-start: 0;
+  right: auto;
+  border-left: 0;
   border-right: 0;
+}
+.offcanvas.offcanvas-start {
+  inset-inline-start: 0;
   border-inline-end: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+}
+.offcanvas.offcanvas-end {
+  inset-inline-end: 0;
+  border-inline-start: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+}
+
+// Keep transform specificity lower than Bootstrap's .show:not(.hiding)
+// rule, so an open drawer remains visible in both directions.
+.offcanvas-start {
   transform: translateX(-100%);
-  [dir='rtl'] & {
-    transform: translateX(100%);
-  }
+  [dir='rtl'] & { transform: translateX(100%); }
 }
 .offcanvas-end {
-  right: auto;
-  inset-inline-end: 0;
-  border-left: 0;
-  border-inline-start: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
   transform: translateX(100%);
-  [dir='rtl'] & {
-    transform: translateX(-100%);
-  }
+  [dir='rtl'] & { transform: translateX(-100%); }
 }
 
 // Mobile sidebar drawer (Bootstrap Offcanvas, re-skinned)

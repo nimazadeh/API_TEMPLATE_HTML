@@ -13,6 +13,6 @@
   align-items: start;
 
   @include mq-max('lg') {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }

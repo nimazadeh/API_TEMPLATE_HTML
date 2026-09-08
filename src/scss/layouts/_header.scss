@@ -11,6 +11,7 @@
   align-items: center;
   gap: var(--space-3);
   height: var(--header-height);
+  min-width: 0;
   padding-inline: 16px;
   background: var(--surface-0);
   border-bottom: 1px solid var(--border);
@@ -63,6 +64,7 @@
   }
 
   .header-actions {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     gap: var(--space-1);
@@ -120,9 +122,9 @@
 .env-banner {
   position: relative;
   z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
+  // Inline flow lets translated prose wrap normally around strong/code
+  // spans instead of turning every text fragment into a cramped flex item.
+  display: block;
   min-height: 32px;
   padding: 6px 16px;
   background: var(--warning-bg);
@@ -133,7 +135,8 @@
   svg {
     width: 14px;
     height: 14px;
-    flex: none;
+    margin-inline-end: var(--space-2);
+    vertical-align: -2px;
   }
 }
 
@@ -141,5 +144,39 @@
 .header-burger {
   @include mq('md') {
     display: none;
+  }
+}
+
+// Compact navigation keeps search, theme, language and notifications usable;
+// it does not hide overflow or shrink the whole page to fit a desktop header.
+@include mq-max('lg') {
+  .app-header {
+    .header-title .crumb,
+    .header-title .crumb-sep {
+      display: none;
+    }
+    .header-search {
+      flex: 0 0 var(--control-height);
+      width: var(--control-height);
+      padding-inline: 0;
+      justify-content: center;
+      gap: 0;
+      > span { display: none; }
+    }
+  }
+}
+
+@include mq-max('md') {
+  .app-header {
+    gap: var(--space-2);
+    padding-inline: var(--space-3);
+    .header-burger { flex-shrink: 0; }
+    .header-title { flex: 1; }
+    .header-search { margin-inline: 0; }
+    .header-actions {
+      margin-inline-start: 0;
+      // Available in the mobile sidebar drawer instead.
+      > .env-switcher { display: none; }
+    }
   }
 }
