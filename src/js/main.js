@@ -16,6 +16,7 @@ import { initCodeBlocks } from './components/code-block.js';
 import { initCopy } from './components/copy.js';
 import { initToast } from './components/toast.js';
 import { initReveal } from './components/reveal.js';
+import { initShortcuts } from './components/shortcuts.js';
 import './core/bootstrap.js';
 
 export function boot() {
@@ -27,4 +28,5 @@ export function boot() {
   initCopy();
   initToast();
   initReveal();
+  initShortcuts();
 }
