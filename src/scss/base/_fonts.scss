@@ -26,8 +26,11 @@
 @import '@fontsource/jetbrains-mono/400.css';
 @import '@fontsource/jetbrains-mono/500.css';
 
-// Vazirmatn — Persian UI. 300 / 400 / 500 / 700.
+// Vazirmatn — the primary Persian face. 300 / 400 / 500 / 600 / 700
+// (600 is used for headings and buttons; 300/700 keep the full range
+// for display text and emphasis).
 @import '@fontsource/vazirmatn/300.css';
 @import '@fontsource/vazirmatn/400.css';
 @import '@fontsource/vazirmatn/500.css';
+@import '@fontsource/vazirmatn/600.css';
 @import '@fontsource/vazirmatn/700.css';

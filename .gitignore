@@ -36,4 +36,8 @@ test-results/
 playwright-report/
 
 # Assembled marketplace tree (rebuild with node packaging/assemble.mjs)
-release/APIForge-X/
+release/APIForge-X-HTML/
+release/APIForge-X-Source/
+release/Documentation/
+release/marketplace/
+release/LICENSE.txt

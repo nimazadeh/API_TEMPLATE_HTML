@@ -6,6 +6,43 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## [Phase 6 — marketplace release package] — 2026-09-08 — Vazirmatn-first typography + ZIP-ready commercial package
+
+### Fixed
+- **Persian typography:** `body`, `.display`, `.form-control`, `.form-select`
+  and Bootstrap's `--bs-body-font-family` were pinned to `--font-latin-ui`,
+  so Persian (the default locale) fell back to system fonts instead of
+  Vazirmatn. Introduced the locale-resolved `--font-body` token
+  (`[dir='rtl'],[lang='fa']` → Vazirmatn; otherwise Inter Variable) and
+  pointed all UI text lanes at it. `--font-numeric` now resolves per locale
+  as well.
+- Vazirmatn weight 600 added (used 23× for headings/buttons) — previously
+  the browser fell back to 700.
+
+### Added
+- `packaging/verify.mjs` — release QA audit: page inventory, per-page
+  href/src reference resolution, CSS url() audit, Vazirmatn font-face/woff2
+  audit (300–700 arabic subset), locale font-rule assertions, full JS import
+  graph check, dev-file exclusion, live static-server smoke test
+  (status + content-type for every page and asset). Writes
+  `RELEASE-VERIFICATION.md`.
+- `packaging/Marketplace/` — paste-ready listing copy (EN + FA), feature
+  list with the 30-page inventory, screenshot capture guide.
+- `PACKAGE-MANIFEST.json` generation in `packaging/assemble.mjs`
+  (inventory + SHA-256 per file).
+
+### Changed
+- Release structure → `release/{APIForge-X-HTML, APIForge-X-Source,
+  Documentation, marketplace, LICENSE.txt, PACKAGE-MANIFEST.json}`; the
+  30-page HTML package excludes the `rtl-persian-test.html` QA harness
+  (source-only) and strips its in-page links.
+- Buyer docs rewritten for the new structure with Vazirmatn-first font
+  documentation (`Installation`, `Customization`, `RTL-Guide`,
+  `Theme-System`, `File-Structure`).
+- `release/APIForge-X-v1.0.0.zip` replaced with the corrected package.
+
+---
+
 ## [Responsive review] — 2026-09-08 — Scroll ownership, mobile layout and invite backdrop
 
 ### Fixed
