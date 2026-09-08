@@ -3,7 +3,7 @@
   "slug": "apiforge-x",
   "version": "1.0.0",
   "type": "premium-html-template",
-  "created": "2026-09-08T17:45:34.296Z",
+  "created": "2026-09-08T19:36:03.422Z",
   "defaultLocale": "fa",
   "locales": [
     "fa",
@@ -445,6 +445,7 @@
       "APIForge-X-Source/team.html": "e1e26ae2c04d43e11a655a155b1684141999ed6807fb2083952a4644ea0ecd66",
       "APIForge-X-Source/tests/catalogs.spec.js": "0dc13b33ddd2c147117aa7ad7fa9425edee5be7ea4dfb9653a6433c9778d9ceb",
       "APIForge-X-Source/tests/localization.spec.js": "b256460348dc050dd30ea7b7e74a4eb517e78c08ba023f2c04ca645233c40e1a",
+      "APIForge-X-Source/tests/production.spec.js": "accd419af3c324224575f03a5e10509e1e99d5d3bd3ca6f7df6ac8189f179f92",
       "APIForge-X-Source/tests/responsive.spec.js": "b754dff0cef984af16074748bc7b87ed212270ab5d5b9fd28b1af4dbb0260fea",
       "APIForge-X-Source/usage.html": "4fd6d505da2fec70cdda212e58cbc3a27a7c3c8305fc7aa5bcee43bd20566460",
       "APIForge-X-Source/visual-showcase.html": "d12154f986a3d27e1f4954a5a89d531833f6c563c6323862d0a00016909faee5",
