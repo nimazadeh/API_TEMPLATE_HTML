@@ -12,6 +12,7 @@ import { createIcons, icons } from '../components/icons.js';
 import { compactNumber, relativeTime, escapeHtml } from '../utils/format.js';
 import observability from '../data/mock-observability.json';
 import activity from '../data/mock-activity.json';
+import plans from '../data/mock-plans.json';
 
 bootSite();
 initCharts();
@@ -99,6 +100,31 @@ function renderActivity() {
   createIcons({ icons });
 }
 
+// Pricing teaser — the same plans as pricing.html / billing.html.
+function renderPricingTeaser() {
+  const grid = document.getElementById('pricing-teaser');
+  if (!grid) return;
+  grid.innerHTML = plans
+    .map(
+      (p) => `
+      <div class="pricing-card${p.highlight ? ' is-featured' : ''}">
+        <span class="badge ${p.highlight ? 'badge-accent' : 'badge-neutral'} pricing-card__tag">${p.highlight ? 'Most popular' : p.name}</span>
+        <div class="pricing-card__name">${p.name}</div>
+        <div class="pricing-card__price"><span class="amount">${p.priceLabel}</span><span class="period">${p.period}</span></div>
+        <p class="pricing-card__blurb">${p.blurb}</p>
+        <ul class="pricing-card__features">
+          <li><i data-lucide="check"></i> ${p.requests} requests</li>
+          <li><i data-lucide="check"></i> ${p.environments} environments</li>
+          <li><i data-lucide="check"></i> ${p.webhooks} webhook endpoints</li>
+        </ul>
+        <a class="btn ${p.highlight ? 'btn-primary' : 'btn-ghost'} pricing-card__cta" href="./pricing.html">${p.highlight ? 'Choose ' + p.name : 'Start with ' + p.name}</a>
+      </div>`
+    )
+    .join('');
+  createIcons({ icons });
+}
+
 renderKpis();
 renderChart();
 renderActivity();
+renderPricingTeaser();

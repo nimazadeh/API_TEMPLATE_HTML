@@ -163,6 +163,39 @@ export const commandGroups = [
     ],
   },
   {
+    label: 'Marketing',
+    items: [
+      {
+        id: 'site-home',
+        title: 'Home',
+        desc: 'Landing page with the live product preview',
+        icon: 'zap',
+        href: './index.html',
+      },
+      {
+        id: 'site-pricing',
+        title: 'Pricing',
+        desc: 'Plans, overage and comparison',
+        icon: 'credit-card',
+        href: './pricing.html',
+      },
+      {
+        id: 'site-changelog',
+        title: 'Changelog',
+        desc: 'Versioned release notes',
+        icon: 'clock',
+        href: './changelog.html',
+      },
+      {
+        id: 'site-status',
+        title: 'Status',
+        desc: 'Uptime and incident history',
+        icon: 'activity',
+        href: './status.html',
+      },
+    ],
+  },
+  {
     label: 'Quick actions',
     items: [
       {

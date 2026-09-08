@@ -1,5 +1,30 @@
 # Test Status — APIForge X
 
+## Final Release Audit — PASS ✅ (with honest limitations)
+
+**Date:** 2026-09-08
+**Status:** PASS ✅ — release gate executed. Real browser re-confirmed **UNAVAILABLE** (no binary; browser CDNs + apt blocked). Strongest static + jsdom alternative run: runtime QA **116/116** across 30 pages, `vite build` clean (30 inputs, 0 warnings), structural a11y audit clean (30 pages), static design audit clean, link-integrity + secrets + CDN scans clean. 8 defects fixed (1 P1, 7 P2); 2 new regression steps added (landing code-tab switch, pricing teaser). Nothing marked PASS for visual/responsive/Lighthouse — those stay LIMITATION.
+
+### Audit-added regression steps (116 = 114 baseline + 2)
+
+- `index` +2 — pricing teaser renders 3 plans (featured present); code tab switch reveals the Node pane (guards the P1 fix)
+- All prior 114 steps unchanged and green
+
+### Defects fixed in this pass
+
+- **P1** `site.js` — marketing `bootSite()` now calls `initCodeBlocks()` (landing code tabs + copy were dead)
+- **P2** `index.html`/`index.js` — pricing teaser now from `mock-plans.json` (was inconsistent license pricing); "26 pages" → 30; stat label clarified
+- **P2** `billing.js` — removed unused `formatNumber`
+- **P2** `rtl-test.html` — added missing `<h1>`
+- **P2** `README.md` — "Customization reference" + "Deploying"
+- **P2** `commands.js` — "Marketing" group (app → marketing continuity)
+
+### Honest limitations (unchanged)
+
+- Real-browser visual/responsive at 360–1920, real chart painting, keyboard traversal, in-situ contrast, Lighthouse and full WCAG were NOT executed — no browser exists in this sandbox. Marketplace screenshots are produced by `marketplace/capture-screenshots.mjs` on the buyer's machine.
+
+---
+
 ## Phase 4 (Re-scoped) — Marketplace Excellence & Commercial Polish — PASS ✅ (with honest limitations)
 
 **Date:** 2026-09-08

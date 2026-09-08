@@ -10,7 +10,7 @@ import { Modal } from '../core/bootstrap.js';
 import { createIcons, icons } from '../components/icons.js';
 import { afxToast } from '../components/toast.js';
 import { ask, initConfirm } from '../components/confirm.js';
-import { escapeHtml, formatNumber, compactNumber, formatDate } from '../utils/format.js';
+import { escapeHtml, compactNumber, formatDate } from '../utils/format.js';
 import plans from '../data/mock-plans.json';
 import invoices from '../data/mock-invoices.json';
 import plan from '../data/mock-plan.json';

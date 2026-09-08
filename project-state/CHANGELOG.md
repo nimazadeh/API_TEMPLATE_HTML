@@ -287,6 +287,27 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## Final Release Audit — 2026-09-08
+
+### Fixed
+- **P1** `site.js` — marketing `bootSite()` now initializes code blocks; the landing's code showcase (language tabs + copy) was dead and now works
+- **P2** `index.html` / `index.js` — pricing teaser renders the product plans from `mock-plans.json` (was template-license pricing, inconsistent with `pricing.html`); "26 pages" → "30 pages"; stat label clarified to "3 themes — dark · light · system"
+- **P2** `billing.js` — removed unused `formatNumber` import
+- **P2** `rtl-test.html` — added the missing `<h1>`
+- **P2** `README.md` — "Customization reference" (colors/fonts/nav/icons) + "Deploying" sections
+- **P2** `commands.js` — "Marketing" command-palette group (app → marketing continuity)
+
+### Validated
+- `vite build` clean (30 inputs, 0 warnings)
+- Runtime QA **116/116** across 30 pages (0 jsdom/console/module-eval errors)
+- Structural a11y audit clean (30 pages); static audit clean; link integrity + secrets + CDN scans clean
+- Real browser UNAVAILABLE (visual/responsive/Lighthouse stay LIMITATION)
+
+### Next
+- Marketplace screenshots + submission (Rastchin / ThemeForest) on a machine with Chromium
+
+---
+
 ## Template for Future Phases
 
 ```

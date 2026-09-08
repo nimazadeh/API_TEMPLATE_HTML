@@ -3,9 +3,9 @@
 ## Project: APIForge X — Premium Developer API Platform HTML Template
 
 **Branch:** arena/01a07d58-api-template-html
-**Phase:** PHASE 4 (RE-SCOPED: Marketplace Excellence & Commercial Polish) — COMPLETE ✅
+**Phase:** FINAL RELEASE AUDIT — COMPLETE ✅ (release-ready, no P0/P1 open)
 **Date:** 2026-09-08
-**Status:** Phase 4 complete — premium marketing layer (landing `index.html` + pricing/changelog/status/404), keyboard shortcuts (`?` help, `g` navigation, `/` search, Esc), RTL/nav parity fixes, buyer README + marketplace assets (screenshot manifest, RTL-Theme + ThemeForest copy, capture script). Runtime QA 114/114 scenario steps green across 30 pages; static + a11y audits clean (30 pages); visual/responsive static-only (no browser in sandbox — screenshots produced by `marketplace/capture-screenshots.mjs` on the buyer's machine).
+**Status:** Final release audit executed — real-browser QA re-confirmed unavailable (browser CDNs + apt blocked), strongest static + jsdom alternative used. 6 genuine defects fixed (1 P1 dead code-block on the landing; 5 P2 copy/a11y/docs/continuity), 2 new regression scenarios added. Runtime QA **116/116** across 30 pages, build clean (30 inputs, 0 warnings), a11y + static audits clean, link integrity + secrets + CDN scans clean. See the "Final Release Audit" section below for the issue table and scorecard.
 
 ---
 
@@ -208,6 +208,34 @@
 - [x] Runtime QA: **114/114 scenario steps PASS** across 30 pages (0 jsdom/console/module-eval errors)
 - [x] Structural a11y audit (30 pages) clean; static audit clean (0 Inter Tight/Geist/CDN, logical props, reduced-motion, tabular-nums)
 - [~] Real-browser visual/responsive QA not executed (no browser in sandbox) — screenshots produced locally via `marketplace/capture-screenshots.mjs`, recorded honestly
+
+---
+
+### FINAL RELEASE AUDIT — COMPLETE ✅ (2026-09-08)
+
+> Release gate, not a development phase. Findings below are genuine defects fixed
+> in this pass; no features were added.
+
+**Environment:** Real browser **UNAVAILABLE** — no Chromium/Firefox binary, browser-binary CDNs (`storage.googleapis.com`, `cdn.playwright.dev`, `playwright.azureedge.net`) and apt repos blocked; npm registry reachable but ships no browser. Visual/responsive/Lighthouse remain static-only, recorded honestly.
+
+**Defects found & fixed:**
+
+| Sev | Area | Issue | Fix |
+|-----|------|-------|-----|
+| P1 | Marketing landing | Code showcase tabs + copy were **dead** — `bootSite()` never called `initCodeBlocks()` | `site.js` now boots `initCodeBlocks()`; regression step added |
+| P2 | Marketing landing | Pricing teaser showed template-license pricing (Regular/Extended/Source) inconsistent with `pricing.html`'s product plans | Teaser now renders from `mock-plans.json` (single source of truth) |
+| P2 | Marketing copy | "26 pages" stale (now 30) in hero hint + stat | Corrected to 30 |
+| P2 | Marketing copy | Awkward stat "3 themes + environments" | → "3 themes — dark · light · system" |
+| P2 | Code quality | `billing.js` unused `formatNumber` import | Removed |
+| P2 | Accessibility | `rtl-test.html` had no `<h1>` | Title promoted to `h1` (identical styling) |
+| P2 | Buyer docs | Colors/fonts/nav/deploy answers hard to discover | README "Customization reference" + "Deploying" added |
+| P2 | Continuity | No path from app back to marketing pages | "Marketing" group added to the command palette |
+
+**Verified clean (no action):** all internal links (the `api-keys.html#create` deep-link is JS-handled, not broken); secrets (only synthetic `sk_test_`/`sk_live_` demo keys); no CDN/fonts.googleapis refs; no orphan SCSS partials; no disabled palette items; mock webhook URLs all fictional; style-guide's `console.log` is a deliberate toast-demo handler.
+
+**Scorecard:** Product PASS · Build PASS (30 inputs, 0 warnings) · Runtime QA 116/116 · Regression PASS · Accessibility PASS (static; WCAG not claimed) · RTL LIMITATION (static-only) · Responsive LIMITATION (static-only) · Real Browser UNAVAILABLE · Visual QA LIMITATION · Theme LIMITATION · Link Integrity PASS · Marketplace Packaging PASS · Buyer Documentation PASS · Security Sanity PASS · Performance LIMITATION (Lighthouse unavailable; 2.4 MB dist incl. 49 self-hosted font subsets, no images).
+
+**Final decision:** *YES* — this reads as a premium, specialized API/developer SaaS template, not a generic admin theme. *NO* P0/P1 issues remain.
 
 ---
 

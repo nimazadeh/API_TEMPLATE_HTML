@@ -130,6 +130,28 @@ marketplace/    # buyer assets: screenshot manifest, description copy, capture s
 - Persian digits via `.num-fa`, Western digits via `.num-en`.
 - Charts and code blocks remain LTR regardless of document direction.
 
+## Customization reference
+
+Every common change is one file:
+
+| I want to… | Edit |
+|------------|------|
+| Change the accent / surface / status colors | `src/scss/tokens/_colors.scss` (dark in `:root`, light in `[data-theme="light"]`) |
+| Change spacing / radius / type scale | `src/scss/tokens/_spacing.scss` / `_radius.scss` / `_typography.scss` |
+| Change the fonts | `src/scss/base/_fonts.scss` (self-hosted Fontsource imports) |
+| Change the sidebar / nav items | the `<nav class="sidebar-nav">` block on every page, and `src/js/data/commands.js` for the palette |
+| Change marketing nav / footer | the `.site-header` / `.site-footer` blocks on the marketing pages |
+| Flip the whole app to RTL | set `<html dir="rtl" lang="fa">` (logical properties handle the rest; see `rtl.html`) |
+| Add or change an icon | `src/js/components/icons.js` (tree-shaken registry) |
+| Add a page | see “Adding a page” below |
+
+## Deploying
+
+`npm run build` writes a static `dist/` folder — no server runtime, no
+environment variables, no database. Upload `dist/` to any static host
+(Netlify, Vercel, GitHub Pages, cPanel, an nginx bucket, or a Persian CDN).
+The build uses a relative `base: './'`, so it works from any sub-directory.
+
 ## Adding a page
 
 Every page is a top-level HTML file + a `src/js/pages/*.js` entry, registered in

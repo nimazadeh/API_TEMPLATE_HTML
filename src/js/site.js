@@ -9,6 +9,7 @@
 import { initIcons } from './components/icons.js';
 import { initTheme } from './components/theme.js';
 import { initCopy } from './components/copy.js';
+import { initCodeBlocks } from './components/code-block.js';
 import './core/bootstrap.js';
 
 /**
@@ -43,6 +44,7 @@ export function bootSite() {
   initIcons();
   initTheme();
   initCopy();
+  initCodeBlocks();
   initNavActive();
   initDrawerLinks();
 }
