@@ -120,7 +120,7 @@
             </div>
           </div>
           
-          <button type="button" class="btn btn-icon" aria-label="راهنما" data-bs-toggle="tooltip" data-bs-title="راهنما" data-i18n-attr="aria-label:aria.help" data-i18n-attr="data-bs-title:dashboard.help">
+          <button type="button" class="btn btn-icon" aria-label="راهنما" data-bs-toggle="tooltip" data-bs-title="راهنما" data-i18n-attr="aria-label:aria.help,data-bs-title:dashboard.help">
             <i data-lucide="help-circle"></i>
           </button>
           <div class="dropdown">
@@ -156,7 +156,7 @@
           </header>
 
           <!-- KPI strip -->
-          <section class="row g-3 mb-4" id="kpi-strip" aria-label="شاخص‌های کلیدی" data-i18n-attr="aria-label:dashboard.key-metrics">
+          <section data-motion-group class="row g-3 mb-4" id="kpi-strip" aria-label="شاخص‌های کلیدی" data-i18n-attr="aria-label:dashboard.key-metrics">
             <div class="col-6 col-xl-3">
               <div class="card card--dense kpi skeleton-kpi" data-kpi="requests"></div>
             </div>
@@ -172,9 +172,9 @@
           </section>
 
           <!-- Charts -->
-          <section class="row g-3 mb-4">
+          <section data-motion-group class="row g-3 mb-4">
             <div class="col-12 col-xl-8">
-              <div class="card card--dense">
+              <div data-motion class="card card--dense">
                 <div class="chart">
                   <div class="chart__head">
                     <div>
@@ -190,7 +190,7 @@
               </div>
             </div>
             <div class="col-12 col-xl-4">
-              <div class="card card--dense">
+              <div data-motion class="card card--dense">
                 <div class="chart">
                   <div class="chart__head">
                     <div>
@@ -207,13 +207,13 @@
           </section>
 
           <!-- Activity + quick actions -->
-          <section class="row g-3">
+          <section data-motion-group class="row g-3">
             <div class="col-12 col-xl-7">
-              <div class="card card--dense h-100">
-                <div class="card-header">
+              <div data-motion class="card card--dense h-100">
+                <div data-motion class="card-header">
                   <div>
                     <h4 class="card-title" data-i18n="dashboard.recent-activity">فعالیت‌های اخیر</h4>
-                    <div class="card-subtitle" data-i18n="dashboard.keys-webhooks-and-endpoints-across-your-workspac">کلیدها، وب‌هوک‌ها و نقاط پایانی در فضای کاری شما.</div>
+                    <div data-motion class="card-subtitle" data-i18n="dashboard.keys-webhooks-and-endpoints-across-your-workspac">کلیدها، وب‌هوک‌ها و نقاط پایانی در فضای کاری شما.</div>
                   </div>
                   <a class="btn btn-sm btn-ghost" href="./logs.html" data-i18n="action.viewLogs">مشاهدهٔ لاگ‌ها <i data-lucide="arrow-up-left"></i></a>
                 </div>
@@ -222,21 +222,21 @@
             </div>
             <div class="col-12 col-xl-5">
               <div class="d-flex flex-column gap-3 h-100">
-                <a class="card card--interactive d-flex flex-column gap-1 text-body" href="./api-keys.html#create" style="text-decoration:none">
+                <a data-motion class="card card--interactive d-flex flex-column gap-1 text-body" href="./api-keys.html#create" style="text-decoration:none">
                   <div class="d-flex align-items-center gap-2">
                     <span class="empty-icon" style="width:32px;height:32px;margin:0"><i data-lucide="key"></i></span>
                     <h4 class="mb-0" data-i18n="dashboard.create-api-key">ایجاد کلید API</h4>
                   </div>
                   <p class="text-secondary mb-0" data-i18n="dashboard.generate-a-key-with-scoped-permissions">ساخت کلید با سطح دسترسی مشخص.</p>
                 </a>
-                <a class="card card--interactive d-flex flex-column gap-1 text-body" href="./apis.html#endpoints" style="text-decoration:none">
+                <a data-motion class="card card--interactive d-flex flex-column gap-1 text-body" href="./apis.html#endpoints" style="text-decoration:none">
                   <div class="d-flex align-items-center gap-2">
                     <span class="empty-icon" style="width:32px;height:32px;margin:0"><i data-lucide="play"></i></span>
                     <h4 class="mb-0" data-i18n="dashboard.test-an-endpoint">آزمایش یک نقطهٔ پایانی</h4>
                   </div>
                   <p class="text-secondary mb-0" data-i18n="dashboard.send-a-live-request-from-the-api-explorer">ارسال یک درخواست واقعی از کاوشگر API.</p>
                 </a>
-                <a class="card card--interactive d-flex flex-column gap-1 text-body" href="./logs.html" style="text-decoration:none">
+                <a data-motion class="card card--interactive d-flex flex-column gap-1 text-body" href="./logs.html" style="text-decoration:none">
                   <div class="d-flex align-items-center gap-2">
                     <span class="empty-icon" style="width:32px;height:32px;margin:0"><i data-lucide="scroll-text"></i></span>
                     <h4 class="mb-0" data-i18n="dashboard.debug-a-request">اشکال‌زدایی یک درخواست</h4>

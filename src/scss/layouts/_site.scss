@@ -8,6 +8,7 @@
 @use '../tokens/_index' as *;
 
 .site {
+  position: relative; // containing block for the atmospheric backdrop
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
@@ -42,7 +43,7 @@
     display: flex;
     align-items: center;
     gap: var(--space-4);
-    height: 60px;
+    height: var(--site-header-height);
   }
 
   .site-header__brand {
@@ -73,7 +74,7 @@
     font-size: var(--fs-body-sm);
     color: var(--text-secondary);
     text-decoration: none;
-    @include motion(150ms);
+    @include motion(var(--motion-fast));
 
     &:hover {
       color: var(--text-primary);
@@ -110,7 +111,7 @@
     font-size: var(--fs-body);
     color: var(--text-secondary);
     text-decoration: none;
-    @include motion(150ms);
+    @include motion(var(--motion-fast));
 
     &:hover,
     &.is-active {
@@ -127,11 +128,17 @@
 }
 
 // --- Main / Footer ---------------------------------------------------------
+// Content always paints above the (absolutely positioned, z-index 0)
+// backdrop layer.
 .site-main {
+  position: relative;
+  z-index: 1;
   flex: 1 0 auto;
 }
 
 .site-footer {
+  position: relative;
+  z-index: 1;
   border-top: 1px solid var(--border-subtle);
   padding-block: var(--space-8) var(--space-6);
   margin-top: var(--space-8);
@@ -176,7 +183,7 @@
     font-size: var(--fs-body-sm);
     color: var(--text-secondary);
     text-decoration: none;
-    @include motion(150ms);
+    @include motion(var(--motion-fast));
 
     &:hover {
       color: var(--text-primary);

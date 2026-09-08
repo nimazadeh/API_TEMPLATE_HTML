@@ -22,6 +22,11 @@
   </head>
   <body data-page="status">
     <div class="site">
+      <div class="backdrop" data-backdrop aria-hidden="true">
+        <div class="backdrop__grid"></div>
+        <div class="backdrop__glow"></div>
+        <div class="backdrop__mesh"></div>
+      </div>
       <header class="site-header">
         <div class="site-container site-header__inner">
           <a class="site-header__brand" href="./index.html">
@@ -80,15 +85,15 @@
         </section>
 
         <section class="section site-container">
-          <div class="status-banner" id="status-banner">
+          <div data-motion class="status-banner" id="status-banner">
             <span class="status-banner__dot" aria-hidden="true"></span>
             <div>
-              <div class="status-banner__title" data-i18n="status.all-systems-operational">همهٔ سرویس‌ها در دسترس هستند</div>
-              <div class="status-banner__sub" id="status-updated" data-i18n="status.updated-just-now">هم‌اکنون به‌روزرسانی شد</div>
+              <div data-motion class="status-banner__title" data-i18n="status.all-systems-operational">همهٔ سرویس‌ها در دسترس هستند</div>
+              <div data-motion class="status-banner__sub" id="status-updated" data-i18n="status.updated-just-now">هم‌اکنون به‌روزرسانی شد</div>
             </div>
           </div>
 
-          <div class="card card--dense mt-4" style="padding: var(--space-5);">
+          <div data-motion class="card card--dense mt-4" style="padding: var(--space-5);">
             <div class="d-flex align-items-center justify-content-between mb-2">
               <h3 class="mb-0" data-i18n="status.uptime">در دسترس‌بودن</h3>
               <span class="caption text-tertiary" data-i18n="status.last-90-days">۹۰ روز گذشته</span>
@@ -97,16 +102,16 @@
             <div class="caption text-tertiary mt-3" data-i18n="status.99-95-average-two-minor-degradations-both-resolv">میانگین ۹۹.۹۵٪ · دو افت کیفیت جزئی که هر دو در کمتر از ۴۰ دقیقه برطرف شد</div>
           </div>
 
-          <div class="row g-3 mt-4">
+          <div data-motion-group class="row g-3 mt-4">
             <div class="col-12 col-lg-7">
-              <div class="card card--dense" style="padding: var(--space-5);">
+              <div data-motion class="card card--dense" style="padding: var(--space-5);">
                 <h3 class="mb-1" data-i18n="status.components">اجزای سرویس</h3>
                 <p class="text-secondary mb-3" data-i18n="status.current-health-of-each-platform-service">وضعیت فعلی هر یک از سرویس‌های پلتفرم.</p>
                 <div class="status-components" id="components-list"></div>
               </div>
             </div>
             <div class="col-12 col-lg-5">
-              <div class="card card--dense" style="padding: var(--space-5);">
+              <div data-motion class="card card--dense" style="padding: var(--space-5);">
                 <h3 class="mb-1" data-i18n="status.incident-history">تاریخچهٔ رخدادها</h3>
                 <p class="text-secondary mb-3" data-i18n="status.resolved-incidents-from-the-last-90-days">رخدادهای برطرف‌شده در ۹۰ روز گذشته.</p>
                 <div class="incidents" id="incidents-list"></div>
@@ -137,6 +142,7 @@
               <a class="site-footer__link" href="./docs.html" data-i18n="site.documentation">مستندات</a>
               <a class="site-footer__link" href="./style-guide.html" data-i18n="site.style-guide">راهنمای استایل</a>
               <a class="site-footer__link" href="./changelog.html" data-i18n="site.changelog">گزارش تغییرات</a>
+              <a class="site-footer__link" href="./visual-showcase.html" data-i18n="vs.footerLink">نمایش بصری</a>
               <a class="site-footer__link" href="./status.html" data-i18n="site.status">وضعیت</a>
               <a class="site-footer__link" href="./rtl.html" data-i18n="site.rtl-demo">نسخهٔ دموی فارسی</a>
             </div>

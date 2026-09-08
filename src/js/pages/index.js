@@ -11,6 +11,7 @@ import { t as tr, onLocaleChange } from '../core/i18n.js';
 import { makeChart, axis, tooltips, initCharts } from '../components/charts.js';
 import { createIcons, icons } from '../components/icons.js';
 import { compactNumber, relativeTime, escapeHtml, percent, latencyText } from '../utils/format.js';
+import { observeMotion } from '../components/motion.js';
 import observability from '../data/mock-observability.json';
 import activity from '../data/mock-activity.json';
 import plans from '../data/mock-plans.json';
@@ -108,7 +109,7 @@ function renderPricingTeaser() {
   grid.innerHTML = plans
     .map(
       (p) => `
-      <div class="pricing-card${p.highlight ? ' is-featured' : ''}">
+      <div class="pricing-card${p.highlight ? ' is-featured' : ''}" data-motion>
         <span class="badge ${p.highlight ? 'badge-accent' : 'badge-neutral'} pricing-card__tag">${p.highlight ? tr('sg.mostPopular') : p.name}</span>
         <div class="pricing-card__name">${p.name}</div>
         <div class="pricing-card__price"><span class="amount">${p.priceLabel}</span><span class="period">${p.period}</span></div>
@@ -123,6 +124,7 @@ function renderPricingTeaser() {
     )
     .join('');
   createIcons({ icons });
+  observeMotion(grid);
 }
 
 renderKpis();

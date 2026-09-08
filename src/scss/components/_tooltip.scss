@@ -15,6 +15,19 @@
   --bs-tooltip-bg: var(--surface-3);
   --bs-tooltip-border-radius: var(--radius-sm);
   --bs-tooltip-opacity: 1;
+
+  // Fade + a hair of scale on the independent `scale` property (Popper
+  // owns `transform`, so we never animate it).
+  transition: opacity var(--motion-fast) var(--ease-standard);
+
+  &.show {
+    animation: afx-drop-in var(--motion-fast) var(--ease-standard) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    transition: none;
+  }
 }
 
 .tooltip-inner {

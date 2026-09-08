@@ -171,10 +171,10 @@
           </section>
 
           <!-- Period stats -->
-          <div class="stat-strip">
-            <div class="stat-strip__item" data-i18n="usage.statRequests"><span class="stat-strip__label">درخواست‌های این دوره</span><span class="stat-strip__value" id="usage-requests">—</span></div>
-            <div class="stat-strip__item" data-i18n="usage.statLatency"><span class="stat-strip__label">میانگین تاخیر</span><span class="stat-strip__value" id="usage-latency">—</span></div>
-            <div class="stat-strip__item" data-i18n="usage.statSuccess"><span class="stat-strip__label">نرخ موفقیت</span><span class="stat-strip__value" id="usage-success">—</span></div>
+          <div data-motion class="stat-strip">
+            <div data-motion class="stat-strip__item" data-i18n="usage.statRequests"><span class="stat-strip__label">درخواست‌های این دوره</span><span class="stat-strip__value" id="usage-requests">—</span></div>
+            <div data-motion class="stat-strip__item" data-i18n="usage.statLatency"><span class="stat-strip__label">میانگین تاخیر</span><span class="stat-strip__value" id="usage-latency">—</span></div>
+            <div data-motion class="stat-strip__item" data-i18n="usage.statSuccess"><span class="stat-strip__label">نرخ موفقیت</span><span class="stat-strip__value" id="usage-success">—</span></div>
           </div>
 
           <!-- Requests over time -->
@@ -197,9 +197,9 @@
           </section>
 
           <!-- Consumption + top endpoints -->
-          <section class="row g-3 mb-4">
+          <section data-motion-group class="row g-3 mb-4">
             <div class="col-12 col-lg-7">
-              <div class="card card--dense h-100">
+              <div data-motion class="card card--dense h-100">
                 <div class="chart">
                   <div class="chart__head">
                     <div>
@@ -214,11 +214,11 @@
               </div>
             </div>
             <div class="col-12 col-lg-5">
-              <div class="card card--dense h-100">
-                <div class="card-header">
+              <div data-motion class="card card--dense h-100">
+                <div data-motion class="card-header">
                   <div>
                     <h4 class="card-title" data-i18n="usage.topEndpoints">پرتکرارترین نقاط پایانی</h4>
-                    <div class="card-subtitle" data-i18n="usage.by-request-volume-this-period">بر اساس حجم درخواست‌ها در این دوره.</div>
+                    <div data-motion class="card-subtitle" data-i18n="usage.by-request-volume-this-period">بر اساس حجم درخواست‌ها در این دوره.</div>
                   </div>
                 </div>
                 <div id="usage-top-endpoints" class="top-list"></div>
@@ -228,10 +228,10 @@
 
           <!-- Attribution -->
           <section class="card card--dense">
-            <div class="card-header">
+            <div data-motion class="card-header">
               <div>
                 <h4 class="card-title" data-i18n="usage.whereFrom">منشأ مصرف</h4>
-                <div class="card-subtitle" data-i18n="usage.breakdown-by-endpoint-and-environment">تفکیک بر اساس نقطهٔ پایانی و محیط.</div>
+                <div data-motion class="card-subtitle" data-i18n="usage.breakdown-by-endpoint-and-environment">تفکیک بر اساس نقطهٔ پایانی و محیط.</div>
               </div>
             </div>
             <div class="attribution">

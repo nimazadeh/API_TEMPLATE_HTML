@@ -18,6 +18,7 @@ import { initCopy } from './components/copy.js';
 import { initToast } from './components/toast.js';
 import { initReveal } from './components/reveal.js';
 import { initShortcuts } from './components/shortcuts.js';
+import { initMotion } from './components/motion.js';
 import './core/bootstrap.js';
 
 export function boot() {
@@ -32,4 +33,6 @@ export function boot() {
   initToast();
   initReveal();
   initShortcuts();
+  // Last: every reveal is measured after the DOM is final.
+  initMotion();
 }

@@ -22,6 +22,11 @@
   </head>
   <body data-page="home">
     <div class="site">
+      <div class="backdrop" data-backdrop aria-hidden="true">
+        <div class="backdrop__grid"></div>
+        <div class="backdrop__glow"></div>
+        <div class="backdrop__mesh"></div>
+      </div>
       <!-- ============ Header ============ -->
       <header class="site-header">
         <div class="site-container site-header__inner">
@@ -94,7 +99,7 @@
               </div>
               <div class="hero-preview__body">
                 <div class="hero-preview__pane">
-                  <div class="hero-preview__kpis" id="hero-kpis"></div>
+                  <div class="hero-preview__kpis" id="hero-kpis" data-motion-group></div>
                   <div class="card card--dense">
                     <div class="chart">
                       <div class="chart__head">
@@ -146,18 +151,18 @@
 
         <!-- Features -->
         <section class="section site-container">
-          <div class="section-head">
+          <div data-motion class="section-head">
             <span class="eyebrow" data-i18n="home.built-for-developer-platforms">ساخته‌شده برای پلتفرم‌های توسعه‌دهنده</span>
             <h2 data-i18n="home.not-another-admin-theme">یک قالب مدیریتی معمولی نیست</h2>
             <p data-i18n="home.every-page-is-purpose-built-for-api-infrastructu">هر صفحه با هدفی مشخص برای زیرساخت API ساخته شده است؛ عمیق، تخصصی و تعاملی — نه مجموعه‌ای از کارت‌های تکراری.</p>
           </div>
-          <div class="feature-grid">
-            <a class="feature-card" href="./logs.html" data-i18n="home.featureLogs"><span class="feature-card__icon"><i data-lucide="scroll-text"></i></span> <span class="feature-card__title">کاوشگر لاگ درخواست‌ها</span> <span class="feature-card__desc">جدول‌های فشردهٔ درخواست‌ها با وضعیت، تاخیر پاسخ و شناسهٔ درخواست، به همراه یک بازرس کامل — هدرها، بدنهٔ درخواست، زمان‌بندی و کپی در قالب cURL.</span> <span class="feature-card__link">بررسی لاگ‌ها <i data-lucide="arrow-left"></i></span></a>
-            <a class="feature-card" href="./webhooks.html" data-i18n="home.featureWebhooks"><span class="feature-card__icon"><i data-lucide="webhook"></i></span> <span class="feature-card__title">اشکال‌زدای وب‌هوک</span> <span class="feature-card__desc">خط زمانی تحویل، وضعیت تلاش‌های مجدد و بازرس بدنه به همراه ابزارهای امضا — ابزار وب‌هوک در سطح استرایپ.</span> <span class="feature-card__link">اشکال‌زدایی یک تحویل <i data-lucide="arrow-left"></i></span></a>
-            <a class="feature-card" href="./api-keys.html" data-i18n="home.featureKeys"><span class="feature-card__icon"><i data-lucide="key"></i></span> <span class="feature-card__title">کلیدهای API با نمایش یک‌باره</span> <span class="feature-card__desc">کلیدهای پوشیده با امکان نمایش یک‌باره، چرخش، ابطال و ساخت با سطح دسترسی مشخص. همان تجربهٔ امنیتی که کاربرانتان انتظار دارند.</span> <span class="feature-card__link">مدیریت کلیدها <i data-lucide="arrow-left"></i></span></a>
-            <a class="feature-card" href="./apis.html" data-i18n="home.featureTester"><span class="feature-card__icon"><i data-lucide="code-2"></i></span> <span class="feature-card__title">تستر درخواست زنده</span> <span class="feature-card__desc">کاتالوگ APIها را مرور کنید و درخواست واقعی با تزریق کلید، تب‌های مختلف و پاسخ JSON ارسال کنید.</span> <span class="feature-card__link">آزمایش یک نقطهٔ پایانی <i data-lucide="arrow-left"></i></span></a>
-            <a class="feature-card" href="./errors.html" data-i18n="home.featureErrors"><span class="feature-card__icon"><i data-lucide="bug"></i></span> <span class="feature-card__title">مانیتورینگ خطاها</span> <span class="feature-card__desc">خطاها همراه با ردیابی پشته، زمینهٔ درخواست و فیلتر شدت — اطلاعاتی که به اقدام منجر می‌شود، نه فقط شمارش خطا.</span> <span class="feature-card__link">بررسی یک خطا <i data-lucide="arrow-left"></i></span></a>
-            <a class="feature-card" href="./rtl.html" data-i18n="home.featureRtl"><span class="feature-card__icon"><i data-lucide="languages"></i></span> <span class="feature-card__title">فارسی و راست‌به‌چپ، درجه‌یک</span> <span class="feature-card__desc">فونت وزیرمتن، ویژگی‌های منطقی CSS و جداسازی کدهای چپ‌به‌راست. یک دموی کامل فارسی همراه قالب عرضه می‌شود — بدون هیچ ترفندی.</span> <span class="feature-card__link">مشاهدهٔ نسخهٔ دموی فارسی <i data-lucide="arrow-left"></i></span></a>
+          <div data-motion-group class="feature-grid">
+            <a data-motion class="feature-card" href="./logs.html" data-i18n="home.featureLogs"><span class="feature-card__icon"><i data-lucide="scroll-text"></i></span> <span class="feature-card__title">کاوشگر لاگ درخواست‌ها</span> <span class="feature-card__desc">جدول‌های فشردهٔ درخواست‌ها با وضعیت، تاخیر پاسخ و شناسهٔ درخواست، به همراه یک بازرس کامل — هدرها، بدنهٔ درخواست، زمان‌بندی و کپی در قالب cURL.</span> <span class="feature-card__link">بررسی لاگ‌ها <i data-lucide="arrow-left"></i></span></a>
+            <a data-motion class="feature-card" href="./webhooks.html" data-i18n="home.featureWebhooks"><span class="feature-card__icon"><i data-lucide="webhook"></i></span> <span class="feature-card__title">اشکال‌زدای وب‌هوک</span> <span class="feature-card__desc">خط زمانی تحویل، وضعیت تلاش‌های مجدد و بازرس بدنه به همراه ابزارهای امضا — ابزار وب‌هوک در سطح استرایپ.</span> <span class="feature-card__link">اشکال‌زدایی یک تحویل <i data-lucide="arrow-left"></i></span></a>
+            <a data-motion class="feature-card" href="./api-keys.html" data-i18n="home.featureKeys"><span class="feature-card__icon"><i data-lucide="key"></i></span> <span class="feature-card__title">کلیدهای API با نمایش یک‌باره</span> <span class="feature-card__desc">کلیدهای پوشیده با امکان نمایش یک‌باره، چرخش، ابطال و ساخت با سطح دسترسی مشخص. همان تجربهٔ امنیتی که کاربرانتان انتظار دارند.</span> <span class="feature-card__link">مدیریت کلیدها <i data-lucide="arrow-left"></i></span></a>
+            <a data-motion class="feature-card" href="./apis.html" data-i18n="home.featureTester"><span class="feature-card__icon"><i data-lucide="code-2"></i></span> <span class="feature-card__title">تستر درخواست زنده</span> <span class="feature-card__desc">کاتالوگ APIها را مرور کنید و درخواست واقعی با تزریق کلید، تب‌های مختلف و پاسخ JSON ارسال کنید.</span> <span class="feature-card__link">آزمایش یک نقطهٔ پایانی <i data-lucide="arrow-left"></i></span></a>
+            <a data-motion class="feature-card" href="./errors.html" data-i18n="home.featureErrors"><span class="feature-card__icon"><i data-lucide="bug"></i></span> <span class="feature-card__title">مانیتورینگ خطاها</span> <span class="feature-card__desc">خطاها همراه با ردیابی پشته، زمینهٔ درخواست و فیلتر شدت — اطلاعاتی که به اقدام منجر می‌شود، نه فقط شمارش خطا.</span> <span class="feature-card__link">بررسی یک خطا <i data-lucide="arrow-left"></i></span></a>
+            <a data-motion class="feature-card" href="./rtl.html" data-i18n="home.featureRtl"><span class="feature-card__icon"><i data-lucide="languages"></i></span> <span class="feature-card__title">فارسی و راست‌به‌چپ، درجه‌یک</span> <span class="feature-card__desc">فونت وزیرمتن، ویژگی‌های منطقی CSS و جداسازی کدهای چپ‌به‌راست. یک دموی کامل فارسی همراه قالب عرضه می‌شود — بدون هیچ ترفندی.</span> <span class="feature-card__link">مشاهدهٔ نسخهٔ دموی فارسی <i data-lucide="arrow-left"></i></span></a>
           </div>
         </section>
 
@@ -209,13 +214,13 @@ client.emails.send(
 
         <!-- Page directory -->
         <section class="section site-container">
-          <div class="section-head">
+          <div data-motion class="section-head">
             <span class="eyebrow" data-i18n="home.whats-inside">درون قالب چه خبر است؟</span>
             <h2 data-i18n="home.every-page-mapped">هر صفحه، با نقشهٔ کامل</h2>
             <p data-i18n="home.the-full-product-surface-organized-the-way-the-a">تمام بخش‌های محصول، با همان نظم ناوبری برنامه. بدون هیچ صفحهٔ اضافه‌ای.</p>
           </div>
-          <div class="showcase">
-            <div class="showcase__group">
+          <div data-motion-group class="showcase">
+            <div data-motion class="showcase__group">
               <div class="showcase__label" data-i18n="shell.developer">توسعه‌دهنده</div>
               <a class="showcase__item" href="./dashboard.html" data-i18n="home.showcaseOverview"><i data-lucide="layout-dashboard"></i> نمای کلی <code>/dashboard.html</code></a>
               <a class="showcase__item" href="./apis.html" data-i18n="home.showcaseApis"><i data-lucide="code-2"></i> APIها <code>/apis.html</code></a>
@@ -224,7 +229,7 @@ client.emails.send(
               <a class="showcase__item" href="./logs.html" data-i18n="home.showcaseLogs"><i data-lucide="scroll-text"></i> لاگ‌ها <code>/logs.html</code></a>
               <a class="showcase__item" href="./webhooks.html" data-i18n="home.showcaseWebhooks"><i data-lucide="webhook"></i> وب‌هوک‌ها <code>/webhooks.html</code></a>
             </div>
-            <div class="showcase__group">
+            <div data-motion class="showcase__group">
               <div class="showcase__label" data-i18n="shell.analytics">تحلیل‌ها</div>
               <a class="showcase__item" href="./usage.html" data-i18n="home.showcaseUsage"><i data-lucide="bar-chart-3"></i> میزان استفاده <code>/usage.html</code></a>
               <a class="showcase__item" href="./errors.html" data-i18n="home.showcaseErrors"><i data-lucide="bug"></i> خطاها <code>/errors.html</code></a>
@@ -236,7 +241,7 @@ client.emails.send(
               <a class="showcase__item" href="./billing.html" data-i18n="home.showcaseBilling"><i data-lucide="credit-card"></i> صورت‌حساب <code>/billing.html</code></a>
               <a class="showcase__item" href="./notifications.html" data-i18n="home.showcaseNotifications"><i data-lucide="bell"></i> اعلان‌ها <code>/notifications.html</code></a>
             </div>
-            <div class="showcase__group">
+            <div data-motion class="showcase__group">
               <div class="showcase__label" data-i18n="common.platform">پلتفرم</div>
               <a class="showcase__item" href="./docs.html" data-i18n="home.showcaseDocs"><i data-lucide="book-open"></i> مستندات <code>/docs.html</code></a>
               <a class="showcase__item" href="./sdk.html" data-i18n="home.showcaseSdks"><i data-lucide="package"></i> SDKها <code>/sdk.html</code></a>
@@ -245,23 +250,24 @@ client.emails.send(
               <a class="showcase__item" href="./profile.html" data-i18n="home.showcaseProfile"><i data-lucide="user"></i> نمایه <code>/profile.html</code></a>
               <a class="showcase__item" href="./style-guide.html" data-i18n="home.showcaseStyleGuide"><i data-lucide="palette"></i> راهنمای استایل <code>/style-guide.html</code></a>
               <a class="showcase__item" href="./rtl.html" data-i18n="home.showcaseRtl"><i data-lucide="languages"></i> نسخهٔ دموی فارسی <code>/rtl.html</code></a>
+              <a class="showcase__item" href="./visual-showcase.html" data-i18n="vs.showcaseItem"><i data-lucide="palette"></i> نمایش بصری و حرکت <code>/visual-showcase.html</code></a>
             </div>
           </div>
         </section>
 
         <!-- Pricing teaser -->
         <section class="section site-container">
-          <div class="section-head">
+          <div data-motion class="section-head">
             <span class="eyebrow" data-i18n="site.pricing">قیمت‌گذاری</span>
             <h2 data-i18n="home.start-free-scale-with-usage">شروع رایگان، رشد همگام با مصرف</h2>
             <p><span data-i18n="home.three-plans-usage-based-overage-no-contracts">سه طرح، محاسبهٔ مصرف مازاد و بدون هیچ قراردادی.</span><a href="./pricing.html" data-i18n="home.see-the-full-comparison">مشاهدهٔ مقایسهٔ کامل طرح‌ها</a></p>
           </div>
-          <div class="pricing-grid" id="pricing-teaser" aria-label="طرح‌ها" data-i18n-attr="aria-label:aria.plans"></div>
+          <div data-motion-group class="pricing-grid" id="pricing-teaser" aria-label="طرح‌ها" data-i18n-attr="aria-label:aria.plans"></div>
         </section>
 
         <!-- CTA band -->
         <section class="section site-container">
-          <div class="cta-band">
+          <div data-motion class="cta-band">
             <span class="eyebrow" data-i18n="home.ship-this-week">همین هفته محصولتان را عرضه کنید</span>
             <h2 class="mt-2 mb-3" data-i18n="home.your-api-platform-not-a-year-of-building">پلتفرم API شما، نه یک سال زمان صرف ساخت آن</h2>
             <p class="body-lg text-secondary mb-4" data-i18n="home.open-the-live-demo-flip-it-to-light-switch-to-pe">نسخهٔ دموی زنده را باز کنید، پوسته را روشن کنید، به فارسی راست‌به‌چپ سوئیچ کنید و تصمیم بگیرید.</p>
@@ -295,6 +301,7 @@ client.emails.send(
               <a class="site-footer__link" href="./docs.html" data-i18n="site.documentation">مستندات</a>
               <a class="site-footer__link" href="./style-guide.html" data-i18n="site.style-guide">راهنمای استایل</a>
               <a class="site-footer__link" href="./changelog.html" data-i18n="site.changelog">گزارش تغییرات</a>
+              <a class="site-footer__link" href="./visual-showcase.html" data-i18n="vs.footerLink">نمایش بصری</a>
               <a class="site-footer__link" href="./status.html" data-i18n="site.status">وضعیت</a>
               <a class="site-footer__link" href="./rtl.html" data-i18n="site.rtl-demo">نسخهٔ دموی فارسی</a>
             </div>

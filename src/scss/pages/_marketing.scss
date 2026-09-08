@@ -38,13 +38,27 @@
   padding-bottom: var(--space-7);
   text-align: center;
 
-  // Atmospheric glow behind the hero (allowed: radial, behind content only).
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(700px 360px at 50% 0%, rgba(var(--accent-rgb), 0.16), transparent 70%);
-    pointer-events: none;
+  // The hero glow is provided by the shared .backdrop layer, so the hero
+  // itself stays free of colour literals.
+
+  // --- Entrance choreography (transform + opacity only) -------------------
+  // 100ms eyebrow · 150ms title · 250ms description · 350ms CTA · 450ms
+  // preview. `both` fill keeps each element invisible until its turn, so
+  // nothing pops in out of order and no layout ever shifts.
+  .eyebrow {
+    @include motion-enter(100ms);
+  }
+  .hero__title {
+    @include motion-enter(150ms);
+  }
+  .hero__sub {
+    @include motion-enter(250ms);
+  }
+  .hero__cta {
+    @include motion-enter(350ms);
+  }
+  .hero__hint {
+    @include motion-enter(400ms);
   }
 
   .hero__inner {
@@ -92,6 +106,7 @@
   margin-top: var(--space-7);
   max-width: 960px;
   margin-inline: auto;
+  @include motion-enter(450ms);
 
   .hero-preview__chrome {
     display: flex;
@@ -190,6 +205,19 @@
     @include mq-max('sm') {
       grid-template-columns: 1fr;
     }
+
+    // KPI stagger — the numbers land after the frame they live in.
+    > .card {
+      @include motion-enter(calc(520ms + var(--motion-i, 0) * var(--motion-stagger)));
+    }
+  }
+
+  // The two preview panels follow the frame, one after the other.
+  .hero-preview__body > .hero-preview__pane:nth-of-type(1) {
+    @include motion-enter(560ms);
+  }
+  .hero-preview__body > .hero-preview__pane:nth-of-type(2) {
+    @include motion-enter(620ms);
   }
 }
 
@@ -247,12 +275,12 @@
   border-radius: var(--radius-md);
   text-decoration: none;
   color: var(--text-primary);
-  @include motion(200ms);
 
   &:hover {
     border-color: var(--border-hover);
     background: var(--surface-2);
     transform: translateY(-1px);
+    box-shadow: var(--elevation-1);
   }
 
   .feature-card__icon {
@@ -327,7 +355,7 @@
     text-decoration: none;
     color: var(--text-secondary);
     font-size: var(--fs-body-sm);
-    @include motion(150ms);
+    @include motion(var(--motion-fast));
 
     &:hover {
       color: var(--text-primary);
@@ -376,7 +404,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(500px 260px at 50% 0%, rgba(var(--accent-rgb), 0.14), transparent 70%);
+    background: radial-gradient(500px 260px at 50% 0%, var(--backdrop-glow-soft), transparent 70%);
     pointer-events: none;
   }
 
@@ -406,6 +434,11 @@
   background: var(--surface-1);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
+
+  &:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--elevation-1);
+  }
 
   &.is-featured {
     border-color: var(--accent-subtle-border);

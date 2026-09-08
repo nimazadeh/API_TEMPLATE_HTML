@@ -124,6 +124,10 @@
       </header>
 
       <main class="app-main">
+        <div class="backdrop backdrop--quiet" data-backdrop aria-hidden="true">
+          <div class="backdrop__grid"></div>
+          <div class="backdrop__glow"></div>
+        </div>
         <div class="env-banner" data-env-banner hidden data-i18n="shell.envBanner"><i data-lucide="alert-triangle"></i> شما در حال مشاهدهٔ <strong>داده‌های آزمایشی</strong> هستید. همهٔ کلیدها از پیشوند <code class="ltr-isolate">sk_test_</code> استفاده می‌کنند.</div>
         <div class="app-main__inner">
 
@@ -140,7 +144,7 @@
             </div>
           </header>
 
-          <div class="row g-3" id="sdk-grid"></div>
+          <div data-motion-group class="row g-3" id="sdk-grid"></div>
         </div>
       </main>
     </div>

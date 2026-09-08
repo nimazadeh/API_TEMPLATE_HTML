@@ -93,7 +93,7 @@
     font-size: var(--fs-body-sm);
     font-weight: 500;
     cursor: pointer;
-    @include motion(150ms);
+    @include motion(var(--motion-fast));
     .dot {
       width: 6px;
       height: 6px;
@@ -115,8 +115,11 @@
   }
 }
 
-// Test-mode banner (below header when env=test)
+// Test-mode banner (below header when env=test). Sits above the quiet
+// backdrop layer on the docs-style pages that render one.
 .env-banner {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: var(--space-2);

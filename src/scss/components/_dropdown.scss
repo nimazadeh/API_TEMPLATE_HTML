@@ -24,6 +24,15 @@
   --bs-dropdown-divider-bg: var(--border-subtle);
   --bs-dropdown-divider-margin-y: 6px;
   box-shadow: var(--elevation-2);
+
+  // Smooth entrance. Every shown menu re-runs the animation because
+  // Bootstrap toggles display — that is exactly what we want.
+  animation: afx-drop-in var(--motion-fast) var(--ease-standard) both;
+  transform-origin: top center;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 }
 
 .dropdown-item {
@@ -32,6 +41,7 @@
   gap: var(--space-2);
   border-radius: var(--radius-sm);
   font-size: var(--fs-body);
+  @include motion(var(--motion-fast), (background-color, color));
 
   svg {
     width: 16px;

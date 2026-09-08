@@ -1,13 +1,41 @@
 // =============================================================
 // APIForge X — Design Tokens: Motion
-// Transform & opacity only. Respects prefers-reduced-motion (see the
-// motion() mixin in _mixins.scss).
+// Transform & opacity only. Respects prefers-reduced-motion (see
+// the motion() mixin in _mixins.scss).
+//
+// Phase 5.5 — centralized motion system:
+//   fast   150ms  hover, focus, tooltips, micro-feedback
+//   normal 250ms  buttons, cards, dropdowns, toasts, modals
+//   slow   400ms  entrance reveals, drawers (hard ceiling)
+// Nothing in the system animates longer than --motion-slow.
 // =============================================================
 
 :root {
-  --duration-fast: 150ms; // tooltip, icon hover
-  --duration-base: 200ms; // hover, focus, buttons, copy feedback
-  --duration-slow: 250ms; // modal, drawer, offcanvas
+  // Duration ladder — the only three speeds in the product.
+  --motion-fast: 150ms; // 120-180ms band (hover, focus, tooltip)
+  --motion-normal: 250ms; // 200-300ms band (buttons, dropdown, toast, modal)
+  --motion-slow: 400ms; // hard ceiling: entrances, drawers
+
+  // Easing — one professional SaaS curve for everything.
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+
+  // Entrance choreography
+  --motion-stagger: 60ms; // gap between staggered siblings
+  --motion-shift: 8px; // vertical travel of an entrance (Y only — never X)
+
+  // Directional sign: 1 in LTR, -1 in RTL. Multiply any *horizontal*
+  // travel by this so directional motion mirrors automatically.
+  --dir-sign: 1;
+
+  // Backwards-compatible aliases (pre-5.5 duration tokens). Kept so no
+  // component stylesheet has to be rewritten; new code uses --motion-*.
+  --duration-fast: var(--motion-fast);
+  --duration-base: var(--motion-normal);
+  --duration-slow: var(--motion-normal);
+}
+
+[dir='rtl'] {
+  --dir-sign: -1;
 }

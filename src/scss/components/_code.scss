@@ -61,7 +61,7 @@
   padding: 4px 10px;
   border-radius: 4px;
   cursor: pointer;
-  @include motion(150ms);
+  @include motion(var(--motion-fast), (background-color, color));
   &:hover {
     color: var(--text-primary);
   }

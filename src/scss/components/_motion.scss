@@ -1,0 +1,131 @@
+// =============================================================
+// APIForge X — Motion system (Phase 5.5)
+// One place for every entrance in the product. Rules of the house:
+//   • transform + opacity only — never width/height/top/left
+//   • fast 150ms · normal 250ms · slow 400ms (hard ceiling)
+//   • directional travel multiplied by --dir-sign so RTL mirrors
+//   • every entrance is disabled under prefers-reduced-motion
+//   • nothing loops, nothing drifts, nothing animates continuously
+// Scroll reveals are opt-in via [data-motion] and driven by a single
+// IntersectionObserver (components/motion.js). Elements are only hidden
+// after JS "arms" them, so a failed or deferred script can never leave a
+// page blank.
+// =============================================================
+
+@use '../tokens/_index' as *;
+
+// --- Keyframes -------------------------------------------------------------
+@keyframes afx-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--motion-shift), 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes afx-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes afx-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// Dropdown / popover entrance — short drop, no bounce.
+// Uses the individual `translate` / `scale` properties on purpose: Popper
+// owns `transform` on positioned overlays, and an animated transform would
+// fight it. Independent transform properties compose with it safely.
+@keyframes afx-drop-in {
+  from {
+    opacity: 0;
+    translate: 0 calc(var(--motion-shift) * -0.5);
+    scale: 0.98;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+// --- Scroll reveal ---------------------------------------------------------
+// `.motion-armed` is only added by motion.js, at the exact moment the
+// element starts being observed. Nothing is hidden by CSS alone, so a
+// failed/deferred script can never leave a page blank.
+[data-motion].motion-armed:not(.is-inview) {
+  opacity: 0;
+}
+
+[data-motion].is-inview {
+  animation: afx-rise var(--motion-slow) var(--ease-standard) both;
+  animation-delay: calc(var(--motion-i, 0) * var(--motion-stagger));
+
+  // Promote only while something is actually animating — and never for
+  // users who asked for less motion (they get no animation at all).
+  @media (prefers-reduced-motion: no-preference) {
+    will-change: opacity, transform;
+  }
+}
+
+// Once the entrance has played, drop the compositor hint so long pages
+// keep no promoted layers around.
+[data-motion].is-inview.is-settled {
+  will-change: auto;
+  animation: none;
+}
+
+// --- Explicit entrance utilities ------------------------------------------
+.anim-rise {
+  @include motion-enter(0ms);
+}
+.anim-fade {
+  animation: afx-fade var(--motion-normal) var(--ease-standard) both;
+  @include motion-reduce;
+}
+.anim-pop {
+  animation: afx-pop var(--motion-normal) var(--ease-standard) both;
+  @include motion-reduce;
+}
+
+// --- Stagger ---------------------------------------------------------------
+// Assigns --motion-i to children so a grid reveals in sequence. Capped at
+// 12 so long lists never produce a slow cascade.
+@for $i from 1 through 12 {
+  .motion-stagger > *:nth-child(#{$i}),
+  [data-motion-group] > *:nth-child(#{$i}) {
+    --motion-i: #{$i - 1};
+  }
+}
+
+// --- Reduced motion --------------------------------------------------------
+// Belt and braces: even if a class is added by JS, no entrance animates.
+@media (prefers-reduced-motion: reduce) {
+  [data-motion] {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .anim-rise,
+  .anim-fade,
+  .anim-pop {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

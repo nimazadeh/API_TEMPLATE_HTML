@@ -67,7 +67,11 @@ function renderKpis(range) {
     </div>
     <span class="stat-foot">${plan.periodLabel}</span>`;
 
-  cards.forEach((c) => c.classList.remove('skeleton-kpi'));
+  // Skeleton → content: the card settles in place instead of snapping.
+  cards.forEach((c) => {
+    c.classList.remove('skeleton-kpi');
+    c.classList.add('is-loaded');
+  });
   createIcons({ icons });
 }
 

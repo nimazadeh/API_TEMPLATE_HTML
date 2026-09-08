@@ -32,7 +32,7 @@
   line-height: 1;
   cursor: pointer;
   white-space: nowrap;
-  @include motion(150ms);
+  @include motion(var(--motion-fast));
   transition-property: background-color, color;
 
   svg {

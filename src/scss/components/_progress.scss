@@ -16,7 +16,7 @@
   height: 100%;
   background: var(--accent);
   border-radius: var(--radius-pill);
-  @include motion(300ms);
+  @include motion(var(--motion-normal));
   transition-property: width;
 
   &.progress-bar--success { background: var(--success); }

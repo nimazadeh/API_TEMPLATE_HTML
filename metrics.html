@@ -146,17 +146,17 @@
             </div>
           </header>
 
-          <section class="row g-3 mb-4" aria-label="شاخص‌های کلیدی" data-i18n-attr="aria-label:aria.keyMetrics">
-            <div class="col-6 col-lg"><div class="card card--dense stat" data-i18n="metrics.statRequestsEn"><span class="stat-label">درخواست‌ها</span><span class="stat-value" id="metric-requests">—</span><span class="stat-foot" id="metric-range-label">۲۴ ساعت گذشته</span></div></div>
-            <div class="col-6 col-lg"><div class="card card--dense stat" data-i18n="metrics.statErrorRate"><span class="stat-label">نرخ خطا</span><span class="stat-value" id="metric-error-rate">—</span><span class="stat-foot">در همهٔ نقاط پایانی</span></div></div>
-            <div class="col-6 col-lg"><div class="card card--dense stat" data-i18n="metrics.statP95"><span class="stat-label">تاخیر P95</span><span class="stat-value" id="metric-p95">—</span><span class="stat-foot">صدک ۹۵</span></div></div>
-            <div class="col-6 col-lg"><div class="card card--dense stat" data-i18n="metrics.statP99"><span class="stat-label">تاخیر P99</span><span class="stat-value" id="metric-p99">—</span><span class="stat-foot">صدک ۹۹</span></div></div>
-            <div class="col-6 col-lg"><div class="card card--dense stat" data-i18n="metrics.statAvailability"><span class="stat-label">در دسترس‌بودن</span><span class="stat-value" id="metric-availability">—</span><span class="stat-foot">زمان در دسترس‌بودنِ لغزان</span></div></div>
+          <section data-motion-group class="row g-3 mb-4" aria-label="شاخص‌های کلیدی" data-i18n-attr="aria-label:aria.keyMetrics">
+            <div class="col-6 col-lg"><div data-motion class="card card--dense stat" data-i18n="metrics.statRequestsEn"><span class="stat-label">درخواست‌ها</span><span class="stat-value" id="metric-requests">—</span><span class="stat-foot" id="metric-range-label">۲۴ ساعت گذشته</span></div></div>
+            <div class="col-6 col-lg"><div data-motion class="card card--dense stat" data-i18n="metrics.statErrorRate"><span class="stat-label">نرخ خطا</span><span class="stat-value" id="metric-error-rate">—</span><span class="stat-foot">در همهٔ نقاط پایانی</span></div></div>
+            <div class="col-6 col-lg"><div data-motion class="card card--dense stat" data-i18n="metrics.statP95"><span class="stat-label">تاخیر P95</span><span class="stat-value" id="metric-p95">—</span><span class="stat-foot">صدک ۹۵</span></div></div>
+            <div class="col-6 col-lg"><div data-motion class="card card--dense stat" data-i18n="metrics.statP99"><span class="stat-label">تاخیر P99</span><span class="stat-value" id="metric-p99">—</span><span class="stat-foot">صدک ۹۹</span></div></div>
+            <div class="col-6 col-lg"><div data-motion class="card card--dense stat" data-i18n="metrics.statAvailability"><span class="stat-label">در دسترس‌بودن</span><span class="stat-value" id="metric-availability">—</span><span class="stat-foot">زمان در دسترس‌بودنِ لغزان</span></div></div>
           </section>
 
-          <section class="row g-3 mb-4">
+          <section data-motion-group class="row g-3 mb-4">
             <div class="col-12 col-xl-6">
-              <div class="card card--dense h-100">
+              <div data-motion class="card card--dense h-100">
                 <div class="chart">
                   <div class="chart__head"><div><div class="chart__title" data-i18n="dashboard.request-volume">حجم درخواست‌ها</div><div class="chart__sentence" data-i18n="metrics.requests-over-the-selected-window">درخواست‌ها در بازهٔ انتخاب‌شده.</div></div></div>
                   <div class="chart__canvas" style="--chart-height: 240px"><canvas id="chart-metric-volume" role="img" aria-label="حجم درخواست‌ها در طول زمان" data-i18n-attr="aria-label:aria.requestVolumeChart"></canvas></div>
@@ -164,7 +164,7 @@
               </div>
             </div>
             <div class="col-12 col-xl-6">
-              <div class="card card--dense h-100">
+              <div data-motion class="card card--dense h-100">
                 <div class="chart">
                   <div class="chart__head"><div><div class="chart__title" data-i18n="metrics.latencyPercentiles">صدک‌های تاخیر پاسخ</div><div class="chart__sentence" data-i18n="metrics.p50-p95-and-p99-over-the-selected-window">p50، p95 و p99 در بازهٔ انتخاب‌شده.</div></div></div>
                   <div class="chart__canvas" style="--chart-height: 240px"><canvas id="chart-metric-latency" role="img" aria-label="صدک‌های تاخیر پاسخ در طول زمان" data-i18n-attr="aria-label:aria.latencyPercentiles"></canvas></div>
@@ -172,7 +172,7 @@
               </div>
             </div>
             <div class="col-12 col-xl-6">
-              <div class="card card--dense h-100">
+              <div data-motion class="card card--dense h-100">
                 <div class="chart">
                   <div class="chart__head"><div><div class="chart__title" data-i18n="metrics.errorRate">نرخ خطا</div><div class="chart__sentence" data-i18n="metrics.percentage-of-requests-returning-4xx-5xx">درصد درخواست‌هایی که با کد ۴xx/۵xx پاسخ گرفته‌اند.</div></div></div>
                   <div class="chart__canvas" style="--chart-height: 240px"><canvas id="chart-metric-errors" role="img" aria-label="نرخ خطا در طول زمان" data-i18n-attr="aria-label:aria.errorRate"></canvas></div>
@@ -180,7 +180,7 @@
               </div>
             </div>
             <div class="col-12 col-xl-6">
-              <div class="card card--dense h-100">
+              <div data-motion class="card card--dense h-100">
                 <div class="chart">
                   <div class="chart__head"><div><div class="chart__title" data-i18n="metrics.statusDistribution">توزیع کدهای وضعیت</div><div class="chart__sentence" data-i18n="metrics.share-of-requests-by-response-class">سهم درخواست‌ها بر اساس کلاس پاسخ.</div></div></div>
                   <div class="chart__canvas" style="--chart-height: 240px"><canvas id="chart-metric-status" role="img" aria-label="توزیع کدهای وضعیت" data-i18n-attr="aria-label:aria.statusDistribution"></canvas></div>
@@ -189,10 +189,10 @@
             </div>
           </section>
 
-          <section class="row g-3">
+          <section data-motion-group class="row g-3">
             <div class="col-12 col-xl-6">
-              <div class="card card--dense mb-3 h-100">
-                <div class="card-header"><div><h4 class="card-title" data-i18n="usage.byEndpoint">به تفکیک نقطهٔ پایانی</h4><div class="card-subtitle" data-i18n="metrics.requests-p95-and-error-rate-per-endpoint">درخواست‌ها، p95 و نرخ خطا به تفکیک نقطهٔ پایانی.</div></div></div>
+              <div data-motion class="card card--dense mb-3 h-100">
+                <div data-motion class="card-header"><div><h4 class="card-title" data-i18n="usage.byEndpoint">به تفکیک نقطهٔ پایانی</h4><div data-motion class="card-subtitle" data-i18n="metrics.requests-p95-and-error-rate-per-endpoint">درخواست‌ها، p95 و نرخ خطا به تفکیک نقطهٔ پایانی.</div></div></div>
                 <div class="table-responsive">
                   <table class="table table--compact">
                     <thead><tr><th scope="col" data-i18n="table.method">متد</th><th scope="col" data-i18n="table.endpoint">نقطهٔ پایانی</th><th scope="col" class="cell-num" data-i18n="table.requests">درخواست‌ها</th><th scope="col" class="cell-num" data-i18n="table.p95">p95</th><th scope="col" class="cell-num" data-i18n="table.errors">خطاها</th></tr></thead>
@@ -202,8 +202,8 @@
               </div>
             </div>
             <div class="col-12 col-xl-6">
-              <div class="card card--dense mb-3 h-100">
-                <div class="card-header"><div><h4 class="card-title" data-i18n="metrics.byApi">به تفکیک API</h4><div class="card-subtitle" data-i18n="metrics.request-volume-and-error-rate-aggregated-per-ser">حجم درخواست‌ها و نرخ خطا به تفکیک هر سرویس.</div></div></div>
+              <div data-motion class="card card--dense mb-3 h-100">
+                <div data-motion class="card-header"><div><h4 class="card-title" data-i18n="metrics.byApi">به تفکیک API</h4><div data-motion class="card-subtitle" data-i18n="metrics.request-volume-and-error-rate-aggregated-per-ser">حجم درخواست‌ها و نرخ خطا به تفکیک هر سرویس.</div></div></div>
                 <div class="table-responsive">
                   <table class="table table--compact">
                     <thead><tr><th scope="col" data-i18n="table.service">سرویس</th><th scope="col" class="cell-num" data-i18n="table.requests">درخواست‌ها</th><th scope="col" class="cell-num" data-i18n="table.p95">p95</th><th scope="col" class="cell-num" data-i18n="table.errors">خطاها</th></tr></thead>
@@ -213,8 +213,8 @@
               </div>
             </div>
             <div class="col-12 col-xl-6">
-              <div class="card card--dense mb-3">
-                <div class="card-header"><div><h4 class="card-title" data-i18n="usage.byEnvironment">به تفکیک محیط</h4><div class="card-subtitle" data-i18n="metrics.traffic-split-and-health-per-environment">تقسیم ترافیک و سلامت به تفکیک محیط.</div></div></div>
+              <div data-motion class="card card--dense mb-3">
+                <div data-motion class="card-header"><div><h4 class="card-title" data-i18n="usage.byEnvironment">به تفکیک محیط</h4><div data-motion class="card-subtitle" data-i18n="metrics.traffic-split-and-health-per-environment">تقسیم ترافیک و سلامت به تفکیک محیط.</div></div></div>
                 <div class="table-responsive">
                   <table class="table table--compact">
                     <thead><tr><th scope="col" data-i18n="table.environment">محیط</th><th scope="col" class="cell-num" data-i18n="table.requests">درخواست‌ها</th><th scope="col" class="cell-num" data-i18n="table.p95">p95</th><th scope="col" class="cell-num" data-i18n="table.errors">خطاها</th><th scope="col" class="cell-num" data-i18n="status.uptime">در دسترس‌بودن</th></tr></thead>
@@ -222,8 +222,8 @@
                   </table>
                 </div>
               </div>
-              <div class="card card--dense mb-3">
-                <div class="card-header"><div><h4 class="card-title" data-i18n="metrics.byStatusCode">به تفکیک کد وضعیت</h4><div class="card-subtitle" data-i18n="metrics.response-class-distribution">توزیع کلاس پاسخ.</div></div></div>
+              <div data-motion class="card card--dense mb-3">
+                <div data-motion class="card-header"><div><h4 class="card-title" data-i18n="metrics.byStatusCode">به تفکیک کد وضعیت</h4><div data-motion class="card-subtitle" data-i18n="metrics.response-class-distribution">توزیع کلاس پاسخ.</div></div></div>
                 <div class="table-responsive">
                   <table class="table table--compact">
                     <thead><tr><th scope="col" data-i18n="table.class">کلاس</th><th scope="col" class="cell-num" data-i18n="table.requests">درخواست‌ها</th><th scope="col" class="cell-num" data-i18n="table.share">سهم</th></tr></thead>
@@ -231,8 +231,8 @@
                   </table>
                 </div>
               </div>
-              <div class="card card--dense">
-                <div class="card-header"><div><h4 class="card-title" data-i18n="metrics.byMethod">به تفکیک متد</h4><div class="card-subtitle" data-i18n="metrics.share-of-requests-by-http-verb">سهم درخواست‌ها بر اساس فعل HTTP.</div></div></div>
+              <div data-motion class="card card--dense">
+                <div data-motion class="card-header"><div><h4 class="card-title" data-i18n="metrics.byMethod">به تفکیک متد</h4><div data-motion class="card-subtitle" data-i18n="metrics.share-of-requests-by-http-verb">سهم درخواست‌ها بر اساس فعل HTTP.</div></div></div>
                 <div class="table-responsive">
                   <table class="table table--compact">
                     <thead><tr><th scope="col" data-i18n="table.method">متد</th><th scope="col" class="cell-num" data-i18n="table.requests">درخواست‌ها</th><th scope="col" class="cell-num" data-i18n="table.share">سهم</th></tr></thead>

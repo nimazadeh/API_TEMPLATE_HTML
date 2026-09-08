@@ -7,6 +7,7 @@
 import { bootSite } from '../site.js';
 import plans from '../data/mock-plans.json';
 import { t as tr, onLocaleChange } from '../core/i18n.js';
+import { observeMotion } from '../components/motion.js';
 
 bootSite();
 
@@ -25,7 +26,7 @@ function renderCards() {
   grid.innerHTML = plans
     .map(
       (p) => `
-      <div class="pricing-card${p.highlight ? ' is-featured' : ''}">
+      <div class="pricing-card${p.highlight ? ' is-featured' : ''}" data-motion>
         <span class="badge ${p.highlight ? 'badge-accent' : 'badge-neutral'} pricing-card__tag">${p.highlight ? tr('sg.mostPopular') : p.name}</span>
         <div class="pricing-card__name">${p.name}</div>
         <div class="pricing-card__price"><span class="amount">${p.priceLabel}</span><span class="period">${p.period}</span></div>
@@ -42,6 +43,7 @@ function renderCards() {
       </div>`
     )
     .join('');
+  observeMotion(grid);
 }
 
 function renderComparison() {

@@ -22,6 +22,11 @@
   </head>
   <body data-page="pricing">
     <div class="site">
+      <div class="backdrop" data-backdrop aria-hidden="true">
+        <div class="backdrop__grid"></div>
+        <div class="backdrop__glow"></div>
+        <div class="backdrop__mesh"></div>
+      </div>
       <header class="site-header">
         <div class="site-container site-header__inner">
           <a class="site-header__brand" href="./index.html">
@@ -80,11 +85,11 @@
         </section>
 
         <section class="section site-container">
-          <div class="pricing-grid" id="pricing-grid" aria-label="طرح‌ها" data-i18n-attr="aria-label:aria.plans"></div>
+          <div data-motion-group class="pricing-grid" id="pricing-grid" aria-label="طرح‌ها" data-i18n-attr="aria-label:aria.plans"></div>
         </section>
 
         <section class="section site-container">
-          <div class="card card--dense" style="padding: var(--space-5);">
+          <div data-motion class="card card--dense" style="padding: var(--space-5);">
             <div class="d-flex flex-wrap gap-4 align-items-center justify-content-between">
               <div>
                 <h3 class="mb-1" data-i18n="pricing.usage-based-overage">محاسبهٔ مصرف مازاد</h3>
@@ -96,11 +101,11 @@
         </section>
 
         <section class="section site-container">
-          <div class="section-head">
+          <div data-motion class="section-head">
             <span class="eyebrow" data-i18n="pricing.compare">مقایسه</span>
             <h2 data-i18n="pricing.plan-comparison">مقایسهٔ طرح‌ها</h2>
           </div>
-          <div class="table-card">
+          <div data-motion class="table-card">
             <div class="table-responsive">
               <table class="table table--compact" id="pricing-compare">
                 <thead>
@@ -118,28 +123,28 @@
         </section>
 
         <section class="section site-container">
-          <div class="section-head">
+          <div data-motion class="section-head">
             <span class="eyebrow" data-i18n="pricing.faq">پرسش‌های پرتکرار</span>
             <h2 data-i18n="pricing.questions-answered">پاسخ پرسش‌های شما</h2>
           </div>
-          <div class="faq">
-            <div class="faq__item">
+          <div data-motion-group class="faq">
+            <div data-motion class="faq__item">
               <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="false" aria-controls="faq-1" data-i18n="pricing.faq1q">آیا می‌توانم هر زمان طرح را تغییر دهم؟ <i data-lucide="chevron-down"></i></button>
               <div class="collapse" id="faq-1"><div class="faq__answer" data-i18n="pricing.yes-upgrades-apply-immediately-and-are-prorated-">بله. ارتقا بلافاصله اعمال می‌شود و هزینهٔ آن به نسبت زمان باقی‌مانده محاسبه می‌گردد. تنزل طرح از ابتدای دورهٔ صورت‌حساب بعدی اعمال می‌شود.</div></div>
             </div>
-            <div class="faq__item">
+            <div data-motion class="faq__item">
               <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-2" aria-expanded="false" aria-controls="faq-2" data-i18n="pricing.faq2q">مصرف مازاد چگونه محاسبه می‌شود؟ <i data-lucide="chevron-down"></i></button>
               <div class="collapse" id="faq-2"><div class="faq__answer" data-i18n="pricing.requests-beyond-your-plan-allowance-are-billed-a">درخواست‌های فراتر از سقف طرح، با نرخ ثابت به ازای هر میلیون درخواست محاسبه و به صورت ریز در صورت‌حساب شما درج می‌شود.</div></div>
             </div>
-            <div class="faq__item">
+            <div data-motion class="faq__item">
               <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-3" aria-expanded="false" aria-controls="faq-3" data-i18n="pricing.faq3q">برای شروع به کارت اعتباری نیاز دارم؟ <i data-lucide="chevron-down"></i></button>
               <div class="collapse" id="faq-3"><div class="faq__answer" data-i18n="pricing.no-the-developer-plan-is-free-and-requires-no-pa">خیر. طرح توسعه‌دهنده رایگان است و به روش پرداختی نیاز ندارد. کارت اعتباری تنها برای طرح‌های حرفه‌ای و سازمانی لازم است.</div></div>
             </div>
-            <div class="faq__item">
+            <div data-motion class="faq__item">
               <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-4" aria-expanded="false" aria-controls="faq-4" data-i18n="pricing.faq4q">اگر به محدودیت نرخ برسم چه اتفاقی می‌افتد؟ <i data-lucide="chevron-down"></i></button>
               <div class="collapse" id="faq-4"><div class="faq__answer" data-i18n="pricing.requests-above-your-per-second-limit-return-http">درخواست‌های بیش از سقف مجاز در هر ثانیه با کد ۴۲۹ پاسخ می‌گیرند. سقف شما در هر ثانیه بازنشانی می‌شود — هیچ مسدودسازی روزانه‌ای در کار نیست.</div></div>
             </div>
-            <div class="faq__item">
+            <div data-motion class="faq__item">
               <button type="button" class="faq__question" data-bs-toggle="collapse" data-bs-target="#faq-5" aria-expanded="false" aria-controls="faq-5" data-i18n="pricing.faq5q">آیا قرارداد بلندمدتی وجود دارد؟ <i data-lucide="chevron-down"></i></button>
               <div class="collapse" id="faq-5"><div class="faq__answer" data-i18n="pricing.no-plans-are-month-to-month-and-you-can-cancel-a">خیر. طرح‌ها ماه‌به‌ماه هستند و هر زمان بخواهید می‌توانید از بخش صورت‌حساب آن را لغو کنید.</div></div>
             </div>
@@ -180,6 +185,7 @@
               <a class="site-footer__link" href="./docs.html" data-i18n="site.documentation">مستندات</a>
               <a class="site-footer__link" href="./style-guide.html" data-i18n="site.style-guide">راهنمای استایل</a>
               <a class="site-footer__link" href="./changelog.html" data-i18n="site.changelog">گزارش تغییرات</a>
+              <a class="site-footer__link" href="./visual-showcase.html" data-i18n="vs.footerLink">نمایش بصری</a>
               <a class="site-footer__link" href="./status.html" data-i18n="site.status">وضعیت</a>
               <a class="site-footer__link" href="./rtl.html" data-i18n="site.rtl-demo">نسخهٔ دموی فارسی</a>
             </div>

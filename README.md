@@ -6,13 +6,21 @@ A dark-first, keyboard-first, **RTL first-class** HTML template for API platform
 depth-over-breadth developer tool surface in the spirit of Stripe, Resend,
 Vercel and Linear.
 
-> **Status:** Phase 5 (Persian RTL Localization & Marketplace Readiness) **complete** ✅ —
-> the template is now **Persian-first and bilingual (fa ⇄ en)**: every page ships in
-> Farsi with `dir="rtl"`, ~1,260 translation keys in `src/locales/fa.json` +
+> **Status:** Phase 5.5 (Premium Visual Polish & Motion System) **complete** ✅ —
+> APIForge X now carries a **premium SaaS atmosphere**: a token-driven atmospheric
+> backdrop on the marketing + auth surfaces, a centralized motion system
+> (`--motion-fast 150ms` · `--motion-normal 250ms` · `--motion-slow 400ms`,
+> `cubic-bezier(.2,.8,.2,1)`), entrance choreography on the landing hero, card/table/
+> button/dropdown/modal/drawer/toast micro-interactions, animated charts — and a
+> rebuilt premium Toast. All **31 pages** build; every animation is transform/opacity
+> only and fully disabled under `prefers-reduced-motion`. See `/PHASE_5_5_REPORT.md`.
+>
+> Phase 5 (Persian RTL Localization & Marketplace Readiness) **complete** ✅ —
+> the template is **Persian-first and bilingual (fa ⇄ en)**: every page ships in
+> Farsi with `dir="rtl"`, ~1,347 translation keys in `src/locales/fa.json` +
 > `src/locales/en.json`, a live language/direction switch in every header, Jalali dates,
 > Persian digits, Persian seeded mock data, and a dedicated `rtl-persian-test.html`
-> QA harness. All 30 pages build; no hardcoded UI strings remain. See
-> `/PHASE_5_REPORT.md` and `/project-state/PROJECT_STATE.md`.
+> QA harness. See `/PHASE_5_REPORT.md` and `/project-state/PROJECT_STATE.md`.
 
 > **فتح بازار ایران:** متن رابط کاملاً فارسی و تخصصی، راست‌به‌چپ واقعی با ویژگی‌های
 > منطقی، فونت وزیرمتن محلی، تاریخ شمسی و ارقام فارسی، دادهٔ نمایشی فارسی و تغییر
@@ -78,6 +86,7 @@ Foundation pages:
 | `/style-guide.html` | The living component contract — every primitive (incl. marketing), both themes, RTL/LTR |
 | `/rtl-persian-test.html` | **Persian RTL QA harness** — mixed-script sentences, digits, LTR isolation, code blocks, tables, forms, charts, dropdowns, modals, pagination, alerts + live fa/en & theme switching |
 | `/rtl.html` | Persian / RTL demo — sidebar right, Vazirmatn, LTR-isolated code |
+| `/visual-showcase.html` | **Visual & motion QA page** — backdrop layers, motion tokens, card/button micro-interactions, modal, drawer, dropdown, tabs and every toast state, live in dark/light × RTL/LTR |
 
 Marketing pages (Phase 4):
 
@@ -100,16 +109,19 @@ src/
     components/ # buttons, forms, badges, tables, cards, code, skeletons, empty,
                 # tooltip, modal/offcanvas, progress, timeline, toast, dropdown,
                 # tabs, alert, breadcrumb, avatar, stat, chart, loading, palette,
-                # segmented, toolbar, split, inspector, explorer, shortcuts
+                # segmented, toolbar, split, inspector, explorer, shortcuts,
+                # backdrop (atmospheric layer), motion (entrance system)
+    pages/      # per-page styles (rtl-test, usage, errors, rate-limits, marketing,
+                # auth, docs, workspace, visual-showcase)
     layouts/    # app shell, sidebar, header, mobile nav, site (marketing shell)
-    pages/      # per-page styles (rtl-test, usage, errors, rate-limits, marketing)
     main.scss
-  locales/    # fa.json + en.json — the full translation catalogs (~1,260 keys)
+  locales/    # fa.json + en.json — the full translation catalogs (~1,347 keys)
   js/
     core/       # bootstrap.js — Bootstrap ESM data-API imports
                 # i18n.js — locale resolution, t(), [data-i18n] painter, RTL/LTR sync
     components/ # theme, env switcher, command palette, code block, copy, icons,
-                # log/webhook/error detail drawers, charts, shortcuts, …
+                # log/webhook/error detail drawers, charts, shortcuts, toast,
+                # motion (IntersectionObserver reveal), …
     data/       # mock JSON (regenerate: node scripts/generate-mock-data.mjs)
                 # docs-content.{en,fa}.js — long-form docs, authored per locale
     utils/      # formatting (relative time, latency, badges, Persian digits)
@@ -128,6 +140,35 @@ marketplace/    # buyer assets: screenshot manifest, description copy, capture s
   dark, set inline in `<head>` so there is no flash.
 - Bootstrap utilities are bridged to the token system (`--bs-*` → `--surface-*` /
   `--accent` / `--border`) so `.text-primary`, `.bg-body`, `.border` stay theme-aware.
+
+## Motion system
+
+One place defines every animation in the product — `src/scss/tokens/_motion.scss`
+(speeds + easing), `src/scss/components/_motion.scss` (keyframes + the reveal
+contract) and `src/js/components/motion.js` (a single IntersectionObserver).
+
+| Token | Value | Used for |
+|-------|-------|----------|
+| `--motion-fast` | 150ms | hover, focus ring, tooltips, toasts |
+| `--motion-normal` | 250ms | buttons, cards, dropdowns, modals, tables |
+| `--motion-slow` | 400ms | entrances, drawers, chart reveals (hard ceiling) |
+| `--ease-standard` | `cubic-bezier(.2,.8,.2,1)` | everything |
+| `--motion-stagger` | 60ms | gap between staggered siblings |
+| `--motion-shift` | 8px | vertical travel of an entrance |
+| `--dir-sign` | `1` / `-1` | multiplies directional travel so RTL mirrors |
+
+- **Only `transform`, `translate`, `scale`, `opacity`.** No width/height/top/left
+  animation, no layout recalculation, no continuous or looping motion.
+- **Scroll reveals** are opt-in: `data-motion` on an element, `data-motion-group`
+  on a container to stagger its children (`--motion-i` is assigned in CSS).
+  `motion.js` arms an element at the exact moment it starts observing it, so a
+  page without JS (or with a failing script) never hides content — and content
+  inside a modal / offcanvas / collapse / inactive tab is never armed at all.
+- **`prefers-reduced-motion`** disables every entrance, the backdrop fade, chart
+  animation and the drawer/modal transitions.
+- **Atmospheric backdrop** (`.backdrop` → `__grid` / `__glow` / `__mesh`) is used
+  on the marketing and auth surfaces only; the application workspace stays clean.
+  Variants: `.backdrop--quiet` (docs/SDK/reference) and `.backdrop--auth`.
 
 ## Localization (Persian ⇄ English)
 
@@ -175,6 +216,8 @@ Every common change is one file:
 |------------|------|
 | Change the accent / surface / status colors | `src/scss/tokens/_colors.scss` (dark in `:root`, light in `[data-theme="light"]`) |
 | Change spacing / radius / type scale | `src/scss/tokens/_spacing.scss` / `_radius.scss` / `_typography.scss` |
+| Change animation speeds / easing | `src/scss/tokens/_motion.scss` (`--motion-fast` · `--motion-normal` · `--motion-slow`) |
+| Change the backdrop intensity | `src/scss/components/_backdrop.scss` + the `--backdrop-*` tokens in `_colors.scss` |
 | Change the fonts | `src/scss/base/_fonts.scss` (self-hosted Fontsource imports) |
 | Change the sidebar / nav items | the `<nav class="sidebar-nav">` block on every page, and `src/js/data/commands.js` for the palette |
 | Add or change a translation | `src/locales/fa.json` + `src/locales/en.json` (keys are referenced by `data-i18n` / `t()`) |

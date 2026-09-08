@@ -21,6 +21,22 @@
   --bs-modal-footer-gap: 8px;
 }
 
+// Motion — opacity + translate only, 250ms, one curve for every overlay.
+// Declared inside `no-preference` so Bootstrap's own reduced-motion rule
+// (transition: none) is never re-enabled by a later declaration.
+@media (prefers-reduced-motion: no-preference) {
+  .modal.fade {
+    transition: opacity var(--motion-normal) var(--ease-standard);
+  }
+  .modal.fade .modal-dialog {
+    transform: translate3d(0, calc(var(--motion-shift) * -1.5), 0);
+    transition: transform var(--motion-normal) var(--ease-standard);
+  }
+  .modal.show .modal-dialog {
+    transform: none;
+  }
+}
+
 .modal-content {
   box-shadow: var(--elevation-3);
 }
@@ -52,6 +68,10 @@
   --bs-backdrop-zindex: var(--z-backdrop);
   --bs-backdrop-bg: var(--overlay-bg);
   --bs-backdrop-opacity: 1;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: opacity var(--motion-normal) var(--ease-standard);
+  }
 }
 
 // ---- Offcanvas (drawer) ----
@@ -63,6 +83,8 @@
   --bs-offcanvas-border-width: 1px;
   --bs-offcanvas-padding-x: 20px;
   --bs-offcanvas-padding-y: 20px;
+  // Drawers are the slowest thing we animate — still inside the 400ms cap.
+  --bs-offcanvas-transition: transform var(--motion-slow) var(--ease-standard);
   box-shadow: var(--elevation-3);
 }
 
@@ -113,6 +135,23 @@
   --bs-backdrop-zindex: var(--z-backdrop);
   --bs-backdrop-bg: var(--overlay-bg);
   --bs-backdrop-opacity: 1;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: opacity var(--motion-normal) var(--ease-standard);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal.fade,
+  .modal.fade .modal-dialog,
+  .modal-backdrop,
+  .offcanvas,
+  .offcanvas-backdrop {
+    transition: none;
+  }
+  .modal.fade .modal-dialog {
+    transform: none;
+  }
 }
 
 // Close button (Bootstrap .btn-close) — ghost icon matching our system

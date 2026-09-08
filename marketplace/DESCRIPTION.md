@@ -46,7 +46,7 @@ demo works the moment you open it:
 **Bilingual by design (fa ⇄ en)**
 
 - Two complete translation catalogs — `src/locales/fa.json` and `src/locales/en.json` —
-  ~1,260 keys covering navigation, buttons, forms, tables, empty states, modals,
+  ~1,347 keys covering navigation, buttons, forms, tables, empty states, modals,
   alerts, toasts, status labels, chart sentences, docs and marketing copy
 - No hardcoded UI strings: every visible label is bound with `data-i18n` /
   `data-i18n-attr`, so swapping copy never means touching markup
@@ -54,6 +54,26 @@ demo works the moment you open it:
   script restores the saved locale before first paint)
 - Long-form documentation is authored per locale (`docs-content.fa.js` /
   `docs-content.en.js`), not string-by-string
+
+**Premium polish & motion (Phase 5.5)**
+
+- An atmospheric backdrop layer (fine developer grid, controlled accent glow and
+  an API-infrastructure lattice) on the marketing and auth surfaces — the app
+  workspace stays a clean, distraction-free tool
+- A centralized motion system: `--motion-fast 150ms` · `--motion-normal 250ms` ·
+  `--motion-slow 400ms` on one `cubic-bezier(.2,.8,.2,1)` curve
+- Entrance choreography on the landing hero (eyebrow → title → description →
+  CTA → product preview → KPI stagger), card entrances, hover elevation on
+  buttons and cards, row hover with a directional accent rail, sliding tab
+  indicators, smooth dropdown / modal / drawer / toast transitions and animated
+  charts
+- `transform` and `opacity` only — no layout shift, no looping motion — and
+  every decorative animation is disabled under `prefers-reduced-motion`
+- A rebuilt premium Toast: icon · title + message · close, logical padding that
+  mirrors in RTL, `role="status"` / `role="alert"` with `aria-live`, four
+  token-coloured states and a 250ms enter / fade exit
+- `visual-showcase.html` — a live QA page for all of the above in dark/light ×
+  RTL/LTR
 
 **RTL engineering, not an afterthought**
 
@@ -78,9 +98,10 @@ Built the way you would build it:
 - Responsive 360–1920 with intentional mobile patterns (drawer, bottom bar, scrollable tables)
 - Deterministic mock data — regenerate any dataset from one script
 
-**What you get:** 30 HTML pages, the full SCSS source with documented tokens,
+**What you get:** 31 HTML pages, the full SCSS source with documented tokens,
 the mock-data generator, a style guide, a Persian RTL demo plus a Persian RTL QA
-page, buyer documentation and the screenshot capture script for your own listing.
+page, a visual & motion QA page, buyer documentation and the screenshot capture
+script for your own listing.
 
 **License:** Regular and Extended. Extended covers unlimited end-product sales.
 
@@ -120,7 +141,7 @@ API است — APIهای هوش مصنوعی، زیرساخت‌ها، BaaS و �
 **دوزبانه از پایه (فارسی ⇄ انگلیسی)**
 
 - دو فایل ترجمهٔ کامل — `src/locales/fa.json` و `src/locales/en.json` — با بیش از
-  ۱٬۲۶۰ کلید برای ناوبری، دکمه‌ها، فرم‌ها، جدول‌ها، وضعیت‌های خالی، پنجره‌ها،
+  ۱٬۳۴۷ کلید برای ناوبری، دکمه‌ها، فرم‌ها، جدول‌ها، وضعیت‌های خالی، پنجره‌ها،
   هشدارها، پیام‌ها، برچسب‌های وضعیت، جملات نمودارها، مستندات و متون بازاریابی
 - **هیچ متن ثابتی در نشانه‌گذاری نیست**: همهٔ برچسب‌ها با `data-i18n` و
   `data-i18n-attr` به فایل‌های ترجمه متصل‌اند؛ تغییر متن نیازی به دست‌زدن در HTML ندارد
@@ -128,6 +149,25 @@ API است — APIهای هوش مصنوعی، زیرساخت‌ها، BaaS و �
   `<head>` زبان ذخیره‌شده را پیش از نخستین رندر اعمال می‌کند (بدون پرش تصویر)
 - مستندات بلند به‌صورت فایل جداگانه برای هر زبان نوشته شده‌اند
   (`docs-content.fa.js` / `docs-content.en.js`)، نه کلیدبه‌کلید
+
+**پرداخت بصری پریمیوم و سیستم حرکت (فاز ۵.۵)**
+
+- لایهٔ پس‌زمینهٔ جوی (شبکهٔ ظریف توسعه‌دهنده، درخشش کنترل‌شدهٔ تأکیدی و الگوی
+  زیرساخت API) روی صفحات بازاریابی و احراز هویت — فضای کاری برنامه همچنان
+  پاکیزه و بدون عامل پرت‌کنندهٔ حواس باقی می‌ماند
+- سیستم حرکت یکپارچه: `۱۵۰ms` سریع، `۲۵۰ms` عادی، `۴۰۰ms` آرام، همه با یک منحنی
+  `cubic-bezier(.2,.8,.2,1)`
+- طراحی ورودِ مرحله‌به‌مرحله در صفحهٔ فرود (ابرو ← عنوان ← توضیح ← دکمه‌ها ←
+  پیش‌نمایش محصول ← کارت‌های شاخص)، ورود کارت‌ها، اِلِویشن در هاورِ دکمه و کارت،
+  هاورِ ردیف جدول با نوار تأکیدی جهت‌دار، نشانگر لغزان تب‌ها، انتقال‌های نرم در
+  منو، پنجره، کشو و اعلان و نمودارهای متحرک
+- فقط `transform` و `opacity` — بدون جابه‌جایی چیدمان و بدون حرکت مداوم — و
+  خاموش‌شدن کامل انیمیشن‌های تزئینی در صورت فعال‌بودن `prefers-reduced-motion`
+- اعلان (Toast) بازطراحی‌شده: آیکون · عنوان و پیام · دکمهٔ بستن، فاصله‌گذاری
+  منطقی که در راست‌به‌چپ آینه می‌شود، `role="status"` / `role="alert"` همراه
+  `aria-live`، چهار وضعیت با رنگ‌های توکن‌محور و ورود ۲۵۰ میلی‌ثانیه‌ای
+- `visual-showcase.html` — صفحهٔ تضمین کیفیت زنده برای همهٔ موارد بالا در
+  تیره/روشن و راست‌به‌چپ/چپ‌به‌راست
 
 **مهندسی راست‌به‌چپ، نه یک ویژگی الحاقی**
 
@@ -154,9 +194,10 @@ API است — APIهای هوش مصنوعی، زیرساخت‌ها، BaaS و �
 - واکنش‌گرا از ۳۶۰ تا ۱۹۲۰ پیکسل با الگوهای هدفمند موبایل (کشو، نوار پایین، جدول اسکرول‌پذیر)
 - دادهٔ نمایشی قطعی — هر مجموعه‌داده با یک اسکریپت بازتولید می‌شود
 
-**آنچه دریافت می‌کنید:** ۳۰ صفحهٔ HTML، سورس کامل SCSS با توکن‌های مستند،
+**آنچه دریافت می‌کنید:** ۳۱ صفحهٔ HTML، سورس کامل SCSS با توکن‌های مستند،
 مولد دادهٔ نمایشی، راهنمای استایل، دموی فارسی و صفحهٔ تضمین کیفیت راست‌به‌چپ،
-مستندات خریدار و اسکریپت تولید تصاویر اسکرین‌شات برای لیست‌کردن خودتان.
+صفحهٔ تضمین کیفیت بصری و حرکت، مستندات خریدار و اسکریپت تولید تصاویر
+اسکرین‌شات برای لیست‌کردن خودتان.
 
 **لایسنس:** نسخهٔ عادی و توسعه‌یافته (Extended). نسخهٔ توسعه‌یافته فروش به
 کاربر نهایی نامحدود را پوشش می‌دهد.

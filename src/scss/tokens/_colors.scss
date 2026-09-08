@@ -94,6 +94,17 @@
   // Shimmer highlight for skeletons (theme-aware)
   --shimmer: rgba(255, 255, 255, 0.06);
 
+  // Atmospheric backdrop (Phase 5.5) — marketing + auth surfaces only.
+  // Every value is a token so no component ever writes an rgba() literal.
+  --backdrop-grid-size: 44px; // 40-48px band: fine technical grid
+  --backdrop-grid-line: rgba(255, 255, 255, 0.035);
+  --backdrop-glow: rgba(var(--accent-rgb), 0.16);
+  --backdrop-glow-soft: rgba(var(--accent-rgb), 0.07);
+  --backdrop-mesh-size: 168px;
+  --backdrop-mesh-line: rgba(var(--accent-rgb), 0.09);
+  --backdrop-mesh-node: rgba(var(--accent-rgb), 0.28);
+  --backdrop-strength: 1; // 1 = full, lowered by .backdrop--quiet
+
   // Code (always dark, even in light theme — Vercel/Stripe discipline)
   --code-bg: #0f0f10;
   --code-header-bg: #141415;
@@ -164,4 +175,11 @@
   --orange-fg: #c2410c;
   --orange-bg: rgba(234, 88, 12, 0.1);
   --orange-border: rgba(234, 88, 12, 0.3);
+
+  // Atmospheric backdrop — light theme keeps the same structure, lower ink.
+  --backdrop-grid-line: rgba(0, 0, 0, 0.045);
+  --backdrop-glow: rgba(var(--accent-rgb), 0.14);
+  --backdrop-glow-soft: rgba(var(--accent-rgb), 0.06);
+  --backdrop-mesh-line: rgba(var(--accent-rgb), 0.1);
+  --backdrop-mesh-node: rgba(var(--accent-rgb), 0.24);
 }

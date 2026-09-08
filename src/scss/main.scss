@@ -32,6 +32,7 @@
 @use 'components/progress';
 @use 'components/timeline';
 @use 'components/toast';
+@use 'components/backdrop';
 @use 'components/dropdown';
 @use 'components/command-palette';
 @use 'components/tabs';
@@ -46,6 +47,8 @@
 @use 'components/split';
 @use 'components/inspector';
 @use 'components/explorer';
+// Motion system last: its reveal rules must win over component defaults.
+@use 'components/motion';
 
 // Layouts
 @use 'layouts/app-shell';
@@ -61,5 +64,6 @@
 @use 'pages/rate-limits';
 @use 'pages/marketing';
 @use 'pages/auth';
+@use 'pages/visual-showcase';
 @use 'pages/docs';
 @use 'pages/workspace';

@@ -31,6 +31,7 @@
 }
 
 .app-main {
+  position: relative; // containing block for the quiet backdrop (docs pages)
   overflow-y: auto;
   background: var(--surface-canvas);
   // Page scroll region
@@ -38,6 +39,8 @@
 }
 
 .app-main__inner {
+  position: relative;
+  z-index: 1; // above the backdrop layer
   max-width: var(--content-max-width);
   margin-inline: auto;
   padding: var(--content-pad);

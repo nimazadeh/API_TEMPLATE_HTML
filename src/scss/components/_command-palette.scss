@@ -29,7 +29,7 @@
   overflow: hidden;
   opacity: 0;
   transform: translateY(-8px) scale(0.98);
-  @include motion(150ms);
+  @include motion(var(--motion-fast));
   transition-property: opacity, transform;
   transition-timing-function: $ease-out;
 

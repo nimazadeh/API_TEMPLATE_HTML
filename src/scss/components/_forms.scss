@@ -42,7 +42,7 @@
   background-color: var(--surface-1);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  transition: border-color 200ms $ease-out, box-shadow 200ms $ease-out;
+  @include motion(var(--motion-normal), (border-color, box-shadow));
 
   &::placeholder {
     color: var(--text-tertiary);
@@ -97,7 +97,7 @@ textarea.form-control {
   background-repeat: no-repeat;
   background-position: right 10px center;
   cursor: pointer;
-  transition: border-color 200ms $ease-out, box-shadow 200ms $ease-out;
+  @include motion(var(--motion-normal), (border-color, box-shadow));
 
   &:focus {
     outline: none;
