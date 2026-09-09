@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <title data-i18n="auth.loginTitle">ورود — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+        var loc = null;
+        try { loc = localStorage.getItem('afx-locale'); } catch (e) {}
+        if (loc !== 'fa' && loc !== 'en') loc = 'fa';
+        document.documentElement.setAttribute('lang', loc);
+        document.documentElement.setAttribute('dir', loc === 'fa' ? 'rtl' : 'ltr');
+      })();
+    </script>
+    <script defer src="./assets/js/login.js"></script>
+    <link rel="stylesheet" href="./assets/css/main.css">
+  </head>
+  <body>
+    <main class="auth">
+      <div class="backdrop backdrop--auth" data-backdrop aria-hidden="true">
+        <div class="backdrop__grid"></div>
+        <div class="backdrop__glow"></div>
+      </div>
+      <div class="auth__card">
+        <div class="auth__brand">
+          <span class="brand-mark"><i data-lucide="zap"></i></span>
+          <span class="brand-name">APIForge X</span>
+          <button type="button" class="btn btn-sm btn-ghost ms-auto" data-locale-toggle aria-label="تغییر زبان" data-i18n-attr="aria-label:aria.switchLanguage">
+            <i data-lucide="languages"></i> <span data-locale-label>EN</span>
+          </button>
+        </div>
+
+        <h1 class="auth__title" data-i18n="auth.loginHeading">ورود به حساب</h1>
+        <p class="auth__subtitle" data-i18n="auth.loginSub">برای ادامه وارد فضای کاری APIForge شوید.</p>
+
+        <div class="auth__notice" role="note">
+          <i data-lucide="info"></i>
+          <div data-i18n="auth.demoNotice">این یک نسخهٔ نمایشی است و احراز هویت به‌صورت شبیه‌سازی انجام می‌شود؛ هیچ درخواست واقعی ارسال نمی‌گردد.</div>
+        </div>
+
+        <form id="login-form" novalidate>
+          <div class="form-group mb-3">
+            <label class="form-label" for="login-email" data-i18n="auth.email">ایمیل</label>
+            <input class="form-control form-control--mono" id="login-email" type="email" dir="ltr" autocomplete="email" placeholder="you@company.com" />
+            <div class="invalid-feedback" data-i18n="auth.emailInvalid">یک ایمیل معتبر وارد کنید.</div>
+          </div>
+          <div class="form-group mb-4">
+            <div class="d-flex align-items-center justify-content-between">
+              <label class="form-label mb-0" for="login-password" data-i18n="auth.password">گذرواژه</label>
+              <a class="caption" href="./forgot-password.html" data-i18n="auth.forgotLink">گذرواژه را فراموش کرده‌اید؟</a>
+            </div>
+            <input class="form-control form-control--mono mt-2" id="login-password" type="password" dir="ltr" autocomplete="current-password" placeholder="••••••••" />
+            <div class="invalid-feedback" data-i18n="auth.passwordShort6">گذرواژه باید دست‌کم ۶ نویسه باشد.</div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100" id="login-submit" data-i18n="auth.signIn"><i data-lucide="log-in"></i> ورود</button>
+        </form>
+
+        <div class="auth__footer"><span data-i18n="auth.haveInvite">دعوت‌نامه دریافت کرده‌اید؟</span><a href="./invite.html" data-i18n="auth.acceptInvite">پذیرش دعوت‌نامه</a>
+        </div>
+      </div>
+    </main>
+
+  </body>
+</html>

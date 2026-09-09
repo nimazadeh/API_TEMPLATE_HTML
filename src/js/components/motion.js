@@ -1,5 +1,5 @@
 // =============================================================
-// APIForge X — Motion (Phase 5.5)
+// APIForge X — Motion system
 // One IntersectionObserver for every scroll reveal in the product.
 //
 // Contract:

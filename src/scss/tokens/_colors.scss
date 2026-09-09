@@ -11,7 +11,6 @@
 //   --surface-interactive  hover & focus-visible surfaces
 //   --surface-overlay      floating surfaces (dropdown, modal, palette)
 //   --surface-code         code wells (ALWAYS dark, both themes)
-// Source: docs/product/DESIGN_DIRECTION.md
 // =============================================================
 
 :root {
@@ -94,7 +93,7 @@
   // Shimmer highlight for skeletons (theme-aware)
   --shimmer: rgba(255, 255, 255, 0.06);
 
-  // Atmospheric backdrop (Phase 5.5) — marketing + auth surfaces only.
+  // Atmospheric backdrop — marketing + auth surfaces only.
   // Every value is a token so no component ever writes an rgba() literal.
   --backdrop-grid-size: 44px; // 40-48px band: fine technical grid
   --backdrop-grid-line: rgba(255, 255, 255, 0.035);

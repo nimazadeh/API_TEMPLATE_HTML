@@ -32,8 +32,7 @@
 
 import { test, expect } from '@playwright/test';
 
-// Every page the buyer package must ship (task Phase 5 list plus the
-// extra marketing/dev pages that dist builds).
+// Every page the buyer package must ship.
 const REQUIRED_PAGES = [
   'index.html', 'pricing.html', 'dashboard.html', 'apis.html', 'api-keys.html',
   'logs.html', 'usage.html', 'webhooks.html', 'endpoints.html', 'errors.html',
@@ -42,7 +41,6 @@ const REQUIRED_PAGES = [
   'sdk.html', 'api-reference.html', 'metrics.html', 'login.html',
   'forgot-password.html', 'invite.html', 'changelog.html', 'status.html',
   '404.html', 'style-guide.html', 'rtl.html', 'visual-showcase.html',
-  'rtl-persian-test.html',
 ];
 
 // Diagnostics collected once per page, then asserted in bulk so a

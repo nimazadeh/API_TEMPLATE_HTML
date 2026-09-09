@@ -32,7 +32,7 @@ export function getCommandGroups() {
         { id: 'nav-profile', title: t('page.profile'), desc: t('cmd.profileDesc'), icon: 'user', href: './profile.html' },
         { id: 'nav-notifications', title: t('page.notifications'), desc: t('cmd.notificationsDesc'), icon: 'bell', href: './notifications.html' },
         { id: 'nav-style-guide', title: t('page.style-guide'), desc: t('cmd.styleGuideDesc'), icon: 'palette', href: './style-guide.html' },
-        { id: 'nav-rtl', title: t('cmd.rtlTitle'), desc: t('cmd.rtlDesc'), icon: 'languages', href: './rtl-persian-test.html' },
+        { id: 'nav-rtl', title: t('cmd.rtlTitle'), desc: t('cmd.rtlDesc'), icon: 'languages', href: './rtl.html' },
       ],
     },
     {

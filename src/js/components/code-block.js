@@ -9,7 +9,7 @@ import { copyText, flashCopied } from './copy.js';
 import { currentEnv } from './env-switcher.js';
 import { escapeHtml } from '../utils/format.js';
 
-// Subtle JSON syntax highlighting — 4 colors max (D-009): keys accent,
+// Subtle JSON syntax highlighting — four colors max: keys accent,
 // strings green, numbers blue, keywords/comment grey. Token text is
 // escaped so payload data can never inject markup.
 const JSON_TOKEN = /("(?:\\.|[^"\\])*")(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/g;

@@ -1,5 +1,5 @@
 // =============================================================
-// APIForge X — Changelog page (Phase 4)
+// APIForge X — Changelog page
 // Static authored content; only needs the marketing shell boot.
 // =============================================================
 

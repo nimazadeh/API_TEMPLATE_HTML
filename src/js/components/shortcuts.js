@@ -1,5 +1,5 @@
 // =============================================================
-// APIForge X — Keyboard shortcuts (Phase 4 polish)
+// APIForge X — Keyboard shortcuts
 //   ?            toggle the help modal
 //   ⌘K / Ctrl+K command palette (owned by command-palette.js)
 //   g then key   jump to a page (GitHub-style prefix nav)

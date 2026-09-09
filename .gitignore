@@ -35,9 +35,7 @@ playwright-report/
 # Marketplace screenshots are committed release deliverables
 # (regenerate with: node marketplace/capture-screenshots.mjs)
 
-# Assembled marketplace package (rebuild with node packaging/build-release.mjs).
-# Only the transient unpacked working folders are ignored — the versioned
-# release/APIForge-X-v*/ package (zips, Documentation, README, manifest,
-# verification report) is committed as the shippable deliverable.
-release/*/APIForge-X-Developer/
-release/*/APIForge-X-Preview/
+# Assembled marketplace packages (rebuild with node packaging/build-release.mjs).
+# release/APIForge-X-v<version>/ is the final customer tree (committed);
+# release/APIForge-X.zip and APIForge-X-Developer.zip are its marketplace
+# deliverables. Internal QA tooling never enters either package.

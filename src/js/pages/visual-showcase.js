@@ -1,7 +1,7 @@
 // =============================================================
 // APIForge X — Visual & motion showcase (visual-showcase.html)
 //
-// The QA surface for the Phase 5.5 polish pass: it exercises the
+// The living showcase for the shared polish system: it exercises the
 // atmospheric backdrop, the three motion speeds, card/button micro
 // -interactions, overlays and every toast state — live, in both
 // themes and both directions. Nothing here ships to the product

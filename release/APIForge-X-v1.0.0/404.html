@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="robots" content="noindex" />
+    <title data-i18n="notfound.page-not-found-apiforge-x">صفحه یافت نشد — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+        var loc = null;
+        try { loc = localStorage.getItem('afx-locale'); } catch (e) {}
+        if (loc !== 'fa' && loc !== 'en') loc = 'fa';
+        document.documentElement.setAttribute('lang', loc);
+        document.documentElement.setAttribute('dir', loc === 'fa' ? 'rtl' : 'ltr');
+      })();
+    </script>
+    <script defer src="./assets/js/404.js"></script>
+    <link rel="stylesheet" href="./assets/css/main.css">
+  </head>
+  <body data-page="404">
+    <div class="site">
+      <header class="site-header">
+        <div class="site-container site-header__inner">
+          <a class="site-header__brand" href="./index.html">
+            <span class="brand-mark"><i data-lucide="zap"></i></span>
+            <span class="brand-name">APIForge X</span>
+          </a>
+          <div class="site-header__actions">
+            <button type="button" class="btn btn-icon" data-theme-toggle aria-label="تغییر پوسته" aria-pressed="false" data-i18n-attr="aria-label:aria.toggleTheme">
+              <i data-lucide="sun-moon"></i>
+            </button>
+            <button type="button" class="btn btn-ghost" data-locale-toggle aria-label="تغییر زبان" data-i18n-attr="aria-label:aria.switchLanguage">
+              <i data-lucide="languages"></i> <span data-locale-label>EN</span>
+            </button>
+            <a class="btn btn-primary" href="./dashboard.html" data-i18n="site.open-dashboard">ورود به داشبورد</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="site-main">
+        <section class="site-container">
+          <div class="error-page">
+            <div>
+              <div class="error-page__code ltr-isolate">404</div>
+              <h1 class="display mt-3 mb-3" data-i18n="notfound.this-page-doesnt-exist">چنین صفحه‌ای وجود ندارد</h1>
+              <p class="body-lg text-secondary mb-0" style="max-width: 480px; margin-inline: auto;" data-i18n="notfound.the-url-may-be-mistyped-or-the-page-may-have-mov">احتمالاً نشانی را اشتباه وارد کرده‌اید یا صفحه جابه‌جا شده است. داشبورد نقطهٔ خوبی برای شروع است.</p>
+              <div class="error-page__cta">
+                <a class="btn btn-primary btn-lg" href="./dashboard.html" data-i18n="notfound.openDashboard">ورود به داشبورد <i data-lucide="arrow-left"></i></a>
+                <a class="btn btn-ghost btn-lg" href="./index.html" data-i18n="notfound.back-to-home">بازگشت به صفحهٔ اصلی</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+  </body>
+</html>

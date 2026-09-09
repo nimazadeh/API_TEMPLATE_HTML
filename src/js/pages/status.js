@@ -1,5 +1,5 @@
 // =============================================================
-// APIForge X — Status page (Phase 4)
+// APIForge X — Status page
 // Deterministic (seeded) 90-day uptime bars, component health and
 // incident history. Marketing content — authored here, not in the
 // mock-data generator.

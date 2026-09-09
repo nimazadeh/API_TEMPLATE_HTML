@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <title data-i18n="header.title.profile">نمایه — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+        var loc = null;
+        try { loc = localStorage.getItem('afx-locale'); } catch (e) {}
+        if (loc !== 'fa' && loc !== 'en') loc = 'fa';
+        document.documentElement.setAttribute('lang', loc);
+        document.documentElement.setAttribute('dir', loc === 'fa' ? 'rtl' : 'ltr');
+      })();
+    </script>
+    <script defer src="./assets/js/profile.js"></script>
+    <link rel="stylesheet" href="./assets/css/main.css">
+  </head>
+  <body data-env="live">
+    <div class="app-shell">
+      <aside class="app-sidebar">
+        <div class="sidebar-brand">
+          <span class="brand-mark"><i data-lucide="zap"></i></span>
+          <span class="brand-name">APIForge X</span>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="shell.overview">نمای کلی</div>
+            <a class="nav-item" href="./dashboard.html" data-i18n="nav.overview"><i data-lucide="layout-dashboard"></i><span data-i18n="rtl.groupOverview">نمای کلی</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="shell.developer">توسعه‌دهنده</div>
+            <a class="nav-item" href="./apis.html" data-i18n="nav.apis"><i data-lucide="code-2"></i><span>APIها</span></a>
+            <a class="nav-item" href="./endpoints.html" data-i18n="nav.endpoints"><i data-lucide="braces"></i><span>نقاط پایانی</span></a>
+            <a class="nav-item" href="./api-keys.html" data-i18n="nav.apiKeys"><i data-lucide="key"></i><span>کلیدهای API</span></a>
+            <a class="nav-item" href="./logs.html" data-i18n="nav.logs"><i data-lucide="scroll-text"></i><span>لاگ‌ها</span></a>
+            <a class="nav-item" href="./webhooks.html" data-i18n="nav.webhooks"><i data-lucide="webhook"></i><span>وب‌هوک‌ها</span></a>
+            <a class="nav-item" href="./docs.html" data-i18n="nav.docs"><i data-lucide="book-open"></i><span>مستندات</span></a>
+            <a class="nav-item" href="./sdk.html" data-i18n="nav.sdks"><i data-lucide="package"></i><span>SDKها</span></a>
+            <a class="nav-item" href="./api-reference.html" data-i18n="nav.apiReference"><i data-lucide="book-marked"></i><span>مرجع API</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="shell.analytics">تحلیل‌ها</div>
+            <a class="nav-item" href="./usage.html" data-i18n="nav.usage"><i data-lucide="bar-chart-3"></i><span>میزان استفاده</span></a>
+            <a class="nav-item" href="./errors.html" data-i18n="nav.errors"><i data-lucide="bug"></i><span>خطاها</span></a>
+            <a class="nav-item" href="./rate-limits.html" data-i18n="nav.rateLimits"><i data-lucide="gauge"></i><span>محدودیت نرخ</span></a>
+            <a class="nav-item" href="./metrics.html" data-i18n="nav.metrics"><i data-lucide="activity"></i><span>متریک‌ها</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="shell.workspace">فضای کاری</div>
+            <a class="nav-item" href="./environments.html" data-i18n="nav.environments"><i data-lucide="server"></i><span>محیط‌ها</span></a>
+            <a class="nav-item" href="./team.html" data-i18n="nav.team"><i data-lucide="users"></i><span>تیم</span></a>
+            <a class="nav-item" href="./billing.html" data-i18n="nav.billing"><i data-lucide="credit-card"></i><span>صورت‌حساب</span></a>
+            <a class="nav-item" href="./notifications.html" data-i18n="nav.notifications"><i data-lucide="bell"></i><span>اعلان‌ها</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="shell.account">حساب کاربری</div>
+            <a class="nav-item is-active" href="./profile.html" data-i18n="nav.profile"><i data-lucide="user"></i><span>نمایه</span></a>
+            <a class="nav-item" href="./settings.html" data-i18n="nav.settings"><i data-lucide="settings"></i><span>تنظیمات</span></a>
+          </div>
+        </nav>
+
+        <div class="sidebar-foot">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="محیط" data-i18n-attr="aria-label:aria.environment">
+            <button type="button" class="env-option" data-env="test" data-i18n="env.test"><span class="dot"></span>آزمایشی</button>
+            <button type="button" class="env-option" data-env="live" data-i18n="env.live"><span class="dot"></span>عملیاتی</button>
+          </div>
+          <div class="sidebar-user dropdown dropup">
+            <button type="button" class="sidebar-user__toggle" data-bs-toggle="dropdown" aria-expanded="false" data-i18n="shell.userMenu"><span class="avatar">عر</span> <span class="sidebar-user__meta"> <span class="name">علی رضایی</span> <span class="email ltr-isolate">ali@apiforge.dev</span> </span> <i data-lucide="chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <div class="dropdown-header" data-i18n="shell.userEmail">ali@apiforge.dev</div>
+              <a class="dropdown-item" href="./profile.html" data-i18n="action.profileUser"><i data-lucide="user"></i> نمایه</a>
+              <a class="dropdown-item" href="./settings.html" data-i18n="action.settings"><i data-lucide="settings"></i> تنظیمات</a>
+              <a class="dropdown-item" href="./docs.html" data-i18n="site.drawerDocs"><i data-lucide="book-open"></i> مستندات</a>
+              <hr class="dropdown-divider" />
+              <a class="dropdown-item is-danger" href="./login.html" data-i18n="action.signOut"><i data-lucide="log-out"></i> خروج</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <header class="app-header">
+        <button type="button" class="btn btn-icon header-burger" aria-label="باز کردن منو" data-bs-toggle="offcanvas" data-bs-target="#sidebar-drawer" aria-controls="sidebar-drawer" data-i18n-attr="aria-label:aria.openMenu">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="header-title" data-i18n="header.crumb.profile"><span class="crumb">APIForge X</span> <span class="crumb-sep">/</span> <span class="title">نمایه</span></div>
+        <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="جستجو (⌘K)" data-i18n-attr="aria-label:aria.searchCommandK" data-i18n="shell.search"><i data-lucide="search"></i> <span class="text-tertiary">جستجو…</span> <span class="kbd-hint">⌘K</span></button>
+        <div class="header-actions">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="محیط" data-i18n-attr="aria-label:aria.environment">
+            <button type="button" class="env-option" data-env="test" data-i18n="env.test"><span class="dot"></span>آزمایشی</button>
+            <button type="button" class="env-option" data-env="live" data-i18n="env.live"><span class="dot"></span>عملیاتی</button>
+          </div>
+          <div class="dropdown" data-theme-menu>
+            <button type="button" class="btn btn-icon" aria-label="پوسته" data-bs-toggle="dropdown" aria-expanded="false" data-i18n-attr="aria-label:aria.theme">
+              <i data-lucide="sun-moon"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <button type="button" class="dropdown-item" data-mode="dark" role="menuitemradio" data-i18n="theme.dark"><i data-lucide="sun-moon"></i> تیره <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-mode="light" role="menuitemradio" data-i18n="theme.light"><i data-lucide="sun-moon"></i> روشن <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-mode="system" role="menuitemradio" data-i18n="theme.system"><i data-lucide="sun-moon"></i> سیستم <span class="theme-check" hidden><i data-lucide="check"></i></span></button>
+            </div>
+          </div>
+          <div class="dropdown" data-locale-menu>
+            <button type="button" class="btn btn-icon" aria-label="تغییر زبان" data-bs-toggle="dropdown" aria-expanded="false" data-i18n-attr="aria-label:aria.switchLanguage">
+              <i data-lucide="languages"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <button type="button" class="dropdown-item" data-locale="fa" role="menuitemradio" aria-checked="true">فارسی <span class="locale-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-locale="en" role="menuitemradio" aria-checked="false">English <span class="locale-check" hidden><i data-lucide="check"></i></span></button>
+            </div>
+          </div>
+          
+          <button type="button" class="btn btn-icon" aria-label="راهنما" data-bs-toggle="tooltip" data-bs-title="راهنما" data-i18n-attr="aria-label:aria.help,data-bs-title:aria.helpTooltip">
+            <i data-lucide="help-circle"></i>
+          </button>
+          <a class="btn btn-icon" href="./notifications.html" aria-label="اعلان‌ها" data-i18n-attr="aria-label:aria.notifications">
+            <i data-lucide="bell"></i>
+          </a>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <div class="env-banner" data-env-banner hidden data-i18n="shell.envBanner"><i data-lucide="alert-triangle"></i> شما در حال مشاهدهٔ <strong>داده‌های آزمایشی</strong> هستید. همهٔ کلیدها از پیشوند <code class="ltr-isolate">sk_test_</code> استفاده می‌کنند.</div>
+        <div class="app-main__inner">
+
+          <header class="toolbar">
+            <div>
+              <h1 class="mb-1" data-i18n="page.profile">نمایه</h1>
+              <p class="text-secondary mb-0" data-i18n="profile.personal-information-preferences-and-developer-i">اطلاعات شخصی، ترجیحات و هویت توسعه‌دهنده.</p>
+            </div>
+            <div class="toolbar__actions">
+              <button type="button" class="btn btn-ghost" id="pf-cancel" data-i18n="action.cancel">انصراف</button>
+              <button type="button" class="btn btn-primary" id="pf-save" data-i18n="action.saveChanges">ذخیرهٔ تغییرات</button>
+            </div>
+          </header>
+
+          <section data-motion-group class="row g-3">
+            <div class="col-lg-4">
+              <div data-motion class="card card--dense mb-3">
+                <div class="d-flex flex-column align-items-center text-center py-3">
+                  <span class="avatar avatar--xl mb-3" id="pf-avatar">عر</span>
+                  <h4 class="mb-0" id="pf-display-name">علی رضایی</h4>
+                  <div class="text-tertiary caption ltr-isolate" id="pf-email-display">arash@apiforge.dev</div>
+                  <span class="badge badge-accent mt-2" id="pf-role" data-i18n="profile.owner">مالک</span>
+                </div>
+                <hr class="my-3" />
+                <div class="d-flex flex-column gap-2 caption">
+                  <div class="d-flex justify-content-between" data-i18n="profile.joined"><span class="text-tertiary">تاریخ عضویت</span><span class="text-body" id="pf-joined">۱۴۰۴-۰۸-۲۳</span></div>
+                  <div class="d-flex justify-content-between" data-i18n="profile.developerId"><span class="text-tertiary">شناسهٔ توسعه‌دهنده</span><code class="ltr-isolate mono-sm text-body" id="pf-dev-id">dev_8Fk2mQx1Zw</code></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-8">
+              <div data-motion class="card card--dense mb-3">
+                <div data-motion class="card-header"><div><h4 class="card-title" data-i18n="profile.personalInfo">اطلاعات شخصی</h4><div data-motion class="card-subtitle" data-i18n="profile.how-you-appear-across-the-workspace">نحوهٔ نمایش شما در فضای کاری.</div></div></div>
+                <div data-motion-group class="row g-3">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label" for="pf-name" data-i18n="profile.fullName">نام کامل</label>
+                      <input class="form-control" id="pf-name" type="text" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label" for="pf-email" data-i18n="table.email">ایمیل</label>
+                      <input class="form-control ltr-isolate" id="pf-email" type="email" dir="ltr" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label" for="pf-timezone" data-i18n="settings.timezone">منطقهٔ زمانی</label>
+                      <select class="form-select" id="pf-timezone"></select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label" for="pf-language" data-i18n="profile.language">زبان</label>
+                      <select class="form-select" id="pf-language">
+                        <option value="fa">فارسی</option>
+                        <option value="en">English</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div data-motion class="card card--dense mb-3">
+                <div data-motion class="card-header"><div><h4 class="card-title" data-i18n="profile.preferences">ترجیحات</h4><div data-motion class="card-subtitle" data-i18n="profile.theme-and-notification-defaults">پیش‌فرض‌های پوسته و اعلان‌ها.</div></div></div>
+                <div class="settings-section">
+                  <div class="settings-section__row">
+                    <div class="settings-section__meta">
+                      <div class="settings-section__label" data-i18n="profile.theme">پوسته</div>
+                      <div class="settings-section__hint" data-i18n="profile.used-across-the-app-until-overridden-per-device">در سراسر برنامه اعمال می‌شود مگر اینکه در هر دستگاه تغییر داده شود.</div>
+                    </div>
+                    <div class="settings-section__control">
+                      <div class="seg" role="group" aria-label="ترجیح پوسته" data-i18n-attr="aria-label:aria.themePreference">
+                        <button type="button" class="seg__item is-active" data-pref="dark" data-i18n="theme.darkOption">تیره</button>
+                        <button type="button" class="seg__item" data-pref="light" data-i18n="theme.lightOption">روشن</button>
+                        <button type="button" class="seg__item" data-pref="system" data-i18n="theme.systemOption">سیستم</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="settings-section__row">
+                    <div class="settings-section__meta">
+                      <div class="settings-section__label" data-i18n="profile.emailNotifications">اعلان‌های ایمیلی</div>
+                      <div class="settings-section__hint" data-i18n="profile.errors-webhook-failures-and-billing-updates">خطاها، خطای وب‌هوک‌ها و به‌روزرسانی‌های صورت‌حساب.</div>
+                    </div>
+                    <div class="settings-section__control">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="pf-notify" checked />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div data-motion class="card card--dense">
+                <div data-motion class="card-header"><div><h4 class="card-title" data-i18n="profile.devIdentity">هویت توسعه‌دهنده</h4><div data-motion class="card-subtitle" data-i18n="profile.shown-on-sdk-pages-and-in-generated-code">در صفحات SDK و کدهای تولیدشده نمایش داده می‌شود.</div></div></div>
+                <div data-motion-group class="row g-3">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label" for="pf-handle" data-i18n="profile.devHandle">نام کاربری توسعه‌دهنده</label>
+                      <input class="form-control form-control--mono ltr-isolate" id="pf-handle" type="text" dir="ltr" placeholder="you" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label" for="pf-github" data-i18n="profile.github">نام کاربری گیت‌هاب</label>
+                      <input class="form-control form-control--mono ltr-isolate" id="pf-github" type="text" dir="ltr" placeholder="you" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label" for="pf-website" data-i18n="profile.website">وب‌سایت</label>
+                      <input class="form-control form-control--mono ltr-isolate" id="pf-website" type="url" dir="ltr" placeholder="https://…" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label" for="pf-org" data-i18n="profile.organization">سازمان</label>
+                      <input class="form-control" id="pf-org" type="text" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
+      <div class="sidebar-brand">
+        <span class="brand-mark"><i data-lucide="zap"></i></span>
+        <span class="brand-name">APIForge X</span>
+        <button type="button" class="btn btn-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="بستن منو" data-i18n-attr="aria-label:aria.closeMenu"><i data-lucide="x"></i></button>
+      </div>
+      <nav class="sidebar-nav" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="shell.overview">نمای کلی</div>
+            <a class="nav-item" href="./dashboard.html" data-i18n="nav.overview"><i data-lucide="layout-dashboard"></i><span data-i18n="rtl.groupOverview">نمای کلی</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="shell.developer">توسعه‌دهنده</div>
+            <a class="nav-item" href="./apis.html" data-i18n="nav.apis"><i data-lucide="code-2"></i><span>APIها</span></a>
+            <a class="nav-item" href="./endpoints.html" data-i18n="nav.endpoints"><i data-lucide="braces"></i><span>نقاط پایانی</span></a>
+            <a class="nav-item" href="./api-keys.html" data-i18n="nav.apiKeys"><i data-lucide="key"></i><span>کلیدهای API</span></a>
+            <a class="nav-item" href="./logs.html" data-i18n="nav.logs"><i data-lucide="scroll-text"></i><span>لاگ‌ها</span></a>
+            <a class="nav-item" href="./webhooks.html" data-i18n="nav.webhooks"><i data-lucide="webhook"></i><span>وب‌هوک‌ها</span></a>
+            <a class="nav-item" href="./docs.html" data-i18n="nav.docs"><i data-lucide="book-open"></i><span>مستندات</span></a>
+            <a class="nav-item" href="./sdk.html" data-i18n="nav.sdks"><i data-lucide="package"></i><span>SDKها</span></a>
+            <a class="nav-item" href="./api-reference.html" data-i18n="nav.apiReference"><i data-lucide="book-marked"></i><span>مرجع API</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="shell.analytics">تحلیل‌ها</div>
+            <a class="nav-item" href="./usage.html" data-i18n="nav.usage"><i data-lucide="bar-chart-3"></i><span>میزان استفاده</span></a>
+            <a class="nav-item" href="./errors.html" data-i18n="nav.errors"><i data-lucide="bug"></i><span>خطاها</span></a>
+            <a class="nav-item" href="./rate-limits.html" data-i18n="nav.rateLimits"><i data-lucide="gauge"></i><span>محدودیت نرخ</span></a>
+            <a class="nav-item" href="./metrics.html" data-i18n="nav.metrics"><i data-lucide="activity"></i><span>متریک‌ها</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="shell.workspace">فضای کاری</div>
+            <a class="nav-item" href="./environments.html" data-i18n="nav.environments"><i data-lucide="server"></i><span>محیط‌ها</span></a>
+            <a class="nav-item" href="./team.html" data-i18n="nav.team"><i data-lucide="users"></i><span>تیم</span></a>
+            <a class="nav-item" href="./billing.html" data-i18n="nav.billing"><i data-lucide="credit-card"></i><span>صورت‌حساب</span></a>
+            <a class="nav-item" href="./notifications.html" data-i18n="nav.notifications"><i data-lucide="bell"></i><span>اعلان‌ها</span></a>
+          </div>
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="shell.account">حساب کاربری</div>
+            <a class="nav-item is-active" href="./profile.html" data-i18n="nav.profile"><i data-lucide="user"></i><span>نمایه</span></a>
+            <a class="nav-item" href="./settings.html" data-i18n="nav.settings"><i data-lucide="settings"></i><span>تنظیمات</span></a>
+          </div>
+      </nav>
+    </div>
+
+    <nav class="bottom-tabbar" aria-label="ناوبری موبایل" data-i18n-attr="aria-label:aria.primaryNavMobile">
+      <a class="bottom-tabbar__item" href="./dashboard.html" data-i18n="nav.overview"><i data-lucide="layout-dashboard"></i><span data-i18n="rtl.groupOverview">نمای کلی</span></a>
+      <a class="bottom-tabbar__item" href="./apis.html" data-i18n="nav.apis"><i data-lucide="code-2"></i><span>APIها</span></a>
+      <a class="bottom-tabbar__item" href="./logs.html" data-i18n="nav.logs"><i data-lucide="scroll-text"></i><span>لاگ‌ها</span></a>
+      <a class="bottom-tabbar__item" href="./api-keys.html" data-i18n="nav.keysShort"><i data-lucide="key"></i><span>کلیدها</span></a>
+      <button type="button" class="bottom-tabbar__item" data-command-palette aria-label="بیشتر" data-i18n-attr="aria-label:aria.more" data-i18n="nav.more"><i data-lucide="more-horizontal"></i><span>بیشتر</span></button>
+    </nav>
+
+
+  </body>
+</html>

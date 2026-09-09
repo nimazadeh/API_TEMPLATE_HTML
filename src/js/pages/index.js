@@ -1,5 +1,5 @@
 // =============================================================
-// APIForge X — Marketing landing (Phase 4)
+// APIForge X — Marketing landing
 // Replaces the temporary foundation hub. Renders a *live* product
 // preview (KPIs, chart, activity) from the same seeded datasets the
 // app pages use, honoring D-014 "product as hero" without shipping a

@@ -1,6 +1,6 @@
 // =============================================================
 // APIForge X — Design Tokens: Typography
-// Five lanes (established in Phase 0/1, formalized here):
+// Five lanes:
 //   PERSIAN_UI     Vazirmatn — Persian interface & headings
 //   LATIN_UI       Inter Variable — English interface & headings
 //   TECHNICAL_TERM Inter — technical terms inside Persian text
@@ -8,7 +8,6 @@
 //                  to Vazirmatn when embedded in RTL
 //   CODE           JetBrains Mono — code, paths, identifiers, JSON
 //   NUMERIC_DATA   Inter/Vazirmatn with tabular-nums (tnum) alignment
-// Source: docs/product/DESIGN_DIRECTION.md (D-005)
 // =============================================================
 
 :root {
@@ -29,7 +28,7 @@
   // below is the default rendering path, not a fallback.
   --font-body: var(--font-latin-ui);
 
-  // Type scale (app) — see DESIGN_DIRECTION.md type table
+  // Type scale (app)
   --fs-display: 48px;
   --fs-h1: 32px;
   --fs-h2: 24px;
