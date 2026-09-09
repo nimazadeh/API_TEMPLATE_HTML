@@ -1,5 +1,5 @@
 // =============================================================
-// APIForge X — Marketing site entry (Phase 4)
+// APIForge X — Marketing site entry
 // Lightweight boot for the marketing layer (landing, pricing,
 // changelog, status, 404). Reuses the same components as the app
 // but does NOT pull in the command palette / env switcher /

@@ -43,7 +43,7 @@ Chart.defaults.font.size = 11;
 Chart.defaults.color = '#71717a';
 Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
 
-// Phase 5.5 — chart motion. One reveal at the product's slow speed
+// Chart motion — one reveal at the product's slow speed
 // (400ms, the hard ceiling) and nothing at all for reduced-motion users.
 // NOTE: the non-reduced-motion branch MERGES into Chart.js's
 // `defaults.animation` instead of replacing the object. Chart.js's

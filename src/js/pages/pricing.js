@@ -1,5 +1,5 @@
 // =============================================================
-// APIForge X — Pricing page (Phase 4)
+// APIForge X — Pricing page
 // Renders the three plans and the comparison table from the same
 // deterministic `mock-plans.json` the in-app Billing page uses.
 // =============================================================

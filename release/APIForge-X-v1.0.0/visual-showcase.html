@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="نمایش بصری APIForge X — لایه‌های پس‌زمینه، حرکت‌ها، تعامل‌های کوچک، پنجره‌ها و اعلان‌ها در پوسته‌های تیره و روشن و جهت‌های راست‌به‌چپ و چپ‌به‌راست." data-i18n-attr="content:meta.visual-showcase" />
+    <title data-i18n="vs.pageTitle">APIForge X — نمایش بصری و حرکت</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+        var loc = null;
+        try { loc = localStorage.getItem('afx-locale'); } catch (e) {}
+        if (loc !== 'fa' && loc !== 'en') loc = 'fa';
+        document.documentElement.setAttribute('lang', loc);
+        document.documentElement.setAttribute('dir', loc === 'fa' ? 'rtl' : 'ltr');
+      })();
+    </script>
+    <script defer src="./assets/js/visual-showcase.js"></script>
+    <link rel="stylesheet" href="./assets/css/main.css">
+  </head>
+    <div class="site">
+      <div class="backdrop" data-backdrop aria-hidden="true">
+        <div class="backdrop__grid"></div>
+        <div class="backdrop__glow"></div>
+        <div class="backdrop__mesh"></div>
+      </div>
+      <!-- ============ Header ============ -->
+      <header class="site-header">
+        <div class="site-container site-header__inner">
+          <a class="site-header__brand" href="./index.html">
+            <span class="brand-mark"><i data-lucide="zap"></i></span>
+            <span class="brand-name">APIForge X</span>
+          </a>
+          <nav class="site-nav" aria-label="ناوبری صفحات" data-i18n-attr="aria-label:aria.marketingNav">
+            <a class="site-nav__link" data-nav="home" href="./index.html" data-i18n="site.product">محصول</a>
+            <a class="site-nav__link" data-nav="docs" href="./docs.html" data-i18n="site.docs">مستندات</a>
+            <a class="site-nav__link" data-nav="pricing" href="./pricing.html" data-i18n="site.pricing">قیمت‌گذاری</a>
+            <a class="site-nav__link" data-nav="changelog" href="./changelog.html" data-i18n="site.changelog">گزارش تغییرات</a>
+            <a class="site-nav__link" data-nav="status" href="./status.html" data-i18n="site.status">وضعیت</a>
+          </nav>
+          <div class="site-header__actions">
+            <button type="button" class="btn btn-icon" data-theme-toggle aria-label="تغییر پوسته" aria-pressed="false" data-i18n-attr="aria-label:aria.toggleTheme">
+              <i data-lucide="sun-moon"></i>
+            </button>
+            <button type="button" class="btn btn-ghost" data-locale-toggle aria-label="تغییر زبان" data-i18n-attr="aria-label:aria.switchLanguage">
+              <i data-lucide="languages"></i> <span data-locale-label>EN</span>
+            </button>
+            <a class="btn btn-ghost d-none d-md-inline-flex" href="./login.html" data-i18n="site.sign-in">ورود</a>
+            <a class="btn btn-primary" href="./dashboard.html" data-i18n="site.open-dashboard">ورود به داشبورد</a>
+            <button type="button" class="btn btn-icon d-lg-none" aria-label="باز کردن منو" data-bs-toggle="offcanvas" data-bs-target="#site-drawer" aria-controls="site-drawer" data-i18n-attr="aria-label:aria.openMenu">
+              <i data-lucide="menu"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Mobile nav drawer -->
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="site-drawer" aria-labelledby="site-drawer-label">
+        <div class="offcanvas-header">
+          <span class="offcanvas-title" id="site-drawer-label"><span class="brand-mark"><i data-lucide="zap"></i></span> APIForge X</span>
+          <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="بستن" data-i18n-attr="aria-label:aria.close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="offcanvas-body p-0">
+          <nav class="site-drawer-nav" aria-label="ناوبری موبایل صفحات" data-i18n-attr="aria-label:aria.marketingNavMobile">
+            <a class="site-drawer-nav__link" data-nav="home" href="./index.html" data-i18n="site.navProduct"><i data-lucide="zap"></i> محصول</a>
+            <a class="site-drawer-nav__link" data-nav="docs" href="./docs.html" data-i18n="site.drawerDocs"><i data-lucide="book-open"></i> مستندات</a>
+            <a class="site-drawer-nav__link" data-nav="pricing" href="./pricing.html" data-i18n="site.drawerPricing"><i data-lucide="credit-card"></i> قیمت‌گذاری</a>
+            <a class="site-drawer-nav__link" data-nav="changelog" href="./changelog.html" data-i18n="site.drawerChangelog"><i data-lucide="clock"></i> گزارش تغییرات</a>
+            <a class="site-drawer-nav__link" data-nav="status" href="./status.html" data-i18n="site.drawerStatus"><i data-lucide="activity"></i> وضعیت سرویس</a>
+            <a class="site-drawer-nav__link" href="./login.html" data-i18n="site.drawerSignIn"><i data-lucide="log-in"></i> ورود</a>
+          </nav>
+        </div>
+      </div>
+
+
+      <!-- ============ Main ============ -->
+      <main class="site-main">
+        <!-- QA control bar -->
+        <div class="showcase-bar">
+          <div class="site-container showcase-bar__inner">
+            <div class="d-flex align-items-center gap-2">
+              <span class="brand-mark"><i data-lucide="palette"></i></span>
+              <div>
+                <h1 class="mb-0" style="font-size: var(--fs-body); font-weight: 500" data-i18n="vs.pageHeading">نمایش بصری و حرکت</h1>
+                <div class="caption text-tertiary" data-i18n="vs.pageSub">لایه‌های پس‌زمینه، توکن‌های حرکت و ریزتعامل‌ها — به‌صورت زنده</div>
+              </div>
+            </div>
+            <div class="d-flex flex-wrap align-items-center gap-2">
+              <div class="env-switcher" role="group" aria-label="پوسته" data-i18n-attr="aria-label:aria.theme">
+                <button type="button" class="env-option" data-mode="dark" data-i18n="vs.themeDark">تیره</button>
+                <button type="button" class="env-option" data-mode="light" data-i18n="vs.themeLight">روشن</button>
+                <button type="button" class="env-option" data-mode="system" data-i18n="vs.themeSystem">سیستم</button>
+              </div>
+              <div class="env-switcher" role="group" aria-label="جهت" data-i18n-attr="aria-label:aria.direction">
+                <button type="button" class="env-option" data-dir="rtl">RTL</button>
+                <button type="button" class="env-option" data-dir="ltr">LTR</button>
+              </div>
+              <button type="button" class="btn btn-sm btn-ghost" id="vs-backdrop-toggle" data-i18n="vs.hideBackdrop">پنهان کردن پس‌زمینه</button>
+              <a class="btn btn-sm btn-ghost" href="./style-guide.html" data-i18n="site.style-guide">راهنمای استایل</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-page">
+          <!-- 1 ─ Hero example (same choreography as the landing page) -->
+          <section class="site-container showcase-hero hero" id="vs-hero">
+            <div class="hero__inner">
+              <span class="eyebrow" data-i18n="vs.heroEyebrow">نمایش بصری</span>
+              <h2 class="hero__title" data-i18n="vs.heroTitle">حرکتِ <span class="hero__title-accent">هدفمند</span></h2>
+              <p class="body-lg text-secondary hero__sub" data-i18n="vs.heroSub">هر عنصر با تاخیری مشخص وارد می‌شود: ابرو، عنوان، توضیح، دکمه‌ها و در پایان پیش‌نمایش محصول. فقط opacity و transform — بدون هیچ جابه‌جایی در چیدمان.</p>
+              <div class="hero__cta">
+                <button type="button" class="btn btn-primary btn-lg" id="vs-replay" data-i18n="vs.replay"><i data-lucide="rotate-ccw"></i> پخش دوبارهٔ ورود</button>
+                <a class="btn btn-ghost btn-lg" href="./index.html" data-i18n="vs.seeLanding">مشاهدهٔ صفحهٔ فرود</a>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2 ─ Backdrop system -->
+          <section class="site-container showcase-section">
+            <div class="section-head" data-motion>
+              <span class="eyebrow" data-i18n="vs.backdropEyebrow">جوّ صفحه</span>
+              <h2 data-i18n="vs.backdropTitle">سه لایه، یک سیستم</h2>
+              <p data-i18n="vs.backdropSub">لایهٔ پس‌زمینه فقط روی صفحات بازاریابی و احراز هویت قرار می‌گیرد. فضای کاری برنامه هیچ پس‌زمینهٔ تزئینی ندارد.</p>
+            </div>
+            <div class="showcase-grid">
+              <div>
+                <div class="showcase-tile">
+                  <div class="backdrop"><div class="backdrop__grid"></div></div>
+                  <span class="showcase-tile__label ltr-isolate">.backdrop__grid</span>
+                </div>
+                <div class="mt-3">
+                  <div class="fw-medium" data-i18n="vs.gridTitle">شبکهٔ توسعه‌دهنده</div>
+                  <div class="text-secondary" style="font-size: var(--fs-body-sm)" data-i18n="vs.gridSub">خطوط ۴۴ پیکسلی با کمترین کنتراست؛ به سمت پایین محو می‌شود.</div>
+                </div>
+              </div>
+              <div>
+                <div class="showcase-tile">
+                  <div class="backdrop"><div class="backdrop__glow"></div></div>
+                  <span class="showcase-tile__label ltr-isolate">.backdrop__glow</span>
+                </div>
+                <div class="mt-3">
+                  <div class="fw-medium" data-i18n="vs.glowTitle">درخشش تأکیدی</div>
+                  <div class="text-secondary" style="font-size: var(--fs-body-sm)" data-i18n="vs.glowSub">گردایان بزرگ در بالا و مرکز — همیشه پشت محتوا.</div>
+                </div>
+              </div>
+              <div>
+                <div class="showcase-tile">
+                  <div class="backdrop"><div class="backdrop__mesh"></div></div>
+                  <span class="showcase-tile__label ltr-isolate">.backdrop__mesh</span>
+                </div>
+                <div class="mt-3">
+                  <div class="fw-medium" data-i18n="vs.meshTitle">الگوی زیرساخت API</div>
+                  <div class="text-secondary" style="font-size: var(--fs-body-sm)" data-i18n="vs.meshSub">گره‌ها و خطوط اتصال با زاویه‌ای ملایم — حس توپولوژی، نه تزئین.</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3 ─ Motion tokens -->
+          <section class="site-container showcase-section">
+            <div class="section-head" data-motion>
+              <span class="eyebrow" data-i18n="vs.motionEyebrow">توکن‌های حرکت</span>
+              <h2 data-i18n="vs.motionTitle">سه سرعت، یک منحنی</h2>
+              <p data-i18n="vs.motionSub">سریع ۱۵۰ میلی‌ثانیه برای هاور و فوکوس، عادی ۲۵۰ برای دکمه‌ها و منوها، آرام ۴۰۰ برای ورود و کشوها. سقف سیستم ۴۰۰ میلی‌ثانیه است.</p>
+            </div>
+            <div class="showcase-motion">
+              <div class="showcase-motion__stage">
+                <div class="d-flex align-items-center gap-4">
+                  <span class="showcase-motion__dot is-fast" aria-hidden="true"></span>
+                  <span class="showcase-motion__dot is-normal" aria-hidden="true"></span>
+                  <span class="showcase-motion__dot is-slow" aria-hidden="true"></span>
+                </div>
+              </div>
+              <div class="showcase-row">
+                <button type="button" class="btn btn-secondary" id="vs-nudge" data-i18n="vs.motionPlay">اجرای مقایسه</button>
+                <span class="caption text-tertiary ltr-isolate">cubic-bezier(.2,.8,.2,1)</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4 ─ Cards: entrance + hover -->
+          <section class="site-container showcase-section">
+            <div class="section-head" data-motion>
+              <span class="eyebrow" data-i18n="vs.cardsEyebrow">کارت‌ها</span>
+              <h2 data-i18n="vs.cardsTitle">ورود گام‌به‌گام و هاورِ نرم</h2>
+              <p data-i18n="vs.cardsSub">هر کارت با ۶۰ میلی‌ثانیه تاخیر نسبت به کارت قبلی وارد می‌شود و در هاور، یک پیکسل بالا می‌آید.</p>
+            </div>
+            <div class="feature-grid" data-motion-group>
+              <div class="feature-card" data-motion>
+                <span class="feature-card__icon"><i data-lucide="gauge"></i></span>
+                <span class="feature-card__title" data-i18n="vs.card1Title">بدون جابه‌جایی چیدمان</span>
+                <span class="feature-card__desc" data-i18n="vs.card1Body">فقط opacity و transform انیمیشن می‌گیرند؛ عرض، ارتفاع و موقعیت هرگز.</span>
+              </div>
+              <div class="feature-card" data-motion>
+                <span class="feature-card__icon"><i data-lucide="languages"></i></span>
+                <span class="feature-card__title" data-i18n="vs.card2Title">آینه‌ای در راست‌به‌چپ</span>
+                <span class="feature-card__desc" data-i18n="vs.card2Body">هر حرکت جهت‌دار در <code class="ltr-isolate">--dir-sign</code> ضرب می‌شود و خودکار معکوس می‌گردد.</span>
+              </div>
+              <div class="feature-card" data-motion>
+                <span class="feature-card__icon"><i data-lucide="shield-check"></i></span>
+                <span class="feature-card__title" data-i18n="vs.card3Title">احترام به کاهش حرکت</span>
+                <span class="feature-card__desc" data-i18n="vs.card3Body">با فعال‌بودن <code class="ltr-isolate">prefers-reduced-motion</code> همهٔ انیمیشن‌های تزئینی خاموش می‌شوند.</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- 5 ─ Buttons -->
+          <section class="site-container showcase-section">
+            <div class="section-head" data-motion>
+              <span class="eyebrow" data-i18n="vs.buttonsEyebrow">دکمه‌ها</span>
+              <h2 data-i18n="vs.buttonsTitle">هاور، فوکوس و فشار</h2>
+              <p data-i18n="vs.buttonsSub">دکمه‌های توپُر در هاور یک پیکسل بالا می‌آیند و سایه‌ای ملایم می‌گیرند. حلقهٔ فوکوس در ۱۵۰ میلی‌ثانیه باز می‌شود.</p>
+            </div>
+            <div class="showcase-row" data-motion>
+              <button type="button" class="btn btn-primary" data-i18n="vs.btnPrimary">اصلی</button>
+              <button type="button" class="btn btn-secondary" data-i18n="vs.btnSecondary">ثانویه</button>
+              <button type="button" class="btn btn-ghost" data-i18n="vs.btnGhost">شبح</button>
+              <button type="button" class="btn btn-danger" data-i18n="vs.btnDanger">مخرب</button>
+              <button type="button" class="btn btn-icon" aria-label="تنظیمات" data-i18n-attr="aria-label:aria.settings"><i data-lucide="settings"></i></button>
+              <button type="button" class="btn btn-primary" disabled data-i18n="vs.btnDisabled">غیرفعال</button>
+            </div>
+          </section>
+
+          <!-- 6 ─ Overlays: modal · drawer · dropdown · tabs -->
+          <section class="site-container showcase-section">
+            <div class="section-head" data-motion>
+              <span class="eyebrow" data-i18n="vs.overlaysEyebrow">لایه‌های شناور</span>
+              <h2 data-i18n="vs.overlaysTitle">مودال، کشو، منو و تب</h2>
+              <p data-i18n="vs.overlaysSub">مودال با محو‌شدن و جابه‌جایی ۲۵۰ میلی‌ثانیه‌ای وارد می‌شود؛ کشوها تا سقف ۴۰۰ میلی‌ثانیه می‌لغزند و از سمت درست باز می‌شوند.</p>
+            </div>
+            <div class="showcase-row" data-motion>
+              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#vs-modal" data-i18n="vs.openModal">باز کردن مودال</button>
+              <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#vs-drawer" aria-controls="vs-drawer" data-i18n="vs.openDrawer">باز کردن کشو</button>
+              <div class="dropdown">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-i18n="vs.dropdown">منوی کشویی</button>
+                <ul class="dropdown-menu">
+                  <li><button type="button" class="dropdown-item" data-i18n="vs.dropdownNew"><i data-lucide="plus"></i> ایجاد کلید جدید</button></li>
+                  <li><button type="button" class="dropdown-item" data-i18n="vs.dropdownRotate"><i data-lucide="refresh-cw"></i> چرخش کلید</button></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><button type="button" class="dropdown-item is-danger" data-i18n="vs.dropdownRevoke"><i data-lucide="ban"></i> ابطال کلید</button></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card mt-4" data-motion>
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button type="button" class="nav-link active" data-bs-toggle="tab" data-bs-target="#vs-tab-1" role="tab" aria-selected="true" data-i18n="vs.tab1">بررسی اجمالی</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#vs-tab-2" role="tab" aria-selected="false" data-i18n="vs.tab2">درخواست</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#vs-tab-3" role="tab" aria-selected="false" data-i18n="vs.tab3">پاسخ</button>
+                </li>
+              </ul>
+              <div class="tab-content pt-3">
+                <div class="tab-pane fade show active" id="vs-tab-1" role="tabpanel">
+                  <p class="text-secondary mb-0" data-i18n="vs.tabBody1">نشانگر تبِ فعال با transform جابه‌جا می‌شود، نه با عرض یا موقعیت.</p>
+                </div>
+                <div class="tab-pane fade" id="vs-tab-2" role="tabpanel">
+                  <p class="text-secondary mb-0 ltr-isolate">GET /v1/emails?limit=50</p>
+                </div>
+                <div class="tab-pane fade" id="vs-tab-3" role="tabpanel">
+                  <p class="text-secondary mb-0 ltr-isolate">200 OK · 42 items · 118&nbsp;ms</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 7 ─ Toasts -->
+          <section class="site-container showcase-section">
+            <div class="section-head" data-motion>
+              <span class="eyebrow" data-i18n="vs.toastsEyebrow">اعلان‌ها</span>
+              <h2 data-i18n="vs.toastsTitle">چهار وضعیت، یک ساختار</h2>
+              <p data-i18n="vs.toastsSub">آیکون · عنوان و پیام · دکمهٔ بستن — با فاصله‌گذاری منطقی که در راست‌به‌چپ معکوس می‌شود و رنگ‌هایی که فقط از توکن می‌آیند.</p>
+            </div>
+            <div class="showcase-row" data-motion>
+              <button type="button" class="btn btn-secondary" data-toast="success" data-i18n="vs.toastSuccess">موفقیت</button>
+              <button type="button" class="btn btn-secondary" data-toast="error" data-i18n="vs.toastError">خطا</button>
+              <button type="button" class="btn btn-secondary" data-toast="warning" data-i18n="vs.toastWarning">هشدار</button>
+              <button type="button" class="btn btn-secondary" data-toast="info" data-i18n="vs.toastInfo">اطلاعات</button>
+              <button type="button" class="btn btn-secondary" data-toast="long" data-i18n="vs.toastLong">پیام بلند</button>
+              <button type="button" class="btn btn-secondary" data-toast="action" data-i18n="vs.toastAction">همراه با عملیات</button>
+            </div>
+          </section>
+
+          <!-- 8 ─ Note -->
+          <section class="site-container showcase-section">
+            <div class="showcase-note" data-motion>
+              <i data-lucide="info"></i>
+              <span data-i18n="vs.noteReduced">اگر در سیستم خود «کاهش حرکت» را فعال کنید، همهٔ انیمیشن‌های ورودی، پس‌زمینه و لایه‌های شناور بلافاصله و بدون حرکت نمایش داده می‌شوند. این رفتار در توکن‌های حرکت و میان‌برِ <code class="ltr-isolate">prefers-reduced-motion</code> تعبیه شده است.</span>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- Modal specimen -->
+      <div class="modal fade" id="vs-modal" tabindex="-1" aria-labelledby="vs-modal-title" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="vs-modal-title" data-i18n="vs.modalTitle">تأیید چرخش کلید</h4>
+              <button type="button" class="btn btn-icon" data-bs-dismiss="modal" aria-label="بستن" data-i18n-attr="aria-label:aria.close"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+              <p class="mb-0" data-i18n="vs.modalBody">مودال با محو شدنِ پس‌زمینه و جابه‌جایی ۱۲ پیکسلیِ کارت وارد می‌شود — مجموعاً ۲۵۰ میلی‌ثانیه.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-ghost" data-bs-dismiss="modal" data-i18n="action.cancel">انصراف</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-i18n="action.confirm">تأیید</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drawer specimen -->
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="vs-drawer" aria-labelledby="vs-drawer-title">
+        <div class="offcanvas-header">
+          <span class="offcanvas-title" id="vs-drawer-title" data-i18n="vs.drawerTitle">کشوی نمایش</span>
+          <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="بستن" data-i18n-attr="aria-label:aria.close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="offcanvas-body">
+          <p data-i18n="vs.drawerBody">کشو از لبهٔ درستِ جهتِ خواندن باز می‌شود: در چپ‌به‌راست از راست و در راست‌به‌چپ از چپ. لغزش ۴۰۰ میلی‌ثانیه و فقط روی transform انجام می‌شود.</p>
+          <p class="text-secondary" data-i18n="vs.drawerBody2">همین الگو در کشوی ناوبری موبایل و بازرسِ لاگ‌ها استفاده شده است.</p>
+        </div>
+      </div>
+
+
+      <!-- ============ Footer ============ -->
+      <footer class="site-footer">
+        <div class="site-container">
+          <div class="site-footer__grid">
+            <div class="site-footer__brand">
+              <span class="brand-mark"><i data-lucide="zap"></i></span>
+              <span class="brand-name">APIForge X</span>
+              <p class="mt-2" data-i18n="site.a-premium-api-infrastructure-html-template-engin">قالب HTML حرفه‌ای زیرساخت API؛ طراحی‌شده برای پلتفرم‌های توسعه‌دهنده و آماده برای بازار ایران.</p>
+            </div>
+            <div>
+              <div class="site-footer__col-label" data-i18n="site.product">محصول</div>
+              <a class="site-footer__link" href="./dashboard.html" data-i18n="shell.overview">نمای کلی</a>
+              <a class="site-footer__link" href="./logs.html" data-i18n="site.logs">لاگ‌ها</a>
+              <a class="site-footer__link" href="./webhooks.html" data-i18n="site.webhooks">وب‌هوک‌ها</a>
+              <a class="site-footer__link" href="./api-keys.html" data-i18n="site.api-keys">کلیدهای API</a>
+              <a class="site-footer__link" href="./pricing.html" data-i18n="site.pricing">قیمت‌گذاری</a>
+            </div>
+            <div>
+              <div class="site-footer__col-label" data-i18n="site.resources">منابع</div>
+              <a class="site-footer__link" href="./docs.html" data-i18n="site.documentation">مستندات</a>
+              <a class="site-footer__link" href="./style-guide.html" data-i18n="site.style-guide">راهنمای استایل</a>
+              <a class="site-footer__link" href="./changelog.html" data-i18n="site.changelog">گزارش تغییرات</a>
+              <a class="site-footer__link" href="./status.html" data-i18n="site.status">وضعیت</a>
+              <a class="site-footer__link" href="./rtl.html" data-i18n="site.rtl-demo">نسخهٔ دموی فارسی</a>
+            </div>
+          </div>
+          <div class="site-footer__legal" data-i18n="site.footerLegal"><span>© ۲۰۲۶ APIForge X. یک محصول نمایشی — بدون بک‌اند واقعی.</span> <span>Bootstrap 5 · SCSS · Vite · Chart.js · Lucide</span></div>
+        </div>
+      </footer>
+    </div>
+
+  </body>
+</html>

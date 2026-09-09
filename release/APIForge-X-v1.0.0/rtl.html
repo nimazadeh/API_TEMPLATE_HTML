@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <title data-i18n="rtl.pageTitle">آزمایش راست‌به‌چپ — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+        var loc = null;
+        try { loc = localStorage.getItem('afx-locale'); } catch (e) {}
+        if (loc !== 'fa' && loc !== 'en') loc = 'fa';
+        document.documentElement.setAttribute('lang', loc);
+        document.documentElement.setAttribute('dir', loc === 'fa' ? 'rtl' : 'ltr');
+      })();
+    </script>
+    <script defer src="./assets/js/rtl.js"></script>
+    <link rel="stylesheet" href="./assets/css/main.css">
+  </head>
+  <body data-env="live">
+    <div class="app-shell">
+      <!-- ============ Sidebar (right side in RTL) ============ -->
+      <aside class="app-sidebar">
+        <div class="sidebar-brand">
+          <span class="brand-mark"><i data-lucide="zap"></i></span>
+          <span class="brand-name">APIForge X</span>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="rtl.groupFoundation">پایه</div>
+            <a class="nav-item" href="./index.html" data-i18n="rtl.navHome"><i data-lucide="zap"></i><span>صفحهٔ اصلی</span></a>
+            <a class="nav-item" href="./style-guide.html" data-i18n="rtl.navStyleGuide"><i data-lucide="palette"></i><span>راهنمای استایل</span></a>
+            <a class="nav-item is-active" href="./rtl.html" data-i18n="rtl.navPersianDemo"><i data-lucide="flask-conical"></i><span>نمونهٔ فارسی</span></a>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="rtl.groupOverview">نمای کلی</div>
+            <a class="nav-item" href="./dashboard.html" data-i18n="rtl.navOverview"><i data-lucide="layout-dashboard"></i><span data-i18n="rtl.groupOverview">نمای کلی</span></a>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="rtl.groupDeveloper">توسعه‌دهنده</div>
+            <a class="nav-item" href="./apis.html" data-i18n="rtl.navApis"><i data-lucide="code-2"></i><span>APIها</span></a>
+            <a class="nav-item" href="./endpoints.html" data-i18n="rtl.navEndpoints"><i data-lucide="braces"></i><span>نقاط پایانی</span></a>
+            <a class="nav-item" href="./api-keys.html" data-i18n="rtl.navApiKeys"><i data-lucide="key"></i><span>کلیدهای API</span></a>
+            <a class="nav-item" href="./logs.html" data-i18n="rtl.navLogs"><i data-lucide="scroll-text"></i><span>لاگ‌ها</span></a>
+            <a class="nav-item" href="./webhooks.html" data-i18n="rtl.navWebhooks"><i data-lucide="webhook"></i><span>وب‌هوک‌ها</span></a>
+            <a class="nav-item" href="./docs.html" data-i18n="rtl.navDocs"><i data-lucide="book-open"></i><span>مستندات</span></a>
+            <a class="nav-item" href="./sdk.html" data-i18n="rtl.navSdks"><i data-lucide="package"></i><span>SDKها</span></a>
+            <a class="nav-item" href="./api-reference.html" data-i18n="rtl.navReference"><i data-lucide="book-marked"></i><span>مرجع API</span></a>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="rtl.groupAnalytics">تحلیل‌ها</div>
+            <a class="nav-item" href="./usage.html" data-i18n="rtl.navUsage"><i data-lucide="bar-chart-3"></i><span>میزان استفاده</span></a>
+            <a class="nav-item" href="./errors.html" data-i18n="rtl.navErrors"><i data-lucide="bug"></i><span>خطاها</span></a>
+            <a class="nav-item" href="./rate-limits.html" data-i18n="rtl.navRateLimits"><i data-lucide="gauge"></i><span>محدودیت نرخ</span></a>
+            <a class="nav-item" href="./metrics.html" data-i18n="rtl.navMetrics"><i data-lucide="activity"></i><span>متریک‌ها</span></a>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="rtl.groupWorkspace">فضای کاری</div>
+            <a class="nav-item" href="./environments.html" data-i18n="rtl.navEnvironments"><i data-lucide="server"></i><span>محیط‌ها</span></a>
+            <a class="nav-item" href="./team.html" data-i18n="rtl.navTeam"><i data-lucide="users"></i><span>تیم</span></a>
+            <a class="nav-item" href="./billing.html" data-i18n="rtl.navBilling"><i data-lucide="credit-card"></i><span>صورت‌حساب</span></a>
+            <a class="nav-item" href="./notifications.html" data-i18n="rtl.navNotifications"><i data-lucide="bell"></i><span>اعلان‌ها</span></a>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group__label" data-i18n="rtl.groupAccount">حساب کاربری</div>
+            <a class="nav-item" href="./profile.html" data-i18n="rtl.navProfile"><i data-lucide="user"></i><span>نمایه</span></a>
+            <a class="nav-item" href="./settings.html" data-i18n="rtl.navSettings"><i data-lucide="settings"></i><span>تنظیمات</span></a>
+          </div>
+        </nav>
+
+        <div class="sidebar-foot">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="محیط" data-i18n-attr="aria-label:aria.environment">
+            <button type="button" class="env-option" data-env="test" data-i18n="rtl.envTest"><span class="dot"></span>آزمایشی</button>
+            <button type="button" class="env-option" data-env="live" data-i18n="rtl.envLive"><span class="dot"></span>عملیاتی</button>
+          </div>
+          <button type="button" class="btn btn-ghost" data-theme-toggle aria-pressed="false" aria-label="تغییر پوسته" data-i18n="rtl.navTheme" data-i18n-attr="aria-label:aria.toggleThemeBs"><i data-lucide="sun-moon"></i><span>پوسته</span></button>
+          <div class="sidebar-user" data-i18n="rtl.userMenu"><span class="avatar">عر</span> <span class="sidebar-user__meta"> <span class="name">علی رضایی</span> <span class="email ltr-isolate">ali@apiforge.dev</span> </span> <i data-lucide="chevron-down"></i></div>
+        </div>
+      </aside>
+
+      <!-- ============ Header ============ -->
+      <header class="app-header">
+        <button type="button" class="btn btn-icon header-burger" aria-label="باز کردن منو" data-bs-toggle="offcanvas" data-bs-target="#sidebar-drawer" aria-controls="sidebar-drawer" data-i18n-attr="aria-label:aria.openMenu">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="header-title">
+          <span class="crumb">APIForge X</span>
+          <span class="crumb-sep">/</span>
+          <span class="title" data-i18n="rtl.heading">آزمایش راست‌به‌چپ</span>
+        </div>
+        <button type="button" class="btn btn-secondary header-search" data-command-palette aria-label="جستجو (⌘K)" data-i18n="rtl.search" data-i18n-attr="aria-label:aria.searchCommandK"><i data-lucide="search"></i> <span class="text-tertiary">جستجو…</span> <span class="kbd-hint">⌘K</span></button>
+        <div class="header-actions">
+          <div class="env-switcher" data-env-switcher role="group" aria-label="محیط" data-i18n-attr="aria-label:aria.environment">
+            <button type="button" class="env-option" data-env="test" data-i18n="rtl.envTest"><span class="dot"></span>آزمایشی</button>
+            <button type="button" class="env-option" data-env="live" data-i18n="rtl.envLive"><span class="dot"></span>عملیاتی</button>
+          </div>
+          <button type="button" class="btn btn-icon" data-theme-toggle aria-label="تغییر پوسته" data-bs-toggle="tooltip" data-bs-title="تغییر پوسته" data-i18n-attr="aria-label:aria.toggleThemeBs">
+            <i data-lucide="sun-moon"></i>
+          </button>
+          <div class="dropdown" data-locale-menu>
+            <button type="button" class="btn btn-icon" aria-label="تغییر زبان" data-bs-toggle="dropdown" aria-expanded="false" data-i18n-attr="aria-label:aria.switchLanguage">
+              <i data-lucide="languages"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <button type="button" class="dropdown-item" data-locale="fa" role="menuitemradio" aria-checked="true">فارسی <span class="locale-check" hidden><i data-lucide="check"></i></span></button>
+              <button type="button" class="dropdown-item" data-locale="en" role="menuitemradio" aria-checked="false">English <span class="locale-check" hidden><i data-lucide="check"></i></span></button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ============ Main ============ -->
+      <main class="app-main">
+        <div class="env-banner" data-env-banner hidden data-i18n="rtl.envBanner"><i data-lucide="alert-triangle"></i> شما در حال مشاهدهٔ <strong>داده‌های آزمایشی</strong> هستید. همهٔ کلیدها از پیشوند <code dir="ltr" class="ltr-isolate">sk_test_</code> استفاده می‌کنند.</div>
+        <div class="app-main__inner">
+          <div class="d-flex align-items-end justify-content-between mb-4 gap-3 flex-wrap">
+            <div>
+              <h1 class="mb-1" data-i18n="rtl.heading">آزمایش راست‌به‌چپ</h1>
+              <p class="text-secondary mb-0" data-i18n="rtl.subtitle">نوار کناری در سمت راست، متن فارسی با وزیرمتن و کد همیشه چپ‌به‌راست.</p>
+            </div>
+          </div>
+
+          <!-- Mixed content demo -->
+          <section class="card mb-4">
+            <div data-motion class="card-header">
+              <div>
+                <h3 class="card-title" data-i18n="rtl.mixedTitle">متن ترکیبی فارسی و انگلیسی</h3>
+                <div data-motion class="card-subtitle" data-i18n="rtl.mixedSubtitle">کد، کلید و شناسه‌ها درون جملهٔ فارسی جهت خود را حفظ می‌کنند.</div>
+              </div>
+            </div>
+            <p class="text-body" data-i18n="rtl.mixedBody">برای ارسال درخواست از کلید <code dir="ltr" class="ltr-isolate">sk_live_4fJk9Lm2Xp</code> و نقطهٔ پایانی <code dir="ltr" class="ltr-isolate">POST /v1/emails</code> استفاده کنید. شناسهٔ درخواست <code dir="ltr" class="ltr-isolate">req_8Fk2mQx1Zw</code> پس از ارسال بازگردانده می‌شود.</p>
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+              <button type="button" class="btn btn-secondary" data-copy="sk_live_4fJk9Lm2XpQz7RvW" data-i18n="rtl.copyButton"><i data-lucide="copy"></i><span class="copy-label">کپی</span></button>
+              <button type="button" class="btn btn-primary" data-copy="sk_live_4fJk9Lm2XpQz7RvW" data-i18n="rtl.copyKeyButton"><i data-lucide="key"></i><span class="copy-label">کپی کلید</span></button>
+            </div>
+          </section>
+
+          <!-- LTR code block in RTL page -->
+          <section class="mb-4">
+            <h3 class="mb-2" data-i18n="rtl.codeTitle">بلوک کد — همیشه چپ‌به‌راست</h3>
+            <div data-motion-group class="row g-3">
+              <div class="col-lg-7">
+                <div class="code-block" data-code-block>
+                  <div class="code-block__header">
+                    <div class="code-tabs" role="tablist" aria-label="زبان" data-i18n-attr="aria-label:aria.language">
+                      <button type="button" class="code-tabs__tab is-active" data-tab="curl">cURL</button>
+                      <button type="button" class="code-tabs__tab" data-tab="node">Node</button>
+                    </div>
+                    <div class="code-block__actions">
+                      <button type="button" class="btn btn-icon" data-code-copy aria-label="کپی کد" data-i18n-attr="aria-label:aria.copyCode"><i data-lucide="copy"></i></button>
+                    </div>
+                  </div>
+                  <pre class="code-block__body" data-code-pane data-pane="curl">curl https://api.apiforge.dev/v1/emails \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d '{ "to": "user@example.com" }'</pre>
+                  <pre class="code-block__body" data-code-pane data-pane="node" hidden>import { ApiForge } from '@apiforge/sdk';
+
+const client = new ApiForge('YOUR_API_KEY');
+await client.emails.send({ to: 'user@example.com' });</pre>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div data-motion class="card card--dense h-100">
+                  <div data-motion class="card-header"><h4 class="card-title" data-i18n="rtl.rulesTitle">قواعد</h4></div>
+                  <ul class="mb-0 ps-3">
+                    <li class="text-secondary mb-2" data-i18n="rtl.rule1">ویژگی‌های منطقی (logical properties) باعث آینه‌شدن خودکار چیدمان می‌شوند.</li>
+                    <li class="text-secondary mb-2" data-i18n="rtl.rule2">کد با <code dir="ltr" class="ltr-isolate">dir="ltr"</code> و کلاس <code dir="ltr" class="ltr-isolate">ltr-isolate</code> ایزوله می‌شود.</li>
+                    <li class="text-secondary" data-i18n="rtl.rule3">اعداد فارسی با کلاس <code dir="ltr" class="ltr-isolate">num-fa</code>: <span class="num-fa">۱۲۳۴۵۶۷۸۹۰</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- RTL table with mixed content -->
+          <section class="mb-4">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <div>
+                <h3 class="mb-0" data-i18n="rtl.tableTitle">جدول لاگ‌ها</h3>
+                <div class="text-secondary" data-i18n="rtl.tableSubtitle">ستون‌های کد چپ‌به‌راست و برچسب‌ها فارسی هستند.</div>
+              </div>
+            </div>
+            <div data-motion class="table-card">
+              <div class="table-responsive">
+                <table class="table table--compact">
+                  <thead>
+                    <tr>
+                      <th scope="col" data-i18n="rtl.thTime">زمان</th>
+                      <th scope="col" data-i18n="rtl.thMethod">متد</th>
+                      <th scope="col" data-i18n="rtl.thEndpoint">نقطهٔ پایانی</th>
+                      <th scope="col" data-i18n="rtl.thStatus">وضعیت</th>
+                      <th scope="col" class="cell-num" data-i18n="rtl.thLatency">تاخیر پاسخ</th>
+                      <th scope="col" data-i18n="rtl.thRequestId">شناسهٔ درخواست</th>
+                      <th scope="col" data-i18n="rtl.thKey">کلید</th>
+                    </tr>
+                  </thead>
+                  <tbody id="logs-demo"></tbody>
+                </table>
+              </div>
+              <div class="table-footer" data-i18n="rtl.showingRows"><span>نمایش <strong>۸</strong> از <strong>۵۰</strong> درخواست</span></div>
+            </div>
+          </section>
+
+          <!-- Empty state (Persian) -->
+          <section class="card mb-4">
+            <div data-motion class="card-header">
+              <div>
+                <h3 class="card-title" data-i18n="rtl.emptyTitle">وضعیت خالی</h3>
+              </div>
+            </div>
+            <div class="empty-state">
+              <span class="empty-icon"><i data-lucide="scroll-text"></i></span>
+              <h4 class="empty-title" data-i18n="rtl.emptyHeading">هنوز درخواستی ثبت نشده است</h4>
+              <p class="empty-desc" data-i18n="rtl.emptyDesc">نخستین درخواست را ارسال کنید تا همین‌جا نمایش داده شود.</p>
+              <button type="button" class="btn btn-primary" data-i18n="rtl.createKey"><i data-lucide="plus"></i> ایجاد کلید API</button>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Mobile drawer (Bootstrap Offcanvas) -->
+    <div class="offcanvas offcanvas-start sidebar-drawer" id="sidebar-drawer" tabindex="-1" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
+      <div class="sidebar-brand">
+        <span class="brand-mark"><i data-lucide="zap"></i></span>
+        <span class="brand-name">APIForge X</span>
+        <button type="button" class="btn btn-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="بستن منو" data-i18n-attr="aria-label:aria.closeMenu"><i data-lucide="x"></i></button>
+      </div>
+      <nav class="sidebar-nav" aria-label="ناوبری اصلی" data-i18n-attr="aria-label:aria.primaryNav">
+        <div class="nav-group">
+          <div class="nav-group__label" data-i18n="rtl.groupFoundation">پایه</div>
+          <a class="nav-item" href="./index.html" data-i18n="rtl.navHome"><i data-lucide="zap"></i><span>صفحهٔ اصلی</span></a>
+          <a class="nav-item" href="./style-guide.html" data-i18n="rtl.navStyleGuide"><i data-lucide="palette"></i><span>راهنمای استایل</span></a>
+          <a class="nav-item is-active" href="./rtl.html" data-i18n="rtl.navPersianDemo"><i data-lucide="flask-conical"></i><span>نمونهٔ فارسی</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label" data-i18n="rtl.groupOverview">نمای کلی</div>
+          <a class="nav-item" href="./dashboard.html" data-i18n="rtl.navOverview"><i data-lucide="layout-dashboard"></i><span data-i18n="rtl.groupOverview">نمای کلی</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label" data-i18n="rtl.groupDeveloper">توسعه‌دهنده</div>
+          <a class="nav-item" href="./apis.html" data-i18n="rtl.navApis"><i data-lucide="code-2"></i><span>APIها</span></a>
+          <a class="nav-item" href="./endpoints.html" data-i18n="rtl.navEndpoints"><i data-lucide="braces"></i><span>نقاط پایانی</span></a>
+          <a class="nav-item" href="./api-keys.html" data-i18n="rtl.navApiKeys"><i data-lucide="key"></i><span>کلیدهای API</span></a>
+          <a class="nav-item" href="./logs.html" data-i18n="rtl.navLogs"><i data-lucide="scroll-text"></i><span>لاگ‌ها</span></a>
+          <a class="nav-item" href="./webhooks.html" data-i18n="rtl.navWebhooks"><i data-lucide="webhook"></i><span>وب‌هوک‌ها</span></a>
+          <a class="nav-item" href="./docs.html" data-i18n="rtl.navDocs"><i data-lucide="book-open"></i><span>مستندات</span></a>
+          <a class="nav-item" href="./sdk.html" data-i18n="rtl.navSdks"><i data-lucide="package"></i><span>SDKها</span></a>
+          <a class="nav-item" href="./api-reference.html" data-i18n="rtl.navReference"><i data-lucide="book-marked"></i><span>مرجع API</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label" data-i18n="rtl.groupAnalytics">تحلیل‌ها</div>
+          <a class="nav-item" href="./usage.html" data-i18n="rtl.navUsage"><i data-lucide="bar-chart-3"></i><span>میزان استفاده</span></a>
+          <a class="nav-item" href="./errors.html" data-i18n="rtl.navErrors"><i data-lucide="bug"></i><span>خطاها</span></a>
+          <a class="nav-item" href="./rate-limits.html" data-i18n="rtl.navRateLimits"><i data-lucide="gauge"></i><span>محدودیت نرخ</span></a>
+          <a class="nav-item" href="./metrics.html" data-i18n="rtl.navMetrics"><i data-lucide="activity"></i><span>متریک‌ها</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label" data-i18n="rtl.groupWorkspace">فضای کاری</div>
+          <a class="nav-item" href="./environments.html" data-i18n="rtl.navEnvironments"><i data-lucide="server"></i><span>محیط‌ها</span></a>
+          <a class="nav-item" href="./team.html" data-i18n="rtl.navTeam"><i data-lucide="users"></i><span>تیم</span></a>
+          <a class="nav-item" href="./billing.html" data-i18n="rtl.navBilling"><i data-lucide="credit-card"></i><span>صورت‌حساب</span></a>
+          <a class="nav-item" href="./notifications.html" data-i18n="rtl.navNotifications"><i data-lucide="bell"></i><span>اعلان‌ها</span></a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group__label" data-i18n="rtl.groupAccount">حساب کاربری</div>
+          <a class="nav-item" href="./profile.html" data-i18n="rtl.navProfile"><i data-lucide="user"></i><span>نمایه</span></a>
+          <a class="nav-item" href="./settings.html" data-i18n="rtl.navSettings"><i data-lucide="settings"></i><span>تنظیمات</span></a>
+        </div>
+      </nav>
+    </div>
+
+  </body>
+</html>

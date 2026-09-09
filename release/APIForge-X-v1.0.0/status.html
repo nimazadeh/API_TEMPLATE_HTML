@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="وضعیت APIForge X — دسترس‌پذیری فعلی، اجزای سیستم و تاریخچهٔ رخدادها." data-i18n-attr="content:meta.status" />
+    <title data-i18n="status.status-apiforge-x">وضعیت سرویس — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+        var loc = null;
+        try { loc = localStorage.getItem('afx-locale'); } catch (e) {}
+        if (loc !== 'fa' && loc !== 'en') loc = 'fa';
+        document.documentElement.setAttribute('lang', loc);
+        document.documentElement.setAttribute('dir', loc === 'fa' ? 'rtl' : 'ltr');
+      })();
+    </script>
+    <script defer src="./assets/js/status.js"></script>
+    <link rel="stylesheet" href="./assets/css/main.css">
+  </head>
+  <body data-page="status">
+    <div class="site">
+      <div class="backdrop" data-backdrop aria-hidden="true">
+        <div class="backdrop__grid"></div>
+        <div class="backdrop__glow"></div>
+        <div class="backdrop__mesh"></div>
+      </div>
+      <header class="site-header">
+        <div class="site-container site-header__inner">
+          <a class="site-header__brand" href="./index.html">
+            <span class="brand-mark"><i data-lucide="zap"></i></span>
+            <span class="brand-name">APIForge X</span>
+          </a>
+          <nav class="site-nav" aria-label="ناوبری صفحات" data-i18n-attr="aria-label:aria.marketingNav">
+            <a class="site-nav__link" data-nav="home" href="./index.html" data-i18n="site.product">محصول</a>
+            <a class="site-nav__link" data-nav="docs" href="./docs.html" data-i18n="site.docs">مستندات</a>
+            <a class="site-nav__link" data-nav="pricing" href="./pricing.html" data-i18n="site.pricing">قیمت‌گذاری</a>
+            <a class="site-nav__link" data-nav="changelog" href="./changelog.html" data-i18n="site.changelog">گزارش تغییرات</a>
+            <a class="site-nav__link" data-nav="status" href="./status.html" data-i18n="site.status">وضعیت</a>
+          </nav>
+          <div class="site-header__actions">
+            <button type="button" class="btn btn-icon" data-theme-toggle aria-label="تغییر پوسته" aria-pressed="false" data-i18n-attr="aria-label:aria.toggleTheme">
+              <i data-lucide="sun-moon"></i>
+            </button>
+            <button type="button" class="btn btn-ghost" data-locale-toggle aria-label="تغییر زبان" data-i18n-attr="aria-label:aria.switchLanguage">
+              <i data-lucide="languages"></i> <span data-locale-label>EN</span>
+            </button>
+            <a class="btn btn-ghost d-none d-md-inline-flex" href="./login.html" data-i18n="site.sign-in">ورود</a>
+            <a class="btn btn-primary" href="./dashboard.html" data-i18n="site.open-dashboard">ورود به داشبورد</a>
+            <button type="button" class="btn btn-icon d-lg-none" aria-label="باز کردن منو" data-bs-toggle="offcanvas" data-bs-target="#site-drawer" aria-controls="site-drawer" data-i18n-attr="aria-label:aria.openMenu">
+              <i data-lucide="menu"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="site-drawer" aria-labelledby="site-drawer-label">
+        <div class="offcanvas-header">
+          <span class="offcanvas-title" id="site-drawer-label"><span class="brand-mark"><i data-lucide="zap"></i></span> APIForge X</span>
+          <button type="button" class="btn btn-icon" data-bs-dismiss="offcanvas" aria-label="بستن" data-i18n-attr="aria-label:aria.close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="offcanvas-body p-0">
+          <nav class="site-drawer-nav" aria-label="ناوبری موبایل صفحات" data-i18n-attr="aria-label:aria.marketingNavMobile">
+            <a class="site-drawer-nav__link" data-nav="home" href="./index.html" data-i18n="site.navProduct"><i data-lucide="zap"></i> محصول</a>
+            <a class="site-drawer-nav__link" data-nav="docs" href="./docs.html" data-i18n="site.drawerDocs"><i data-lucide="book-open"></i> مستندات</a>
+            <a class="site-drawer-nav__link" data-nav="pricing" href="./pricing.html" data-i18n="site.drawerPricing"><i data-lucide="credit-card"></i> قیمت‌گذاری</a>
+            <a class="site-drawer-nav__link" data-nav="changelog" href="./changelog.html" data-i18n="site.drawerChangelog"><i data-lucide="clock"></i> گزارش تغییرات</a>
+            <a class="site-drawer-nav__link" data-nav="status" href="./status.html" data-i18n="site.drawerStatus"><i data-lucide="activity"></i> وضعیت سرویس</a>
+            <a class="site-drawer-nav__link" href="./login.html" data-i18n="site.drawerSignIn"><i data-lucide="log-in"></i> ورود</a>
+          </nav>
+        </div>
+      </div>
+
+      <main class="site-main">
+        <section class="hero">
+          <div class="site-container">
+            <div class="hero__inner">
+              <span class="eyebrow" data-i18n="site.status">وضعیت</span>
+              <h1 class="hero__title" data-i18n="status.heroTitle">همهٔ سرویس‌ها <span class="hero__title-accent">در دسترس</span></h1>
+              <p class="body-lg text-secondary hero__sub" data-i18n="status.uptime-component-health-and-incident-history-for">زمان در دسترس‌بودن، سلامت اجزا و تاریخچهٔ رخدادهای پلتفرم دمو.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section site-container">
+          <div data-motion class="status-banner" id="status-banner">
+            <span class="status-banner__dot" aria-hidden="true"></span>
+            <div>
+              <div data-motion class="status-banner__title" data-i18n="status.all-systems-operational">همهٔ سرویس‌ها در دسترس هستند</div>
+              <div data-motion class="status-banner__sub" id="status-updated" data-i18n="status.updated-just-now">هم‌اکنون به‌روزرسانی شد</div>
+            </div>
+          </div>
+
+          <div data-motion class="card card--dense mt-4" style="padding: var(--space-5);">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <h3 class="mb-0" data-i18n="status.uptime">در دسترس‌بودن</h3>
+              <span class="caption text-tertiary" data-i18n="status.last-90-days">۹۰ روز گذشته</span>
+            </div>
+            <div class="uptime-bars" id="uptime-bars" role="img" aria-label="نمودار میله‌ای در دسترس‌بودن در ۹۰ روز گذشته" data-i18n-attr="aria-label:aria.uptimeChart"></div>
+            <div class="caption text-tertiary mt-3" data-i18n="status.99-95-average-two-minor-degradations-both-resolv">میانگین ۹۹.۹۵٪ · دو افت کیفیت جزئی که هر دو در کمتر از ۴۰ دقیقه برطرف شد</div>
+          </div>
+
+          <div data-motion-group class="row g-3 mt-4">
+            <div class="col-12 col-lg-7">
+              <div data-motion class="card card--dense" style="padding: var(--space-5);">
+                <h3 class="mb-1" data-i18n="status.components">اجزای سرویس</h3>
+                <p class="text-secondary mb-3" data-i18n="status.current-health-of-each-platform-service">وضعیت فعلی هر یک از سرویس‌های پلتفرم.</p>
+                <div class="status-components" id="components-list"></div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-5">
+              <div data-motion class="card card--dense" style="padding: var(--space-5);">
+                <h3 class="mb-1" data-i18n="status.incident-history">تاریخچهٔ رخدادها</h3>
+                <p class="text-secondary mb-3" data-i18n="status.resolved-incidents-from-the-last-90-days">رخدادهای برطرف‌شده در ۹۰ روز گذشته.</p>
+                <div class="incidents" id="incidents-list"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="site-container">
+          <div class="site-footer__grid">
+            <div class="site-footer__brand">
+              <span class="brand-mark"><i data-lucide="zap"></i></span>
+              <span class="brand-name">APIForge X</span>
+              <p class="mt-2" data-i18n="site.a-premium-api-infrastructure-html-template-engin">قالب HTML حرفه‌ای زیرساخت API؛ طراحی‌شده برای پلتفرم‌های توسعه‌دهنده و آماده برای بازار ایران.</p>
+            </div>
+            <div>
+              <div class="site-footer__col-label" data-i18n="site.product">محصول</div>
+              <a class="site-footer__link" href="./dashboard.html" data-i18n="shell.overview">نمای کلی</a>
+              <a class="site-footer__link" href="./logs.html" data-i18n="site.logs">لاگ‌ها</a>
+              <a class="site-footer__link" href="./webhooks.html" data-i18n="site.webhooks">وب‌هوک‌ها</a>
+              <a class="site-footer__link" href="./api-keys.html" data-i18n="site.api-keys">کلیدهای API</a>
+              <a class="site-footer__link" href="./pricing.html" data-i18n="site.pricing">قیمت‌گذاری</a>
+            </div>
+            <div>
+              <div class="site-footer__col-label" data-i18n="site.resources">منابع</div>
+              <a class="site-footer__link" href="./docs.html" data-i18n="site.documentation">مستندات</a>
+              <a class="site-footer__link" href="./style-guide.html" data-i18n="site.style-guide">راهنمای استایل</a>
+              <a class="site-footer__link" href="./changelog.html" data-i18n="site.changelog">گزارش تغییرات</a>
+              <a class="site-footer__link" href="./visual-showcase.html" data-i18n="vs.footerLink">نمایش بصری</a>
+              <a class="site-footer__link" href="./status.html" data-i18n="site.status">وضعیت</a>
+              <a class="site-footer__link" href="./rtl.html" data-i18n="site.rtl-demo">نسخهٔ دموی فارسی</a>
+            </div>
+          </div>
+          <div class="site-footer__legal" data-i18n="site.footerLegal"><span>© ۲۰۲۶ APIForge X. یک محصول نمایشی — بدون بک‌اند واقعی.</span> <span>Bootstrap 5 · SCSS · Vite · Chart.js · Lucide</span></div>
+        </div>
+      </footer>
+    </div>
+
+  </body>
+</html>

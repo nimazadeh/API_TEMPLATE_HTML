@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <title data-i18n="auth.inviteTitle">پذیرش دعوت‌نامه — APIForge X</title>
+    <script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('afx-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+        var loc = null;
+        try { loc = localStorage.getItem('afx-locale'); } catch (e) {}
+        if (loc !== 'fa' && loc !== 'en') loc = 'fa';
+        document.documentElement.setAttribute('lang', loc);
+        document.documentElement.setAttribute('dir', loc === 'fa' ? 'rtl' : 'ltr');
+      })();
+    </script>
+    <script defer src="./assets/js/invite.js"></script>
+    <link rel="stylesheet" href="./assets/css/main.css">
+  </head>
+  <body>
+    <main class="auth">
+      <div class="backdrop backdrop--auth" data-backdrop aria-hidden="true">
+        <div class="backdrop__grid"></div>
+        <div class="backdrop__glow"></div>
+      </div>
+      <div class="auth__card">
+        <div class="auth__brand">
+          <span class="brand-mark"><i data-lucide="zap"></i></span>
+          <span class="brand-name">APIForge X</span>
+          <button type="button" class="btn btn-sm btn-ghost ms-auto" data-locale-toggle aria-label="تغییر زبان" data-i18n-attr="aria-label:aria.switchLanguage">
+            <i data-lucide="languages"></i> <span data-locale-label>EN</span>
+          </button>
+        </div>
+
+        <h1 class="auth__title" data-i18n="auth.acceptInvite">پذیرش دعوت‌نامه</h1>
+        <p class="auth__subtitle" data-i18n="auth.inviteSub">به فضای کاری <strong>APIForge</strong> دعوت شده‌اید.</p>
+
+        <div class="auth__notice" role="note">
+          <i data-lucide="shield-check"></i>
+          <div data-i18n="auth.inviteNotice">نقش شما در این فضای کاری: <strong>توسعه‌دهنده</strong> (Developer). پس از ثبت‌نام، به کلیدها و لاگ‌های فضای کاری دسترسی خواهید داشت.</div>
+        </div>
+
+        <form id="invite-form" novalidate>
+          <div class="form-group mb-3">
+            <label class="form-label" for="invite-name" data-i18n="auth.fullName">نام کامل</label>
+            <input class="form-control" id="invite-name" type="text" autocomplete="name" />
+            <div class="invalid-feedback" data-i18n="auth.nameInvalid">نام خود را وارد کنید (دست‌کم ۲ نویسه).</div>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label" for="invite-password" data-i18n="auth.password">گذرواژه</label>
+            <input class="form-control form-control--mono" id="invite-password" type="password" dir="ltr" autocomplete="new-password" placeholder="••••••••" />
+            <div class="invalid-feedback" data-i18n="auth.passwordShort8">گذرواژه باید دست‌کم ۸ نویسه باشد.</div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100" id="invite-submit" data-i18n="auth.joinWorkspace"><i data-lucide="user-plus"></i> پیوستن به فضای کاری</button>
+        </form>
+
+        <div class="auth__footer"><span data-i18n="auth.haveAccount">حساب دارید؟</span><a href="./login.html" data-i18n="site.sign-in">ورود</a>
+        </div>
+      </div>
+    </main>
+
+  </body>
+</html>

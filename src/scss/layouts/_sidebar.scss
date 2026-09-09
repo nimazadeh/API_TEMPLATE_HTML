@@ -4,7 +4,6 @@
 // bottom user menu + env switcher + theme toggle.
 // The nav chrome is hoisted to top level so the mobile offcanvas
 // drawer (.offcanvas.sidebar-drawer) reuses it unchanged.
-// Source: docs/product/INFORMATION_ARCHITECTURE.md
 // =============================================================
 
 @use '../tokens/_index' as *;

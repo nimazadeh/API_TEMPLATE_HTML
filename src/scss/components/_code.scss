@@ -2,7 +2,7 @@
 // APIForge X — Components: Code
 // Dark wells ALWAYS (even in light theme), 40px header with language
 // + copy + tabs, mono 13px body, LTR forced. Subtle 4-color syntax.
-// Inline code LTR-isolated. Source: DESIGN_DIRECTION.md (D-009)
+// Inline code LTR-isolated.
 // =============================================================
 
 @use '../tokens/_index' as *;
@@ -92,7 +92,7 @@
   }
 }
 
-// Subtle syntax — 4 colors max (D-009)
+// Subtle syntax — four colors max
 .tok-kw { color: var(--syn-keyword); }
 .tok-str { color: var(--syn-string); }
 .tok-num { color: var(--syn-number); }
