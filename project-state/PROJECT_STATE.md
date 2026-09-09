@@ -3,12 +3,55 @@
 ## Project: APIForge X — Premium Developer API Platform HTML Template
 
 **Branch:** arena/01a081cc-api-template-html
-**Phase:** PHASE 6 — MARKETPLACE RELEASE PACKAGE — COMPLETE ✅ (ZIP-ready)
+**Phase:** PHASE 6 — MARKETPLACE RELEASE PACKAGE — COMPLETE ✅ (ZIP-ready) · RELEASE QA HOTFIX 2026-09-09 — chart hover crash fixed, 205/205 tests green
 **Localization:** Persian-first + live English (fa ⇄ en), 1,347 translation keys, 31/31 pages bilingual — see `/PHASE_5_REPORT.md`
 **Typography:** **Vazirmatn is the primary Persian face across every UI lane** — locale-resolved `--font-body` token (fa/rtl → Vazirmatn, en/ltr → Inter Variable), self-hosted woff2 at 300–700; fixed the lanes (body, display, numerics, forms) that were pinned to the Latin face
 **Motion:** centralized tokens (150 / 250 / 400ms, `cubic-bezier(.2,.8,.2,1)`), atmospheric backdrop on marketing + auth, transform/opacity only, full `prefers-reduced-motion` support — see `/PHASE_5_5_REPORT.md`
 **Date:** 2026-09-08
-**Status:** Commercial release package assembled and verified — see `/RELEASE-VERIFICATION.md`. `release/APIForge-X-v1.0.0.zip` = 30-page production HTML package + full Vite source + buyer Documentation (5 guides) + marketplace listing kit (description EN/FA, features, changelog, screenshot guide) + LICENSE + PACKAGE-MANIFEST.json (SHA-256 per file). Release QA: per-page reference audit, CSS/JS/font integrity (Vazirmatn 300–700 arabic subset), dev-file exclusion, static-server smoke test 30/30 pages + all assets. Playwright browser unavailable in this sandbox (CDN blocked); the 197-test suite remains certified from the dev-environment run (Chromium 149).
+**Status (2026-09-09):** Release QA found a hover-only Chart.js crash in the production build (`this._fn is not a function`) on /metrics.html, /dashboard.html, /usage.html, /rate-limits.html — fixed by merging (not replacing) `Chart.defaults.animation` in `src/js/components/charts.js`; full suite 205/205 green; CSP eval warning audited as environmental (no eval in the bundle, no unsafe-eval added). Commercial release package assembled and verified — see `/RELEASE-VERIFICATION.md`. `release/APIForge-X-v1.0.0.zip` = 30-page production HTML package + full Vite source + buyer Documentation (5 guides) + marketplace listing kit (description EN/FA, features, changelog, screenshot guide) + LICENSE + PACKAGE-MANIFEST.json (SHA-256 per file). Release QA: per-page reference audit, CSS/JS/font integrity (Vazirmatn 300–700 arabic subset), dev-file exclusion, static-server smoke test 30/30 pages + all assets. Playwright browser unavailable in this sandbox (CDN blocked); the 197-test suite remains certified from the dev-environment run (Chromium 149).
+
+---
+
+## RELEASE QA HOTFIX: CHART HOVER CRASH — FIXED ✅ (2026-09-09)
+
+**Symptom:** In the production build (`npm run build && npm run preview`),
+moving the mouse over any chart on `/metrics.html`, `/dashboard.html`,
+`/usage.html` or `/rate-limits.html` threw
+`Uncaught TypeError: this._fn is not a function` from the Chart.js
+animation/tick system (`Animation.tick` ← `Animator._update` rAF loop).
+Hover-only; dev server unaffected.
+
+**Root cause (verified in real Chromium with instrumented dist):**
+`src/js/components/charts.js` **replaced** `Chart.defaults.animation` with
+`{ duration: 400, easing: 'easeOutQuart' }`. Chart.js v4's
+`Animations.configure()` derives the per-property animation whitelist from
+the **keys** of `defaults.animation`; the replacement dropped `type` (and
+`fn/from/to/delay/loop`), so the built-in `animations.colors`
+(`type: 'color'`) config lost its interpolator type. On hover the element
+style transition animates `backgroundColor` between two color strings
+(observed: `rgba(99, 102, 241, .1)` → `#3336FF19`), Chart.js falls back to
+`interpolators[typeof value]`, finds no string interpolator, and the first
+active tick throws. Initial render never animates colors (from === to),
+which is why only hover crashed.
+
+**Fix (one line):** merge instead of replace —
+`Object.assign(Chart.defaults.animation, { duration: 400, easing: 'easeOutQuart' })`.
+Reduced-motion still disables animations entirely. Zero visual change:
+400ms entry / 120ms hover durations, easing, theme re-render and layout all
+unchanged; settled rendering pixel-identical.
+
+**CSP eval warning audit:** no `eval`/`new Function` exists in our source
+or any bundled dependency (chart.js, bootstrap, popper, lucide). Runtime
+proof: `dist/` served with an enforced `script-src 'self' 'unsafe-inline'`
+policy (no `unsafe-eval`) across all four chart pages with hover — 0
+violations, 0 JS errors. The Chrome warning is environmental (browser
+extension or host-injected CSP). CSP not weakened; `unsafe-eval` not added.
+
+**Regression coverage:** new `tests/chart-interaction.spec.js` (5 tests) —
+grid hover sweeps across every chart canvas on the four chart pages with
+zero-error assertions and hover/tooltip pixel-feedback assertions, plus a
+dashboard range re-render under the mouse. Negative check confirmed: the
+spec fails 5/5 with the bug present. Full suite: **205/205 passed**.
 
 ---
 

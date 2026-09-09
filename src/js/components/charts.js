@@ -45,10 +45,19 @@ Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
 
 // Phase 5.5 — chart motion. One reveal at the product's slow speed
 // (400ms, the hard ceiling) and nothing at all for reduced-motion users.
+// NOTE: the non-reduced-motion branch MERGES into Chart.js's
+// `defaults.animation` instead of replacing the object. Chart.js's
+// `Animations.configure()` derives the per-property animation whitelist
+// from the KEYS of `defaults.animation` (delay/duration/easing/fn/from/
+// loop/to/type); replacing the object drops `type`, so hover-driven color
+// transitions (element backgroundColor/borderColor) fall back to
+// `interpolators[typeof value]`, find no string interpolator, and every
+// animator tick under the mouse throws `TypeError: this._fn is not a
+// function`. Reduced-motion keeps `false` (animation system off entirely).
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 Chart.defaults.animation = REDUCED_MOTION
   ? false
-  : { duration: 400, easing: 'easeOutQuart' };
+  : Object.assign(Chart.defaults.animation, { duration: 400, easing: 'easeOutQuart' });
 // Hover feedback is shortened, not removed: charts should still feel
 // like instruments without drifting into decorative motion.
 Chart.defaults.transitions.active.animation = { duration: 120 };
