@@ -1,6 +1,48 @@
 # Test Status — APIForge X
 
+## Release QA hotfix — chart hover crash — 2026-09-09 — PASS
+
+- **Regression found & fixed:** `Uncaught TypeError: this._fn is not a
+  function` (Chart.js `Animation.tick` ← `Animator._update` rAF loop) on
+  every chart of `/metrics.html`, `/dashboard.html`, `/usage.html`,
+  `/rate-limits.html`, hover-only, production build only. Root cause:
+  `Chart.defaults.animation` was **replaced** (not merged) in
+  `src/js/components/charts.js`, which stripped `type` from Chart.js's
+  per-property animation whitelist and left hover color transitions without
+  an interpolator. Fix: one line — `Object.assign(Chart.defaults.animation,
+  { duration: 400, easing: 'easeOutQuart' })`.
+- `npm run build`: success, all 31 HTML entries.
+- **Full `npm test` suite: 205/205 passed** (200 pre-existing across
+  catalogs/localization/production/responsive + 5 new) against the fixed
+  production build via `npm run preview`.
+- New `tests/chart-interaction.spec.js`: **5/5 passed** — per chart page:
+  grid hover sweep across every chart canvas (line, bar, doughnut) with
+  zero console/page errors and asserted hover/tooltip pixel feedback;
+  plus dashboard range re-render under the mouse (destroy + recreate +
+  hover). **Negative check:** with the fix temporarily reverted the same
+  spec fails **5/5** with the reported `this._fn is not a function` error —
+  the regression is genuinely guarded.
+- **CSP eval audit:** no `eval`/`new Function` in our source or any bundled
+  dependency; runtime proof — `dist/` served with enforced
+  `script-src 'self' 'unsafe-inline'` (no `unsafe-eval`), all four chart
+  pages hovered: **0 CSP violations, 0 JS errors**. The Chrome eval warning
+  is environmental (extension / host-injected CSP), not this codebase. No
+  CSP changes made; `unsafe-eval` not added.
+- Behavior parity: entry animation 400ms `easeOutQuart` and hover
+  transition 120ms unchanged; settled chart rendering pixel-identical
+  (verified in real Chromium before/after).
+
+**Execution:** real headless Chromium (Playwright) against `npm run
+preview`. The Playwright browser CDN is blocked in this sandbox, so a local
+Chromium binary from `@sparticuz/chromium` (scratch-only, removed after the
+run) was supplied through the config's `CHROMIUM_EXECUTABLE_PATH`. Scratch
+audit tooling (jsdom/@napi-rs/canvas probes, patched dist chunks) was
+removed after verification; `dist/` is rebuilt clean from source.
+
+---
+
 ## Responsive / scrolling review — 2026-09-08 — PASS
+
 
 - `npm run build`: success, all 31 HTML entries.
 - `npm test`: **197/197 passed** against the production build.

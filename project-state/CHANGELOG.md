@@ -6,6 +6,54 @@ Format based on Keep a Changelog, but adapted for product phases.
 
 ---
 
+## [Release QA hotfix] — 2026-09-09 — Chart hover crash in production build
+
+### Fixed
+- **Chart.js hover crash (`Uncaught TypeError: this._fn is not a function`)** —
+  `src/js/components/charts.js` **replaced** the `Chart.defaults.animation`
+  object with `{ duration: 400, easing: 'easeOutQuart' }`. Chart.js v4's
+  `Animations.configure()` derives the per-property animation whitelist from
+  the **keys** of `defaults.animation` (`delay/duration/easing/fn/from/loop/
+  to/type`); replacing the object silently dropped `type` (and the
+  `fn/from/to` fallbacks), so hover-driven element color transitions
+  (`backgroundColor`/`borderColor`, e.g. `rgba(99, 102, 241, .1)` →
+  `#3336FF19` under the tooltip/hover style resolution) fell back to
+  `interpolators[typeof value]`, found no string interpolator, and every
+  animator tick under the mouse threw `this._fn is not a function`. The fix
+  **merges** into the defaults object instead of replacing it
+  (`Object.assign(Chart.defaults.animation, { duration: 400, easing:
+  'easeOutQuart' })`), restoring `type: 'color'` / `type: 'number'` on all
+  per-property animation configs. Reduced-motion still disables the
+  animation system entirely (`false`). No visual, layout or timing change:
+  durations (400ms entry / 120ms hover), easing and theme re-render behavior
+  are untouched; verified pixel-identical settled rendering.
+- Root cause confirmed in a real Chromium against the built `dist/` on all
+  four chart pages (`/metrics.html`, `/dashboard.html`, `/usage.html`,
+  `/rate-limits.html`); crash reproduces only during hover, matching the QA
+  report.
+
+### Added
+- `tests/chart-interaction.spec.js` — production-build regression spec:
+  hovers every chart canvas on the four chart pages (grid sweep, hover-in →
+  across → out) and asserts zero console/page errors plus hover/tooltip
+  pixel feedback; additionally covers a range re-render under the mouse
+  (chart destroy + recreate + hover). Fails 5/5 with the bug present,
+  passes 5/5 with the fix.
+
+### Security/CSP audit (no code change required)
+- Audited our source and every bundled dependency (`chart.js`, `bootstrap`,
+  `@popperjs/core`, `lucide`, fonts): **no `eval` / `new Function` anywhere**
+  in the shipped bundle. Verified at runtime by serving `dist/` with an
+  enforced `script-src 'self' 'unsafe-inline'` policy (no `unsafe-eval`)
+  across all four chart pages with hover interaction: **zero CSP
+  violations, zero JS errors**. The Chrome console warning
+  "Content Security Policy of your site blocks the use of eval" therefore
+  does not originate from this template's code or dependencies (external
+  browser extension / host-injected CSP are the remaining suspects). CSP was
+  not weakened and `unsafe-eval` was not added.
+
+---
+
 ## [Phase 6 — marketplace release package] — 2026-09-08 — Vazirmatn-first typography + ZIP-ready commercial package
 
 ### Fixed
