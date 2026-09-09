@@ -1,11 +1,27 @@
 # APIForge X v1.0.0 — Release verification
 
-- **Date (UTC):** 2026-09-08T20:53:23.810Z
-- **Method:** buyer simulation — clean extraction of `APIForge-X-Preview.zip`, every page opened over `file://` (no server, no npm), console/CORS audited, then interactions on `index.html`.
+- **Date (UTC):** 2026-09-09T04:45:27.421Z
+- **Package:** `release/APIForge-X-v1.0.0/`
+- **Method:** production pipeline check (`npm install` → `npm run build` → `npm run preview`), buyer simulation — clean extraction of `APIForge-X-Preview.zip`, every page opened over `file://` (no server, no npm), console/CORS audited, interactions on `index.html`, then the six key pages swept over the `npm run preview` server.
 - **Result:** ✅ PASS
 
+## Production pipeline
+
+- `npm install` — dependencies installed from `package-lock.json`.
+- `npm run build` — Vite production build (`dist/`, 31 pages, relative asset paths).
+- `npm run preview` — production build served on `http://127.0.0.1:4173` and swept by a real browser (see “Key pages” below).
+
+## Hotfixes verified in this build
+
+| Hotfix | Evidence |
+|--------|----------|
+| Chart.js hover crash (`this._fn is not a function`) | Animation defaults are merged, not replaced (`src/js/components/charts.js`); every chart page (dashboard / metrics / usage / rate-limits) swept with mouse hover in → across → out — 0 errors (see “Key pages” below); the `tests/chart-interaction.spec.js` regression suite passes in the Playwright run. |
+| Preview build fixes (double-click `file://` package) | All 31 pages open from a clean zip extraction over `file://` with one classic (non-module) deferred script per page — 0 module/CORS errors, 0 modulepreload/crossorigin leftovers. |
+| CSS loading fixes | Exactly one standalone stylesheet (`assets/css/main.css`) per page, live on every page (computed styles + live link), all relative URLs resolve. |
+| Font loading fixes | All 55 font files referenced by the CSS ship in `assets/fonts/`; `document.fonts` reports Vazirmatn loaded on every page; locale-resolved `--font-body`. |
+
 ## Static checks
-- ✅ preview extracted to clean folder — `/tmp/afx-preview-qa-JXxvNi/APIForge-X-Preview`
+- ✅ preview extracted to clean folder — `/tmp/afx-preview-qa-T8UfEt/APIForge-X-Preview`
 - ✅ 31 pages present in preview root (found 31)
 - ✅ every internal page link resolves (60 unique checked)
 - ✅ every ./assets/ reference in HTML exists
@@ -20,12 +36,14 @@
 - ✅ theme toggle restores previous theme — `light`
 - ✅ in-page navigation to dashboard.html works from file:// — `نمای کلی — APIForge X`
 - ✅ no console/CORS errors during interactions
+- ✅ npm run preview server reused (already listening on :4173)
+- ✅ all six key pages pass the production-server sweep
 - ✅ developer zip extracts with package.json + vite.config.js
 - ✅ developer zip contains src/ + index.html
 - ✅ npm ci succeeds from clean extraction (lockfile reproducible)
 - ✅ npm run build succeeds (31 pages emitted)
 
-## Per-page browser sweep (file://)
+## Per-page browser sweep — preview package over file:// (all pages)
 
 | Page | OK | CSS sheets | lucide icons | loaded fonts | lang/dir | canvas painted px | console/CORS errors |
 |---|---|---|---|---|---|---|---|
@@ -65,4 +83,15 @@
 > canvas painted px = maximum count of painted (non-transparent) pixels across the page's canvases.
 > icons = the number of lucide SVG icons present after the page script booted.
 
-## Checks: 19/19 passed
+## Key pages — production server sweep (npm run preview)
+
+- ✅ page: index.html — css=ok fonts=ok rtl=ok theme=ok locale=ok hoverErrors=0 consoleErrors=0
+- ✅ page: dashboard.html — css=ok fonts=ok rtl=ok theme=ok locale=ok hoverErrors=0 consoleErrors=0
+- ✅ page: metrics.html — css=ok fonts=ok rtl=ok theme=ok locale=ok hoverErrors=0 consoleErrors=0
+- ✅ page: usage.html — css=ok fonts=ok rtl=ok theme=ok locale=ok hoverErrors=0 consoleErrors=0
+- ✅ page: rate-limits.html — css=ok fonts=ok rtl=ok theme=ok locale=ok hoverErrors=0 consoleErrors=0
+- ✅ page: pricing.html — css=ok fonts=ok rtl=ok theme=ok locale=ok hoverErrors=0 consoleErrors=0
+
+> Per page: CSS applied (2,000+ live rules + computed styles), fonts loaded (Vazirmatn), Persian RTL default (`fa/rtl`), live theme switch (dark ⇄ light), live locale switch (fa/rtl ⇄ en/ltr), Chart.js hover sweep with zero errors (the `this._fn` crash pattern) and a console free of errors.
+
+## Checks: 27/27 passed

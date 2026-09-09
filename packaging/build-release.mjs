@@ -1,18 +1,17 @@
 #!/usr/bin/env node
 // =============================================================
-// APIForge X — Marketplace release assembler (v2 layout)
+// APIForge X — Marketplace release assembler (v3 layout)
 //
-// Builds the buyer-ready release/ tree:
+// Builds the buyer-ready versioned release tree:
 //
 //   release/
-//   ├── APIForge-X-Developer/         full Vite source package
-//   ├── APIForge-X-Developer.zip      (marketplace download)
-//   ├── APIForge-X-Preview/           standalone, double-click file:// package
-//   ├── APIForge-X-Preview.zip        (marketplace download)
-//   ├── Documentation/                buyer guides
-//   ├── README.md                     package overview
-//   ├── LICENSE.txt
-//   └── PACKAGE-MANIFEST.json         inventory + SHA-256 per file
+//   └── APIForge-X-v<version>/
+//       ├── APIForge-X-Developer.zip    full Vite source package
+//       ├── APIForge-X-Preview.zip      standalone, double-click file:// package
+//       ├── Documentation/              buyer guides
+//       ├── README.md                   buyer README (copied from repo root)
+//       ├── VERIFICATION.md             QA report (written by verify-release.mjs)
+//       └── PACKAGE-MANIFEST.json       inventory + SHA-256 per file
 //
 // The Preview package is produced from the production build (dist/)
 // by converting every page's ES-module entry chunk into a single
@@ -32,11 +31,13 @@ import { fileURLToPath } from 'node:url';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pack = path.join(repo, 'packaging');
-const release = path.join(repo, 'release');
-const dist = path.join(repo, 'dist');
-
 const pkg = JSON.parse(fs.readFileSync(path.join(repo, 'package.json'), 'utf8'));
 const version = pkg.version;
+// Versioned marketplace package folder: release/APIForge-X-v<version>/
+const releaseRoot = path.join(repo, 'release');
+const release = path.join(releaseRoot, `APIForge-X-v${version}`);
+const dist = path.join(repo, 'dist');
+
 
 // ------------------------------------------------------------------
 // helpers
@@ -89,9 +90,9 @@ console.log('→ vite build (fresh, always)');
 execSync('npm run build', { cwd: repo, stdio: 'inherit' });
 
 // ------------------------------------------------------------------
-// 2. Clean release/
+// 2. Clean release tree (stale versioned folders included)
 // ------------------------------------------------------------------
-rmrf(release);
+rmrf(releaseRoot);
 mkdirp(release);
 const previewOut = path.join(release, 'APIForge-X-Preview');
 const devOut = path.join(release, 'APIForge-X-Developer');
@@ -308,16 +309,18 @@ See \`Customization.md\`, \`RTL-Guide.md\`, \`Theme-System.md\` and
 ## Release package root
 
 \`\`\`
-APIForge-X/
-├── APIForge-X-Developer/     ← full Vite development source (edit here)
-├── APIForge-X-Developer.zip
-├── APIForge-X-Preview/       ← standalone preview — double-click index.html
-├── APIForge-X-Preview.zip
-├── Documentation/            ← buyer guides (this folder)
-├── README.md                 ← package overview
-├── LICENSE.txt
-└── PACKAGE-MANIFEST.json     ← file inventory + SHA-256 checksums
+APIForge-X-v${version}/
+├── APIForge-X-Preview.zip      ← standalone preview — unzip, double-click index.html
+├── APIForge-X-Developer.zip    ← full Vite development source (edit here)
+├── Documentation/              ← buyer guides (this folder)
+├── README.md                   ← package overview
+├── VERIFICATION.md             ← automated release QA report
+└── PACKAGE-MANIFEST.json       ← file inventory + SHA-256 checksums
 \`\`\`
+
+Unzipping \`APIForge-X-Preview.zip\` creates one \`APIForge-X-Preview/\` folder;
+unzipping \`APIForge-X-Developer.zip\` creates one \`APIForge-X-Developer/\`
+folder. \`LICENSE.txt\` ships inside both zip packages.
 
 ## APIForge-X-Preview (static, server-less)
 
@@ -329,6 +332,7 @@ APIForge-X-Preview/
 │   ├── css/main.css          ← one standalone stylesheet for every page
 │   ├── js/<page>.js          ← one classic bundle per page (no modules)
 │   └── fonts/                ← Vazirmatn, Inter Variable, JetBrains Mono
+├── LICENSE.txt
 └── README.md
 \`\`\`
 
@@ -352,6 +356,7 @@ APIForge-X-Developer/
 ├── scripts/                  ← mock-data generators
 ├── tests/                    ← Playwright suites
 ├── docs/                     ← product & localization documentation
+├── LICENSE.txt
 └── README.md
 \`\`\`
 
@@ -400,76 +405,60 @@ for (const [name, text] of Object.entries(docFiles)) {
 }
 
 // ------------------------------------------------------------------
-// 6. Release root — README.md + LICENSE.txt
+// 6. Release root — buyer README (from the repo's product README)
 // ------------------------------------------------------------------
-fs.writeFileSync(
-  path.join(release, 'README.md'),
-  `# APIForge X v${version} — Premium Developer API Platform HTML Template
-
-Dark-first, keyboard-first, **RTL first-class** HTML template for API
-platforms (AI APIs, infra APIs, BaaS, SaaS dev tools). Persian-first and
-bilingual (fa ⇄ en), with **${pages.length} pages**, 22+ seeded datasets,
-two themes (dark/light/system), token-driven SCSS and self-hosted fonts
-(Vazirmatn, Inter Variable, JetBrains Mono) — no CDN, no backend.
-
-## What is inside
-
-| Item | Description |
-|------|-------------|
-| \`APIForge-X-Preview/\` (+ \`.zip\`) | **Instant preview** — unzip, double-click \`index.html\`. Runs from \`file://\` with no npm and no server. Bundled classic JS, one standalone CSS, local fonts. |
-| \`APIForge-X-Developer/\` (+ \`.zip\`) | **Original Vite source** — \`src/\`, \`package.json\`, \`vite.config.js\`, \`docs/\`, tests. \`npm install && npm run dev\`. |
-| \`Documentation/\` | Buyer guides — Installation, File structure, Preview getting-started, Customization, RTL, Theme system. |
-| \`PACKAGE-MANIFEST.json\` | Inventory of every shipped file with SHA-256 checksums. |
-
-## Preview in 10 seconds
-
-1. Unzip \`APIForge-X-Preview.zip\`.
-2. Double-click \`index.html\`.
-
-Done — no tools, no server, no CORS/module errors (all scripts are classic
-bundles, all assets relative and local).
-
-## Customize
-
-\`\`\`bash
-unzip APIForge-X-Developer.zip
-cd APIForge-X-Developer
-npm install
-npm run dev        # http://localhost:3000
-npm run build      # → dist/ (static site)
-\`\`\`
-
-Node.js 20+, npm 10+. No backend, database or host-side build step.
-
-## Browser support
-
-Modern evergreen browsers (Chrome/Edge, Firefox, Safari). RTL, themes and
-animations respect \`prefers-reduced-motion\` and system settings.
-
-## QA
-
-\`VERIFICATION.md\` (when present) records the automated release audit: every
-page opened from a clean unzip over \`file://\`, CSS/JS/fonts verified,
-console free of errors and CORS warnings.
-`,
-);
-copyFile(path.join(pack, 'LICENSE.txt'), path.join(release, 'LICENSE.txt'));
+copyFile(path.join(repo, 'README.md'), path.join(release, 'README.md'));
 
 // ------------------------------------------------------------------
-// 7. ZIP packages (folder roots included, so extraction creates one folder)
+// 7. ZIP packages (folder roots included, so extraction creates one folder),
+//    then drop the unpacked folders — the shipped package keeps only the
+//    zips, Documentation/, README.md and (from the QA step) VERIFICATION.md.
 // ------------------------------------------------------------------
 console.log('→ zipping packages');
 const zips = [];
 for (const folder of ['APIForge-X-Developer', 'APIForge-X-Preview']) {
   const zipPath = path.join(release, `${folder}.zip`);
-  execSync(`cd "${release}" && zip -qrX "${path.join(release, folder + '.zip')}" "${folder}"`, {
+  execSync(`cd "${release}" && zip -qrX "${zipPath}" "${folder}"`, {
     shell: '/bin/bash',
   });
   zips.push(zipPath);
 }
 
+// Capture package metadata from the unpacked folders before removing them.
+function inventory(rootDir) {
+  const out = {};
+  const walk = (p, rel) => {
+    for (const ent of fs.readdirSync(p, { withFileTypes: true })) {
+      const fp = path.join(p, ent.name);
+      const fr = rel ? `${rel}/${ent.name}` : ent.name;
+      if (ent.isDirectory()) walk(fp, fr);
+      else out[fr] = sha256File(fp);
+    }
+  };
+  walk(rootDir, '');
+  return out;
+}
+const previewMeta = {
+  pages: fs.readdirSync(previewOut).filter((n) => n.endsWith('.html')).sort(),
+  js: fs.readdirSync(path.join(previewOut, 'assets', 'js')).sort(),
+  fonts: fs.readdirSync(path.join(previewOut, 'assets', 'fonts')).sort(),
+  assetsBytes: sizeOfDir(path.join(previewOut, 'assets')),
+  cssBytes: fs.statSync(path.join(previewOut, 'assets', 'css', 'main.css')).size,
+  jsBytes: sizeOfDir(path.join(previewOut, 'assets', 'js')),
+  fontsBytes: sizeOfDir(path.join(previewOut, 'assets', 'fonts')),
+  devHtmlInputs: fs.readdirSync(devOut).filter((n) => n.endsWith('.html')).length,
+  devBytes: sizeOfDir(devOut),
+  fileChecksums: inventory(previewOut),
+  devFileChecksums: inventory(devOut),
+};
+
+rmrf(previewOut);
+rmrf(devOut);
+
+
 // ------------------------------------------------------------------
 // 8. PACKAGE-MANIFEST.json
+//    (metadata captured from the unpacked folders before they were removed)
 // ------------------------------------------------------------------
 const sha = {};
 {
@@ -478,13 +467,11 @@ const sha = {};
       const fp = path.join(p, ent.name);
       const fr = rel ? `${rel}/${ent.name}` : ent.name;
       if (ent.isDirectory()) walk(fp, fr);
-      else if (ent.name !== 'PACKAGE-MANIFEST.json') sha[fr] = sha256File(fp);
+      else if (ent.name !== 'PACKAGE-MANIFEST.json' && ent.name !== 'VERIFICATION.md') sha[fr] = sha256File(fp);
     }
   };
   walk(release, '');
 }
-const htmlFiles = fs.readdirSync(previewOut).filter((n) => n.endsWith('.html')).sort();
-const previewAssets = path.join(previewOut, 'assets');
 const manifest = {
   product: 'APIForge X',
   slug: 'apiforge-x',
@@ -495,31 +482,35 @@ const manifest = {
   locales: ['fa', 'en'],
   themes: ['dark', 'light', 'system'],
   structure: {
-    developerPackage: 'APIForge-X-Developer',
+    root: `APIForge-X-v${version}`,
     developerZip: 'APIForge-X-Developer.zip',
-    previewPackage: 'APIForge-X-Preview',
     previewZip: 'APIForge-X-Preview.zip',
     documentation: 'Documentation',
     readme: 'README.md',
-    license: 'LICENSE.txt',
+    verificationReport: 'VERIFICATION.md (generated by packaging/verify-release.mjs after this manifest)',
     manifest: 'PACKAGE-MANIFEST.json',
+    license: 'LICENSE.txt (shipped inside both zip packages)',
   },
   previewPackage: {
     entry: 'index.html (open by double-click — file://, no server, no npm)',
-    pages: htmlFiles,
-    pageCount: htmlFiles.length,
+    pages: previewMeta.pages,
+    pageCount: previewMeta.pages.length,
     assets: {
       css: ['assets/css/main.css'],
-      js: fs.readdirSync(path.join(previewAssets, 'js')).sort(),
-      fonts: fs.readdirSync(path.join(previewAssets, 'fonts')).sort(),
-      totalSizeBytes: sizeOfDir(previewAssets),
+      js: previewMeta.js,
+      fonts: previewMeta.fonts,
+      totalSizeBytes: previewMeta.assetsBytes,
     },
     moduleLoading: 'converted to classic deferred scripts (no ES modules — no CORS)',
+    fileCount: Object.keys(previewMeta.fileChecksums).length,
+    files: { sha256: previewMeta.fileChecksums },
   },
   developerPackage: {
     entry: 'npm install && npm run dev (Vite)',
-    htmlInputs: fs.readdirSync(devOut).filter((n) => n.endsWith('.html')).length,
-    sourceBytes: sizeOfDir(devOut),
+    htmlInputs: previewMeta.devHtmlInputs,
+    sourceBytes: previewMeta.devBytes,
+    fileCount: Object.keys(previewMeta.devFileChecksums).length,
+    files: { sha256: previewMeta.devFileChecksums },
   },
   zips: {
     developer: fs.statSync(path.join(release, 'APIForge-X-Developer.zip')).size,
@@ -537,11 +528,11 @@ fs.writeFileSync(path.join(release, 'PACKAGE-MANIFEST.json'), JSON.stringify(man
 // 9. Summary
 // ------------------------------------------------------------------
 console.log('ASSEMBLE OK');
-console.log(`  pages              ${htmlFiles.length}`);
-console.log(`  preview css        assets/css/main.css (${(fs.statSync(path.join(cssOutDir, 'main.css')).size / 1024).toFixed(0)} KB)`);
-console.log(`  preview js bundles ${fs.readdirSync(jsOutDir).length} (${(sizeOfDir(jsOutDir) / 1024 / 1024).toFixed(2)} MB)`);
-console.log(`  preview fonts      ${fontFiles.size} files (${(sizeOfDir(fontsOutDir) / 1024 / 1024).toFixed(2)} MB)`);
-console.log(`  developer source   ${manifest.developerPackage.htmlInputs} html inputs (${(manifest.developerPackage.sourceBytes / 1024 / 1024).toFixed(2)} MB)`);
+console.log(`  pages              ${previewMeta.pages.length}`);
+console.log(`  preview css        assets/css/main.css (${(previewMeta.cssBytes / 1024).toFixed(0)} KB)`);
+console.log(`  preview js bundles ${previewMeta.js.length} (${(previewMeta.jsBytes / 1024 / 1024).toFixed(2)} MB)`);
+console.log(`  preview fonts      ${previewMeta.fonts.length} files (${(previewMeta.fontsBytes / 1024 / 1024).toFixed(2)} MB)`);
+console.log(`  developer source   ${previewMeta.devHtmlInputs} html inputs (${(previewMeta.devBytes / 1024 / 1024).toFixed(2)} MB)`);
 console.log(`  zips               ${zips.map((z) => `${path.basename(z)} (${(fs.statSync(z).size / 1024 / 1024).toFixed(2)} MB)`).join(', ')}`);
-console.log(`  manifest entries   ${Object.keys(sha).length}`);
+console.log(`  checksums          ${Object.keys(sha).length} release files + ${Object.keys(previewMeta.fileChecksums).length} preview package files + ${Object.keys(previewMeta.devFileChecksums).length} developer package files`);
 console.log(`  out                ${release}`);

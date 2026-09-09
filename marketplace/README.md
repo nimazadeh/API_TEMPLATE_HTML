@@ -7,32 +7,36 @@ Everything a seller needs to list **APIForge X** on the Iranian marketplaces
 |------|---------|
 | `SCREENSHOTS_MANIFEST.md` | The exact screenshot set the listing requires, with per-shot guidance and naming |
 | `DESCRIPTION.md` | Ready-to-paste listing copy — an English ThemeForest description + a Persian RTL-Theme description |
-| `capture-screenshots.mjs` | Captures every screenshot against the production build (local Chromium required) |
-| `screenshots/` | Output directory for the captured PNGs (git-ignored) |
+| `capture-screenshots.mjs` | Captures every screenshot against the production build (Playwright Chromium) |
+| `screenshots/` | The captured listing PNGs (committed — they ship with the release) |
 
 ## Produce the screenshots
 
 ```bash
 npm install
 npm run build
-npm install --no-save puppeteer       # one-time, downloads a local Chromium
 node marketplace/capture-screenshots.mjs
 ```
 
-The script starts `vite preview` on `:4173`, drives a real browser through each
-page (opening the log/webhook detail drawers, the command palette, switching
-dark/light), and writes the PNGs to `marketplace/screenshots/`.
+The script reuses a preview server on `:4173` (or starts `npm run preview`
+itself), drives a real browser through each page — opening the webhook
+delivery drawer — and writes the PNGs to `marketplace/screenshots/`.
 
-> **Note:** the capture script runs on a developer's machine — this sandbox has
-> no browser, so the screenshots cannot be generated here. The hero on the
-> landing page (`index.html`) uses a *live product preview* built from real
-> components and seeded data, so the demo never depends on a static image.
+Browser resolution:
+
+- default: the Playwright-registered Chromium (`npx playwright install chromium`), or
+- `AFX_CHROMIUM_EXEC=/path/to/chromium` (+ optional
+  `AFX_CHROMIUM_LIBS=/path/to/libs`) for a custom binary, e.g. in sandboxes
+  where the Playwright CDN is unreachable.
+
+If no browser can be launched, the script prints manual capture instructions
+and exits cleanly — an unavailable browser never fails the packaging process.
 
 ## Suggested listing order
 
-1. `01-overview-dark.png` — primary preview (hero of the listing)
-2. `03-logs.png` — the "deep, not generic" proof point
-3. `05-webhooks.png` — the Stripe-grade differentiator
-4. `07-rtl-persian.png` — the Iranian-market differentiator
-5. `08-command-palette.png` + `09-code-blocks.png` — the developer polish
-6. `10-landing.png` — the marketing surface
+1. `01-home.png` — the marketing surface (hero of the listing)
+2. `02-dashboard.png` — primary product preview
+3. `04-webhooks.png` — the Stripe-grade differentiator
+4. `10-rtl-demo.png` — the Iranian-market differentiator
+5. `05-metrics.png` + `06-docs.png` — the developer depth
+6. `07-pricing.png` — monetization surface
