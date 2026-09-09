@@ -55,15 +55,16 @@ First public marketplace release.
 ### Package structure
 
 ```
-APIForge-X/
-├── APIForge-X-HTML/          30-page production site + assets/
-├── APIForge-X-Source/        full Vite development source
+release/APIForge-X-v1.0.0/
+├── APIForge-X-Preview.zip    standalone 31-page file:// preview package
+├── APIForge-X-Developer.zip  full Vite development source
 ├── Documentation/            Installation, Customization, RTL-Guide,
-│                             Theme-System, File-Structure
-├── marketplace/              Product-Description, Features, Changelog,
-│                             Screenshot-Guide
-├── LICENSE.txt
-└── PACKAGE-MANIFEST.json     inventory + SHA-256 per file
+│                             Theme-System, File-Structure,
+│                             Preview-Getting-Started
+├── README.md                 buyer-facing product README
+├── VERIFICATION.md           automated release QA report
+└── PACKAGE-MANIFEST.json     inventory + SHA-256 per file (release files
+                              + every file inside both zips)
 ```
 
 - Production build uses relative asset paths (`base: './'`) — sub-folder and
@@ -78,9 +79,12 @@ APIForge-X/
 
 ### Quality
 
-- 197 Playwright tests covering localization, interaction, and responsive
-  layout (Chromium, 320–1920px). Safari / Firefox / physical devices are not
+- 205 Playwright tests covering localization, chart interaction (the hover
+  crash regression), production build integrity, and responsive layout
+  (Chromium, 320–1920px). Safari / Firefox / physical devices are not
   certified.
 - Release QA: per-page asset-reference audit, CSS/JS/font integrity,
-  static-server smoke test of all 30 pages, dev-file exclusion check — see
-  `RELEASE-VERIFICATION.md` (generated each release).
+  file:// sweep of all 31 preview pages, interaction smoke (theme, locale,
+  navigation), production-server sweep of the six key pages, and a clean
+  `npm ci && npm run build` of the Developer zip — see
+  `release/APIForge-X-v1.0.0/VERIFICATION.md` (generated each release).

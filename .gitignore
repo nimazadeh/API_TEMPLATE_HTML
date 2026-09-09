@@ -27,19 +27,17 @@ Thumbs.db
 .env.*
 !.env.example
 
-# Marketplace screenshot output (generated locally)
-marketplace/screenshots/
-
 # Local audits and browser-test output
 .cache/
 test-results/
 playwright-report/
 
-# Assembled marketplace tree (rebuild with node packaging/build-release.mjs)
-release/APIForge-X-HTML/
-release/APIForge-X-Source/
-release/APIForge-X-Developer/
-release/APIForge-X-Preview/
-release/Documentation/
-release/marketplace/
-release/LICENSE.txt
+# Marketplace screenshots are committed release deliverables
+# (regenerate with: node marketplace/capture-screenshots.mjs)
+
+# Assembled marketplace package (rebuild with node packaging/build-release.mjs).
+# Only the transient unpacked working folders are ignored — the versioned
+# release/APIForge-X-v*/ package (zips, Documentation, README, manifest,
+# verification report) is committed as the shippable deliverable.
+release/*/APIForge-X-Developer/
+release/*/APIForge-X-Preview/

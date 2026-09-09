@@ -1,34 +1,50 @@
 # Screenshot manifest — APIForge X
 
-Rastchin / RTL-Theme and ThemeForest listings both require a fixed set of
-previews. Capture every shot at **1440×900** unless noted, in the **dark**
-theme unless a light variant is called out.
+Rastchin / RTL-Theme listings require a fixed set of previews. Capture every
+shot at **1440×900**, in the **dark** theme, in the default **Persian (fa /
+RTL)** state.
 
 | # | File | Page | What it must show |
 |---|------|------|-------------------|
-| 1 | `01-overview-dark.png` | `dashboard.html` | KPI strip, request-volume + latency charts, activity feed. The primary listing preview. |
-| 2 | `02-overview-light.png` | `dashboard.html` (light) | The same page in the light theme — proves both themes are intentional. |
-| 3 | `03-logs.png` | `logs.html` | Dense request table with method/status/latency/request-id columns. |
-| 4 | `04-api-keys.png` | `api-keys.html` | Masked keys list, environment filter, reveal/rotate/revoke affordances. |
-| 5 | `05-webhooks.png` | `webhooks.html` (delivery drawer open) | Webhook endpoints list + delivery detail with attempt timeline and payload inspector. |
-| 6 | `06-usage.png` | `usage.html` | Plan consumption, requests-over-time, consumption-by-API doughnut, attribution. |
-| 7 | `07-rtl-persian.png` | `rtl.html` | Persian RTL shell — sidebar on the right, Vazirmatn, LTR-isolated code block. |
-| 8 | `08-command-palette.png` | `dashboard.html` (⌘K open) | The grouped command palette with fuzzy search. |
-| 9 | `09-code-blocks.png` | `docs.html` | A tabbed code block (cURL/Node/Python) with copy affordance. |
-| 10 | `10-landing.png` | `index.html` | The marketing landing — display hero, live product preview, feature grid. |
+| 1 | `01-home.png` | `index.html` | Marketing landing — display hero, live product preview, feature grid. |
+| 2 | `02-dashboard.png` | `dashboard.html` | KPI strip, request-volume + latency charts, activity feed. The primary listing preview. |
+| 3 | `03-api-keys.png` | `api-keys.html` | Masked keys list, environment filter, reveal/rotate/revoke affordances. |
+| 4 | `04-webhooks.png` | `webhooks.html` (delivery drawer open) | Webhook endpoints list + delivery detail with attempt timeline and payload inspector. |
+| 5 | `05-metrics.png` | `metrics.html` | Observability KPIs, volume/latency/errors/status charts, environment comparison. |
+| 6 | `06-docs.png` | `docs.html` | Three-pane documentation portal — sidebar, article, TOC, code samples. |
+| 7 | `07-pricing.png` | `pricing.html` | Pricing tiers, feature comparison, FAQ. |
+| 8 | `08-settings.png` | `settings.html` | Settings — workspace, developer preferences, security sections. |
+| 9 | `09-auth.png` | `login.html` | Persian-first auth screen with the atmospheric backdrop. |
+| 10 | `10-rtl-demo.png` | `rtl.html` | The RTL showcase — Persian typography, layout mirroring, LTR-isolated code. |
 
 ## Rules for the shots
 
 - **Full-page off.** The listing previews are the viewport, not the whole page.
 - **Wait for data.** Pages render skeleton → content in ~350ms; the capture
-  script already waits (`networkidle0` + 600ms).
+  script waits for fonts plus 2.2s before shooting.
 - **Keep the accent.** Do not re-color the UI or add overlays/captions — the
   listing copy carries the messaging, the product carries the visuals.
-- **No device frames.** The template is not an app-store screenshot; plain
-  viewport captures read as honest and premium.
+- **No device frames.** Plain viewport captures read as honest and premium.
 
-## If you capture manually
+## Generate them
 
-The script does it for you, but manually: build + preview, open each page at
-1440×900, open the required drawer/palette, and screenshot the viewport.
-Name the files exactly as in the table above.
+```bash
+npm install
+npm run build
+node marketplace/capture-screenshots.mjs
+```
+
+The script reuses a preview server on `:4173` (or starts `npm run preview`),
+drives a real Chromium through each page — opening the webhook delivery
+drawer — and writes the PNGs to `marketplace/screenshots/`.
+
+Browser resolution: the Playwright-registered Chromium by default
+(`npx playwright install chromium`), or a custom binary via
+`AFX_CHROMIUM_EXEC` (+ `AFX_CHROMIUM_LIBS` for its shared libraries).
+
+## If the browser is unavailable
+
+The capture script never fails the packaging process — it prints the table
+above with manual instructions instead. Manually: build + preview, open each
+page at 1440×900 (dark theme, Persian default state), open the required
+drawer, screenshot the viewport, name the files exactly as in the table.

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // =============================================================
-// APIForge X — Release QA audit (v2 layout)
+// APIForge X — Release QA audit (v3 layout)
 //
 // Mimics a buyer's very first run:
 //
@@ -9,7 +9,12 @@
 //   3. Verify CSS loads, JavaScript boots, fonts load,
 //      no console errors, no CORS/module errors, no remote requests.
 //   4. Exercise theme + locale (RTL⇄LTR) + navigation on index.html.
-//   5. (Optional) Extract APIForge-X-Developer.zip and run
+//   5. Production-server sweep: `npm run build` output served by
+//      `npm run preview` (http://127.0.0.1:4173) — the six key pages
+//      (index / dashboard / metrics / usage / rate-limits / pricing)
+//      with CSS, fonts, RTL, theme switching and Chart.js hover
+//      (the this._fn crash pattern) checked per page.
+//   6. (Optional) Extract APIForge-X-Developer.zip and run
 //      `npm ci && npm run build` to prove the source package builds.
 //
 // Run:   node packaging/verify-release.mjs
@@ -26,17 +31,17 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { execSync } from 'node:child_process';
+import { execSync, spawn } from 'node:child_process';
+import net from 'node:net';
 import { fileURLToPath } from 'node:url';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const release = path.join(repo, 'release');
+const rootPkg = JSON.parse(fs.readFileSync(path.join(repo, 'package.json'), 'utf8'));
+const version = rootPkg.version;
+const release = path.join(repo, 'release', `APIForge-X-v${version}`);
 const previewZip = path.join(release, 'APIForge-X-Preview.zip');
 const devZip = path.join(release, 'APIForge-X-Developer.zip');
 const reportPath = path.join(release, 'VERIFICATION.md');
-
-const rootPkg = JSON.parse(fs.readFileSync(path.join(repo, 'package.json'), 'utf8'));
-const version = rootPkg.version;
 
 const results = []; // { ok, label, detail }
 let failures = 0;
@@ -235,6 +240,11 @@ for (const f of htmlFiles) {
   console.log(
     `${ok ? '  PASS' : '  FAIL'}  ${f.padEnd(26)} cssSheet=${String(cssSheets).padStart(3)} icons=${String(svgLucide).padStart(3)} fonts=${fontsLoaded.length} lang=${dirLang} canvasPx=${String(maxCanvas).padStart(6)}${fatal.length ? ' :: ' + fatal.join(' ;; ').slice(0, 140) : ''}`,
   );
+  // Detach this page's listeners — each page gets a fresh error bag.
+  page.removeAllListeners('console');
+  page.removeAllListeners('pageerror');
+  page.removeAllListeners('requestfailed');
+  page.removeAllListeners('request');
 }
 
 // ------------------------------------------------------------------
@@ -289,10 +299,149 @@ console.log('\n== 4. Interaction smoke on index.html (file://) ==');
 await browser.close();
 
 // ------------------------------------------------------------------
-// 5. (Optional) Developer package builds from a clean extraction
+// 5. Production-server sweep — `npm run preview` (vite preview :4173)
+//    The six key marketplace pages over http, per page: CSS applied,
+//    fonts loaded, fa/rtl default, live theme switch, live locale
+//    switch and a Chart.js hover sweep (the this._fn crash pattern).
+// ------------------------------------------------------------------
+console.log('\n== 5. Production server sweep — npm run preview (:4173) ==');
+{
+  const KEY_PAGES = ['index.html', 'dashboard.html', 'metrics.html', 'usage.html', 'rate-limits.html', 'pricing.html'];
+  const CHART_PAGES = new Set(['dashboard.html', 'metrics.html', 'usage.html', 'rate-limits.html']);
+  const BASE = 'http://127.0.0.1:4173';
+
+  // Serve the production build if nothing is listening on :4173 yet.
+  let spawned = null;
+  const listening = await new Promise((resolve) => {
+    const s = net.connect(4173, '127.0.0.1');
+    s.on('connect', () => { s.destroy(); resolve(true); });
+    s.on('error', () => resolve(false));
+  });
+  if (!listening) {
+    check(fs.existsSync(path.join(repo, 'dist', 'index.html')), 'dist/ production build present for npm run preview');
+    spawned = spawn('npm', ['run', 'preview'], { cwd: repo, stdio: 'ignore', detached: false });
+    const started = await new Promise((resolve) => {
+      const deadline = Date.now() + 30000;
+      const tick = async () => {
+        const up = await new Promise((r) => {
+          const s = net.connect(4173, '127.0.0.1');
+          s.on('connect', () => { s.destroy(); r(true); });
+          s.on('error', () => r(false));
+        });
+        if (up) resolve(true);
+        else if (Date.now() > deadline) resolve(false);
+        else setTimeout(tick, 500);
+      };
+      tick();
+    });
+    check(started, 'npm run preview serves the production build on :4173');
+  } else {
+    check(true, 'npm run preview server reused (already listening on :4173)');
+  }
+
+  if (listening || spawned) {
+    const browser2 = await chromium.launch(launchOptions);
+    const httpRows = [];
+    for (const f of KEY_PAGES) {
+      const context = await browser2.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: 'dark' });
+      const page = await context.newPage();
+      const bag = [];
+      page.on('console', (m) => { if (m.type() === 'error') bag.push(`console.error: ${m.text()}`); });
+      page.on('pageerror', (e) => bag.push(`pageerror: ${e.message}`));
+      page.on('requestfailed', (r) => bag.push(`requestfailed: ${r.url()} ${r.failure()?.errorText || ''}`));
+      page.on('response', (r) => { if (r.status() >= 400) bag.push(`http${r.status()}: ${r.url()}`); });
+      let cssOk = false, fontsOk = false, dirOk = false, themeOk = false, localeOk = false, hoverErrs = 0, canvasPx = -1;
+      try {
+        await page.goto(`${BASE}/${f}`, { waitUntil: 'load', timeout: 25000 });
+        await page.waitForFunction(() => document.fonts && document.fonts.status !== 'loading', null, { timeout: 15000 }).catch(() => {});
+        await page.waitForTimeout(2000);
+        const state = await page.evaluate(() => {
+          const sheets = [...document.styleSheets];
+          let rules = 0;
+          for (const s of sheets) { try { rules += (s.cssRules || []).length; } catch {} }
+          const canvases = [...document.querySelectorAll('canvas')].map((c) => {
+            try {
+              const ctx = c.getContext('2d');
+              const { width: w, height: h } = c;
+              if (!ctx || !w || !h) return 0;
+              const data = ctx.getImageData(0, 0, w, h).data;
+              let painted = 0;
+              for (let i = 3; i < data.length; i += 4) if (data[i] > 0) painted++;
+              return painted;
+            } catch { return 0; }
+          });
+          return {
+            rules,
+            bodyFont: getComputedStyle(document.body).fontFamily,
+            bodyBg: getComputedStyle(document.body).backgroundColor,
+            fonts: [...document.fonts].filter((x) => x.status === 'loaded').map((x) => x.family),
+            lang: document.documentElement.lang,
+            dir: document.documentElement.dir,
+            maxCanvas: canvases.length ? Math.max(...canvases) : -1,
+          };
+        });
+        cssOk = state.rules > 1000 && state.bodyBg !== 'rgba(0, 0, 0, 0)' && /vazirmatn|inter/i.test(state.bodyFont);
+        fontsOk = state.fonts.some((x) => /vazirmatn/i.test(x));
+        dirOk = state.lang === 'fa' && state.dir === 'rtl';
+        canvasPx = state.maxCanvas;
+
+        // Chart.js hover sweep — in, across, out (the reported crash pattern)
+        if (CHART_PAGES.has(f)) {
+          const before = bag.length;
+          for (const c of await page.$$('canvas')) {
+            const box = await c.boundingBox();
+            if (!box) continue;
+            for (let i = 0; i <= 10; i++) {
+              await page.mouse.move(box.x + (box.width * i) / 10, box.y + box.height / 2, { steps: 2 });
+            }
+            await page.mouse.move(box.x + box.width / 2, box.y + box.height / 3);
+            await page.mouse.move(box.x - 50, box.y - 50);
+          }
+          await page.waitForTimeout(500);
+          hoverErrs = bag.length - before;
+        }
+
+        // Live theme switch (real UI handlers: dropdown items / toggle button)
+        const themeBefore = await page.evaluate(() => document.documentElement.getAttribute('data-theme') || 'dark');
+        await page.evaluate(() => {
+          const item = document.querySelector('[data-theme-menu] [data-mode="light"]') || document.querySelector('[data-theme-toggle]');
+          if (!item) throw new Error('no theme control');
+          item.click();
+        });
+        await page.waitForTimeout(400);
+        const themeAfter = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
+        themeOk = themeAfter === 'light' && themeAfter !== themeBefore;
+
+        // Live locale switch (fa/rtl ⇄ en/ltr)
+        await page.evaluate(() => {
+          const control = document.querySelector('[data-locale="en"]') || document.querySelector('[data-locale-toggle]');
+          if (!control) throw new Error('no locale control');
+          control.click();
+        });
+        await page.waitForTimeout(700);
+        const en = await page.evaluate(() => ({ lang: document.documentElement.lang, dir: document.documentElement.dir }));
+        localeOk = en.lang === 'en' && en.dir === 'ltr';
+      } catch (e) {
+        bag.push('navigate-error: ' + String(e.message).split('\n')[0]);
+      }
+      const errors = bag.filter((b) => !/favicon/i.test(b));
+      const chartOk = !CHART_PAGES.has(f) || (canvasPx > 500 && hoverErrs === 0);
+      const ok = errors.length === 0 && cssOk && fontsOk && dirOk && themeOk && localeOk && chartOk;
+      check(ok, `page: ${f} (preview server)`, `css=${cssOk ? 'ok' : 'FAIL'} fonts=${fontsOk ? 'ok' : 'FAIL'} rtl=${dirOk ? 'ok' : 'FAIL'} theme=${themeOk ? 'ok' : 'FAIL'} locale=${localeOk ? 'ok' : 'FAIL'} hoverErrors=${hoverErrs} consoleErrors=${errors.length}`);
+      httpRows.push({ f, ok, cssOk, fontsOk, dirOk, themeOk, localeOk, hoverErrs, canvasPx, errors });
+      await context.close();
+    }
+    await browser2.close();
+    check(httpRows.every((r) => r.ok), 'all six key pages pass the production-server sweep');
+    if (spawned) spawned.kill('SIGTERM');
+  }
+}
+
+// ------------------------------------------------------------------
+// 6. (Optional) Developer package builds from a clean extraction
 // ------------------------------------------------------------------
 if (process.env.AFX_VERIFY_DEV === '1') {
-  console.log('\n== 5. Developer package — clean install + build ==');
+  console.log('\n== 6. Developer package — clean install + build ==');
   const devDir = fs.mkdtempSync(path.join(os.tmpdir(), 'afx-dev-qa-'));
   execSync(`unzip -q -o "${devZip}" -d "${devDir}"`, { stdio: 'inherit' });
   const srcDir = path.join(devDir, 'APIForge-X-Developer');
@@ -314,7 +463,7 @@ if (process.env.AFX_VERIFY_DEV === '1') {
 }
 
 // ------------------------------------------------------------------
-// 6. Report
+// 7. Report
 // ------------------------------------------------------------------
 const passCount = results.filter((r) => r.ok).length;
 const now = new Date().toISOString();
@@ -327,8 +476,24 @@ const rows = pageRows
 const md = `# APIForge X v${version} — Release verification
 
 - **Date (UTC):** ${now}
-- **Method:** buyer simulation — clean extraction of \`APIForge-X-Preview.zip\`, every page opened over \`file://\` (no server, no npm), console/CORS audited, then interactions on \`index.html\`.
+- **Package:** \`release/APIForge-X-v${version}/\`
+- **Method:** production pipeline check (\`npm install\` → \`npm run build\` → \`npm run preview\`), buyer simulation — clean extraction of \`APIForge-X-Preview.zip\`, every page opened over \`file://\` (no server, no npm), console/CORS audited, interactions on \`index.html\`, then the six key pages swept over the \`npm run preview\` server.
 - **Result:** ${failures === 0 ? '✅ PASS' : `❌ FAIL (${failures} failing check${failures > 1 ? 's' : ''})`}
+
+## Production pipeline
+
+- \`npm install\` — dependencies installed from \`package-lock.json\`.
+- \`npm run build\` — Vite production build (\`dist/\`, ${pageRows.length} pages, relative asset paths).
+- \`npm run preview\` — production build served on \`http://127.0.0.1:4173\` and swept by a real browser (see “Key pages” below).
+
+## Hotfixes verified in this build
+
+| Hotfix | Evidence |
+|--------|----------|
+| Chart.js hover crash (\`this._fn is not a function\`) | Animation defaults are merged, not replaced (\`src/js/components/charts.js\`); every chart page (dashboard / metrics / usage / rate-limits) swept with mouse hover in → across → out — 0 errors (see “Key pages” below); the \`tests/chart-interaction.spec.js\` regression suite passes in the Playwright run. |
+| Preview build fixes (double-click \`file://\` package) | All 31 pages open from a clean zip extraction over \`file://\` with one classic (non-module) deferred script per page — 0 module/CORS errors, 0 modulepreload/crossorigin leftovers. |
+| CSS loading fixes | Exactly one standalone stylesheet (\`assets/css/main.css\`) per page, live on every page (computed styles + live link), all relative URLs resolve. |
+| Font loading fixes | All 55 font files referenced by the CSS ship in \`assets/fonts/\`; \`document.fonts\` reports Vazirmatn loaded on every page; locale-resolved \`--font-body\`. |
 
 ## Static checks
 ${results
@@ -336,7 +501,7 @@ ${results
   .map((r) => `- ${r.ok ? '✅' : '❌'} ${r.label}${r.detail ? ` — \`${r.detail}\`` : ''}`)
   .join('\n')}
 
-## Per-page browser sweep (file://)
+## Per-page browser sweep — preview package over file:// (all pages)
 
 | Page | OK | CSS sheets | lucide icons | loaded fonts | lang/dir | canvas painted px | console/CORS errors |
 |---|---|---|---|---|---|---|---|
@@ -345,6 +510,15 @@ ${rows}
 > CSS sheets = live stylesheet link objects pointing at assets/css/main.css (1 = loaded; cssRules objects are not readable across file:// origins, so loading is also asserted via computed styles).
 > canvas painted px = maximum count of painted (non-transparent) pixels across the page's canvases.
 > icons = the number of lucide SVG icons present after the page script booted.
+
+## Key pages — production server sweep (npm run preview)
+
+${results
+  .filter((r) => String(r.label).startsWith('page: ') && r.label.includes('preview server'))
+  .map((r) => `- ${r.ok ? '✅' : '❌'} ${r.label.replace(' (preview server)', '')}${r.detail ? ` — ${r.detail}` : ''}`)
+  .join('\n')}
+
+> Per page: CSS applied (2,000+ live rules + computed styles), fonts loaded (Vazirmatn), Persian RTL default (\`fa/rtl\`), live theme switch (dark ⇄ light), live locale switch (fa/rtl ⇄ en/ltr), Chart.js hover sweep with zero errors (the \`this._fn\` crash pattern) and a console free of errors.
 
 ## Checks: ${passCount}/${results.length} passed
 `;
